@@ -10,7 +10,7 @@ iii) The details of next layer beneficiary account(s) relating to the below tran
 Details of Beneficiary
 | Ref. | Beneficiary Bank | Layer | Beneficiary Account No. | Beneficiary Account Name |
 | ---- | ---------------- | ----- | ----------------------- | ------------------------ |
-| AC1 | <Template_Suspect_1_Bank>HSB</Template_Suspect_1_Bank> | 1st | <Template_Suspect_1_Account_Number>111-111111-101 </Template_Suspect_1_Account_Number> | <Template_Suspect_1_Name>CHAN TAI MAN</Template_Suspect_1_Name> |
+| AC1 | <Template_Suspect1_Bank>HSB</Template_Suspect1_Bank> | 1st | <Template_Suspect1_AccountNumber>111-111111-101 </Template_Suspect1_AccountNumber> | <Template_Suspect1_Name>CHAN TAI MAN</Template_Suspect1_Name> |
 
 Transaction Details
 | S/N | Date | Currency | Involved Amounts | Approx. HKD | Remitting Bank | AC Location | Depositor AC No. | Depositor AC Name |
@@ -36,7 +36,7 @@ Transaction Details
 Details of Beneficiary
 | Ref. | Beneficiary Bank | Layer | Beneficiary Account No. | Beneficiary Account Name |
 | ---- | ---------------- | ----- | ----------------------- | ------------------------ |
-| AC2 | <Template_Suspect_2_Bank>HSB</Template_Suspect_2_Bank> | 1st | <Template_Suspect_2_Account_Number>111-111111-102 </Template_Suspect_2_Account_Number> | <Template_Suspect_2_Name>CHUNG SIU</Template_Suspect_2_Name> |
+| AC2 | <Template_Suspect2_Bank>HSB</Template_Suspect2_Bank> | 1st | <Template_Suspect2_AccountNumber>111-111111-102 </Template_Suspect2_AccountNumber> | <Template_Suspect2_Name>CHUNG SIU</Template_Suspect2_Name> |
 
 Transaction Details
 | S/N | Date | Currency | Involved Amounts | Approx. HKD | Remitting Bank | AC Location | Depositor AC No. | Depositor AC Name |
