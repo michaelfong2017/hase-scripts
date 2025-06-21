@@ -1,0 +1,6 @@
+## Transaction record
+| Transaction Date (value) | Account ID | Counterparty Name | Counterparty ID | Originating Currency | Originating Amount | Debit Credit Indicator | Beneficiary Bank Raw | Originator Bank Raw | Beneficiary Name | Originator Account Number | Transaction Type Source | Transaction Code Description | Sending Bank Account Number | Sending Bank Address | Converted Amount | Fraud payment |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2025-01-02 | 111-111111-102 | CHEUNG TAK SHING | 222-222222-101 | HKD | 113504 | C | NaN | NaN | CHUNG SIU | 222-222222-101 | CUTF | DCP UNRELATED ELECTRONIC TRANSFER CREDIT FROM PIB | NaN |  | 113504 | 4 |
+| 2025-01-02 | 111-111111-102 | YAN MEI MEI | 444-4444444-102 | HKD | 2000 | C | Hang Seng Bank Ltd. | The Hongkong and Shanghai Banking Corporation Limited | CHUNG SIU | 444-4444444-102 | CWTF | Default transaction | NaN | The Hongkong and Shanghai Banking Corporation Limited | 2000 | 5 |
+| 2025-01-02 | 111-111111-102 | TAN FUNG | 444-4444444-103 | HKD | 2600 | C | Hang Seng Bank Ltd. | STANDARD CHARTERED BANK (HONG KONG) LIMITED | CHUNG SIU | 444-4444444-103 | CWTF | Default transaction | NaN | STANDARD CHARTERED BANK (HONG KONG) LIMITED | 2600 | 6 |

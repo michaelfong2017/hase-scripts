@@ -1,0 +1,5 @@
+## Transaction record
+| Transaction Date (value) | Account ID | Counterparty Name | Counterparty ID | Originating Currency | Originating Amount | Debit Credit Indicator | Beneficiary Bank Raw | Originator Bank Raw | Beneficiary Name | Originator Account Number | Transaction Type Source | Transaction Code Description | Sending Bank Account Number | Sending Bank Address | Converted Amount | Fraud payment |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2024-12-10 | 222-222222-101 | CHUNG SIU | 333-333333-102 | HKD | 46000 | D | NaN | NaN | CHUNG SIU | 222-222222-101 | DUTF | ATM TRANSFER UNRELATED WITHDRAWAL | NaN | NaN | 46000 | 1 |
+| 2024-12-11 | 222-222222-101 | CHAN TAI MAN | 111-111111-101 | HKD | 46000 | D | NaN | NaN | CHAN TAI MAN | 222-222222-101 | DUTF | ATM TRANSFER UNRELATED WITHDRAWAL | NaN | NaN | 46000 | 2 |

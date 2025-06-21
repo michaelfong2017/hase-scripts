@@ -1,0 +1,9 @@
+## Transaction record
+| Transaction Date (value) | Account ID | Counterparty Name | Counterparty ID | Originating Currency | Originating Amount | Debit Credit Indicator | Beneficiary Bank Raw | Originator Bank Raw | Beneficiary Name | Originator Account Number | Transaction Type Source | Transaction Code Description | Sending Bank Account Number | Sending Bank Address | Converted Amount | Fraud payment |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2025-01-03 | 111-111111-101 | CHEUNG TAK SHING | 444-4444444-101 | HKD | 49553 | C | NaN | NaN | CHAN TAI MAN | 444-4444444-101 | CUTF | ATM TRANSFER UNRELATED DEPOSIT | NaN | NaN | 49553 | 1 |
+| 2025-01-03 | 111-111111-101 | CHEUNG TAK SHING | 444-4444444-101 | HKD | 78123 | C | NaN | NaN | CHAN TAI MAN | 444-4444444-101 | CUTF | ATM TRANSFER UNRELATED DEPOSIT | NaN | NaN | 78123 | 2 |
+| 2025-01-03 | 111-111111-101 | CHEUNG TAK SHING | 444-4444444-101 | HKD | 1612 | C | NaN | NaN | CHAN TAI MAN | 444-4444444-101 | CUTF | ATM TRANSFER UNRELATED DEPOSIT | NaN | NaN | 1612 | 3 |
+| 2025-01-03 | 111-111111-101 | YAN MEI MEI | 444-4444444-102 | HKD | 18000 | C | Hang Seng Bank Ltd. | STANDARD CHARTERED BANK (HONG KONG) LIMITED | CHAN TAI MAN | 444-4444444-102 | CWTF | Default transaction | NaN | STANDARD CHARTERED BANK (HONG KONG) LIMITED HK | 18000 | 4 |
+| 2025-01-03 | 111-111111-101 | TAN FUNG | 444-4444444-103 | HKD | 20000 | C | Hang Seng Bank Ltd. | Bank of China (Hong Kong) Limited | CHAN TAI MAN | 444-4444444-103 | CWTF | Default transaction | NaN | Bank of China (Hong Kong) Limited HK | 20000 | 5 |
+| 2025-01-02 | 111-111111-101 | PANG YA SHI | 444-4444444-104 | HKD | 4000 | C | Hang Seng Bank Ltd. | Bank of China (Hong Kong) Limited | CHAN TAI MAN | 444-4444444-104 | CWTF | Default transaction | NaN | Bank of China (Hong Kong) Limited HK | 4000 | 6 |

@@ -1,0 +1,6 @@
+## Transaction record
+| Transaction Date (value) | Account ID | Counterparty Name | Counterparty ID | Originating Currency | Originating Amount | Debit Credit Indicator | Beneficiary Bank Raw | Originator Bank Raw | Beneficiary Name | Originator Account Number | Transaction Type Source | Transaction Code Description | Sending Bank Account Number | Sending Bank Address | Converted Amount | Fraud payment |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2024-12-01 | 111-111111-101 | CHAN TAI MAN | 333-333333-101 | HKD | NaN | C | Hang Seng Bank Ltd. | The Hongkong and Shanghai Banking Corporation Limited | CHAN TAI MAN | 333-333333-101 | CWTF | Default transaction | The Hongkong and Shanghai Banking Corporation Limited HK | NaN | 10575.19 | 2 |
+| 2024-12-01 | 111-111111-101 | CHAN TAI MAN | 333-333333-101 | HKD | NaN | C | Hang Seng Bank Ltd. | The Hongkong and Shanghai Banking Corporation Limited | CHAN TAI MAN | 333-333333-101 | CWTF | Default transaction | The Hongkong and Shanghai Banking Corporation Limited HK | NaN | 150000.00 | 1 |
+| 2024-12-03 | 111-111111-101 | CHAN TAI MAN | CASH TXN CREDIT | HKD | NaN | C | NaN | NaN | CHAN TAI MAN | COUNTERPARTY\_NOT\_STATED – 111-111111-101 - CASH TXN CREDIT | CCAS | CIF CASH DEPOSIT | NaN | NaN | 6180.00 | 4 |

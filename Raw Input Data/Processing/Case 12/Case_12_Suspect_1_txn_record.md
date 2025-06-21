@@ -1,0 +1,6 @@
+## Transaction record
+| Transaction Date (value) | Account ID | Counterparty Name | Counterparty ID | Originating Currency | Originating Amount | Debit Credit Indicator | Beneficiary Bank Raw | Originator Bank Raw | Beneficiary Name | Originator Account Number | Transaction Type Source | Transaction Code Description | Sending Bank Account Number | Sending Bank Address | Converted Amount | Fraud payment |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2024-07-15 | 111-111111-101 | COUNTERPARTY\_NOT\_STATED – 111111111101 - CASH TXN CREDIT | CASH TXN CREDIT | HKD | 40000 | C | NaN | NaN | CHAN TAI MAN | COUNTERPARTY\_NOT\_STATED – 111111111101 - CASH TXN CREDIT | CCCS | CASH DEP VIA CDM/BCDM - AC INPUT (TOUCH SCREEN) | NaN | NaN | 40000 | 3 |
+| 2024-07-17 | 111-111111-101 | CHEUNG TAK SHING | 222-222222-101 | HKD | 30000 | C | NaN | NaN | CHAN TAI MAN | 222-222222-101 | CUTF | ATM TRANSFER UNRELATED DEPOSIT | NaN | NaN | 30000 | 1 |
+| 2024-07-17 | 111-111111-101 | COUNTERPARTY\_NOT\_STATED – 111111111101 - CASH TXN CREDIT | CASH TXN CREDIT | HKD | 9000 | C | NaN | NaN | CHAN TAI MAN | COUNTERPARTY\_NOT\_STATED – 111111111101 - CASH TXN CREDIT | CCCS | CASH DEP VIA CDM/BCDM - AC INPUT (TOUCH SCREEN) | NaN | NaN | 9000 | 2 |

@@ -1,0 +1,6 @@
+## Transaction record
+| Transaction Date (value) | Account ID | Counterparty Name | Counterparty ID | Originating Currency | Originating Amount | Debit Credit Indicator | Beneficiary Bank Raw | Originator Bank Raw | Beneficiary Name | Originator Account Number | Transaction Type Source | Transaction Code Description | Sending Bank Account Number | Sending Bank Address | Converted Amount | Fraud payment |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2024-08-10 | 111-111111-101 | YAN MEI MEI | 222-222222-102 | HKD | 10169 | C | NaN | NaN | CHAN TAI MAN | 222-222222-102 | CUTF | DCP UNRELATED ELECTRONIC TRANSFER CREDIT FROM PIB | NaN | NaN | 10169 | 3 |
+| 2024-08-10 | 111-111111-101 | CHEUNG TAK SHING | 222-222222-101 | HKD | 164024 | C | NaN | NaN | CHAN TAI MAN | 222-222222-101 | CUTF | DCP UNRELATED ELECTRONIC TRANSFER CREDIT FROM PIB | NaN | NaN | 164024 | 1 |
+| 2024-08-11 | 111-111111-101 | YEUNG KAI | 66666666601 | HKD | 98001 | C | NaN | NaN | CHAN TAI MAN | 66666666601 | CUTF | ATM TRANSFER UNRELATED DEPOSIT | NaN | NaN | 98001 | 2 |

@@ -1,0 +1,6 @@
+## Transaction record
+| Transaction Date (value) | Account ID | Counterparty Name | Counterparty ID | Originating Currency | Originating Amount | Debit Credit Indicator | Beneficiary Bank Raw | Originator Bank Raw | Beneficiary Name | Originator Account Number | Transaction Type Source | Transaction Code Description | Sending Bank Account Number | Sending Bank Address | Converted Amount | Fraud payment |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2024-12-29 | 111-111111-101 | CHEUNG TAK SHING | 444-4444444-101 | HKD | 116523.87 | C | Hang Seng Bank Ltd. | The Hongkong and Shanghai Banking Corporation Limited | CHAN TAI MAN | 444-4444444-101 | CWTF | Default transaction | NaN | The Hongkong and Shanghai Banking Corporation Limited HK | NaN | 1 |
+| 2024-12-30 | 111-111111-101 | TAN FUNG | 444-4444444-103 | HKD | 10000.00 | C | Hang Seng Bank Ltd. | Bank of China (Hong Kong) Limited | CHAN TAI MAN | 444-4444444-103 | CWTF | Default transaction | NaN | Bank of China (Hong Kong) Limited HK | NaN | 3 |
+| 2024-12-30 | 111-111111-101 | YAN MEI MEI | 444-4444444-102 | HKD | 150000.00 | C | Hang Seng Bank Ltd. | Bank of China (Hong Kong) Limited | CHAN TAI MAN | 444-4444444-102 | CWTF | Default transaction | NaN | Bank of China (Hong Kong) Limited HK | NaN | 2 |

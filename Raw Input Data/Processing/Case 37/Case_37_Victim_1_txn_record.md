@@ -1,0 +1,7 @@
+## Transaction record
+| Transaction Date (value) | Account ID | Counterparty Name | Counterparty ID | Originating Currency | Originating Amount | Debit Credit Indicator | Beneficiary Bank Raw | Originator Bank Raw | Beneficiary Name | Originator Account Number | Transaction Type Source | Transaction Code Description | Sending Bank Account Number | Sending Bank Address | Converted Amount | Fraud payment |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2024-12-31 | 222-222222-101 | CHAN TAI MAN | 111-111111-101 | HKD | 66120 | D | NaN | NaN | CHAN TAI MAN | 222-222222-101 | DUTF | DCP UNRELATED ELECTRONIC TRANSFER DEBIT FROM PIB | NaN | NaN | 66120 | 2 |
+| 2024-12-31 | 222-222222-101 | CHAN TAI MAN | 111-111111-101 | HKD | 55100 | D | NaN | NaN | CHAN TAI MAN | 222-222222-101 | DUTF | DCP UNRELATED ELECTRONIC TRANSFER DEBIT FROM PIB | NaN | NaN | 55100 | 1 |
+| 2025-01-01 | 222-222222-101 | CHAN TAI MAN | 111-111111-101 | HKD | 52460 | D | NaN | NaN | CHAN TAI MAN | 222-222222-101 | DUTF | DCP UNRELATED ELECTRONIC TRANSFER DEBIT FROM PIB | NaN | NaN | 52460 | 3 |
+| 2025-01-02 | 222-222222-101 | CHUNG SIU | 111-111111-102 | HKD | 113504 | D | NaN | NaN | CHUNG SIU | 222-222222-101 | DUTF | DCP UNRELATED ELECTRONIC TRANSFER DEBIT FROM PIB | NaN | NaN | 113504 | 4 |
