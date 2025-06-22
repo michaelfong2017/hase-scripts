@@ -1,0 +1,94 @@
+File,Row,Column,OriginalValue
+Case_10_Suspect_3_transaction_record.csv,2,Counterparty Name,CHEUNG TAK SHING
+Case_10_Suspect_3_transaction_record.csv,2,Counterparty ID,222-222222-101
+Case_10_Suspect_3_transaction_record.csv,2,Originator Account Number,COUNTERPARTY_NOT_STATED -111-111111-103- CASH TXN CREDIT
+Case_12_Suspect_1_transaction_record.csv,2,Counterparty Name,COUNTERPARTY_NOT_STATED - 111111111101 - CASH TXN CREDIT
+Case_12_Suspect_1_transaction_record.csv,2,Counterparty ID,CASH TXN CREDIT
+Case_12_Suspect_1_transaction_record.csv,2,Originator Account Number,COUNTERPARTY_NOT_STATED - 111111111101 - CASH TXN CREDIT
+Case_12_Suspect_1_transaction_record.csv,4,Counterparty Name,COUNTERPARTY_NOT_STATED - 111111111101 - CASH TXN CREDIT
+Case_12_Suspect_1_transaction_record.csv,4,Counterparty ID,CASH TXN CREDIT
+Case_12_Suspect_1_transaction_record.csv,4,Originator Account Number,COUNTERPARTY_NOT_STATED - 111111111101 - CASH TXN CREDIT
+Case_14_Suspect_1_transaction_record.csv,6,Counterparty Name,COUNTERPARTY_NOT_STATED - CASH TXN CREDIT
+Case_14_Suspect_1_transaction_record.csv,6,Counterparty ID,CASH TXN CREDIT
+Case_14_Suspect_1_transaction_record.csv,6,Originator Account Number,COUNTERPARTY_NOT_STATED - 001 - CASH TXN CREDIT
+Case_17_Suspect_1_transaction_record.csv,2,Counterparty Name,COUNTERPARTY_NOT_STATED - 001 - CASH TXN CREDIT
+Case_17_Suspect_1_transaction_record.csv,2,Counterparty ID,CASH TXN CREDIT
+Case_17_Suspect_1_transaction_record.csv,2,Originator Account Number,COUNTERPARTY_NOT_STATED - 001 - CASH TXN CREDIT
+Case_22_Suspect_1_transaction_record.csv,4,Counterparty Name,CHAN TAI MAN
+Case_22_Suspect_1_transaction_record.csv,4,Counterparty ID,CASH TXN CREDIT
+Case_22_Suspect_1_transaction_record.csv,4,Originator Account Number,COUNTERPARTY_NOT_STATED - 111-111111-101 - CASH TXN CREDIT
+Case_28_Suspect_1_transaction_record.csv,2,Counterparty Name,COUNTERPARTY_NOT_STATED -111-111111-101 - CASH TXN CREDIT
+Case_28_Suspect_1_transaction_record.csv,2,Counterparty ID,COUNTERPARTY_NOT_STATED -111-111111-101 - CASH TXN CREDIT
+Case_28_Suspect_1_transaction_record.csv,2,Originator Account Number,COUNTERPARTY_NOT_STATED -111-111111-101- CASH TXN CREDIT
+Case_28_Suspect_2_transaction_record.csv,2,Counterparty Name,COUNTERPARTY_NOT_STATED -111-111111-102 - CASH TXN CREDIT
+Case_28_Suspect_2_transaction_record.csv,2,Counterparty ID,COUNTERPARTY_NOT_STATED -111-111111-102 - CASH TXN CREDIT
+Case_28_Suspect_2_transaction_record.csv,2,Originator Account Number,COUNTERPARTY_NOT_STATED -111-111111-102 - CASH TXN CREDIT
+Case_28_Suspect_2_transaction_record.csv,3,Counterparty Name,COUNTERPARTY_NOT_STATED -111-111111-102 - CASH TXN CREDIT
+Case_28_Suspect_2_transaction_record.csv,3,Counterparty ID,COUNTERPARTY_NOT_STATED -111-111111-102 - CASH TXN CREDIT
+Case_28_Suspect_2_transaction_record.csv,3,Originator Account Number,COUNTERPARTY_NOT_STATED -111-111111-102 - CASH TXN CREDIT
+Case_28_Suspect_3_transaction_record.csv,2,Counterparty Name,COUNTERPARTY_NOT_STATED -111-111111-103 - CASH TXN CREDIT
+Case_28_Suspect_3_transaction_record.csv,2,Counterparty ID,COUNTERPARTY_NOT_STATED- 111-111111-103 - CASH TXN CREDIT
+Case_28_Suspect_3_transaction_record.csv,2,Originator Account Number,COUNTERPARTY_NOT_STATED -111-111111-103 - CASH TXN CREDIT
+Case_28_Suspect_3_transaction_record.csv,3,Counterparty Name,COUNTERPARTY_NOT_STATED -111-111111-103 - CASH TXN CREDIT
+Case_28_Suspect_3_transaction_record.csv,3,Counterparty ID,COUNTERPARTY_NOT_STATED -111-111111-103 - CASH TXN CREDIT
+Case_28_Suspect_3_transaction_record.csv,3,Originator Account Number,COUNTERPARTY_NOT_STATED -111-111111-103 - CASH TXN CREDIT
+Case_28_Suspect_4_transaction_record.csv,2,Counterparty Name,COUNTERPARTY_NOT_STATED - 111-111111-104 - CASH TXN CREDIT
+Case_28_Suspect_4_transaction_record.csv,2,Counterparty ID,COUNTERPARTY_NOT_STATED -111-111111-104 - CASH TXN CREDIT
+Case_28_Suspect_4_transaction_record.csv,2,Originator Account Number,COUNTERPARTY_NOT_STATED -111-111111-104 - CASH TXN CREDIT
+Case_28_Suspect_4_transaction_record.csv,3,Counterparty Name,COUNTERPARTY_NOT_STATED - 111-111111-104  CASH TXN CREDIT
+Case_28_Suspect_4_transaction_record.csv,3,Counterparty ID,COUNTERPARTY_NOT_STATED -111-111111-104 - CASH TXN CREDIT
+Case_28_Suspect_4_transaction_record.csv,3,Originator Account Number,COUNTERPARTY_NOT_STATED -111-111111-104 - CASH TXN CREDIT
+Case_2_Suspect_1_transaction_record.csv,2,Counterparty Name,COUNTERPARTY_NOT_STATED - 111-111111-101  - CASH TXN CREDIT
+Case_2_Suspect_1_transaction_record.csv,2,Counterparty ID,CASH TXN CREDIT
+Case_2_Suspect_1_transaction_record.csv,2,Originator Account Number,COUNTERPARTY_NOT_STATED - 111-111111-101  - CASH TXN CREDIT
+Case_2_Suspect_2_transaction_record.csv,2,Counterparty Name,COUNTERPARTY_NOT_STATED -111-111111-102 - CASH TXN CREDIT
+Case_2_Suspect_2_transaction_record.csv,2,Counterparty ID,CASH TXN CREDIT
+Case_2_Suspect_2_transaction_record.csv,2,Originator Account Number,COUNTERPARTY_NOT_STATED - 111-111111-102 - CASH TXN CREDIT
+Case_2_Suspect_2_transaction_record.csv,3,Counterparty Name,COUNTERPARTY_NOT_STATED -111-111111-102 - CASH TXN CREDIT
+Case_2_Suspect_2_transaction_record.csv,3,Counterparty ID,CASH TXN CREDIT
+Case_2_Suspect_2_transaction_record.csv,3,Originator Account Number,COUNTERPARTY_NOT_STATED - 111-111111-102 - CASH TXN CREDIT
+Case_30_Suspect_1_transaction_record.csv,2,Counterparty Name,COUNTERPARTY_NOT_STATED - 111-111111-101  - CASH TXN CREDIT
+Case_30_Suspect_1_transaction_record.csv,2,Counterparty ID,CASH TXN CREDIT
+Case_30_Suspect_1_transaction_record.csv,2,Originator Account Number,COUNTERPARTY_NOT_STATED - 111-111111-101 - CASH TXN CREDIT
+Case_41_Suspect_1_transaction_record.csv,2,Counterparty Name,COUNTERPARTY_NOT_STATED - 111-111111-101  - CASH TXN CREDIT
+Case_41_Suspect_1_transaction_record.csv,2,Counterparty ID,nan
+Case_41_Suspect_1_transaction_record.csv,2,Originator Account Number,111-111111-101
+Case_42_Suspect_1_transaction_record.csv,5,Counterparty Name,COUNTERPARTY_NOT_STATED - 111-111111-101  - CASH TXN CREDIT
+Case_42_Suspect_1_transaction_record.csv,5,Counterparty ID,CASH TXN CREDIT
+Case_42_Suspect_1_transaction_record.csv,5,Originator Account Number,CASH TXN CREDIT
+Case_42_Suspect_1_transaction_record.csv,6,Counterparty Name,COUNTERPARTY_NOT_STATED - 111-111111-101  - CASH TXN CREDIT
+Case_42_Suspect_1_transaction_record.csv,6,Counterparty ID,CASH TXN CREDIT
+Case_42_Suspect_1_transaction_record.csv,6,Originator Account Number,CASH TXN CREDIT
+Case_43_Suspect_1_transaction_record.csv,5,Counterparty Name,COUNTERPARTY_NOT_STATED - 111-111111-101 - CASH TXN CREDIT
+Case_43_Suspect_1_transaction_record.csv,5,Counterparty ID,CASH TXN CREDIT
+Case_43_Suspect_1_transaction_record.csv,5,Originator Account Number,COUNTERPARTY_NOT_STATED - 111-111111-101 - CASH TXN CREDIT
+Case_43_Suspect_1_transaction_record.csv,6,Counterparty Name,COUNTERPARTY_NOT_STATED - 111-111111-101 - CASH TXN CREDIT
+Case_43_Suspect_1_transaction_record.csv,6,Counterparty ID,CASH TXN CREDIT
+Case_43_Suspect_1_transaction_record.csv,6,Originator Account Number,COUNTERPARTY_NOT_STATED - 111-111111-101 - CASH TXN CREDIT
+Case_43_Suspect_1_transaction_record.csv,7,Counterparty Name,COUNTERPARTY_NOT_STATED - 111-111111-101 - CASH TXN CREDIT
+Case_43_Suspect_1_transaction_record.csv,7,Counterparty ID,CASH TXN CREDIT
+Case_43_Suspect_1_transaction_record.csv,7,Originator Account Number,COUNTERPARTY_NOT_STATED - 111-111111-101 - CASH TXN CREDIT
+Case_44_Suspect_1_transaction_record.csv,4,Counterparty Name,COUNTERPARTY_NOT_STATED - 111111111101 - CASH TXN CREDIT
+Case_44_Suspect_1_transaction_record.csv,4,Counterparty ID,CASH TXN CREDIT
+Case_44_Suspect_1_transaction_record.csv,4,Originator Account Number,COUNTERPARTY_NOT_STATED - 111111111101 - CASH TXN CREDIT
+Case_44_Suspect_1_transaction_record.csv,5,Counterparty Name,COUNTERPARTY_NOT_STATED - 111111111101 - CASH TXN CREDIT
+Case_44_Suspect_1_transaction_record.csv,5,Counterparty ID,CASH TXN CREDIT
+Case_44_Suspect_1_transaction_record.csv,5,Originator Account Number,COUNTERPARTY_NOT_STATED - 111111111101 - CASH TXN CREDIT
+Case_44_Suspect_1_transaction_record.csv,6,Counterparty Name,COUNTERPARTY_NOT_STATED - 111111111101 - CASH TXN CREDIT
+Case_44_Suspect_1_transaction_record.csv,6,Counterparty ID,CASH TXN CREDIT
+Case_44_Suspect_1_transaction_record.csv,6,Originator Account Number,COUNTERPARTY_NOT_STATED - 111111111101 - CASH TXN CREDIT
+Case_46_Suspect_1_transaction_record.csv,5,Counterparty Name,COUNTERPARTY_NOT_STATED - 111-111111-101 - CASH TXN CREDIT
+Case_46_Suspect_1_transaction_record.csv,5,Counterparty ID,CASH TXN CREDIT
+Case_46_Suspect_1_transaction_record.csv,5,Originator Account Number,COUNTERPARTY_NOT_STATED -111-111111-101 - CASH TXN CREDIT
+Case_47_Suspect_1_transaction_record.csv,2,Counterparty Name,COUNTERPARTY_NOT_STATED - 111-111111-101 - CASH TXN CREDIT
+Case_47_Suspect_1_transaction_record.csv,2,Counterparty ID,CASH TXN CREDIT
+Case_47_Suspect_1_transaction_record.csv,2,Originator Account Number,COUNTERPARTY_NOT_STATED - 111-111111-101 - CASH TXN CREDIT
+Case_50_Suspect_1_transaction_record.csv,2,Counterparty Name,COUNTERPARTY_NOT_STATED - 111-111111-101 - EPOS TXN
+Case_50_Suspect_1_transaction_record.csv,2,Counterparty ID,EPOS TXN CREDIT
+Case_50_Suspect_1_transaction_record.csv,2,Originator Account Number,COUNTERPARTY_NOT_STATED - 111-111111-101 - EPOS TXN CREDIT
+Case_7_Suspect_1_transaction_record.csv,4,Counterparty Name,COUNTERPARTY_NOT_STATED -111-111111-101 - CASH TXN CREDIT
+Case_7_Suspect_1_transaction_record.csv,4,Counterparty ID,COUNTERPARTY_NOT_STATED -111-111111-101 - CASH TXN CREDIT
+Case_7_Suspect_1_transaction_record.csv,4,Originator Account Number,COUNTERPARTY_NOT_STATED -111-111111-101 - CASH TXN CREDIT
+Case_9_Suspect_1_transaction_record.csv,2,Counterparty Name,COUNTERPARTY_NOT_STATED -111-111111-101 - CASH TXN CREDIT
+Case_9_Suspect_1_transaction_record.csv,2,Counterparty ID,COUNTERPARTY_NOT_STATED -111-111111-101- CASH TXN CREDIT
+Case_9_Suspect_1_transaction_record.csv,2,Originator Account Number,COUNTERPARTY_NOT_STATED -111-111111-101 - CASH TXN CREDIT

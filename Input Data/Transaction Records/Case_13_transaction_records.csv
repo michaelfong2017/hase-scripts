@@ -1,0 +1,3 @@
+Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Fraud Payment 
+2024-08-21,HKD,1244,C,,,222-222222-101,111-111111-101,CHEUNG TAK SHING,CHAN TAI MAN,Beneficiary,CUTF,ATM TRANSFER UNRELATED   DEPOSIT,,,1244,1
+2024-08-21,HKD,1244,D,,,222-222222-101,111-111111-101,,CHAN TAI MAN,Originator,DUTF,ATM TRANSFER UNRELATED   WITHDRAWAL,,,1244,1

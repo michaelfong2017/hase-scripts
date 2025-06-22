@@ -1,0 +1,7 @@
+Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Fraud Payment 
+2025-01-03,HKD,49553,C,,,444-4444444-101,111-111111-101,CHEUNG TAK SHING,CHAN TAI MAN,Beneficiary,CUTF,ATM TRANSFER UNRELATED   DEPOSIT,,,49553,1
+2025-01-03,HKD,78123,C,,,444-4444444-101,111-111111-101,CHEUNG TAK SHING,CHAN TAI MAN,Beneficiary,CUTF,ATM TRANSFER UNRELATED   DEPOSIT,,,78123,2
+2025-01-03,HKD,1612,C,,,444-4444444-101,111-111111-101,CHEUNG TAK SHING,CHAN TAI MAN,Beneficiary,CUTF,ATM TRANSFER UNRELATED   DEPOSIT,,,1612,3
+2025-01-03,HKD,18000,C,Hang Seng Bank Ltd.,STANDARD CHARTERED BANK (HONG KONG) LIMITED,444-4444444-102,111-111111-101,YAN MEI MEI,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,STANDARD CHARTERED BANK (HONG KONG) LIMITED    HK,18000,4
+2025-01-03,HKD,20000,C,Hang Seng Bank Ltd.,Bank of China (Hong Kong) Limited,444-4444444-103,111-111111-101,TAN FUNG,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,Bank of China (Hong Kong) Limited    HK,20000,5
+2025-01-02,HKD,4000,C,Hang Seng Bank Ltd.,Bank of China (Hong Kong) Limited,444-4444444-104,111-111111-101,PANG YA SHI,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,Bank of China (Hong Kong) Limited    HK,4000,6

@@ -1,0 +1,4 @@
+Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Fraud Payment 
+2024-12-01,HKD,,C,Hang Seng Bank Ltd.,The Hongkong and Shanghai Banking Corporation Limited,333-333333-101,111-111111-101,CHAN TAI MAN,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,The Hongkong and Shanghai Banking Corporation Limited    HK,,150000.0,1
+2024-12-01,HKD,,C,Hang Seng Bank Ltd.,The Hongkong and Shanghai Banking Corporation Limited,333-333333-101,111-111111-101,CHAN TAI MAN,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,The Hongkong and Shanghai Banking Corporation Limited    HK,,10575.19,2
+2024-12-03,HKD,,C,,,,111-111111-101,,CHAN TAI MAN,Beneficiary,CCAS,CIF CASH DEPOSIT,,,6180.0,4
