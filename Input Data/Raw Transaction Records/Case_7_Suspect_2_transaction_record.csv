@@ -1,0 +1,3 @@
+Transaction Date (value),Account ID,Counterparty Name,Counterparty ID,Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Beneficiary Name,Originator Account Number,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Fraud payment 
+2024-08-25,111-111111-102 ,CHEUNG TAK SHING ,444-4444444-101 ,HKD,50000,C,,,CHUNG SIU ,444-4444444-101,CUTF,UNRELATED ELECTRONIC     TRANSFER CREDIT,,,50000,9
+2024-08-25,111-111111-102 ,CHEUNG TAK SHING ,222-222222-101 ,HKD,50000,C,,,CHUNG SIU ,222-222222-101,CUTF,UNRELATED ELECTRONIC     TRANSFER CREDIT,,,50000,10

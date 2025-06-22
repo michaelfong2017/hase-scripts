@@ -1,0 +1,3 @@
+Transaction Date (value),Account ID,Counterparty Name,Counterparty ID,Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Beneficiary Name,Originator Account Number,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Fraud payment 
+2024-12-27,111-111111-101,1/YEUNG KAI,666-66666-601,HKD,129890,C,,PCBCCN■■■■,MR  CHAN TAI MAN,666-66666-601 ,CWTF,WIRE-TRANSFER CREDIT,,PCBCH■■■    HK,129890,1
+2024-12-27,111-111111-101,1/YEUNG KAI,666-66666-601,HKD,158890,C,,PCBCCN■■■■,MR CHAN TAI MAN,666-66666-601 ,CWTF,WIRE-TRANSFER CREDIT,,PCBCH■■■   HK,158890,2
