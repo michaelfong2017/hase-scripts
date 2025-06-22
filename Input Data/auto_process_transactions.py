@@ -180,19 +180,15 @@ def process_transaction_columns():
             conflicts_resolved = []
             
             if debit_credit_indicator == 'C':
-                # Beneficiary logic
                 subject_type_value = 'Beneficiary'
                 originator_name_value = counterparty_name if counterparty_name else ''
                 beneficiary_account_value = account_id if account_id else ''
                 
-                # Check if counterparty_id should be preserved in originator_account_number
                 if counterparty_id and str(counterparty_id).strip():
                     if not originator_account_number or str(originator_account_number).strip() == '':
-                        # Empty - preserve counterparty_id
                         df.at[idx, 'Originator Account Number'] = counterparty_id
                         preservation_actions.append(f"Preserved Counterparty ID '{counterparty_id}' in empty Originator Account Number")
                     elif str(originator_account_number).strip() != str(counterparty_id).strip():
-                        # Conflict - trust dropped column
                         conflict_logs.append({
                             'File': case_file.name,
                             'Row': idx + 2,
@@ -213,19 +209,15 @@ def process_transaction_columns():
                 transaction_log['Added_Subject_Type'] = subject_type_value
                 
             else:
-                # Originator logic
                 subject_type_value = 'Originator'
                 beneficiary_account_value = counterparty_id if counterparty_id else ''
                 originator_name_value = ''
                 
-                # Check if account_id should be preserved in originator_account_number
                 if account_id and str(account_id).strip():
                     if not originator_account_number or str(originator_account_number).strip() == '':
-                        # Empty - preserve account_id
                         df.at[idx, 'Originator Account Number'] = account_id
                         preservation_actions.append(f"Preserved Account ID '{account_id}' in empty Originator Account Number")
                     elif str(originator_account_number).strip() != str(account_id).strip():
-                        # Conflict - trust dropped column
                         conflict_logs.append({
                             'File': case_file.name,
                             'Row': idx + 2,
@@ -237,14 +229,11 @@ def process_transaction_columns():
                         df.at[idx, 'Originator Account Number'] = account_id
                         conflicts_resolved.append(f"Replaced Originator Account Number '{originator_account_number}' with Account ID '{account_id}'")
                 
-                # Check if counterparty_name should be preserved in beneficiary_name
                 if counterparty_name and str(counterparty_name).strip():
                     if not beneficiary_name or str(beneficiary_name).strip() == '':
-                        # Empty - preserve counterparty_name
                         df.at[idx, 'Beneficiary Name'] = counterparty_name
                         preservation_actions.append(f"Preserved Counterparty Name '{counterparty_name}' in empty Beneficiary Name")
                     elif str(beneficiary_name).strip() != str(counterparty_name).strip():
-                        # Conflict - trust dropped column
                         conflict_logs.append({
                             'File': case_file.name,
                             'Row': idx + 2,
@@ -290,7 +279,6 @@ def process_transaction_columns():
 
         df.to_csv(case_file, index=False)
 
-    # Combine transaction logs and conflict logs
     all_logs = transaction_logs.copy()
     for conflict in conflict_logs:
         all_logs.append({
@@ -325,6 +313,84 @@ def process_transaction_columns():
         else:
             print("No conflicts detected.")
 
+def merge_cd_transactions():
+    """Merge C and D transactions by dropping D records and logging matched pairs."""
+    input_dir = pathlib.Path('Transaction Records')
+    case_files = list(input_dir.glob('Case_*_transaction_records.csv'))
+    
+    matched_pairs_log = []
+    total_dropped_d_records = 0
+    
+    for case_file in case_files:
+        df = pd.read_csv(case_file, dtype=str)
+        df = trim_dataframe(df)
+        
+        key_cols = ['Transaction Date (value)', 'Originator Account Number', 'Beneficiary Account Number', 'Converted Amount']
+        
+        # Check if all required columns exist
+        missing_cols = [col for col in key_cols if col not in df.columns]
+        if missing_cols:
+            print(f"Warning: {case_file.name} missing columns: {missing_cols}")
+            continue
+        
+        # Normalize data for matching
+        for col in key_cols:
+            df[col] = df[col].fillna('').astype(str).str.strip()
+        
+        df['Debit Credit Indicator'] = df['Debit Credit Indicator'].fillna('').astype(str).str.upper().str.strip()
+        
+        # Group by matching criteria
+        grouped = df.groupby(key_cols)
+        
+        rows_to_drop = []
+        
+        for group_key, group_data in grouped:
+            # Get C and D records in this group
+            c_records = group_data[group_data['Debit Credit Indicator'] == 'C']
+            d_records = group_data[group_data['Debit Credit Indicator'] == 'D']
+            
+            if len(c_records) > 0 and len(d_records) > 0:
+                # We have both C and D records - log the pairs and mark D records for deletion
+                for _, c_record in c_records.iterrows():
+                    for _, d_record in d_records.iterrows():
+                        matched_pairs_log.append({
+                            'File': case_file.name,
+                            'Transaction_Date': group_key[0],
+                            'Originator_Account': group_key[1],
+                            'Beneficiary_Account': group_key[2],
+                            'Amount': group_key[3],
+                            'C_Record_Row': c_record.name + 2,  # Excel-like row numbering
+                            'D_Record_Row': d_record.name + 2,
+                            'C_Record_Fraud_Payment': c_record.get('Fraud Payment', ''),
+                            'D_Record_Fraud_Payment': d_record.get('Fraud Payment', ''),
+                            'C_Record_Subject_Type': c_record.get('Subject Type', ''),
+                            'D_Record_Subject_Type': d_record.get('Subject Type', ''),
+                            'Action': 'D record dropped, C record kept'
+                        })
+                
+                # Mark D records for deletion
+                rows_to_drop.extend(d_records.index.tolist())
+                total_dropped_d_records += len(d_records)
+        
+        # Drop the D records
+        if rows_to_drop:
+            df_merged = df.drop(rows_to_drop)
+            df_merged.to_csv(case_file, index=False)
+            print(f"Merged {case_file.name}: Dropped {len(rows_to_drop)} D records")
+        else:
+            print(f"No mergeable pairs found in {case_file.name}")
+    
+    # Save matched pairs log
+    if matched_pairs_log:
+        pairs_df = pd.DataFrame(matched_pairs_log)
+        pairs_df.to_csv('merged_cd_pairs_log.csv', index=False)
+        print(f"Merged C-D pairs log saved to: {pathlib.Path('merged_cd_pairs_log.csv').resolve()}")
+        print(f"Total matched pairs: {len(matched_pairs_log)}")
+        print(f"Total D records dropped: {total_dropped_d_records}")
+    else:
+        print("No C-D pairs found for merging.")
+
 if __name__ == "__main__":
     combine_case_transactions()
     process_transaction_columns()
+    merge_cd_transactions()

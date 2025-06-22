@@ -1,3 +1,2 @@
 Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Fraud Payment 
 2025-01-06,HKD,147585.59,C,,,222-222222-101,111-111111-101,CHEUNG TAK SHING,CHAN TAI MAN,Beneficiary,CUTF,Default transaction,,,147585.59,1
-2025-01-06,HKD,147585.59,D,,,222-222222-101,111-111111-101,,CHAN TAI MAN,Originator,DUTF,Default transaction,,,147585.59,1
