@@ -1,4 +1,4 @@
-Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Fraud Payment 
+Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Fraud Payment
 2025-01-03,HKD,49553,C,,,444-4444444-101,111-111111-101,CHEUNG TAK SHING,CHAN TAI MAN,Beneficiary,CUTF,ATM TRANSFER UNRELATED   DEPOSIT,,,49553,1
 2025-01-03,HKD,78123,C,,,444-4444444-101,111-111111-101,CHEUNG TAK SHING,CHAN TAI MAN,Beneficiary,CUTF,ATM TRANSFER UNRELATED   DEPOSIT,,,78123,2
 2025-01-03,HKD,1612,C,,,444-4444444-101,111-111111-101,CHEUNG TAK SHING,CHAN TAI MAN,Beneficiary,CUTF,ATM TRANSFER UNRELATED   DEPOSIT,,,1612,3

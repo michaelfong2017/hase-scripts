@@ -1,4 +1,4 @@
-Transaction Date (value),Account ID,Counterparty Name,Counterparty ID,Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Beneficiary Name,Originator Account Number,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Fraud Payment 
+Transaction Date (value),Account ID,Counterparty Name,Counterparty ID,Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Beneficiary Name,Originator Account Number,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Fraud Payment
 2024-12-08,111-111111-101,YEUNG KAI,66666666601,HKD,12200,C,,,CHAN TAI MAN,66666666601,CUTF,ATM TRANSFER UNRELATED   DEPOSIT,,,12200,3
 2024-12-08,111-111111-101,YEUNG KAI,66666666601,HKD,200,C,,,CHAN TAI MAN,66666666601,CUTF,ATM TRANSFER UNRELATED   DEPOSIT,,,200,2
 2024-12-09,111-111111-101,CHEUNG TAK SHING ,222-222222-101 ,HKD,49967,C,,,CHAN TAI MAN,222-222222-101 ,CUTF,ATM TRANSFER UNRELATED   DEPOSIT,,,49967,1
