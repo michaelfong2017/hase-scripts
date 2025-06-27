@@ -1,0 +1,2428 @@
+﻿Type,Case Number,Intelligence Number,Suspect Number,Variant Number,Instruction,Source Markdown File,IR Markdown File,IR Raw File,Transactions,Input,Ground Truth,Variant Description
+ADCC,31,1,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with two documents: an unstructured fraud alert source and a structured CSV file of transaction records.
+
+Your task is to identify the fraudulent transactions described in the fraud alert source, match them to their corresponding entries in the transaction CSV, and produce a single consolidated JSON output that merges and reflects all relevant information. After generating the JSON, you must also provide a clear explanation of your matching and merging decisions.
+
+Key Instructions:
+
+    1. Core Task:
+        - Extract only transactions explicitly mentioned in the fraud alert source that contain both date and amount.
+        - Use the transaction CSV as the authoritative source to verify, correct, and enrich transaction data.
+
+    2. Step-by-Step Process:
+        a. Carefully read the fraud alert source to extract global fields and identify transactions to investigate.
+        b. Validate transactions:
+            - For each transaction, check if both date and amount are explicitly present and non-null.
+            - Immediately exclude transactions missing either field.
+        c. For each valid transaction:
+            - Search the CSV for a matching row using the rules below.
+            - If matched: Merge data using prioritization logic (set can_be_located: true).
+            - If unmatched: Use only fraud alert data (set can_be_located: false).
+        d. If no valid transactions remain, set alerted_transactions to an empty list [].
+        e. Assemble the final JSON output according to the schema.
+
+    3. Matching Rules (can_be_located logic):
+        A transaction from the fraud alert source matches a CSV row only if all three of the following conditions are met:
+            1. The date must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
+            2. The amount must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
+            3. At least one of the following is true:
+                - The from.account_number in the fraud alert source matches the Originator Account Number in the CSV.
+                - The to.account_number in the fraud alert source matches the Beneficiary Account Number in the CSV.
+                - The from.name in the fraud alert source matches the Originator Name in the CSV.
+                - The to.name in the fraud alert source matches the Beneficiary Name in the CSV.
+
+    4. Data Merging and Prioritization:
+        - For the global fields fraud_type, police_reference, and police_team: Always use the value from the fraud alert source.
+        - For the police_team field, extract and include any geographic location details mentioned with the police team in the fraud alert source.
+        - For transaction fields:
+            - If a transaction is not found in the CSV (can_be_located: false): Use only data from the fraud alert source.
+            - If a transaction is found in the CSV (can_be_located: true): For each field, use the following priority:
+                1. CSV value (if present and not blank)
+                2. Fraud alert source value (if CSV value is blank or missing)
+                3. null (if neither source provides a value)
+
+    5. Data Handling:
+        - For the global fields fraud_type, police_reference, and police_team: Always use the value from the fraud alert source.
+        - For the police_team field, extract and include any geographic location details mentioned with the police team in the fraud alert source.
+        - Preserve content: Do not remove or alter non-printable characters or artifacts; preserve content exactly as found.
+        - Whitespace: You may trim leading/trailing whitespace, but do not alter internal whitespace.
+
+    6. Strict Schema and Format Compliance:
+        - The final output must strictly follow the JSON schema below.
+        - All specified fields must be present. If a value cannot be found, use null (do not omit the key).
+        - Never output transactions with null/missing date or amount.
+        - The alerted_transactions array must always be present in the output, and if no valid transactions are found, it must be an empty list.
+        - Output must be a valid JSON object only, with no comments or extraneous text.
+
+    7. Additional Rules:
+        - For the per-transaction channel field (payment method used): Only extract channel values that are present in the fraud alert source (for example, ""FPS"" if stated in the source). If the fraud alert source does not specify a channel and the transaction record clearly indicates (even if not fully explicit) that the channel is ""ATM"" or ""Cash Deposit,"" you may use ""ATM"" or ""Cash Deposit"" as the channel value (do not include any additional descriptive text; output only ""ATM"" or ""Cash Deposit""). Otherwise, do not use or infer channel values from the transaction records.
+
+JSON Schema:
+
+    {
+      ""fraud_type"": ""string | null"",
+      ""police_reference"": ""string | null"",
+      ""police_team"": ""string | null"",
+      ""alerted_transactions"": [
+        {
+          ""date"": ""string | null"", // Format: YYYY-MM-DD
+          ""amount"": ""number | null"",
+          ""currency"": ""string | null"",
+          ""from"": {
+            ""name"": ""string | null"",
+            ""account_number"": ""string | null"",
+            ""bank"": ""string | null""
+          },
+          ""to"": {
+            ""name"": ""string | null"",
+            ""account_number"": ""string | null"",
+            ""bank"": ""string | null""
+          },
+          ""channel"": ""string | null"", // Payment method used
+          ""can_be_located"": ""boolean""
+        }
+      ]
+    }",Case_31_Suspect_1_Intelligence_1_ADCC.md,Case_31_IR.md,IR - C2531.docx,"Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Fraud Payment
+2025-02-04,C,110555,C,Hang Seng Bank Ltd.,China Construction Bank (Asia) Corporation Limited,444-4444444-101,111-111111-101,CHEUNG TAK SHING,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,China Construction Bank (Asia) Corporation Limited    HK,110555,1
+2025-02-04,C,50000,C,Hang Seng Bank Ltd.,China Construction Bank (Asia) Corporation Limited,444-4444444-101,111-111111-101,CHEUNG TAK SHING,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,China Construction Bank (Asia) Corporation Limited    HK,50000,2
+2025-02-05,C,200000,C,Hang Seng Bank Ltd.,China Construction Bank (Asia) Corporation Limited,444-4444444-101,111-111111-101,CHEUNG TAK SHING,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,China Construction Bank (Asia) Corporation Limited    HK,200000,3
+2025-02-05,C,200000,C,Hang Seng Bank Ltd.,DBS Bank (Hong Kong) Ltd.,666-666666-101,111-111111-101,CHEUNG TAK SHING,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,DBS Bank (Hong Kong) Ltd.    HK,200000,4","Dear HSB,
+
+Please be informed of a case of **""Social Media Deception - Compensated Dating Decep""** reported on **2025-02-06** and it is under the investigation by **DIT 5-■■■■■**. It is alleged that the relevant crime proceeds were transferred to the account(s) below **[from the victim]**
+
+As a matter of urgency, please inform the ADCC of the following:
+i) The latest balance of the beneficiary account(s);
+ii) Whether the beneficiary account(s) has been suspended after your review. If yes, what functions are blocked;
+iii) The details of next layer beneficiary account(s) relating to the below transaction of [AC1, AC1] (including details of transaction, bank, account number and beneficiary name). If the beneficiary account(s) belong to your bank, please provide us the account balance.
+Details of Beneficiary
+| Ref. | Beneficiary Bank | Layer | Beneficiary Account No. | Beneficiary Account Name |
+| ---- | ---------------- | ----- | ----------------------- | ------------------------ |
+| AC1 | HSB | 1st | 111-111111-101 | CHAN TAI MAN |
+
+Transaction Details
+| S/N | Date | Currency | Involved Amounts | Approx. HKD | Remitting Bank | AC Location | Depositor AC No. | Depositor AC Name |
+| --- | ---- | -------- | ---------------- | ----------- | -------------- | ----------- | ---------------- | ----------------- |
+| 1 | 2025-02-04 | HKD | 110555 | 110555 | CCBA | Hong Kong | 444-4444444-101 | CHEUNG TAK SHING |
+| 1 | 2025-02-04 | HKD | 50000 | 50000 | CCBA | Hong Kong | 444-4444444-101 | CHEUNG TAK SHING |
+| 1 | 2025-02-05 | HKD | 200000 | 200000 | CCBA | Hong Kong | 444-4444444-101 | CHEUNG TAK SHING |
+
+\*\*NO STR\*\*
+
+Details of Beneficiary
+| Ref. | Beneficiary Bank | Layer | Beneficiary Account No. | Beneficiary Account Name |
+| ---- | ---------------- | ----- | ----------------------- | ------------------------ |
+| AC1 | HSB | 1st | 111-111111-101 | CHAN TAI MAN |
+
+Transaction Details
+| S/N | Date | Currency | Involved Amounts | Approx. HKD | Remitting Bank | AC Location | Depositor AC No. | Depositor AC Name |
+| --- | ---- | -------- | ---------------- | ----------- | -------------- | ----------- | ---------------- | ----------------- |
+| 1 | 2025-02-05 | HKD | 200000 | 200000 | DBS | Hong Kong | 666-666666-101 | CHEUNG TAK SHING |
+
+\*\*NO STR\*\*
+
+We have examined each report referred by the subject investigation team and we believe that **that the beneficiary account(s) might have been used to deal with suspected proceeds of crime**. Therefore, you are advised (i) **to critically examine the alleged transaction(s) in the relevant account(s)** to ascertain whether or not you are satisfied that the provenance of the deposits into the said account(s) is legitimate and (ii) **to actively consider appropriate actions** to avoid dealing with property in whole or in part directly or indirectly represent any person's proceeds of an indictable offence, which may be liable to a prosecution for a criminal offence under sections 25(1) and (3) of the Organized and Serious Crimes Ordinance, Cap. 455. A person includes a financial institution.
+
+When fulfilling the reporting obligations by filing Suspicious Transaction Reports (STR) to the Joint Financial Intelligence Unit (""JFIU""), if any, please state **ESPS ■■■■/2025 and e-Hub ■■■■■■■■ (DIT 5-■■■■■)** for ease of reference.
+
+We confirm that the requested information is required for the purpose of section 58(1)(a) under the Personal Data (Privacy) Ordinance, Cap 486. Failure to provide the requested information may lead to possibly failure or unnecessary delay on prevention or detection of crime. In view of the above, we consider that section 58(2) as read with section 58(1)(a) of the Personal Data (Privacy) Ordinance, Cap. 486 is the applicable exemption under the circumstances.
+
+You are also advised to refer to the ""Guideline on Anti-Money Laundering and Counter-Terrorist Financing"" published by the Hong Kong Monetary Authority (HKMA) under the Anti-Money Laundering and Counter-Terrorist Financing (Financial Institutions) Ordinance, Cap. 615 (""AMLO"") and to take all reasonable measures to prevent a contravention and to mitigate Money Laundering risks.
+
+Should you have any enquiry, please feel free to contact the undersigned or our officers at 286■■■■■. Thank you! 
+
+Best regards, 
+SGT  ■■■■ ■■■
+""Anti-Deception Coordination Centre 
+Commercial Crime Bureau 
+Hong Kong Police Force""
+Tel: 286■■■■■ / Fax: 220■■■■■","{
+  ""fraud_type"": ""Social Media Deception - Compensated Dating Decep"",
+  ""police_reference"": ""ESPS ■■■■/2025 and e-Hub ■■■■■■■■ (DIT 5-■■■■■)"",
+  ""police_team"": ""DIT 5-■■■■■"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2025-02-04"",
+      ""amount"": 110555,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""444-4444444-101"",
+        ""bank"": ""China Construction Bank (Asia) Corporation Limited""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""Hang Seng Bank Ltd.""
+      },
+      ""channel"": null,
+      ""can_be_located"": true
+    },
+    {
+      ""date"": ""2025-02-04"",
+      ""amount"": 50000,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""444-4444444-101"",
+        ""bank"": ""China Construction Bank (Asia) Corporation Limited""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""Hang Seng Bank Ltd.""
+      },
+      ""channel"": null,
+      ""can_be_located"": true
+    },
+    {
+      ""date"": ""2025-02-05"",
+      ""amount"": 200000,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""444-4444444-101"",
+        ""bank"": ""China Construction Bank (Asia) Corporation Limited""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""Hang Seng Bank Ltd.""
+      },
+      ""channel"": null,
+      ""can_be_located"": true
+    },
+    {
+      ""date"": ""2025-02-05"",
+      ""amount"": 200000,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""666-666666-101"",
+        ""bank"": ""DBS Bank (Hong Kong) Ltd.""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""Hang Seng Bank Ltd.""
+      },
+      ""channel"": null,
+      ""can_be_located"": true
+    }
+  ]
+}",Original (without the explanation requirement during inference)
+ADCC,31,1,1,2,"You are an advanced AI assistant specializing in data extraction. You will be provided with one document: an unstructured fraud alert source.
+
+Your task is to identify the fraudulent transactions described in the fraud alert source, and produce a single consolidated JSON output that reflects all relevant information.
+
+Key Instructions:
+
+    1. Core Task:
+        - Extract only transactions explicitly mentioned in the fraud alert source that contain both date and amount.
+
+    2. Step-by-Step Process:
+        a. Carefully read the fraud alert source to identify transactions to investigate.
+        b. Validate transactions:
+            - For each transaction, check if both date and amount are explicitly present and non-null.
+            - Immediately exclude transactions missing either field.
+        c. If no valid transactions remain, set alerted_transactions to an empty list [].
+
+    3. Data Handling:
+        - For the global fields fraud_type, police_reference, and police_team: Always use the value from the fraud alert source.
+        - For the police_team field, extract and include any geographic location details mentioned with the police team in the fraud alert source.
+        - Preserve content: Do not remove or alter non-printable characters or artifacts; preserve content exactly as found.
+        - Whitespace: You may trim leading/trailing whitespace, but do not alter internal whitespace.
+
+    4. Strict Schema and Format Compliance:
+        - The final output must strictly follow the JSON schema below.
+        - All specified fields must be present. If a value cannot be found, use null (do not omit the key).
+        - Never output transactions with null/missing date or amount.
+        - The alerted_transactions array must always be present in the output, and if no valid transactions are found, it must be an empty list.
+        - Output must be a valid JSON object only, with no comments or extraneous text.
+
+JSON Schema:
+
+    {
+      ""fraud_type"": ""string | null"",
+      ""police_reference"": ""string | null"",
+      ""police_team"": ""string | null"",
+      ""alerted_transactions"": [
+        {
+          ""date"": ""string | null"", // Format: YYYY-MM-DD
+          ""amount"": ""number | null"",
+          ""currency"": ""string | null"",
+          ""from"": {
+            ""name"": ""string | null"",
+            ""account_number"": ""string | null"",
+            ""bank"": ""string | null""
+          },
+          ""to"": {
+            ""name"": ""string | null"",
+            ""account_number"": ""string | null"",
+            ""bank"": ""string | null""
+          },
+          ""channel"": ""string | null"" // Payment method used
+        }
+      ]
+    }",Case_31_Suspect_1_Intelligence_1_ADCC.md,Case_31_IR.md,IR - C2531.docx,,"Dear HSB,
+
+Please be informed of a case of **""Social Media Deception - Compensated Dating Decep""** reported on **2025-02-06** and it is under the investigation by **DIT 5-■■■■■**. It is alleged that the relevant crime proceeds were transferred to the account(s) below **[from the victim]**
+
+As a matter of urgency, please inform the ADCC of the following:
+i) The latest balance of the beneficiary account(s);
+ii) Whether the beneficiary account(s) has been suspended after your review. If yes, what functions are blocked;
+iii) The details of next layer beneficiary account(s) relating to the below transaction of [AC1, AC1] (including details of transaction, bank, account number and beneficiary name). If the beneficiary account(s) belong to your bank, please provide us the account balance.
+Details of Beneficiary
+| Ref. | Beneficiary Bank | Layer | Beneficiary Account No. | Beneficiary Account Name |
+| ---- | ---------------- | ----- | ----------------------- | ------------------------ |
+| AC1 | HSB | 1st | 111-111111-101 | CHAN TAI MAN |
+
+Transaction Details
+| S/N | Date | Currency | Involved Amounts | Approx. HKD | Remitting Bank | AC Location | Depositor AC No. | Depositor AC Name |
+| --- | ---- | -------- | ---------------- | ----------- | -------------- | ----------- | ---------------- | ----------------- |
+| 1 | 2025-02-04 | HKD | 110555 | 110555 | CCBA | Hong Kong | 444-4444444-101 | CHEUNG TAK SHING |
+| 1 | 2025-02-04 | HKD | 50000 | 50000 | CCBA | Hong Kong | 444-4444444-101 | CHEUNG TAK SHING |
+| 1 | 2025-02-05 | HKD | 200000 | 200000 | CCBA | Hong Kong | 444-4444444-101 | CHEUNG TAK SHING |
+
+\*\*NO STR\*\*
+
+Details of Beneficiary
+| Ref. | Beneficiary Bank | Layer | Beneficiary Account No. | Beneficiary Account Name |
+| ---- | ---------------- | ----- | ----------------------- | ------------------------ |
+| AC1 | HSB | 1st | 111-111111-101 | CHAN TAI MAN |
+
+Transaction Details
+| S/N | Date | Currency | Involved Amounts | Approx. HKD | Remitting Bank | AC Location | Depositor AC No. | Depositor AC Name |
+| --- | ---- | -------- | ---------------- | ----------- | -------------- | ----------- | ---------------- | ----------------- |
+| 1 | 2025-02-05 | HKD | 200000 | 200000 | DBS | Hong Kong | 666-666666-101 | CHEUNG TAK SHING |
+
+\*\*NO STR\*\*
+
+We have examined each report referred by the subject investigation team and we believe that **that the beneficiary account(s) might have been used to deal with suspected proceeds of crime**. Therefore, you are advised (i) **to critically examine the alleged transaction(s) in the relevant account(s)** to ascertain whether or not you are satisfied that the provenance of the deposits into the said account(s) is legitimate and (ii) **to actively consider appropriate actions** to avoid dealing with property in whole or in part directly or indirectly represent any person's proceeds of an indictable offence, which may be liable to a prosecution for a criminal offence under sections 25(1) and (3) of the Organized and Serious Crimes Ordinance, Cap. 455. A person includes a financial institution.
+
+When fulfilling the reporting obligations by filing Suspicious Transaction Reports (STR) to the Joint Financial Intelligence Unit (""JFIU""), if any, please state **ESPS ■■■■/2025 and e-Hub ■■■■■■■■ (DIT 5-■■■■■)** for ease of reference.
+
+We confirm that the requested information is required for the purpose of section 58(1)(a) under the Personal Data (Privacy) Ordinance, Cap 486. Failure to provide the requested information may lead to possibly failure or unnecessary delay on prevention or detection of crime. In view of the above, we consider that section 58(2) as read with section 58(1)(a) of the Personal Data (Privacy) Ordinance, Cap. 486 is the applicable exemption under the circumstances.
+
+You are also advised to refer to the ""Guideline on Anti-Money Laundering and Counter-Terrorist Financing"" published by the Hong Kong Monetary Authority (HKMA) under the Anti-Money Laundering and Counter-Terrorist Financing (Financial Institutions) Ordinance, Cap. 615 (""AMLO"") and to take all reasonable measures to prevent a contravention and to mitigate Money Laundering risks.
+
+Should you have any enquiry, please feel free to contact the undersigned or our officers at 286■■■■■. Thank you! 
+
+Best regards, 
+SGT  ■■■■ ■■■
+""Anti-Deception Coordination Centre 
+Commercial Crime Bureau 
+Hong Kong Police Force""
+Tel: 286■■■■■ / Fax: 220■■■■■","{
+  ""fraud_type"": ""Social Media Deception - Compensated Dating Decep"",
+  ""police_reference"": ""ESPS ■■■■/2025 and e-Hub ■■■■■■■■ (DIT 5-■■■■■)"",
+  ""police_team"": ""DIT 5-■■■■■"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2025-02-04"",
+      ""amount"": 110555,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""444-4444444-101"",
+        ""bank"": ""CCBA""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HSB""
+      },
+      ""channel"": null
+    },
+    {
+      ""date"": ""2025-02-04"",
+      ""amount"": 50000,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""444-4444444-101"",
+        ""bank"": ""CCBA""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HSB""
+      },
+      ""channel"": null
+    },
+    {
+      ""date"": ""2025-02-05"",
+      ""amount"": 200000,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""444-4444444-101"",
+        ""bank"": ""CCBA""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HSB""
+      },
+      ""channel"": null
+    },
+    {
+      ""date"": ""2025-02-05"",
+      ""amount"": 200000,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""666-666666-101"",
+        ""bank"": ""DBS""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HSB""
+      },
+      ""channel"": null
+    }
+  ]
+}",Without transaction log
+ADCC,31,1,1,3,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with two documents: an unstructured fraud alert source and a structured CSV file of transaction records.
+
+Your task is to identify the fraudulent transactions described in the fraud alert source, match them to their corresponding entries in the transaction CSV, and produce a single consolidated JSON output that merges and reflects all relevant information. After generating the JSON, you must also provide a clear explanation of your matching and merging decisions.
+
+Key Instructions:
+
+    1. Core Task:
+        - Extract only transactions explicitly mentioned in the fraud alert source that contain both date and amount.
+        - Use the transaction CSV as the authoritative source to verify, correct, and enrich transaction data.
+
+    2. Step-by-Step Process:
+        a. Carefully read the fraud alert source to extract global fields and identify transactions to investigate.
+        b. Validate transactions:
+            - For each transaction, check if both date and amount are explicitly present and non-null.
+            - Immediately exclude transactions missing either field.
+        c. For each valid transaction:
+            - Search the CSV for a matching row using the rules below.
+            - If matched: Merge data using prioritization logic (set can_be_located: true).
+            - If unmatched: Use only fraud alert data (set can_be_located: false).
+        d. If no valid transactions remain, set alerted_transactions to an empty list [].
+        e. Assemble the final JSON output according to the schema.
+
+    3. Matching Rules (can_be_located logic):
+        A transaction from the fraud alert source matches a CSV row only if all three of the following conditions are met:
+            1. The date must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
+            2. The amount must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
+            3. At least one of the following is true:
+                - The from.account_number in the fraud alert source matches the Originator Account Number in the CSV.
+                - The to.account_number in the fraud alert source matches the Beneficiary Account Number in the CSV.
+                - The from.name in the fraud alert source matches the Originator Name in the CSV.
+                - The to.name in the fraud alert source matches the Beneficiary Name in the CSV.
+
+    4. Data Merging and Prioritization:
+        - For transaction fields:
+            - If a transaction is not found in the CSV (can_be_located: false): Use only data from the fraud alert source.
+            - If a transaction is found in the CSV (can_be_located: true): For each field, use the following priority:
+                1. CSV value (if present and not blank)
+                2. Fraud alert source value (if CSV value is blank or missing)
+                3. null (if neither source provides a value)
+
+    5. Data Handling:
+        - Preserve content: Do not remove or alter non-printable characters or artifacts; preserve content exactly as found.
+        - Whitespace: You may trim leading/trailing whitespace, but do not alter internal whitespace.
+
+    6. Strict Schema and Format Compliance:
+        - The final output must strictly follow the JSON schema below.
+        - All specified fields must be present. If a value cannot be found, use null (do not omit the key).
+        - Never output transactions with null/missing date or amount.
+        - The alerted_transactions array must always be present in the output, and if no valid transactions are found, it must be an empty list.
+        - Output must be a valid JSON object only, with no comments or extraneous text.
+
+    7. Additional Rules:
+        - For the per-transaction channel field (payment method used): Only extract channel values that are present in the fraud alert source (for example, ""FPS"" if stated in the source). If the fraud alert source does not specify a channel and the transaction record clearly indicates (even if not fully explicit) that the channel is ""ATM"" or ""Cash Deposit,"" you may use ""ATM"" or ""Cash Deposit"" as the channel value (do not include any additional descriptive text; output only ""ATM"" or ""Cash Deposit""). Otherwise, do not use or infer channel values from the transaction records.
+
+JSON Schema:
+
+    {
+      ""alerted_transactions"": [
+        {
+          ""date"": ""string | null"", // Format: YYYY-MM-DD
+          ""amount"": ""number | null"",
+          ""currency"": ""string | null"",
+          ""from"": {
+            ""name"": ""string | null"",
+            ""account_number"": ""string | null"",
+            ""bank"": ""string | null""
+          },
+          ""to"": {
+            ""name"": ""string | null"",
+            ""account_number"": ""string | null"",
+            ""bank"": ""string | null""
+          },
+          ""channel"": ""string | null"", // Payment method used
+          ""can_be_located"": ""boolean""
+        }
+      ]
+    }",Case_31_Suspect_1_Intelligence_1_ADCC.md,Case_31_IR.md,IR - C2531.docx,"Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Fraud Payment
+2025-02-04,C,110555,C,Hang Seng Bank Ltd.,China Construction Bank (Asia) Corporation Limited,444-4444444-101,111-111111-101,CHEUNG TAK SHING,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,China Construction Bank (Asia) Corporation Limited    HK,110555,1
+2025-02-04,C,50000,C,Hang Seng Bank Ltd.,China Construction Bank (Asia) Corporation Limited,444-4444444-101,111-111111-101,CHEUNG TAK SHING,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,China Construction Bank (Asia) Corporation Limited    HK,50000,2
+2025-02-05,C,200000,C,Hang Seng Bank Ltd.,China Construction Bank (Asia) Corporation Limited,444-4444444-101,111-111111-101,CHEUNG TAK SHING,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,China Construction Bank (Asia) Corporation Limited    HK,200000,3
+2025-02-05,C,200000,C,Hang Seng Bank Ltd.,DBS Bank (Hong Kong) Ltd.,666-666666-101,111-111111-101,CHEUNG TAK SHING,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,DBS Bank (Hong Kong) Ltd.    HK,200000,4","Dear HSB,
+
+Please be informed of a case of **""Social Media Deception - Compensated Dating Decep""** reported on **2025-02-06** and it is under the investigation by **DIT 5-■■■■■**. It is alleged that the relevant crime proceeds were transferred to the account(s) below **[from the victim]**
+
+As a matter of urgency, please inform the ADCC of the following:
+i) The latest balance of the beneficiary account(s);
+ii) Whether the beneficiary account(s) has been suspended after your review. If yes, what functions are blocked;
+iii) The details of next layer beneficiary account(s) relating to the below transaction of [AC1, AC1] (including details of transaction, bank, account number and beneficiary name). If the beneficiary account(s) belong to your bank, please provide us the account balance.
+Details of Beneficiary
+| Ref. | Beneficiary Bank | Layer | Beneficiary Account No. | Beneficiary Account Name |
+| ---- | ---------------- | ----- | ----------------------- | ------------------------ |
+| AC1 | HSB | 1st | 111-111111-101 | CHAN TAI MAN |
+
+Transaction Details
+| S/N | Date | Currency | Involved Amounts | Approx. HKD | Remitting Bank | AC Location | Depositor AC No. | Depositor AC Name |
+| --- | ---- | -------- | ---------------- | ----------- | -------------- | ----------- | ---------------- | ----------------- |
+| 1 | 2025-02-04 | HKD | 110555 | 110555 | CCBA | Hong Kong | 444-4444444-101 | CHEUNG TAK SHING |
+| 1 | 2025-02-04 | HKD | 50000 | 50000 | CCBA | Hong Kong | 444-4444444-101 | CHEUNG TAK SHING |
+| 1 | 2025-02-05 | HKD | 200000 | 200000 | CCBA | Hong Kong | 444-4444444-101 | CHEUNG TAK SHING |
+
+\*\*NO STR\*\*
+
+Details of Beneficiary
+| Ref. | Beneficiary Bank | Layer | Beneficiary Account No. | Beneficiary Account Name |
+| ---- | ---------------- | ----- | ----------------------- | ------------------------ |
+| AC1 | HSB | 1st | 111-111111-101 | CHAN TAI MAN |
+
+Transaction Details
+| S/N | Date | Currency | Involved Amounts | Approx. HKD | Remitting Bank | AC Location | Depositor AC No. | Depositor AC Name |
+| --- | ---- | -------- | ---------------- | ----------- | -------------- | ----------- | ---------------- | ----------------- |
+| 1 | 2025-02-05 | HKD | 200000 | 200000 | DBS | Hong Kong | 666-666666-101 | CHEUNG TAK SHING |
+
+\*\*NO STR\*\*
+
+We have examined each report referred by the subject investigation team and we believe that **that the beneficiary account(s) might have been used to deal with suspected proceeds of crime**. Therefore, you are advised (i) **to critically examine the alleged transaction(s) in the relevant account(s)** to ascertain whether or not you are satisfied that the provenance of the deposits into the said account(s) is legitimate and (ii) **to actively consider appropriate actions** to avoid dealing with property in whole or in part directly or indirectly represent any person's proceeds of an indictable offence, which may be liable to a prosecution for a criminal offence under sections 25(1) and (3) of the Organized and Serious Crimes Ordinance, Cap. 455. A person includes a financial institution.
+
+When fulfilling the reporting obligations by filing Suspicious Transaction Reports (STR) to the Joint Financial Intelligence Unit (""JFIU""), if any, please state **ESPS ■■■■/2025 and e-Hub ■■■■■■■■ (DIT 5-■■■■■)** for ease of reference.
+
+We confirm that the requested information is required for the purpose of section 58(1)(a) under the Personal Data (Privacy) Ordinance, Cap 486. Failure to provide the requested information may lead to possibly failure or unnecessary delay on prevention or detection of crime. In view of the above, we consider that section 58(2) as read with section 58(1)(a) of the Personal Data (Privacy) Ordinance, Cap. 486 is the applicable exemption under the circumstances.
+
+You are also advised to refer to the ""Guideline on Anti-Money Laundering and Counter-Terrorist Financing"" published by the Hong Kong Monetary Authority (HKMA) under the Anti-Money Laundering and Counter-Terrorist Financing (Financial Institutions) Ordinance, Cap. 615 (""AMLO"") and to take all reasonable measures to prevent a contravention and to mitigate Money Laundering risks.
+
+Should you have any enquiry, please feel free to contact the undersigned or our officers at 286■■■■■. Thank you! 
+
+Best regards, 
+SGT  ■■■■ ■■■
+""Anti-Deception Coordination Centre 
+Commercial Crime Bureau 
+Hong Kong Police Force""
+Tel: 286■■■■■ / Fax: 220■■■■■","{
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2025-02-04"",
+      ""amount"": 110555,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""444-4444444-101"",
+        ""bank"": ""China Construction Bank (Asia) Corporation Limited""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""Hang Seng Bank Ltd.""
+      },
+      ""channel"": null,
+      ""can_be_located"": true
+    },
+    {
+      ""date"": ""2025-02-04"",
+      ""amount"": 50000,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""444-4444444-101"",
+        ""bank"": ""China Construction Bank (Asia) Corporation Limited""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""Hang Seng Bank Ltd.""
+      },
+      ""channel"": null,
+      ""can_be_located"": true
+    },
+    {
+      ""date"": ""2025-02-05"",
+      ""amount"": 200000,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""444-4444444-101"",
+        ""bank"": ""China Construction Bank (Asia) Corporation Limited""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""Hang Seng Bank Ltd.""
+      },
+      ""channel"": null,
+      ""can_be_located"": true
+    },
+    {
+      ""date"": ""2025-02-05"",
+      ""amount"": 200000,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""666-666666-101"",
+        ""bank"": ""DBS Bank (Hong Kong) Ltd.""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""Hang Seng Bank Ltd.""
+      },
+      ""channel"": null,
+      ""can_be_located"": true
+    }
+  ]
+}",Without other fields
+ADCC,31,1,1,4,"You are an advanced AI assistant specializing in data extraction. You will be provided with one document: an unstructured fraud alert source.
+
+Your task is to identify the fraudulent transactions described in the fraud alert source, and produce a single consolidated JSON output that reflects all relevant information.
+
+Key Instructions:
+
+    1. Core Task:
+        - Extract only transactions explicitly mentioned in the fraud alert source that contain both date and amount.
+
+    2. Step-by-Step Process:
+        a. Carefully read the fraud alert source to identify transactions to investigate.
+        b. Validate transactions:
+            - For each transaction, check if both date and amount are explicitly present and non-null.
+            - Immediately exclude transactions missing either field.
+        c. If no valid transactions remain, set alerted_transactions to an empty list [].
+
+    3. Data Handling:
+        - Preserve content: Do not remove or alter non-printable characters or artifacts; preserve content exactly as found.
+        - Whitespace: You may trim leading/trailing whitespace, but do not alter internal whitespace.
+
+    4. Strict Schema and Format Compliance:
+        - The final output must strictly follow the JSON schema below.
+        - All specified fields must be present. If a value cannot be found, use null (do not omit the key).
+        - Never output transactions with null/missing date or amount.
+        - The alerted_transactions array must always be present in the output, and if no valid transactions are found, it must be an empty list.
+        - Output must be a valid JSON object only, with no comments or extraneous text.
+
+JSON Schema:
+
+    {
+      ""alerted_transactions"": [
+        {
+          ""date"": ""string | null"", // Format: YYYY-MM-DD
+          ""amount"": ""number | null"",
+          ""currency"": ""string | null"",
+          ""from"": {
+            ""name"": ""string | null"",
+            ""account_number"": ""string | null"",
+            ""bank"": ""string | null""
+          },
+          ""to"": {
+            ""name"": ""string | null"",
+            ""account_number"": ""string | null"",
+            ""bank"": ""string | null""
+          },
+          ""channel"": ""string | null"" // Payment method used
+        }
+      ]
+    }",Case_31_Suspect_1_Intelligence_1_ADCC.md,Case_31_IR.md,IR - C2531.docx,,"Dear HSB,
+
+Please be informed of a case of **""Social Media Deception - Compensated Dating Decep""** reported on **2025-02-06** and it is under the investigation by **DIT 5-■■■■■**. It is alleged that the relevant crime proceeds were transferred to the account(s) below **[from the victim]**
+
+As a matter of urgency, please inform the ADCC of the following:
+i) The latest balance of the beneficiary account(s);
+ii) Whether the beneficiary account(s) has been suspended after your review. If yes, what functions are blocked;
+iii) The details of next layer beneficiary account(s) relating to the below transaction of [AC1, AC1] (including details of transaction, bank, account number and beneficiary name). If the beneficiary account(s) belong to your bank, please provide us the account balance.
+Details of Beneficiary
+| Ref. | Beneficiary Bank | Layer | Beneficiary Account No. | Beneficiary Account Name |
+| ---- | ---------------- | ----- | ----------------------- | ------------------------ |
+| AC1 | HSB | 1st | 111-111111-101 | CHAN TAI MAN |
+
+Transaction Details
+| S/N | Date | Currency | Involved Amounts | Approx. HKD | Remitting Bank | AC Location | Depositor AC No. | Depositor AC Name |
+| --- | ---- | -------- | ---------------- | ----------- | -------------- | ----------- | ---------------- | ----------------- |
+| 1 | 2025-02-04 | HKD | 110555 | 110555 | CCBA | Hong Kong | 444-4444444-101 | CHEUNG TAK SHING |
+| 1 | 2025-02-04 | HKD | 50000 | 50000 | CCBA | Hong Kong | 444-4444444-101 | CHEUNG TAK SHING |
+| 1 | 2025-02-05 | HKD | 200000 | 200000 | CCBA | Hong Kong | 444-4444444-101 | CHEUNG TAK SHING |
+
+\*\*NO STR\*\*
+
+Details of Beneficiary
+| Ref. | Beneficiary Bank | Layer | Beneficiary Account No. | Beneficiary Account Name |
+| ---- | ---------------- | ----- | ----------------------- | ------------------------ |
+| AC1 | HSB | 1st | 111-111111-101 | CHAN TAI MAN |
+
+Transaction Details
+| S/N | Date | Currency | Involved Amounts | Approx. HKD | Remitting Bank | AC Location | Depositor AC No. | Depositor AC Name |
+| --- | ---- | -------- | ---------------- | ----------- | -------------- | ----------- | ---------------- | ----------------- |
+| 1 | 2025-02-05 | HKD | 200000 | 200000 | DBS | Hong Kong | 666-666666-101 | CHEUNG TAK SHING |
+
+\*\*NO STR\*\*
+
+We have examined each report referred by the subject investigation team and we believe that **that the beneficiary account(s) might have been used to deal with suspected proceeds of crime**. Therefore, you are advised (i) **to critically examine the alleged transaction(s) in the relevant account(s)** to ascertain whether or not you are satisfied that the provenance of the deposits into the said account(s) is legitimate and (ii) **to actively consider appropriate actions** to avoid dealing with property in whole or in part directly or indirectly represent any person's proceeds of an indictable offence, which may be liable to a prosecution for a criminal offence under sections 25(1) and (3) of the Organized and Serious Crimes Ordinance, Cap. 455. A person includes a financial institution.
+
+When fulfilling the reporting obligations by filing Suspicious Transaction Reports (STR) to the Joint Financial Intelligence Unit (""JFIU""), if any, please state **ESPS ■■■■/2025 and e-Hub ■■■■■■■■ (DIT 5-■■■■■)** for ease of reference.
+
+We confirm that the requested information is required for the purpose of section 58(1)(a) under the Personal Data (Privacy) Ordinance, Cap 486. Failure to provide the requested information may lead to possibly failure or unnecessary delay on prevention or detection of crime. In view of the above, we consider that section 58(2) as read with section 58(1)(a) of the Personal Data (Privacy) Ordinance, Cap. 486 is the applicable exemption under the circumstances.
+
+You are also advised to refer to the ""Guideline on Anti-Money Laundering and Counter-Terrorist Financing"" published by the Hong Kong Monetary Authority (HKMA) under the Anti-Money Laundering and Counter-Terrorist Financing (Financial Institutions) Ordinance, Cap. 615 (""AMLO"") and to take all reasonable measures to prevent a contravention and to mitigate Money Laundering risks.
+
+Should you have any enquiry, please feel free to contact the undersigned or our officers at 286■■■■■. Thank you! 
+
+Best regards, 
+SGT  ■■■■ ■■■
+""Anti-Deception Coordination Centre 
+Commercial Crime Bureau 
+Hong Kong Police Force""
+Tel: 286■■■■■ / Fax: 220■■■■■","{
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2025-02-04"",
+      ""amount"": 110555,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""444-4444444-101"",
+        ""bank"": ""CCBA""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HSB""
+      },
+      ""channel"": null
+    },
+    {
+      ""date"": ""2025-02-04"",
+      ""amount"": 50000,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""444-4444444-101"",
+        ""bank"": ""CCBA""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HSB""
+      },
+      ""channel"": null
+    },
+    {
+      ""date"": ""2025-02-05"",
+      ""amount"": 200000,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""444-4444444-101"",
+        ""bank"": ""CCBA""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HSB""
+      },
+      ""channel"": null
+    },
+    {
+      ""date"": ""2025-02-05"",
+      ""amount"": 200000,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""666-666666-101"",
+        ""bank"": ""DBS Bank (Hong Kong) Ltd.""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HSB""
+      },
+      ""channel"": null
+    }
+  ]
+}",Without transaction log & Without other fields
+ADCC,31,1,1,5,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with two documents: an unstructured fraud alert source and a structured CSV file of transaction records.
+
+Your task is to identify the fraudulent transactions described in the fraud alert source, match them to their corresponding entries in the transaction CSV, and produce a single consolidated JSON output that merges and reflects all relevant information. After generating the JSON, you must also provide a clear explanation of your matching and merging decisions.
+
+Key Instructions:
+
+    1. Core Task:
+        - Extract only transactions explicitly mentioned in the fraud alert source that contain both date and amount.
+        - Use the transaction CSV as the authoritative source to verify, correct, and enrich transaction data.
+
+    2. Step-by-Step Process:
+        a. Carefully read the fraud alert source to extract global fields and identify transactions to investigate.
+        b. Validate transactions:
+            - For each transaction, check if both date and amount are explicitly present and non-null.
+            - Immediately exclude transactions missing either field.
+        c. For each valid transaction:
+            - Search the CSV for a matching row using the rules below.
+            - If matched: Merge data using prioritization logic (set can_be_located: true).
+            - If unmatched: Use only fraud alert data (set can_be_located: false).
+        d. If no valid transactions remain, set alerted_transactions to an empty list [].
+        e. Assemble the final JSON output according to the schema.
+
+    3. Matching Rules (can_be_located logic):
+        A transaction from the fraud alert source matches a CSV row only if all three of the following conditions are met:
+            1. The date must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
+            2. The amount must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
+            3. At least one of the following is true:
+                - The from.account_number in the fraud alert source matches the Originator Account Number in the CSV.
+                - The to.account_number in the fraud alert source matches the Beneficiary Account Number in the CSV.
+                - The from.name in the fraud alert source matches the Originator Name in the CSV.
+                - The to.name in the fraud alert source matches the Beneficiary Name in the CSV.
+
+    4. Data Merging and Prioritization:
+        - For transaction fields:
+            - If a transaction is not found in the CSV (can_be_located: false): Use only data from the fraud alert source.
+            - If a transaction is found in the CSV (can_be_located: true): For each field, use the following priority:
+                1. CSV value (if present and not blank)
+                2. Fraud alert source value (if CSV value is blank or missing)
+                3. null (if neither source provides a value)
+
+    5. Data Handling:
+        - Preserve content: Do not remove or alter non-printable characters or artifacts; preserve content exactly as found.
+        - Whitespace: You may trim leading/trailing whitespace, but do not alter internal whitespace.
+
+    6. Strict Schema and Format Compliance:
+        - The final output must strictly follow the JSON schema below.
+        - All specified fields must be present. If a value cannot be found, use null (do not omit the key).
+        - Never output transactions with null/missing date or amount.
+        - The alerted_transactions array must always be present in the output, and if no valid transactions are found, it must be an empty list.
+        - Output must be a valid JSON object only, with no comments or extraneous text.
+
+    7. Additional Rules:
+        - For the per-transaction channel field (payment method used): Only extract channel values that are present in the fraud alert source (for example, ""FPS"" if stated in the source). If the fraud alert source does not specify a channel and the transaction record clearly indicates (even if not fully explicit) that the channel is ""ATM"" or ""Cash Deposit,"" you may use ""ATM"" or ""Cash Deposit"" as the channel value (do not include any additional descriptive text; output only ""ATM"" or ""Cash Deposit""). Otherwise, do not use or infer channel values from the transaction records.
+
+JSON Schema:
+
+    {
+      ""alerted_transactions"": [
+        {
+          ""date"": ""string | null"", // Format: YYYY-MM-DD
+          ""amount"": ""number | null"",
+          ""currency"": ""string | null"",
+          ""from"": {
+            ""name"": ""string | null"",
+            ""account_number"": ""string | null"",
+            ""bank"": ""string | null""
+          },
+          ""to"": {
+            ""name"": ""string | null"",
+            ""account_number"": ""string | null"",
+            ""bank"": ""string | null""
+          },
+          ""channel"": ""string | null"", // Payment method used
+          ""can_be_located"": ""boolean""
+        }
+      ]
+    }",Case_31_Suspect_1_Intelligence_1_ADCC.md,Case_31_IR.md,IR - C2531.docx,"Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Fraud Payment
+2025-02-04,C,110555,C,Hang Seng Bank Ltd.,China Construction Bank (Asia) Corporation Limited,444-4444444-101,111-111111-101,CHEUNG TAK SHING,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,China Construction Bank (Asia) Corporation Limited    HK,110555,1
+2025-02-05,C,200000,C,Hang Seng Bank Ltd.,DBS Bank (Hong Kong) Ltd.,666-666666-101,111-111111-101,CHEUNG TAK SHING,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,DBS Bank (Hong Kong) Ltd.    HK,200000,4","Dear HSB,
+
+Please be informed of a case of **""Social Media Deception - Compensated Dating Decep""** reported on **2025-02-06** and it is under the investigation by **DIT 5-■■■■■**. It is alleged that the relevant crime proceeds were transferred to the account(s) below **[from the victim]**
+
+As a matter of urgency, please inform the ADCC of the following:
+i) The latest balance of the beneficiary account(s);
+ii) Whether the beneficiary account(s) has been suspended after your review. If yes, what functions are blocked;
+iii) The details of next layer beneficiary account(s) relating to the below transaction of [AC1, AC1] (including details of transaction, bank, account number and beneficiary name). If the beneficiary account(s) belong to your bank, please provide us the account balance.
+Details of Beneficiary
+| Ref. | Beneficiary Bank | Layer | Beneficiary Account No. | Beneficiary Account Name |
+| ---- | ---------------- | ----- | ----------------------- | ------------------------ |
+| AC1 | HSB | 1st | 111-111111-101 | CHAN TAI MAN |
+
+Transaction Details
+| S/N | Date | Currency | Involved Amounts | Approx. HKD | Remitting Bank | AC Location | Depositor AC No. | Depositor AC Name |
+| --- | ---- | -------- | ---------------- | ----------- | -------------- | ----------- | ---------------- | ----------------- |
+| 1 | 2025-02-04 | HKD | 110555 | 110555 | CCBA | Hong Kong | 444-4444444-101 | CHEUNG TAK SHING |
+
+\*\*NO STR\*\*
+
+Details of Beneficiary
+| Ref. | Beneficiary Bank | Layer | Beneficiary Account No. | Beneficiary Account Name |
+| ---- | ---------------- | ----- | ----------------------- | ------------------------ |
+| AC1 | HSB | 1st | 111-111111-101 | CHAN TAI MAN |
+
+Transaction Details
+| S/N | Date | Currency | Involved Amounts | Approx. HKD | Remitting Bank | AC Location | Depositor AC No. | Depositor AC Name |
+| --- | ---- | -------- | ---------------- | ----------- | -------------- | ----------- | ---------------- | ----------------- |
+| 1 | 2025-02-05 | HKD | 200000 | 200000 | DBS | Hong Kong | 666-666666-101 | CHEUNG TAK SHING |
+
+\*\*NO STR\*\*
+
+We have examined each report referred by the subject investigation team and we believe that **that the beneficiary account(s) might have been used to deal with suspected proceeds of crime**. Therefore, you are advised (i) **to critically examine the alleged transaction(s) in the relevant account(s)** to ascertain whether or not you are satisfied that the provenance of the deposits into the said account(s) is legitimate and (ii) **to actively consider appropriate actions** to avoid dealing with property in whole or in part directly or indirectly represent any person's proceeds of an indictable offence, which may be liable to a prosecution for a criminal offence under sections 25(1) and (3) of the Organized and Serious Crimes Ordinance, Cap. 455. A person includes a financial institution.
+
+When fulfilling the reporting obligations by filing Suspicious Transaction Reports (STR) to the Joint Financial Intelligence Unit (""JFIU""), if any, please state **ESPS ■■■■/2025 and e-Hub ■■■■■■■■ (DIT 5-■■■■■)** for ease of reference.
+
+We confirm that the requested information is required for the purpose of section 58(1)(a) under the Personal Data (Privacy) Ordinance, Cap 486. Failure to provide the requested information may lead to possibly failure or unnecessary delay on prevention or detection of crime. In view of the above, we consider that section 58(2) as read with section 58(1)(a) of the Personal Data (Privacy) Ordinance, Cap. 486 is the applicable exemption under the circumstances.
+
+You are also advised to refer to the ""Guideline on Anti-Money Laundering and Counter-Terrorist Financing"" published by the Hong Kong Monetary Authority (HKMA) under the Anti-Money Laundering and Counter-Terrorist Financing (Financial Institutions) Ordinance, Cap. 615 (""AMLO"") and to take all reasonable measures to prevent a contravention and to mitigate Money Laundering risks.
+
+Should you have any enquiry, please feel free to contact the undersigned or our officers at 286■■■■■. Thank you! 
+
+Best regards, 
+SGT  ■■■■ ■■■
+""Anti-Deception Coordination Centre 
+Commercial Crime Bureau 
+Hong Kong Police Force""
+Tel: 286■■■■■ / Fax: 220■■■■■","{
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2025-02-04"",
+      ""amount"": 110555,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""444-4444444-101"",
+        ""bank"": ""China Construction Bank (Asia) Corporation Limited""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""Hang Seng Bank Ltd.""
+      },
+      ""channel"": null,
+      ""can_be_located"": true
+    },
+    {
+      ""date"": ""2025-02-05"",
+      ""amount"": 200000,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""666-666666-101"",
+        ""bank"": ""DBS Bank (Hong Kong) Ltd.""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""Hang Seng Bank Ltd.""
+      },
+      ""channel"": null,
+      ""can_be_located"": true
+    }
+  ]
+}",Without other fields & Randomly removed transactions 1
+ADCC,31,1,1,6,"You are an advanced AI assistant specializing in data extraction. You will be provided with one document: an unstructured fraud alert source.
+
+Your task is to identify the fraudulent transactions described in the fraud alert source, and produce a single consolidated JSON output that reflects all relevant information.
+
+Key Instructions:
+
+    1. Core Task:
+        - Extract only transactions explicitly mentioned in the fraud alert source that contain both date and amount.
+
+    2. Step-by-Step Process:
+        a. Carefully read the fraud alert source to identify transactions to investigate.
+        b. Validate transactions:
+            - For each transaction, check if both date and amount are explicitly present and non-null.
+            - Immediately exclude transactions missing either field.
+        c. If no valid transactions remain, set alerted_transactions to an empty list [].
+
+    3. Data Handling:
+        - Preserve content: Do not remove or alter non-printable characters or artifacts; preserve content exactly as found.
+        - Whitespace: You may trim leading/trailing whitespace, but do not alter internal whitespace.
+
+    4. Strict Schema and Format Compliance:
+        - The final output must strictly follow the JSON schema below.
+        - All specified fields must be present. If a value cannot be found, use null (do not omit the key).
+        - Never output transactions with null/missing date or amount.
+        - The alerted_transactions array must always be present in the output, and if no valid transactions are found, it must be an empty list.
+        - Output must be a valid JSON object only, with no comments or extraneous text.
+
+JSON Schema:
+
+    {
+      ""alerted_transactions"": [
+        {
+          ""date"": ""string | null"", // Format: YYYY-MM-DD
+          ""amount"": ""number | null"",
+          ""currency"": ""string | null"",
+          ""from"": {
+            ""name"": ""string | null"",
+            ""account_number"": ""string | null"",
+            ""bank"": ""string | null""
+          },
+          ""to"": {
+            ""name"": ""string | null"",
+            ""account_number"": ""string | null"",
+            ""bank"": ""string | null""
+          },
+          ""channel"": ""string | null"" // Payment method used
+        }
+      ]
+    }",Case_31_Suspect_1_Intelligence_1_ADCC.md,Case_31_IR.md,IR - C2531.docx,,"Dear HSB,
+
+Please be informed of a case of **""Social Media Deception - Compensated Dating Decep""** reported on **2025-02-06** and it is under the investigation by **DIT 5-■■■■■**. It is alleged that the relevant crime proceeds were transferred to the account(s) below **[from the victim]**
+
+As a matter of urgency, please inform the ADCC of the following:
+i) The latest balance of the beneficiary account(s);
+ii) Whether the beneficiary account(s) has been suspended after your review. If yes, what functions are blocked;
+iii) The details of next layer beneficiary account(s) relating to the below transaction of [AC1, AC1] (including details of transaction, bank, account number and beneficiary name). If the beneficiary account(s) belong to your bank, please provide us the account balance.
+Details of Beneficiary
+| Ref. | Beneficiary Bank | Layer | Beneficiary Account No. | Beneficiary Account Name |
+| ---- | ---------------- | ----- | ----------------------- | ------------------------ |
+| AC1 | HSB | 1st | 111-111111-101 | CHAN TAI MAN |
+
+Transaction Details
+| S/N | Date | Currency | Involved Amounts | Approx. HKD | Remitting Bank | AC Location | Depositor AC No. | Depositor AC Name |
+| --- | ---- | -------- | ---------------- | ----------- | -------------- | ----------- | ---------------- | ----------------- |
+| 1 | 2025-02-04 | HKD | 110555 | 110555 | CCBA | Hong Kong | 444-4444444-101 | CHEUNG TAK SHING |
+
+\*\*NO STR\*\*
+
+Details of Beneficiary
+| Ref. | Beneficiary Bank | Layer | Beneficiary Account No. | Beneficiary Account Name |
+| ---- | ---------------- | ----- | ----------------------- | ------------------------ |
+| AC1 | HSB | 1st | 111-111111-101 | CHAN TAI MAN |
+
+Transaction Details
+| S/N | Date | Currency | Involved Amounts | Approx. HKD | Remitting Bank | AC Location | Depositor AC No. | Depositor AC Name |
+| --- | ---- | -------- | ---------------- | ----------- | -------------- | ----------- | ---------------- | ----------------- |
+| 1 | 2025-02-05 | HKD | 200000 | 200000 | DBS | Hong Kong | 666-666666-101 | CHEUNG TAK SHING |
+
+\*\*NO STR\*\*
+
+We have examined each report referred by the subject investigation team and we believe that **that the beneficiary account(s) might have been used to deal with suspected proceeds of crime**. Therefore, you are advised (i) **to critically examine the alleged transaction(s) in the relevant account(s)** to ascertain whether or not you are satisfied that the provenance of the deposits into the said account(s) is legitimate and (ii) **to actively consider appropriate actions** to avoid dealing with property in whole or in part directly or indirectly represent any person's proceeds of an indictable offence, which may be liable to a prosecution for a criminal offence under sections 25(1) and (3) of the Organized and Serious Crimes Ordinance, Cap. 455. A person includes a financial institution.
+
+When fulfilling the reporting obligations by filing Suspicious Transaction Reports (STR) to the Joint Financial Intelligence Unit (""JFIU""), if any, please state **ESPS ■■■■/2025 and e-Hub ■■■■■■■■ (DIT 5-■■■■■)** for ease of reference.
+
+We confirm that the requested information is required for the purpose of section 58(1)(a) under the Personal Data (Privacy) Ordinance, Cap 486. Failure to provide the requested information may lead to possibly failure or unnecessary delay on prevention or detection of crime. In view of the above, we consider that section 58(2) as read with section 58(1)(a) of the Personal Data (Privacy) Ordinance, Cap. 486 is the applicable exemption under the circumstances.
+
+You are also advised to refer to the ""Guideline on Anti-Money Laundering and Counter-Terrorist Financing"" published by the Hong Kong Monetary Authority (HKMA) under the Anti-Money Laundering and Counter-Terrorist Financing (Financial Institutions) Ordinance, Cap. 615 (""AMLO"") and to take all reasonable measures to prevent a contravention and to mitigate Money Laundering risks.
+
+Should you have any enquiry, please feel free to contact the undersigned or our officers at 286■■■■■. Thank you! 
+
+Best regards, 
+SGT  ■■■■ ■■■
+""Anti-Deception Coordination Centre 
+Commercial Crime Bureau 
+Hong Kong Police Force""
+Tel: 286■■■■■ / Fax: 220■■■■■","{
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2025-02-04"",
+      ""amount"": 110555,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""444-4444444-101"",
+        ""bank"": ""CCBA""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HSB""
+      },
+      ""channel"": null
+    },
+    {
+      ""date"": ""2025-02-05"",
+      ""amount"": 200000,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""666-666666-101"",
+        ""bank"": ""DBS Bank (Hong Kong) Ltd.""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HSB""
+      },
+      ""channel"": null
+    }
+  ]
+}",Without transaction log & Without other fields & Randomly removed transactions 1
+ADCC,31,1,1,7,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with two documents: an unstructured fraud alert source and a structured CSV file of transaction records.
+
+Your task is to identify the fraudulent transactions described in the fraud alert source, match them to their corresponding entries in the transaction CSV, and produce a single consolidated JSON output that merges and reflects all relevant information. After generating the JSON, you must also provide a clear explanation of your matching and merging decisions.
+
+Key Instructions:
+
+    1. Core Task:
+        - Extract only transactions explicitly mentioned in the fraud alert source that contain both date and amount.
+        - Use the transaction CSV as the authoritative source to verify, correct, and enrich transaction data.
+
+    2. Step-by-Step Process:
+        a. Carefully read the fraud alert source to extract global fields and identify transactions to investigate.
+        b. Validate transactions:
+            - For each transaction, check if both date and amount are explicitly present and non-null.
+            - Immediately exclude transactions missing either field.
+        c. For each valid transaction:
+            - Search the CSV for a matching row using the rules below.
+            - If matched: Merge data using prioritization logic (set can_be_located: true).
+            - If unmatched: Use only fraud alert data (set can_be_located: false).
+        d. If no valid transactions remain, set alerted_transactions to an empty list [].
+        e. Assemble the final JSON output according to the schema.
+
+    3. Matching Rules (can_be_located logic):
+        A transaction from the fraud alert source matches a CSV row only if all three of the following conditions are met:
+            1. The date must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
+            2. The amount must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
+            3. At least one of the following is true:
+                - The from.account_number in the fraud alert source matches the Originator Account Number in the CSV.
+                - The to.account_number in the fraud alert source matches the Beneficiary Account Number in the CSV.
+                - The from.name in the fraud alert source matches the Originator Name in the CSV.
+                - The to.name in the fraud alert source matches the Beneficiary Name in the CSV.
+
+    4. Data Merging and Prioritization:
+        - For transaction fields:
+            - If a transaction is not found in the CSV (can_be_located: false): Use only data from the fraud alert source.
+            - If a transaction is found in the CSV (can_be_located: true): For each field, use the following priority:
+                1. CSV value (if present and not blank)
+                2. Fraud alert source value (if CSV value is blank or missing)
+                3. null (if neither source provides a value)
+
+    5. Data Handling:
+        - Preserve content: Do not remove or alter non-printable characters or artifacts; preserve content exactly as found.
+        - Whitespace: You may trim leading/trailing whitespace, but do not alter internal whitespace.
+
+    6. Strict Schema and Format Compliance:
+        - The final output must strictly follow the JSON schema below.
+        - All specified fields must be present. If a value cannot be found, use null (do not omit the key).
+        - Never output transactions with null/missing date or amount.
+        - The alerted_transactions array must always be present in the output, and if no valid transactions are found, it must be an empty list.
+        - Output must be a valid JSON object only, with no comments or extraneous text.
+
+    7. Additional Rules:
+        - For the per-transaction channel field (payment method used): Only extract channel values that are present in the fraud alert source (for example, ""FPS"" if stated in the source). If the fraud alert source does not specify a channel and the transaction record clearly indicates (even if not fully explicit) that the channel is ""ATM"" or ""Cash Deposit,"" you may use ""ATM"" or ""Cash Deposit"" as the channel value (do not include any additional descriptive text; output only ""ATM"" or ""Cash Deposit""). Otherwise, do not use or infer channel values from the transaction records.
+
+JSON Schema:
+
+    {
+      ""alerted_transactions"": [
+        {
+          ""date"": ""string | null"", // Format: YYYY-MM-DD
+          ""amount"": ""number | null"",
+          ""currency"": ""string | null"",
+          ""from"": {
+            ""name"": ""string | null"",
+            ""account_number"": ""string | null"",
+            ""bank"": ""string | null""
+          },
+          ""to"": {
+            ""name"": ""string | null"",
+            ""account_number"": ""string | null"",
+            ""bank"": ""string | null""
+          },
+          ""channel"": ""string | null"", // Payment method used
+          ""can_be_located"": ""boolean""
+        }
+      ]
+    }",Case_31_Suspect_1_Intelligence_1_ADCC.md,Case_31_IR.md,IR - C2531.docx,"Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Fraud Payment
+2025-02-04,C,110555,C,Hang Seng Bank Ltd.,China Construction Bank (Asia) Corporation Limited,444-4444444-101,111-111111-101,CHEUNG TAK SHING,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,China Construction Bank (Asia) Corporation Limited    HK,110555,1","Dear HSB,
+
+Please be informed of a case of **""Social Media Deception - Compensated Dating Decep""** reported on **2025-02-06** and it is under the investigation by **DIT 5-■■■■■**. It is alleged that the relevant crime proceeds were transferred to the account(s) below **[from the victim]**
+
+As a matter of urgency, please inform the ADCC of the following:
+i) The latest balance of the beneficiary account(s);
+ii) Whether the beneficiary account(s) has been suspended after your review. If yes, what functions are blocked;
+iii) The details of next layer beneficiary account(s) relating to the below transaction of [AC1, AC1] (including details of transaction, bank, account number and beneficiary name). If the beneficiary account(s) belong to your bank, please provide us the account balance.
+Details of Beneficiary
+| Ref. | Beneficiary Bank | Layer | Beneficiary Account No. | Beneficiary Account Name |
+| ---- | ---------------- | ----- | ----------------------- | ------------------------ |
+| AC1 | HSB | 1st | 111-111111-101 | CHAN TAI MAN |
+
+Transaction Details
+| S/N | Date | Currency | Involved Amounts | Approx. HKD | Remitting Bank | AC Location | Depositor AC No. | Depositor AC Name |
+| --- | ---- | -------- | ---------------- | ----------- | -------------- | ----------- | ---------------- | ----------------- |
+| 1 | 2025-02-04 | HKD | 110555 | 110555 | CCBA | Hong Kong | 444-4444444-101 | CHEUNG TAK SHING |
+| 1 | 2025-02-04 | HKD | 50000 | 50000 | CCBA | Hong Kong | 444-4444444-101 | CHEUNG TAK SHING |
+
+\*\*NO STR\*\*
+
+We have examined each report referred by the subject investigation team and we believe that **that the beneficiary account(s) might have been used to deal with suspected proceeds of crime**. Therefore, you are advised (i) **to critically examine the alleged transaction(s) in the relevant account(s)** to ascertain whether or not you are satisfied that the provenance of the deposits into the said account(s) is legitimate and (ii) **to actively consider appropriate actions** to avoid dealing with property in whole or in part directly or indirectly represent any person's proceeds of an indictable offence, which may be liable to a prosecution for a criminal offence under sections 25(1) and (3) of the Organized and Serious Crimes Ordinance, Cap. 455. A person includes a financial institution.
+
+When fulfilling the reporting obligations by filing Suspicious Transaction Reports (STR) to the Joint Financial Intelligence Unit (""JFIU""), if any, please state **ESPS ■■■■/2025 and e-Hub ■■■■■■■■ (DIT 5-■■■■■)** for ease of reference.
+
+We confirm that the requested information is required for the purpose of section 58(1)(a) under the Personal Data (Privacy) Ordinance, Cap 486. Failure to provide the requested information may lead to possibly failure or unnecessary delay on prevention or detection of crime. In view of the above, we consider that section 58(2) as read with section 58(1)(a) of the Personal Data (Privacy) Ordinance, Cap. 486 is the applicable exemption under the circumstances.
+
+You are also advised to refer to the ""Guideline on Anti-Money Laundering and Counter-Terrorist Financing"" published by the Hong Kong Monetary Authority (HKMA) under the Anti-Money Laundering and Counter-Terrorist Financing (Financial Institutions) Ordinance, Cap. 615 (""AMLO"") and to take all reasonable measures to prevent a contravention and to mitigate Money Laundering risks.
+
+Should you have any enquiry, please feel free to contact the undersigned or our officers at 286■■■■■. Thank you! 
+
+Best regards, 
+SGT  ■■■■ ■■■
+""Anti-Deception Coordination Centre 
+Commercial Crime Bureau 
+Hong Kong Police Force""
+Tel: 286■■■■■ / Fax: 220■■■■■","{
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2025-02-04"",
+      ""amount"": 110555,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""444-4444444-101"",
+        ""bank"": ""China Construction Bank (Asia) Corporation Limited""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""Hang Seng Bank Ltd.""
+      },
+      ""channel"": null,
+      ""can_be_located"": true
+    },
+    {
+      ""date"": ""2025-02-04"",
+      ""amount"": 50000,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""444-4444444-101"",
+        ""bank"": ""China Construction Bank (Asia) Corporation Limited""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""Hang Seng Bank Ltd.""
+      },
+      ""channel"": null,
+      ""can_be_located"": true
+    }
+  ]
+}",Without other fields & Randomly removed transactions 2
+ADCC,31,1,1,8,"You are an advanced AI assistant specializing in data extraction. You will be provided with one document: an unstructured fraud alert source.
+
+Your task is to identify the fraudulent transactions described in the fraud alert source, and produce a single consolidated JSON output that reflects all relevant information.
+
+Key Instructions:
+
+    1. Core Task:
+        - Extract only transactions explicitly mentioned in the fraud alert source that contain both date and amount.
+
+    2. Step-by-Step Process:
+        a. Carefully read the fraud alert source to identify transactions to investigate.
+        b. Validate transactions:
+            - For each transaction, check if both date and amount are explicitly present and non-null.
+            - Immediately exclude transactions missing either field.
+        c. If no valid transactions remain, set alerted_transactions to an empty list [].
+
+    3. Data Handling:
+        - Preserve content: Do not remove or alter non-printable characters or artifacts; preserve content exactly as found.
+        - Whitespace: You may trim leading/trailing whitespace, but do not alter internal whitespace.
+
+    4. Strict Schema and Format Compliance:
+        - The final output must strictly follow the JSON schema below.
+        - All specified fields must be present. If a value cannot be found, use null (do not omit the key).
+        - Never output transactions with null/missing date or amount.
+        - The alerted_transactions array must always be present in the output, and if no valid transactions are found, it must be an empty list.
+        - Output must be a valid JSON object only, with no comments or extraneous text.
+
+JSON Schema:
+
+    {
+      ""alerted_transactions"": [
+        {
+          ""date"": ""string | null"", // Format: YYYY-MM-DD
+          ""amount"": ""number | null"",
+          ""currency"": ""string | null"",
+          ""from"": {
+            ""name"": ""string | null"",
+            ""account_number"": ""string | null"",
+            ""bank"": ""string | null""
+          },
+          ""to"": {
+            ""name"": ""string | null"",
+            ""account_number"": ""string | null"",
+            ""bank"": ""string | null""
+          },
+          ""channel"": ""string | null"" // Payment method used
+        }
+      ]
+    }",Case_31_Suspect_1_Intelligence_1_ADCC.md,Case_31_IR.md,IR - C2531.docx,,"Dear HSB,
+
+Please be informed of a case of **""Social Media Deception - Compensated Dating Decep""** reported on **2025-02-06** and it is under the investigation by **DIT 5-■■■■■**. It is alleged that the relevant crime proceeds were transferred to the account(s) below **[from the victim]**
+
+As a matter of urgency, please inform the ADCC of the following:
+i) The latest balance of the beneficiary account(s);
+ii) Whether the beneficiary account(s) has been suspended after your review. If yes, what functions are blocked;
+iii) The details of next layer beneficiary account(s) relating to the below transaction of [AC1, AC1] (including details of transaction, bank, account number and beneficiary name). If the beneficiary account(s) belong to your bank, please provide us the account balance.
+Details of Beneficiary
+| Ref. | Beneficiary Bank | Layer | Beneficiary Account No. | Beneficiary Account Name |
+| ---- | ---------------- | ----- | ----------------------- | ------------------------ |
+| AC1 | HSB | 1st | 111-111111-101 | CHAN TAI MAN |
+
+Transaction Details
+| S/N | Date | Currency | Involved Amounts | Approx. HKD | Remitting Bank | AC Location | Depositor AC No. | Depositor AC Name |
+| --- | ---- | -------- | ---------------- | ----------- | -------------- | ----------- | ---------------- | ----------------- |
+| 1 | 2025-02-04 | HKD | 110555 | 110555 | CCBA | Hong Kong | 444-4444444-101 | CHEUNG TAK SHING |
+| 1 | 2025-02-04 | HKD | 50000 | 50000 | CCBA | Hong Kong | 444-4444444-101 | CHEUNG TAK SHING |
+
+\*\*NO STR\*\*
+
+We have examined each report referred by the subject investigation team and we believe that **that the beneficiary account(s) might have been used to deal with suspected proceeds of crime**. Therefore, you are advised (i) **to critically examine the alleged transaction(s) in the relevant account(s)** to ascertain whether or not you are satisfied that the provenance of the deposits into the said account(s) is legitimate and (ii) **to actively consider appropriate actions** to avoid dealing with property in whole or in part directly or indirectly represent any person's proceeds of an indictable offence, which may be liable to a prosecution for a criminal offence under sections 25(1) and (3) of the Organized and Serious Crimes Ordinance, Cap. 455. A person includes a financial institution.
+
+When fulfilling the reporting obligations by filing Suspicious Transaction Reports (STR) to the Joint Financial Intelligence Unit (""JFIU""), if any, please state **ESPS ■■■■/2025 and e-Hub ■■■■■■■■ (DIT 5-■■■■■)** for ease of reference.
+
+We confirm that the requested information is required for the purpose of section 58(1)(a) under the Personal Data (Privacy) Ordinance, Cap 486. Failure to provide the requested information may lead to possibly failure or unnecessary delay on prevention or detection of crime. In view of the above, we consider that section 58(2) as read with section 58(1)(a) of the Personal Data (Privacy) Ordinance, Cap. 486 is the applicable exemption under the circumstances.
+
+You are also advised to refer to the ""Guideline on Anti-Money Laundering and Counter-Terrorist Financing"" published by the Hong Kong Monetary Authority (HKMA) under the Anti-Money Laundering and Counter-Terrorist Financing (Financial Institutions) Ordinance, Cap. 615 (""AMLO"") and to take all reasonable measures to prevent a contravention and to mitigate Money Laundering risks.
+
+Should you have any enquiry, please feel free to contact the undersigned or our officers at 286■■■■■. Thank you! 
+
+Best regards, 
+SGT  ■■■■ ■■■
+""Anti-Deception Coordination Centre 
+Commercial Crime Bureau 
+Hong Kong Police Force""
+Tel: 286■■■■■ / Fax: 220■■■■■","{
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2025-02-04"",
+      ""amount"": 110555,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""444-4444444-101"",
+        ""bank"": ""CCBA""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HSB""
+      },
+      ""channel"": null
+    },
+    {
+      ""date"": ""2025-02-04"",
+      ""amount"": 50000,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""444-4444444-101"",
+        ""bank"": ""CCBA""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HSB""
+      },
+      ""channel"": null
+    }
+  ]
+}",Without transaction log & Without other fields & Randomly removed transactions 2
+HSBC Referral,23,1,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with two documents: an unstructured fraud alert source and a structured CSV file of transaction records.
+
+Your task is to identify the fraudulent transactions described in the fraud alert source, match them to their corresponding entries in the transaction CSV, and produce a single consolidated JSON output that merges and reflects all relevant information. After generating the JSON, you must also provide a clear explanation of your matching and merging decisions.
+
+Key Instructions:
+
+    1. Core Task:
+        - Extract only transactions explicitly mentioned in the fraud alert source that contain both date and amount.
+        - Use the transaction CSV as the authoritative source to verify, correct, and enrich transaction data.
+
+    2. Step-by-Step Process:
+        a. Carefully read the fraud alert source to extract global fields and identify transactions to investigate.
+        b. Validate transactions:
+            - For each transaction, check if both date and amount are explicitly present and non-null.
+            - Immediately exclude transactions missing either field.
+        c. For each valid transaction:
+            - Search the CSV for a matching row using the rules below.
+            - If matched: Merge data using prioritization logic (set can_be_located: true).
+            - If unmatched: Use only fraud alert data (set can_be_located: false).
+        d. If no valid transactions remain, set alerted_transactions to an empty list [].
+        e. Assemble the final JSON output according to the schema.
+
+    3. Matching Rules (can_be_located logic):
+        A transaction from the fraud alert source matches a CSV row only if all three of the following conditions are met:
+            1. The date must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
+            2. The amount must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
+            3. At least one of the following is true:
+                - The from.account_number in the fraud alert source matches the Originator Account Number in the CSV.
+                - The to.account_number in the fraud alert source matches the Beneficiary Account Number in the CSV.
+                - The from.name in the fraud alert source matches the Originator Name in the CSV.
+                - The to.name in the fraud alert source matches the Beneficiary Name in the CSV.
+
+    4. Data Merging and Prioritization:
+        - For the global field fraud_type: Always use the value from the fraud alert source.
+        - For transaction fields:
+            - If a transaction is not found in the CSV (can_be_located: false): Use only data from the fraud alert source.
+            - If a transaction is found in the CSV (can_be_located: true): For each field, use the following priority:
+                1. CSV value (if present and not blank)
+                2. Fraud alert source value (if CSV value is blank or missing)
+                3. null (if neither source provides a value)
+
+    5. Data Handling:
+        - For the global fields fraud_type, police_reference, and police_team: Always use the value from the fraud alert source.
+        - For the police_team field, extract and include any geographic location details mentioned with the police team in the fraud alert source.
+        - Preserve content: Do not remove or alter non-printable characters or artifacts; preserve content exactly as found.
+        - Whitespace: You may trim leading/trailing whitespace, but do not alter internal whitespace.
+
+    6. Strict Schema and Format Compliance:
+        - The final output must strictly follow the JSON schema below.
+        - All specified fields must be present. If a value cannot be found, use null (do not omit the key).
+        - Never output transactions with null/missing date or amount.
+        - The alerted_transactions array must always be present in the output, and if no valid transactions are found, it must be an empty list.
+        - Output must be a valid JSON object only, with no comments or extraneous text.
+
+    7. Additional Rules:
+        - For the per-transaction channel field (payment method used): Only extract channel values that are present in the fraud alert source (for example, ""FPS"" if stated in the source). If the fraud alert source does not specify a channel and the transaction record clearly indicates (even if not fully explicit) that the channel is ""ATM"" or ""Cash Deposit,"" you may use ""ATM"" or ""Cash Deposit"" as the channel value (do not include any additional descriptive text; output only ""ATM"" or ""Cash Deposit""). Otherwise, do not use or infer channel values from the transaction records.
+
+JSON Schema:
+
+    {
+      ""fraud_type"": ""string | null"",
+      ""alerted_transactions"": [
+        {
+          ""date"": ""string | null"", // Format: YYYY-MM-DD
+          ""amount"": ""number | null"",
+          ""currency"": ""string | null"",
+          ""from"": {
+            ""name"": ""string | null"",
+            ""account_number"": ""string | null"",
+            ""bank"": ""string | null""
+          },
+          ""to"": {
+            ""name"": ""string | null"",
+            ""account_number"": ""string | null"",
+            ""bank"": ""string | null""
+          },
+          ""channel"": ""string | null"", // Payment method used
+          ""can_be_located"": ""boolean""
+        }
+      ]
+    }",Case_23_Suspect_1_Intelligence_1_CrossBorder.md,Case_23_IR.md,IR - C2523.docx,"Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Fraud Payment
+2024-12-03,HKD,2997,C,Hang Seng Bank Ltd.,The Hongkong and Shanghai Banking Corporation Limited,333-333333-101,111-111111-101,CHAN TAI MAN,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,The Hongkong and Shanghai Banking Corporation Limited    HK,2997,1
+2024-12-03,HKD,144123,C,,,444-4444444-101,111-111111-101,CHEUNG TAK SHING,CHAN TAI MAN,Beneficiary,CUTF,ATM TRANSFER UNRELATED   DEPOSIT,,,144123,2
+2024-12-03,HKD,50001,C,Hang Seng Bank Ltd.,The Hongkong and Shanghai Banking Corporation Limited,333-333333-101,111-111111-101,CHAN TAI MAN,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,The Hongkong and Shanghai Banking Corporation Limited    HK,50001,3
+2024-12-03,HKD,7001,C,Hang Seng Bank Ltd.,The Hongkong and Shanghai Banking Corporation Limited,333-333333-101,111-111111-101,CHAN TAI MAN,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,The Hongkong and Shanghai Banking Corporation Limited    HK,7001,4
+2024-12-03,HKD,5001,C,Hang Seng Bank Ltd.,The Hongkong and Shanghai Banking Corporation Limited,333-333333-101,111-111111-101,CHAN TAI MAN,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,The Hongkong and Shanghai Banking Corporation Limited    HK,5001,5
+2024-12-03,HKD,50001,C,Hang Seng Bank Ltd.,The Hongkong and Shanghai Banking Corporation Limited,333-333333-101,111-111111-101,CHAN TAI MAN,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,The Hongkong and Shanghai Banking Corporation Limited    HK,50001,6","Dear team,
+
+There is a fraud case reporting involved HASE  suspect, please review the account information and take actions where appropriate. Thanks
+\- AMH UCM No. 
+\- Fraud Type (L5): Impersonation
+\- Source: HSBC Referral
+
+\- Originator Role: Victim ~~/1st layer/2nd layer~~ (select appropriate)
+<table><tr><th>Originator A/C number</th><th>Originator Name</th><th>Originator Bank</th><th>Currency / Amount</th><th>Transaction ref. number</th></tr>
+<tr><td>444-4444444-101</td><td>CHEUNG TAK SHING</td><td>HSBC</td><td>HKD 144,123.00</td><td>Nil</td></tr>
+</table>
+
+\- Beneficiary Role: 1st layer
+<table><tr><th>Transaction Date</th><th>Beneficiary A/C number</th><th>Beneficiary Name (if any)</th><th>Beneficiary Bank</th></tr>
+<tr><td>3 Dec 2024</td><td>111-111111-101 </td><td>CHAN TAI MAN</td><td>HASE</td></tr>
+</table>
+
+\- Originator Role: ~~Victim/~~ 1st layer ~~/2nd layer~~ (select appropriate)
+<table><tr><th>Originator A/C number</th><th>Originator Name</th><th>Originator Bank</th><th>Currency / Amount</th><th>Transaction ref. number</th></tr>
+<tr><td>333-333333-101</td><td>CHAN TAI MAN </td><td>004</td><td>HKD 2,997.00</td><td>024 SDDA■■■■■■■■■■ 03DEC</td></tr>
+</table>
+
+\- Beneficiary Role: 2nd layer
+<table><tr><th>Transaction Date</th><th>Beneficiary A/C number</th><th>Beneficiary Name (if any)</th><th>Beneficiary Bank</th></tr>
+<tr><td>3 Dec 2024</td><td>111-111111-101 </td><td>CHAN TAI MAN</td><td>024</td></tr>
+</table>
+
+Best Regards,","{
+  ""fraud_type"": ""Impersonation"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2024-12-03"",
+      ""amount"": 144123,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""444-4444444-101"",
+        ""bank"": ""HSBC""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HASE""
+      },
+      ""channel"": ""ATM"",
+      ""can_be_located"": true
+    },
+    {
+      ""date"": ""2024-12-03"",
+      ""amount"": 2997,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""333-333333-101"",
+        ""bank"": ""The Hongkong and Shanghai Banking Corporation Limited""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""Hang Seng Bank Ltd.""
+      },
+      ""channel"": null,
+      ""can_be_located"": true
+    }
+  ]
+}",Original (without the explanation requirement during inference)
+HSBC Referral,23,1,1,2,"You are an advanced AI assistant specializing in data extraction. You will be provided with one document: an unstructured fraud alert source.
+
+Your task is to identify the fraudulent transactions described in the fraud alert source, and produce a single consolidated JSON output that reflects all relevant information.
+
+Key Instructions:
+
+    1. Core Task:
+        - Extract only transactions explicitly mentioned in the fraud alert source that contain both date and amount.
+
+    2. Step-by-Step Process:
+        a. Carefully read the fraud alert source to identify transactions to investigate.
+        b. Validate transactions:
+            - For each transaction, check if both date and amount are explicitly present and non-null.
+            - Immediately exclude transactions missing either field.
+        c. If no valid transactions remain, set alerted_transactions to an empty list [].
+
+    3. Data Handling:
+        - For the global field fraud_type: Always use the value from the fraud alert source.
+        - Preserve content: Do not remove or alter non-printable characters or artifacts; preserve content exactly as found.
+        - Whitespace: You may trim leading/trailing whitespace, but do not alter internal whitespace.
+
+    4. Strict Schema and Format Compliance:
+        - The final output must strictly follow the JSON schema below.
+        - All specified fields must be present. If a value cannot be found, use null (do not omit the key).
+        - Never output transactions with null/missing date or amount.
+        - The alerted_transactions array must always be present in the output, and if no valid transactions are found, it must be an empty list.
+        - Output must be a valid JSON object only, with no comments or extraneous text.
+
+JSON Schema:
+
+    {
+      ""fraud_type"": ""string | null"",
+      ""alerted_transactions"": [
+        {
+          ""date"": ""string | null"", // Format: YYYY-MM-DD
+          ""amount"": ""number | null"",
+          ""currency"": ""string | null"",
+          ""from"": {
+            ""name"": ""string | null"",
+            ""account_number"": ""string | null"",
+            ""bank"": ""string | null""
+          },
+          ""to"": {
+            ""name"": ""string | null"",
+            ""account_number"": ""string | null"",
+            ""bank"": ""string | null""
+          },
+          ""channel"": ""string | null"" // Payment method used
+        }
+      ]
+    }",Case_23_Suspect_1_Intelligence_1_CrossBorder.md,Case_23_IR.md,IR - C2523.docx,,"Dear team,
+
+There is a fraud case reporting involved HASE  suspect, please review the account information and take actions where appropriate. Thanks
+\- AMH UCM No. 
+\- Fraud Type (L5): Impersonation
+\- Source: HSBC Referral
+
+\- Originator Role: Victim ~~/1st layer/2nd layer~~ (select appropriate)
+<table><tr><th>Originator A/C number</th><th>Originator Name</th><th>Originator Bank</th><th>Currency / Amount</th><th>Transaction ref. number</th></tr>
+<tr><td>444-4444444-101</td><td>CHEUNG TAK SHING</td><td>HSBC</td><td>HKD 144,123.00</td><td>Nil</td></tr>
+</table>
+
+\- Beneficiary Role: 1st layer
+<table><tr><th>Transaction Date</th><th>Beneficiary A/C number</th><th>Beneficiary Name (if any)</th><th>Beneficiary Bank</th></tr>
+<tr><td>3 Dec 2024</td><td>111-111111-101 </td><td>CHAN TAI MAN</td><td>HASE</td></tr>
+</table>
+
+\- Originator Role: ~~Victim/~~ 1st layer ~~/2nd layer~~ (select appropriate)
+<table><tr><th>Originator A/C number</th><th>Originator Name</th><th>Originator Bank</th><th>Currency / Amount</th><th>Transaction ref. number</th></tr>
+<tr><td>333-333333-101</td><td>CHAN TAI MAN </td><td>004</td><td>HKD 2,997.00</td><td>024 SDDA■■■■■■■■■■ 03DEC</td></tr>
+</table>
+
+\- Beneficiary Role: 2nd layer
+<table><tr><th>Transaction Date</th><th>Beneficiary A/C number</th><th>Beneficiary Name (if any)</th><th>Beneficiary Bank</th></tr>
+<tr><td>3 Dec 2024</td><td>111-111111-101 </td><td>CHAN TAI MAN</td><td>024</td></tr>
+</table>
+
+Best Regards,","{
+  ""fraud_type"": ""Impersonation"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2024-12-03"",
+      ""amount"": 144123,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""444-4444444-101"",
+        ""bank"": ""HSBC""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HASE""
+      },
+      ""channel"": ""ATM""
+    },
+    {
+      ""date"": ""2024-12-03"",
+      ""amount"": 2997,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""333-333333-101"",
+        ""bank"": ""The Hongkong and Shanghai Banking Corporation Limited""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""Hang Seng Bank Ltd.""
+      },
+      ""channel"": null
+    }
+  ]
+}",Without transaction log
+HSBC Referral,23,1,1,3,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with two documents: an unstructured fraud alert source and a structured CSV file of transaction records.
+
+Your task is to identify the fraudulent transactions described in the fraud alert source, match them to their corresponding entries in the transaction CSV, and produce a single consolidated JSON output that merges and reflects all relevant information. After generating the JSON, you must also provide a clear explanation of your matching and merging decisions.
+
+Key Instructions:
+
+    1. Core Task:
+        - Extract only transactions explicitly mentioned in the fraud alert source that contain both date and amount.
+        - Use the transaction CSV as the authoritative source to verify, correct, and enrich transaction data.
+
+    2. Step-by-Step Process:
+        a. Carefully read the fraud alert source to extract global fields and identify transactions to investigate.
+        b. Validate transactions:
+            - For each transaction, check if both date and amount are explicitly present and non-null.
+            - Immediately exclude transactions missing either field.
+        c. For each valid transaction:
+            - Search the CSV for a matching row using the rules below.
+            - If matched: Merge data using prioritization logic (set can_be_located: true).
+            - If unmatched: Use only fraud alert data (set can_be_located: false).
+        d. If no valid transactions remain, set alerted_transactions to an empty list [].
+        e. Assemble the final JSON output according to the schema.
+
+    3. Matching Rules (can_be_located logic):
+        A transaction from the fraud alert source matches a CSV row only if all three of the following conditions are met:
+            1. The date must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
+            2. The amount must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
+            3. At least one of the following is true:
+                - The from.account_number in the fraud alert source matches the Originator Account Number in the CSV.
+                - The to.account_number in the fraud alert source matches the Beneficiary Account Number in the CSV.
+                - The from.name in the fraud alert source matches the Originator Name in the CSV.
+                - The to.name in the fraud alert source matches the Beneficiary Name in the CSV.
+
+    4. Data Merging and Prioritization:
+        - For transaction fields:
+            - If a transaction is not found in the CSV (can_be_located: false): Use only data from the fraud alert source.
+            - If a transaction is found in the CSV (can_be_located: true): For each field, use the following priority:
+                1. CSV value (if present and not blank)
+                2. Fraud alert source value (if CSV value is blank or missing)
+                3. null (if neither source provides a value)
+
+    5. Data Handling:
+        - Preserve content: Do not remove or alter non-printable characters or artifacts; preserve content exactly as found.
+        - Whitespace: You may trim leading/trailing whitespace, but do not alter internal whitespace.
+
+    6. Strict Schema and Format Compliance:
+        - The final output must strictly follow the JSON schema below.
+        - All specified fields must be present. If a value cannot be found, use null (do not omit the key).
+        - Never output transactions with null/missing date or amount.
+        - The alerted_transactions array must always be present in the output, and if no valid transactions are found, it must be an empty list.
+        - Output must be a valid JSON object only, with no comments or extraneous text.
+
+    7. Additional Rules:
+        - For the per-transaction channel field (payment method used): Only extract channel values that are present in the fraud alert source (for example, ""FPS"" if stated in the source). If the fraud alert source does not specify a channel and the transaction record clearly indicates (even if not fully explicit) that the channel is ""ATM"" or ""Cash Deposit,"" you may use ""ATM"" or ""Cash Deposit"" as the channel value (do not include any additional descriptive text; output only ""ATM"" or ""Cash Deposit""). Otherwise, do not use or infer channel values from the transaction records.
+
+JSON Schema:
+
+    {
+      ""alerted_transactions"": [
+        {
+          ""date"": ""string | null"", // Format: YYYY-MM-DD
+          ""amount"": ""number | null"",
+          ""currency"": ""string | null"",
+          ""from"": {
+            ""name"": ""string | null"",
+            ""account_number"": ""string | null"",
+            ""bank"": ""string | null""
+          },
+          ""to"": {
+            ""name"": ""string | null"",
+            ""account_number"": ""string | null"",
+            ""bank"": ""string | null""
+          },
+          ""channel"": ""string | null"", // Payment method used
+          ""can_be_located"": ""boolean""
+        }
+      ]
+    }",Case_23_Suspect_1_Intelligence_1_CrossBorder.md,Case_23_IR.md,IR - C2523.docx,"Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Fraud Payment
+2024-12-03,HKD,2997,C,Hang Seng Bank Ltd.,The Hongkong and Shanghai Banking Corporation Limited,333-333333-101,111-111111-101,CHAN TAI MAN,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,The Hongkong and Shanghai Banking Corporation Limited    HK,2997,1
+2024-12-03,HKD,144123,C,,,444-4444444-101,111-111111-101,CHEUNG TAK SHING,CHAN TAI MAN,Beneficiary,CUTF,ATM TRANSFER UNRELATED   DEPOSIT,,,144123,2
+2024-12-03,HKD,50001,C,Hang Seng Bank Ltd.,The Hongkong and Shanghai Banking Corporation Limited,333-333333-101,111-111111-101,CHAN TAI MAN,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,The Hongkong and Shanghai Banking Corporation Limited    HK,50001,3
+2024-12-03,HKD,7001,C,Hang Seng Bank Ltd.,The Hongkong and Shanghai Banking Corporation Limited,333-333333-101,111-111111-101,CHAN TAI MAN,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,The Hongkong and Shanghai Banking Corporation Limited    HK,7001,4
+2024-12-03,HKD,5001,C,Hang Seng Bank Ltd.,The Hongkong and Shanghai Banking Corporation Limited,333-333333-101,111-111111-101,CHAN TAI MAN,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,The Hongkong and Shanghai Banking Corporation Limited    HK,5001,5
+2024-12-03,HKD,50001,C,Hang Seng Bank Ltd.,The Hongkong and Shanghai Banking Corporation Limited,333-333333-101,111-111111-101,CHAN TAI MAN,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,The Hongkong and Shanghai Banking Corporation Limited    HK,50001,6","Dear team,
+
+There is a fraud case reporting involved HASE  suspect, please review the account information and take actions where appropriate. Thanks
+\- AMH UCM No. 
+\- Fraud Type (L5): Impersonation
+\- Source: HSBC Referral
+
+\- Originator Role: Victim ~~/1st layer/2nd layer~~ (select appropriate)
+<table><tr><th>Originator A/C number</th><th>Originator Name</th><th>Originator Bank</th><th>Currency / Amount</th><th>Transaction ref. number</th></tr>
+<tr><td>444-4444444-101</td><td>CHEUNG TAK SHING</td><td>HSBC</td><td>HKD 144,123.00</td><td>Nil</td></tr>
+</table>
+
+\- Beneficiary Role: 1st layer
+<table><tr><th>Transaction Date</th><th>Beneficiary A/C number</th><th>Beneficiary Name (if any)</th><th>Beneficiary Bank</th></tr>
+<tr><td>3 Dec 2024</td><td>111-111111-101 </td><td>CHAN TAI MAN</td><td>HASE</td></tr>
+</table>
+
+\- Originator Role: ~~Victim/~~ 1st layer ~~/2nd layer~~ (select appropriate)
+<table><tr><th>Originator A/C number</th><th>Originator Name</th><th>Originator Bank</th><th>Currency / Amount</th><th>Transaction ref. number</th></tr>
+<tr><td>333-333333-101</td><td>CHAN TAI MAN </td><td>004</td><td>HKD 2,997.00</td><td>024 SDDA■■■■■■■■■■ 03DEC</td></tr>
+</table>
+
+\- Beneficiary Role: 2nd layer
+<table><tr><th>Transaction Date</th><th>Beneficiary A/C number</th><th>Beneficiary Name (if any)</th><th>Beneficiary Bank</th></tr>
+<tr><td>3 Dec 2024</td><td>111-111111-101 </td><td>CHAN TAI MAN</td><td>024</td></tr>
+</table>
+
+Best Regards,","{
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2024-12-03"",
+      ""amount"": 144123,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""444-4444444-101"",
+        ""bank"": ""HSBC""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HASE""
+      },
+      ""channel"": ""ATM"",
+      ""can_be_located"": true
+    },
+    {
+      ""date"": ""2024-12-03"",
+      ""amount"": 2997,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""333-333333-101"",
+        ""bank"": ""The Hongkong and Shanghai Banking Corporation Limited""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""Hang Seng Bank Ltd.""
+      },
+      ""channel"": null,
+      ""can_be_located"": true
+    }
+  ]
+}",Without other fields
+HSBC Referral,23,1,1,4,"You are an advanced AI assistant specializing in data extraction. You will be provided with one document: an unstructured fraud alert source.
+
+Your task is to identify the fraudulent transactions described in the fraud alert source, and produce a single consolidated JSON output that reflects all relevant information.
+
+Key Instructions:
+
+    1. Core Task:
+        - Extract only transactions explicitly mentioned in the fraud alert source that contain both date and amount.
+
+    2. Step-by-Step Process:
+        a. Carefully read the fraud alert source to identify transactions to investigate.
+        b. Validate transactions:
+            - For each transaction, check if both date and amount are explicitly present and non-null.
+            - Immediately exclude transactions missing either field.
+        c. If no valid transactions remain, set alerted_transactions to an empty list [].
+
+    3. Data Handling:
+        - Preserve content: Do not remove or alter non-printable characters or artifacts; preserve content exactly as found.
+        - Whitespace: You may trim leading/trailing whitespace, but do not alter internal whitespace.
+
+    4. Strict Schema and Format Compliance:
+        - The final output must strictly follow the JSON schema below.
+        - All specified fields must be present. If a value cannot be found, use null (do not omit the key).
+        - Never output transactions with null/missing date or amount.
+        - The alerted_transactions array must always be present in the output, and if no valid transactions are found, it must be an empty list.
+        - Output must be a valid JSON object only, with no comments or extraneous text.
+
+JSON Schema:
+
+    {
+      ""alerted_transactions"": [
+        {
+          ""date"": ""string | null"", // Format: YYYY-MM-DD
+          ""amount"": ""number | null"",
+          ""currency"": ""string | null"",
+          ""from"": {
+            ""name"": ""string | null"",
+            ""account_number"": ""string | null"",
+            ""bank"": ""string | null""
+          },
+          ""to"": {
+            ""name"": ""string | null"",
+            ""account_number"": ""string | null"",
+            ""bank"": ""string | null""
+          },
+          ""channel"": ""string | null"" // Payment method used
+        }
+      ]
+    }",Case_23_Suspect_1_Intelligence_1_CrossBorder.md,Case_23_IR.md,IR - C2523.docx,,"Dear team,
+
+There is a fraud case reporting involved HASE  suspect, please review the account information and take actions where appropriate. Thanks
+\- AMH UCM No. 
+\- Fraud Type (L5): Impersonation
+\- Source: HSBC Referral
+
+\- Originator Role: Victim ~~/1st layer/2nd layer~~ (select appropriate)
+<table><tr><th>Originator A/C number</th><th>Originator Name</th><th>Originator Bank</th><th>Currency / Amount</th><th>Transaction ref. number</th></tr>
+<tr><td>444-4444444-101</td><td>CHEUNG TAK SHING</td><td>HSBC</td><td>HKD 144,123.00</td><td>Nil</td></tr>
+</table>
+
+\- Beneficiary Role: 1st layer
+<table><tr><th>Transaction Date</th><th>Beneficiary A/C number</th><th>Beneficiary Name (if any)</th><th>Beneficiary Bank</th></tr>
+<tr><td>3 Dec 2024</td><td>111-111111-101 </td><td>CHAN TAI MAN</td><td>HASE</td></tr>
+</table>
+
+\- Originator Role: ~~Victim/~~ 1st layer ~~/2nd layer~~ (select appropriate)
+<table><tr><th>Originator A/C number</th><th>Originator Name</th><th>Originator Bank</th><th>Currency / Amount</th><th>Transaction ref. number</th></tr>
+<tr><td>333-333333-101</td><td>CHAN TAI MAN </td><td>004</td><td>HKD 2,997.00</td><td>024 SDDA■■■■■■■■■■ 03DEC</td></tr>
+</table>
+
+\- Beneficiary Role: 2nd layer
+<table><tr><th>Transaction Date</th><th>Beneficiary A/C number</th><th>Beneficiary Name (if any)</th><th>Beneficiary Bank</th></tr>
+<tr><td>3 Dec 2024</td><td>111-111111-101 </td><td>CHAN TAI MAN</td><td>024</td></tr>
+</table>
+
+Best Regards,","{
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2024-12-03"",
+      ""amount"": 144123,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""444-4444444-101"",
+        ""bank"": ""HSBC""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HASE""
+      },
+      ""channel"": ""ATM""
+    },
+    {
+      ""date"": ""2024-12-03"",
+      ""amount"": 2997,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""333-333333-101"",
+        ""bank"": ""The Hongkong and Shanghai Banking Corporation Limited""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""Hang Seng Bank Ltd.""
+      },
+      ""channel"": null
+    }
+  ]
+}",Without transaction log & Without other fields
+HSBC Referral,23,1,1,5,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with two documents: an unstructured fraud alert source and a structured CSV file of transaction records.
+
+Your task is to identify the fraudulent transactions described in the fraud alert source, match them to their corresponding entries in the transaction CSV, and produce a single consolidated JSON output that merges and reflects all relevant information. After generating the JSON, you must also provide a clear explanation of your matching and merging decisions.
+
+Key Instructions:
+
+    1. Core Task:
+        - Extract only transactions explicitly mentioned in the fraud alert source that contain both date and amount.
+        - Use the transaction CSV as the authoritative source to verify, correct, and enrich transaction data.
+
+    2. Step-by-Step Process:
+        a. Carefully read the fraud alert source to extract global fields and identify transactions to investigate.
+        b. Validate transactions:
+            - For each transaction, check if both date and amount are explicitly present and non-null.
+            - Immediately exclude transactions missing either field.
+        c. For each valid transaction:
+            - Search the CSV for a matching row using the rules below.
+            - If matched: Merge data using prioritization logic (set can_be_located: true).
+            - If unmatched: Use only fraud alert data (set can_be_located: false).
+        d. If no valid transactions remain, set alerted_transactions to an empty list [].
+        e. Assemble the final JSON output according to the schema.
+
+    3. Matching Rules (can_be_located logic):
+        A transaction from the fraud alert source matches a CSV row only if all three of the following conditions are met:
+            1. The date must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
+            2. The amount must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
+            3. At least one of the following is true:
+                - The from.account_number in the fraud alert source matches the Originator Account Number in the CSV.
+                - The to.account_number in the fraud alert source matches the Beneficiary Account Number in the CSV.
+                - The from.name in the fraud alert source matches the Originator Name in the CSV.
+                - The to.name in the fraud alert source matches the Beneficiary Name in the CSV.
+
+    4. Data Merging and Prioritization:
+        - For transaction fields:
+            - If a transaction is not found in the CSV (can_be_located: false): Use only data from the fraud alert source.
+            - If a transaction is found in the CSV (can_be_located: true): For each field, use the following priority:
+                1. CSV value (if present and not blank)
+                2. Fraud alert source value (if CSV value is blank or missing)
+                3. null (if neither source provides a value)
+
+    5. Data Handling:
+        - Preserve content: Do not remove or alter non-printable characters or artifacts; preserve content exactly as found.
+        - Whitespace: You may trim leading/trailing whitespace, but do not alter internal whitespace.
+
+    6. Strict Schema and Format Compliance:
+        - The final output must strictly follow the JSON schema below.
+        - All specified fields must be present. If a value cannot be found, use null (do not omit the key).
+        - Never output transactions with null/missing date or amount.
+        - The alerted_transactions array must always be present in the output, and if no valid transactions are found, it must be an empty list.
+        - Output must be a valid JSON object only, with no comments or extraneous text.
+
+    7. Additional Rules:
+        - For the per-transaction channel field (payment method used): Only extract channel values that are present in the fraud alert source (for example, ""FPS"" if stated in the source). If the fraud alert source does not specify a channel and the transaction record clearly indicates (even if not fully explicit) that the channel is ""ATM"" or ""Cash Deposit,"" you may use ""ATM"" or ""Cash Deposit"" as the channel value (do not include any additional descriptive text; output only ""ATM"" or ""Cash Deposit""). Otherwise, do not use or infer channel values from the transaction records.
+
+JSON Schema:
+
+    {
+      ""alerted_transactions"": [
+        {
+          ""date"": ""string | null"", // Format: YYYY-MM-DD
+          ""amount"": ""number | null"",
+          ""currency"": ""string | null"",
+          ""from"": {
+            ""name"": ""string | null"",
+            ""account_number"": ""string | null"",
+            ""bank"": ""string | null""
+          },
+          ""to"": {
+            ""name"": ""string | null"",
+            ""account_number"": ""string | null"",
+            ""bank"": ""string | null""
+          },
+          ""channel"": ""string | null"", // Payment method used
+          ""can_be_located"": ""boolean""
+        }
+      ]
+    }",Case_23_Suspect_1_Intelligence_1_CrossBorder.md,Case_23_IR.md,IR - C2523.docx,"Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Fraud Payment
+2024-12-03,HKD,2997,C,Hang Seng Bank Ltd.,The Hongkong and Shanghai Banking Corporation Limited,333-333333-101,111-111111-101,CHAN TAI MAN,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,The Hongkong and Shanghai Banking Corporation Limited    HK,2997,1
+2024-12-03,HKD,50001,C,Hang Seng Bank Ltd.,The Hongkong and Shanghai Banking Corporation Limited,333-333333-101,111-111111-101,CHAN TAI MAN,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,The Hongkong and Shanghai Banking Corporation Limited    HK,50001,3
+2024-12-03,HKD,7001,C,Hang Seng Bank Ltd.,The Hongkong and Shanghai Banking Corporation Limited,333-333333-101,111-111111-101,CHAN TAI MAN,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,The Hongkong and Shanghai Banking Corporation Limited    HK,7001,4
+2024-12-03,HKD,5001,C,Hang Seng Bank Ltd.,The Hongkong and Shanghai Banking Corporation Limited,333-333333-101,111-111111-101,CHAN TAI MAN,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,The Hongkong and Shanghai Banking Corporation Limited    HK,5001,5
+2024-12-03,HKD,50001,C,Hang Seng Bank Ltd.,The Hongkong and Shanghai Banking Corporation Limited,333-333333-101,111-111111-101,CHAN TAI MAN,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,The Hongkong and Shanghai Banking Corporation Limited    HK,50001,6","Dear team,
+
+There is a fraud case reporting involved HASE  suspect, please review the account information and take actions where appropriate. Thanks
+\- AMH UCM No. 
+\- Fraud Type (L5): Impersonation
+\- Source: HSBC Referral
+
+\- Originator Role: ~~Victim/~~ 1st layer ~~/2nd layer~~ (select appropriate)
+<table><tr><th>Originator A/C number</th><th>Originator Name</th><th>Originator Bank</th><th>Currency / Amount</th><th>Transaction ref. number</th></tr>
+<tr><td>333-333333-101</td><td>CHAN TAI MAN </td><td>004</td><td>HKD 2,997.00</td><td>024 SDDA■■■■■■■■■■ 03DEC</td></tr>
+</table>
+
+\- Beneficiary Role: 2nd layer
+<table><tr><th>Transaction Date</th><th>Beneficiary A/C number</th><th>Beneficiary Name (if any)</th><th>Beneficiary Bank</th></tr>
+<tr><td>3 Dec 2024</td><td>111-111111-101 </td><td>CHAN TAI MAN</td><td>024</td></tr>
+</table>
+
+Best Regards,","{
+  ""fraud_type"": ""Impersonation"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2024-12-03"",
+      ""amount"": 2997,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""333-333333-101"",
+        ""bank"": ""The Hongkong and Shanghai Banking Corporation Limited""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""Hang Seng Bank Ltd.""
+      },
+      ""channel"": null,
+      ""can_be_located"": true
+    }
+  ]
+}",Without other fields & Randomly removed transactions 1
+HSBC Referral,23,1,1,6,"You are an advanced AI assistant specializing in data extraction. You will be provided with one document: an unstructured fraud alert source.
+
+Your task is to identify the fraudulent transactions described in the fraud alert source, and produce a single consolidated JSON output that reflects all relevant information.
+
+Key Instructions:
+
+    1. Core Task:
+        - Extract only transactions explicitly mentioned in the fraud alert source that contain both date and amount.
+
+    2. Step-by-Step Process:
+        a. Carefully read the fraud alert source to identify transactions to investigate.
+        b. Validate transactions:
+            - For each transaction, check if both date and amount are explicitly present and non-null.
+            - Immediately exclude transactions missing either field.
+        c. If no valid transactions remain, set alerted_transactions to an empty list [].
+
+    3. Data Handling:
+        - Preserve content: Do not remove or alter non-printable characters or artifacts; preserve content exactly as found.
+        - Whitespace: You may trim leading/trailing whitespace, but do not alter internal whitespace.
+
+    4. Strict Schema and Format Compliance:
+        - The final output must strictly follow the JSON schema below.
+        - All specified fields must be present. If a value cannot be found, use null (do not omit the key).
+        - Never output transactions with null/missing date or amount.
+        - The alerted_transactions array must always be present in the output, and if no valid transactions are found, it must be an empty list.
+        - Output must be a valid JSON object only, with no comments or extraneous text.
+
+JSON Schema:
+
+    {
+      ""alerted_transactions"": [
+        {
+          ""date"": ""string | null"", // Format: YYYY-MM-DD
+          ""amount"": ""number | null"",
+          ""currency"": ""string | null"",
+          ""from"": {
+            ""name"": ""string | null"",
+            ""account_number"": ""string | null"",
+            ""bank"": ""string | null""
+          },
+          ""to"": {
+            ""name"": ""string | null"",
+            ""account_number"": ""string | null"",
+            ""bank"": ""string | null""
+          },
+          ""channel"": ""string | null"" // Payment method used
+        }
+      ]
+    }",Case_23_Suspect_1_Intelligence_1_CrossBorder.md,Case_23_IR.md,IR - C2523.docx,,"Dear team,
+
+There is a fraud case reporting involved HASE  suspect, please review the account information and take actions where appropriate. Thanks
+\- AMH UCM No. 
+\- Fraud Type (L5): Impersonation
+\- Source: HSBC Referral
+
+\- Originator Role: ~~Victim/~~ 1st layer ~~/2nd layer~~ (select appropriate)
+<table><tr><th>Originator A/C number</th><th>Originator Name</th><th>Originator Bank</th><th>Currency / Amount</th><th>Transaction ref. number</th></tr>
+<tr><td>333-333333-101</td><td>CHAN TAI MAN </td><td>004</td><td>HKD 2,997.00</td><td>024 SDDA■■■■■■■■■■ 03DEC</td></tr>
+</table>
+
+\- Beneficiary Role: 2nd layer
+<table><tr><th>Transaction Date</th><th>Beneficiary A/C number</th><th>Beneficiary Name (if any)</th><th>Beneficiary Bank</th></tr>
+<tr><td>3 Dec 2024</td><td>111-111111-101 </td><td>CHAN TAI MAN</td><td>024</td></tr>
+</table>
+
+Best Regards,","{
+  ""fraud_type"": ""Impersonation"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2024-12-03"",
+      ""amount"": 2997,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""333-333333-101"",
+        ""bank"": ""The Hongkong and Shanghai Banking Corporation Limited""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""Hang Seng Bank Ltd.""
+      },
+      ""channel"": null
+    }
+  ]
+}",Without transaction log & Without other fields & Randomly removed transactions 1
+HSBC Referral,23,1,1,7,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with two documents: an unstructured fraud alert source and a structured CSV file of transaction records.
+
+Your task is to identify the fraudulent transactions described in the fraud alert source, match them to their corresponding entries in the transaction CSV, and produce a single consolidated JSON output that merges and reflects all relevant information. After generating the JSON, you must also provide a clear explanation of your matching and merging decisions.
+
+Key Instructions:
+
+    1. Core Task:
+        - Extract only transactions explicitly mentioned in the fraud alert source that contain both date and amount.
+        - Use the transaction CSV as the authoritative source to verify, correct, and enrich transaction data.
+
+    2. Step-by-Step Process:
+        a. Carefully read the fraud alert source to extract global fields and identify transactions to investigate.
+        b. Validate transactions:
+            - For each transaction, check if both date and amount are explicitly present and non-null.
+            - Immediately exclude transactions missing either field.
+        c. For each valid transaction:
+            - Search the CSV for a matching row using the rules below.
+            - If matched: Merge data using prioritization logic (set can_be_located: true).
+            - If unmatched: Use only fraud alert data (set can_be_located: false).
+        d. If no valid transactions remain, set alerted_transactions to an empty list [].
+        e. Assemble the final JSON output according to the schema.
+
+    3. Matching Rules (can_be_located logic):
+        A transaction from the fraud alert source matches a CSV row only if all three of the following conditions are met:
+            1. The date must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
+            2. The amount must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
+            3. At least one of the following is true:
+                - The from.account_number in the fraud alert source matches the Originator Account Number in the CSV.
+                - The to.account_number in the fraud alert source matches the Beneficiary Account Number in the CSV.
+                - The from.name in the fraud alert source matches the Originator Name in the CSV.
+                - The to.name in the fraud alert source matches the Beneficiary Name in the CSV.
+
+    4. Data Merging and Prioritization:
+        - For transaction fields:
+            - If a transaction is not found in the CSV (can_be_located: false): Use only data from the fraud alert source.
+            - If a transaction is found in the CSV (can_be_located: true): For each field, use the following priority:
+                1. CSV value (if present and not blank)
+                2. Fraud alert source value (if CSV value is blank or missing)
+                3. null (if neither source provides a value)
+
+    5. Data Handling:
+        - Preserve content: Do not remove or alter non-printable characters or artifacts; preserve content exactly as found.
+        - Whitespace: You may trim leading/trailing whitespace, but do not alter internal whitespace.
+
+    6. Strict Schema and Format Compliance:
+        - The final output must strictly follow the JSON schema below.
+        - All specified fields must be present. If a value cannot be found, use null (do not omit the key).
+        - Never output transactions with null/missing date or amount.
+        - The alerted_transactions array must always be present in the output, and if no valid transactions are found, it must be an empty list.
+        - Output must be a valid JSON object only, with no comments or extraneous text.
+
+    7. Additional Rules:
+        - For the per-transaction channel field (payment method used): Only extract channel values that are present in the fraud alert source (for example, ""FPS"" if stated in the source). If the fraud alert source does not specify a channel and the transaction record clearly indicates (even if not fully explicit) that the channel is ""ATM"" or ""Cash Deposit,"" you may use ""ATM"" or ""Cash Deposit"" as the channel value (do not include any additional descriptive text; output only ""ATM"" or ""Cash Deposit""). Otherwise, do not use or infer channel values from the transaction records.
+
+JSON Schema:
+
+    {
+      ""alerted_transactions"": [
+        {
+          ""date"": ""string | null"", // Format: YYYY-MM-DD
+          ""amount"": ""number | null"",
+          ""currency"": ""string | null"",
+          ""from"": {
+            ""name"": ""string | null"",
+            ""account_number"": ""string | null"",
+            ""bank"": ""string | null""
+          },
+          ""to"": {
+            ""name"": ""string | null"",
+            ""account_number"": ""string | null"",
+            ""bank"": ""string | null""
+          },
+          ""channel"": ""string | null"", // Payment method used
+          ""can_be_located"": ""boolean""
+        }
+      ]
+    }",Case_23_Suspect_1_Intelligence_1_CrossBorder.md,Case_23_IR.md,IR - C2523.docx,"Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Fraud Payment
+2024-12-03,HKD,50001,C,Hang Seng Bank Ltd.,The Hongkong and Shanghai Banking Corporation Limited,333-333333-101,111-111111-101,CHAN TAI MAN,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,The Hongkong and Shanghai Banking Corporation Limited    HK,50001,3
+2024-12-03,HKD,7001,C,Hang Seng Bank Ltd.,The Hongkong and Shanghai Banking Corporation Limited,333-333333-101,111-111111-101,CHAN TAI MAN,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,The Hongkong and Shanghai Banking Corporation Limited    HK,7001,4
+2024-12-03,HKD,5001,C,Hang Seng Bank Ltd.,The Hongkong and Shanghai Banking Corporation Limited,333-333333-101,111-111111-101,CHAN TAI MAN,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,The Hongkong and Shanghai Banking Corporation Limited    HK,5001,5
+2024-12-03,HKD,50001,C,Hang Seng Bank Ltd.,The Hongkong and Shanghai Banking Corporation Limited,333-333333-101,111-111111-101,CHAN TAI MAN,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,The Hongkong and Shanghai Banking Corporation Limited    HK,50001,6","Dear team,
+
+There is a fraud case reporting involved HASE  suspect, please review the account information and take actions where appropriate. Thanks
+\- AMH UCM No. 
+\- Fraud Type (L5): Impersonation
+\- Source: HSBC Referral
+
+\- Originator Role: Victim ~~/1st layer/2nd layer~~ (select appropriate)
+<table><tr><th>Originator A/C number</th><th>Originator Name</th><th>Originator Bank</th><th>Currency / Amount</th><th>Transaction ref. number</th></tr>
+<tr><td>444-4444444-101</td><td>CHEUNG TAK SHING</td><td>HSBC</td><td>HKD 144,123.00</td><td>Nil</td></tr>
+</table>
+
+\- Beneficiary Role: 1st layer
+<table><tr><th>Transaction Date</th><th>Beneficiary A/C number</th><th>Beneficiary Name (if any)</th><th>Beneficiary Bank</th></tr>
+<tr><td>3 Dec 2024</td><td>111-111111-101 </td><td>CHAN TAI MAN</td><td>HASE</td></tr>
+</table>
+
+\- Originator Role: ~~Victim/~~ 1st layer ~~/2nd layer~~ (select appropriate)
+<table><tr><th>Originator A/C number</th><th>Originator Name</th><th>Originator Bank</th><th>Currency / Amount</th><th>Transaction ref. number</th></tr>
+<tr><td>333-333333-101</td><td>CHAN TAI MAN </td><td>004</td><td>HKD 2,997.00</td><td>024 SDDA■■■■■■■■■■ 03DEC</td></tr>
+</table>
+
+\- Beneficiary Role: 2nd layer
+<table><tr><th>Transaction Date</th><th>Beneficiary A/C number</th><th>Beneficiary Name (if any)</th><th>Beneficiary Bank</th></tr>
+<tr><td>3 Dec 2024</td><td>111-111111-101 </td><td>CHAN TAI MAN</td><td>024</td></tr>
+</table>
+
+Best Regards,","{
+  ""fraud_type"": ""Impersonation"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2024-12-03"",
+      ""amount"": 144123,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""444-4444444-101"",
+        ""bank"": ""HSBC""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HASE""
+      },
+      ""channel"": ""ATM"",
+      ""can_be_located"": false
+    },
+    {
+      ""date"": ""2024-12-03"",
+      ""amount"": 2997,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""333-333333-101"",
+        ""bank"": ""The Hongkong and Shanghai Banking Corporation Limited""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""Hang Seng Bank Ltd.""
+      },
+      ""channel"": null,
+      ""can_be_located"": false
+    }
+  ]
+}",Without other fields & Randomly removed transactions 2
+HSBC Referral,23,1,1,8,"You are an advanced AI assistant specializing in data extraction. You will be provided with one document: an unstructured fraud alert source.
+
+Your task is to identify the fraudulent transactions described in the fraud alert source, and produce a single consolidated JSON output that reflects all relevant information.
+
+Key Instructions:
+
+    1. Core Task:
+        - Extract only transactions explicitly mentioned in the fraud alert source that contain both date and amount.
+
+    2. Step-by-Step Process:
+        a. Carefully read the fraud alert source to identify transactions to investigate.
+        b. Validate transactions:
+            - For each transaction, check if both date and amount are explicitly present and non-null.
+            - Immediately exclude transactions missing either field.
+        c. If no valid transactions remain, set alerted_transactions to an empty list [].
+
+    3. Data Handling:
+        - Preserve content: Do not remove or alter non-printable characters or artifacts; preserve content exactly as found.
+        - Whitespace: You may trim leading/trailing whitespace, but do not alter internal whitespace.
+
+    4. Strict Schema and Format Compliance:
+        - The final output must strictly follow the JSON schema below.
+        - All specified fields must be present. If a value cannot be found, use null (do not omit the key).
+        - Never output transactions with null/missing date or amount.
+        - The alerted_transactions array must always be present in the output, and if no valid transactions are found, it must be an empty list.
+        - Output must be a valid JSON object only, with no comments or extraneous text.
+
+JSON Schema:
+
+    {
+      ""alerted_transactions"": [
+        {
+          ""date"": ""string | null"", // Format: YYYY-MM-DD
+          ""amount"": ""number | null"",
+          ""currency"": ""string | null"",
+          ""from"": {
+            ""name"": ""string | null"",
+            ""account_number"": ""string | null"",
+            ""bank"": ""string | null""
+          },
+          ""to"": {
+            ""name"": ""string | null"",
+            ""account_number"": ""string | null"",
+            ""bank"": ""string | null""
+          },
+          ""channel"": ""string | null"" // Payment method used
+        }
+      ]
+    }",Case_23_Suspect_1_Intelligence_1_CrossBorder.md,Case_23_IR.md,IR - C2523.docx,,"Dear team,
+
+There is a fraud case reporting involved HASE  suspect, please review the account information and take actions where appropriate. Thanks
+\- AMH UCM No. 
+\- Fraud Type (L5): Impersonation
+\- Source: HSBC Referral
+
+\- Originator Role: Victim ~~/1st layer/2nd layer~~ (select appropriate)
+<table><tr><th>Originator A/C number</th><th>Originator Name</th><th>Originator Bank</th><th>Currency / Amount</th><th>Transaction ref. number</th></tr>
+<tr><td>444-4444444-101</td><td>CHEUNG TAK SHING</td><td>HSBC</td><td>HKD 144,123.00</td><td>Nil</td></tr>
+</table>
+
+\- Beneficiary Role: 1st layer
+<table><tr><th>Transaction Date</th><th>Beneficiary A/C number</th><th>Beneficiary Name (if any)</th><th>Beneficiary Bank</th></tr>
+<tr><td>3 Dec 2024</td><td>111-111111-101 </td><td>CHAN TAI MAN</td><td>HASE</td></tr>
+</table>
+
+\- Originator Role: ~~Victim/~~ 1st layer ~~/2nd layer~~ (select appropriate)
+<table><tr><th>Originator A/C number</th><th>Originator Name</th><th>Originator Bank</th><th>Currency / Amount</th><th>Transaction ref. number</th></tr>
+<tr><td>333-333333-101</td><td>CHAN TAI MAN </td><td>004</td><td>HKD 2,997.00</td><td>024 SDDA■■■■■■■■■■ 03DEC</td></tr>
+</table>
+
+\- Beneficiary Role: 2nd layer
+<table><tr><th>Transaction Date</th><th>Beneficiary A/C number</th><th>Beneficiary Name (if any)</th><th>Beneficiary Bank</th></tr>
+<tr><td>3 Dec 2024</td><td>111-111111-101 </td><td>CHAN TAI MAN</td><td>024</td></tr>
+</table>
+
+Best Regards,","{
+  ""fraud_type"": ""Impersonation"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2024-12-03"",
+      ""amount"": 144123,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""444-4444444-101"",
+        ""bank"": ""HSBC""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HASE""
+      },
+      ""channel"": ""ATM""
+    },
+    {
+      ""date"": ""2024-12-03"",
+      ""amount"": 2997,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""333-333333-101"",
+        ""bank"": ""The Hongkong and Shanghai Banking Corporation Limited""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""Hang Seng Bank Ltd.""
+      },
+      ""channel"": null
+    }
+  ]
+}",Without transaction log & Without other fields & Randomly removed transactions 2
+Police Letter,2,2,"[1, 2]",,,,,,,,,
+Police Letter,4,8,1,,,,,,,,,
+Police Letter,4,11,1,,,,,,,,,
+Police Letter,4,12,1,,,,,,,,,
+Police Letter,4,15,1,,,,,,,,,
+Police Letter,9,1,1,,,,,,,,,
+Police Letter,10,1,"[1, 3]",,,,,,,,,
+Police Letter,11,1,1,,,,,,,,,
+Police Letter,12,2,1,,,,,,,,,
+Police Letter,12,3,1,,,,,,,,,
+Police Letter,14,1,1,,,,,,,,,
+Police Letter,14,3,1,,,,,,,,,
+Police Letter,14,6,1,,,,,,,,,
+Police Letter,17,1,1,,,,,,,,,
+Police Letter,17,2,1,,,,,,,,,
+Police Letter,17,3,1,,,,,,,,,
+Police Letter,18,3,1,,,,,,,,,
+Police Letter,18,5,1,,,,,,,,,
+Police Letter,21,2,1,,,,,,,,,
+Police Letter,28,2,"[1, 2, 3, 4]",,,,,,,,,
+Police Letter,30,10,1,,,,,,,,,
+Police Letter,31,6,1,,,,,,,,,
+Police Letter,32,1,1,,,,,,,,,
+Police Letter,33,4,1,,,,,,,,,
+Police Letter,33,5,1,,,,,,,,,
+Police Letter,33,6,1,,,,,,,,,
+Police Letter,38,5,1,,,,,,,,,
+Police Letter,38,6,1,,,,,,,,,
+Police Letter,40,2,1,,,,,,,,,
+Police Letter,42,2,1,,,,,,,,,
+Police Letter,42,3,1,,,,,,,,,
+Police Letter,43,2,1,,,,,,,,,
+Police Letter,44,2,1,,,,,,,,,
+Police Letter,44,3,1,,,,,,,,,
+Police Letter,46,3,1,,,,,,,,,
+Police Letter,47,2,1,,,,,,,,,
+Police Letter,47,3,1,,,,,,,,,
+Search Warrant,4,16,1,,,,,,,,,
+Search Warrant,4,17,1,,,,,,,,,
+Search Warrant,4,18,1,,,,,,,,,
+Search Warrant,6,1,1,,,,,,,,,
+Search Warrant,7,3,2,,,,,,,,,
+Search Warrant,14,2,1,,,,,,,,,
+Search Warrant,14,4,1,,,,,,,,,
+Search Warrant,15,4,1,,,,,,,,,
+Search Warrant,18,4,1,,,,,,,,,
+Search Warrant,21,4,1,,,,,,,,,
+Search Warrant,22,2,1,,,,,,,,,
+Search Warrant,23,10,1,,,,,,,,,
+Search Warrant,24,7,1,,,,,,,,,
+Search Warrant,25,3,1,,,,,,,,,
+Search Warrant,30,4,1,,,,,,,,,
+Search Warrant,30,6,1,,,,,,,,,
+Search Warrant,31,7,1,,,,,,,,,
+Search Warrant,33,2,1,,,,,,,,,
+Search Warrant,37,5,2,,,,,,,,,
+Search Warrant,38,4,1,,,,,,,,,
+Search Warrant,43,1,1,,,,,,,,,
+Search Warrant,43,4,1,,,,,,,,,
+Search Warrant,46,4,1,,,,,,,,,
+Search Warrant,47,4,1,,,,,,,,,
+Search Warrant,50,1,1,,,,,,,,,
+UAR,2,1,1,,,,,,,,,
+UAR,3,2,1,,,,,,,,,
+UAR,4,5,1,,,,,,,,,
+UAR,4,6,1,,,,,,,,,
+UAR,4,7,1,,,,,,,,,
+UAR,4,9,1,,,,,,,,,
+UAR,4,10,1,,,,,,,,,
+UAR,5,3,1,,,,,,,,,
+UAR,5,7,1,,,,,,,,,
+UAR,5,8,1,,,,,,,,,
+UAR,8,2,1,,,,,,,,,
+UAR,13,1,1,,,,,,,,,
+UAR,15,3,1,,,,,,,,,
+UAR,18,2,1,,,,,,,,,
+UAR,23,5,1,,,,,,,,,
+UAR,23,7,1,,,,,,,,,
+UAR,23,8,1,,,,,,,,,
+UAR,23,9,1,,,,,,,,,
+UAR,23,11,1,,,,,,,,,
+UAR,24,2,1,,,,,,,,,
+UAR,24,5,1,,,,,,,,,
+UAR,24,6,1,,,,,,,,,
+UAR,25,2,1,,,,,,,,,
+UAR,27,4,1,,,,,,,,,
+UAR,27,5,1,,,,,,,,,
+UAR,27,6,1,,,,,,,,,
+UAR,29,2,1,,,,,,,,,
+UAR,29,3,1,,,,,,,,,
+UAR,30,2,1,,,,,,,,,
+UAR,30,3,1,,,,,,,,,
+UAR,30,7,1,,,,,,,,,
+UAR,30,8,1,,,,,,,,,
+UAR,30,9,1,,,,,,,,,
+UAR,31,2,1,,,,,,,,,
+UAR,31,3,1,,,,,,,,,
+UAR,31,4,1,,,,,,,,,
+UAR,31,5,1,,,,,,,,,
+UAR,32,3,1,,,,,,,,,
+UAR,33,3,1,,,,,,,,,
+UAR,37,3,2,,,,,,,,,
+UAR,37,4,1,,,,,,,,,
+UAR,38,2,1,,,,,,,,,
+UAR,39,2,1,,,,,,,,,
+UAR,40,1,1,,,,,,,,,
+UAR,44,1,1,,,,,,,,,
+UAR,46,7,1,,,,,,,,,
+UAR,48,1,1,,,,,,,,,
+UAR,48,2,1,,,,,,,,,
+UAR,50,1,1,,,,,,,,,
+ODFT,4,1,1,,,,,,,,,
+ODFT,4,13,1,,,,,,,,,
+ODFT,4,14,1,,,,,,,,,
+ODFT,12,1,1,,,,,,,,,
+ODFT,15,1,1,,,,,,,,,
+ODFT,15,5,1,,,,,,,,,
+ODFT,15,6,1,,,,,,,,,
+ODFT,20,1,1,,,,,,,,,
+ODFT,24,1,1,,,,,,,,,
+ODFT,29,1,1,,,,,,,,,
+ODFT,36,1,1,,,,,,,,,
+ODFT,42,1,1,,,,,,,,,
+ODFT,48,3,1,,,,,,,,,
