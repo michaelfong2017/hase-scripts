@@ -1,16 +1,16 @@
 **<u>Annex H6</u>**
 **PERSONAL DATA**
-*Our Ref.:* TST RN 240■■■■■■■
+*Our Ref.:* TM RN 240■■■■■■■
 *Your Ref.:* 
 *Tel.:* 366■■■■■
-*Fax:* 237■■■■■
+*Fax:* 246■■■■■
 
-District Investigation Team 3
-Yau Tsim District
-Tsim Sha Tsui Police Station
-213 Nathan Road
-Kowloon
-2024-08-09
+District Technology & Financial Crime Unit
+Tuen Mun District
+Tuen Mun Police Station
+No. 100 Pui To Road
+Tuen Mun
+2024-08-13
 
 HANG SENG BANK, LIMITED
 Money Laundering Reporting Officer
@@ -26,15 +26,16 @@ I write to you in connection with the following bank account, which is believed 
 <table>
 <thead><tr><th colspan='3'>Account Details</th></tr></thead>
 <tbody>
-<tr><th rowspan='3'>FPS Proxy Type:</th><td colspan='2'> - [X] Proxy ID</td></tr><tr><td colspan='2'> - [ ] Mobile Number</td></tr><tr><td colspan='2'> - [ ] E-mail</td></tr><tr><th>FPS Proxy:</th><td colspan='2'>113■■■■■■■</td></tr><tr><th>FPS Customer ID:</th><td colspan='2'>113■■■■■■■</td></tr><tr><th>FPS Masked Name:</th><td colspan='2'>CHAN TAI MAN</td></tr>
+<tr><th rowspan='3'>FPS Proxy Type:</th><td colspan='2'> - [X] Proxy ID</td></tr><tr><td colspan='2'> - [ ] Mobile Number</td></tr><tr><td colspan='2'> - [ ] E-mail</td></tr><tr><th>FPS Proxy:</th><td colspan='2'>113■■■■■■■</td></tr><tr><th>FPS Customer ID:</th><td colspan='2'>024N■■■■■■■</td></tr><tr><th>FPS Masked Name:</th><td colspan='2'>CHAN TAI MAN</td></tr>
 <tr><th colspan='3'>Suspected nature of transactions:</th><tr><tr><td colspan='3'> - [X] Might have been used in receicing proceeds of crime</td></tr><tr><td colspan='3'> - [ ] Might have been used to receive funds related to terrorist financing</td></tr><tr><td colspan='3'> - [ ] Exhibited transaction patterns which were incommensurate with holder's background</td></tr><tr><td colspan='3'> - [ ] Others (please specify) </td></tr>
-<tr><th colspan='3'>If the predicate offence is deception related, please state the type of deception:</th><tr><tr><td colspan='3'> - [X] Telephone Deception</td></tr><tr><td colspan='3'> - [ ] E-shopping Fraud</td></tr><tr><td colspan='3'> - [ ] Romance Scam</td></tr><tr><td colspan='3'> - [ ] Investment Scam</td></tr><tr><td colspan='3'> - [ ] Employment Fraud</td></tr><tr><td colspan='3'> - [ ] Others (please specify) </td></tr><tr><td colspan='3'>(please tick if appropriate)</td></tr>
+<tr><th colspan='3'>If the predicate offence is deception related, please state the type of deception:</th><tr><tr><td colspan='3'> - [ ] Telephone Deception</td></tr><tr><td colspan='3'> - [X] E-shopping Fraud</td></tr><tr><td colspan='3'> - [ ] Romance Scam</td></tr><tr><td colspan='3'> - [ ] Investment Scam</td></tr><tr><td colspan='3'> - [ ] Employment Fraud</td></tr><tr><td colspan='3'> - [ ] Others (please specify) </td></tr><tr><td colspan='3'>(please tick if appropriate)</td></tr>
 <tr><th colspan='3'>Transaction Details:</th><tr><tr><th>Date</th><th>Amount</th><th>Transferor's Bank and Account</th></tr>
-<tr><td>2024-08-07</td><td>3060.003</td><td>HASE 222-222222-102 </td></tr>
-<tr><th colspan='3'>Case Summary:</th></tr><tr><td colspan='3'>On 2024-08-07, a male reported to police that 2024-08-07, he was lured to purchase the
-Hotel tickets at a price of $3060-HKD online and had deposited a total of HK$3060 into
-HSB bank accounts (including the above listed transactions). The male later found he could
-not receive the purchased items and lost contact with the seller.</td></tr>
+<tr><td>2024-08-07</td><td>2010</td><td>HSBC 666-66666-602</td></tr>
+<tr><td>2024-08-07</td><td>1248</td><td>HSBC 666-66666-602</td></tr>
+<tr><th colspan='3'>Case Summary:</th></tr><tr><td colspan='3'>On 2024-08-07, a female reported to police that on 2024-08-07, she was lured to purchase
+the hotel package at a price of $3,258-HKD and had deposited a total of HK$3,258 into 1
+FPS account (including the above listed transactions). The female later found she could not
+receive the purchased items and lost contact with the seller.</td></tr>
 <tr><th colspan='3'>Notification Letter issued before on the same case:</th></tr><tr><td colspan='3'> [ ] Yes
 
 Under case reference: dated </td></tr>
@@ -59,11 +60,11 @@ an indictable offence, he shall as soon as it is reasonable for him to do so dis
 
 Please treat this notification in confidence. Disclosure of the contents of this notification, directly or indirectly, to any unauthorized persons including the subjects under investigation, may prejudice the police investigation.
 
-Should you have any queries concerning this matter, please contact the Officer-in-Charge of the case LUK  ■■■■■■■ on telephone number 366■■■■■
+Should you have any queries concerning this matter, please contact the Officer-in-Charge of the case DIP SO ■■■■■■■ on telephone number 366■■■■■
 
 Yours faithfully,
 (Original Signed)
-LUK  ■■■■■■■
+DIP SO ■■■■■■■
 OC DIT ■■■■■
 for Commissioner of Police
 cc SP JFIU FIIB
