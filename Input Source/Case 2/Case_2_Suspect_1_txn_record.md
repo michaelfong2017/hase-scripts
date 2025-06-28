@@ -1,4 +1,0 @@
-## Transaction record
-| Transaction Date (value) | Account ID | Counterparty Name | Counterparty ID | Originating Currency | Originating Amount | Debit Credit Indicator | Beneficiary Bank Raw | Originator Bank Raw | Beneficiary Name | Originator Account Number | Transaction Type Source | Transaction Code Description | Sending Bank Account Number | Sending Bank Address | Converted Amount | Fraud payment |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 2024-08-29 | 111-111111-101 | COUNTERPARTY\_NOT\_STATED – 111-111111-101 - CASH TXN CREDIT | CASH TXN CREDIT | HKD | 20000 | C | NaN | NaN | MR CHAN TAI MAN | COUNTERPARTY\_NOT\_STATED – 111-111111-101 - CASH TXN CREDIT | CCCS | ATM/CDM CASH CREDIT USINGACCOUNT INPUT | NaN | NaN | 20000 | 1 |

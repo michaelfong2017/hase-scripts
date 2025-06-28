@@ -1,4 +1,0 @@
-## Transaction record
-| Transaction Date (value) | Account ID | Counterparty Name | Counterparty ID | Originating Currency | Originating Amount | Debit Credit Indicator | Beneficiary Bank Raw | Originator Bank Raw | Beneficiary Name | Originator Account Number | Transaction Type Source | Transaction Code Description | Sending Bank Account Number | Sending Bank Address | Converted Amount | Fraud payment |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 2024-12-11 | 111-111111-101 | CHEUNG TAK SHING | 222-222222-101 | HKD | 46000 | C | NaN | NaN | CHAN, TAIMAN | 222-222222-101 | CUTF | ATM TRANSFER UNRELATED DEPOSIT | NaN | NaN | 46000 | 2 |
