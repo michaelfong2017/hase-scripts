@@ -1,0 +1,4 @@
+## Transaction record
+| Transaction Date (value) | Account ID | Counterparty Name | Counterparty ID | Originating Currency | Originating Amount | Debit Credit Indicator | Beneficiary Bank Raw | Originator Bank Raw | Beneficiary Name | Originator Account Number | Transaction Type Source | Transaction Code Description | Sending Bank Account Number | Sending Bank Address | Converted Amount | Fraud payment |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2024-12-23 | 111-111111-101 | ABC1 Limited | 444-4444444-101 | HKD | 20000 | C | Hang Seng Bank Ltd. | The Hongkong and Shanghai Banking Corporation Limited | CHAN, TAI MAN | 444-4444444-101 | CWTF | Default transaction | NaN | The Hongkong and Shanghai Banking Corporation Limited | 20000 | 1 |

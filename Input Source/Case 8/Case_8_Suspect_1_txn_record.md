@@ -1,0 +1,4 @@
+## Transaction record
+| Transaction Date (value) | Account ID | Counterparty Name | Counterparty ID | Originating Currency | Originating Amount | Debit Credit Indicator | Beneficiary Bank Raw | Originator Bank Raw | Beneficiary Name | Originator Account Number | Transaction Type Source | Transaction Code Description | Sending Bank Account Number | Sending Bank Address | Converted Amount | Fraud payment |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2024-10-07 | 111-111111-101 | YEUNG KAI | 66666666601 | HKD | 192500 | C | Hang Seng Bank Ltd. | Bank of China (Hong Kong) Limited | CHAN TAI MAN | 66666666601 | CWTF | Default transaction | NaN | Bank of China (Hong Kong) Limited HK | 192500 | 1 |

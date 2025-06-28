@@ -1,0 +1,68 @@
+{
+  "alerted_transactions": [
+    {
+      "date": "2024-10-06",
+      "amount": "40,000.00",
+      "currency": "HKD",
+      "from": {
+        "name": "YEUNG KAI",
+        "account_number": "666-66666-601",
+        "bank": "The Hongkong and Shanghai Banking Corporation Limited"
+      },
+      "to": {
+        "name": "CHAN TAI MAN",
+        "account_number": "111-111111-101",
+        "bank": "Hang Seng Bank Ltd."
+      },
+      "channel": null
+    },
+    {
+      "date": "2024-08-29",
+      "amount": "20,000.00",
+      "currency": "HKD",
+      "from": {
+        "name": null,
+        "account_number": null,
+        "bank": null
+      },
+      "to": {
+        "name": "MR CHAN TAI MAN",
+        "account_number": "111-111111-101",
+        "bank": null
+      },
+      "channel": "cash deposit via ATM"
+    },
+    {
+      "date": "2024-08-30",
+      "amount": "20,000.00",
+      "currency": "HKD",
+      "from": {
+        "name": null,
+        "account_number": null,
+        "bank": null
+      },
+      "to": {
+        "name": "MR CHUNG SIU",
+        "account_number": "111-111111-102",
+        "bank": null
+      },
+      "channel": "cash deposit via ATM"
+    },
+    {
+      "date": "2024-08-28",
+      "amount": "50,000.00",
+      "currency": "HKD",
+      "from": {
+        "name": null,
+        "account_number": null,
+        "bank": null
+      },
+      "to": {
+        "name": "MR CHUNG SIU",
+        "account_number": "111-111111-102",
+        "bank": "HASE"
+      },
+      "channel": "cash"
+    }
+  ]
+}

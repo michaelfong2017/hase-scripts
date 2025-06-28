@@ -1,0 +1,5 @@
+## Transaction record
+| Transaction Date (value) | Account ID | Counterparty Name | Counterparty ID | Originating Currency | Originating Amount | Debit Credit Indicator | Beneficiary Bank Raw | Originator Bank Raw | Beneficiary Name | Originator Account Number | Transaction Type Source | Transaction Code Description | Sending Bank Account Number | Sending Bank Address | Converted Amount | Fraud payment |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2024-11-24 | 111-111111-101 | TSANG SIU MING | 666-66666-602 | HKD | 49833 | C | NaN | NaN | MR CHAN TAI MAN | 666-66666-602 | CUTF | UNRELATED ELECTRONIC TRANSFER CREDIT | NaN | NaN | 49833 | 2=3 |
+| 2024-11-24 | 111-111111-101 | YEUNG KAI | 666-66666-601 | HKD | 12778 | C | NaN | NaN | MR CHAN TAI MAN | 666-66666-601 | CUTF | UNRELATED ELECTRONIC TRANSFER CREDIT | NaN | NaN | 12778 | 1 |
