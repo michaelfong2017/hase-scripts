@@ -25,7 +25,12 @@ Transaction Details
 | 2 | 2024-08-25 | HKD | 50000 | 50000 | HSB | Hong Kong | 222-222222-101  | CHEUNG TAK SHING  |
 | 3 | 2024-08-25 | HKD | 60000 | 60000 | HSB | Hong Kong | 222-222222-101  | CHEUNG TAK SHING  |
 | 4 | 2024-08-25 | HKD | 30000 | 30000 | HSB | Hong Kong | 222-222222-101  | CHEUNG TAK SHING  |
-| 1 | 2024-08-25 | HKD | 39000 | 39000 | Hong Kong | CHEUNG TAK SHING  |
+
+
+Transaction Details
+| S/N | Date | Currency | Involved Amounts | Approx. HKD | Remitting Bank | AC Location | Depositor AC No. | Depositor AC Name |
+| --- | ---- | -------- | ---------------- | ----------- | -------------- | ----------- | ---------------- | ----------------- |
+| 1 | 2024-08-25 | HKD | 39000 | 39000 |  | Hong Kong | | CHEUNG TAK SHING  |
 
 \*\*NO STR\*\*
 

@@ -14,7 +14,7 @@ Details of Beneficiary
 Transaction Details
 | S/N | Date | Currency | Involved Amounts | Approx. HKD | Remitting Bank | AC Location | Depositor AC No. | Depositor AC Name |
 | --- | ---- | -------- | ---------------- | ----------- | -------------- | ----------- | ---------------- | ----------------- |
-| 1 | 2025-02-04 | HKD | 115555 | 115555 | CCBA | Hong Kong | 444-4444444-101 | CHEUNG TAK SHING |
+| 1 | 2025-02-04 | HKD | 110555 | 110555 | CCBA | Hong Kong | 444-4444444-101 | CHEUNG TAK SHING |
 | 1 | 2025-02-04 | HKD | 50000 | 50000 | CCBA | Hong Kong | 444-4444444-101 | CHEUNG TAK SHING |
 | 1 | 2025-02-05 | HKD | 200000 | 200000 | CCBA | Hong Kong | 444-4444444-101 | CHEUNG TAK SHING |
 

@@ -9,17 +9,47 @@ Details of Beneficiary
 | Ref. | Beneficiary Bank | Layer | Beneficiary Account No. | Beneficiary Account Name |
 | ---- | ---------------- | ----- | ----------------------- | ------------------------ |
 | AC1 | HSB | 1st | 111-111111-101  | CHAN, TAI MAN |
-| AC2 | HSB | 1st | 111-111111-102  | CHUNG SIU |
-| AC3 | HSB | 1st | 111-111111-103  | CHIU YAN |
-| AC4 | HSB | 1st | 111-111111-104 | CHONG MAN |
 
 Transaction Details
 | S/N | Date | Currency | Involved Amounts | Approx. HKD | Remitting Bank | AC Location | Depositor AC No. | Depositor AC Name |
 | --- | ---- | -------- | ---------------- | ----------- | -------------- | ----------- | ---------------- | ----------------- |
 | 1 | 2024-12-30 | HKD | 100000 | 100000 |  | Hong Kong |  | CASH CASH |
+
+\*\*NO STR\*\*
+
+Details of Beneficiary
+| Ref. | Beneficiary Bank | Layer | Beneficiary Account No. | Beneficiary Account Name |
+| ---- | ---------------- | ----- | ----------------------- | ------------------------ |
+| AC2 | HSB | 1st | 111-111111-102  | CHUNG SIU |
+
+Transaction Details
+| S/N | Date | Currency | Involved Amounts | Approx. HKD | Remitting Bank | AC Location | Depositor AC No. | Depositor AC Name |
+| --- | ---- | -------- | ---------------- | ----------- | -------------- | ----------- | ---------------- | ----------------- |
 | 1 | 2024-12-30 | HKD | 100000 | 100000 |  | Hong Kong |  | CASH CASH |
 | 2 | 2024-12-31 | HKD | 100000 | 100000 |  | Hong Kong |  | CASH CASH |
+
+\*\*NO STR\*\*
+
+Details of Beneficiary
+| Ref. | Beneficiary Bank | Layer | Beneficiary Account No. | Beneficiary Account Name |
+| ---- | ---------------- | ----- | ----------------------- | ------------------------ |
+| AC3 | HSB | 1st | 111-111111-103  | CHIU YAN |
+
+Transaction Details
+| S/N | Date | Currency | Involved Amounts | Approx. HKD | Remitting Bank | AC Location | Depositor AC No. | Depositor AC Name |
+| --- | ---- | -------- | ---------------- | ----------- | -------------- | ----------- | ---------------- | ----------------- |
 | 1 | 2024-12-31 | HKD | 100000 | 100000 |  | Hong Kong |  | CASH CASH |
+
+\*\*NO STR\*\*
+
+Details of Beneficiary
+| Ref. | Beneficiary Bank | Layer | Beneficiary Account No. | Beneficiary Account Name |
+| ---- | ---------------- | ----- | ----------------------- | ------------------------ |
+| AC4 | HSB | 1st | 111-111111-104 | CHONG MAN |
+
+Transaction Details
+| S/N | Date | Currency | Involved Amounts | Approx. HKD | Remitting Bank | AC Location | Depositor AC No. | Depositor AC Name |
+| --- | ---- | -------- | ---------------- | ----------- | -------------- | ----------- | ---------------- | ----------------- |
 | 1 | 2024-12-30 | HKD | 50000 | 50000 |  | Hong Kong |  | CASH CASH |
 | 2 | 2024-12-30 | HKD | 50000 | 50000 |  | Hong Kong |  | CASH CASH |
 

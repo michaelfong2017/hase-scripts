@@ -11,10 +11,16 @@ Details of Beneficiary
 | ---- | ---------------- | ----- | ----------------------- | ------------------------ |
 | AC2 | HSB | 1st | 111-111111-102  | CHUNG SIU |
 
+
 Transaction Details
 | S/N | Date | Currency | Involved Amounts | Approx. HKD | Remitting Bank | AC Location | Depositor AC No. | Depositor AC Name |
 | --- | ---- | -------- | ---------------- | ----------- | -------------- | ----------- | ---------------- | ----------------- |
 | 1 | 2024-08-25 | HKD | 50000 | 50000 | HSBC | Hong Kong | 444-4444444-101 | CHEUNG TAK SHING  |
+
+
+Transaction Details
+| S/N | Date | Currency | Involved Amounts | Approx. HKD | Remitting Bank | AC Location | Depositor AC No. | Depositor AC Name |
+| --- | ---- | -------- | ---------------- | ----------- | -------------- | ----------- | ---------------- | ----------------- |
 | 1 | 2024-08-25 | HKD | 50000 | 50000 | HSB | Hong Kong | 222-222222-101  | CHEUNG TAK SHING  |
 
 \*\*NO STR\*\*

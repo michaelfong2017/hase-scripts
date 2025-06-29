@@ -31,7 +31,7 @@ I write to you in connection with the following bank account, which is believed 
 <tr><th colspan='3'>If the predicate offence is deception related, please state the type of deception:</th><tr><tr><td colspan='3'> - [ ] Telephone Deception</td></tr><tr><td colspan='3'> - [ ] E-shopping Fraud</td></tr><tr><td colspan='3'> - [ ] Romance Scam</td></tr><tr><td colspan='3'> - [X] Investment Scam</td></tr><tr><td colspan='3'> - [ ] Employment Fraud</td></tr><tr><td colspan='3'> - [ ] Others (please specify) </td></tr><tr><td colspan='3'>(please tick if appropriate)</td></tr>
 <tr><th colspan='3'>Transaction Details:</th><tr><tr><th>Date</th><th>Amount</th><th>Transferor's Bank and Account</th></tr>
 <tr><td>2024-07-27</td><td>20000</td><td>HSB 222-222222-101</td></tr>
-<tr><td>2024-07-27</td><td>20000</td><td>HSB 222-222222-101</td></tr>
+<tr><td>2024-07-27</td><td>35000</td><td>HSB 222-222222-101</td></tr>
 <tr><th colspan='3'>Case Summary:</th></tr><tr><td colspan='3'>On 2024-08-20, a female reported to police that between 2024-07-25 and 2024-08-07, she was lured to invest into currency excnahge and had deposited a total of HK$1,416,000 into eight bank accounts (including the above listed transactions). The female later found she could not withdraw the investment and lost contact with the seller.
 </td></tr>
 <tr><th colspan='3'>Notification Letter issued before on the same case:</th></tr><tr><td colspan='3'> [ ] Yes
