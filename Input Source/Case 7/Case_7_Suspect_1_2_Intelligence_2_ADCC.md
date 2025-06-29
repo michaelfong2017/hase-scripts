@@ -5,7 +5,35 @@ Please be informed of a case of **"Investment Fraud"** reported on **2024-09-01*
 As a matter of urgency, please inform the ADCC of the following:
 i) The latest balance of the beneficiary account(s);
 ii) Whether the beneficiary account(s) has been suspended after your review. If yes, what functions are blocked;
-iii) The details of next layer beneficiary account(s) relating to the below transaction of [AC2] (including details of transaction, bank, account number and beneficiary name). If the beneficiary account(s) belong to your bank, please provide us the account balance.
+iii) The details of next layer beneficiary account(s) relating to the below transaction of [AC1] (including details of transaction, bank, account number and beneficiary name). If the beneficiary account(s) belong to your bank, please provide us the account balance.
+Details of Beneficiary
+| Ref. | Beneficiary Bank | Layer | Beneficiary Account No. | Beneficiary Account Name |
+| ---- | ---------------- | ----- | ----------------------- | ------------------------ |
+| AC1 | HSB | 1st | 111-111111-101  | CHAN TAI MAN |
+
+Transaction Details
+| S/N | Date | Currency | Involved Amounts | Approx. HKD | Remitting Bank | AC Location | Depositor AC No. | Depositor AC Name |
+| --- | ---- | -------- | ---------------- | ----------- | -------------- | ----------- | ---------------- | ----------------- |
+| 1 | 2024-08-24 | HKD | 50000 | 50000 | HSBC | Hong Kong | 444-4444444-101 | CHEUNG TAK SHING  |
+| 2 | 2024-08-25 | HKD | 10000 | 10000 | HSBC | Hong Kong | 444-4444444-101 | CHEUNG TAK SHING  |
+
+
+Transaction Details
+| S/N | Date | Currency | Involved Amounts | Approx. HKD | Remitting Bank | AC Location | Depositor AC No. | Depositor AC Name |
+| --- | ---- | -------- | ---------------- | ----------- | -------------- | ----------- | ---------------- | ----------------- |
+| 1 | 2024-08-24 | HKD | 31000 | 31000 | HSB | Hong Kong | 222-222222-101  | CHEUNG TAK SHING  |
+| 2 | 2024-08-25 | HKD | 50000 | 50000 | HSB | Hong Kong | 222-222222-101  | CHEUNG TAK SHING  |
+| 3 | 2024-08-25 | HKD | 60000 | 60000 | HSB | Hong Kong | 222-222222-101  | CHEUNG TAK SHING  |
+| 4 | 2024-08-25 | HKD | 30000 | 30000 | HSB | Hong Kong | 222-222222-101  | CHEUNG TAK SHING  |
+
+
+Transaction Details
+| S/N | Date | Currency | Involved Amounts | Approx. HKD | Remitting Bank | AC Location | Depositor AC No. | Depositor AC Name |
+| --- | ---- | -------- | ---------------- | ----------- | -------------- | ----------- | ---------------- | ----------------- |
+| 1 | 2024-08-25 | HKD | 39000 | 39000 |  | Hong Kong | | CHEUNG TAK SHING  |
+
+\*\*NO STR\*\*
+
 Details of Beneficiary
 | Ref. | Beneficiary Bank | Layer | Beneficiary Account No. | Beneficiary Account Name |
 | ---- | ---------------- | ----- | ----------------------- | ------------------------ |
