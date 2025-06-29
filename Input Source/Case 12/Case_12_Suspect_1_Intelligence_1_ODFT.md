@@ -1,7 +1,7 @@
 ## 4.Victim with financial loss
 | 4.Victim with financial loss (Non-Card payment) | Unnamed: 1 |
 | --- | --- |
-| Fraud case reported date<br>(FO Received Date)<br>e.g. "Ctrl+;" 即可快捷輸入當日日期 | 2024-07-24 00:00:00 |
+| Fraud case reported date<br>(FO Received Date)<br>e.g. "Ctrl+;" 即可快捷輸入當日日期 | 2024-07-17 00:00:00 |
 | Special Attention<br> | NaN |
 | Account No. <br>（如沒有戶口號碼則提供ID No.） | 222-222222-101 |
 | Customer Name | CHEUNG TAK SHING |
