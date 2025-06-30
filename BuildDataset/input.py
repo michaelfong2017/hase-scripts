@@ -3,6 +3,7 @@ import os
 import re
 import json
 import numpy as np
+import random
 from io import StringIO
 from datetime import datetime
 
@@ -85,6 +86,123 @@ def convert_to_number(val):
         return num
     except (ValueError, TypeError):
         return None
+
+def randomly_remove_transactions(csv_content, removal_probability=0.3):
+    """Randomly remove some transactions from CSV content and return removed transaction IDs"""
+    if csv_content is None or pd.isnull(csv_content):
+        return csv_content, []
+    
+    try:
+        df = pd.read_csv(StringIO(csv_content))
+        if 'Transaction ID' not in df.columns or len(df) == 0:
+            return csv_content, []
+        
+        # Randomly select transactions to remove
+        num_to_remove = max(1, int(len(df) * removal_probability))
+        indices_to_remove = random.sample(range(len(df)), min(num_to_remove, len(df)))
+        
+        # Get the Transaction IDs of removed transactions
+        removed_transaction_ids = df.iloc[indices_to_remove]['Transaction ID'].tolist()
+        
+        # Remove the selected transactions
+        df_filtered = df.drop(indices_to_remove)
+        
+        return df_filtered.to_csv(index=False), removed_transaction_ids
+    except Exception as e:
+        print(f"Error processing transactions: {e}")
+        return csv_content, []
+
+def build_ground_truth_with_removed_transactions(gt_row, transaction_rows, row_type, removed_transaction_ids, use_source_columns=False):
+    """Build ground truth with removed transactions marked as can_be_located=False"""
+    alerted_transactions = []
+    
+    for tx_row in transaction_rows:
+        # Get transaction references from Transaction ID column and split by semicolon
+        transaction_id_raw = tx_row.get("Transaction ID", None)
+        transaction_references = []
+        if transaction_id_raw and pd.notna(transaction_id_raw):
+            # Split by semicolon and clean up each reference
+            transaction_references = [ref.strip() for ref in str(transaction_id_raw).split(';') if ref.strip()]
+        
+        # Check if any of the transaction references were removed
+        is_removed = any(ref in removed_transaction_ids for ref in transaction_references)
+        
+        if is_removed:
+            # Use SourceOnlyGroundTruth columns for removed transactions
+            transaction = {
+                "date": clean_date_string(tx_row.get("SourceOnlyGroundTruth_Transaction Date (value)", None)),
+                "amount": convert_to_number(tx_row.get("Source_Originating Amount", None)),
+                "currency": treat_null(tx_row.get("Source_Originating Currency", None)),
+                "from": {
+                    "name": treat_null(tx_row.get("SourceOnlyGroundTruth_Originator Name", None)),
+                    "account_number": treat_null(tx_row.get("SourceOnlyGroundTruth_Originator Account Number", None)),
+                    "bank": treat_null(tx_row.get("SourceOnlyGroundTruth_Originator Bank Raw", None))
+                },
+                "to": {
+                    "name": treat_null(tx_row.get("Source_Beneficiary Name", None)),
+                    "account_number": treat_null(tx_row.get("Source_Beneficiary Account Number", None)),
+                    "bank": treat_null(tx_row.get("SourceOnlyGroundTruth_Beneficiary Bank Raw", None))
+                },
+                "channel": treat_null(tx_row.get("Source_Transaction Channel", None)),
+                "can_be_located": False,
+                "transaction_references": transaction_references
+            }
+        else:
+            # Use GroundTruth columns for non-removed transactions
+            transaction = {
+                "date": clean_date_string(tx_row.get("GroundTruth_Transaction Date (value)", None)),
+                "amount": convert_to_number(tx_row.get("GroundTruth_Originating Amount", None)),
+                "currency": treat_null(tx_row.get("GroundTruth_Originating Currency", None)),
+                "from": {
+                    "name": treat_null(tx_row.get("GroundTruth_Originator Name", None)),
+                    "account_number": treat_null(tx_row.get("GroundTruth_Originator Account Number", None)),
+                    "bank": treat_null(tx_row.get("GroundTruth_Originator Bank Raw", None))
+                },
+                "to": {
+                    "name": treat_null(tx_row.get("GroundTruth_Beneficiary Name", None)),
+                    "account_number": treat_null(tx_row.get("GroundTruth_Beneficiary Account Number", None)),
+                    "bank": treat_null(tx_row.get("GroundTruth_Beneficiary Bank Raw", None))
+                },
+                "channel": treat_null(tx_row.get("GroundTruth_Transaction Channel", None)),
+                "can_be_located": convert_to_bool(tx_row.get("GroundTruth_Can Be Located", None)),
+                "transaction_references": transaction_references
+            }
+        
+        # Add cancel_amount_requested only for UAR type
+        if row_type == 'UAR':
+            if is_removed:
+                transaction["cancel_amount_requested"] = convert_to_number(tx_row.get("Source_Cancel Amount Requested", None))
+            else:
+                transaction["cancel_amount_requested"] = convert_to_number(tx_row.get("GroundTruth_Cancel Amount Requested", None))
+        
+        alerted_transactions.append(transaction)
+    
+    # Build ground truth based on type
+    if row_type == 'ADCC' or row_type == 'Police Letter':
+        gt_dict = {
+            "fraud_type": treat_null(gt_row.get("GroundTruth_Fraud Type", None)),
+            "police_reference": treat_null(gt_row.get("GroundTruth Police Reference", None)),
+            "police_team": treat_null(gt_row.get("GroundTruth_Police Team", None)),
+            "alerted_transactions": alerted_transactions
+        }
+    elif row_type in ['HSBC Referral', 'UAR', 'ODFT']:
+        gt_dict = {
+            "fraud_type": treat_null(gt_row.get("GroundTruth_Fraud Type", None)),
+            "alerted_transactions": alerted_transactions
+        }
+    elif row_type == 'Search Warrant':
+        gt_dict = {
+            "fraud_type": treat_null(gt_row.get("GroundTruth_Fraud Type", None)),
+            "police_reference": treat_null(gt_row.get("GroundTruth Police Reference", None)),
+            "writ_no": treat_null(gt_row.get("GroundTruth_Writ No", None)),
+            "contact_person": treat_null(gt_row.get("GroundTruth_Contact Person", None)),
+            "police_team": treat_null(gt_row.get("GroundTruth_Police Team", None)),
+            "alerted_transactions": alerted_transactions
+        }
+    else:
+        return None
+    
+    return gt_dict
 
 # --- Load the original CSV file ---
 csv_path = 'Dataset_Source_v5.csv'
@@ -267,6 +385,13 @@ else:
             # Build alerted_transactions array - can contain multiple transactions
             alerted_transactions = []
             for tx_row in transaction_rows:
+                # Get transaction references from Transaction ID column and split by semicolon
+                transaction_id_raw = tx_row.get("Transaction ID", None)
+                transaction_references = []
+                if transaction_id_raw and pd.notna(transaction_id_raw):
+                    # Split by semicolon and clean up each reference
+                    transaction_references = [ref.strip() for ref in str(transaction_id_raw).split(';') if ref.strip()]
+                
                 # Base transaction structure
                 transaction = {
                     "date": clean_date_string(tx_row.get("GroundTruth_Transaction Date (value)", None)),
@@ -283,7 +408,8 @@ else:
                         "bank": treat_null(tx_row.get("GroundTruth_Beneficiary Bank Raw", None))
                     },
                     "channel": treat_null(tx_row.get("GroundTruth_Transaction Channel", None)),
-                    "can_be_located": convert_to_bool(tx_row.get("GroundTruth_Can Be Located", None))
+                    "can_be_located": convert_to_bool(tx_row.get("GroundTruth_Can Be Located", None)),
+                    "transaction_references": transaction_references
                 }
                 
                 # Add cancel_amount_requested only for UAR type
@@ -328,10 +454,10 @@ else:
 
     df['Ground Truth'] = ground_truths
 
-# --- Duplicate rows with Source_ columns and empty Transactions ---
+# --- Create duplicate rows with Source_ columns and empty Transactions ---
 print("Creating duplicate rows with Source_ columns...")
 
-# Create a copy of the current dataframe
+# Create a copy of the original DataFrame for Source_ version
 source_df = df.copy()
 
 # IMPORTANT: Clear the Transactions column for the duplicated rows
@@ -370,22 +496,20 @@ for idx, row in source_df.iterrows():
             
             # Base transaction structure with Source_ columns
             transaction = {
-                "date": clean_date_string(tx_row.get("SourceOnlyGroundTruth_Transaction Date (value)", None)),
+                "date": clean_date_string(tx_row.get("Source_Transaction Date (value)", None)),
                 "amount": convert_to_number(tx_row.get("Source_Originating Amount", None)),
                 "currency": treat_null(tx_row.get("Source_Originating Currency", None)),
                 "from": {
-                    "name": treat_null(tx_row.get("SourceOnlyGroundTruth_Originator Name", None)),
-                    "account_number": treat_null(tx_row.get("SourceOnlyGroundTruth_Originator Account Number", None)),
-                    "bank": treat_null(tx_row.get("SourceOnlyGroundTruth_Originator Bank Raw", None))
+                    "name": treat_null(tx_row.get("Source_Originator Name", None)),
+                    "account_number": treat_null(tx_row.get("Source_Originator Account Number", None)),
+                    "bank": treat_null(tx_row.get("Source_Originator Bank Raw", None))
                 },
                 "to": {
                     "name": treat_null(tx_row.get("Source_Beneficiary Name", None)),
                     "account_number": treat_null(tx_row.get("Source_Beneficiary Account Number", None)),
-                    "bank": treat_null(tx_row.get("SourceOnlyGroundTruth_Beneficiary Bank Raw", None))
+                    "bank": treat_null(tx_row.get("Source_Beneficiary Bank Raw", None))
                 },
-                "channel": treat_null(tx_row.get("Source_Transaction Channel", None)),
-                "can_be_located": convert_to_bool(tx_row.get("Source_Can Be Located", None)),
-                "transaction_references": transaction_references  # Add the new field
+                "channel": treat_null(tx_row.get("Source_Transaction Channel", None))
             }
             
             # Add cancel_amount_requested only for UAR type
@@ -429,17 +553,74 @@ for idx, row in source_df.iterrows():
 
 source_df['Ground Truth'] = source_ground_truths
 
-# Combine original dataframe with source dataframe
-combined_df = pd.concat([df, source_df], ignore_index=True)
+# --- Create 3 additional sets with randomly removed transactions ---
+print("Creating 3 additional sets with randomly removed transactions...")
 
-# Check if duplicated rows have empty Transactions
-print("Checking if duplicated rows have empty Transactions...")
-original_row_count = len(df)
-duplicated_transactions = combined_df.loc[combined_df.index >= original_row_count, 'Transactions']
-print(f"Are duplicated Transactions empty? {duplicated_transactions.isnull().all()}")
+all_dataframes = [df.copy(), source_df.copy()]  # Start with original and source versions
+
+for set_num in range(1, 4):
+    print(f"Creating set {set_num} with randomly removed transactions...")
+    
+    # Create a copy of the original DataFrame
+    modified_df = df.copy()
+    
+    # Store removed transaction IDs for each row
+    removed_transactions_per_row = []
+    
+    # Modify transactions and store removed IDs
+    modified_transactions = []
+    for idx, row in modified_df.iterrows():
+        original_transactions = row['Transactions']
+        modified_content, removed_ids = randomly_remove_transactions(original_transactions, removal_probability=0.3)
+        modified_transactions.append(modified_content)
+        removed_transactions_per_row.append(removed_ids)
+    
+    modified_df['Transactions'] = modified_transactions
+    
+    # Build modified ground truth
+    modified_ground_truths = []
+    for idx, row in modified_df.iterrows():
+        case_num = int(row['Case Number'])
+        intelligence_numbers = parse_intelligence_numbers(row['Intelligence Number'])
+        gt_row = None
+        transaction_rows = []
+        removed_ids = removed_transactions_per_row[idx]
+        
+        # Find ground truth data
+        for int_num in intelligence_numbers:
+            key = (case_num, int_num)
+            if key in gt_lookup:
+                gt_row = gt_lookup[key]
+            if key in transaction_gt_lookup:
+                transaction_rows.extend(transaction_gt_lookup[key])
+            if gt_row is not None and transaction_rows:
+                break
+        
+        if gt_row is not None:
+            row_type = row['Type']
+            gt_dict = build_ground_truth_with_removed_transactions(gt_row, transaction_rows, row_type, removed_ids)
+            
+            if gt_dict:
+                modified_ground_truths.append(json.dumps(gt_dict, ensure_ascii=False, indent=2))
+                print(f"Modified Ground Truth Set {set_num} for Case {case_num}, Intelligence {intelligence_numbers}: Removed {len(removed_ids)} transactions")
+            else:
+                modified_ground_truths.append(None)
+        else:
+            modified_ground_truths.append(None)
+    
+    modified_df['Ground Truth'] = modified_ground_truths
+    all_dataframes.append(modified_df)
+
+# Combine all dataframes
+final_df = pd.concat(all_dataframes, ignore_index=True)
 
 # --- Save to a new CSV file ---
 output_csv_path = 'Dataset_Source_v5_updated_with_groundtruth.csv'
-combined_df.to_csv(output_csv_path, index=False, encoding='utf-8-sig')
-print(f'Updated data with Input, Transactions, Instruction, Ground Truth and Source duplicates saved to {output_csv_path}')
-print(f'Total rows: {len(combined_df)} (Original: {len(df)}, Duplicated: {len(source_df)})')
+final_df.to_csv(output_csv_path, index=False, encoding='utf-8-sig')
+print(f'Updated data with all variations saved to {output_csv_path}')
+print(f'Total sets: {len(all_dataframes)}')
+print(f'Total rows: {len(final_df)}')
+print(f'Breakdown:')
+print(f'  - Original set: {len(df)} rows')
+print(f'  - Source set (empty transactions): {len(source_df)} rows')
+print(f'  - 3 modified sets (randomly removed transactions): {3 * len(df)} rows')
