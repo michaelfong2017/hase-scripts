@@ -4,6 +4,7 @@ import re
 import json
 import numpy as np
 from io import StringIO
+from datetime import datetime
 
 def safe_int_convert(series):
     """Safely convert a series to int, handling float strings like '7.0'"""
@@ -84,7 +85,7 @@ def convert_to_number(val):
         return num
     except (ValueError, TypeError):
         return None
-    
+
 # --- Load the original CSV file ---
 csv_path = 'Dataset_Source_v5.csv'
 df = pd.read_csv(csv_path)
@@ -211,8 +212,8 @@ else:
         transaction_gt_df = transaction_gt_df.applymap(treat_null)
         
         # Convert TRUE/FALSE to boolean for can_be_located field
-        if 'GroundTruth_Can_Be_Located' in transaction_gt_df.columns:
-            transaction_gt_df['GroundTruth_Can_Be_Located'] = transaction_gt_df['GroundTruth_Can_Be_Located'].apply(convert_to_bool)
+        if 'GroundTruth_Can Be Located' in transaction_gt_df.columns:
+            transaction_gt_df['GroundTruth_Can Be Located'] = transaction_gt_df['GroundTruth_Can Be Located'].apply(convert_to_bool)
         
         # Filter rows where GroundTruth_Fraud Payment is not null
         if 'GroundTruth_Fraud Payment' in transaction_gt_df.columns:
@@ -257,7 +258,7 @@ else:
                 gt_row = gt_lookup[key]
             if key in transaction_gt_lookup:
                 transaction_rows.extend(transaction_gt_lookup[key])
-            if gt_row is not None and len(transaction_rows) > 0:  # Fixed condition
+            if gt_row is not None and transaction_rows:
                 break
         
         if gt_row is not None:
@@ -269,7 +270,7 @@ else:
                 # Base transaction structure
                 transaction = {
                     "date": clean_date_string(tx_row.get("GroundTruth_Transaction Date (value)", None)),
-                    "amount": convert_to_number(tx_row.get("GroundTruth_Originating Amount", None)),  # Convert to number
+                    "amount": convert_to_number(tx_row.get("GroundTruth_Originating Amount", None)),
                     "currency": treat_null(tx_row.get("GroundTruth_Originating Currency", None)),
                     "from": {
                         "name": treat_null(tx_row.get("GroundTruth_Originator Name", None)),
@@ -287,7 +288,7 @@ else:
                 
                 # Add cancel_amount_requested only for UAR type
                 if row_type == 'UAR':
-                    transaction["cancel_amount_requested"] = convert_to_number(tx_row.get("GroundTruth_Cancel Amount Requested", None))  # Convert to number
+                    transaction["cancel_amount_requested"] = convert_to_number(tx_row.get("GroundTruth_Cancel Amount Requested", None))
                 
                 alerted_transactions.append(transaction)
             
@@ -327,7 +328,110 @@ else:
 
     df['Ground Truth'] = ground_truths
 
+# --- Duplicate rows with Source_ columns and empty Transactions ---
+print("Creating duplicate rows with Source_ columns...")
+
+# Create a copy of the current dataframe
+source_df = df.copy()
+
+# IMPORTANT: Clear the Transactions column for the duplicated rows
+source_df['Transactions'] = None
+
+# Process Ground Truth column for Source_ prefixed columns
+source_ground_truths = []
+for idx, row in source_df.iterrows():
+    case_num = int(row['Case Number'])
+    intelligence_numbers = parse_intelligence_numbers(row['Intelligence Number'])
+    gt_row = None
+    transaction_rows = []
+    
+    # Find ground truth data (same logic as before)
+    for int_num in intelligence_numbers:
+        key = (case_num, int_num)
+        if key in gt_lookup:
+            gt_row = gt_lookup[key]
+        if key in transaction_gt_lookup:
+            transaction_rows.extend(transaction_gt_lookup[key])
+        if gt_row is not None and transaction_rows:
+            break
+    
+    if gt_row is not None:
+        row_type = row['Type']
+        
+        # Build alerted_transactions array using Source_ columns
+        alerted_transactions = []
+        for tx_row in transaction_rows:
+            # Base transaction structure with Source_ columns
+            transaction = {
+                "date": clean_date_string(tx_row.get("Source_Transaction Date (value)", None)),
+                "amount": convert_to_number(tx_row.get("Source_Originating Amount", None)),
+                "currency": treat_null(tx_row.get("Source_Originating Currency", None)),
+                "from": {
+                    "name": treat_null(tx_row.get("Source_Originator Name", None)),
+                    "account_number": treat_null(tx_row.get("Source_Originator Account Number", None)),
+                    "bank": treat_null(tx_row.get("Source_Originator Bank Raw", None))
+                },
+                "to": {
+                    "name": treat_null(tx_row.get("Source_Beneficiary Name", None)),
+                    "account_number": treat_null(tx_row.get("Source_Beneficiary Account Number", None)),
+                    "bank": treat_null(tx_row.get("Source_Beneficiary Bank Raw", None))
+                },
+                "channel": treat_null(tx_row.get("Source_Transaction Channel", None)),
+                "can_be_located": convert_to_bool(tx_row.get("Source_Can Be Located", None))
+            }
+            
+            # Add cancel_amount_requested only for UAR type
+            if row_type == 'UAR':
+                transaction["cancel_amount_requested"] = convert_to_number(tx_row.get("Source_Cancel Amount Requested", None))
+            
+            alerted_transactions.append(transaction)
+        
+        # Build ground truth based on type using Source_ columns
+        if row_type == 'ADCC' or row_type == 'Police Letter':
+            gt_dict = {
+                "fraud_type": treat_null(gt_row.get("Source_Fraud Type", None)),
+                "police_reference": treat_null(gt_row.get("Source Police Reference", None)),
+                "police_team": treat_null(gt_row.get("Source_Police Team", None)),
+                "alerted_transactions": alerted_transactions
+            }
+        elif row_type in ['HSBC Referral', 'UAR', 'ODFT']:
+            gt_dict = {
+                "fraud_type": treat_null(gt_row.get("Source_Fraud Type", None)),
+                "alerted_transactions": alerted_transactions
+            }
+        elif row_type == 'Search Warrant':
+            gt_dict = {
+                "fraud_type": treat_null(gt_row.get("Source_Fraud Type", None)),
+                "police_reference": treat_null(gt_row.get("Source Police Reference", None)),
+                "writ_no": treat_null(gt_row.get("Source_Writ No", None)),
+                "contact_person": treat_null(gt_row.get("Source_Contact Person", None)),
+                "police_team": treat_null(gt_row.get("Source_Police Team", None)),
+                "alerted_transactions": alerted_transactions
+            }
+        else:
+            gt_dict = None
+        
+        if gt_dict:
+            source_ground_truths.append(json.dumps(gt_dict, ensure_ascii=False, indent=2))
+            print(f"Source Ground Truth for Case {case_num}, Intelligence {intelligence_numbers}, Type {row_type}: Found {len(alerted_transactions)} transactions")
+        else:
+            source_ground_truths.append(None)
+    else:
+        source_ground_truths.append(None)
+
+source_df['Ground Truth'] = source_ground_truths
+
+# Combine original dataframe with source dataframe
+combined_df = pd.concat([df, source_df], ignore_index=True)
+
+# Check if duplicated rows have empty Transactions
+print("Checking if duplicated rows have empty Transactions...")
+original_row_count = len(df)
+duplicated_transactions = combined_df.loc[combined_df.index >= original_row_count, 'Transactions']
+print(f"Are duplicated Transactions empty? {duplicated_transactions.isnull().all()}")
+
 # --- Save to a new CSV file ---
 output_csv_path = 'Dataset_Source_v5_updated_with_groundtruth.csv'
-df.to_csv(output_csv_path, index=False, encoding='utf-8-sig')
-print(f'Updated data with Input, Transactions, Instruction, and Ground Truth saved to {output_csv_path}')
+combined_df.to_csv(output_csv_path, index=False, encoding='utf-8-sig')
+print(f'Updated data with Input, Transactions, Instruction, Ground Truth and Source duplicates saved to {output_csv_path}')
+print(f'Total rows: {len(combined_df)} (Original: {len(df)}, Duplicated: {len(source_df)})')
