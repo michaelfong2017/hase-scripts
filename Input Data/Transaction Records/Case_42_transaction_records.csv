@@ -1,6 +1,6 @@
-Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Fraud Payment
-2025-01-02,HKD,10000,C,,,222-222222-101,111-111111-101,CHEUNG TAK SHING,CHAN TAI MAN,Beneficiary,CUTF,Default transaction,,,10000,1
-2025-01-03,HKD,2200,C,,,,111-111111-101,,CHAN TAI MAN,Beneficiary,CCCS,CASH DEP VIA CDM/BCDM -  AC INPUT (TOUCH SCREEN),,,2200,2
-2025-01-03,HKD,10000,C,,,,111-111111-101,,CHAN TAI MAN,Beneficiary,CCCS,CASH DEP VIA CDM/BCDM -  AC INPUT (TOUCH SCREEN),,,10000,3
-2025-01-03,HKD,30000,C,,,222-222222-102,111-111111-101,YAN MEI MEI,CHAN TAI MAN,Beneficiary,CUTF,ATM TRANSFER UNRELATED   DEPOSIT,,,30000,4
-2025-01-03,HKD,42000,C,,,222-222222-102,111-111111-101,YAN MEI MEI,CHAN TAI MAN,Beneficiary,CUTF,DCP UNRELATED ELECTRONIC TRANSFER CREDIT FROM PIB,,,42000,5
+Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Fraud Payment,Transaction ID
+2025-01-02,HKD,10000,C,,,222-222222-101,111-111111-101,CHEUNG TAK SHING,CHAN TAI MAN,Beneficiary,CUTF,Default transaction,,,10000,1,3fa14dbb-130c-4945-8e1e-0d94d0494e13
+2025-01-03,HKD,2200,C,,,,111-111111-101,,CHAN TAI MAN,Beneficiary,CCCS,CASH DEP VIA CDM/BCDM -  AC INPUT (TOUCH SCREEN),,,2200,2,ffaf1edd-31c0-4935-80f1-5914c613fe3e
+2025-01-03,HKD,10000,C,,,,111-111111-101,,CHAN TAI MAN,Beneficiary,CCCS,CASH DEP VIA CDM/BCDM -  AC INPUT (TOUCH SCREEN),,,10000,3,6187d877-560f-4700-8c98-f5efe1064ee2
+2025-01-03,HKD,30000,C,,,222-222222-102,111-111111-101,YAN MEI MEI,CHAN TAI MAN,Beneficiary,CUTF,ATM TRANSFER UNRELATED   DEPOSIT,,,30000,4,cc3b9838-ace5-47fc-9f92-34c8977d89b4
+2025-01-03,HKD,42000,C,,,222-222222-102,111-111111-101,YAN MEI MEI,CHAN TAI MAN,Beneficiary,CUTF,DCP UNRELATED ELECTRONIC TRANSFER CREDIT FROM PIB,,,42000,5,a6631ec4-19b6-41d6-a3e8-39b8c67ec756

@@ -1,4 +1,4 @@
-Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Fraud Payment
-2024-07-17,HKD,30000,C,,,222-222222-101,111-111111-101,CHEUNG TAK SHING,CHAN TAI MAN,Beneficiary,CUTF,ATM TRANSFER UNRELATED   DEPOSIT,,,30000,1
-2024-07-17,HKD,9000,C,,,,111-111111-101,,CHAN TAI MAN,Beneficiary,CCCS,CASH DEP VIA CDM/BCDM -  AC INPUT (TOUCH SCREEN),,,9000,2
-2024-07-15,HKD,40000,C,,,,111-111111-101,,CHAN TAI MAN,Beneficiary,CCCS,CASH DEP VIA CDM/BCDM -  AC INPUT (TOUCH SCREEN),,,40000,3
+Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Fraud Payment,Transaction ID
+2024-07-17,HKD,30000,C,,,222-222222-101,111-111111-101,CHEUNG TAK SHING,CHAN TAI MAN,Beneficiary,CUTF,ATM TRANSFER UNRELATED   DEPOSIT,,,30000,1,2810da47-1684-450f-94d9-aef6064774b4
+2024-07-17,HKD,9000,C,,,,111-111111-101,,CHAN TAI MAN,Beneficiary,CCCS,CASH DEP VIA CDM/BCDM -  AC INPUT (TOUCH SCREEN),,,9000,2,40a3a6a4-78d6-4031-aa6c-7b536057a13f
+2024-07-15,HKD,40000,C,,,,111-111111-101,,CHAN TAI MAN,Beneficiary,CCCS,CASH DEP VIA CDM/BCDM -  AC INPUT (TOUCH SCREEN),,,40000,3,798d401c-512f-4779-8a01-a46353179106

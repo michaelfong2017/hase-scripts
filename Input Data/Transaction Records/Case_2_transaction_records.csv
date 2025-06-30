@@ -1,4 +1,4 @@
-Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Fraud Payment
-2024-08-29,HKD,20000,C,,,,111-111111-101,,MR       CHAN TAI MAN,Beneficiary,CCCS,ATM/CDM CASH CREDIT USINGACCOUNT INPUT,,,20000,1
-2024-08-30,HKD,20000,C,,,,111-111111-102,,MR   CHUNG SIU,Beneficiary,CCCS,ATM/CDM CASH CREDIT USINGACCOUNT INPUT,,,20000,2
-2024-08-28,HKD,50000,C,,,,111-111111-102,,MR    CHUNG SIU,Beneficiary,CCCS,ATM/CDM CASH CREDIT USINGACCOUNT INPUT,,,50000,3
+Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Fraud Payment,Transaction ID
+2024-08-29,HKD,20000,C,,,,111-111111-101,,MR       CHAN TAI MAN,Beneficiary,CCCS,ATM/CDM CASH CREDIT USINGACCOUNT INPUT,,,20000,1,d144dec7-8032-463c-b66c-21caed6abdab
+2024-08-30,HKD,20000,C,,,,111-111111-102,,MR   CHUNG SIU,Beneficiary,CCCS,ATM/CDM CASH CREDIT USINGACCOUNT INPUT,,,20000,2,4064485e-8e70-4cf1-9303-99ba85cc0014
+2024-08-28,HKD,50000,C,,,,111-111111-102,,MR    CHUNG SIU,Beneficiary,CCCS,ATM/CDM CASH CREDIT USINGACCOUNT INPUT,,,50000,3,3e024257-694b-4138-bb70-c8e9082160d6

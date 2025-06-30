@@ -1,4 +1,4 @@
-Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Fraud Payment
-2024-08-10,HKD,164024,C,,,222-222222-101,111-111111-101,CHEUNG TAK SHING,CHAN TAI MAN,Beneficiary,CUTF,DCP UNRELATED ELECTRONIC TRANSFER CREDIT FROM PIB,,,164024,1
-2024-08-11,HKD,98001,C,,,66666666601,111-111111-101,YEUNG KAI,CHAN TAI MAN,Beneficiary,CUTF,ATM TRANSFER UNRELATED   DEPOSIT,,,98001,2
-2024-08-10,HKD,10169,C,,,222-222222-102,111-111111-101,YAN MEI MEI,CHAN TAI MAN,Beneficiary,CUTF,DCP UNRELATED ELECTRONIC TRANSFER CREDIT FROM PIB,,,10169,3
+Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Fraud Payment,Transaction ID
+2024-08-10,HKD,164024,C,,,222-222222-101,111-111111-101,CHEUNG TAK SHING,CHAN TAI MAN,Beneficiary,CUTF,DCP UNRELATED ELECTRONIC TRANSFER CREDIT FROM PIB,,,164024,1,c7e1a931-fba6-4be7-b06d-1bbc900bd034
+2024-08-11,HKD,98001,C,,,66666666601,111-111111-101,YEUNG KAI,CHAN TAI MAN,Beneficiary,CUTF,ATM TRANSFER UNRELATED   DEPOSIT,,,98001,2,96f49988-0450-4cf1-8ef9-2c448bd5488b
+2024-08-10,HKD,10169,C,,,222-222222-102,111-111111-101,YAN MEI MEI,CHAN TAI MAN,Beneficiary,CUTF,DCP UNRELATED ELECTRONIC TRANSFER CREDIT FROM PIB,,,10169,3,860328bd-ffba-42e9-95e2-c6404a6f0231
