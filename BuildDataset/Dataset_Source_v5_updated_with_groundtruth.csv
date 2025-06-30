@@ -165,7 +165,7 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
   ""alerted_transactions"": [
     {
       ""date"": ""2024-08-24"",
-      ""amount"": ""50000"",
+      ""amount"": 50000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING "",
@@ -182,7 +182,7 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
     },
     {
       ""date"": ""2024-08-25"",
-      ""amount"": ""10000"",
+      ""amount"": 10000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING "",
@@ -199,7 +199,7 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
     },
     {
       ""date"": ""2024-08-24"",
-      ""amount"": ""31000"",
+      ""amount"": 31000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING "",
@@ -216,7 +216,7 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
     },
     {
       ""date"": ""2024-08-25"",
-      ""amount"": ""50000"",
+      ""amount"": 50000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING "",
@@ -233,7 +233,7 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
     },
     {
       ""date"": ""2024-08-25"",
-      ""amount"": ""60000"",
+      ""amount"": 60000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING "",
@@ -250,7 +250,7 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
     },
     {
       ""date"": ""2024-08-25"",
-      ""amount"": ""30000"",
+      ""amount"": 30000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING "",
@@ -267,7 +267,7 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
     },
     {
       ""date"": ""2024-08-25"",
-      ""amount"": ""39000"",
+      ""amount"": 39000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING "",
@@ -284,7 +284,7 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
     },
     {
       ""date"": ""2024-08-25"",
-      ""amount"": ""50000"",
+      ""amount"": 50000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING "",
@@ -301,7 +301,7 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
     },
     {
       ""date"": ""2024-08-25"",
-      ""amount"": ""50000"",
+      ""amount"": 50000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING "",
@@ -440,7 +440,7 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
   ""alerted_transactions"": [
     {
       ""date"": ""2024-10-07"",
-      ""amount"": ""192500"",
+      ""amount"": 192500,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""YEUNG KAI"",
@@ -583,7 +583,7 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
   ""alerted_transactions"": [
     {
       ""date"": ""2024-07-25"",
-      ""amount"": ""135524"",
+      ""amount"": 135524,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""TSANG SIU MING"",
@@ -721,7 +721,7 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
   ""alerted_transactions"": [
     {
       ""date"": ""2024-09-30"",
-      ""amount"": ""198500"",
+      ""amount"": 198500,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""YEUNG KAI"",
@@ -874,7 +874,7 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
   ""alerted_transactions"": [
     {
       ""date"": ""2024-12-03"",
-      ""amount"": ""145886"",
+      ""amount"": 145886,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""YEUNG KAI"",
@@ -1018,7 +1018,7 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
   ""alerted_transactions"": [
     {
       ""date"": ""2024-12-03"",
-      ""amount"": ""144123"",
+      ""amount"": 144123,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -1201,7 +1201,7 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
   ""alerted_transactions"": [
     {
       ""date"": ""2024-12-30"",
-      ""amount"": ""100000"",
+      ""amount"": 100000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": null,
@@ -1218,7 +1218,7 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
     },
     {
       ""date"": ""2024-12-30"",
-      ""amount"": ""100000"",
+      ""amount"": 100000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": null,
@@ -1235,7 +1235,7 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
     },
     {
       ""date"": ""2024-12-31"",
-      ""amount"": ""100000"",
+      ""amount"": 100000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": null,
@@ -1252,7 +1252,7 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
     },
     {
       ""date"": ""2024-12-31"",
-      ""amount"": ""100000"",
+      ""amount"": 100000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": null,
@@ -1269,7 +1269,7 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
     },
     {
       ""date"": ""2024-12-30"",
-      ""amount"": ""50000"",
+      ""amount"": 50000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": null,
@@ -1286,7 +1286,7 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
     },
     {
       ""date"": ""2024-12-30"",
-      ""amount"": ""50000"",
+      ""amount"": 50000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": null,
@@ -1443,7 +1443,7 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
   ""alerted_transactions"": [
     {
       ""date"": ""2025-02-04"",
-      ""amount"": ""110555"",
+      ""amount"": 110555,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -1460,7 +1460,7 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
     },
     {
       ""date"": ""2025-02-04"",
-      ""amount"": ""50000"",
+      ""amount"": 50000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -1477,7 +1477,7 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
     },
     {
       ""date"": ""2025-02-05"",
-      ""amount"": ""200000"",
+      ""amount"": 200000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -1494,7 +1494,7 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
     },
     {
       ""date"": ""2025-02-05"",
-      ""amount"": ""200000"",
+      ""amount"": 200000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -1633,7 +1633,7 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-20"",
-      ""amount"": ""130000"",
+      ""amount"": 130000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -1781,7 +1781,7 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
   ""alerted_transactions"": [
     {
       ""date"": ""2024-12-31"",
-      ""amount"": ""55100"",
+      ""amount"": 55100,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -1798,7 +1798,7 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
     },
     {
       ""date"": ""2024-12-31"",
-      ""amount"": ""66120"",
+      ""amount"": 66120,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -1815,7 +1815,7 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
     },
     {
       ""date"": ""2025-01-01"",
-      ""amount"": ""52460"",
+      ""amount"": 52460,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -1832,7 +1832,7 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
     },
     {
       ""date"": ""2025-01-02"",
-      ""amount"": ""113504"",
+      ""amount"": 113504,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -1973,7 +1973,7 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
   ""alerted_transactions"": [
     {
       ""date"": ""2024-12-29"",
-      ""amount"": ""116523.87"",
+      ""amount"": 116523.87,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -2114,7 +2114,7 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
   ""alerted_transactions"": [
     {
       ""date"": ""2024-12-30"",
-      ""amount"": ""150000"",
+      ""amount"": 150000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""YAN MEI MEI"",
@@ -2283,7 +2283,7 @@ Tel: 286■■■■■ / Fax: ","{
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-02"",
-      ""amount"": ""100000"",
+      ""amount"": 100000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -2300,7 +2300,7 @@ Tel: 286■■■■■ / Fax: ","{
     },
     {
       ""date"": ""2025-01-02"",
-      ""amount"": ""100000"",
+      ""amount"": 100000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -2317,7 +2317,7 @@ Tel: 286■■■■■ / Fax: ","{
     },
     {
       ""date"": ""2025-01-02"",
-      ""amount"": ""100000"",
+      ""amount"": 100000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -2334,7 +2334,7 @@ Tel: 286■■■■■ / Fax: ","{
     },
     {
       ""date"": ""2025-01-02"",
-      ""amount"": ""100000"",
+      ""amount"": 100000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -2351,7 +2351,7 @@ Tel: 286■■■■■ / Fax: ","{
     },
     {
       ""date"": ""2025-01-02"",
-      ""amount"": ""100000"",
+      ""amount"": 100000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -2368,7 +2368,7 @@ Tel: 286■■■■■ / Fax: ","{
     },
     {
       ""date"": ""2025-01-02"",
-      ""amount"": ""100000"",
+      ""amount"": 100000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -2385,7 +2385,7 @@ Tel: 286■■■■■ / Fax: ","{
     },
     {
       ""date"": ""2025-01-02"",
-      ""amount"": ""100000"",
+      ""amount"": 100000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -2402,7 +2402,7 @@ Tel: 286■■■■■ / Fax: ","{
     },
     {
       ""date"": ""2025-01-02"",
-      ""amount"": ""100000"",
+      ""amount"": 100000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -2419,7 +2419,7 @@ Tel: 286■■■■■ / Fax: ","{
     },
     {
       ""date"": ""2025-01-02"",
-      ""amount"": ""100000"",
+      ""amount"": 100000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -2436,7 +2436,7 @@ Tel: 286■■■■■ / Fax: ","{
     },
     {
       ""date"": ""2025-01-02"",
-      ""amount"": ""100000"",
+      ""amount"": 100000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -2453,7 +2453,7 @@ Tel: 286■■■■■ / Fax: ","{
     },
     {
       ""date"": ""2025-01-02"",
-      ""amount"": ""100000"",
+      ""amount"": 100000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -2470,7 +2470,7 @@ Tel: 286■■■■■ / Fax: ","{
     },
     {
       ""date"": ""2025-01-02"",
-      ""amount"": ""100000"",
+      ""amount"": 100000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -2487,7 +2487,7 @@ Tel: 286■■■■■ / Fax: ","{
     },
     {
       ""date"": ""2025-01-02"",
-      ""amount"": ""100000"",
+      ""amount"": 100000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -2504,7 +2504,7 @@ Tel: 286■■■■■ / Fax: ","{
     },
     {
       ""date"": ""2025-01-02"",
-      ""amount"": ""100000"",
+      ""amount"": 100000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -2521,7 +2521,7 @@ Tel: 286■■■■■ / Fax: ","{
     },
     {
       ""date"": ""2025-01-02"",
-      ""amount"": ""70000"",
+      ""amount"": 70000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -2660,7 +2660,7 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
   ""alerted_transactions"": [
     {
       ""date"": ""2024-12-30"",
-      ""amount"": ""100000"",
+      ""amount"": 100000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -2799,7 +2799,7 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-06"",
-      ""amount"": ""147585.59"",
+      ""amount"": 147585.59,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -2943,7 +2943,7 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-17"",
-      ""amount"": ""200000"",
+      ""amount"": 200000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -2960,7 +2960,7 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
     },
     {
       ""date"": ""2025-01-17"",
-      ""amount"": ""4000"",
+      ""amount"": 4000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -3100,7 +3100,7 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-16"",
-      ""amount"": ""100000"",
+      ""amount"": 100000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -3226,7 +3226,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2024-10-06"",
-      ""amount"": ""40000"",
+      ""amount"": 40000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""YEUNG KAI"",
@@ -3352,7 +3352,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2024-07-10"",
-      ""amount"": ""1"",
+      ""amount"": 1,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""MISS YEUNG KAI"",
@@ -3487,7 +3487,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2024-08-07"",
-      ""amount"": ""1248"",
+      ""amount"": 1248,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""TSANG SIU MING"",
@@ -3504,7 +3504,7 @@ Best Regards,","{
     },
     {
       ""date"": ""2024-08-07"",
-      ""amount"": ""2010"",
+      ""amount"": 2010,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""TSANG SIU MING"",
@@ -3638,7 +3638,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2024-08-07"",
-      ""amount"": ""2460"",
+      ""amount"": 2460,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""XIE PANGAN"",
@@ -3655,7 +3655,7 @@ Best Regards,","{
     },
     {
       ""date"": ""2024-08-07"",
-      ""amount"": ""300"",
+      ""amount"": 300,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""XIE PANGAN"",
@@ -3788,7 +3788,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2024-08-07"",
-      ""amount"": ""5000"",
+      ""amount"": 5000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""YEUNG KAI"",
@@ -3924,7 +3924,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2024-11-12"",
-      ""amount"": ""25500"",
+      ""amount"": 25500,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -4062,7 +4062,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2024-11-12"",
-      ""amount"": ""50000"",
+      ""amount"": 50000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -4079,7 +4079,7 @@ Best Regards,","{
     },
     {
       ""date"": ""2024-11-12"",
-      ""amount"": ""56000"",
+      ""amount"": 56000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -4216,7 +4216,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2024-11-12"",
-      ""amount"": ""93000"",
+      ""amount"": 93000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -4233,7 +4233,7 @@ Best Regards,","{
     },
     {
       ""date"": ""2024-11-12"",
-      ""amount"": ""90000"",
+      ""amount"": 90000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -4371,7 +4371,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2024-11-12"",
-      ""amount"": ""200000"",
+      ""amount"": 200000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -4388,7 +4388,7 @@ Best Regards,","{
     },
     {
       ""date"": ""2024-11-12"",
-      ""amount"": ""100000"",
+      ""amount"": 100000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -4540,7 +4540,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2024-11-12"",
-      ""amount"": ""25500"",
+      ""amount"": 25500,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -4557,7 +4557,7 @@ Best Regards,","{
     },
     {
       ""date"": ""2024-11-12"",
-      ""amount"": ""50000"",
+      ""amount"": 50000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -4574,7 +4574,7 @@ Best Regards,","{
     },
     {
       ""date"": ""2024-11-12"",
-      ""amount"": ""93000"",
+      ""amount"": 93000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -4591,7 +4591,7 @@ Best Regards,","{
     },
     {
       ""date"": ""2024-11-12"",
-      ""amount"": ""90000"",
+      ""amount"": 90000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -4608,7 +4608,7 @@ Best Regards,","{
     },
     {
       ""date"": ""2024-11-12"",
-      ""amount"": ""200000"",
+      ""amount"": 200000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -4625,7 +4625,7 @@ Best Regards,","{
     },
     {
       ""date"": ""2024-11-12"",
-      ""amount"": ""100000"",
+      ""amount"": 100000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -4642,7 +4642,7 @@ Best Regards,","{
     },
     {
       ""date"": ""2024-11-12"",
-      ""amount"": ""77000"",
+      ""amount"": 77000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -4659,7 +4659,7 @@ Best Regards,","{
     },
     {
       ""date"": ""2024-11-12"",
-      ""amount"": ""50000"",
+      ""amount"": 50000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -4676,7 +4676,7 @@ Best Regards,","{
     },
     {
       ""date"": ""2024-11-11"",
-      ""amount"": ""19990"",
+      ""amount"": 19990,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -4812,7 +4812,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2024-11-12"",
-      ""amount"": ""16500"",
+      ""amount"": 16500,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -4946,7 +4946,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2024-08-25"",
-      ""amount"": ""20000"",
+      ""amount"": 20000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""YEUNG KAI"",
@@ -5074,7 +5074,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2024-08-11"",
-      ""amount"": ""98001"",
+      ""amount"": 98001,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""YEUNG KAI"",
@@ -5204,7 +5204,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2024-08-11"",
-      ""amount"": ""98001"",
+      ""amount"": 98001,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""YEUNG KAI"",
@@ -5331,7 +5331,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2024-12-10"",
-      ""amount"": ""5000"",
+      ""amount"": 5000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -5457,7 +5457,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2024-12-23"",
-      ""amount"": ""20000"",
+      ""amount"": 20000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""ABC1 Limited"",
@@ -5618,7 +5618,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2024-12-03"",
-      ""amount"": ""2997"",
+      ""amount"": 2997,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -5635,7 +5635,7 @@ Best Regards,","{
     },
     {
       ""date"": ""2024-12-03"",
-      ""amount"": ""7001"",
+      ""amount"": 7001,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -5652,7 +5652,7 @@ Best Regards,","{
     },
     {
       ""date"": ""2024-12-03"",
-      ""amount"": ""5001"",
+      ""amount"": 5001,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -5669,7 +5669,7 @@ Best Regards,","{
     },
     {
       ""date"": ""2024-12-03"",
-      ""amount"": ""50001"",
+      ""amount"": 50001,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -5686,7 +5686,7 @@ Best Regards,","{
     },
     {
       ""date"": ""2024-12-03"",
-      ""amount"": ""29999"",
+      ""amount"": 29999,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -5703,7 +5703,7 @@ Best Regards,","{
     },
     {
       ""date"": ""2024-12-03"",
-      ""amount"": ""29998"",
+      ""amount"": 29998,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -5720,7 +5720,7 @@ Best Regards,","{
     },
     {
       ""date"": ""2024-12-03"",
-      ""amount"": ""7999"",
+      ""amount"": 7999,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -5737,7 +5737,7 @@ Best Regards,","{
     },
     {
       ""date"": ""2024-12-03"",
-      ""amount"": ""10001"",
+      ""amount"": 10001,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -5754,7 +5754,7 @@ Best Regards,","{
     },
     {
       ""date"": ""2024-12-03"",
-      ""amount"": ""10003"",
+      ""amount"": 10003,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -5771,7 +5771,7 @@ Best Regards,","{
     },
     {
       ""date"": ""2024-12-03"",
-      ""amount"": ""10001"",
+      ""amount"": 10001,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -5788,7 +5788,7 @@ Best Regards,","{
     },
     {
       ""date"": ""2024-12-03"",
-      ""amount"": ""7999"",
+      ""amount"": 7999,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -5805,7 +5805,7 @@ Best Regards,","{
     },
     {
       ""date"": ""2024-12-03"",
-      ""amount"": ""50001"",
+      ""amount"": 50001,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -5935,7 +5935,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2024-12-01"",
-      ""amount"": ""150000"",
+      ""amount"": 150000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -5952,7 +5952,7 @@ Best Regards,","{
     },
     {
       ""date"": ""2024-12-01"",
-      ""amount"": ""10575.19"",
+      ""amount"": 10575.19,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -6080,7 +6080,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2024-12-03"",
-      ""amount"": ""6180"",
+      ""amount"": 6180,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -6223,7 +6223,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2024-12-03"",
-      ""amount"": ""2997"",
+      ""amount"": 2997,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -6240,7 +6240,7 @@ Best Regards,","{
     },
     {
       ""date"": ""2024-12-03"",
-      ""amount"": ""144123"",
+      ""amount"": 144123,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -6371,7 +6371,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2024-12-03"",
-      ""amount"": ""50001"",
+      ""amount"": 50001,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -6502,7 +6502,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2024-12-03"",
-      ""amount"": ""7001"",
+      ""amount"": 7001,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -6633,7 +6633,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2024-12-03"",
-      ""amount"": ""2997"",
+      ""amount"": 2997,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -6764,7 +6764,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2024-12-03"",
-      ""amount"": ""5001"",
+      ""amount"": 5001,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -6894,7 +6894,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2024-11-29"",
-      ""amount"": ""70000"",
+      ""amount"": 70000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -6911,7 +6911,7 @@ Best Regards,","{
     },
     {
       ""date"": ""2024-11-29"",
-      ""amount"": ""100000"",
+      ""amount"": 100000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -7039,7 +7039,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2024-11-29"",
-      ""amount"": ""100000"",
+      ""amount"": 100000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -7165,7 +7165,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2024-11-08"",
-      ""amount"": ""25900"",
+      ""amount"": 25900,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -7292,7 +7292,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2024-11-24"",
-      ""amount"": ""12778"",
+      ""amount"": 12778,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""YEUNG KAI"",
@@ -7419,7 +7419,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2024-11-24"",
-      ""amount"": ""49833"",
+      ""amount"": 49833,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""TSANG SIU MING"",
@@ -7546,7 +7546,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2024-11-24"",
-      ""amount"": ""49833"",
+      ""amount"": 49833,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""TSANG SIU MING"",
@@ -7676,7 +7676,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-03"",
-      ""amount"": ""150600"",
+      ""amount"": 150600,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -7808,7 +7808,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-04"",
-      ""amount"": ""80000"",
+      ""amount"": 80000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -7825,7 +7825,7 @@ Best Regards,","{
     },
     {
       ""date"": ""2025-01-03"",
-      ""amount"": ""46000"",
+      ""amount"": 46000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -7955,7 +7955,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-03"",
-      ""amount"": ""100000"",
+      ""amount"": 100000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -8088,7 +8088,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-03"",
-      ""amount"": ""300"",
+      ""amount"": 300,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""YEUNG KAI"",
@@ -8105,7 +8105,7 @@ Best Regards,","{
     },
     {
       ""date"": ""2025-01-04"",
-      ""amount"": ""300"",
+      ""amount"": 300,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""YEUNG KAI"",
@@ -8236,7 +8236,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-05"",
-      ""amount"": ""2320"",
+      ""amount"": 2320,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""MISS TSANG SIU MING"",
@@ -8362,7 +8362,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2024-08-07"",
-      ""amount"": ""4000"",
+      ""amount"": 4000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHUNG SIU"",
@@ -8495,7 +8495,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-03"",
-      ""amount"": ""49553"",
+      ""amount"": 49553,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -8512,7 +8512,7 @@ Best Regards,","{
     },
     {
       ""date"": ""2025-01-03"",
-      ""amount"": ""78123"",
+      ""amount"": 78123,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -8529,7 +8529,7 @@ Best Regards,","{
     },
     {
       ""date"": ""2025-01-03"",
-      ""amount"": ""1612"",
+      ""amount"": 1612,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -8660,7 +8660,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-05"",
-      ""amount"": ""200000"",
+      ""amount"": 200000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -8677,7 +8677,7 @@ Best Regards,","{
     },
     {
       ""date"": ""2025-01-05"",
-      ""amount"": ""200000"",
+      ""amount"": 200000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -8694,7 +8694,7 @@ Best Regards,","{
     },
     {
       ""date"": ""2025-01-05"",
-      ""amount"": ""12300"",
+      ""amount"": 12300,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -8827,7 +8827,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-05"",
-      ""amount"": ""200000"",
+      ""amount"": 200000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -8844,7 +8844,7 @@ Best Regards,","{
     },
     {
       ""date"": ""2025-01-05"",
-      ""amount"": ""200000"",
+      ""amount"": 200000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -8861,7 +8861,7 @@ Best Regards,","{
     },
     {
       ""date"": ""2025-01-05"",
-      ""amount"": ""12300"",
+      ""amount"": 12300,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -8990,7 +8990,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-05"",
-      ""amount"": ""50000"",
+      ""amount"": 50000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -9121,7 +9121,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-02"",
-      ""amount"": ""2000"",
+      ""amount"": 2000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""YAN MEI MEI"",
@@ -9262,7 +9262,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-04"",
-      ""amount"": ""40012"",
+      ""amount"": 40012,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -9398,7 +9398,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2024-12-08"",
-      ""amount"": ""200"",
+      ""amount"": 200,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""YEUNG KAI"",
@@ -9415,7 +9415,7 @@ Best Regards,","{
     },
     {
       ""date"": ""2024-12-08"",
-      ""amount"": ""12200"",
+      ""amount"": 12200,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""YEUNG KAI"",
@@ -9432,7 +9432,7 @@ Best Regards,","{
     },
     {
       ""date"": ""2024-12-10"",
-      ""amount"": ""10000"",
+      ""amount"": 10000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""YEUNG KAI"",
@@ -9562,7 +9562,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-17"",
-      ""amount"": ""200000"",
+      ""amount"": 200000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -9579,7 +9579,7 @@ Best Regards,","{
     },
     {
       ""date"": ""2025-01-17"",
-      ""amount"": ""4000"",
+      ""amount"": 4000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -9708,7 +9708,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-18"",
-      ""amount"": ""100000"",
+      ""amount"": 100000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -9835,7 +9835,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-24"",
-      ""amount"": ""10900"",
+      ""amount"": 10900,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""YEUNG KAI"",
@@ -9962,7 +9962,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-16"",
-      ""amount"": ""100000"",
+      ""amount"": 100000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""YAN MEI MEI"",
@@ -10089,7 +10089,7 @@ Best Regards,","{
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-16"",
-      ""amount"": ""100000"",
+      ""amount"": 100000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""YAN MEI MEI"",
@@ -10272,7 +10272,7 @@ cc SP JFIU FIIB
   ""alerted_transactions"": [
     {
       ""date"": ""2024-08-28"",
-      ""amount"": ""50000"",
+      ""amount"": 50000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": null,
@@ -10460,7 +10460,7 @@ cc SP JFIU FIIB
   ""alerted_transactions"": [
     {
       ""date"": ""2024-08-07"",
-      ""amount"": ""2430"",
+      ""amount"": 2430,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG, TAK SHING"",
@@ -10648,7 +10648,7 @@ cc SP JFIU FIIB
   ""alerted_transactions"": [
     {
       ""date"": ""2024-08-07"",
-      ""amount"": ""3060"",
+      ""amount"": 3060,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""YAN, MEI MEI"",
@@ -10837,7 +10837,7 @@ cc SP JFIU FIIB
   ""alerted_transactions"": [
     {
       ""date"": ""2024-08-07"",
-      ""amount"": ""3258"",
+      ""amount"": 3258,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""TSANG SIU MING"",
@@ -11025,7 +11025,7 @@ cc SP JFIU FIIB
   ""alerted_transactions"": [
     {
       ""date"": ""2024-08-06"",
-      ""amount"": ""336000"",
+      ""amount"": 336000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""TAN, FUNG"",
@@ -11203,7 +11203,7 @@ cc SP JFIU FIIB
   ""alerted_transactions"": [
     {
       ""date"": ""2024-07-25"",
-      ""amount"": ""50000"",
+      ""amount"": 50000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": null,
@@ -11397,7 +11397,7 @@ cc SP JFIU FIIB
   ""alerted_transactions"": [
     {
       ""date"": ""2024-05-22"",
-      ""amount"": ""3000"",
+      ""amount"": 3000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -11414,7 +11414,7 @@ cc SP JFIU FIIB
     },
     {
       ""date"": ""2024-05-22"",
-      ""amount"": ""50000"",
+      ""amount"": 50000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": null,
@@ -11592,7 +11592,7 @@ cc SP JFIU FIIB
   ""alerted_transactions"": [
     {
       ""date"": ""2024-06-29"",
-      ""amount"": ""25500"",
+      ""amount"": 25500,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -11773,7 +11773,7 @@ cc SP JFIU FIIB
   ""alerted_transactions"": [
     {
       ""date"": ""2024-07-17"",
-      ""amount"": ""9000"",
+      ""amount"": 9000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": null,
@@ -11954,7 +11954,7 @@ cc SP JFIU FIIB
   ""alerted_transactions"": [
     {
       ""date"": ""2024-07-15"",
-      ""amount"": ""40000"",
+      ""amount"": 40000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": null,
@@ -12136,7 +12136,7 @@ cc SP JFIU FIIB
   ""alerted_transactions"": [
     {
       ""date"": ""2024-07-26"",
-      ""amount"": ""10000"",
+      ""amount"": 10000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""YEUNG KAI"",
@@ -12318,7 +12318,7 @@ cc SP JFIU FIIB
   ""alerted_transactions"": [
     {
       ""date"": ""2024-07-28"",
-      ""amount"": ""17000"",
+      ""amount"": 17000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": null,
@@ -12502,7 +12502,7 @@ cc SP JFIU FIIB
   ""alerted_transactions"": [
     {
       ""date"": ""2024-07-27"",
-      ""amount"": ""20000"",
+      ""amount"": 20000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -12519,7 +12519,7 @@ cc SP JFIU FIIB
     },
     {
       ""date"": ""2024-07-27"",
-      ""amount"": ""35000"",
+      ""amount"": 35000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -12699,7 +12699,7 @@ cc SP JFIU FIIB
   ""alerted_transactions"": [
     {
       ""date"": ""2024-07-16"",
-      ""amount"": ""40000"",
+      ""amount"": 40000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -12879,7 +12879,7 @@ cc SP JFIU FIIB
   ""alerted_transactions"": [
     {
       ""date"": ""2024-07-15"",
-      ""amount"": ""40500"",
+      ""amount"": 40500,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""YAN MEI MEI"",
@@ -13059,7 +13059,7 @@ cc SP JFIU FIIB
   ""alerted_transactions"": [
     {
       ""date"": ""2024-07-15"",
-      ""amount"": ""90000"",
+      ""amount"": 90000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": null,
@@ -13238,7 +13238,7 @@ cc SP JFIU FIIB
   ""alerted_transactions"": [
     {
       ""date"": ""2024-12-10"",
-      ""amount"": ""1500"",
+      ""amount"": 1500,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""YAN MEI MEI"",
@@ -13418,7 +13418,7 @@ cc SP JFIU FIIB
   ""alerted_transactions"": [
     {
       ""date"": ""2024-12-10"",
-      ""amount"": ""5000"",
+      ""amount"": 5000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -13616,7 +13616,7 @@ cc SP JFIU FIIB
   ""alerted_transactions"": [
     {
       ""date"": ""2024-12-03"",
-      ""amount"": ""144123"",
+      ""amount"": 144123,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""TSANG SIU MING"",
@@ -13859,7 +13859,7 @@ cc SP JFIU FIIB
   ""alerted_transactions"": [
     {
       ""date"": ""2024-12-30"",
-      ""amount"": ""100000"",
+      ""amount"": 100000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": null,
@@ -13876,7 +13876,7 @@ cc SP JFIU FIIB
     },
     {
       ""date"": ""2024-12-30"",
-      ""amount"": ""100000"",
+      ""amount"": 100000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": null,
@@ -13893,7 +13893,7 @@ cc SP JFIU FIIB
     },
     {
       ""date"": ""2024-12-31"",
-      ""amount"": ""100000"",
+      ""amount"": 100000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": null,
@@ -13910,7 +13910,7 @@ cc SP JFIU FIIB
     },
     {
       ""date"": ""2024-12-31"",
-      ""amount"": ""100000"",
+      ""amount"": 100000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": null,
@@ -13927,7 +13927,7 @@ cc SP JFIU FIIB
     },
     {
       ""date"": ""2024-12-30"",
-      ""amount"": ""100000"",
+      ""amount"": 100000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": null,
@@ -13944,7 +13944,7 @@ cc SP JFIU FIIB
     },
     {
       ""date"": ""2024-12-30"",
-      ""amount"": ""10000"",
+      ""amount"": 10000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": null,
@@ -14130,7 +14130,7 @@ cc SP JFIU FIIB
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-03"",
-      ""amount"": ""30000"",
+      ""amount"": 30000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": null,
@@ -14315,7 +14315,7 @@ cc SP JFIU FIIB
   ""alerted_transactions"": [
     {
       ""date"": ""2025-02-04"",
-      ""amount"": ""110555"",
+      ""amount"": 110555,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -14332,7 +14332,7 @@ cc SP JFIU FIIB
     },
     {
       ""date"": ""2025-02-04"",
-      ""amount"": ""50000"",
+      ""amount"": 50000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -14349,7 +14349,7 @@ cc SP JFIU FIIB
     },
     {
       ""date"": ""2025-02-05"",
-      ""amount"": ""200000"",
+      ""amount"": 200000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -14366,7 +14366,7 @@ cc SP JFIU FIIB
     },
     {
       ""date"": ""2025-02-05"",
-      ""amount"": ""200000"",
+      ""amount"": 200000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -14544,7 +14544,7 @@ cc SP JFIU FIIB
   ""alerted_transactions"": [
     {
       ""date"": ""2024-08-15"",
-      ""amount"": ""5000"",
+      ""amount"": 5000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": null,
@@ -14727,7 +14727,7 @@ cc SP JFIU FIIB
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-03"",
-      ""amount"": ""20000"",
+      ""amount"": 20000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""TAN FUNG"",
@@ -14910,7 +14910,7 @@ cc SP JFIU FIIB
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-03"",
-      ""amount"": ""49553"",
+      ""amount"": 49553,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -15093,7 +15093,7 @@ cc SP JFIU FIIB
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-02"",
-      ""amount"": ""4000"",
+      ""amount"": 4000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""PANG YA SHI"",
@@ -15287,7 +15287,7 @@ cc SP JFIU FIIB
   ""alerted_transactions"": [
     {
       ""date"": ""2024-12-30"",
-      ""amount"": ""10000"",
+      ""amount"": 10000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""TAN FUNG"",
@@ -15467,7 +15467,7 @@ cc SP JFIU FIIB
   ""alerted_transactions"": [
     {
       ""date"": ""2024-12-30"",
-      ""amount"": ""150000"",
+      ""amount"": 150000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""YAN MEI MEI"",
@@ -15645,7 +15645,7 @@ cc SP JFIU FIIB
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-03"",
-      ""amount"": ""3000"",
+      ""amount"": 3000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -15828,7 +15828,7 @@ cc SP JFIU FIIB
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-03"",
-      ""amount"": ""2200"",
+      ""amount"": 2200,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": null,
@@ -15845,7 +15845,7 @@ cc SP JFIU FIIB
     },
     {
       ""date"": ""2025-01-03"",
-      ""amount"": ""10000"",
+      ""amount"": 10000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": null,
@@ -16028,7 +16028,7 @@ cc SP JFIU FIIB
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-03"",
-      ""amount"": ""30000"",
+      ""amount"": 30000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""YAN MEI MEI"",
@@ -16045,7 +16045,7 @@ cc SP JFIU FIIB
     },
     {
       ""date"": ""2025-01-03"",
-      ""amount"": ""42000"",
+      ""amount"": 42000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""YAN MEI MEI"",
@@ -16229,7 +16229,7 @@ cc SP JFIU FIIB
   ""alerted_transactions"": [
     {
       ""date"": ""2024-12-09"",
-      ""amount"": ""89967"",
+      ""amount"": 89967,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -16413,7 +16413,7 @@ cc SP JFIU FIIB
   ""alerted_transactions"": [
     {
       ""date"": ""2024-12-25"",
-      ""amount"": ""10000"",
+      ""amount"": 10000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": null,
@@ -16430,7 +16430,7 @@ cc SP JFIU FIIB
     },
     {
       ""date"": ""2024-12-25"",
-      ""amount"": ""6100"",
+      ""amount"": 6100,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": null,
@@ -16447,7 +16447,7 @@ cc SP JFIU FIIB
     },
     {
       ""date"": ""2024-12-25"",
-      ""amount"": ""500"",
+      ""amount"": 500,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": null,
@@ -16629,7 +16629,7 @@ cc SP JFIU FIIB
   ""alerted_transactions"": [
     {
       ""date"": ""2024-12-23"",
-      ""amount"": ""5000"",
+      ""amount"": 5000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -16816,7 +16816,7 @@ cc SP JFIU FIIB
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-19"",
-      ""amount"": ""22000"",
+      ""amount"": 22000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": null,
@@ -16998,7 +16998,7 @@ cc SP JFIU FIIB
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-24"",
-      ""amount"": ""20000"",
+      ""amount"": 20000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": null,
@@ -17179,7 +17179,7 @@ cc SP JFIU FIIB
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-24"",
-      ""amount"": ""10900"",
+      ""amount"": 10900,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""YEUNG KAI"",
@@ -20507,7 +20507,7 @@ Additional Deatils:
   ""alerted_transactions"": [
     {
       ""date"": ""2024-08-29"",
-      ""amount"": ""20000"",
+      ""amount"": 20000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": null,
@@ -20525,7 +20525,7 @@ Additional Deatils:
     },
     {
       ""date"": ""2024-08-30"",
-      ""amount"": ""20000"",
+      ""amount"": 20000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": null,
@@ -20670,7 +20670,7 @@ Additional Deatils:
   ""alerted_transactions"": [
     {
       ""date"": ""2024-07-10"",
-      ""amount"": ""1"",
+      ""amount"": 1,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""MISS YEUNG KAI"",
@@ -20684,7 +20684,7 @@ Additional Deatils:
       },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
-      ""cancel_amount_requested"": ""1""
+      ""cancel_amount_requested"": 1
     }
   ]
 }"
@@ -20822,7 +20822,7 @@ Additional Deatils:
   ""alerted_transactions"": [
     {
       ""date"": ""2024-08-07"",
-      ""amount"": ""2010"",
+      ""amount"": 2010,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""TSANG SIU MING"",
@@ -20836,7 +20836,7 @@ Additional Deatils:
       },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
-      ""cancel_amount_requested"": ""2010""
+      ""cancel_amount_requested"": 2010
     }
   ]
 }"
@@ -20974,7 +20974,7 @@ Additional Deatils:
   ""alerted_transactions"": [
     {
       ""date"": ""2024-08-07"",
-      ""amount"": ""2460"",
+      ""amount"": 2460,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""XIE PANGAN"",
@@ -20988,7 +20988,7 @@ Additional Deatils:
       },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
-      ""cancel_amount_requested"": ""2460""
+      ""cancel_amount_requested"": 2460
     }
   ]
 }"
@@ -21126,7 +21126,7 @@ Additional Deatils:
   ""alerted_transactions"": [
     {
       ""date"": ""2024-08-07"",
-      ""amount"": ""300"",
+      ""amount"": 300,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""XIE PANGAN"",
@@ -21140,7 +21140,7 @@ Additional Deatils:
       },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
-      ""cancel_amount_requested"": ""300""
+      ""cancel_amount_requested"": 300
     }
   ]
 }"
@@ -21278,7 +21278,7 @@ Additional Deatils:
   ""alerted_transactions"": [
     {
       ""date"": ""2024-08-07"",
-      ""amount"": ""1248"",
+      ""amount"": 1248,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""TSANG SIU MING"",
@@ -21292,7 +21292,7 @@ Additional Deatils:
       },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
-      ""cancel_amount_requested"": ""1248""
+      ""cancel_amount_requested"": 1248
     }
   ]
 }"
@@ -21430,7 +21430,7 @@ Additional Deatils:
   ""alerted_transactions"": [
     {
       ""date"": ""2024-08-07"",
-      ""amount"": ""5000"",
+      ""amount"": 5000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""YEUNG KAI"",
@@ -21444,7 +21444,7 @@ Additional Deatils:
       },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
-      ""cancel_amount_requested"": ""5000""
+      ""cancel_amount_requested"": 5000
     }
   ]
 }"
@@ -21585,7 +21585,7 @@ Additional Deatils:
   ""alerted_transactions"": [
     {
       ""date"": ""2024-11-12"",
-      ""amount"": ""25500"",
+      ""amount"": 25500,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -21599,7 +21599,7 @@ Additional Deatils:
       },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
-      ""cancel_amount_requested"": ""25381""
+      ""cancel_amount_requested"": 25381
     }
   ]
 }"
@@ -21740,7 +21740,7 @@ Additional Deatils:
   ""alerted_transactions"": [
     {
       ""date"": ""2024-11-12"",
-      ""amount"": ""77000"",
+      ""amount"": 77000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -21754,7 +21754,7 @@ Additional Deatils:
       },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
-      ""cancel_amount_requested"": ""20000""
+      ""cancel_amount_requested"": 20000
     }
   ]
 }"
@@ -21895,7 +21895,7 @@ Additional Deatils:
   ""alerted_transactions"": [
     {
       ""date"": ""2024-11-11"",
-      ""amount"": ""19990"",
+      ""amount"": 19990,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -21909,7 +21909,7 @@ Additional Deatils:
       },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
-      ""cancel_amount_requested"": ""19990""
+      ""cancel_amount_requested"": 19990
     }
   ]
 }"
@@ -22166,7 +22166,7 @@ Additional Deatils:
   ""alerted_transactions"": [
     {
       ""date"": ""2024-08-21"",
-      ""amount"": ""1244"",
+      ""amount"": 1244,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -22313,7 +22313,7 @@ Additional Deatils:
   ""alerted_transactions"": [
     {
       ""date"": ""2024-08-11"",
-      ""amount"": ""98001"",
+      ""amount"": 98001,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""YEUNG KAI"",
@@ -22459,7 +22459,7 @@ Additional Deatils:
   ""alerted_transactions"": [
     {
       ""date"": ""2024-12-10"",
-      ""amount"": ""5000"",
+      ""amount"": 5000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -22473,7 +22473,7 @@ Additional Deatils:
       },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
-      ""cancel_amount_requested"": ""5000""
+      ""cancel_amount_requested"": 5000
     }
   ]
 }"
@@ -22609,7 +22609,7 @@ Additional Deatils:
   ""alerted_transactions"": [
     {
       ""date"": ""2024-12-03"",
-      ""amount"": ""2997"",
+      ""amount"": 2997,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -22623,7 +22623,7 @@ Additional Deatils:
       },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
-      ""cancel_amount_requested"": ""2997""
+      ""cancel_amount_requested"": 2997
     }
   ]
 }"
@@ -22758,7 +22758,7 @@ Additional Deatils:
   ""alerted_transactions"": [
     {
       ""date"": ""2024-12-03"",
-      ""amount"": ""50001"",
+      ""amount"": 50001,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -22772,7 +22772,7 @@ Additional Deatils:
       },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
-      ""cancel_amount_requested"": ""49986""
+      ""cancel_amount_requested"": 49986
     }
   ]
 }"
@@ -22907,7 +22907,7 @@ Additional Deatils:
   ""alerted_transactions"": [
     {
       ""date"": ""2024-12-03"",
-      ""amount"": ""7001"",
+      ""amount"": 7001,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -22921,7 +22921,7 @@ Additional Deatils:
       },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
-      ""cancel_amount_requested"": ""7000""
+      ""cancel_amount_requested"": 7000
     }
   ]
 }"
@@ -23056,7 +23056,7 @@ Additional Deatils:
   ""alerted_transactions"": [
     {
       ""date"": ""2024-12-03"",
-      ""amount"": ""5001"",
+      ""amount"": 5001,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -23070,7 +23070,7 @@ Additional Deatils:
       },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
-      ""cancel_amount_requested"": ""5000""
+      ""cancel_amount_requested"": 5000
     }
   ]
 }"
@@ -23206,7 +23206,7 @@ Additional Deatils:
   ""alerted_transactions"": [
     {
       ""date"": ""2024-12-03"",
-      ""amount"": ""50001"",
+      ""amount"": 50001,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -23220,7 +23220,7 @@ Additional Deatils:
       },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
-      ""cancel_amount_requested"": ""49986""
+      ""cancel_amount_requested"": 49986
     }
   ]
 }"
@@ -23353,7 +23353,7 @@ Additional Deatils:
   ""alerted_transactions"": [
     {
       ""date"": ""2024-11-29"",
-      ""amount"": ""100000"",
+      ""amount"": 100000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""YEUNG KAI"",
@@ -23367,7 +23367,7 @@ Additional Deatils:
       },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
-      ""cancel_amount_requested"": ""100000""
+      ""cancel_amount_requested"": 100000
     }
   ]
 }"
@@ -23500,7 +23500,7 @@ Additional Deatils:
   ""alerted_transactions"": [
     {
       ""date"": ""2024-11-29"",
-      ""amount"": ""70000"",
+      ""amount"": 70000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -23514,7 +23514,7 @@ Additional Deatils:
       },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
-      ""cancel_amount_requested"": ""70000""
+      ""cancel_amount_requested"": 70000
     }
   ]
 }"
@@ -23647,7 +23647,7 @@ Additional Deatils:
   ""alerted_transactions"": [
     {
       ""date"": ""2024-11-29"",
-      ""amount"": ""100000"",
+      ""amount"": 100000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -23661,7 +23661,7 @@ Additional Deatils:
       },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
-      ""cancel_amount_requested"": ""100000""
+      ""cancel_amount_requested"": 100000
     }
   ]
 }"
@@ -23792,7 +23792,7 @@ Additional Deatils:
   ""alerted_transactions"": [
     {
       ""date"": ""2024-11-08"",
-      ""amount"": ""25900"",
+      ""amount"": 25900,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -23806,7 +23806,7 @@ Additional Deatils:
       },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
-      ""cancel_amount_requested"": ""17833""
+      ""cancel_amount_requested"": 17833
     }
   ]
 }"
@@ -23941,7 +23941,7 @@ Additional Deatils:
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-03"",
-      ""amount"": ""40200"",
+      ""amount"": 40200,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -23955,7 +23955,7 @@ Additional Deatils:
       },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
-      ""cancel_amount_requested"": ""40000""
+      ""cancel_amount_requested"": 40000
     }
   ]
 }"
@@ -24090,7 +24090,7 @@ Additional Deatils:
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-04"",
-      ""amount"": ""45500"",
+      ""amount"": 45500,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -24104,7 +24104,7 @@ Additional Deatils:
       },
       ""channel"": ""FPS"",
       ""can_be_located"": false,
-      ""cancel_amount_requested"": ""35500""
+      ""cancel_amount_requested"": 35500
     }
   ]
 }"
@@ -24366,7 +24366,7 @@ Additional Deatils:
   ""alerted_transactions"": [
     {
       ""date"": ""2024-12-27"",
-      ""amount"": ""129890"",
+      ""amount"": 129890,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""1/YEUNG KAI"",
@@ -24380,7 +24380,7 @@ Additional Deatils:
       },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
-      ""cancel_amount_requested"": ""129890""
+      ""cancel_amount_requested"": 129890
     }
   ]
 }"
@@ -24512,7 +24512,7 @@ Additional Deatils:
   ""alerted_transactions"": [
     {
       ""date"": ""2024-12-27"",
-      ""amount"": ""158890"",
+      ""amount"": 158890,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""1/YEUNG KAI"",
@@ -24526,7 +24526,7 @@ Additional Deatils:
       },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
-      ""cancel_amount_requested"": ""158890""
+      ""cancel_amount_requested"": 158890
     }
   ]
 }"
@@ -24662,7 +24662,7 @@ Additional Deatils:
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-04"",
-      ""amount"": ""300"",
+      ""amount"": 300,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""YEUNG KAI"",
@@ -24676,7 +24676,7 @@ Additional Deatils:
       },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
-      ""cancel_amount_requested"": ""300""
+      ""cancel_amount_requested"": 300
     }
   ]
 }"
@@ -24812,7 +24812,7 @@ Additional Deatils:
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-03"",
-      ""amount"": ""300"",
+      ""amount"": 300,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""YEUNG KAI"",
@@ -24826,7 +24826,7 @@ Additional Deatils:
       },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
-      ""cancel_amount_requested"": ""300""
+      ""cancel_amount_requested"": 300
     }
   ]
 }"
@@ -24962,7 +24962,7 @@ Additional Deatils:
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-03"",
-      ""amount"": ""32300"",
+      ""amount"": 32300,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""XIE PANGAN"",
@@ -24976,7 +24976,7 @@ Additional Deatils:
       },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
-      ""cancel_amount_requested"": ""32300""
+      ""cancel_amount_requested"": 32300
     }
   ]
 }"
@@ -25112,7 +25112,7 @@ Additional Deatils:
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-03"",
-      ""amount"": ""64348"",
+      ""amount"": 64348,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""XIE PANGAN"",
@@ -25126,7 +25126,7 @@ Additional Deatils:
       },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
-      ""cancel_amount_requested"": ""64348""
+      ""cancel_amount_requested"": 64348
     }
   ]
 }"
@@ -25262,7 +25262,7 @@ Additional Deatils:
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-05"",
-      ""amount"": ""2320"",
+      ""amount"": 2320,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""MISS TSANG SIU MING"",
@@ -25276,7 +25276,7 @@ Additional Deatils:
       },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
-      ""cancel_amount_requested"": ""2320""
+      ""cancel_amount_requested"": 2320
     }
   ]
 }"
@@ -25410,7 +25410,7 @@ Additional Deatils:
   ""alerted_transactions"": [
     {
       ""date"": ""2025-02-05"",
-      ""amount"": ""200000"",
+      ""amount"": 200000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -25424,7 +25424,7 @@ Additional Deatils:
       },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
-      ""cancel_amount_requested"": ""200000""
+      ""cancel_amount_requested"": 200000
     }
   ]
 }"
@@ -25558,7 +25558,7 @@ Additional Deatils:
   ""alerted_transactions"": [
     {
       ""date"": ""2025-02-04"",
-      ""amount"": ""110555"",
+      ""amount"": 110555,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -25572,7 +25572,7 @@ Additional Deatils:
       },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
-      ""cancel_amount_requested"": ""110555""
+      ""cancel_amount_requested"": 110555
     }
   ]
 }"
@@ -25706,7 +25706,7 @@ Additional Deatils:
   ""alerted_transactions"": [
     {
       ""date"": ""2025-02-04"",
-      ""amount"": ""50000"",
+      ""amount"": 50000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -25720,7 +25720,7 @@ Additional Deatils:
       },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
-      ""cancel_amount_requested"": ""50000""
+      ""cancel_amount_requested"": 50000
     }
   ]
 }"
@@ -25854,7 +25854,7 @@ Additional Deatils:
   ""alerted_transactions"": [
     {
       ""date"": ""2025-02-05"",
-      ""amount"": ""200000"",
+      ""amount"": 200000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -25868,7 +25868,7 @@ Additional Deatils:
       },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
-      ""cancel_amount_requested"": ""200000""
+      ""cancel_amount_requested"": 200000
     }
   ]
 }"
@@ -25999,7 +25999,7 @@ Additional Deatils:
   ""alerted_transactions"": [
     {
       ""date"": ""2024-08-07"",
-      ""amount"": ""4000"",
+      ""amount"": 4000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHUNG SIU"",
@@ -26013,7 +26013,7 @@ Additional Deatils:
       },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
-      ""cancel_amount_requested"": ""4000""
+      ""cancel_amount_requested"": 4000
     }
   ]
 }"
@@ -26149,7 +26149,7 @@ Additional Deatils:
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-03"",
-      ""amount"": ""18000"",
+      ""amount"": 18000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""YAN MEI MEI"",
@@ -26163,7 +26163,7 @@ Additional Deatils:
       },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
-      ""cancel_amount_requested"": ""18000""
+      ""cancel_amount_requested"": 18000
     }
   ]
 }"
@@ -26299,7 +26299,7 @@ Additional Deatils:
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-02"",
-      ""amount"": ""2000"",
+      ""amount"": 2000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""YAN MEI MEI"",
@@ -26313,7 +26313,7 @@ Additional Deatils:
       },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
-      ""cancel_amount_requested"": ""2000""
+      ""cancel_amount_requested"": 2000
     }
   ]
 }"
@@ -26449,7 +26449,7 @@ Additional Deatils:
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-02"",
-      ""amount"": ""2600"",
+      ""amount"": 2600,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""TAN FUNG"",
@@ -26463,7 +26463,7 @@ Additional Deatils:
       },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
-      ""cancel_amount_requested"": ""2600""
+      ""cancel_amount_requested"": 2600
     }
   ]
 }"
@@ -26596,7 +26596,7 @@ Additional Deatils:
   ""alerted_transactions"": [
     {
       ""date"": ""2024-12-29"",
-      ""amount"": ""116523.87"",
+      ""amount"": 116523.87,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -26610,7 +26610,7 @@ Additional Deatils:
       },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
-      ""cancel_amount_requested"": ""116523.87""
+      ""cancel_amount_requested"": 116523.87
     }
   ]
 }"
@@ -26756,7 +26756,7 @@ Additional Deatils:
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-04"",
-      ""amount"": ""40012"",
+      ""amount"": 40012,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -26770,7 +26770,7 @@ Additional Deatils:
       },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
-      ""cancel_amount_requested"": ""40000""
+      ""cancel_amount_requested"": 40000
     }
   ]
 }"
@@ -26901,7 +26901,7 @@ Additional Deatils:
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-03"",
-      ""amount"": ""3000"",
+      ""amount"": 3000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -26915,7 +26915,7 @@ Additional Deatils:
       },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
-      ""cancel_amount_requested"": ""3000""
+      ""cancel_amount_requested"": 3000
     }
   ]
 }"
@@ -27050,7 +27050,7 @@ Additional Deatils:
   ""alerted_transactions"": [
     {
       ""date"": ""2024-12-23"",
-      ""amount"": ""24150"",
+      ""amount"": 24150,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""YAN MEI MEI"",
@@ -27064,7 +27064,7 @@ Additional Deatils:
       },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
-      ""cancel_amount_requested"": ""24150""
+      ""cancel_amount_requested"": 24150
     }
   ]
 }"
@@ -27198,7 +27198,7 @@ Additional Deatils:
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-18"",
-      ""amount"": ""100000"",
+      ""amount"": 100000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHAN TAI MAN"",
@@ -27212,7 +27212,7 @@ Additional Deatils:
       },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
-      ""cancel_amount_requested"": ""100000""
+      ""cancel_amount_requested"": 100000
     }
   ]
 }"
@@ -27344,7 +27344,7 @@ Additional Deatils:
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-16"",
-      ""amount"": ""6225"",
+      ""amount"": 6225,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -27490,7 +27490,7 @@ Additional Deatils:
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-16"",
-      ""amount"": ""44855"",
+      ""amount"": 44855,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""YAN MEI MEI"",
@@ -27753,7 +27753,7 @@ JSON Schema:
   ""alerted_transactions"": [
     {
       ""date"": ""2024-08-07"",
-      ""amount"": ""5000"",
+      ""amount"": 5000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""YEUNG KAI"",
@@ -27906,7 +27906,7 @@ JSON Schema:
   ""alerted_transactions"": [
     {
       ""date"": ""2024-08-07"",
-      ""amount"": ""2430"",
+      ""amount"": 2430,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG, TAK SHING"",
@@ -28070,7 +28070,7 @@ JSON Schema:
   ""alerted_transactions"": [
     {
       ""date"": ""2024-08-07"",
-      ""amount"": ""3060"",
+      ""amount"": 3060,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""YAN, MEI MEI"",
@@ -28230,7 +28230,7 @@ JSON Schema:
   ""alerted_transactions"": [
     {
       ""date"": ""2024-07-17"",
-      ""amount"": ""30000"",
+      ""amount"": 30000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -28390,7 +28390,7 @@ JSON Schema:
   ""alerted_transactions"": [
     {
       ""date"": ""2024-08-10"",
-      ""amount"": ""164024"",
+      ""amount"": 164024,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -28549,7 +28549,7 @@ JSON Schema:
   ""alerted_transactions"": [
     {
       ""date"": ""2024-08-10"",
-      ""amount"": ""10169"",
+      ""amount"": 10169,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""YAN MEI MEI"",
@@ -28679,7 +28679,7 @@ JSON Schema:
   ""alerted_transactions"": [
     {
       ""date"": ""2024-08-11"",
-      ""amount"": ""98001"",
+      ""amount"": 98001,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""YEUNG KAI"",
@@ -28833,7 +28833,7 @@ JSON Schema:
   ""alerted_transactions"": [
     {
       ""date"": ""2024-12-10"",
-      ""amount"": ""46000"",
+      ""amount"": 46000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""MR CHEUNG TAK SHING"",
@@ -28850,7 +28850,7 @@ JSON Schema:
     },
     {
       ""date"": ""2024-12-11"",
-      ""amount"": ""46000"",
+      ""amount"": 46000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -28979,7 +28979,7 @@ JSON Schema:
   ""alerted_transactions"": [
     {
       ""date"": ""2024-11-29"",
-      ""amount"": ""100000"",
+      ""amount"": 100000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""YEUNG KAI"",
@@ -29107,7 +29107,7 @@ JSON Schema:
   ""alerted_transactions"": [
     {
       ""date"": ""2024-12-27"",
-      ""amount"": ""129890"",
+      ""amount"": 129890,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""1/YEUNG KAI"",
@@ -29124,7 +29124,7 @@ JSON Schema:
     },
     {
       ""date"": ""2024-12-27"",
-      ""amount"": ""158890"",
+      ""amount"": 158890,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""1/YEUNG KAI"",
@@ -29289,7 +29289,7 @@ JSON Schema:
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-02"",
-      ""amount"": ""10000"",
+      ""amount"": 10000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -29306,7 +29306,7 @@ JSON Schema:
     },
     {
       ""date"": ""2025-01-02"",
-      ""amount"": ""8000"",
+      ""amount"": 8000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -29474,7 +29474,7 @@ JSON Schema:
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-02"",
-      ""amount"": ""10000"",
+      ""amount"": 10000,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEUNG TAK SHING"",
@@ -29602,7 +29602,7 @@ JSON Schema:
   ""alerted_transactions"": [
     {
       ""date"": ""2025-01-16"",
-      ""amount"": ""44855"",
+      ""amount"": 44855,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""YAN MEI MEI"",

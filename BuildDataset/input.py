@@ -71,6 +71,20 @@ def clean_date_string(date_str):
     
     return date_str
 
+def convert_to_number(val):
+    """Convert string values to numbers, handling 'null' and empty values"""
+    val = treat_null(val)  # First handle null/empty values
+    if val is None:
+        return None
+    try:
+        # Try to convert to float first, then to int if it's a whole number
+        num = float(val)
+        if num.is_integer():
+            return int(num)
+        return num
+    except (ValueError, TypeError):
+        return None
+    
 # --- Load the original CSV file ---
 csv_path = 'Dataset_Source_v5.csv'
 df = pd.read_csv(csv_path)
@@ -255,7 +269,7 @@ else:
                 # Base transaction structure
                 transaction = {
                     "date": clean_date_string(tx_row.get("GroundTruth_Transaction Date (value)", None)),
-                    "amount": treat_null(tx_row.get("GroundTruth_Originating Amount", None)),
+                    "amount": convert_to_number(tx_row.get("GroundTruth_Originating Amount", None)),  # Convert to number
                     "currency": treat_null(tx_row.get("GroundTruth_Originating Currency", None)),
                     "from": {
                         "name": treat_null(tx_row.get("GroundTruth_Originator Name", None)),
@@ -273,7 +287,7 @@ else:
                 
                 # Add cancel_amount_requested only for UAR type
                 if row_type == 'UAR':
-                    transaction["cancel_amount_requested"] = treat_null(tx_row.get("GroundTruth_Cancel Amount Requested", None))
+                    transaction["cancel_amount_requested"] = convert_to_number(tx_row.get("GroundTruth_Cancel Amount Requested", None))  # Convert to number
                 
                 alerted_transactions.append(transaction)
             
