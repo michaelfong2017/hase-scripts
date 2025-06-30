@@ -361,23 +361,31 @@ for idx, row in source_df.iterrows():
         # Build alerted_transactions array using Source_ columns
         alerted_transactions = []
         for tx_row in transaction_rows:
+            # Get transaction references from Transaction ID column and split by semicolon
+            transaction_id_raw = tx_row.get("Transaction ID", None)
+            transaction_references = []
+            if transaction_id_raw and pd.notna(transaction_id_raw):
+                # Split by semicolon and clean up each reference
+                transaction_references = [ref.strip() for ref in str(transaction_id_raw).split(';') if ref.strip()]
+            
             # Base transaction structure with Source_ columns
             transaction = {
-                "date": clean_date_string(tx_row.get("Source_Transaction Date (value)", None)),
+                "date": clean_date_string(tx_row.get("SourceOnlyGroundTruth_Transaction Date (value)", None)),
                 "amount": convert_to_number(tx_row.get("Source_Originating Amount", None)),
                 "currency": treat_null(tx_row.get("Source_Originating Currency", None)),
                 "from": {
-                    "name": treat_null(tx_row.get("Source_Originator Name", None)),
-                    "account_number": treat_null(tx_row.get("Source_Originator Account Number", None)),
-                    "bank": treat_null(tx_row.get("Source_Originator Bank Raw", None))
+                    "name": treat_null(tx_row.get("SourceOnlyGroundTruth_Originator Name", None)),
+                    "account_number": treat_null(tx_row.get("SourceOnlyGroundTruth_Originator Account Number", None)),
+                    "bank": treat_null(tx_row.get("SourceOnlyGroundTruth_Originator Bank Raw", None))
                 },
                 "to": {
                     "name": treat_null(tx_row.get("Source_Beneficiary Name", None)),
                     "account_number": treat_null(tx_row.get("Source_Beneficiary Account Number", None)),
-                    "bank": treat_null(tx_row.get("Source_Beneficiary Bank Raw", None))
+                    "bank": treat_null(tx_row.get("SourceOnlyGroundTruth_Beneficiary Bank Raw", None))
                 },
                 "channel": treat_null(tx_row.get("Source_Transaction Channel", None)),
-                "can_be_located": convert_to_bool(tx_row.get("Source_Can Be Located", None))
+                "can_be_located": convert_to_bool(tx_row.get("Source_Can Be Located", None)),
+                "transaction_references": transaction_references  # Add the new field
             }
             
             # Add cancel_amount_requested only for UAR type
