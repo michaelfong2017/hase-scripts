@@ -6,6 +6,24 @@ import os
 from datetime import datetime, timedelta
 from typing import Dict, List, Tuple, Any
 
+# Global set number tracker
+global_set_number = 0
+
+def initialize_global_set_number(df):
+    """Initialize global set number based on existing data"""
+    global global_set_number
+    if 'Set Number' in df.columns:
+        global_set_number = df['Set Number'].max()
+    else:
+        global_set_number = 0
+    print(f"Initialized global set number to: {global_set_number}")
+
+def get_next_set_number():
+    """Get the next global set number"""
+    global global_set_number
+    global_set_number += 1
+    return global_set_number
+
 def randomize_date(original_date: str) -> str:
     """Randomize a date string in YYYY-MM-DD format"""
     try:
@@ -774,12 +792,20 @@ def format_diff(changes: List[Tuple[str, str]]) -> str:
     
     return "\n".join(diff_lines)
 
-def main(num_randomizations=1):
+def get_randomization_count(type_name):
+    """Get number of additional randomized sets based on type"""
+    if type_name in ['ADCC', 'ODFT']:
+        return 6
+    elif type_name == 'Search Warrant':
+        return 4
+    else:  # HSBC Referral, UAR, Police Letter
+        return 3
+
+def main():
     """
-    Main function to process the CSV file with multiple randomizations per row
-    
-    Args:
-        num_randomizations (int): Number of randomization sets to generate per row
+    Main function to process the CSV file with type-specific randomizations
+    Appends randomized rows instead of creating new columns
+    Maintains global set numbering and case number increments
     """
     # Set random seed for reproducibility (optional)
     random.seed(42)
@@ -787,7 +813,7 @@ def main(num_randomizations=1):
     # Get CSV file path from user
     csv_file_path = input("Enter the path to your CSV file (or press Enter to use default): ").strip()
     if not csv_file_path:
-        csv_file_path = '/Users/zacharytang/Desktop/FORMS/randomizer/ZAC_VERIFIED_TRAIN_SET.csv'
+        csv_file_path = 'Dataset_Source_v5_updated_with_groundtruth.csv'  # Default to your output file
     
     # Read the CSV file
     print(f"Loading CSV file: {csv_file_path}...")
@@ -800,6 +826,9 @@ def main(num_randomizations=1):
         print(f"Error reading CSV file: {str(e)}")
         return
     
+    # Initialize global set number based on existing data
+    initialize_global_set_number(df)
+    
     # Display available columns
     print("\nAvailable columns in the CSV file:")
     for i, col in enumerate(df.columns, 1):
@@ -811,8 +840,15 @@ def main(num_randomizations=1):
     # Get original input column
     while True:
         try:
-            input_choice = input("Enter the number or name of the column containing the original input text: ").strip()
-            if input_choice.isdigit():
+            input_choice = input("Enter the number or name of the column containing the original input text (default: Input): ").strip()
+            if not input_choice:
+                input_column = 'Input'
+                if input_column in df.columns:
+                    break
+                else:
+                    print(f"Default column '{input_column}' not found.")
+                    continue
+            elif input_choice.isdigit():
                 input_col_index = int(input_choice) - 1
                 if 0 <= input_col_index < len(df.columns):
                     input_column = df.columns[input_col_index]
@@ -830,8 +866,15 @@ def main(num_randomizations=1):
     # Get ground truth JSON column
     while True:
         try:
-            json_choice = input("Enter the number or name of the column containing the ground truth JSON: ").strip()
-            if json_choice.isdigit():
+            json_choice = input("Enter the number or name of the column containing the ground truth JSON (default: Ground Truth): ").strip()
+            if not json_choice:
+                json_column = 'Ground Truth'
+                if json_column in df.columns:
+                    break
+                else:
+                    print(f"Default column '{json_column}' not found.")
+                    continue
+            elif json_choice.isdigit():
                 json_col_index = int(json_choice) - 1
                 if 0 <= json_col_index < len(df.columns):
                     json_column = df.columns[json_col_index]
@@ -849,8 +892,15 @@ def main(num_randomizations=1):
     # Get transaction records column
     while True:
         try:
-            transaction_choice = input("Enter the number or name of the column containing the transaction records: ").strip()
-            if transaction_choice.isdigit():
+            transaction_choice = input("Enter the number or name of the column containing the transaction records (default: Transactions): ").strip()
+            if not transaction_choice:
+                transaction_column = 'Transactions'
+                if transaction_column in df.columns:
+                    break
+                else:
+                    print(f"Default column '{transaction_column}' not found.")
+                    continue
+            elif transaction_choice.isdigit():
                 transaction_col_index = int(transaction_choice) - 1
                 if 0 <= transaction_col_index < len(df.columns):
                     transaction_column = df.columns[transaction_col_index]
@@ -871,123 +921,134 @@ def main(num_randomizations=1):
     print(f"- Transaction records: '{transaction_column}'")
     print()
     
-    # Initialize dictionaries to hold multiple randomization columns
-    randomized_data = {}
-    for i in range(1, num_randomizations + 1):
-        randomized_data[f'randomized_input_{i}'] = []
-        randomized_data[f'randomized_ground_truth_{i}'] = []
-        randomized_data[f'randomized_transactions_{i}'] = []
-        randomized_data[f'diff_{i}'] = []
+    # Add Randomization Set column to original data if it doesn't exist
+    if 'Randomization Set' not in df.columns:
+        df['Randomization Set'] = 0  # 0 for original
     
-    print(f"Processing {len(df)} rows with {num_randomizations} randomization(s) each...")
+    # Add Diff column to original data (empty for original)
+    if 'Diff' not in df.columns:
+        df['Diff'] = "No changes"
     
-    for index, row in df.iterrows():
-        if index % 10 == 0:
-            print(f"Processing row {index}...")
+    # List to store all DataFrames (original + randomized versions)
+    all_dataframes = [df.copy()]  # Start with original DataFrame
+    
+    # Group by Type and create randomized sets
+    for type_name in df['Type'].unique():
+        type_rows = df[df['Type'] == type_name].copy()
+        randomization_count = get_randomization_count(type_name)
         
-        # Get the original input, ground truth, and transactions
-        original_input = str(row[input_column])
-        ground_truth_str = str(row[json_column])
-        original_transactions = str(row[transaction_column])
+        print(f"Creating {randomization_count} randomized sets for Type: {type_name}")
         
-        # Generate multiple randomizations for this row
-        for randomization_num in range(1, num_randomizations + 1):
-            try:
-                # Extract JSON from markdown code blocks if present
-                json_content = ground_truth_str
-                if ground_truth_str.strip().startswith('```json'):
-                    # Extract content between ```json and ```
-                    match = re.search(r'```json\s*(.*?)\s*```', ground_truth_str, re.DOTALL)
-                    if match:
-                        json_content = match.group(1).strip()
-                    else:
-                        raise ValueError("Could not extract JSON from markdown code block")
+        for randomization_num in range(1, randomization_count + 1):
+            print(f"  Processing randomization set {randomization_num} for {type_name}...")
+            
+            # Create a copy of the type-specific rows
+            randomized_df = type_rows.copy()
+            randomized_df['Randomization Set'] = randomization_num
+            
+            # Get the next global set number and update Set Number column
+            current_set_number = get_next_set_number()
+            randomized_df['Set Number'] = current_set_number
+            
+            # Calculate case number increment based on set number
+            case_increment = current_set_number * 50
+            if 'Case Number' in randomized_df.columns:
+                randomized_df['Case Number'] = randomized_df['Original Case Number'] + case_increment
+            
+            # Process each row for this randomization
+            diff_list = []
+            for index, row in randomized_df.iterrows():
+                # Get the original input, ground truth, and transactions
+                original_input = str(row[input_column])
+                ground_truth_str = str(row[json_column])
+                original_transactions = str(row[transaction_column])
                 
-                # Parse the ground truth JSON
-                ground_truth_json = json.loads(json_content)
-                
-                # Track changes for this randomization
-                changes = []
-                
-                # Randomize the JSON fields
-                randomized_json = randomize_json_fields(ground_truth_json, changes)
-                
-                # Apply changes to input text
-                randomized_input = apply_changes_to_input(original_input, changes)
-                
-                # Apply changes to transaction records
-                randomized_transactions = apply_changes_to_input(original_transactions, changes)
-                
-                # Convert randomized JSON back to string
-                randomized_ground_truth_str = json.dumps(randomized_json, indent=2, ensure_ascii=False)
-                
-                # Format the diff
-                diff_str = format_diff(changes)
-                
-                # Store the results for this randomization
-                randomized_data[f'randomized_input_{randomization_num}'].append(randomized_input)
-                randomized_data[f'randomized_ground_truth_{randomization_num}'].append(randomized_ground_truth_str)
-                randomized_data[f'randomized_transactions_{randomization_num}'].append(randomized_transactions)
-                randomized_data[f'diff_{randomization_num}'].append(diff_str)
-                
-            except Exception as e:
-                print(f"Error processing row {index}, randomization {randomization_num}: {str(e)}")
-                # In case of error, keep original values
-                randomized_data[f'randomized_input_{randomization_num}'].append(original_input)
-                randomized_data[f'randomized_ground_truth_{randomization_num}'].append(ground_truth_str)
-                randomized_data[f'randomized_transactions_{randomization_num}'].append(original_transactions)
-                randomized_data[f'diff_{randomization_num}'].append(f"Error: {str(e)}")
+                try:
+                    # Extract JSON from markdown code blocks if present
+                    json_content = ground_truth_str
+                    if ground_truth_str.strip().startswith('```json'):
+                        # Extract content between ```json and ```
+                        match = re.search(r'```json\s*(.*?)\s*```', ground_truth_str, re.DOTALL)
+                        if match:
+                            json_content = match.group(1).strip()
+                        else:
+                            raise ValueError("Could not extract JSON from markdown code block")
+                    
+                    # Parse the ground truth JSON
+                    ground_truth_json = json.loads(json_content)
+                    
+                    # Track changes for this randomization
+                    changes = []
+                    
+                    # Randomize the JSON fields
+                    randomized_json = randomize_json_fields(ground_truth_json, changes)
+                    
+                    # Apply changes to input text
+                    randomized_input = apply_changes_to_input(original_input, changes)
+                    
+                    # Apply changes to transaction records
+                    randomized_transactions = apply_changes_to_input(original_transactions, changes)
+                    
+                    # Convert randomized JSON back to string
+                    randomized_ground_truth_str = json.dumps(randomized_json, indent=2, ensure_ascii=False)
+                    
+                    # Format the diff
+                    diff_str = format_diff(changes)
+                    
+                    # Update the randomized DataFrame with the new values
+                    randomized_df.at[index, input_column] = randomized_input
+                    randomized_df.at[index, json_column] = randomized_ground_truth_str
+                    randomized_df.at[index, transaction_column] = randomized_transactions
+                    diff_list.append(diff_str)
+                    
+                except Exception as e:
+                    print(f"Error processing row {index}, randomization {randomization_num}: {str(e)}")
+                    # Keep original values in case of error
+                    diff_list.append(f"Error: {str(e)}")
+            
+            # Add the diff column
+            randomized_df['Diff'] = diff_list
+            
+            # Add this randomized DataFrame to our list
+            all_dataframes.append(randomized_df)
     
-    # Add new columns to dataframe
-    for i in range(1, num_randomizations + 1):
-        df[f'Randomized input {i}'] = randomized_data[f'randomized_input_{i}']
-        df[f'Randomized ground truth {i}'] = randomized_data[f'randomized_ground_truth_{i}']
-        df[f'Randomized transactions {i}'] = randomized_data[f'randomized_transactions_{i}']
-        df[f'Diff {i}'] = randomized_data[f'diff_{i}']
+    # Concatenate all DataFrames (original + all randomized versions)
+    final_df = pd.concat(all_dataframes, ignore_index=True)
     
     # Save to new CSV file
     input_dir = os.path.dirname(csv_file_path)
     input_filename = os.path.basename(csv_file_path)
     input_name, input_ext = os.path.splitext(input_filename)
     
-    if num_randomizations == 1:
-        output_filename = os.path.join(input_dir, f'{input_name}_RANDOMIZED{input_ext}')
-    else:
-        output_filename = os.path.join(input_dir, f'{input_name}_RANDOMIZED_{num_randomizations}x{input_ext}')
+    output_filename = os.path.join(input_dir, f'{input_name}_RANDOMIZED_ROWS{input_ext}')
     
-    df.to_csv(output_filename, index=False)
+    final_df.to_csv(output_filename, index=False, encoding='utf-8-sig')
     
     print(f"Randomization complete! Saved to: {output_filename}")
-    print(f"Total rows processed: {len(df)}")
-    print(f"Randomizations per row: {num_randomizations}")
+    print(f"Original rows: {len(df)}")
+    print(f"Final global set number: {global_set_number}")
     
-    # Print some statistics
-    total_changes = 0
-    for i in range(1, num_randomizations + 1):
-        diff_column = randomized_data[f'diff_{i}']
-        non_empty_diffs = [d for d in diff_column if d != "No changes" and not d.startswith("Error:")]
-        total_changes += len(non_empty_diffs)
-        print(f"Randomization {i}: {len(non_empty_diffs)} rows with changes")
+    # Print breakdown by type
+    total_randomized = 0
+    for type_name in df['Type'].unique():
+        original_count = len(df[df['Type'] == type_name])
+        randomization_count = get_randomization_count(type_name)
+        total_for_type = original_count * randomization_count
+        total_randomized += total_for_type
+        print(f"  {type_name}: {original_count} original × {randomization_count} randomizations = {total_for_type} randomized rows")
     
-    print(f"Total randomized instances: {total_changes}")
+    print(f"Total rows in output: {len(final_df)} (Original: {len(df)} + Randomized: {total_randomized})")
+
+# [Copy all your existing randomization functions from the attached file]
+# ... (all functions from randomize_date through format_diff exactly as they are)
 
 if __name__ == "__main__":
-    print("CSV Data Randomizer")
-    print("==================")
-
-    # Prompt for number of randomizations
-    while True:
-        try:
-            num_randomizations = input("Enter the number of randomizations per row (default: 1): ").strip()
-            if not num_randomizations:
-                num_randomizations = 1
-            else:
-                num_randomizations = int(num_randomizations)
-            
-            if num_randomizations < 1:
-                print("Number of randomizations must be at least 1.")
-                continue
-            break
-        except ValueError:
-            print("Please enter a valid number.")
-    main(num_randomizations=num_randomizations)
+    print("CSV Data Randomizer - Type-Specific Row Appender Version")
+    print("======================================================")
+    print("Randomization counts by Type:")
+    print("- ADCC & ODFT: 6 additional sets")
+    print("- Search Warrant: 4 additional sets") 
+    print("- Other types (HSBC Referral, UAR, Police Letter): 3 additional sets")
+    print()
+    
+    main()
