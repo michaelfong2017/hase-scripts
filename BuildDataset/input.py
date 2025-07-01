@@ -646,6 +646,9 @@ for set_num in range(3, 6):
 # Combine all dataframes
 final_df = pd.concat(all_dataframes, ignore_index=True)
 
+# Add Variant Number column equal to Set Number
+final_df['Variant Number'] = final_df['Set Number']
+
 # --- Save to a new CSV file ---
 output_csv_path = 'Dataset_Source_v5_updated_with_groundtruth.csv'
 final_df.to_csv(output_csv_path, index=False, encoding='utf-8-sig')

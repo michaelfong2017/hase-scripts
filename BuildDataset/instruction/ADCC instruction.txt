@@ -13,11 +13,7 @@ Step-by-Step Process:
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- If no exact match found: Look for multiple CSV transactions that:
-  * Have the same date as reported transaction
-  * Have matching originator OR beneficiary account numbers/names as reported transaction  
-  * When summed together, equal the exact amount of the reported transaction
-- If such combination exists: Include all those Transaction IDs
+- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**

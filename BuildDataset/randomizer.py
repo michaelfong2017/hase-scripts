@@ -925,92 +925,100 @@ def main():
     if 'Randomization Set' not in df.columns:
         df['Randomization Set'] = 0  # 0 for original
     
+    # Add Variant Number column to original data if it doesn't exist
+    if 'Variant Number' not in df.columns:
+        df['Variant Number'] = 1  # 1 for original
+
     # Add Diff column to original data (empty for original)
     if 'Diff' not in df.columns:
         df['Diff'] = "No changes"
-    
+
     # List to store all DataFrames (original + randomized versions)
     all_dataframes = [df.copy()]  # Start with original DataFrame
-    
-    # Group by Type and create randomized sets
+
+    # Group by Type and Variant Number, then create randomized sets
     for type_name in df['Type'].unique():
-        type_rows = df[df['Type'] == type_name].copy()
-        randomization_count = get_randomization_count(type_name)
-        
-        print(f"Creating {randomization_count} randomized sets for Type: {type_name}")
-        
-        for randomization_num in range(1, randomization_count + 1):
-            print(f"  Processing randomization set {randomization_num} for {type_name}...")
+        for variant_num in df[df['Type'] == type_name]['Variant Number'].unique():
+            type_variant_rows = df[(df['Type'] == type_name) & (df['Variant Number'] == variant_num)].copy()
+            randomization_count = get_randomization_count(type_name)
             
-            # Create a copy of the type-specific rows
-            randomized_df = type_rows.copy()
-            randomized_df['Randomization Set'] = randomization_num
+            print(f"Creating {randomization_count} randomized sets for Type: {type_name}, Variant: {variant_num}")
             
-            # Get the next global set number and update Set Number column
-            current_set_number = get_next_set_number()
-            randomized_df['Set Number'] = current_set_number
-            
-            # Calculate case number increment based on set number
-            case_increment = current_set_number * 50
-            if 'Case Number' in randomized_df.columns:
-                randomized_df['Case Number'] = randomized_df['Original Case Number'] + case_increment
-            
-            # Process each row for this randomization
-            diff_list = []
-            for index, row in randomized_df.iterrows():
-                # Get the original input, ground truth, and transactions
-                original_input = str(row[input_column])
-                ground_truth_str = str(row[json_column])
-                original_transactions = str(row[transaction_column])
+            for randomization_num in range(1, randomization_count + 1):
+                print(f"  Processing randomization set {randomization_num} for {type_name} Variant {variant_num}...")
                 
-                try:
-                    # Extract JSON from markdown code blocks if present
-                    json_content = ground_truth_str
-                    if ground_truth_str.strip().startswith('```json'):
-                        # Extract content between ```json and ```
-                        match = re.search(r'```json\s*(.*?)\s*```', ground_truth_str, re.DOTALL)
-                        if match:
-                            json_content = match.group(1).strip()
-                        else:
-                            raise ValueError("Could not extract JSON from markdown code block")
+                # Create a copy of the type-variant-specific rows
+                randomized_df = type_variant_rows.copy()
+                randomized_df['Randomization Set'] = randomization_num
+                
+                # Keep the same Variant Number (1, 2, 3, 4, or 5)
+                # randomized_df['Variant Number'] stays the same as source variant
+                
+                # Get the next global set number and update Set Number column
+                current_set_number = get_next_set_number()
+                randomized_df['Set Number'] = current_set_number
+                
+                # Calculate case number increment based on set number
+                case_increment = current_set_number * 50
+                if 'Case Number' in randomized_df.columns:
+                    randomized_df['Case Number'] = randomized_df['Original Case Number'] + case_increment
+                
+                # Process each row for this randomization
+                diff_list = []
+                for index, row in randomized_df.iterrows():
+                    # Get the original input, ground truth, and transactions
+                    original_input = str(row[input_column])
+                    ground_truth_str = str(row[json_column])
+                    original_transactions = str(row[transaction_column])
                     
-                    # Parse the ground truth JSON
-                    ground_truth_json = json.loads(json_content)
-                    
-                    # Track changes for this randomization
-                    changes = []
-                    
-                    # Randomize the JSON fields
-                    randomized_json = randomize_json_fields(ground_truth_json, changes)
-                    
-                    # Apply changes to input text
-                    randomized_input = apply_changes_to_input(original_input, changes)
-                    
-                    # Apply changes to transaction records
-                    randomized_transactions = apply_changes_to_input(original_transactions, changes)
-                    
-                    # Convert randomized JSON back to string
-                    randomized_ground_truth_str = json.dumps(randomized_json, indent=2, ensure_ascii=False)
-                    
-                    # Format the diff
-                    diff_str = format_diff(changes)
-                    
-                    # Update the randomized DataFrame with the new values
-                    randomized_df.at[index, input_column] = randomized_input
-                    randomized_df.at[index, json_column] = randomized_ground_truth_str
-                    randomized_df.at[index, transaction_column] = randomized_transactions
-                    diff_list.append(diff_str)
-                    
-                except Exception as e:
-                    print(f"Error processing row {index}, randomization {randomization_num}: {str(e)}")
-                    # Keep original values in case of error
-                    diff_list.append(f"Error: {str(e)}")
-            
-            # Add the diff column
-            randomized_df['Diff'] = diff_list
-            
-            # Add this randomized DataFrame to our list
-            all_dataframes.append(randomized_df)
+                    try:
+                        # Extract JSON from markdown code blocks if present
+                        json_content = ground_truth_str
+                        if ground_truth_str.strip().startswith('```json'):
+                            # Extract content between ```json and ```
+                            match = re.search(r'```json\s*(.*?)\s*```', ground_truth_str, re.DOTALL)
+                            if match:
+                                json_content = match.group(1).strip()
+                            else:
+                                raise ValueError("Could not extract JSON from markdown code block")
+                        
+                        # Parse the ground truth JSON
+                        ground_truth_json = json.loads(json_content)
+                        
+                        # Track changes for this randomization
+                        changes = []
+                        
+                        # Randomize the JSON fields
+                        randomized_json = randomize_json_fields(ground_truth_json, changes)
+                        
+                        # Apply changes to input text
+                        randomized_input = apply_changes_to_input(original_input, changes)
+                        
+                        # Apply changes to transaction records
+                        randomized_transactions = apply_changes_to_input(original_transactions, changes)
+                        
+                        # Convert randomized JSON back to string
+                        randomized_ground_truth_str = json.dumps(randomized_json, indent=2, ensure_ascii=False)
+                        
+                        # Format the diff
+                        diff_str = format_diff(changes)
+                        
+                        # Update the randomized DataFrame with the new values
+                        randomized_df.at[index, input_column] = randomized_input
+                        randomized_df.at[index, json_column] = randomized_ground_truth_str
+                        randomized_df.at[index, transaction_column] = randomized_transactions
+                        diff_list.append(diff_str)
+                        
+                    except Exception as e:
+                        print(f"Error processing row {index}, randomization {randomization_num}: {str(e)}")
+                        # Keep original values in case of error
+                        diff_list.append(f"Error: {str(e)}")
+                
+                # Add the diff column
+                randomized_df['Diff'] = diff_list
+                
+                # Add this randomized DataFrame to our list
+                all_dataframes.append(randomized_df)
     
     # Concatenate all DataFrames (original + all randomized versions)
     final_df = pd.concat(all_dataframes, ignore_index=True)
@@ -1034,14 +1042,15 @@ def main():
     print(f"Original rows: {len(df)}")
     print(f"Final global set number: {global_set_number}")
     
-    # Print breakdown by type
+    # Print breakdown by type and variant
     total_randomized = 0
     for type_name in df['Type'].unique():
-        original_count = len(df[df['Type'] == type_name])
-        randomization_count = get_randomization_count(type_name)
-        total_for_type = original_count * randomization_count
-        total_randomized += total_for_type
-        print(f"  {type_name}: {original_count} original × {randomization_count} randomizations = {total_for_type} randomized rows")
+        for variant_num in df[df['Type'] == type_name]['Variant Number'].unique():
+            original_count = len(df[(df['Type'] == type_name) & (df['Variant Number'] == variant_num)])
+            randomization_count = get_randomization_count(type_name)
+            total_for_type_variant = original_count * randomization_count
+            total_randomized += total_for_type_variant
+            print(f"  {type_name} Variant {variant_num}: {original_count} original × {randomization_count} randomizations = {total_for_type_variant} randomized rows")
     
     print(f"Total rows in output: {len(final_df)} (Original: {len(df)} + Randomized: {total_randomized})")
 
