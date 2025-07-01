@@ -621,6 +621,16 @@ final_df = pd.concat(all_dataframes, ignore_index=True)
 # --- Save to a new CSV file ---
 output_csv_path = 'Dataset_Source_v5_updated_with_groundtruth.csv'
 final_df.to_csv(output_csv_path, index=False, encoding='utf-8-sig')
+
+# --- Save original set separately ---
+# Filter original set (Set Number == 1)
+set1_df = final_df[final_df['Set Number'] == 1].copy()
+# Save to CSV
+output_original_set_csv_path = 'Dataset_Source_v5_original_set.csv'
+set1_df.to_csv(output_original_set_csv_path, index=False, encoding='utf-8-sig')
+print(f'Original set (Set 1) saved to {output_original_set_csv_path}')
+print(f'Original set contains {len(set1_df)} rows (Case Numbers 1-50)')
+
 print(f'Updated data with all 5 sets saved to {output_csv_path}')
 print(f'Total sets: 5')
 print(f'Total rows: {len(final_df)}')

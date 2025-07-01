@@ -1,6 +1,7 @@
 # core_logic.py
 import json
 import re
+import copy
 
 # Load the inverted_sorted_mappings.json once at module level
 try:
@@ -107,7 +108,7 @@ def are_exact_match_for_eval(value1, value2, key):
 def compare_structures_for_eval(obj1, obj2, path="", comparison_count=[0]):
     """
     Recursively compares two JSON objects and lists human-readable mismatches.
-    --- FIXED: Proper field extraction for your mapping structure ---
+    Transactions can be ordered arbitrarily and tolerated by matching transaction_references first.
     """
     mismatches = []
 
@@ -127,17 +128,54 @@ def compare_structures_for_eval(obj1, obj2, path="", comparison_count=[0]):
                     comparison_count[0] += 1
             else: 
                 mismatches.extend(compare_structures_for_eval(obj1[key], obj2[key], current_path, comparison_count))
+
     elif isinstance(obj1, list) and isinstance(obj2, list):
-        if len(obj1) != len(obj2):
-            mismatches.append(f"{path}: List length mismatch - LLM: {len(obj1)}, Truth: {len(obj2)}")
-            if comparison_count[0] < 3:
-                print(f"DEBUG [Comparison {comparison_count[0] + 1}/3]: {path} - List length mismatch - LLM: {len(obj1)}, Truth: {len(obj2)}")
-                comparison_count[0] += 1
+        # Special handling for alerted_transactions list to match by transaction_references
+        if path == "alerted_transactions":
+            # Create a copy of obj2 list to track matched items
+            unmatched_obj2 = copy.deepcopy(obj2)
+            
+            for i, item1 in enumerate(obj1):
+                # Find matching item in obj2 by transaction_references
+                matched_index = None
+                for j, item2 in enumerate(unmatched_obj2):
+                    # Compare transaction_references as sets (order-independent)
+                    tr1 = set(str(ref) for ref in item1.get('transaction_references', []))
+                    tr2 = set(str(ref) for ref in item2.get('transaction_references', []))
+                    if tr1 == tr2:
+                        matched_index = j
+                        break
+                
+                if matched_index is not None:
+                    # Remove matched item from unmatched_obj2
+                    matched_item2 = unmatched_obj2.pop(matched_index)
+                    # Compare the matched transactions
+                    mismatches.extend(compare_structures_for_eval(item1, matched_item2, f"{path}[{i}]", comparison_count))
+                else:
+                    mismatches.append(f"{path}[{i}]: No matching transaction found by transaction_references (LLM has: {item1.get('transaction_references', [])})")
+                    if comparison_count[0] < 3:
+                        print(f"DEBUG [Comparison {comparison_count[0] + 1}/3]: {path}[{i}] - No matching transaction found by transaction_references (LLM has: {item1.get('transaction_references', [])})")
+                        comparison_count[0] += 1
+            
+            # Any remaining unmatched items in obj2 are missing in obj1
+            for item2 in unmatched_obj2:
+                mismatches.append(f"{path}: Missing transaction in LLM output (Truth has transaction_references: {item2.get('transaction_references', [])})")
+                if comparison_count[0] < 3:
+                    print(f"DEBUG [Comparison {comparison_count[0] + 1}/3]: {path} - Missing transaction in LLM output (Truth has transaction_references: {item2.get('transaction_references', [])})")
+                    comparison_count[0] += 1
         else:
-            for i, (item1, item2) in enumerate(zip(obj1, obj2)):
-                mismatches.extend(compare_structures_for_eval(item1, item2, f"{path}[{i}]", comparison_count))
+            # Regular list comparison for non-transaction lists
+            if len(obj1) != len(obj2):
+                mismatches.append(f"{path}: List length mismatch - LLM: {len(obj1)}, Truth: {len(obj2)}")
+                if comparison_count[0] < 3:
+                    print(f"DEBUG [Comparison {comparison_count[0] + 1}/3]: {path} - List length mismatch - LLM: {len(obj1)}, Truth: {len(obj2)}")
+                    comparison_count[0] += 1
+            else:
+                for i, (item1, item2) in enumerate(zip(obj1, obj2)):
+                    mismatches.extend(compare_structures_for_eval(item1, item2, f"{path}[{i}]", comparison_count))
+
     else:
-        # --- FIXED: Extract field name to match your mapping structure ---
+        # Extract field name to match your mapping structure
         if 'alerted_transactions[' in path and '].' in path:
             # For "alerted_transactions[0].to.name" -> extract "name"
             field_part = path.split('].', 1)[1]  # Gets "to.name"

@@ -71,7 +71,7 @@ JSON Schema:
   "police_team": "string | null",
   "alerted_transactions": [
     {
-      "date": "string | null",
+      "date": "string | null", // Format: YYYY-MM-DD
       "amount": "number | null", 
       "currency": "string | null",
       "from": {

@@ -2,16 +2,16 @@
   "Output_google_gemini_2_0_flash_001_vs_Ground Truth": {
     "total_rows": 189,
     "overall_pass": {
-      "count": 30,
-      "rate": "15.87%"
+      "count": 32,
+      "rate": "16.93%"
     },
     "alert_pass": {
-      "count": 64,
-      "rate": "33.86%"
+      "count": 67,
+      "rate": "35.45%"
     },
     "other_fields_pass": {
-      "count": 83,
-      "rate": "43.92%"
+      "count": 81,
+      "rate": "42.86%"
     }
   }
 }

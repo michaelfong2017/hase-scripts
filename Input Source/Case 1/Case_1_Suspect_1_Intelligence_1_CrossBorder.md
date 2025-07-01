@@ -8,7 +8,7 @@ There is a fraud case reporting involved HASE  suspect, please review the accoun
 \- Originator Role: Victim ~~/1st layer/2nd layer~~ (select appropriate)
 <table>
 <tr><th>Originator A/C number</th><th>Originator Name</th><th>Originator Bank</th><th>Currency / Amount</th><th>Transaction ref. number</th></tr>
-<tr><td>666-6666-601</td><td>YEUNG KAI</td><td>The Hongkong and Shanghai Banking Corporation Limited  </td><td>HKD40,000.00</td><td>A006■■■■■■</td></tr>
+<tr><td>666-66666-601</td><td>YEUNG KAI</td><td>The Hongkong and Shanghai Banking Corporation Limited  </td><td>HKD40,000.00</td><td>A006■■■■■■</td></tr>
 </table>
 
 \- Beneficiary Role: 1st layer
