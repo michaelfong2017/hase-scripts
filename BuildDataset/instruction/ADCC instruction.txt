@@ -5,10 +5,8 @@ Your task: Extract transactions from the fraud alert source, match them to CSV r
 Step-by-Step Process:
 
 **Step 1: Extract Reported Transactions from Source**
-- Carefully read the fraud alert source document
-- Identify and list ALL transactions explicitly mentioned with both date and amount
-- Do NOT modify, combine, or alter any reported transaction amounts or dates
-- Preserve each transaction exactly as reported in the source
+- Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
+- Preserve each transaction exactly as reported in the source and preserve all required fields
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
@@ -30,6 +28,12 @@ For each transaction extracted in Step 1:
 
 **Step 4: Apply Transaction Rules**
 Apply these rules when populating transaction fields:
+
+**Cash Transaction Rules:**
+- If originator bank or name contains "cash" or "cash deposit":
+  * Set channel to "cash"
+  * Set from.bank to null
+  * Set from.name to null (if it was the cash reference)
 
 **Bank Rules:**
 - from.bank:
@@ -59,8 +63,19 @@ Based on Transaction Source in CSV:
 - "DWTF" → "FPS"
 - "FPWICT" → "FPS"
 
-**Step 5: Build Final JSON**
-- Global fields (fraud_type, police_reference, police_team): Use fraud alert source
+**Step 5: Apply Global Field Rules**
+Apply these rules when populating global fields:
+
+**Police Reference Rules:**
+- Extract the full police reference from the source document
+- Exclude police team information that starts with "(DIT" or "(E-HUB" from the police_reference field
+
+**Police Team Rules:**
+- Extract police team information including district and police station if available
+- Include full team designation with district/station information
+
+**Step 6: Build Final JSON**
+- Global fields (fraud_type, police_reference, police_team): Use fraud alert source with global field rules applied
 - Include all transactions extracted from source, each matched to CSV records, enriched with merged data, and adjusted by transaction rules
 - Ensure the final JSON output strictly follows the schema and includes all required fields
 

@@ -673,7 +673,7 @@ def apply_changes_to_input(input_text: str, changes: List[Tuple[str, str]]) -> s
     for old_value, new_value in changes:
         if new_value == "SKIPPED":
             continue
-
+        
         # Check if this is a bank replacement (marked with "BANK:" prefix)
         if old_value.startswith("BANK:"):
             original_bank = old_value[5:]  # Remove the "BANK:" prefix
@@ -818,7 +818,7 @@ def main():
     # Read the CSV file
     print(f"Loading CSV file: {csv_file_path}...")
     try:
-        df = pd.read_csv(csv_file_path)
+        df = pd.read_csv(csv_file_path, na_filter=False)
     except FileNotFoundError:
         print(f"Error: File '{csv_file_path}' not found.")
         return
@@ -1015,6 +1015,12 @@ def main():
     # Concatenate all DataFrames (original + all randomized versions)
     final_df = pd.concat(all_dataframes, ignore_index=True)
     
+    # Before saving, ensure all NaN values are replaced with empty strings for specific columns
+    columns_to_clean = ['Transactions', 'Input', 'Instruction', 'Ground Truth']
+    for col in columns_to_clean:
+        if col in final_df.columns:
+            final_df[col] = final_df[col].fillna('')
+    
     # Save to new CSV file
     input_dir = os.path.dirname(csv_file_path)
     input_filename = os.path.basename(csv_file_path)
@@ -1022,7 +1028,7 @@ def main():
     
     output_filename = os.path.join(input_dir, f'{input_name}_RANDOMIZED_ROWS{input_ext}')
     
-    final_df.to_csv(output_filename, index=False, encoding='utf-8-sig')
+    final_df.to_csv(output_filename, index=False, encoding='utf-8-sig', na_rep='')
     
     print(f"Randomization complete! Saved to: {output_filename}")
     print(f"Original rows: {len(df)}")
@@ -1038,9 +1044,6 @@ def main():
         print(f"  {type_name}: {original_count} original × {randomization_count} randomizations = {total_for_type} randomized rows")
     
     print(f"Total rows in output: {len(final_df)} (Original: {len(df)} + Randomized: {total_randomized})")
-
-# [Copy all your existing randomization functions from the attached file]
-# ... (all functions from randomize_date through format_diff exactly as they are)
 
 if __name__ == "__main__":
     print("CSV Data Randomizer - Type-Specific Row Appender Version")

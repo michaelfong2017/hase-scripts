@@ -144,7 +144,8 @@ def build_ground_truth_with_removed_transactions(gt_row, transaction_rows, row_t
                     "bank": treat_null(tx_row.get("SourceOnlyGroundTruth_Beneficiary Bank Raw", None))
                 },
                 "channel": treat_null(tx_row.get("Source_Transaction Channel", None)),
-                "can_be_located": False
+                "can_be_located": False,
+                "transaction_references": []  # Empty list when can_be_located is False
             }
         else:
             # Use GroundTruth columns for non-removed transactions (WITH transaction_references)
@@ -164,7 +165,7 @@ def build_ground_truth_with_removed_transactions(gt_row, transaction_rows, row_t
                 },
                 "channel": treat_null(tx_row.get("GroundTruth_Transaction Channel", None)),
                 "can_be_located": convert_to_bool(tx_row.get("GroundTruth_Can Be Located", None)),
-                "transaction_references": transaction_references
+                "transaction_references": transaction_references  # Include transaction references when can_be_located is True
             }
         
         # Add cancel_amount_requested only for UAR type
@@ -278,8 +279,12 @@ df['Transactions'] = transactions
 
 # --- Fill 'Instruction' column ---
 instruction_dir = 'instruction'
+instruction_source_only_dir = 'instruction_source_only'
 instruction_types = df['Type'].unique()
 instruction_map = {}
+instruction_source_only_map = {}
+
+# Load regular instructions
 for t in instruction_types:
     instruction_file = os.path.join(instruction_dir, f'{t} instruction.txt')
     if os.path.exists(instruction_file):
@@ -294,6 +299,22 @@ for t in instruction_types:
     else:
         print(f"Instruction file not found for type {t}: {instruction_file}")
         instruction_map[t] = None
+
+# Load source-only instructions
+for t in instruction_types:
+    instruction_source_only_file = os.path.join(instruction_source_only_dir, f'{t} instruction.txt')
+    if os.path.exists(instruction_source_only_file):
+        try:
+            with open(instruction_source_only_file, 'r', encoding='utf-8') as f:
+                content = f.read()
+            instruction_source_only_map[t] = content
+            print(f"Loaded source-only instruction for type {t} from {instruction_source_only_file}")
+        except Exception as e:
+            print(f"Error reading source-only instruction file for type {t}: {e}")
+            instruction_source_only_map[t] = None
+    else:
+        print(f"Source-only instruction file not found for type {t}: {instruction_source_only_file}")
+        instruction_source_only_map[t] = None
 
 instructions = []
 for idx, row in df.iterrows():
@@ -473,7 +494,14 @@ print("Set 2: Empty transactions with Source_ columns")
 set2_df = df.copy()
 set2_df['Case Number'] = set2_df['Case Number'] + 50
 set2_df['Set Number'] = 2
-set2_df['Transactions'] = None
+set2_df['Transactions'] = ''  # Use empty string instead of None
+
+# Update instructions to use source-only for Set 2
+set2_instructions = []
+for idx, row in set2_df.iterrows():
+    t = row['Type']
+    set2_instructions.append(instruction_source_only_map.get(t, None))
+set2_df['Instruction'] = set2_instructions
 
 # Process Ground Truth column for Source_ prefixed columns (without can_be_located and transaction_references)
 source_ground_truths = []

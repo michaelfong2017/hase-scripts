@@ -5,22 +5,23 @@ Your task: Extract transactions from the fraud alert source, match them to CSV r
 Step-by-Step Process:
 
 **Step 1: Extract Reported Transactions from Source**
-- Carefully read the fraud alert source document
-- Identify and list ALL transactions explicitly mentioned with both date and amount
-- Do NOT modify, combine, or alter any reported transaction amounts or dates
-- Preserve each transaction exactly as reported in the source
+- Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
+- Preserve each transaction exactly as reported in the source and preserve all required fields
 - Only proceed to Step 2 after completing this extraction
 
-**Step 2: Match Each Reported Transaction to CSV**
-For each transaction extracted in Step 1:
-- First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
-- If exact match found: Use that single Transaction ID
-- If no exact match found: Look for multiple CSV transactions that:
-  * Have the same date as reported transaction
-  * Have matching originator OR beneficiary account numbers/names as reported transaction  
-  * When summed together, equal the exact amount of the reported transaction
-- If such combination exists: Include all those Transaction IDs
-- If no match found: Set can_be_located: false and transaction_references: []
+**Step 2: Match Transactions to CSV**
+For each valid transaction, match to CSV if ALL three conditions are met:
+1. Date matches exactly
+2. Amount matches exactly  
+3. At least one identifier matches (originator/beneficiary account number OR name)
+
+If exact match found: Use that single Transaction ID
+If no exact match found: Look for multiple CSV transactions that:
+- Have the same date as reported transaction
+- Have matching originator OR beneficiary account numbers/names
+- When summed together, equal the exact amount of the reported transaction
+If such combination exists: Include all those Transaction IDs
+If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
 - First: Extract transaction_references (Transaction IDs) from CSV
