@@ -180,7 +180,7 @@ def build_ground_truth_with_removed_transactions(gt_row, transaction_rows, row_t
     if row_type == 'ADCC' or row_type == 'Police Letter':
         gt_dict = {
             "fraud_type": treat_null(gt_row.get("GroundTruth_Fraud Type", None)),
-            "police_reference": treat_null(gt_row.get("GroundTruth Police Reference", None)),
+            "police_reference": treat_null(gt_row.get("GroundTruth_Police Reference", None)),
             "police_team": treat_null(gt_row.get("GroundTruth_Police Team", None)),
             "alerted_transactions": alerted_transactions
         }
@@ -192,7 +192,7 @@ def build_ground_truth_with_removed_transactions(gt_row, transaction_rows, row_t
     elif row_type == 'Search Warrant':
         gt_dict = {
             "fraud_type": treat_null(gt_row.get("GroundTruth_Fraud Type", None)),
-            "police_reference": treat_null(gt_row.get("GroundTruth Police Reference", None)),
+            "police_reference": treat_null(gt_row.get("GroundTruth_Police Reference", None)),
             "writ_no": treat_null(gt_row.get("GroundTruth_Writ No", None)),
             "contact_person": treat_null(gt_row.get("GroundTruth_Contact Person", None)),
             "police_team": treat_null(gt_row.get("GroundTruth_Police Team", None)),
@@ -421,7 +421,7 @@ else:
             if row_type == 'ADCC' or row_type == 'Police Letter':
                 gt_dict = {
                     "fraud_type": treat_null(gt_row.get("GroundTruth_Fraud Type", None)),
-                    "police_reference": treat_null(gt_row.get("GroundTruth Police Reference", None)),
+                    "police_reference": treat_null(gt_row.get("GroundTruth_Police Reference", None)),
                     "police_team": treat_null(gt_row.get("GroundTruth_Police Team", None)),
                     "alerted_transactions": alerted_transactions
                 }
@@ -433,7 +433,7 @@ else:
             elif row_type == 'Search Warrant':
                 gt_dict = {
                     "fraud_type": treat_null(gt_row.get("GroundTruth_Fraud Type", None)),
-                    "police_reference": treat_null(gt_row.get("GroundTruth Police Reference", None)),
+                    "police_reference": treat_null(gt_row.get("GroundTruth_Police Reference", None)),
                     "writ_no": treat_null(gt_row.get("GroundTruth_Writ No", None)),
                     "contact_person": treat_null(gt_row.get("GroundTruth_Contact Person", None)),
                     "police_team": treat_null(gt_row.get("GroundTruth_Police Team", None)),
@@ -527,7 +527,7 @@ for idx, row in set2_df.iterrows():
         if row_type == 'ADCC' or row_type == 'Police Letter':
             gt_dict = {
                 "fraud_type": treat_null(gt_row.get("Source_Fraud Type", None)),
-                "police_reference": treat_null(gt_row.get("Source Police Reference", None)),
+                "police_reference": treat_null(gt_row.get("Source_Police Reference", None)),
                 "police_team": treat_null(gt_row.get("Source_Police Team", None)),
                 "alerted_transactions": alerted_transactions
             }
@@ -539,7 +539,7 @@ for idx, row in set2_df.iterrows():
         elif row_type == 'Search Warrant':
             gt_dict = {
                 "fraud_type": treat_null(gt_row.get("Source_Fraud Type", None)),
-                "police_reference": treat_null(gt_row.get("Source Police Reference", None)),
+                "police_reference": treat_null(gt_row.get("Source_Police Reference", None)),
                 "writ_no": treat_null(gt_row.get("Source_Writ No", None)),
                 "contact_person": treat_null(gt_row.get("Source_Contact Person", None)),
                 "police_team": treat_null(gt_row.get("Source_Police Team", None)),
