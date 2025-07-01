@@ -1,84 +1,104 @@
 ﻿Type,Case Number,Intelligence Number,Suspect Number,Instruction,Transactions,Input,Ground Truth
-ADCC,7,2,"[1, 2]","You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with two documents: an unstructured fraud alert source and a structured CSV file of transaction records.
+ADCC,7,2,"[1, 2]","You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
-Your task is to identify the fraudulent transactions described in the fraud alert source, match them to their corresponding entries in the transaction CSV, and produce a single consolidated JSON output that merges and reflects all relevant information. After generating the JSON, you must also provide a clear explanation of your matching and merging decisions.
+Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
 
-Key Instructions:
+Step-by-Step Process:
 
-    1. Core Task:
-        - Extract only transactions explicitly mentioned in the fraud alert source that contain both date and amount.
-        - Use the transaction CSV as the authoritative source to verify, correct, and enrich transaction data.
+**Step 1: Extract Reported Transactions from Source**
+- Carefully read the fraud alert source document
+- Identify and list ALL transactions explicitly mentioned with both date and amount
+- Do NOT modify, combine, or alter any reported transaction amounts or dates
+- Preserve each transaction exactly as reported in the source
+- Only proceed to Step 2 after completing this extraction
 
-    2. Step-by-Step Process:
-        a. Carefully read the fraud alert source to extract global fields and identify transactions to investigate.
-        b. Validate transactions:
-            - For each transaction, check if both date and amount are explicitly present and non-null.
-            - Immediately exclude transactions missing either field.
-        c. For each valid transaction:
-            - Search the CSV for a matching row using the rules below.
-            - If matched: Merge data using prioritization logic (set can_be_located: true).
-            - If unmatched: Use only fraud alert data (set can_be_located: false).
-        d. If no valid transactions remain, set alerted_transactions to an empty list [].
-        e. Assemble the final JSON output according to the schema.
+**Step 2: Match Each Reported Transaction to CSV**
+For each transaction extracted in Step 1:
+- First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
+- If exact match found: Use that single Transaction ID
+- If no exact match found: Look for multiple CSV transactions that:
+  * Have the same date as reported transaction
+  * Have matching originator OR beneficiary account numbers/names as reported transaction  
+  * When summed together, equal the exact amount of the reported transaction
+- If such combination exists: Include all those Transaction IDs
+- If no match found: Set can_be_located: false and transaction_references: []
 
-    3. Matching Rules (can_be_located logic):
-        A transaction from the fraud alert source matches a CSV row only if all three of the following conditions are met:
-            1. The date must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
-            2. The amount must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
-            3. At least one of the following is true:
-                - The from.account_number in the fraud alert source matches the Originator Account Number in the CSV.
-                - The to.account_number in the fraud alert source matches the Beneficiary Account Number in the CSV.
-                - The from.name in the fraud alert source matches the Originator Name in the CSV.
-                - The to.name in the fraud alert source matches the Beneficiary Name in the CSV.
+**Step 3: Merge Data for Each Matched Transaction**
+- First: Extract transaction_references (Transaction IDs) from CSV
+- Then: Use CSV values for all transaction fields (originator becomes ""from"", beneficiary becomes ""to"")
+- Finally: Fill missing fields with fraud alert source values
+- Use null if neither source has the value
 
-    4. Data Merging and Prioritization:
-        - For the global fields fraud_type, police_reference, and police_team: Always use the value from the fraud alert source.
-        - For the police_team field, extract and include any geographic location details mentioned with the police team in the fraud alert source.
-        - For transaction fields:
-            - If a transaction is not found in the CSV (can_be_located: false): Use only data from the fraud alert source.
-            - If a transaction is found in the CSV (can_be_located: true): For each field, use the following priority:
-                1. CSV value (if present and not blank)
-                2. Fraud alert source value (if CSV value is blank or missing)
-                3. null (if neither source provides a value)
+**Step 4: Apply Global Field Rules**
+Apply these rules when populating global fields:
 
-    5. Data Handling:
-        - Preserve content: Do not remove or alter non-printable characters or artifacts; preserve content exactly as found.
-        - Whitespace: You may trim leading/trailing whitespace, but do not alter internal whitespace.
+**Fraud Type Rules:**
+- If fraud_type is ""Money Laundering"", ""External Fraud"", or offence types such as ""Obtaining Property By Deception"" but not other: Return ""Not provided""
+- Otherwise: Use the fraud_type value from fraud alert source
 
-    6. Strict Schema and Format Compliance:
-        - The final output must strictly follow the JSON schema below.
-        - All specified fields must be present. If a value cannot be found, use null (do not omit the key).
-        - Never output transactions with null/missing date or amount.
-        - The alerted_transactions array must always be present in the output, and if no valid transactions are found, it must be an empty list.
-        - Output must be a valid JSON object only, with no comments or extraneous text.
+**Step 5: Apply Transaction Rules**
+Apply these rules when populating transaction fields:
+
+**Bank Rules:**
+- from.bank:
+  * HSBC Referral: Always ""HSBC""
+  * Victim ODFT: Always ""HASE""
+  * Suspect ODFT: Use bank code/Chinese name mapping from CSV
+  * UAR: Use appropriate bank mapping from CSV
+- to.bank:
+  * Always ""HASE"", except for Victim ODFT cases
+
+**IMPORTANT: Bank Code Distinctions:**
+- HSB or HASE = Hang Seng Bank Ltd. (these are the SAME bank)
+- HSBC = The Hongkong and Shanghai Banking Corporation Limited (this is a DIFFERENT bank from HSB/HASE)
+- Do NOT confuse HSB with HSBC - they are completely different banks
+
+**Channel Rules (Payment Method):**
+The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""Branch"", or null
+
+Based on Transaction Code Description in CSV:
+- ""ATM TRANSFER UNRELATED DEPOSIT"" → ""ATM""
+- ""ATM TRANSFER UNRELATED WITHDRAWAL"" → ""ATM""
+- ""CASH DEP VIA CDM/BCDM - AC INPUT (TOUCH SCREEN)"" → ""cash""
+- ""ATM/CDM CASH CREDIT USINGACCOUNT INPUT"" → ""cash deposits via ATM"" if source file mentions ATM, otherwise ""cash""
+- ""CIF CASH DEPOSIT"" → ""cash""
+
+Based on Transaction Source in CSV:
+- ""CMTF"" → ""Branch""
+- ""CWTF"" → ""FPS""
+- ""DWTF"" → ""FPS""
+- ""FPWICT"" → ""FPS""
+
+**Step 6: Build Final JSON**
+- Global fields (fraud_type, police_reference, police_team): Use fraud alert source with global field rules applied
+- Include all transactions from Step 1 with their Step 2 matching results and Step 5 rule applications
 
 JSON Schema:
-
+{
+  ""fraud_type"": ""string | null"",
+  ""police_reference"": ""string | null"", 
+  ""police_team"": ""string | null"",
+  ""alerted_transactions"": [
     {
-      ""fraud_type"": ""string | null"",
-      ""police_reference"": ""string | null"",
-      ""police_team"": ""string | null"",
-      ""alerted_transactions"": [
-        {
-          ""date"": ""string | null"", // Format: YYYY-MM-DD
-          ""amount"": ""number | null"",
-          ""currency"": ""string | null"",
-          ""from"": {
-            ""name"": ""string | null"",
-            ""account_number"": ""string | null"",
-            ""bank"": ""string | null""
-          },
-          ""to"": {
-            ""name"": ""string | null"",
-            ""account_number"": ""string | null"",
-            ""bank"": ""string | null""
-          },
-          ""channel"": ""string | null"", // Payment method used
-          ""can_be_located"": ""boolean""
-        }
-      ]
+      ""date"": ""string | null"",
+      ""amount"": ""number | null"", 
+      ""currency"": ""string | null"",
+      ""from"": {
+        ""name"": ""string | null"",
+        ""account_number"": ""string | null"",
+        ""bank"": ""string | null""
+      },
+      ""to"": {
+        ""name"": ""string | null"",
+        ""account_number"": ""string | null"", 
+        ""bank"": ""string | null""
+      },
+      ""channel"": ""string | null"",
+      ""can_be_located"": ""boolean"",
+      ""transaction_references"": [""string""]
     }
-","Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
+  ]
+}","Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
 2024-08-24,HKD,50000,C,,,444-4444444-101,111-111111-101,CHEUNG TAK SHING,CHAN TAI MAN,Beneficiary,CUTF,ATM TRANSFER UNRELATED   DEPOSIT,,,50000,acee7754-75b4-444d-a9ed-f710c8fb1cd2
 2024-08-25,HKD,10000,C,Hang Seng Bank Ltd.,The Hongkong and Shanghai Banking Corporation Limited,444-4444444-101,111-111111-101,CHEUNG TAK SHING,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,The Hongkong and Shanghai Banking Corporation Limited,10000,56c5d066-25a6-46bf-8210-f63fbfc37741
 2024-08-24,HKD,31000,C,,,222-222222-101,111-111111-101,CHEUNG TAK SHING,CHAN TAI MAN,Beneficiary,CUTF,ATM TRANSFER UNRELATED   DEPOSIT,,,31000,1e485d99-8478-482d-86fa-5d73f54d3347
@@ -345,86 +365,106 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
     }
   ]
 }"
-ADCC,8,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with two documents: an unstructured fraud alert source and a structured CSV file of transaction records.
+ADCC,8,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
-Your task is to identify the fraudulent transactions described in the fraud alert source, match them to their corresponding entries in the transaction CSV, and produce a single consolidated JSON output that merges and reflects all relevant information. After generating the JSON, you must also provide a clear explanation of your matching and merging decisions.
+Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
 
-Key Instructions:
+Step-by-Step Process:
 
-    1. Core Task:
-        - Extract only transactions explicitly mentioned in the fraud alert source that contain both date and amount.
-        - Use the transaction CSV as the authoritative source to verify, correct, and enrich transaction data.
+**Step 1: Extract Reported Transactions from Source**
+- Carefully read the fraud alert source document
+- Identify and list ALL transactions explicitly mentioned with both date and amount
+- Do NOT modify, combine, or alter any reported transaction amounts or dates
+- Preserve each transaction exactly as reported in the source
+- Only proceed to Step 2 after completing this extraction
 
-    2. Step-by-Step Process:
-        a. Carefully read the fraud alert source to extract global fields and identify transactions to investigate.
-        b. Validate transactions:
-            - For each transaction, check if both date and amount are explicitly present and non-null.
-            - Immediately exclude transactions missing either field.
-        c. For each valid transaction:
-            - Search the CSV for a matching row using the rules below.
-            - If matched: Merge data using prioritization logic (set can_be_located: true).
-            - If unmatched: Use only fraud alert data (set can_be_located: false).
-        d. If no valid transactions remain, set alerted_transactions to an empty list [].
-        e. Assemble the final JSON output according to the schema.
+**Step 2: Match Each Reported Transaction to CSV**
+For each transaction extracted in Step 1:
+- First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
+- If exact match found: Use that single Transaction ID
+- If no exact match found: Look for multiple CSV transactions that:
+  * Have the same date as reported transaction
+  * Have matching originator OR beneficiary account numbers/names as reported transaction  
+  * When summed together, equal the exact amount of the reported transaction
+- If such combination exists: Include all those Transaction IDs
+- If no match found: Set can_be_located: false and transaction_references: []
 
-    3. Matching Rules (can_be_located logic):
-        A transaction from the fraud alert source matches a CSV row only if all three of the following conditions are met:
-            1. The date must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
-            2. The amount must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
-            3. At least one of the following is true:
-                - The from.account_number in the fraud alert source matches the Originator Account Number in the CSV.
-                - The to.account_number in the fraud alert source matches the Beneficiary Account Number in the CSV.
-                - The from.name in the fraud alert source matches the Originator Name in the CSV.
-                - The to.name in the fraud alert source matches the Beneficiary Name in the CSV.
+**Step 3: Merge Data for Each Matched Transaction**
+- First: Extract transaction_references (Transaction IDs) from CSV
+- Then: Use CSV values for all transaction fields (originator becomes ""from"", beneficiary becomes ""to"")
+- Finally: Fill missing fields with fraud alert source values
+- Use null if neither source has the value
 
-    4. Data Merging and Prioritization:
-        - For the global fields fraud_type, police_reference, and police_team: Always use the value from the fraud alert source.
-        - For the police_team field, extract and include any geographic location details mentioned with the police team in the fraud alert source.
-        - For transaction fields:
-            - If a transaction is not found in the CSV (can_be_located: false): Use only data from the fraud alert source.
-            - If a transaction is found in the CSV (can_be_located: true): For each field, use the following priority:
-                1. CSV value (if present and not blank)
-                2. Fraud alert source value (if CSV value is blank or missing)
-                3. null (if neither source provides a value)
+**Step 4: Apply Global Field Rules**
+Apply these rules when populating global fields:
 
-    5. Data Handling:
-        - Preserve content: Do not remove or alter non-printable characters or artifacts; preserve content exactly as found.
-        - Whitespace: You may trim leading/trailing whitespace, but do not alter internal whitespace.
+**Fraud Type Rules:**
+- If fraud_type is ""Money Laundering"", ""External Fraud"", or offence types such as ""Obtaining Property By Deception"" but not other: Return ""Not provided""
+- Otherwise: Use the fraud_type value from fraud alert source
 
-    6. Strict Schema and Format Compliance:
-        - The final output must strictly follow the JSON schema below.
-        - All specified fields must be present. If a value cannot be found, use null (do not omit the key).
-        - Never output transactions with null/missing date or amount.
-        - The alerted_transactions array must always be present in the output, and if no valid transactions are found, it must be an empty list.
-        - Output must be a valid JSON object only, with no comments or extraneous text.
+**Step 5: Apply Transaction Rules**
+Apply these rules when populating transaction fields:
+
+**Bank Rules:**
+- from.bank:
+  * HSBC Referral: Always ""HSBC""
+  * Victim ODFT: Always ""HASE""
+  * Suspect ODFT: Use bank code/Chinese name mapping from CSV
+  * UAR: Use appropriate bank mapping from CSV
+- to.bank:
+  * Always ""HASE"", except for Victim ODFT cases
+
+**IMPORTANT: Bank Code Distinctions:**
+- HSB or HASE = Hang Seng Bank Ltd. (these are the SAME bank)
+- HSBC = The Hongkong and Shanghai Banking Corporation Limited (this is a DIFFERENT bank from HSB/HASE)
+- Do NOT confuse HSB with HSBC - they are completely different banks
+
+**Channel Rules (Payment Method):**
+The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""Branch"", or null
+
+Based on Transaction Code Description in CSV:
+- ""ATM TRANSFER UNRELATED DEPOSIT"" → ""ATM""
+- ""ATM TRANSFER UNRELATED WITHDRAWAL"" → ""ATM""
+- ""CASH DEP VIA CDM/BCDM - AC INPUT (TOUCH SCREEN)"" → ""cash""
+- ""ATM/CDM CASH CREDIT USINGACCOUNT INPUT"" → ""cash deposits via ATM"" if source file mentions ATM, otherwise ""cash""
+- ""CIF CASH DEPOSIT"" → ""cash""
+
+Based on Transaction Source in CSV:
+- ""CMTF"" → ""Branch""
+- ""CWTF"" → ""FPS""
+- ""DWTF"" → ""FPS""
+- ""FPWICT"" → ""FPS""
+
+**Step 6: Build Final JSON**
+- Global fields (fraud_type, police_reference, police_team): Use fraud alert source with global field rules applied
+- Include all transactions from Step 1 with their Step 2 matching results and Step 5 rule applications
 
 JSON Schema:
-
+{
+  ""fraud_type"": ""string | null"",
+  ""police_reference"": ""string | null"", 
+  ""police_team"": ""string | null"",
+  ""alerted_transactions"": [
     {
-      ""fraud_type"": ""string | null"",
-      ""police_reference"": ""string | null"",
-      ""police_team"": ""string | null"",
-      ""alerted_transactions"": [
-        {
-          ""date"": ""string | null"", // Format: YYYY-MM-DD
-          ""amount"": ""number | null"",
-          ""currency"": ""string | null"",
-          ""from"": {
-            ""name"": ""string | null"",
-            ""account_number"": ""string | null"",
-            ""bank"": ""string | null""
-          },
-          ""to"": {
-            ""name"": ""string | null"",
-            ""account_number"": ""string | null"",
-            ""bank"": ""string | null""
-          },
-          ""channel"": ""string | null"", // Payment method used
-          ""can_be_located"": ""boolean""
-        }
-      ]
+      ""date"": ""string | null"",
+      ""amount"": ""number | null"", 
+      ""currency"": ""string | null"",
+      ""from"": {
+        ""name"": ""string | null"",
+        ""account_number"": ""string | null"",
+        ""bank"": ""string | null""
+      },
+      ""to"": {
+        ""name"": ""string | null"",
+        ""account_number"": ""string | null"", 
+        ""bank"": ""string | null""
+      },
+      ""channel"": ""string | null"",
+      ""can_be_located"": ""boolean"",
+      ""transaction_references"": [""string""]
     }
-","Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
+  ]
+}","Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
 2024-10-07,HKD,192500,C,Hang Seng Bank Ltd.,Bank of China (Hong Kong) Limited,66666666601,111-111111-101,YEUNG KAI,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,Bank of China (Hong Kong) Limited    HK,192500,9ccba1a1-5b79-4c26-adb5-321e79343bff
 ","Dear HSB,
 
@@ -487,86 +527,106 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
     }
   ]
 }"
-ADCC,14,5,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with two documents: an unstructured fraud alert source and a structured CSV file of transaction records.
+ADCC,14,5,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
-Your task is to identify the fraudulent transactions described in the fraud alert source, match them to their corresponding entries in the transaction CSV, and produce a single consolidated JSON output that merges and reflects all relevant information. After generating the JSON, you must also provide a clear explanation of your matching and merging decisions.
+Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
 
-Key Instructions:
+Step-by-Step Process:
 
-    1. Core Task:
-        - Extract only transactions explicitly mentioned in the fraud alert source that contain both date and amount.
-        - Use the transaction CSV as the authoritative source to verify, correct, and enrich transaction data.
+**Step 1: Extract Reported Transactions from Source**
+- Carefully read the fraud alert source document
+- Identify and list ALL transactions explicitly mentioned with both date and amount
+- Do NOT modify, combine, or alter any reported transaction amounts or dates
+- Preserve each transaction exactly as reported in the source
+- Only proceed to Step 2 after completing this extraction
 
-    2. Step-by-Step Process:
-        a. Carefully read the fraud alert source to extract global fields and identify transactions to investigate.
-        b. Validate transactions:
-            - For each transaction, check if both date and amount are explicitly present and non-null.
-            - Immediately exclude transactions missing either field.
-        c. For each valid transaction:
-            - Search the CSV for a matching row using the rules below.
-            - If matched: Merge data using prioritization logic (set can_be_located: true).
-            - If unmatched: Use only fraud alert data (set can_be_located: false).
-        d. If no valid transactions remain, set alerted_transactions to an empty list [].
-        e. Assemble the final JSON output according to the schema.
+**Step 2: Match Each Reported Transaction to CSV**
+For each transaction extracted in Step 1:
+- First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
+- If exact match found: Use that single Transaction ID
+- If no exact match found: Look for multiple CSV transactions that:
+  * Have the same date as reported transaction
+  * Have matching originator OR beneficiary account numbers/names as reported transaction  
+  * When summed together, equal the exact amount of the reported transaction
+- If such combination exists: Include all those Transaction IDs
+- If no match found: Set can_be_located: false and transaction_references: []
 
-    3. Matching Rules (can_be_located logic):
-        A transaction from the fraud alert source matches a CSV row only if all three of the following conditions are met:
-            1. The date must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
-            2. The amount must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
-            3. At least one of the following is true:
-                - The from.account_number in the fraud alert source matches the Originator Account Number in the CSV.
-                - The to.account_number in the fraud alert source matches the Beneficiary Account Number in the CSV.
-                - The from.name in the fraud alert source matches the Originator Name in the CSV.
-                - The to.name in the fraud alert source matches the Beneficiary Name in the CSV.
+**Step 3: Merge Data for Each Matched Transaction**
+- First: Extract transaction_references (Transaction IDs) from CSV
+- Then: Use CSV values for all transaction fields (originator becomes ""from"", beneficiary becomes ""to"")
+- Finally: Fill missing fields with fraud alert source values
+- Use null if neither source has the value
 
-    4. Data Merging and Prioritization:
-        - For the global fields fraud_type, police_reference, and police_team: Always use the value from the fraud alert source.
-        - For the police_team field, extract and include any geographic location details mentioned with the police team in the fraud alert source.
-        - For transaction fields:
-            - If a transaction is not found in the CSV (can_be_located: false): Use only data from the fraud alert source.
-            - If a transaction is found in the CSV (can_be_located: true): For each field, use the following priority:
-                1. CSV value (if present and not blank)
-                2. Fraud alert source value (if CSV value is blank or missing)
-                3. null (if neither source provides a value)
+**Step 4: Apply Global Field Rules**
+Apply these rules when populating global fields:
 
-    5. Data Handling:
-        - Preserve content: Do not remove or alter non-printable characters or artifacts; preserve content exactly as found.
-        - Whitespace: You may trim leading/trailing whitespace, but do not alter internal whitespace.
+**Fraud Type Rules:**
+- If fraud_type is ""Money Laundering"", ""External Fraud"", or offence types such as ""Obtaining Property By Deception"" but not other: Return ""Not provided""
+- Otherwise: Use the fraud_type value from fraud alert source
 
-    6. Strict Schema and Format Compliance:
-        - The final output must strictly follow the JSON schema below.
-        - All specified fields must be present. If a value cannot be found, use null (do not omit the key).
-        - Never output transactions with null/missing date or amount.
-        - The alerted_transactions array must always be present in the output, and if no valid transactions are found, it must be an empty list.
-        - Output must be a valid JSON object only, with no comments or extraneous text.
+**Step 5: Apply Transaction Rules**
+Apply these rules when populating transaction fields:
+
+**Bank Rules:**
+- from.bank:
+  * HSBC Referral: Always ""HSBC""
+  * Victim ODFT: Always ""HASE""
+  * Suspect ODFT: Use bank code/Chinese name mapping from CSV
+  * UAR: Use appropriate bank mapping from CSV
+- to.bank:
+  * Always ""HASE"", except for Victim ODFT cases
+
+**IMPORTANT: Bank Code Distinctions:**
+- HSB or HASE = Hang Seng Bank Ltd. (these are the SAME bank)
+- HSBC = The Hongkong and Shanghai Banking Corporation Limited (this is a DIFFERENT bank from HSB/HASE)
+- Do NOT confuse HSB with HSBC - they are completely different banks
+
+**Channel Rules (Payment Method):**
+The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""Branch"", or null
+
+Based on Transaction Code Description in CSV:
+- ""ATM TRANSFER UNRELATED DEPOSIT"" → ""ATM""
+- ""ATM TRANSFER UNRELATED WITHDRAWAL"" → ""ATM""
+- ""CASH DEP VIA CDM/BCDM - AC INPUT (TOUCH SCREEN)"" → ""cash""
+- ""ATM/CDM CASH CREDIT USINGACCOUNT INPUT"" → ""cash deposits via ATM"" if source file mentions ATM, otherwise ""cash""
+- ""CIF CASH DEPOSIT"" → ""cash""
+
+Based on Transaction Source in CSV:
+- ""CMTF"" → ""Branch""
+- ""CWTF"" → ""FPS""
+- ""DWTF"" → ""FPS""
+- ""FPWICT"" → ""FPS""
+
+**Step 6: Build Final JSON**
+- Global fields (fraud_type, police_reference, police_team): Use fraud alert source with global field rules applied
+- Include all transactions from Step 1 with their Step 2 matching results and Step 5 rule applications
 
 JSON Schema:
-
+{
+  ""fraud_type"": ""string | null"",
+  ""police_reference"": ""string | null"", 
+  ""police_team"": ""string | null"",
+  ""alerted_transactions"": [
     {
-      ""fraud_type"": ""string | null"",
-      ""police_reference"": ""string | null"",
-      ""police_team"": ""string | null"",
-      ""alerted_transactions"": [
-        {
-          ""date"": ""string | null"", // Format: YYYY-MM-DD
-          ""amount"": ""number | null"",
-          ""currency"": ""string | null"",
-          ""from"": {
-            ""name"": ""string | null"",
-            ""account_number"": ""string | null"",
-            ""bank"": ""string | null""
-          },
-          ""to"": {
-            ""name"": ""string | null"",
-            ""account_number"": ""string | null"",
-            ""bank"": ""string | null""
-          },
-          ""channel"": ""string | null"", // Payment method used
-          ""can_be_located"": ""boolean""
-        }
-      ]
+      ""date"": ""string | null"",
+      ""amount"": ""number | null"", 
+      ""currency"": ""string | null"",
+      ""from"": {
+        ""name"": ""string | null"",
+        ""account_number"": ""string | null"",
+        ""bank"": ""string | null""
+      },
+      ""to"": {
+        ""name"": ""string | null"",
+        ""account_number"": ""string | null"", 
+        ""bank"": ""string | null""
+      },
+      ""channel"": ""string | null"",
+      ""can_be_located"": ""boolean"",
+      ""transaction_references"": [""string""]
     }
-","Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
+  ]
+}","Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
 2024-07-26,HKD,10000,C,Hang Seng Bank Ltd.,China Construction Bank (Asia) Corporation Limited,66666666601,111-111111-101,YEUNG KAI,MR CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,China Construction Bank (Asia) Corporation Limited    HK,10000,78bdb275-f43e-4cab-ae02-05b2e901740f
 2024-07-28,HKD,17000,C,,,,111-111111-101,,MR CHAN TAI MAN,Beneficiary,CCCS,CASH DEP VIA CDM/BCDM -  AC INPUT (TOUCH SCREEN),,,17000,26b04c08-dcd9-41e8-a77d-ec8174c7d234
 2024-07-25,HKD,135524,C,Hang Seng Bank Ltd.,The Hongkong and Shanghai Banking Corporation Limited,66666666602,111-111111-101,TSANG SIU MING,MR CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,The Hongkong and Shanghai Banking Corporation Limited    HK,135524,0e7a6906-158c-4162-85c6-1348fad1a84a
@@ -633,86 +693,106 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
     }
   ]
 }"
-ADCC,16,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with two documents: an unstructured fraud alert source and a structured CSV file of transaction records.
+ADCC,16,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
-Your task is to identify the fraudulent transactions described in the fraud alert source, match them to their corresponding entries in the transaction CSV, and produce a single consolidated JSON output that merges and reflects all relevant information. After generating the JSON, you must also provide a clear explanation of your matching and merging decisions.
+Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
 
-Key Instructions:
+Step-by-Step Process:
 
-    1. Core Task:
-        - Extract only transactions explicitly mentioned in the fraud alert source that contain both date and amount.
-        - Use the transaction CSV as the authoritative source to verify, correct, and enrich transaction data.
+**Step 1: Extract Reported Transactions from Source**
+- Carefully read the fraud alert source document
+- Identify and list ALL transactions explicitly mentioned with both date and amount
+- Do NOT modify, combine, or alter any reported transaction amounts or dates
+- Preserve each transaction exactly as reported in the source
+- Only proceed to Step 2 after completing this extraction
 
-    2. Step-by-Step Process:
-        a. Carefully read the fraud alert source to extract global fields and identify transactions to investigate.
-        b. Validate transactions:
-            - For each transaction, check if both date and amount are explicitly present and non-null.
-            - Immediately exclude transactions missing either field.
-        c. For each valid transaction:
-            - Search the CSV for a matching row using the rules below.
-            - If matched: Merge data using prioritization logic (set can_be_located: true).
-            - If unmatched: Use only fraud alert data (set can_be_located: false).
-        d. If no valid transactions remain, set alerted_transactions to an empty list [].
-        e. Assemble the final JSON output according to the schema.
+**Step 2: Match Each Reported Transaction to CSV**
+For each transaction extracted in Step 1:
+- First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
+- If exact match found: Use that single Transaction ID
+- If no exact match found: Look for multiple CSV transactions that:
+  * Have the same date as reported transaction
+  * Have matching originator OR beneficiary account numbers/names as reported transaction  
+  * When summed together, equal the exact amount of the reported transaction
+- If such combination exists: Include all those Transaction IDs
+- If no match found: Set can_be_located: false and transaction_references: []
 
-    3. Matching Rules (can_be_located logic):
-        A transaction from the fraud alert source matches a CSV row only if all three of the following conditions are met:
-            1. The date must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
-            2. The amount must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
-            3. At least one of the following is true:
-                - The from.account_number in the fraud alert source matches the Originator Account Number in the CSV.
-                - The to.account_number in the fraud alert source matches the Beneficiary Account Number in the CSV.
-                - The from.name in the fraud alert source matches the Originator Name in the CSV.
-                - The to.name in the fraud alert source matches the Beneficiary Name in the CSV.
+**Step 3: Merge Data for Each Matched Transaction**
+- First: Extract transaction_references (Transaction IDs) from CSV
+- Then: Use CSV values for all transaction fields (originator becomes ""from"", beneficiary becomes ""to"")
+- Finally: Fill missing fields with fraud alert source values
+- Use null if neither source has the value
 
-    4. Data Merging and Prioritization:
-        - For the global fields fraud_type, police_reference, and police_team: Always use the value from the fraud alert source.
-        - For the police_team field, extract and include any geographic location details mentioned with the police team in the fraud alert source.
-        - For transaction fields:
-            - If a transaction is not found in the CSV (can_be_located: false): Use only data from the fraud alert source.
-            - If a transaction is found in the CSV (can_be_located: true): For each field, use the following priority:
-                1. CSV value (if present and not blank)
-                2. Fraud alert source value (if CSV value is blank or missing)
-                3. null (if neither source provides a value)
+**Step 4: Apply Global Field Rules**
+Apply these rules when populating global fields:
 
-    5. Data Handling:
-        - Preserve content: Do not remove or alter non-printable characters or artifacts; preserve content exactly as found.
-        - Whitespace: You may trim leading/trailing whitespace, but do not alter internal whitespace.
+**Fraud Type Rules:**
+- If fraud_type is ""Money Laundering"", ""External Fraud"", or offence types such as ""Obtaining Property By Deception"" but not other: Return ""Not provided""
+- Otherwise: Use the fraud_type value from fraud alert source
 
-    6. Strict Schema and Format Compliance:
-        - The final output must strictly follow the JSON schema below.
-        - All specified fields must be present. If a value cannot be found, use null (do not omit the key).
-        - Never output transactions with null/missing date or amount.
-        - The alerted_transactions array must always be present in the output, and if no valid transactions are found, it must be an empty list.
-        - Output must be a valid JSON object only, with no comments or extraneous text.
+**Step 5: Apply Transaction Rules**
+Apply these rules when populating transaction fields:
+
+**Bank Rules:**
+- from.bank:
+  * HSBC Referral: Always ""HSBC""
+  * Victim ODFT: Always ""HASE""
+  * Suspect ODFT: Use bank code/Chinese name mapping from CSV
+  * UAR: Use appropriate bank mapping from CSV
+- to.bank:
+  * Always ""HASE"", except for Victim ODFT cases
+
+**IMPORTANT: Bank Code Distinctions:**
+- HSB or HASE = Hang Seng Bank Ltd. (these are the SAME bank)
+- HSBC = The Hongkong and Shanghai Banking Corporation Limited (this is a DIFFERENT bank from HSB/HASE)
+- Do NOT confuse HSB with HSBC - they are completely different banks
+
+**Channel Rules (Payment Method):**
+The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""Branch"", or null
+
+Based on Transaction Code Description in CSV:
+- ""ATM TRANSFER UNRELATED DEPOSIT"" → ""ATM""
+- ""ATM TRANSFER UNRELATED WITHDRAWAL"" → ""ATM""
+- ""CASH DEP VIA CDM/BCDM - AC INPUT (TOUCH SCREEN)"" → ""cash""
+- ""ATM/CDM CASH CREDIT USINGACCOUNT INPUT"" → ""cash deposits via ATM"" if source file mentions ATM, otherwise ""cash""
+- ""CIF CASH DEPOSIT"" → ""cash""
+
+Based on Transaction Source in CSV:
+- ""CMTF"" → ""Branch""
+- ""CWTF"" → ""FPS""
+- ""DWTF"" → ""FPS""
+- ""FPWICT"" → ""FPS""
+
+**Step 6: Build Final JSON**
+- Global fields (fraud_type, police_reference, police_team): Use fraud alert source with global field rules applied
+- Include all transactions from Step 1 with their Step 2 matching results and Step 5 rule applications
 
 JSON Schema:
-
+{
+  ""fraud_type"": ""string | null"",
+  ""police_reference"": ""string | null"", 
+  ""police_team"": ""string | null"",
+  ""alerted_transactions"": [
     {
-      ""fraud_type"": ""string | null"",
-      ""police_reference"": ""string | null"",
-      ""police_team"": ""string | null"",
-      ""alerted_transactions"": [
-        {
-          ""date"": ""string | null"", // Format: YYYY-MM-DD
-          ""amount"": ""number | null"",
-          ""currency"": ""string | null"",
-          ""from"": {
-            ""name"": ""string | null"",
-            ""account_number"": ""string | null"",
-            ""bank"": ""string | null""
-          },
-          ""to"": {
-            ""name"": ""string | null"",
-            ""account_number"": ""string | null"",
-            ""bank"": ""string | null""
-          },
-          ""channel"": ""string | null"", // Payment method used
-          ""can_be_located"": ""boolean""
-        }
-      ]
+      ""date"": ""string | null"",
+      ""amount"": ""number | null"", 
+      ""currency"": ""string | null"",
+      ""from"": {
+        ""name"": ""string | null"",
+        ""account_number"": ""string | null"",
+        ""bank"": ""string | null""
+      },
+      ""to"": {
+        ""name"": ""string | null"",
+        ""account_number"": ""string | null"", 
+        ""bank"": ""string | null""
+      },
+      ""channel"": ""string | null"",
+      ""can_be_located"": ""boolean"",
+      ""transaction_references"": [""string""]
     }
-","Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
+  ]
+}","Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
 2024-09-30,HKD,198500,C,Hang Seng Bank Ltd.,China Construction Bank (Asia) Corporation Limited,66666666601,111-111111-101,YEUNG KAI,MR CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,China Construction Bank (Asia) Corporation Limited,198500,dac3f456-fb82-4b5a-8316-e7db3554105e
 ","Dear HSB,
 
@@ -774,86 +854,106 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
     }
   ]
 }"
-ADCC,21,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with two documents: an unstructured fraud alert source and a structured CSV file of transaction records.
+ADCC,21,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
-Your task is to identify the fraudulent transactions described in the fraud alert source, match them to their corresponding entries in the transaction CSV, and produce a single consolidated JSON output that merges and reflects all relevant information. After generating the JSON, you must also provide a clear explanation of your matching and merging decisions.
+Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
 
-Key Instructions:
+Step-by-Step Process:
 
-    1. Core Task:
-        - Extract only transactions explicitly mentioned in the fraud alert source that contain both date and amount.
-        - Use the transaction CSV as the authoritative source to verify, correct, and enrich transaction data.
+**Step 1: Extract Reported Transactions from Source**
+- Carefully read the fraud alert source document
+- Identify and list ALL transactions explicitly mentioned with both date and amount
+- Do NOT modify, combine, or alter any reported transaction amounts or dates
+- Preserve each transaction exactly as reported in the source
+- Only proceed to Step 2 after completing this extraction
 
-    2. Step-by-Step Process:
-        a. Carefully read the fraud alert source to extract global fields and identify transactions to investigate.
-        b. Validate transactions:
-            - For each transaction, check if both date and amount are explicitly present and non-null.
-            - Immediately exclude transactions missing either field.
-        c. For each valid transaction:
-            - Search the CSV for a matching row using the rules below.
-            - If matched: Merge data using prioritization logic (set can_be_located: true).
-            - If unmatched: Use only fraud alert data (set can_be_located: false).
-        d. If no valid transactions remain, set alerted_transactions to an empty list [].
-        e. Assemble the final JSON output according to the schema.
+**Step 2: Match Each Reported Transaction to CSV**
+For each transaction extracted in Step 1:
+- First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
+- If exact match found: Use that single Transaction ID
+- If no exact match found: Look for multiple CSV transactions that:
+  * Have the same date as reported transaction
+  * Have matching originator OR beneficiary account numbers/names as reported transaction  
+  * When summed together, equal the exact amount of the reported transaction
+- If such combination exists: Include all those Transaction IDs
+- If no match found: Set can_be_located: false and transaction_references: []
 
-    3. Matching Rules (can_be_located logic):
-        A transaction from the fraud alert source matches a CSV row only if all three of the following conditions are met:
-            1. The date must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
-            2. The amount must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
-            3. At least one of the following is true:
-                - The from.account_number in the fraud alert source matches the Originator Account Number in the CSV.
-                - The to.account_number in the fraud alert source matches the Beneficiary Account Number in the CSV.
-                - The from.name in the fraud alert source matches the Originator Name in the CSV.
-                - The to.name in the fraud alert source matches the Beneficiary Name in the CSV.
+**Step 3: Merge Data for Each Matched Transaction**
+- First: Extract transaction_references (Transaction IDs) from CSV
+- Then: Use CSV values for all transaction fields (originator becomes ""from"", beneficiary becomes ""to"")
+- Finally: Fill missing fields with fraud alert source values
+- Use null if neither source has the value
 
-    4. Data Merging and Prioritization:
-        - For the global fields fraud_type, police_reference, and police_team: Always use the value from the fraud alert source.
-        - For the police_team field, extract and include any geographic location details mentioned with the police team in the fraud alert source.
-        - For transaction fields:
-            - If a transaction is not found in the CSV (can_be_located: false): Use only data from the fraud alert source.
-            - If a transaction is found in the CSV (can_be_located: true): For each field, use the following priority:
-                1. CSV value (if present and not blank)
-                2. Fraud alert source value (if CSV value is blank or missing)
-                3. null (if neither source provides a value)
+**Step 4: Apply Global Field Rules**
+Apply these rules when populating global fields:
 
-    5. Data Handling:
-        - Preserve content: Do not remove or alter non-printable characters or artifacts; preserve content exactly as found.
-        - Whitespace: You may trim leading/trailing whitespace, but do not alter internal whitespace.
+**Fraud Type Rules:**
+- If fraud_type is ""Money Laundering"", ""External Fraud"", or offence types such as ""Obtaining Property By Deception"" but not other: Return ""Not provided""
+- Otherwise: Use the fraud_type value from fraud alert source
 
-    6. Strict Schema and Format Compliance:
-        - The final output must strictly follow the JSON schema below.
-        - All specified fields must be present. If a value cannot be found, use null (do not omit the key).
-        - Never output transactions with null/missing date or amount.
-        - The alerted_transactions array must always be present in the output, and if no valid transactions are found, it must be an empty list.
-        - Output must be a valid JSON object only, with no comments or extraneous text.
+**Step 5: Apply Transaction Rules**
+Apply these rules when populating transaction fields:
+
+**Bank Rules:**
+- from.bank:
+  * HSBC Referral: Always ""HSBC""
+  * Victim ODFT: Always ""HASE""
+  * Suspect ODFT: Use bank code/Chinese name mapping from CSV
+  * UAR: Use appropriate bank mapping from CSV
+- to.bank:
+  * Always ""HASE"", except for Victim ODFT cases
+
+**IMPORTANT: Bank Code Distinctions:**
+- HSB or HASE = Hang Seng Bank Ltd. (these are the SAME bank)
+- HSBC = The Hongkong and Shanghai Banking Corporation Limited (this is a DIFFERENT bank from HSB/HASE)
+- Do NOT confuse HSB with HSBC - they are completely different banks
+
+**Channel Rules (Payment Method):**
+The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""Branch"", or null
+
+Based on Transaction Code Description in CSV:
+- ""ATM TRANSFER UNRELATED DEPOSIT"" → ""ATM""
+- ""ATM TRANSFER UNRELATED WITHDRAWAL"" → ""ATM""
+- ""CASH DEP VIA CDM/BCDM - AC INPUT (TOUCH SCREEN)"" → ""cash""
+- ""ATM/CDM CASH CREDIT USINGACCOUNT INPUT"" → ""cash deposits via ATM"" if source file mentions ATM, otherwise ""cash""
+- ""CIF CASH DEPOSIT"" → ""cash""
+
+Based on Transaction Source in CSV:
+- ""CMTF"" → ""Branch""
+- ""CWTF"" → ""FPS""
+- ""DWTF"" → ""FPS""
+- ""FPWICT"" → ""FPS""
+
+**Step 6: Build Final JSON**
+- Global fields (fraud_type, police_reference, police_team): Use fraud alert source with global field rules applied
+- Include all transactions from Step 1 with their Step 2 matching results and Step 5 rule applications
 
 JSON Schema:
-
+{
+  ""fraud_type"": ""string | null"",
+  ""police_reference"": ""string | null"", 
+  ""police_team"": ""string | null"",
+  ""alerted_transactions"": [
     {
-      ""fraud_type"": ""string | null"",
-      ""police_reference"": ""string | null"",
-      ""police_team"": ""string | null"",
-      ""alerted_transactions"": [
-        {
-          ""date"": ""string | null"", // Format: YYYY-MM-DD
-          ""amount"": ""number | null"",
-          ""currency"": ""string | null"",
-          ""from"": {
-            ""name"": ""string | null"",
-            ""account_number"": ""string | null"",
-            ""bank"": ""string | null""
-          },
-          ""to"": {
-            ""name"": ""string | null"",
-            ""account_number"": ""string | null"",
-            ""bank"": ""string | null""
-          },
-          ""channel"": ""string | null"", // Payment method used
-          ""can_be_located"": ""boolean""
-        }
-      ]
+      ""date"": ""string | null"",
+      ""amount"": ""number | null"", 
+      ""currency"": ""string | null"",
+      ""from"": {
+        ""name"": ""string | null"",
+        ""account_number"": ""string | null"",
+        ""bank"": ""string | null""
+      },
+      ""to"": {
+        ""name"": ""string | null"",
+        ""account_number"": ""string | null"", 
+        ""bank"": ""string | null""
+      },
+      ""channel"": ""string | null"",
+      ""can_be_located"": ""boolean"",
+      ""transaction_references"": [""string""]
     }
-","Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
+  ]
+}","Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
 2024-12-03,HKD,145886,C,Hang Seng Bank Ltd.,The Hongkong and Shanghai Banking Corporation Limited,66666666601,111-111111-101,YEUNG KAI,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,The Hongkong and Shanghai Banking Corporation Limited,145886,f9975575-3d90-4e0d-b0f9-3aa8bf65cda5
 2024-12-03,HKD,144123,C,,,666-66666-602,111-111111-101,TSANG SIU MING,MR        CHAN TAI MAN,Beneficiary,CUTF,ATM TRANSFER UNRELATED   DEPOSIT,,,144123,7db023fd-e7a4-4f70-85b2-22b8e5c78ae6
 2024-12-03,HKD,2997,C,Hang Seng Bank Ltd.,The Hongkong and Shanghai Banking Corporation Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,The Hongkong and Shanghai Banking Corporation Limited,2997,b20f462d-e594-40b7-8604-92aa88938e08
@@ -879,7 +979,7 @@ iii) The details of next layer beneficiary account(s) relating to the below tran
 Details of Beneficiary
 | Ref. | Beneficiary Bank | Layer | Beneficiary Account No. | Beneficiary Account Name |
 | ---- | ---------------- | ----- | ----------------------- | ------------------------ |
-| AC2 | HSB | 1st | 111-111111-102  | CHUNG SIU |
+| AC1 | HSB | 1st | 111-111111-101  | CHAN TAI MAN |
 
 Transaction Details
 | S/N | Date | Currency | Involved Amounts | Approx. HKD | Remitting Bank | AC Location | Depositor AC No. | Depositor AC Name |
@@ -930,86 +1030,106 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
     }
   ]
 }"
-ADCC,23,12,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with two documents: an unstructured fraud alert source and a structured CSV file of transaction records.
+ADCC,23,12,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
-Your task is to identify the fraudulent transactions described in the fraud alert source, match them to their corresponding entries in the transaction CSV, and produce a single consolidated JSON output that merges and reflects all relevant information. After generating the JSON, you must also provide a clear explanation of your matching and merging decisions.
+Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
 
-Key Instructions:
+Step-by-Step Process:
 
-    1. Core Task:
-        - Extract only transactions explicitly mentioned in the fraud alert source that contain both date and amount.
-        - Use the transaction CSV as the authoritative source to verify, correct, and enrich transaction data.
+**Step 1: Extract Reported Transactions from Source**
+- Carefully read the fraud alert source document
+- Identify and list ALL transactions explicitly mentioned with both date and amount
+- Do NOT modify, combine, or alter any reported transaction amounts or dates
+- Preserve each transaction exactly as reported in the source
+- Only proceed to Step 2 after completing this extraction
 
-    2. Step-by-Step Process:
-        a. Carefully read the fraud alert source to extract global fields and identify transactions to investigate.
-        b. Validate transactions:
-            - For each transaction, check if both date and amount are explicitly present and non-null.
-            - Immediately exclude transactions missing either field.
-        c. For each valid transaction:
-            - Search the CSV for a matching row using the rules below.
-            - If matched: Merge data using prioritization logic (set can_be_located: true).
-            - If unmatched: Use only fraud alert data (set can_be_located: false).
-        d. If no valid transactions remain, set alerted_transactions to an empty list [].
-        e. Assemble the final JSON output according to the schema.
+**Step 2: Match Each Reported Transaction to CSV**
+For each transaction extracted in Step 1:
+- First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
+- If exact match found: Use that single Transaction ID
+- If no exact match found: Look for multiple CSV transactions that:
+  * Have the same date as reported transaction
+  * Have matching originator OR beneficiary account numbers/names as reported transaction  
+  * When summed together, equal the exact amount of the reported transaction
+- If such combination exists: Include all those Transaction IDs
+- If no match found: Set can_be_located: false and transaction_references: []
 
-    3. Matching Rules (can_be_located logic):
-        A transaction from the fraud alert source matches a CSV row only if all three of the following conditions are met:
-            1. The date must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
-            2. The amount must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
-            3. At least one of the following is true:
-                - The from.account_number in the fraud alert source matches the Originator Account Number in the CSV.
-                - The to.account_number in the fraud alert source matches the Beneficiary Account Number in the CSV.
-                - The from.name in the fraud alert source matches the Originator Name in the CSV.
-                - The to.name in the fraud alert source matches the Beneficiary Name in the CSV.
+**Step 3: Merge Data for Each Matched Transaction**
+- First: Extract transaction_references (Transaction IDs) from CSV
+- Then: Use CSV values for all transaction fields (originator becomes ""from"", beneficiary becomes ""to"")
+- Finally: Fill missing fields with fraud alert source values
+- Use null if neither source has the value
 
-    4. Data Merging and Prioritization:
-        - For the global fields fraud_type, police_reference, and police_team: Always use the value from the fraud alert source.
-        - For the police_team field, extract and include any geographic location details mentioned with the police team in the fraud alert source.
-        - For transaction fields:
-            - If a transaction is not found in the CSV (can_be_located: false): Use only data from the fraud alert source.
-            - If a transaction is found in the CSV (can_be_located: true): For each field, use the following priority:
-                1. CSV value (if present and not blank)
-                2. Fraud alert source value (if CSV value is blank or missing)
-                3. null (if neither source provides a value)
+**Step 4: Apply Global Field Rules**
+Apply these rules when populating global fields:
 
-    5. Data Handling:
-        - Preserve content: Do not remove or alter non-printable characters or artifacts; preserve content exactly as found.
-        - Whitespace: You may trim leading/trailing whitespace, but do not alter internal whitespace.
+**Fraud Type Rules:**
+- If fraud_type is ""Money Laundering"", ""External Fraud"", or offence types such as ""Obtaining Property By Deception"" but not other: Return ""Not provided""
+- Otherwise: Use the fraud_type value from fraud alert source
 
-    6. Strict Schema and Format Compliance:
-        - The final output must strictly follow the JSON schema below.
-        - All specified fields must be present. If a value cannot be found, use null (do not omit the key).
-        - Never output transactions with null/missing date or amount.
-        - The alerted_transactions array must always be present in the output, and if no valid transactions are found, it must be an empty list.
-        - Output must be a valid JSON object only, with no comments or extraneous text.
+**Step 5: Apply Transaction Rules**
+Apply these rules when populating transaction fields:
+
+**Bank Rules:**
+- from.bank:
+  * HSBC Referral: Always ""HSBC""
+  * Victim ODFT: Always ""HASE""
+  * Suspect ODFT: Use bank code/Chinese name mapping from CSV
+  * UAR: Use appropriate bank mapping from CSV
+- to.bank:
+  * Always ""HASE"", except for Victim ODFT cases
+
+**IMPORTANT: Bank Code Distinctions:**
+- HSB or HASE = Hang Seng Bank Ltd. (these are the SAME bank)
+- HSBC = The Hongkong and Shanghai Banking Corporation Limited (this is a DIFFERENT bank from HSB/HASE)
+- Do NOT confuse HSB with HSBC - they are completely different banks
+
+**Channel Rules (Payment Method):**
+The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""Branch"", or null
+
+Based on Transaction Code Description in CSV:
+- ""ATM TRANSFER UNRELATED DEPOSIT"" → ""ATM""
+- ""ATM TRANSFER UNRELATED WITHDRAWAL"" → ""ATM""
+- ""CASH DEP VIA CDM/BCDM - AC INPUT (TOUCH SCREEN)"" → ""cash""
+- ""ATM/CDM CASH CREDIT USINGACCOUNT INPUT"" → ""cash deposits via ATM"" if source file mentions ATM, otherwise ""cash""
+- ""CIF CASH DEPOSIT"" → ""cash""
+
+Based on Transaction Source in CSV:
+- ""CMTF"" → ""Branch""
+- ""CWTF"" → ""FPS""
+- ""DWTF"" → ""FPS""
+- ""FPWICT"" → ""FPS""
+
+**Step 6: Build Final JSON**
+- Global fields (fraud_type, police_reference, police_team): Use fraud alert source with global field rules applied
+- Include all transactions from Step 1 with their Step 2 matching results and Step 5 rule applications
 
 JSON Schema:
-
+{
+  ""fraud_type"": ""string | null"",
+  ""police_reference"": ""string | null"", 
+  ""police_team"": ""string | null"",
+  ""alerted_transactions"": [
     {
-      ""fraud_type"": ""string | null"",
-      ""police_reference"": ""string | null"",
-      ""police_team"": ""string | null"",
-      ""alerted_transactions"": [
-        {
-          ""date"": ""string | null"", // Format: YYYY-MM-DD
-          ""amount"": ""number | null"",
-          ""currency"": ""string | null"",
-          ""from"": {
-            ""name"": ""string | null"",
-            ""account_number"": ""string | null"",
-            ""bank"": ""string | null""
-          },
-          ""to"": {
-            ""name"": ""string | null"",
-            ""account_number"": ""string | null"",
-            ""bank"": ""string | null""
-          },
-          ""channel"": ""string | null"", // Payment method used
-          ""can_be_located"": ""boolean""
-        }
-      ]
+      ""date"": ""string | null"",
+      ""amount"": ""number | null"", 
+      ""currency"": ""string | null"",
+      ""from"": {
+        ""name"": ""string | null"",
+        ""account_number"": ""string | null"",
+        ""bank"": ""string | null""
+      },
+      ""to"": {
+        ""name"": ""string | null"",
+        ""account_number"": ""string | null"", 
+        ""bank"": ""string | null""
+      },
+      ""channel"": ""string | null"",
+      ""can_be_located"": ""boolean"",
+      ""transaction_references"": [""string""]
     }
-","Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
+  ]
+}","Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
 2024-12-03,HKD,2997,C,Hang Seng Bank Ltd.,The Hongkong and Shanghai Banking Corporation Limited,333-333333-101,111-111111-101,CHAN TAI MAN,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,The Hongkong and Shanghai Banking Corporation Limited    HK,2997,8d0c5549-e4ef-41ed-ad29-cc12542d2cbc
 2024-12-03,HKD,144123,C,,,444-4444444-101,111-111111-101,CHEUNG TAK SHING,CHAN TAI MAN,Beneficiary,CUTF,ATM TRANSFER UNRELATED   DEPOSIT,,,144123,4fa4fc74-d89c-43cb-9d70-c6a9978382c2
 2024-12-03,HKD,50001,C,Hang Seng Bank Ltd.,The Hongkong and Shanghai Banking Corporation Limited,333-333333-101,111-111111-101,CHAN TAI MAN,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,The Hongkong and Shanghai Banking Corporation Limited    HK,50001,9ba7b992-e84f-4111-86d7-50237f6498b9
@@ -1077,86 +1197,106 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
     }
   ]
 }"
-ADCC,28,1,"[1, 2, 3, 4]","You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with two documents: an unstructured fraud alert source and a structured CSV file of transaction records.
+ADCC,28,1,"[1, 2, 3, 4]","You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
-Your task is to identify the fraudulent transactions described in the fraud alert source, match them to their corresponding entries in the transaction CSV, and produce a single consolidated JSON output that merges and reflects all relevant information. After generating the JSON, you must also provide a clear explanation of your matching and merging decisions.
+Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
 
-Key Instructions:
+Step-by-Step Process:
 
-    1. Core Task:
-        - Extract only transactions explicitly mentioned in the fraud alert source that contain both date and amount.
-        - Use the transaction CSV as the authoritative source to verify, correct, and enrich transaction data.
+**Step 1: Extract Reported Transactions from Source**
+- Carefully read the fraud alert source document
+- Identify and list ALL transactions explicitly mentioned with both date and amount
+- Do NOT modify, combine, or alter any reported transaction amounts or dates
+- Preserve each transaction exactly as reported in the source
+- Only proceed to Step 2 after completing this extraction
 
-    2. Step-by-Step Process:
-        a. Carefully read the fraud alert source to extract global fields and identify transactions to investigate.
-        b. Validate transactions:
-            - For each transaction, check if both date and amount are explicitly present and non-null.
-            - Immediately exclude transactions missing either field.
-        c. For each valid transaction:
-            - Search the CSV for a matching row using the rules below.
-            - If matched: Merge data using prioritization logic (set can_be_located: true).
-            - If unmatched: Use only fraud alert data (set can_be_located: false).
-        d. If no valid transactions remain, set alerted_transactions to an empty list [].
-        e. Assemble the final JSON output according to the schema.
+**Step 2: Match Each Reported Transaction to CSV**
+For each transaction extracted in Step 1:
+- First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
+- If exact match found: Use that single Transaction ID
+- If no exact match found: Look for multiple CSV transactions that:
+  * Have the same date as reported transaction
+  * Have matching originator OR beneficiary account numbers/names as reported transaction  
+  * When summed together, equal the exact amount of the reported transaction
+- If such combination exists: Include all those Transaction IDs
+- If no match found: Set can_be_located: false and transaction_references: []
 
-    3. Matching Rules (can_be_located logic):
-        A transaction from the fraud alert source matches a CSV row only if all three of the following conditions are met:
-            1. The date must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
-            2. The amount must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
-            3. At least one of the following is true:
-                - The from.account_number in the fraud alert source matches the Originator Account Number in the CSV.
-                - The to.account_number in the fraud alert source matches the Beneficiary Account Number in the CSV.
-                - The from.name in the fraud alert source matches the Originator Name in the CSV.
-                - The to.name in the fraud alert source matches the Beneficiary Name in the CSV.
+**Step 3: Merge Data for Each Matched Transaction**
+- First: Extract transaction_references (Transaction IDs) from CSV
+- Then: Use CSV values for all transaction fields (originator becomes ""from"", beneficiary becomes ""to"")
+- Finally: Fill missing fields with fraud alert source values
+- Use null if neither source has the value
 
-    4. Data Merging and Prioritization:
-        - For the global fields fraud_type, police_reference, and police_team: Always use the value from the fraud alert source.
-        - For the police_team field, extract and include any geographic location details mentioned with the police team in the fraud alert source.
-        - For transaction fields:
-            - If a transaction is not found in the CSV (can_be_located: false): Use only data from the fraud alert source.
-            - If a transaction is found in the CSV (can_be_located: true): For each field, use the following priority:
-                1. CSV value (if present and not blank)
-                2. Fraud alert source value (if CSV value is blank or missing)
-                3. null (if neither source provides a value)
+**Step 4: Apply Global Field Rules**
+Apply these rules when populating global fields:
 
-    5. Data Handling:
-        - Preserve content: Do not remove or alter non-printable characters or artifacts; preserve content exactly as found.
-        - Whitespace: You may trim leading/trailing whitespace, but do not alter internal whitespace.
+**Fraud Type Rules:**
+- If fraud_type is ""Money Laundering"", ""External Fraud"", or offence types such as ""Obtaining Property By Deception"" but not other: Return ""Not provided""
+- Otherwise: Use the fraud_type value from fraud alert source
 
-    6. Strict Schema and Format Compliance:
-        - The final output must strictly follow the JSON schema below.
-        - All specified fields must be present. If a value cannot be found, use null (do not omit the key).
-        - Never output transactions with null/missing date or amount.
-        - The alerted_transactions array must always be present in the output, and if no valid transactions are found, it must be an empty list.
-        - Output must be a valid JSON object only, with no comments or extraneous text.
+**Step 5: Apply Transaction Rules**
+Apply these rules when populating transaction fields:
+
+**Bank Rules:**
+- from.bank:
+  * HSBC Referral: Always ""HSBC""
+  * Victim ODFT: Always ""HASE""
+  * Suspect ODFT: Use bank code/Chinese name mapping from CSV
+  * UAR: Use appropriate bank mapping from CSV
+- to.bank:
+  * Always ""HASE"", except for Victim ODFT cases
+
+**IMPORTANT: Bank Code Distinctions:**
+- HSB or HASE = Hang Seng Bank Ltd. (these are the SAME bank)
+- HSBC = The Hongkong and Shanghai Banking Corporation Limited (this is a DIFFERENT bank from HSB/HASE)
+- Do NOT confuse HSB with HSBC - they are completely different banks
+
+**Channel Rules (Payment Method):**
+The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""Branch"", or null
+
+Based on Transaction Code Description in CSV:
+- ""ATM TRANSFER UNRELATED DEPOSIT"" → ""ATM""
+- ""ATM TRANSFER UNRELATED WITHDRAWAL"" → ""ATM""
+- ""CASH DEP VIA CDM/BCDM - AC INPUT (TOUCH SCREEN)"" → ""cash""
+- ""ATM/CDM CASH CREDIT USINGACCOUNT INPUT"" → ""cash deposits via ATM"" if source file mentions ATM, otherwise ""cash""
+- ""CIF CASH DEPOSIT"" → ""cash""
+
+Based on Transaction Source in CSV:
+- ""CMTF"" → ""Branch""
+- ""CWTF"" → ""FPS""
+- ""DWTF"" → ""FPS""
+- ""FPWICT"" → ""FPS""
+
+**Step 6: Build Final JSON**
+- Global fields (fraud_type, police_reference, police_team): Use fraud alert source with global field rules applied
+- Include all transactions from Step 1 with their Step 2 matching results and Step 5 rule applications
 
 JSON Schema:
-
+{
+  ""fraud_type"": ""string | null"",
+  ""police_reference"": ""string | null"", 
+  ""police_team"": ""string | null"",
+  ""alerted_transactions"": [
     {
-      ""fraud_type"": ""string | null"",
-      ""police_reference"": ""string | null"",
-      ""police_team"": ""string | null"",
-      ""alerted_transactions"": [
-        {
-          ""date"": ""string | null"", // Format: YYYY-MM-DD
-          ""amount"": ""number | null"",
-          ""currency"": ""string | null"",
-          ""from"": {
-            ""name"": ""string | null"",
-            ""account_number"": ""string | null"",
-            ""bank"": ""string | null""
-          },
-          ""to"": {
-            ""name"": ""string | null"",
-            ""account_number"": ""string | null"",
-            ""bank"": ""string | null""
-          },
-          ""channel"": ""string | null"", // Payment method used
-          ""can_be_located"": ""boolean""
-        }
-      ]
+      ""date"": ""string | null"",
+      ""amount"": ""number | null"", 
+      ""currency"": ""string | null"",
+      ""from"": {
+        ""name"": ""string | null"",
+        ""account_number"": ""string | null"",
+        ""bank"": ""string | null""
+      },
+      ""to"": {
+        ""name"": ""string | null"",
+        ""account_number"": ""string | null"", 
+        ""bank"": ""string | null""
+      },
+      ""channel"": ""string | null"",
+      ""can_be_located"": ""boolean"",
+      ""transaction_references"": [""string""]
     }
-","Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
+  ]
+}","Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
 2024-12-30,HKD,100000,C,,,,111-111111-101,,""MR CHAN, TAI MAN"",Beneficiary,CCCS,ATM/CDM CASH CREDIT USINGACCOUNT INPUT,,,100000,c429a9b1-fd9b-429f-8e99-04ba777f1b0b
 2024-12-30,HKD,100000,C,,,,111-111111-102,,MR CHUNG SIU,Beneficiary,CCCS,ATM/CDM CASH CREDIT USINGACCOUNT INPUT,,,100000,116fd01f-e42f-4067-89b1-e7e386fa416e
 2024-12-31,HKD,100000,C,,,,111-111111-102,,MR CHUNG SIU,Beneficiary,CCCS,ATM/CDM CASH CREDIT USINGACCOUNT INPUT,,,100000,966eb655-4867-474b-9d57-2b5656b0b418
@@ -1363,86 +1503,106 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
     }
   ]
 }"
-ADCC,31,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with two documents: an unstructured fraud alert source and a structured CSV file of transaction records.
+ADCC,31,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
-Your task is to identify the fraudulent transactions described in the fraud alert source, match them to their corresponding entries in the transaction CSV, and produce a single consolidated JSON output that merges and reflects all relevant information. After generating the JSON, you must also provide a clear explanation of your matching and merging decisions.
+Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
 
-Key Instructions:
+Step-by-Step Process:
 
-    1. Core Task:
-        - Extract only transactions explicitly mentioned in the fraud alert source that contain both date and amount.
-        - Use the transaction CSV as the authoritative source to verify, correct, and enrich transaction data.
+**Step 1: Extract Reported Transactions from Source**
+- Carefully read the fraud alert source document
+- Identify and list ALL transactions explicitly mentioned with both date and amount
+- Do NOT modify, combine, or alter any reported transaction amounts or dates
+- Preserve each transaction exactly as reported in the source
+- Only proceed to Step 2 after completing this extraction
 
-    2. Step-by-Step Process:
-        a. Carefully read the fraud alert source to extract global fields and identify transactions to investigate.
-        b. Validate transactions:
-            - For each transaction, check if both date and amount are explicitly present and non-null.
-            - Immediately exclude transactions missing either field.
-        c. For each valid transaction:
-            - Search the CSV for a matching row using the rules below.
-            - If matched: Merge data using prioritization logic (set can_be_located: true).
-            - If unmatched: Use only fraud alert data (set can_be_located: false).
-        d. If no valid transactions remain, set alerted_transactions to an empty list [].
-        e. Assemble the final JSON output according to the schema.
+**Step 2: Match Each Reported Transaction to CSV**
+For each transaction extracted in Step 1:
+- First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
+- If exact match found: Use that single Transaction ID
+- If no exact match found: Look for multiple CSV transactions that:
+  * Have the same date as reported transaction
+  * Have matching originator OR beneficiary account numbers/names as reported transaction  
+  * When summed together, equal the exact amount of the reported transaction
+- If such combination exists: Include all those Transaction IDs
+- If no match found: Set can_be_located: false and transaction_references: []
 
-    3. Matching Rules (can_be_located logic):
-        A transaction from the fraud alert source matches a CSV row only if all three of the following conditions are met:
-            1. The date must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
-            2. The amount must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
-            3. At least one of the following is true:
-                - The from.account_number in the fraud alert source matches the Originator Account Number in the CSV.
-                - The to.account_number in the fraud alert source matches the Beneficiary Account Number in the CSV.
-                - The from.name in the fraud alert source matches the Originator Name in the CSV.
-                - The to.name in the fraud alert source matches the Beneficiary Name in the CSV.
+**Step 3: Merge Data for Each Matched Transaction**
+- First: Extract transaction_references (Transaction IDs) from CSV
+- Then: Use CSV values for all transaction fields (originator becomes ""from"", beneficiary becomes ""to"")
+- Finally: Fill missing fields with fraud alert source values
+- Use null if neither source has the value
 
-    4. Data Merging and Prioritization:
-        - For the global fields fraud_type, police_reference, and police_team: Always use the value from the fraud alert source.
-        - For the police_team field, extract and include any geographic location details mentioned with the police team in the fraud alert source.
-        - For transaction fields:
-            - If a transaction is not found in the CSV (can_be_located: false): Use only data from the fraud alert source.
-            - If a transaction is found in the CSV (can_be_located: true): For each field, use the following priority:
-                1. CSV value (if present and not blank)
-                2. Fraud alert source value (if CSV value is blank or missing)
-                3. null (if neither source provides a value)
+**Step 4: Apply Global Field Rules**
+Apply these rules when populating global fields:
 
-    5. Data Handling:
-        - Preserve content: Do not remove or alter non-printable characters or artifacts; preserve content exactly as found.
-        - Whitespace: You may trim leading/trailing whitespace, but do not alter internal whitespace.
+**Fraud Type Rules:**
+- If fraud_type is ""Money Laundering"", ""External Fraud"", or offence types such as ""Obtaining Property By Deception"" but not other: Return ""Not provided""
+- Otherwise: Use the fraud_type value from fraud alert source
 
-    6. Strict Schema and Format Compliance:
-        - The final output must strictly follow the JSON schema below.
-        - All specified fields must be present. If a value cannot be found, use null (do not omit the key).
-        - Never output transactions with null/missing date or amount.
-        - The alerted_transactions array must always be present in the output, and if no valid transactions are found, it must be an empty list.
-        - Output must be a valid JSON object only, with no comments or extraneous text.
+**Step 5: Apply Transaction Rules**
+Apply these rules when populating transaction fields:
+
+**Bank Rules:**
+- from.bank:
+  * HSBC Referral: Always ""HSBC""
+  * Victim ODFT: Always ""HASE""
+  * Suspect ODFT: Use bank code/Chinese name mapping from CSV
+  * UAR: Use appropriate bank mapping from CSV
+- to.bank:
+  * Always ""HASE"", except for Victim ODFT cases
+
+**IMPORTANT: Bank Code Distinctions:**
+- HSB or HASE = Hang Seng Bank Ltd. (these are the SAME bank)
+- HSBC = The Hongkong and Shanghai Banking Corporation Limited (this is a DIFFERENT bank from HSB/HASE)
+- Do NOT confuse HSB with HSBC - they are completely different banks
+
+**Channel Rules (Payment Method):**
+The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""Branch"", or null
+
+Based on Transaction Code Description in CSV:
+- ""ATM TRANSFER UNRELATED DEPOSIT"" → ""ATM""
+- ""ATM TRANSFER UNRELATED WITHDRAWAL"" → ""ATM""
+- ""CASH DEP VIA CDM/BCDM - AC INPUT (TOUCH SCREEN)"" → ""cash""
+- ""ATM/CDM CASH CREDIT USINGACCOUNT INPUT"" → ""cash deposits via ATM"" if source file mentions ATM, otherwise ""cash""
+- ""CIF CASH DEPOSIT"" → ""cash""
+
+Based on Transaction Source in CSV:
+- ""CMTF"" → ""Branch""
+- ""CWTF"" → ""FPS""
+- ""DWTF"" → ""FPS""
+- ""FPWICT"" → ""FPS""
+
+**Step 6: Build Final JSON**
+- Global fields (fraud_type, police_reference, police_team): Use fraud alert source with global field rules applied
+- Include all transactions from Step 1 with their Step 2 matching results and Step 5 rule applications
 
 JSON Schema:
-
+{
+  ""fraud_type"": ""string | null"",
+  ""police_reference"": ""string | null"", 
+  ""police_team"": ""string | null"",
+  ""alerted_transactions"": [
     {
-      ""fraud_type"": ""string | null"",
-      ""police_reference"": ""string | null"",
-      ""police_team"": ""string | null"",
-      ""alerted_transactions"": [
-        {
-          ""date"": ""string | null"", // Format: YYYY-MM-DD
-          ""amount"": ""number | null"",
-          ""currency"": ""string | null"",
-          ""from"": {
-            ""name"": ""string | null"",
-            ""account_number"": ""string | null"",
-            ""bank"": ""string | null""
-          },
-          ""to"": {
-            ""name"": ""string | null"",
-            ""account_number"": ""string | null"",
-            ""bank"": ""string | null""
-          },
-          ""channel"": ""string | null"", // Payment method used
-          ""can_be_located"": ""boolean""
-        }
-      ]
+      ""date"": ""string | null"",
+      ""amount"": ""number | null"", 
+      ""currency"": ""string | null"",
+      ""from"": {
+        ""name"": ""string | null"",
+        ""account_number"": ""string | null"",
+        ""bank"": ""string | null""
+      },
+      ""to"": {
+        ""name"": ""string | null"",
+        ""account_number"": ""string | null"", 
+        ""bank"": ""string | null""
+      },
+      ""channel"": ""string | null"",
+      ""can_be_located"": ""boolean"",
+      ""transaction_references"": [""string""]
     }
-","Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
+  ]
+}","Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
 2025-02-04,HKD,110555,C,Hang Seng Bank Ltd.,China Construction Bank (Asia) Corporation Limited,444-4444444-101,111-111111-101,CHEUNG TAK SHING,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,China Construction Bank (Asia) Corporation Limited    HK,110555,5f631a24-86b5-4572-bec7-0d1663525a75
 2025-02-04,HKD,50000,C,Hang Seng Bank Ltd.,China Construction Bank (Asia) Corporation Limited,444-4444444-101,111-111111-101,CHEUNG TAK SHING,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,China Construction Bank (Asia) Corporation Limited    HK,50000,d2d5de52-a25a-441d-863c-bc3e9c98cc1e
 2025-02-05,HKD,200000,C,Hang Seng Bank Ltd.,China Construction Bank (Asia) Corporation Limited,444-4444444-101,111-111111-101,CHEUNG TAK SHING,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,China Construction Bank (Asia) Corporation Limited    HK,200000,4350270b-a05a-4161-947a-1a51bc254666
@@ -1583,86 +1743,106 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
     }
   ]
 }"
-ADCC,35,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with two documents: an unstructured fraud alert source and a structured CSV file of transaction records.
+ADCC,35,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
-Your task is to identify the fraudulent transactions described in the fraud alert source, match them to their corresponding entries in the transaction CSV, and produce a single consolidated JSON output that merges and reflects all relevant information. After generating the JSON, you must also provide a clear explanation of your matching and merging decisions.
+Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
 
-Key Instructions:
+Step-by-Step Process:
 
-    1. Core Task:
-        - Extract only transactions explicitly mentioned in the fraud alert source that contain both date and amount.
-        - Use the transaction CSV as the authoritative source to verify, correct, and enrich transaction data.
+**Step 1: Extract Reported Transactions from Source**
+- Carefully read the fraud alert source document
+- Identify and list ALL transactions explicitly mentioned with both date and amount
+- Do NOT modify, combine, or alter any reported transaction amounts or dates
+- Preserve each transaction exactly as reported in the source
+- Only proceed to Step 2 after completing this extraction
 
-    2. Step-by-Step Process:
-        a. Carefully read the fraud alert source to extract global fields and identify transactions to investigate.
-        b. Validate transactions:
-            - For each transaction, check if both date and amount are explicitly present and non-null.
-            - Immediately exclude transactions missing either field.
-        c. For each valid transaction:
-            - Search the CSV for a matching row using the rules below.
-            - If matched: Merge data using prioritization logic (set can_be_located: true).
-            - If unmatched: Use only fraud alert data (set can_be_located: false).
-        d. If no valid transactions remain, set alerted_transactions to an empty list [].
-        e. Assemble the final JSON output according to the schema.
+**Step 2: Match Each Reported Transaction to CSV**
+For each transaction extracted in Step 1:
+- First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
+- If exact match found: Use that single Transaction ID
+- If no exact match found: Look for multiple CSV transactions that:
+  * Have the same date as reported transaction
+  * Have matching originator OR beneficiary account numbers/names as reported transaction  
+  * When summed together, equal the exact amount of the reported transaction
+- If such combination exists: Include all those Transaction IDs
+- If no match found: Set can_be_located: false and transaction_references: []
 
-    3. Matching Rules (can_be_located logic):
-        A transaction from the fraud alert source matches a CSV row only if all three of the following conditions are met:
-            1. The date must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
-            2. The amount must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
-            3. At least one of the following is true:
-                - The from.account_number in the fraud alert source matches the Originator Account Number in the CSV.
-                - The to.account_number in the fraud alert source matches the Beneficiary Account Number in the CSV.
-                - The from.name in the fraud alert source matches the Originator Name in the CSV.
-                - The to.name in the fraud alert source matches the Beneficiary Name in the CSV.
+**Step 3: Merge Data for Each Matched Transaction**
+- First: Extract transaction_references (Transaction IDs) from CSV
+- Then: Use CSV values for all transaction fields (originator becomes ""from"", beneficiary becomes ""to"")
+- Finally: Fill missing fields with fraud alert source values
+- Use null if neither source has the value
 
-    4. Data Merging and Prioritization:
-        - For the global fields fraud_type, police_reference, and police_team: Always use the value from the fraud alert source.
-        - For the police_team field, extract and include any geographic location details mentioned with the police team in the fraud alert source.
-        - For transaction fields:
-            - If a transaction is not found in the CSV (can_be_located: false): Use only data from the fraud alert source.
-            - If a transaction is found in the CSV (can_be_located: true): For each field, use the following priority:
-                1. CSV value (if present and not blank)
-                2. Fraud alert source value (if CSV value is blank or missing)
-                3. null (if neither source provides a value)
+**Step 4: Apply Global Field Rules**
+Apply these rules when populating global fields:
 
-    5. Data Handling:
-        - Preserve content: Do not remove or alter non-printable characters or artifacts; preserve content exactly as found.
-        - Whitespace: You may trim leading/trailing whitespace, but do not alter internal whitespace.
+**Fraud Type Rules:**
+- If fraud_type is ""Money Laundering"", ""External Fraud"", or offence types such as ""Obtaining Property By Deception"" but not other: Return ""Not provided""
+- Otherwise: Use the fraud_type value from fraud alert source
 
-    6. Strict Schema and Format Compliance:
-        - The final output must strictly follow the JSON schema below.
-        - All specified fields must be present. If a value cannot be found, use null (do not omit the key).
-        - Never output transactions with null/missing date or amount.
-        - The alerted_transactions array must always be present in the output, and if no valid transactions are found, it must be an empty list.
-        - Output must be a valid JSON object only, with no comments or extraneous text.
+**Step 5: Apply Transaction Rules**
+Apply these rules when populating transaction fields:
+
+**Bank Rules:**
+- from.bank:
+  * HSBC Referral: Always ""HSBC""
+  * Victim ODFT: Always ""HASE""
+  * Suspect ODFT: Use bank code/Chinese name mapping from CSV
+  * UAR: Use appropriate bank mapping from CSV
+- to.bank:
+  * Always ""HASE"", except for Victim ODFT cases
+
+**IMPORTANT: Bank Code Distinctions:**
+- HSB or HASE = Hang Seng Bank Ltd. (these are the SAME bank)
+- HSBC = The Hongkong and Shanghai Banking Corporation Limited (this is a DIFFERENT bank from HSB/HASE)
+- Do NOT confuse HSB with HSBC - they are completely different banks
+
+**Channel Rules (Payment Method):**
+The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""Branch"", or null
+
+Based on Transaction Code Description in CSV:
+- ""ATM TRANSFER UNRELATED DEPOSIT"" → ""ATM""
+- ""ATM TRANSFER UNRELATED WITHDRAWAL"" → ""ATM""
+- ""CASH DEP VIA CDM/BCDM - AC INPUT (TOUCH SCREEN)"" → ""cash""
+- ""ATM/CDM CASH CREDIT USINGACCOUNT INPUT"" → ""cash deposits via ATM"" if source file mentions ATM, otherwise ""cash""
+- ""CIF CASH DEPOSIT"" → ""cash""
+
+Based on Transaction Source in CSV:
+- ""CMTF"" → ""Branch""
+- ""CWTF"" → ""FPS""
+- ""DWTF"" → ""FPS""
+- ""FPWICT"" → ""FPS""
+
+**Step 6: Build Final JSON**
+- Global fields (fraud_type, police_reference, police_team): Use fraud alert source with global field rules applied
+- Include all transactions from Step 1 with their Step 2 matching results and Step 5 rule applications
 
 JSON Schema:
-
+{
+  ""fraud_type"": ""string | null"",
+  ""police_reference"": ""string | null"", 
+  ""police_team"": ""string | null"",
+  ""alerted_transactions"": [
     {
-      ""fraud_type"": ""string | null"",
-      ""police_reference"": ""string | null"",
-      ""police_team"": ""string | null"",
-      ""alerted_transactions"": [
-        {
-          ""date"": ""string | null"", // Format: YYYY-MM-DD
-          ""amount"": ""number | null"",
-          ""currency"": ""string | null"",
-          ""from"": {
-            ""name"": ""string | null"",
-            ""account_number"": ""string | null"",
-            ""bank"": ""string | null""
-          },
-          ""to"": {
-            ""name"": ""string | null"",
-            ""account_number"": ""string | null"",
-            ""bank"": ""string | null""
-          },
-          ""channel"": ""string | null"", // Payment method used
-          ""can_be_located"": ""boolean""
-        }
-      ]
+      ""date"": ""string | null"",
+      ""amount"": ""number | null"", 
+      ""currency"": ""string | null"",
+      ""from"": {
+        ""name"": ""string | null"",
+        ""account_number"": ""string | null"",
+        ""bank"": ""string | null""
+      },
+      ""to"": {
+        ""name"": ""string | null"",
+        ""account_number"": ""string | null"", 
+        ""bank"": ""string | null""
+      },
+      ""channel"": ""string | null"",
+      ""can_be_located"": ""boolean"",
+      ""transaction_references"": [""string""]
     }
-","Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
+  ]
+}","Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
 2025-01-20,HKD,130000,C,Hang Seng Bank Ltd.,Bank of Communications (Hong Kong) Ltd.,444-4444444-101,111-111111-101,CHEUNG TAK SHING,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,Bank of Communications (Hong Kong) Ltd.,130000,6f7549ca-21d3-4f5b-bbfa-bebd7e49290f
 ","Dear HSB,
 
@@ -1725,86 +1905,106 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
     }
   ]
 }"
-ADCC,37,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with two documents: an unstructured fraud alert source and a structured CSV file of transaction records.
+ADCC,37,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
-Your task is to identify the fraudulent transactions described in the fraud alert source, match them to their corresponding entries in the transaction CSV, and produce a single consolidated JSON output that merges and reflects all relevant information. After generating the JSON, you must also provide a clear explanation of your matching and merging decisions.
+Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
 
-Key Instructions:
+Step-by-Step Process:
 
-    1. Core Task:
-        - Extract only transactions explicitly mentioned in the fraud alert source that contain both date and amount.
-        - Use the transaction CSV as the authoritative source to verify, correct, and enrich transaction data.
+**Step 1: Extract Reported Transactions from Source**
+- Carefully read the fraud alert source document
+- Identify and list ALL transactions explicitly mentioned with both date and amount
+- Do NOT modify, combine, or alter any reported transaction amounts or dates
+- Preserve each transaction exactly as reported in the source
+- Only proceed to Step 2 after completing this extraction
 
-    2. Step-by-Step Process:
-        a. Carefully read the fraud alert source to extract global fields and identify transactions to investigate.
-        b. Validate transactions:
-            - For each transaction, check if both date and amount are explicitly present and non-null.
-            - Immediately exclude transactions missing either field.
-        c. For each valid transaction:
-            - Search the CSV for a matching row using the rules below.
-            - If matched: Merge data using prioritization logic (set can_be_located: true).
-            - If unmatched: Use only fraud alert data (set can_be_located: false).
-        d. If no valid transactions remain, set alerted_transactions to an empty list [].
-        e. Assemble the final JSON output according to the schema.
+**Step 2: Match Each Reported Transaction to CSV**
+For each transaction extracted in Step 1:
+- First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
+- If exact match found: Use that single Transaction ID
+- If no exact match found: Look for multiple CSV transactions that:
+  * Have the same date as reported transaction
+  * Have matching originator OR beneficiary account numbers/names as reported transaction  
+  * When summed together, equal the exact amount of the reported transaction
+- If such combination exists: Include all those Transaction IDs
+- If no match found: Set can_be_located: false and transaction_references: []
 
-    3. Matching Rules (can_be_located logic):
-        A transaction from the fraud alert source matches a CSV row only if all three of the following conditions are met:
-            1. The date must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
-            2. The amount must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
-            3. At least one of the following is true:
-                - The from.account_number in the fraud alert source matches the Originator Account Number in the CSV.
-                - The to.account_number in the fraud alert source matches the Beneficiary Account Number in the CSV.
-                - The from.name in the fraud alert source matches the Originator Name in the CSV.
-                - The to.name in the fraud alert source matches the Beneficiary Name in the CSV.
+**Step 3: Merge Data for Each Matched Transaction**
+- First: Extract transaction_references (Transaction IDs) from CSV
+- Then: Use CSV values for all transaction fields (originator becomes ""from"", beneficiary becomes ""to"")
+- Finally: Fill missing fields with fraud alert source values
+- Use null if neither source has the value
 
-    4. Data Merging and Prioritization:
-        - For the global fields fraud_type, police_reference, and police_team: Always use the value from the fraud alert source.
-        - For the police_team field, extract and include any geographic location details mentioned with the police team in the fraud alert source.
-        - For transaction fields:
-            - If a transaction is not found in the CSV (can_be_located: false): Use only data from the fraud alert source.
-            - If a transaction is found in the CSV (can_be_located: true): For each field, use the following priority:
-                1. CSV value (if present and not blank)
-                2. Fraud alert source value (if CSV value is blank or missing)
-                3. null (if neither source provides a value)
+**Step 4: Apply Global Field Rules**
+Apply these rules when populating global fields:
 
-    5. Data Handling:
-        - Preserve content: Do not remove or alter non-printable characters or artifacts; preserve content exactly as found.
-        - Whitespace: You may trim leading/trailing whitespace, but do not alter internal whitespace.
+**Fraud Type Rules:**
+- If fraud_type is ""Money Laundering"", ""External Fraud"", or offence types such as ""Obtaining Property By Deception"" but not other: Return ""Not provided""
+- Otherwise: Use the fraud_type value from fraud alert source
 
-    6. Strict Schema and Format Compliance:
-        - The final output must strictly follow the JSON schema below.
-        - All specified fields must be present. If a value cannot be found, use null (do not omit the key).
-        - Never output transactions with null/missing date or amount.
-        - The alerted_transactions array must always be present in the output, and if no valid transactions are found, it must be an empty list.
-        - Output must be a valid JSON object only, with no comments or extraneous text.
+**Step 5: Apply Transaction Rules**
+Apply these rules when populating transaction fields:
+
+**Bank Rules:**
+- from.bank:
+  * HSBC Referral: Always ""HSBC""
+  * Victim ODFT: Always ""HASE""
+  * Suspect ODFT: Use bank code/Chinese name mapping from CSV
+  * UAR: Use appropriate bank mapping from CSV
+- to.bank:
+  * Always ""HASE"", except for Victim ODFT cases
+
+**IMPORTANT: Bank Code Distinctions:**
+- HSB or HASE = Hang Seng Bank Ltd. (these are the SAME bank)
+- HSBC = The Hongkong and Shanghai Banking Corporation Limited (this is a DIFFERENT bank from HSB/HASE)
+- Do NOT confuse HSB with HSBC - they are completely different banks
+
+**Channel Rules (Payment Method):**
+The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""Branch"", or null
+
+Based on Transaction Code Description in CSV:
+- ""ATM TRANSFER UNRELATED DEPOSIT"" → ""ATM""
+- ""ATM TRANSFER UNRELATED WITHDRAWAL"" → ""ATM""
+- ""CASH DEP VIA CDM/BCDM - AC INPUT (TOUCH SCREEN)"" → ""cash""
+- ""ATM/CDM CASH CREDIT USINGACCOUNT INPUT"" → ""cash deposits via ATM"" if source file mentions ATM, otherwise ""cash""
+- ""CIF CASH DEPOSIT"" → ""cash""
+
+Based on Transaction Source in CSV:
+- ""CMTF"" → ""Branch""
+- ""CWTF"" → ""FPS""
+- ""DWTF"" → ""FPS""
+- ""FPWICT"" → ""FPS""
+
+**Step 6: Build Final JSON**
+- Global fields (fraud_type, police_reference, police_team): Use fraud alert source with global field rules applied
+- Include all transactions from Step 1 with their Step 2 matching results and Step 5 rule applications
 
 JSON Schema:
-
+{
+  ""fraud_type"": ""string | null"",
+  ""police_reference"": ""string | null"", 
+  ""police_team"": ""string | null"",
+  ""alerted_transactions"": [
     {
-      ""fraud_type"": ""string | null"",
-      ""police_reference"": ""string | null"",
-      ""police_team"": ""string | null"",
-      ""alerted_transactions"": [
-        {
-          ""date"": ""string | null"", // Format: YYYY-MM-DD
-          ""amount"": ""number | null"",
-          ""currency"": ""string | null"",
-          ""from"": {
-            ""name"": ""string | null"",
-            ""account_number"": ""string | null"",
-            ""bank"": ""string | null""
-          },
-          ""to"": {
-            ""name"": ""string | null"",
-            ""account_number"": ""string | null"",
-            ""bank"": ""string | null""
-          },
-          ""channel"": ""string | null"", // Payment method used
-          ""can_be_located"": ""boolean""
-        }
-      ]
+      ""date"": ""string | null"",
+      ""amount"": ""number | null"", 
+      ""currency"": ""string | null"",
+      ""from"": {
+        ""name"": ""string | null"",
+        ""account_number"": ""string | null"",
+        ""bank"": ""string | null""
+      },
+      ""to"": {
+        ""name"": ""string | null"",
+        ""account_number"": ""string | null"", 
+        ""bank"": ""string | null""
+      },
+      ""channel"": ""string | null"",
+      ""can_be_located"": ""boolean"",
+      ""transaction_references"": [""string""]
     }
-","Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
+  ]
+}","Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
 2024-12-31,HKD,55100,C,,,222-222222-101,111-111111-101,CHEUNG TAK SHING,CHAN TAI MAN,Beneficiary,CUTF,DCP UNRELATED ELECTRONIC TRANSFER CREDIT FROM PIB,,,55100,8b2bb8a8-4c97-4f85-9dd6-a6f2e2f736bc
 2024-12-31,HKD,66120,C,,,222-222222-101,111-111111-101,CHEUNG TAK SHING,CHAN TAI MAN,Beneficiary,CUTF,DCP UNRELATED ELECTRONIC TRANSFER CREDIT FROM PIB,,,66120,b1fe1784-1964-4b91-8c88-f502ac962761
 2025-01-01,HKD,52460,C,,,222-222222-101,111-111111-101,CHEUNG TAK SHING,CHAN TAI MAN,Beneficiary,CUTF,DCP UNRELATED ELECTRONIC TRANSFER CREDIT FROM PIB,,,52460,e4722871-cd22-445e-972c-7bd988be6b42
@@ -1936,86 +2136,106 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
     }
   ]
 }"
-ADCC,38,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with two documents: an unstructured fraud alert source and a structured CSV file of transaction records.
+ADCC,38,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
-Your task is to identify the fraudulent transactions described in the fraud alert source, match them to their corresponding entries in the transaction CSV, and produce a single consolidated JSON output that merges and reflects all relevant information. After generating the JSON, you must also provide a clear explanation of your matching and merging decisions.
+Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
 
-Key Instructions:
+Step-by-Step Process:
 
-    1. Core Task:
-        - Extract only transactions explicitly mentioned in the fraud alert source that contain both date and amount.
-        - Use the transaction CSV as the authoritative source to verify, correct, and enrich transaction data.
+**Step 1: Extract Reported Transactions from Source**
+- Carefully read the fraud alert source document
+- Identify and list ALL transactions explicitly mentioned with both date and amount
+- Do NOT modify, combine, or alter any reported transaction amounts or dates
+- Preserve each transaction exactly as reported in the source
+- Only proceed to Step 2 after completing this extraction
 
-    2. Step-by-Step Process:
-        a. Carefully read the fraud alert source to extract global fields and identify transactions to investigate.
-        b. Validate transactions:
-            - For each transaction, check if both date and amount are explicitly present and non-null.
-            - Immediately exclude transactions missing either field.
-        c. For each valid transaction:
-            - Search the CSV for a matching row using the rules below.
-            - If matched: Merge data using prioritization logic (set can_be_located: true).
-            - If unmatched: Use only fraud alert data (set can_be_located: false).
-        d. If no valid transactions remain, set alerted_transactions to an empty list [].
-        e. Assemble the final JSON output according to the schema.
+**Step 2: Match Each Reported Transaction to CSV**
+For each transaction extracted in Step 1:
+- First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
+- If exact match found: Use that single Transaction ID
+- If no exact match found: Look for multiple CSV transactions that:
+  * Have the same date as reported transaction
+  * Have matching originator OR beneficiary account numbers/names as reported transaction  
+  * When summed together, equal the exact amount of the reported transaction
+- If such combination exists: Include all those Transaction IDs
+- If no match found: Set can_be_located: false and transaction_references: []
 
-    3. Matching Rules (can_be_located logic):
-        A transaction from the fraud alert source matches a CSV row only if all three of the following conditions are met:
-            1. The date must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
-            2. The amount must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
-            3. At least one of the following is true:
-                - The from.account_number in the fraud alert source matches the Originator Account Number in the CSV.
-                - The to.account_number in the fraud alert source matches the Beneficiary Account Number in the CSV.
-                - The from.name in the fraud alert source matches the Originator Name in the CSV.
-                - The to.name in the fraud alert source matches the Beneficiary Name in the CSV.
+**Step 3: Merge Data for Each Matched Transaction**
+- First: Extract transaction_references (Transaction IDs) from CSV
+- Then: Use CSV values for all transaction fields (originator becomes ""from"", beneficiary becomes ""to"")
+- Finally: Fill missing fields with fraud alert source values
+- Use null if neither source has the value
 
-    4. Data Merging and Prioritization:
-        - For the global fields fraud_type, police_reference, and police_team: Always use the value from the fraud alert source.
-        - For the police_team field, extract and include any geographic location details mentioned with the police team in the fraud alert source.
-        - For transaction fields:
-            - If a transaction is not found in the CSV (can_be_located: false): Use only data from the fraud alert source.
-            - If a transaction is found in the CSV (can_be_located: true): For each field, use the following priority:
-                1. CSV value (if present and not blank)
-                2. Fraud alert source value (if CSV value is blank or missing)
-                3. null (if neither source provides a value)
+**Step 4: Apply Global Field Rules**
+Apply these rules when populating global fields:
 
-    5. Data Handling:
-        - Preserve content: Do not remove or alter non-printable characters or artifacts; preserve content exactly as found.
-        - Whitespace: You may trim leading/trailing whitespace, but do not alter internal whitespace.
+**Fraud Type Rules:**
+- If fraud_type is ""Money Laundering"", ""External Fraud"", or offence types such as ""Obtaining Property By Deception"" but not other: Return ""Not provided""
+- Otherwise: Use the fraud_type value from fraud alert source
 
-    6. Strict Schema and Format Compliance:
-        - The final output must strictly follow the JSON schema below.
-        - All specified fields must be present. If a value cannot be found, use null (do not omit the key).
-        - Never output transactions with null/missing date or amount.
-        - The alerted_transactions array must always be present in the output, and if no valid transactions are found, it must be an empty list.
-        - Output must be a valid JSON object only, with no comments or extraneous text.
+**Step 5: Apply Transaction Rules**
+Apply these rules when populating transaction fields:
+
+**Bank Rules:**
+- from.bank:
+  * HSBC Referral: Always ""HSBC""
+  * Victim ODFT: Always ""HASE""
+  * Suspect ODFT: Use bank code/Chinese name mapping from CSV
+  * UAR: Use appropriate bank mapping from CSV
+- to.bank:
+  * Always ""HASE"", except for Victim ODFT cases
+
+**IMPORTANT: Bank Code Distinctions:**
+- HSB or HASE = Hang Seng Bank Ltd. (these are the SAME bank)
+- HSBC = The Hongkong and Shanghai Banking Corporation Limited (this is a DIFFERENT bank from HSB/HASE)
+- Do NOT confuse HSB with HSBC - they are completely different banks
+
+**Channel Rules (Payment Method):**
+The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""Branch"", or null
+
+Based on Transaction Code Description in CSV:
+- ""ATM TRANSFER UNRELATED DEPOSIT"" → ""ATM""
+- ""ATM TRANSFER UNRELATED WITHDRAWAL"" → ""ATM""
+- ""CASH DEP VIA CDM/BCDM - AC INPUT (TOUCH SCREEN)"" → ""cash""
+- ""ATM/CDM CASH CREDIT USINGACCOUNT INPUT"" → ""cash deposits via ATM"" if source file mentions ATM, otherwise ""cash""
+- ""CIF CASH DEPOSIT"" → ""cash""
+
+Based on Transaction Source in CSV:
+- ""CMTF"" → ""Branch""
+- ""CWTF"" → ""FPS""
+- ""DWTF"" → ""FPS""
+- ""FPWICT"" → ""FPS""
+
+**Step 6: Build Final JSON**
+- Global fields (fraud_type, police_reference, police_team): Use fraud alert source with global field rules applied
+- Include all transactions from Step 1 with their Step 2 matching results and Step 5 rule applications
 
 JSON Schema:
-
+{
+  ""fraud_type"": ""string | null"",
+  ""police_reference"": ""string | null"", 
+  ""police_team"": ""string | null"",
+  ""alerted_transactions"": [
     {
-      ""fraud_type"": ""string | null"",
-      ""police_reference"": ""string | null"",
-      ""police_team"": ""string | null"",
-      ""alerted_transactions"": [
-        {
-          ""date"": ""string | null"", // Format: YYYY-MM-DD
-          ""amount"": ""number | null"",
-          ""currency"": ""string | null"",
-          ""from"": {
-            ""name"": ""string | null"",
-            ""account_number"": ""string | null"",
-            ""bank"": ""string | null""
-          },
-          ""to"": {
-            ""name"": ""string | null"",
-            ""account_number"": ""string | null"",
-            ""bank"": ""string | null""
-          },
-          ""channel"": ""string | null"", // Payment method used
-          ""can_be_located"": ""boolean""
-        }
-      ]
+      ""date"": ""string | null"",
+      ""amount"": ""number | null"", 
+      ""currency"": ""string | null"",
+      ""from"": {
+        ""name"": ""string | null"",
+        ""account_number"": ""string | null"",
+        ""bank"": ""string | null""
+      },
+      ""to"": {
+        ""name"": ""string | null"",
+        ""account_number"": ""string | null"", 
+        ""bank"": ""string | null""
+      },
+      ""channel"": ""string | null"",
+      ""can_be_located"": ""boolean"",
+      ""transaction_references"": [""string""]
     }
-","Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
+  ]
+}","Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
 2024-12-29,HKD,116523.87,C,Hang Seng Bank Ltd.,The Hongkong and Shanghai Banking Corporation Limited,444-4444444-101,111-111111-101,CHEUNG TAK SHING,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,The Hongkong and Shanghai Banking Corporation Limited    HK,,124a7b9d-c52d-4f21-b135-7a38ec924c26
 2024-12-30,HKD,150000.0,C,Hang Seng Bank Ltd.,Bank of China (Hong Kong) Limited,444-4444444-102,111-111111-101,YAN MEI MEI,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,Bank of China (Hong Kong) Limited    HK,,68da62b3-dfb7-4421-940d-ac999f8fd6f9
 2024-12-30,HKD,10000.0,C,Hang Seng Bank Ltd.,Bank of China (Hong Kong) Limited,444-4444444-103,111-111111-101,TAN FUNG,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,Bank of China (Hong Kong) Limited    HK,,5b269966-e726-42fa-a980-4227e78c3706
@@ -2080,86 +2300,106 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
     }
   ]
 }"
-ADCC,38,3,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with two documents: an unstructured fraud alert source and a structured CSV file of transaction records.
+ADCC,38,3,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
-Your task is to identify the fraudulent transactions described in the fraud alert source, match them to their corresponding entries in the transaction CSV, and produce a single consolidated JSON output that merges and reflects all relevant information. After generating the JSON, you must also provide a clear explanation of your matching and merging decisions.
+Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
 
-Key Instructions:
+Step-by-Step Process:
 
-    1. Core Task:
-        - Extract only transactions explicitly mentioned in the fraud alert source that contain both date and amount.
-        - Use the transaction CSV as the authoritative source to verify, correct, and enrich transaction data.
+**Step 1: Extract Reported Transactions from Source**
+- Carefully read the fraud alert source document
+- Identify and list ALL transactions explicitly mentioned with both date and amount
+- Do NOT modify, combine, or alter any reported transaction amounts or dates
+- Preserve each transaction exactly as reported in the source
+- Only proceed to Step 2 after completing this extraction
 
-    2. Step-by-Step Process:
-        a. Carefully read the fraud alert source to extract global fields and identify transactions to investigate.
-        b. Validate transactions:
-            - For each transaction, check if both date and amount are explicitly present and non-null.
-            - Immediately exclude transactions missing either field.
-        c. For each valid transaction:
-            - Search the CSV for a matching row using the rules below.
-            - If matched: Merge data using prioritization logic (set can_be_located: true).
-            - If unmatched: Use only fraud alert data (set can_be_located: false).
-        d. If no valid transactions remain, set alerted_transactions to an empty list [].
-        e. Assemble the final JSON output according to the schema.
+**Step 2: Match Each Reported Transaction to CSV**
+For each transaction extracted in Step 1:
+- First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
+- If exact match found: Use that single Transaction ID
+- If no exact match found: Look for multiple CSV transactions that:
+  * Have the same date as reported transaction
+  * Have matching originator OR beneficiary account numbers/names as reported transaction  
+  * When summed together, equal the exact amount of the reported transaction
+- If such combination exists: Include all those Transaction IDs
+- If no match found: Set can_be_located: false and transaction_references: []
 
-    3. Matching Rules (can_be_located logic):
-        A transaction from the fraud alert source matches a CSV row only if all three of the following conditions are met:
-            1. The date must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
-            2. The amount must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
-            3. At least one of the following is true:
-                - The from.account_number in the fraud alert source matches the Originator Account Number in the CSV.
-                - The to.account_number in the fraud alert source matches the Beneficiary Account Number in the CSV.
-                - The from.name in the fraud alert source matches the Originator Name in the CSV.
-                - The to.name in the fraud alert source matches the Beneficiary Name in the CSV.
+**Step 3: Merge Data for Each Matched Transaction**
+- First: Extract transaction_references (Transaction IDs) from CSV
+- Then: Use CSV values for all transaction fields (originator becomes ""from"", beneficiary becomes ""to"")
+- Finally: Fill missing fields with fraud alert source values
+- Use null if neither source has the value
 
-    4. Data Merging and Prioritization:
-        - For the global fields fraud_type, police_reference, and police_team: Always use the value from the fraud alert source.
-        - For the police_team field, extract and include any geographic location details mentioned with the police team in the fraud alert source.
-        - For transaction fields:
-            - If a transaction is not found in the CSV (can_be_located: false): Use only data from the fraud alert source.
-            - If a transaction is found in the CSV (can_be_located: true): For each field, use the following priority:
-                1. CSV value (if present and not blank)
-                2. Fraud alert source value (if CSV value is blank or missing)
-                3. null (if neither source provides a value)
+**Step 4: Apply Global Field Rules**
+Apply these rules when populating global fields:
 
-    5. Data Handling:
-        - Preserve content: Do not remove or alter non-printable characters or artifacts; preserve content exactly as found.
-        - Whitespace: You may trim leading/trailing whitespace, but do not alter internal whitespace.
+**Fraud Type Rules:**
+- If fraud_type is ""Money Laundering"", ""External Fraud"", or offence types such as ""Obtaining Property By Deception"" but not other: Return ""Not provided""
+- Otherwise: Use the fraud_type value from fraud alert source
 
-    6. Strict Schema and Format Compliance:
-        - The final output must strictly follow the JSON schema below.
-        - All specified fields must be present. If a value cannot be found, use null (do not omit the key).
-        - Never output transactions with null/missing date or amount.
-        - The alerted_transactions array must always be present in the output, and if no valid transactions are found, it must be an empty list.
-        - Output must be a valid JSON object only, with no comments or extraneous text.
+**Step 5: Apply Transaction Rules**
+Apply these rules when populating transaction fields:
+
+**Bank Rules:**
+- from.bank:
+  * HSBC Referral: Always ""HSBC""
+  * Victim ODFT: Always ""HASE""
+  * Suspect ODFT: Use bank code/Chinese name mapping from CSV
+  * UAR: Use appropriate bank mapping from CSV
+- to.bank:
+  * Always ""HASE"", except for Victim ODFT cases
+
+**IMPORTANT: Bank Code Distinctions:**
+- HSB or HASE = Hang Seng Bank Ltd. (these are the SAME bank)
+- HSBC = The Hongkong and Shanghai Banking Corporation Limited (this is a DIFFERENT bank from HSB/HASE)
+- Do NOT confuse HSB with HSBC - they are completely different banks
+
+**Channel Rules (Payment Method):**
+The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""Branch"", or null
+
+Based on Transaction Code Description in CSV:
+- ""ATM TRANSFER UNRELATED DEPOSIT"" → ""ATM""
+- ""ATM TRANSFER UNRELATED WITHDRAWAL"" → ""ATM""
+- ""CASH DEP VIA CDM/BCDM - AC INPUT (TOUCH SCREEN)"" → ""cash""
+- ""ATM/CDM CASH CREDIT USINGACCOUNT INPUT"" → ""cash deposits via ATM"" if source file mentions ATM, otherwise ""cash""
+- ""CIF CASH DEPOSIT"" → ""cash""
+
+Based on Transaction Source in CSV:
+- ""CMTF"" → ""Branch""
+- ""CWTF"" → ""FPS""
+- ""DWTF"" → ""FPS""
+- ""FPWICT"" → ""FPS""
+
+**Step 6: Build Final JSON**
+- Global fields (fraud_type, police_reference, police_team): Use fraud alert source with global field rules applied
+- Include all transactions from Step 1 with their Step 2 matching results and Step 5 rule applications
 
 JSON Schema:
-
+{
+  ""fraud_type"": ""string | null"",
+  ""police_reference"": ""string | null"", 
+  ""police_team"": ""string | null"",
+  ""alerted_transactions"": [
     {
-      ""fraud_type"": ""string | null"",
-      ""police_reference"": ""string | null"",
-      ""police_team"": ""string | null"",
-      ""alerted_transactions"": [
-        {
-          ""date"": ""string | null"", // Format: YYYY-MM-DD
-          ""amount"": ""number | null"",
-          ""currency"": ""string | null"",
-          ""from"": {
-            ""name"": ""string | null"",
-            ""account_number"": ""string | null"",
-            ""bank"": ""string | null""
-          },
-          ""to"": {
-            ""name"": ""string | null"",
-            ""account_number"": ""string | null"",
-            ""bank"": ""string | null""
-          },
-          ""channel"": ""string | null"", // Payment method used
-          ""can_be_located"": ""boolean""
-        }
-      ]
+      ""date"": ""string | null"",
+      ""amount"": ""number | null"", 
+      ""currency"": ""string | null"",
+      ""from"": {
+        ""name"": ""string | null"",
+        ""account_number"": ""string | null"",
+        ""bank"": ""string | null""
+      },
+      ""to"": {
+        ""name"": ""string | null"",
+        ""account_number"": ""string | null"", 
+        ""bank"": ""string | null""
+      },
+      ""channel"": ""string | null"",
+      ""can_be_located"": ""boolean"",
+      ""transaction_references"": [""string""]
     }
-","Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
+  ]
+}","Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
 2024-12-29,HKD,116523.87,C,Hang Seng Bank Ltd.,The Hongkong and Shanghai Banking Corporation Limited,444-4444444-101,111-111111-101,CHEUNG TAK SHING,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,The Hongkong and Shanghai Banking Corporation Limited    HK,,124a7b9d-c52d-4f21-b135-7a38ec924c26
 2024-12-30,HKD,150000.0,C,Hang Seng Bank Ltd.,Bank of China (Hong Kong) Limited,444-4444444-102,111-111111-101,YAN MEI MEI,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,Bank of China (Hong Kong) Limited    HK,,68da62b3-dfb7-4421-940d-ac999f8fd6f9
 2024-12-30,HKD,10000.0,C,Hang Seng Bank Ltd.,Bank of China (Hong Kong) Limited,444-4444444-103,111-111111-101,TAN FUNG,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,Bank of China (Hong Kong) Limited    HK,,5b269966-e726-42fa-a980-4227e78c3706
@@ -2224,86 +2464,106 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
     }
   ]
 }"
-ADCC,39,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with two documents: an unstructured fraud alert source and a structured CSV file of transaction records.
+ADCC,39,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
-Your task is to identify the fraudulent transactions described in the fraud alert source, match them to their corresponding entries in the transaction CSV, and produce a single consolidated JSON output that merges and reflects all relevant information. After generating the JSON, you must also provide a clear explanation of your matching and merging decisions.
+Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
 
-Key Instructions:
+Step-by-Step Process:
 
-    1. Core Task:
-        - Extract only transactions explicitly mentioned in the fraud alert source that contain both date and amount.
-        - Use the transaction CSV as the authoritative source to verify, correct, and enrich transaction data.
+**Step 1: Extract Reported Transactions from Source**
+- Carefully read the fraud alert source document
+- Identify and list ALL transactions explicitly mentioned with both date and amount
+- Do NOT modify, combine, or alter any reported transaction amounts or dates
+- Preserve each transaction exactly as reported in the source
+- Only proceed to Step 2 after completing this extraction
 
-    2. Step-by-Step Process:
-        a. Carefully read the fraud alert source to extract global fields and identify transactions to investigate.
-        b. Validate transactions:
-            - For each transaction, check if both date and amount are explicitly present and non-null.
-            - Immediately exclude transactions missing either field.
-        c. For each valid transaction:
-            - Search the CSV for a matching row using the rules below.
-            - If matched: Merge data using prioritization logic (set can_be_located: true).
-            - If unmatched: Use only fraud alert data (set can_be_located: false).
-        d. If no valid transactions remain, set alerted_transactions to an empty list [].
-        e. Assemble the final JSON output according to the schema.
+**Step 2: Match Each Reported Transaction to CSV**
+For each transaction extracted in Step 1:
+- First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
+- If exact match found: Use that single Transaction ID
+- If no exact match found: Look for multiple CSV transactions that:
+  * Have the same date as reported transaction
+  * Have matching originator OR beneficiary account numbers/names as reported transaction  
+  * When summed together, equal the exact amount of the reported transaction
+- If such combination exists: Include all those Transaction IDs
+- If no match found: Set can_be_located: false and transaction_references: []
 
-    3. Matching Rules (can_be_located logic):
-        A transaction from the fraud alert source matches a CSV row only if all three of the following conditions are met:
-            1. The date must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
-            2. The amount must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
-            3. At least one of the following is true:
-                - The from.account_number in the fraud alert source matches the Originator Account Number in the CSV.
-                - The to.account_number in the fraud alert source matches the Beneficiary Account Number in the CSV.
-                - The from.name in the fraud alert source matches the Originator Name in the CSV.
-                - The to.name in the fraud alert source matches the Beneficiary Name in the CSV.
+**Step 3: Merge Data for Each Matched Transaction**
+- First: Extract transaction_references (Transaction IDs) from CSV
+- Then: Use CSV values for all transaction fields (originator becomes ""from"", beneficiary becomes ""to"")
+- Finally: Fill missing fields with fraud alert source values
+- Use null if neither source has the value
 
-    4. Data Merging and Prioritization:
-        - For the global fields fraud_type, police_reference, and police_team: Always use the value from the fraud alert source.
-        - For the police_team field, extract and include any geographic location details mentioned with the police team in the fraud alert source.
-        - For transaction fields:
-            - If a transaction is not found in the CSV (can_be_located: false): Use only data from the fraud alert source.
-            - If a transaction is found in the CSV (can_be_located: true): For each field, use the following priority:
-                1. CSV value (if present and not blank)
-                2. Fraud alert source value (if CSV value is blank or missing)
-                3. null (if neither source provides a value)
+**Step 4: Apply Global Field Rules**
+Apply these rules when populating global fields:
 
-    5. Data Handling:
-        - Preserve content: Do not remove or alter non-printable characters or artifacts; preserve content exactly as found.
-        - Whitespace: You may trim leading/trailing whitespace, but do not alter internal whitespace.
+**Fraud Type Rules:**
+- If fraud_type is ""Money Laundering"", ""External Fraud"", or offence types such as ""Obtaining Property By Deception"" but not other: Return ""Not provided""
+- Otherwise: Use the fraud_type value from fraud alert source
 
-    6. Strict Schema and Format Compliance:
-        - The final output must strictly follow the JSON schema below.
-        - All specified fields must be present. If a value cannot be found, use null (do not omit the key).
-        - Never output transactions with null/missing date or amount.
-        - The alerted_transactions array must always be present in the output, and if no valid transactions are found, it must be an empty list.
-        - Output must be a valid JSON object only, with no comments or extraneous text.
+**Step 5: Apply Transaction Rules**
+Apply these rules when populating transaction fields:
+
+**Bank Rules:**
+- from.bank:
+  * HSBC Referral: Always ""HSBC""
+  * Victim ODFT: Always ""HASE""
+  * Suspect ODFT: Use bank code/Chinese name mapping from CSV
+  * UAR: Use appropriate bank mapping from CSV
+- to.bank:
+  * Always ""HASE"", except for Victim ODFT cases
+
+**IMPORTANT: Bank Code Distinctions:**
+- HSB or HASE = Hang Seng Bank Ltd. (these are the SAME bank)
+- HSBC = The Hongkong and Shanghai Banking Corporation Limited (this is a DIFFERENT bank from HSB/HASE)
+- Do NOT confuse HSB with HSBC - they are completely different banks
+
+**Channel Rules (Payment Method):**
+The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""Branch"", or null
+
+Based on Transaction Code Description in CSV:
+- ""ATM TRANSFER UNRELATED DEPOSIT"" → ""ATM""
+- ""ATM TRANSFER UNRELATED WITHDRAWAL"" → ""ATM""
+- ""CASH DEP VIA CDM/BCDM - AC INPUT (TOUCH SCREEN)"" → ""cash""
+- ""ATM/CDM CASH CREDIT USINGACCOUNT INPUT"" → ""cash deposits via ATM"" if source file mentions ATM, otherwise ""cash""
+- ""CIF CASH DEPOSIT"" → ""cash""
+
+Based on Transaction Source in CSV:
+- ""CMTF"" → ""Branch""
+- ""CWTF"" → ""FPS""
+- ""DWTF"" → ""FPS""
+- ""FPWICT"" → ""FPS""
+
+**Step 6: Build Final JSON**
+- Global fields (fraud_type, police_reference, police_team): Use fraud alert source with global field rules applied
+- Include all transactions from Step 1 with their Step 2 matching results and Step 5 rule applications
 
 JSON Schema:
-
+{
+  ""fraud_type"": ""string | null"",
+  ""police_reference"": ""string | null"", 
+  ""police_team"": ""string | null"",
+  ""alerted_transactions"": [
     {
-      ""fraud_type"": ""string | null"",
-      ""police_reference"": ""string | null"",
-      ""police_team"": ""string | null"",
-      ""alerted_transactions"": [
-        {
-          ""date"": ""string | null"", // Format: YYYY-MM-DD
-          ""amount"": ""number | null"",
-          ""currency"": ""string | null"",
-          ""from"": {
-            ""name"": ""string | null"",
-            ""account_number"": ""string | null"",
-            ""bank"": ""string | null""
-          },
-          ""to"": {
-            ""name"": ""string | null"",
-            ""account_number"": ""string | null"",
-            ""bank"": ""string | null""
-          },
-          ""channel"": ""string | null"", // Payment method used
-          ""can_be_located"": ""boolean""
-        }
-      ]
+      ""date"": ""string | null"",
+      ""amount"": ""number | null"", 
+      ""currency"": ""string | null"",
+      ""from"": {
+        ""name"": ""string | null"",
+        ""account_number"": ""string | null"",
+        ""bank"": ""string | null""
+      },
+      ""to"": {
+        ""name"": ""string | null"",
+        ""account_number"": ""string | null"", 
+        ""bank"": ""string | null""
+      },
+      ""channel"": ""string | null"",
+      ""can_be_located"": ""boolean"",
+      ""transaction_references"": [""string""]
     }
-","Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
+  ]
+}","Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
 2025-01-02,HKD,100000,C,Hang Seng Bank Ltd.,STANDARD CHARTERED BANK (HONG KONG) LIMITED,333-333333-101,111-111111-101,CHAN TAI MAN,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,STANDARD CHARTERED BANK (HONG KONG) LIMITED,100000,eef1a152-90b6-4b2c-bbf4-94d20d0e9047
 2025-01-02,HKD,100000,C,Hang Seng Bank Ltd.,STANDARD CHARTERED BANK (HONG KONG) LIMITED,333-333333-101,111-111111-101,CHAN TAI MAN,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,STANDARD CHARTERED BANK (HONG KONG) LIMITED,100000,d470b32b-bc91-4d54-a3e9-d0236a5c13ee
 2025-01-02,HKD,100000,C,Hang Seng Bank Ltd.,STANDARD CHARTERED BANK (HONG KONG) LIMITED,333-333333-101,111-111111-101,CHAN TAI MAN,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,STANDARD CHARTERED BANK (HONG KONG) LIMITED,100000,ef59533d-7110-4569-8bf8-e3d0d5452c79
@@ -2676,86 +2936,106 @@ Tel: 286■■■■■ / Fax: ","{
     }
   ]
 }"
-ADCC,41,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with two documents: an unstructured fraud alert source and a structured CSV file of transaction records.
+ADCC,41,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
-Your task is to identify the fraudulent transactions described in the fraud alert source, match them to their corresponding entries in the transaction CSV, and produce a single consolidated JSON output that merges and reflects all relevant information. After generating the JSON, you must also provide a clear explanation of your matching and merging decisions.
+Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
 
-Key Instructions:
+Step-by-Step Process:
 
-    1. Core Task:
-        - Extract only transactions explicitly mentioned in the fraud alert source that contain both date and amount.
-        - Use the transaction CSV as the authoritative source to verify, correct, and enrich transaction data.
+**Step 1: Extract Reported Transactions from Source**
+- Carefully read the fraud alert source document
+- Identify and list ALL transactions explicitly mentioned with both date and amount
+- Do NOT modify, combine, or alter any reported transaction amounts or dates
+- Preserve each transaction exactly as reported in the source
+- Only proceed to Step 2 after completing this extraction
 
-    2. Step-by-Step Process:
-        a. Carefully read the fraud alert source to extract global fields and identify transactions to investigate.
-        b. Validate transactions:
-            - For each transaction, check if both date and amount are explicitly present and non-null.
-            - Immediately exclude transactions missing either field.
-        c. For each valid transaction:
-            - Search the CSV for a matching row using the rules below.
-            - If matched: Merge data using prioritization logic (set can_be_located: true).
-            - If unmatched: Use only fraud alert data (set can_be_located: false).
-        d. If no valid transactions remain, set alerted_transactions to an empty list [].
-        e. Assemble the final JSON output according to the schema.
+**Step 2: Match Each Reported Transaction to CSV**
+For each transaction extracted in Step 1:
+- First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
+- If exact match found: Use that single Transaction ID
+- If no exact match found: Look for multiple CSV transactions that:
+  * Have the same date as reported transaction
+  * Have matching originator OR beneficiary account numbers/names as reported transaction  
+  * When summed together, equal the exact amount of the reported transaction
+- If such combination exists: Include all those Transaction IDs
+- If no match found: Set can_be_located: false and transaction_references: []
 
-    3. Matching Rules (can_be_located logic):
-        A transaction from the fraud alert source matches a CSV row only if all three of the following conditions are met:
-            1. The date must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
-            2. The amount must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
-            3. At least one of the following is true:
-                - The from.account_number in the fraud alert source matches the Originator Account Number in the CSV.
-                - The to.account_number in the fraud alert source matches the Beneficiary Account Number in the CSV.
-                - The from.name in the fraud alert source matches the Originator Name in the CSV.
-                - The to.name in the fraud alert source matches the Beneficiary Name in the CSV.
+**Step 3: Merge Data for Each Matched Transaction**
+- First: Extract transaction_references (Transaction IDs) from CSV
+- Then: Use CSV values for all transaction fields (originator becomes ""from"", beneficiary becomes ""to"")
+- Finally: Fill missing fields with fraud alert source values
+- Use null if neither source has the value
 
-    4. Data Merging and Prioritization:
-        - For the global fields fraud_type, police_reference, and police_team: Always use the value from the fraud alert source.
-        - For the police_team field, extract and include any geographic location details mentioned with the police team in the fraud alert source.
-        - For transaction fields:
-            - If a transaction is not found in the CSV (can_be_located: false): Use only data from the fraud alert source.
-            - If a transaction is found in the CSV (can_be_located: true): For each field, use the following priority:
-                1. CSV value (if present and not blank)
-                2. Fraud alert source value (if CSV value is blank or missing)
-                3. null (if neither source provides a value)
+**Step 4: Apply Global Field Rules**
+Apply these rules when populating global fields:
 
-    5. Data Handling:
-        - Preserve content: Do not remove or alter non-printable characters or artifacts; preserve content exactly as found.
-        - Whitespace: You may trim leading/trailing whitespace, but do not alter internal whitespace.
+**Fraud Type Rules:**
+- If fraud_type is ""Money Laundering"", ""External Fraud"", or offence types such as ""Obtaining Property By Deception"" but not other: Return ""Not provided""
+- Otherwise: Use the fraud_type value from fraud alert source
 
-    6. Strict Schema and Format Compliance:
-        - The final output must strictly follow the JSON schema below.
-        - All specified fields must be present. If a value cannot be found, use null (do not omit the key).
-        - Never output transactions with null/missing date or amount.
-        - The alerted_transactions array must always be present in the output, and if no valid transactions are found, it must be an empty list.
-        - Output must be a valid JSON object only, with no comments or extraneous text.
+**Step 5: Apply Transaction Rules**
+Apply these rules when populating transaction fields:
+
+**Bank Rules:**
+- from.bank:
+  * HSBC Referral: Always ""HSBC""
+  * Victim ODFT: Always ""HASE""
+  * Suspect ODFT: Use bank code/Chinese name mapping from CSV
+  * UAR: Use appropriate bank mapping from CSV
+- to.bank:
+  * Always ""HASE"", except for Victim ODFT cases
+
+**IMPORTANT: Bank Code Distinctions:**
+- HSB or HASE = Hang Seng Bank Ltd. (these are the SAME bank)
+- HSBC = The Hongkong and Shanghai Banking Corporation Limited (this is a DIFFERENT bank from HSB/HASE)
+- Do NOT confuse HSB with HSBC - they are completely different banks
+
+**Channel Rules (Payment Method):**
+The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""Branch"", or null
+
+Based on Transaction Code Description in CSV:
+- ""ATM TRANSFER UNRELATED DEPOSIT"" → ""ATM""
+- ""ATM TRANSFER UNRELATED WITHDRAWAL"" → ""ATM""
+- ""CASH DEP VIA CDM/BCDM - AC INPUT (TOUCH SCREEN)"" → ""cash""
+- ""ATM/CDM CASH CREDIT USINGACCOUNT INPUT"" → ""cash deposits via ATM"" if source file mentions ATM, otherwise ""cash""
+- ""CIF CASH DEPOSIT"" → ""cash""
+
+Based on Transaction Source in CSV:
+- ""CMTF"" → ""Branch""
+- ""CWTF"" → ""FPS""
+- ""DWTF"" → ""FPS""
+- ""FPWICT"" → ""FPS""
+
+**Step 6: Build Final JSON**
+- Global fields (fraud_type, police_reference, police_team): Use fraud alert source with global field rules applied
+- Include all transactions from Step 1 with their Step 2 matching results and Step 5 rule applications
 
 JSON Schema:
-
+{
+  ""fraud_type"": ""string | null"",
+  ""police_reference"": ""string | null"", 
+  ""police_team"": ""string | null"",
+  ""alerted_transactions"": [
     {
-      ""fraud_type"": ""string | null"",
-      ""police_reference"": ""string | null"",
-      ""police_team"": ""string | null"",
-      ""alerted_transactions"": [
-        {
-          ""date"": ""string | null"", // Format: YYYY-MM-DD
-          ""amount"": ""number | null"",
-          ""currency"": ""string | null"",
-          ""from"": {
-            ""name"": ""string | null"",
-            ""account_number"": ""string | null"",
-            ""bank"": ""string | null""
-          },
-          ""to"": {
-            ""name"": ""string | null"",
-            ""account_number"": ""string | null"",
-            ""bank"": ""string | null""
-          },
-          ""channel"": ""string | null"", // Payment method used
-          ""can_be_located"": ""boolean""
-        }
-      ]
+      ""date"": ""string | null"",
+      ""amount"": ""number | null"", 
+      ""currency"": ""string | null"",
+      ""from"": {
+        ""name"": ""string | null"",
+        ""account_number"": ""string | null"",
+        ""bank"": ""string | null""
+      },
+      ""to"": {
+        ""name"": ""string | null"",
+        ""account_number"": ""string | null"", 
+        ""bank"": ""string | null""
+      },
+      ""channel"": ""string | null"",
+      ""can_be_located"": ""boolean"",
+      ""transaction_references"": [""string""]
     }
-","Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
+  ]
+}","Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
 2024-12-30,HKD,100000,C,,,,111-111111-101,,CHAN TAI MAN,Beneficiary,CCCS,CASH DEP VIA CDM/BCDM -  AC INPUT (TOUCH SCREEN),,,100000,a7b67e63-4eaf-402b-bc62-e73ed095a0be
 ","Dear HSB,
 
@@ -2818,86 +3098,106 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
     }
   ]
 }"
-ADCC,45,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with two documents: an unstructured fraud alert source and a structured CSV file of transaction records.
+ADCC,45,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
-Your task is to identify the fraudulent transactions described in the fraud alert source, match them to their corresponding entries in the transaction CSV, and produce a single consolidated JSON output that merges and reflects all relevant information. After generating the JSON, you must also provide a clear explanation of your matching and merging decisions.
+Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
 
-Key Instructions:
+Step-by-Step Process:
 
-    1. Core Task:
-        - Extract only transactions explicitly mentioned in the fraud alert source that contain both date and amount.
-        - Use the transaction CSV as the authoritative source to verify, correct, and enrich transaction data.
+**Step 1: Extract Reported Transactions from Source**
+- Carefully read the fraud alert source document
+- Identify and list ALL transactions explicitly mentioned with both date and amount
+- Do NOT modify, combine, or alter any reported transaction amounts or dates
+- Preserve each transaction exactly as reported in the source
+- Only proceed to Step 2 after completing this extraction
 
-    2. Step-by-Step Process:
-        a. Carefully read the fraud alert source to extract global fields and identify transactions to investigate.
-        b. Validate transactions:
-            - For each transaction, check if both date and amount are explicitly present and non-null.
-            - Immediately exclude transactions missing either field.
-        c. For each valid transaction:
-            - Search the CSV for a matching row using the rules below.
-            - If matched: Merge data using prioritization logic (set can_be_located: true).
-            - If unmatched: Use only fraud alert data (set can_be_located: false).
-        d. If no valid transactions remain, set alerted_transactions to an empty list [].
-        e. Assemble the final JSON output according to the schema.
+**Step 2: Match Each Reported Transaction to CSV**
+For each transaction extracted in Step 1:
+- First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
+- If exact match found: Use that single Transaction ID
+- If no exact match found: Look for multiple CSV transactions that:
+  * Have the same date as reported transaction
+  * Have matching originator OR beneficiary account numbers/names as reported transaction  
+  * When summed together, equal the exact amount of the reported transaction
+- If such combination exists: Include all those Transaction IDs
+- If no match found: Set can_be_located: false and transaction_references: []
 
-    3. Matching Rules (can_be_located logic):
-        A transaction from the fraud alert source matches a CSV row only if all three of the following conditions are met:
-            1. The date must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
-            2. The amount must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
-            3. At least one of the following is true:
-                - The from.account_number in the fraud alert source matches the Originator Account Number in the CSV.
-                - The to.account_number in the fraud alert source matches the Beneficiary Account Number in the CSV.
-                - The from.name in the fraud alert source matches the Originator Name in the CSV.
-                - The to.name in the fraud alert source matches the Beneficiary Name in the CSV.
+**Step 3: Merge Data for Each Matched Transaction**
+- First: Extract transaction_references (Transaction IDs) from CSV
+- Then: Use CSV values for all transaction fields (originator becomes ""from"", beneficiary becomes ""to"")
+- Finally: Fill missing fields with fraud alert source values
+- Use null if neither source has the value
 
-    4. Data Merging and Prioritization:
-        - For the global fields fraud_type, police_reference, and police_team: Always use the value from the fraud alert source.
-        - For the police_team field, extract and include any geographic location details mentioned with the police team in the fraud alert source.
-        - For transaction fields:
-            - If a transaction is not found in the CSV (can_be_located: false): Use only data from the fraud alert source.
-            - If a transaction is found in the CSV (can_be_located: true): For each field, use the following priority:
-                1. CSV value (if present and not blank)
-                2. Fraud alert source value (if CSV value is blank or missing)
-                3. null (if neither source provides a value)
+**Step 4: Apply Global Field Rules**
+Apply these rules when populating global fields:
 
-    5. Data Handling:
-        - Preserve content: Do not remove or alter non-printable characters or artifacts; preserve content exactly as found.
-        - Whitespace: You may trim leading/trailing whitespace, but do not alter internal whitespace.
+**Fraud Type Rules:**
+- If fraud_type is ""Money Laundering"", ""External Fraud"", or offence types such as ""Obtaining Property By Deception"" but not other: Return ""Not provided""
+- Otherwise: Use the fraud_type value from fraud alert source
 
-    6. Strict Schema and Format Compliance:
-        - The final output must strictly follow the JSON schema below.
-        - All specified fields must be present. If a value cannot be found, use null (do not omit the key).
-        - Never output transactions with null/missing date or amount.
-        - The alerted_transactions array must always be present in the output, and if no valid transactions are found, it must be an empty list.
-        - Output must be a valid JSON object only, with no comments or extraneous text.
+**Step 5: Apply Transaction Rules**
+Apply these rules when populating transaction fields:
+
+**Bank Rules:**
+- from.bank:
+  * HSBC Referral: Always ""HSBC""
+  * Victim ODFT: Always ""HASE""
+  * Suspect ODFT: Use bank code/Chinese name mapping from CSV
+  * UAR: Use appropriate bank mapping from CSV
+- to.bank:
+  * Always ""HASE"", except for Victim ODFT cases
+
+**IMPORTANT: Bank Code Distinctions:**
+- HSB or HASE = Hang Seng Bank Ltd. (these are the SAME bank)
+- HSBC = The Hongkong and Shanghai Banking Corporation Limited (this is a DIFFERENT bank from HSB/HASE)
+- Do NOT confuse HSB with HSBC - they are completely different banks
+
+**Channel Rules (Payment Method):**
+The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""Branch"", or null
+
+Based on Transaction Code Description in CSV:
+- ""ATM TRANSFER UNRELATED DEPOSIT"" → ""ATM""
+- ""ATM TRANSFER UNRELATED WITHDRAWAL"" → ""ATM""
+- ""CASH DEP VIA CDM/BCDM - AC INPUT (TOUCH SCREEN)"" → ""cash""
+- ""ATM/CDM CASH CREDIT USINGACCOUNT INPUT"" → ""cash deposits via ATM"" if source file mentions ATM, otherwise ""cash""
+- ""CIF CASH DEPOSIT"" → ""cash""
+
+Based on Transaction Source in CSV:
+- ""CMTF"" → ""Branch""
+- ""CWTF"" → ""FPS""
+- ""DWTF"" → ""FPS""
+- ""FPWICT"" → ""FPS""
+
+**Step 6: Build Final JSON**
+- Global fields (fraud_type, police_reference, police_team): Use fraud alert source with global field rules applied
+- Include all transactions from Step 1 with their Step 2 matching results and Step 5 rule applications
 
 JSON Schema:
-
+{
+  ""fraud_type"": ""string | null"",
+  ""police_reference"": ""string | null"", 
+  ""police_team"": ""string | null"",
+  ""alerted_transactions"": [
     {
-      ""fraud_type"": ""string | null"",
-      ""police_reference"": ""string | null"",
-      ""police_team"": ""string | null"",
-      ""alerted_transactions"": [
-        {
-          ""date"": ""string | null"", // Format: YYYY-MM-DD
-          ""amount"": ""number | null"",
-          ""currency"": ""string | null"",
-          ""from"": {
-            ""name"": ""string | null"",
-            ""account_number"": ""string | null"",
-            ""bank"": ""string | null""
-          },
-          ""to"": {
-            ""name"": ""string | null"",
-            ""account_number"": ""string | null"",
-            ""bank"": ""string | null""
-          },
-          ""channel"": ""string | null"", // Payment method used
-          ""can_be_located"": ""boolean""
-        }
-      ]
+      ""date"": ""string | null"",
+      ""amount"": ""number | null"", 
+      ""currency"": ""string | null"",
+      ""from"": {
+        ""name"": ""string | null"",
+        ""account_number"": ""string | null"",
+        ""bank"": ""string | null""
+      },
+      ""to"": {
+        ""name"": ""string | null"",
+        ""account_number"": ""string | null"", 
+        ""bank"": ""string | null""
+      },
+      ""channel"": ""string | null"",
+      ""can_be_located"": ""boolean"",
+      ""transaction_references"": [""string""]
     }
-","Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
+  ]
+}","Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
 2025-01-06,HKD,147585.59,C,,,222-222222-101,111-111111-101,CHEUNG TAK SHING,CHAN TAI MAN,Beneficiary,CUTF,Default transaction,,,147585.59,56cf127d-3e3a-41fa-b75c-ca6200fab4e3
 ","Dear HSB,
 
@@ -2952,7 +3252,7 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
         ""account_number"": ""111-111111-101"",
         ""bank"": ""HASE""
       },
-      ""channel"": null,
+      ""channel"": ""FPS"",
       ""can_be_located"": true,
       ""transaction_references"": [
         ""56cf127d-3e3a-41fa-b75c-ca6200fab4e3""
@@ -2960,86 +3260,106 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
     }
   ]
 }"
-ADCC,46,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with two documents: an unstructured fraud alert source and a structured CSV file of transaction records.
+ADCC,46,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
-Your task is to identify the fraudulent transactions described in the fraud alert source, match them to their corresponding entries in the transaction CSV, and produce a single consolidated JSON output that merges and reflects all relevant information. After generating the JSON, you must also provide a clear explanation of your matching and merging decisions.
+Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
 
-Key Instructions:
+Step-by-Step Process:
 
-    1. Core Task:
-        - Extract only transactions explicitly mentioned in the fraud alert source that contain both date and amount.
-        - Use the transaction CSV as the authoritative source to verify, correct, and enrich transaction data.
+**Step 1: Extract Reported Transactions from Source**
+- Carefully read the fraud alert source document
+- Identify and list ALL transactions explicitly mentioned with both date and amount
+- Do NOT modify, combine, or alter any reported transaction amounts or dates
+- Preserve each transaction exactly as reported in the source
+- Only proceed to Step 2 after completing this extraction
 
-    2. Step-by-Step Process:
-        a. Carefully read the fraud alert source to extract global fields and identify transactions to investigate.
-        b. Validate transactions:
-            - For each transaction, check if both date and amount are explicitly present and non-null.
-            - Immediately exclude transactions missing either field.
-        c. For each valid transaction:
-            - Search the CSV for a matching row using the rules below.
-            - If matched: Merge data using prioritization logic (set can_be_located: true).
-            - If unmatched: Use only fraud alert data (set can_be_located: false).
-        d. If no valid transactions remain, set alerted_transactions to an empty list [].
-        e. Assemble the final JSON output according to the schema.
+**Step 2: Match Each Reported Transaction to CSV**
+For each transaction extracted in Step 1:
+- First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
+- If exact match found: Use that single Transaction ID
+- If no exact match found: Look for multiple CSV transactions that:
+  * Have the same date as reported transaction
+  * Have matching originator OR beneficiary account numbers/names as reported transaction  
+  * When summed together, equal the exact amount of the reported transaction
+- If such combination exists: Include all those Transaction IDs
+- If no match found: Set can_be_located: false and transaction_references: []
 
-    3. Matching Rules (can_be_located logic):
-        A transaction from the fraud alert source matches a CSV row only if all three of the following conditions are met:
-            1. The date must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
-            2. The amount must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
-            3. At least one of the following is true:
-                - The from.account_number in the fraud alert source matches the Originator Account Number in the CSV.
-                - The to.account_number in the fraud alert source matches the Beneficiary Account Number in the CSV.
-                - The from.name in the fraud alert source matches the Originator Name in the CSV.
-                - The to.name in the fraud alert source matches the Beneficiary Name in the CSV.
+**Step 3: Merge Data for Each Matched Transaction**
+- First: Extract transaction_references (Transaction IDs) from CSV
+- Then: Use CSV values for all transaction fields (originator becomes ""from"", beneficiary becomes ""to"")
+- Finally: Fill missing fields with fraud alert source values
+- Use null if neither source has the value
 
-    4. Data Merging and Prioritization:
-        - For the global fields fraud_type, police_reference, and police_team: Always use the value from the fraud alert source.
-        - For the police_team field, extract and include any geographic location details mentioned with the police team in the fraud alert source.
-        - For transaction fields:
-            - If a transaction is not found in the CSV (can_be_located: false): Use only data from the fraud alert source.
-            - If a transaction is found in the CSV (can_be_located: true): For each field, use the following priority:
-                1. CSV value (if present and not blank)
-                2. Fraud alert source value (if CSV value is blank or missing)
-                3. null (if neither source provides a value)
+**Step 4: Apply Global Field Rules**
+Apply these rules when populating global fields:
 
-    5. Data Handling:
-        - Preserve content: Do not remove or alter non-printable characters or artifacts; preserve content exactly as found.
-        - Whitespace: You may trim leading/trailing whitespace, but do not alter internal whitespace.
+**Fraud Type Rules:**
+- If fraud_type is ""Money Laundering"", ""External Fraud"", or offence types such as ""Obtaining Property By Deception"" but not other: Return ""Not provided""
+- Otherwise: Use the fraud_type value from fraud alert source
 
-    6. Strict Schema and Format Compliance:
-        - The final output must strictly follow the JSON schema below.
-        - All specified fields must be present. If a value cannot be found, use null (do not omit the key).
-        - Never output transactions with null/missing date or amount.
-        - The alerted_transactions array must always be present in the output, and if no valid transactions are found, it must be an empty list.
-        - Output must be a valid JSON object only, with no comments or extraneous text.
+**Step 5: Apply Transaction Rules**
+Apply these rules when populating transaction fields:
+
+**Bank Rules:**
+- from.bank:
+  * HSBC Referral: Always ""HSBC""
+  * Victim ODFT: Always ""HASE""
+  * Suspect ODFT: Use bank code/Chinese name mapping from CSV
+  * UAR: Use appropriate bank mapping from CSV
+- to.bank:
+  * Always ""HASE"", except for Victim ODFT cases
+
+**IMPORTANT: Bank Code Distinctions:**
+- HSB or HASE = Hang Seng Bank Ltd. (these are the SAME bank)
+- HSBC = The Hongkong and Shanghai Banking Corporation Limited (this is a DIFFERENT bank from HSB/HASE)
+- Do NOT confuse HSB with HSBC - they are completely different banks
+
+**Channel Rules (Payment Method):**
+The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""Branch"", or null
+
+Based on Transaction Code Description in CSV:
+- ""ATM TRANSFER UNRELATED DEPOSIT"" → ""ATM""
+- ""ATM TRANSFER UNRELATED WITHDRAWAL"" → ""ATM""
+- ""CASH DEP VIA CDM/BCDM - AC INPUT (TOUCH SCREEN)"" → ""cash""
+- ""ATM/CDM CASH CREDIT USINGACCOUNT INPUT"" → ""cash deposits via ATM"" if source file mentions ATM, otherwise ""cash""
+- ""CIF CASH DEPOSIT"" → ""cash""
+
+Based on Transaction Source in CSV:
+- ""CMTF"" → ""Branch""
+- ""CWTF"" → ""FPS""
+- ""DWTF"" → ""FPS""
+- ""FPWICT"" → ""FPS""
+
+**Step 6: Build Final JSON**
+- Global fields (fraud_type, police_reference, police_team): Use fraud alert source with global field rules applied
+- Include all transactions from Step 1 with their Step 2 matching results and Step 5 rule applications
 
 JSON Schema:
-
+{
+  ""fraud_type"": ""string | null"",
+  ""police_reference"": ""string | null"", 
+  ""police_team"": ""string | null"",
+  ""alerted_transactions"": [
     {
-      ""fraud_type"": ""string | null"",
-      ""police_reference"": ""string | null"",
-      ""police_team"": ""string | null"",
-      ""alerted_transactions"": [
-        {
-          ""date"": ""string | null"", // Format: YYYY-MM-DD
-          ""amount"": ""number | null"",
-          ""currency"": ""string | null"",
-          ""from"": {
-            ""name"": ""string | null"",
-            ""account_number"": ""string | null"",
-            ""bank"": ""string | null""
-          },
-          ""to"": {
-            ""name"": ""string | null"",
-            ""account_number"": ""string | null"",
-            ""bank"": ""string | null""
-          },
-          ""channel"": ""string | null"", // Payment method used
-          ""can_be_located"": ""boolean""
-        }
-      ]
+      ""date"": ""string | null"",
+      ""amount"": ""number | null"", 
+      ""currency"": ""string | null"",
+      ""from"": {
+        ""name"": ""string | null"",
+        ""account_number"": ""string | null"",
+        ""bank"": ""string | null""
+      },
+      ""to"": {
+        ""name"": ""string | null"",
+        ""account_number"": ""string | null"", 
+        ""bank"": ""string | null""
+      },
+      ""channel"": ""string | null"",
+      ""can_be_located"": ""boolean"",
+      ""transaction_references"": [""string""]
     }
-","Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
+  ]
+}","Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
 2025-01-17,HKD,200000,C,Hang Seng Bank Ltd.,The Hongkong and Shanghai Banking Corporation Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,WIRE-TRANSFER CREDIT,,The Hongkong and Shanghai Banking Corporation Limited    HK,200000,8bc79c2c-3080-445c-a8cf-1cd476a2ac3a
 2025-01-17,HKD,4000,C,Hang Seng Bank Ltd.,The Hongkong and Shanghai Banking Corporation Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,WIRE-TRANSFER CREDIT,,The Hongkong and Shanghai Banking Corporation Limited    HK,4000,0c1eaeaa-5b66-46cd-99da-d57f52ead4a9
 2025-01-19,HKD,22000,C,,,,111-111111-101,,MR        CHAN TAI MAN,Beneficiary,CCCS,ATM/CDM CASH CREDIT USINGACCOUNT INPUT,,,22000,d1bb54cb-7a0c-4209-90a0-9fbe693bacf5
@@ -3127,86 +3447,106 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
     }
   ]
 }"
-ADCC,49,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with two documents: an unstructured fraud alert source and a structured CSV file of transaction records.
+ADCC,49,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
-Your task is to identify the fraudulent transactions described in the fraud alert source, match them to their corresponding entries in the transaction CSV, and produce a single consolidated JSON output that merges and reflects all relevant information. After generating the JSON, you must also provide a clear explanation of your matching and merging decisions.
+Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
 
-Key Instructions:
+Step-by-Step Process:
 
-    1. Core Task:
-        - Extract only transactions explicitly mentioned in the fraud alert source that contain both date and amount.
-        - Use the transaction CSV as the authoritative source to verify, correct, and enrich transaction data.
+**Step 1: Extract Reported Transactions from Source**
+- Carefully read the fraud alert source document
+- Identify and list ALL transactions explicitly mentioned with both date and amount
+- Do NOT modify, combine, or alter any reported transaction amounts or dates
+- Preserve each transaction exactly as reported in the source
+- Only proceed to Step 2 after completing this extraction
 
-    2. Step-by-Step Process:
-        a. Carefully read the fraud alert source to extract global fields and identify transactions to investigate.
-        b. Validate transactions:
-            - For each transaction, check if both date and amount are explicitly present and non-null.
-            - Immediately exclude transactions missing either field.
-        c. For each valid transaction:
-            - Search the CSV for a matching row using the rules below.
-            - If matched: Merge data using prioritization logic (set can_be_located: true).
-            - If unmatched: Use only fraud alert data (set can_be_located: false).
-        d. If no valid transactions remain, set alerted_transactions to an empty list [].
-        e. Assemble the final JSON output according to the schema.
+**Step 2: Match Each Reported Transaction to CSV**
+For each transaction extracted in Step 1:
+- First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
+- If exact match found: Use that single Transaction ID
+- If no exact match found: Look for multiple CSV transactions that:
+  * Have the same date as reported transaction
+  * Have matching originator OR beneficiary account numbers/names as reported transaction  
+  * When summed together, equal the exact amount of the reported transaction
+- If such combination exists: Include all those Transaction IDs
+- If no match found: Set can_be_located: false and transaction_references: []
 
-    3. Matching Rules (can_be_located logic):
-        A transaction from the fraud alert source matches a CSV row only if all three of the following conditions are met:
-            1. The date must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
-            2. The amount must be explicitly mentioned in the fraud alert source and matches exactly with the CSV.
-            3. At least one of the following is true:
-                - The from.account_number in the fraud alert source matches the Originator Account Number in the CSV.
-                - The to.account_number in the fraud alert source matches the Beneficiary Account Number in the CSV.
-                - The from.name in the fraud alert source matches the Originator Name in the CSV.
-                - The to.name in the fraud alert source matches the Beneficiary Name in the CSV.
+**Step 3: Merge Data for Each Matched Transaction**
+- First: Extract transaction_references (Transaction IDs) from CSV
+- Then: Use CSV values for all transaction fields (originator becomes ""from"", beneficiary becomes ""to"")
+- Finally: Fill missing fields with fraud alert source values
+- Use null if neither source has the value
 
-    4. Data Merging and Prioritization:
-        - For the global fields fraud_type, police_reference, and police_team: Always use the value from the fraud alert source.
-        - For the police_team field, extract and include any geographic location details mentioned with the police team in the fraud alert source.
-        - For transaction fields:
-            - If a transaction is not found in the CSV (can_be_located: false): Use only data from the fraud alert source.
-            - If a transaction is found in the CSV (can_be_located: true): For each field, use the following priority:
-                1. CSV value (if present and not blank)
-                2. Fraud alert source value (if CSV value is blank or missing)
-                3. null (if neither source provides a value)
+**Step 4: Apply Global Field Rules**
+Apply these rules when populating global fields:
 
-    5. Data Handling:
-        - Preserve content: Do not remove or alter non-printable characters or artifacts; preserve content exactly as found.
-        - Whitespace: You may trim leading/trailing whitespace, but do not alter internal whitespace.
+**Fraud Type Rules:**
+- If fraud_type is ""Money Laundering"", ""External Fraud"", or offence types such as ""Obtaining Property By Deception"" but not other: Return ""Not provided""
+- Otherwise: Use the fraud_type value from fraud alert source
 
-    6. Strict Schema and Format Compliance:
-        - The final output must strictly follow the JSON schema below.
-        - All specified fields must be present. If a value cannot be found, use null (do not omit the key).
-        - Never output transactions with null/missing date or amount.
-        - The alerted_transactions array must always be present in the output, and if no valid transactions are found, it must be an empty list.
-        - Output must be a valid JSON object only, with no comments or extraneous text.
+**Step 5: Apply Transaction Rules**
+Apply these rules when populating transaction fields:
+
+**Bank Rules:**
+- from.bank:
+  * HSBC Referral: Always ""HSBC""
+  * Victim ODFT: Always ""HASE""
+  * Suspect ODFT: Use bank code/Chinese name mapping from CSV
+  * UAR: Use appropriate bank mapping from CSV
+- to.bank:
+  * Always ""HASE"", except for Victim ODFT cases
+
+**IMPORTANT: Bank Code Distinctions:**
+- HSB or HASE = Hang Seng Bank Ltd. (these are the SAME bank)
+- HSBC = The Hongkong and Shanghai Banking Corporation Limited (this is a DIFFERENT bank from HSB/HASE)
+- Do NOT confuse HSB with HSBC - they are completely different banks
+
+**Channel Rules (Payment Method):**
+The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""Branch"", or null
+
+Based on Transaction Code Description in CSV:
+- ""ATM TRANSFER UNRELATED DEPOSIT"" → ""ATM""
+- ""ATM TRANSFER UNRELATED WITHDRAWAL"" → ""ATM""
+- ""CASH DEP VIA CDM/BCDM - AC INPUT (TOUCH SCREEN)"" → ""cash""
+- ""ATM/CDM CASH CREDIT USINGACCOUNT INPUT"" → ""cash deposits via ATM"" if source file mentions ATM, otherwise ""cash""
+- ""CIF CASH DEPOSIT"" → ""cash""
+
+Based on Transaction Source in CSV:
+- ""CMTF"" → ""Branch""
+- ""CWTF"" → ""FPS""
+- ""DWTF"" → ""FPS""
+- ""FPWICT"" → ""FPS""
+
+**Step 6: Build Final JSON**
+- Global fields (fraud_type, police_reference, police_team): Use fraud alert source with global field rules applied
+- Include all transactions from Step 1 with their Step 2 matching results and Step 5 rule applications
 
 JSON Schema:
-
+{
+  ""fraud_type"": ""string | null"",
+  ""police_reference"": ""string | null"", 
+  ""police_team"": ""string | null"",
+  ""alerted_transactions"": [
     {
-      ""fraud_type"": ""string | null"",
-      ""police_reference"": ""string | null"",
-      ""police_team"": ""string | null"",
-      ""alerted_transactions"": [
-        {
-          ""date"": ""string | null"", // Format: YYYY-MM-DD
-          ""amount"": ""number | null"",
-          ""currency"": ""string | null"",
-          ""from"": {
-            ""name"": ""string | null"",
-            ""account_number"": ""string | null"",
-            ""bank"": ""string | null""
-          },
-          ""to"": {
-            ""name"": ""string | null"",
-            ""account_number"": ""string | null"",
-            ""bank"": ""string | null""
-          },
-          ""channel"": ""string | null"", // Payment method used
-          ""can_be_located"": ""boolean""
-        }
-      ]
+      ""date"": ""string | null"",
+      ""amount"": ""number | null"", 
+      ""currency"": ""string | null"",
+      ""from"": {
+        ""name"": ""string | null"",
+        ""account_number"": ""string | null"",
+        ""bank"": ""string | null""
+      },
+      ""to"": {
+        ""name"": ""string | null"",
+        ""account_number"": ""string | null"", 
+        ""bank"": ""string | null""
+      },
+      ""channel"": ""string | null"",
+      ""can_be_located"": ""boolean"",
+      ""transaction_references"": [""string""]
     }
-","Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
+  ]
+}","Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
 2025-01-16,HKD,100000,C,Hang Seng Bank Ltd.,The Hongkong and Shanghai Banking Corporation Limited,444-4444444-101,111-111111-101,CHEUNG TAK SHING,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,The Hongkong and Shanghai Banking Corporation Limited    HK,,9efec3dc-bb03-4c9b-a71c-4121d437b0d2
 2025-01-16,HKD,100000,C,Hang Seng Bank Ltd.,The Hongkong and Shanghai Banking Corporation Limited,444-4444444-102,111-111111-101,YAN MEI MEI,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,The Hongkong and Shanghai Banking Corporation Limited    HK,,b44aafc5-297c-4c25-8827-6f31af5a655e
 ","Dear HSB,

@@ -67,7 +67,7 @@ def generate_response_openrouter(model_name: str, instruction: str, user_input: 
     payload = {
         "model": model_name,
         "messages": messages,
-        "max_tokens": 2048,
+        "max_tokens": 4096,
         "temperature": TEMPERATURE,
         "top_p": 1.0,
         "frequency_penalty": 0,

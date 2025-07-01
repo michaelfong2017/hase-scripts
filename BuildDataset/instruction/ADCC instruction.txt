@@ -28,9 +28,49 @@ For each transaction extracted in Step 1:
 - Finally: Fill missing fields with fraud alert source values
 - Use null if neither source has the value
 
-**Step 4: Build Final JSON**
-- Global fields (fraud_type, police_reference, police_team): Use fraud alert source
-- Include all transactions from Step 1 with their Step 2 matching results
+**Step 4: Apply Global Field Rules**
+Apply these rules when populating global fields:
+
+**Fraud Type Rules:**
+- If fraud_type is "Money Laundering", "External Fraud", or "Obtaining Property By Deception": Look for other fraud type hints in the document and use those instead, otherwise return "Not provided"
+- Otherwise: Use the fraud_type value from fraud alert source
+
+**Step 5: Apply Transaction Rules**
+Apply these rules when populating transaction fields:
+
+**Bank Rules:**
+- from.bank:
+  * HSBC Referral: Always "HSBC"
+  * Victim ODFT: Always "HASE"
+  * Suspect ODFT: Use bank code/Chinese name mapping from CSV
+  * UAR: Use appropriate bank mapping from CSV
+- to.bank:
+  * Always "HASE", except for Victim ODFT cases
+
+**IMPORTANT: Bank Code Distinctions:**
+- HSB or HASE = Hang Seng Bank Ltd. (these are the SAME bank)
+- HSBC = The Hongkong and Shanghai Banking Corporation Limited (this is a DIFFERENT bank from HSB/HASE)
+- Do NOT confuse HSB with HSBC - they are completely different banks
+
+**Channel Rules (Payment Method):**
+The channel field can only be: "FPS", "cash", "ATM", "cash deposits via ATM", "Branch", or null
+
+Based on Transaction Code Description in CSV:
+- "ATM TRANSFER UNRELATED DEPOSIT" → "ATM"
+- "ATM TRANSFER UNRELATED WITHDRAWAL" → "ATM"
+- "CASH DEP VIA CDM/BCDM - AC INPUT (TOUCH SCREEN)" → "cash"
+- "ATM/CDM CASH CREDIT USINGACCOUNT INPUT" → "cash deposits via ATM" if source file mentions ATM, otherwise "cash"
+- "CIF CASH DEPOSIT" → "cash"
+
+Based on Transaction Source in CSV:
+- "CMTF" → "Branch"
+- "CWTF" → "FPS"
+- "DWTF" → "FPS"
+- "FPWICT" → "FPS"
+
+**Step 6: Build Final JSON**
+- Global fields (fraud_type, police_reference, police_team): Use fraud alert source with global field rules applied
+- Include all transactions from Step 1 with their Step 2 matching results and Step 5 rule applications
 
 JSON Schema:
 {

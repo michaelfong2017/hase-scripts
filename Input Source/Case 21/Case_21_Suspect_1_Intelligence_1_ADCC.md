@@ -9,7 +9,7 @@ iii) The details of next layer beneficiary account(s) relating to the below tran
 Details of Beneficiary
 | Ref. | Beneficiary Bank | Layer | Beneficiary Account No. | Beneficiary Account Name |
 | ---- | ---------------- | ----- | ----------------------- | ------------------------ |
-| AC2 | HSB | 1st | 111-111111-102  | CHUNG SIU |
+| AC1 | HSB | 1st | 111-111111-101  | CHAN TAI MAN |
 
 Transaction Details
 | S/N | Date | Currency | Involved Amounts | Approx. HKD | Remitting Bank | AC Location | Depositor AC No. | Depositor AC Name |
