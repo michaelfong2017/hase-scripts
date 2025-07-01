@@ -28,24 +28,15 @@ For each transaction extracted in Step 1:
 - Finally: Fill missing fields with fraud alert source values
 - Use null if neither source has the value
 
-**Step 4: Apply Global Field Rules**
-Apply these rules when populating global fields:
-
-**Fraud Type Rules:**
-- If fraud_type is "Money Laundering", "External Fraud", or "Obtaining Property By Deception": Look for other fraud type hints in the document and use those instead, otherwise return "Not provided"
-- Otherwise: Use the fraud_type value from fraud alert source
-
-**Step 5: Apply Transaction Rules**
+**Step 4: Apply Transaction Rules**
 Apply these rules when populating transaction fields:
 
 **Bank Rules:**
 - from.bank:
-  * HSBC Referral: Always "HSBC"
-  * Victim ODFT: Always "HASE"
-  * Suspect ODFT: Use bank code/Chinese name mapping from CSV
-  * UAR: Use appropriate bank mapping from CSV
+  * If bank name is directly mentioned in source file, use that bank name as-is
+  * Then apply previous matching and merging rules from CSV data as usual
 - to.bank:
-  * Always "HASE", except for Victim ODFT cases
+  * Always "HASE"
 
 **IMPORTANT: Bank Code Distinctions:**
 - HSB or HASE = Hang Seng Bank Ltd. (these are the SAME bank)
@@ -68,9 +59,10 @@ Based on Transaction Source in CSV:
 - "DWTF" → "FPS"
 - "FPWICT" → "FPS"
 
-**Step 6: Build Final JSON**
-- Global fields (fraud_type, police_reference, police_team): Use fraud alert source with global field rules applied
-- Include all transactions from Step 1 with their Step 2 matching results and Step 5 rule applications
+**Step 5: Build Final JSON**
+- Global fields (fraud_type, police_reference, police_team): Use fraud alert source
+- Include all transactions extracted from source, each matched to CSV records, enriched with merged data, and adjusted by transaction rules
+- Ensure the final JSON output strictly follows the schema and includes all required fields
 
 JSON Schema:
 {

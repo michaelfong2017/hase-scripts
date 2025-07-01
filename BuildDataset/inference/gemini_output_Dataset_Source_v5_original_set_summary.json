@@ -2,46 +2,16 @@
   "Output_google_gemini_2_0_flash_001_vs_Ground Truth": {
     "total_rows": 189,
     "overall_pass": {
-      "count": 8,
-      "rate": "4.23%",
-      "first_half": {
-        "count": 8,
-        "total": 94,
-        "rate": "8.51%"
-      },
-      "second_half": {
-        "count": 0,
-        "total": 95,
-        "rate": "0.00%"
-      }
+      "count": 30,
+      "rate": "15.87%"
     },
     "alert_pass": {
-      "count": 18,
-      "rate": "9.52%",
-      "first_half": {
-        "count": 14,
-        "total": 94,
-        "rate": "14.89%"
-      },
-      "second_half": {
-        "count": 4,
-        "total": 95,
-        "rate": "4.21%"
-      }
+      "count": 64,
+      "rate": "33.86%"
     },
     "other_fields_pass": {
-      "count": 92,
-      "rate": "48.68%",
-      "first_half": {
-        "count": 75,
-        "total": 94,
-        "rate": "79.79%"
-      },
-      "second_half": {
-        "count": 17,
-        "total": 95,
-        "rate": "17.89%"
-      }
+      "count": 83,
+      "rate": "43.92%"
     }
   }
 }

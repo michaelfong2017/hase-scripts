@@ -11,7 +11,7 @@ from core_logic import generate_evaluation_report
 
 class CSVMultiColumnComparator:
     """An interactive tool to compare JSON in multiple CSV column pairs with summary reporting."""
-    def __init__(self, file_path, split_mode='half'):
+    def __init__(self, file_path, split_mode='full'):
         try:
             self.df = pd.read_csv(file_path)
             print(f"Loaded {len(self.df)} rows from {file_path}.")
@@ -20,7 +20,7 @@ class CSVMultiColumnComparator:
             sys.exit(1)
         self.column_pairs = []
         self.summary_stats = {}
-        self.split_mode = split_mode  # 'half' or 'quadrant'
+        self.split_mode = split_mode  # 'full', 'half' or 'quadrant'
 
     def auto_select_column_pairs(self):
         """Automatically select Ground Truth as GT and all columns ending with '-Instruct' or starting with 'job_' as LLM columns."""
@@ -77,6 +77,12 @@ class CSVMultiColumnComparator:
             self.column_pairs.append((gt_col, llm_col))
             print(f"Added pair: ('{gt_col}', '{llm_col}')")
 
+    def calculate_full_statistics(self, pass_series, total_rows):
+        """Calculate statistics for the full dataset without splitting."""
+        count = int(pass_series.sum())
+        rate = f"{(count / total_rows * 100):.2f}%" if total_rows > 0 else "0.00%"
+        return {"count": count, "total": total_rows, "rate": rate}
+    
     def calculate_half_statistics(self, pass_series, total_rows):
         """Calculate statistics for first half and second half of the data."""
         midpoint = total_rows // 2
@@ -125,11 +131,39 @@ class CSVMultiColumnComparator:
             "third_quarter_all_transactions": stats(third_quarter),
             "fourth_quarter_all_transactions": stats(fourth_quarter)
         }
+    
+    def reorder_extracted_columns_among_new(self, gt_col, llm_col, original_columns):
+        """Reorder only among newly added columns to put extracted columns first among new columns."""
+        extracted_gt_col = f"{gt_col}_extracted_json"
+        extracted_llm_col = f"{llm_col}_extracted_json"
+        
+        # Get all current columns
+        current_columns = self.df.columns.tolist()
+        
+        # Identify newly added columns (not in original)
+        new_columns = [col for col in current_columns if col not in original_columns]
+        
+        # Separate extracted columns from other new columns
+        extracted_cols = [extracted_gt_col, extracted_llm_col]
+        other_new_cols = [col for col in new_columns if col not in extracted_cols]
+        
+        # Rebuild column order:
+        # 1. Original columns (keep their order)
+        # 2. Extracted columns first among new columns
+        # 3. Other new columns
+        new_order = original_columns + extracted_cols + other_new_cols
+        
+        # Filter out any columns that don't exist and reorder
+        new_order = [col for col in new_order if col in current_columns]
+        self.df = self.df[new_order]
 
     def run_all_comparisons(self):
         if not self.column_pairs:
             print("No pairs selected.")
             return
+
+        # Store original columns before adding new ones
+        original_columns = self.df.columns.tolist()
 
         for gt_col, llm_col in self.column_pairs:
             print(f"\nProcessing pair: GT='{gt_col}', LLM='{llm_col}'")
@@ -151,6 +185,9 @@ class CSVMultiColumnComparator:
             results_df = pd.DataFrame(results, index=self.df.index)
             self.df = pd.concat([self.df, results_df], axis=1)
 
+            # Reorder extracted columns to be first among newly added columns
+            self.reorder_extracted_columns_among_new(gt_col, llm_col, original_columns)
+
             # Calculate overall and split statistics for this pair
             total_rows = len(self.df)
             overall_pass_count = int(self.df[overall_pass_col].sum())
@@ -158,7 +195,24 @@ class CSVMultiColumnComparator:
             other_pass_count = int(self.df[other_pass_col].sum())
             
             # User-driven split logic
-            if self.split_mode == 'half':
+            if self.split_mode == 'full':
+                # No splitting - use full dataset
+                self.summary_stats[base_name] = {
+                    "total_rows": total_rows,
+                    "overall_pass": {
+                        "count": overall_pass_count, 
+                        "rate": f"{(overall_pass_count / total_rows * 100):.2f}%" if total_rows > 0 else "0.00%"
+                    },
+                    "alert_pass": {
+                        "count": alert_pass_count, 
+                        "rate": f"{(alert_pass_count / total_rows * 100):.2f}%" if total_rows > 0 else "0.00%"
+                    },
+                    "other_fields_pass": {
+                        "count": other_pass_count, 
+                        "rate": f"{(other_pass_count / total_rows * 100):.2f}%" if total_rows > 0 else "0.00%"
+                    }
+                }
+            elif self.split_mode == 'half':
                 # Use original half split
                 overall_half_stats = self.calculate_half_statistics(self.df[overall_pass_col], total_rows)
                 alert_half_stats = self.calculate_half_statistics(self.df[alert_pass_col], total_rows)
@@ -219,7 +273,7 @@ class CSVMultiColumnComparator:
                     }
                 }
             else:
-                raise ValueError("split_mode must be 'half' or 'quadrant'.")
+                raise ValueError("split_mode must be 'full', 'half' or 'quadrant'.")
 
     def display_and_save_summary(self, summary_path, log_path="results.txt"):
         """Prints a formatted summary to the console and saves it to a JSON file and results.txt."""
@@ -246,7 +300,10 @@ class CSVMultiColumnComparator:
                 alert = stats['alert_pass']
                 other = stats['other_fields_pass']
 
-                if all(key in overall for key in half_keys):
+                if self.split_mode == 'full':
+                    pass
+
+                elif all(key in overall for key in half_keys):
                     print(f"    • First Half:           {overall['first_half']['count']}/{overall['first_half']['total']} ({overall['first_half']['rate']})")
                     print(f"    • Second Half:          {overall['second_half']['count']}/{overall['second_half']['total']} ({overall['second_half']['rate']})")
                 else:
@@ -334,9 +391,9 @@ def main():
         return
     file_path = sys.argv[1] if len(sys.argv) > 1 else input("Enter path to CSV file: ")
     # Prompt user for split mode
-    split_mode = input("Choose split mode ('quadrant' or 'half') [quadrant]: ").strip().lower() or 'quadrant'
-    if split_mode not in ('half', 'quadrant'):
-        print("Invalid split mode. Please enter 'half' or 'quadrant'.")
+    split_mode = input("Choose split mode ('full', 'half', or 'quadrant') [full]: ").strip().lower() or 'full'
+    if split_mode not in ('full', 'half', 'quadrant'):
+        print("Invalid split mode. Please enter 'full', 'half', or 'quadrant'.")
         sys.exit(1)
     
     comparator = CSVMultiColumnComparator(file_path, split_mode=split_mode)
