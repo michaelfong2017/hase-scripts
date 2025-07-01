@@ -7,6 +7,7 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Apply Transaction Rules**
@@ -37,11 +38,6 @@ Apply these rules when populating global fields:
 
 **Police Reference Rules:**
 - Extract the full police reference from the source document
-- Exclude police team information that starts with "(DIT" or "(E-HUB" from the police_reference field
-
-**Police Team Rules:**
-- Extract police team information including district and police station if available
-- Include full team designation with district/station information
 
 **Step 4: Build Final JSON**
 - Global fields (fraud_type, police_reference, police_team): Use fraud alert source with global field rules applied

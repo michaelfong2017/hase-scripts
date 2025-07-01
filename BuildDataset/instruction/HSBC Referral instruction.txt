@@ -7,13 +7,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**

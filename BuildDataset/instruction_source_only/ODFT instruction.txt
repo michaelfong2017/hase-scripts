@@ -7,6 +7,7 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Apply Global Field Rules**

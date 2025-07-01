@@ -2,9 +2,9 @@
 ========================= FINAL EVALUATION SUMMARY =========================
 
 📊 Results for: Output_google_gemini_2_0_flash_001_vs_Ground Truth
-  - Overall Pass Rate:      57/189 (30.16%)
-  - Alert Transactions Pass: 105/189 (55.56%)
-  - Other Fields Pass:      91/189 (48.15%)
+  - Overall Pass Rate:      54/189 (28.57%)
+  - Alert Transactions Pass: 107/189 (56.61%)
+  - Other Fields Pass:      87/189 (46.03%)
 
 ======================================================================
 ✅ Summary statistics successfully saved to: gemini_output_Dataset_Source_v5_original_set_summary.json

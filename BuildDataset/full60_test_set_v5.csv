@@ -8,13 +8,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -65,11 +67,6 @@ Apply these rules when populating global fields:
 
 **Police Reference Rules:**
 - Extract the full police reference from the source document
-- Exclude police team information that starts with ""(DIT"" or ""(E-HUB"" from the police_reference field
-
-**Police Team Rules:**
-- Extract police team information including district and police station if available
-- Include full team designation with district/station information
 
 **Step 6: Build Final JSON**
 - Global fields (fraud_type, police_reference, police_team): Use fraud alert source with global field rules applied
@@ -377,13 +374,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -434,11 +433,6 @@ Apply these rules when populating global fields:
 
 **Police Reference Rules:**
 - Extract the full police reference from the source document
-- Exclude police team information that starts with ""(DIT"" or ""(E-HUB"" from the police_reference field
-
-**Police Team Rules:**
-- Extract police team information including district and police station if available
-- Include full team designation with district/station information
 
 **Step 6: Build Final JSON**
 - Global fields (fraud_type, police_reference, police_team): Use fraud alert source with global field rules applied
@@ -542,13 +536,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -670,13 +666,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -808,13 +806,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -968,13 +968,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -1127,13 +1129,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -1287,13 +1291,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -1601,13 +1607,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -1739,13 +1747,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -1873,13 +1883,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -2001,13 +2013,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -2203,13 +2217,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -2400,13 +2416,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -2633,13 +2651,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -2830,13 +2850,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -3030,13 +3052,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -3230,13 +3254,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -3366,13 +3392,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -3511,13 +3539,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -3648,13 +3678,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -3837,13 +3869,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -4001,13 +4035,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -4175,13 +4211,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -4349,13 +4387,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -4523,13 +4563,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -4665,13 +4707,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -4829,13 +4873,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -4993,13 +5039,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -5164,13 +5212,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -5349,13 +5399,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -5406,11 +5458,6 @@ Apply these rules when populating global fields:
 
 **Police Reference Rules:**
 - Extract the full police reference from the source document
-- Exclude police team information that starts with ""(DIT"" or ""(E-HUB"" from the police_reference field
-
-**Police Team Rules:**
-- Extract police team information including district and police station if available
-- Include full team designation with district/station information
 
 **Step 6: Build Final JSON**
 - Global fields (fraud_type, police_reference, police_team): Use fraud alert source with global field rules applied
@@ -5822,13 +5869,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -5879,11 +5928,6 @@ Apply these rules when populating global fields:
 
 **Police Reference Rules:**
 - Extract the full police reference from the source document
-- Exclude police team information that starts with ""(DIT"" or ""(E-HUB"" from the police_reference field
-
-**Police Team Rules:**
-- Extract police team information including district and police station if available
-- Include full team designation with district/station information
 
 **Step 6: Build Final JSON**
 - Global fields (fraud_type, police_reference, police_team): Use fraud alert source with global field rules applied
@@ -5998,13 +6042,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -6137,13 +6183,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -6286,13 +6334,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -6469,13 +6519,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -6651,13 +6703,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -6834,13 +6888,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -7255,13 +7311,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -7404,13 +7462,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -7547,13 +7607,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -7683,13 +7745,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -7777,12 +7841,12 @@ JSON Schema:
     }
   ]
 }","Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
-2024-08-29,HKD,20000,C,,,,111-111111-101,,NG       CHAN TAI MAN,Beneficiary,CCCS,ATM/CDM CASH CREDIT USINGACCOUNT INPUT,,,20000,d144dec7-8032-463c-b66c-21caed6abdab
-2024-08-30,HKD,20000,C,,,,560-542672-413,,MR   HOK YIN,Beneficiary,CCCS,ATM/CDM CASH CREDIT USINGACCOUNT INPUT,,,20000,4064485e-8e70-4cf1-9303-99ba85cc0014
-2025-04-01,HKD,32663.93,C,,,,111-111111-102,,MR    CHUNG SIU,Beneficiary,CCCS,ATM/CDM CASH CREDIT USINGACCOUNT INPUT,,,50000,3e024257-694b-4138-bb70-c8e9082160d6
+2024-08-29,HKD,20000,C,,,,111-111111-101,,MING       CHAN TAI MAN,Beneficiary,CCCS,ATM/CDM CASH CREDIT USINGACCOUNT INPUT,,,20000,d144dec7-8032-463c-b66c-21caed6abdab
+2024-08-30,HKD,20000,C,,,,412-574078-616,,MR   WAI SIU,Beneficiary,CCCS,ATM/CDM CASH CREDIT USINGACCOUNT INPUT,,,20000,4064485e-8e70-4cf1-9303-99ba85cc0014
+2025-08-18,HKD,74258.80,C,,,,111-111111-102,,MR    CHUNG SIU,Beneficiary,CCCS,ATM/CDM CASH CREDIT USINGACCOUNT INPUT,,,50000,3e024257-694b-4138-bb70-c8e9082160d6
 ","**<u>Annex H6</u>**
 **PERSONAL DATA**
-*Our Ref.:* ESPS 45676/3036 and TY RN 7761952 (DIT 1 4960170)
+*Our Ref.:* ESPS 7645/3511 and ERC223931770223 (E-HUB-804)
 *Your Ref.:* 
 *Tel.:* 366■■■■■
 *Fax:* 244■■■■■
@@ -7794,9 +7858,9 @@ Yuen Long District
 Yuen Long
 2024-09-10
 
-Agricultural Bank of China (Hong Kong) Limited
+DBS Bank (Hong Kong) Limited
 Money Laundering Reporting Officer
-Agricultural Bank of China (Hong Kong) Limited
+DBS Bank (Hong Kong) Limited
 Financial Crime Investigations
 13/F, 83 Des Voeux Road Central,
 Hong Kong
@@ -7808,11 +7872,11 @@ I write to you in connection with the following bank account, which is believed 
 <table>
 <thead><tr><th colspan='3'>Account Details</th></tr></thead>
 <tbody>
-<tr><th>Account Name:</th><td colspan='2'>HOK YIN</td></tr><tr><th>Account Number:</th><td colspan='2'>560-542672-413</td></tr>
+<tr><th>Account Name:</th><td colspan='2'>WAI MING</td></tr><tr><th>Account Number:</th><td colspan='2'>412-574078-616</td></tr>
 <tr><th colspan='3'>Suspected nature of transactions:</th><tr><tr><td colspan='3'> - [X] Might have been used in receicing proceeds of crime</td></tr><tr><td colspan='3'> - [ ] Might have been used to receive funds related to terrorist financing</td></tr><tr><td colspan='3'> - [ ] Exhibited transaction patterns which were incommensurate with holder's background</td></tr><tr><td colspan='3'> - [ ] Others (please specify) </td></tr>
 <tr><th colspan='3'>If the predicate offence is deception related, please state the type of deception:</th><tr><tr><td colspan='3'> - [ ] Telephone Deception</td></tr><tr><td colspan='3'> - [ ] E-shopping Fraud</td></tr><tr><td colspan='3'> - [ ] Romance Scam</td></tr><tr><td colspan='3'> - [X] Investment Scam</td></tr><tr><td colspan='3'> - [ ] Employment Fraud</td></tr><tr><td colspan='3'> - [ ] Others (please specify) </td></tr><tr><td colspan='3'>(please tick if appropriate)</td></tr>
 <tr><th colspan='3'>Transaction Details:</th><tr><tr><th>Date</th><th>Amount</th><th>Transferor's Bank and Account</th></tr>
-<tr><td>2025-04-01</td><td>32663.93</td><td>NA CASH</td></tr>
+<tr><td>2025-08-18</td><td>74258.80</td><td>NA CASH</td></tr>
 <tr><th colspan='3'>Case Summary:</th></tr><tr><td colspan='3'>On 2024-08-22, a female reported to police that on 2024-09-09, she was lured to invest into
 cryptocurrencies and had deposited a total of HK$1,267,000 into 26 bank accounts
 (including the above listed transactions). The female later found she could not withdraw the
@@ -7851,12 +7915,12 @@ for Commissioner of Police
 cc SP JFIU FIIB
 (email: jfiu-noti-letter@police.gov.hk)","{
   ""fraud_type"": ""Investment Scam"",
-  ""police_reference"": ""ESPS 45676/3036 and TY RN 7761952 (DIT 1 4960170)"",
+  ""police_reference"": ""ESPS 7645/3511 and ERC223931770223 (E-HUB-804)"",
   ""police_team"": ""District Investigation Team 3, Yuen Long District"",
   ""alerted_transactions"": [
     {
-      ""date"": ""2025-04-01"",
-      ""amount"": 32663.93,
+      ""date"": ""2025-08-18"",
+      ""amount"": 74258.8,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": null,
@@ -7864,9 +7928,9 @@ cc SP JFIU FIIB
         ""bank"": null
       },
       ""to"": {
-        ""name"": ""NG HOK YIN"",
-        ""account_number"": ""560-542672-413"",
-        ""bank"": ""Agricultural Bank of China (Hong Kong) Limited""
+        ""name"": ""SIU WAI MING"",
+        ""account_number"": ""412-574078-616"",
+        ""bank"": ""DBS Bank (Hong Kong) Limited""
       },
       ""channel"": ""cash"",
       ""can_be_located"": true,
@@ -7875,14 +7939,14 @@ cc SP JFIU FIIB
       ]
     }
   ]
-}",51,1,1,"TSW RN 240■■■■■■■ --> ESPS 45676/3036 and TY RN 7761952 (DIT 1 4960170)
-2024-08-28 --> 2025-04-01
-50000 --> 32663.93
-MR --> NG
-CHUNG --> HOK
-SIU --> YIN
-111-111111-102 --> 560-542672-413
-BANK:HASE --> Agricultural Bank of China (Hong Kong) Limited"
+}",51,1,1,"TSW RN 240■■■■■■■ --> ESPS 7645/3511 and ERC223931770223 (E-HUB-804)
+2024-08-28 --> 2025-08-18
+50000 --> 74258.80
+MR --> SIU
+CHUNG --> WAI
+SIU --> MING
+111-111111-102 --> 412-574078-616
+BANK:HASE --> DBS Bank (Hong Kong) Limited"
 Police Letter,2559,9,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -7892,13 +7956,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -7986,10 +8052,10 @@ JSON Schema:
     }
   ]
 }","Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
-2025-02-14,HKD,45979.51,C,,,,299-482140-570,,,Beneficiary,CCAS,CIF CASH DEPOSIT,,,50000,bb686b10-b386-4645-a4bb-bd1d4d996bd1
+2025-06-30,HKD,74247.46,C,,,,994-535790-316,,,Beneficiary,CCAS,CIF CASH DEPOSIT,,,50000,bb686b10-b386-4645-a4bb-bd1d4d996bd1
 ","**<u>Annex H6</u>**
 **PERSONAL DATA**
-*Our Ref.:* C RN 8055263628
+*Our Ref.:* ESPS 201/1048 and TYDIV 6633401 (DIT 6-4215634)
 *Your Ref.:* 
 *Tel.:* 366■■■■■
 *Fax:* 249■■■■■
@@ -8001,9 +8067,9 @@ Kwai Chung Police Station
 Kwai Chung
 2024-08-28
 
-The Hongkong and Shanghai Banking Corporation Limited
+Bank of East Asia, Limited
 Money Laundering Reporting Officer
-The Hongkong and Shanghai Banking Corporation Limited
+Bank of East Asia, Limited
 Financial Crime Investigations
 13/F, 83 Des Voeux Road Central,
 Hong Kong
@@ -8015,11 +8081,11 @@ I write to you in connection with the following bank account, which is believed 
 <table>
 <thead><tr><th colspan='3'>Account Details</th></tr></thead>
 <tbody>
-<tr><th>Account Name:</th><td colspan='2'>299-482140-570</td></tr><tr><th>Account Number:</th><td colspan='2'>LAU SIN YEE</td></tr>
+<tr><th>Account Name:</th><td colspan='2'>994-535790-316</td></tr><tr><th>Account Number:</th><td colspan='2'>TSANG MEI LIN</td></tr>
 <tr><th colspan='3'>Suspected nature of transactions:</th><tr><tr><td colspan='3'> - [X] Might have been used in receicing proceeds of crime</td></tr><tr><td colspan='3'> - [ ] Might have been used to receive funds related to terrorist financing</td></tr><tr><td colspan='3'> - [ ] Exhibited transaction patterns which were incommensurate with holder's background</td></tr><tr><td colspan='3'> - [ ] Others (please specify) </td></tr>
 <tr><th colspan='3'>If the predicate offence is deception related, please state the type of deception:</th><tr><tr><td colspan='3'> - [ ] Telephone Deception</td></tr><tr><td colspan='3'> - [ ] E-shopping Fraud</td></tr><tr><td colspan='3'> - [X] Romance Scam</td></tr><tr><td colspan='3'> - [ ] Investment Scam</td></tr><tr><td colspan='3'> - [ ] Employment Fraud</td></tr><tr><td colspan='3'> - [ ] Others (please specify) </td></tr><tr><td colspan='3'>(please tick if appropriate)</td></tr>
 <tr><th colspan='3'>Transaction Details:</th><tr><tr><th>Date</th><th>Amount</th><th>Transferor's Bank and Account</th></tr>
-<tr><td>2025-02-14</td><td>45979.51</td><td>Cash Deposit</td></tr>
+<tr><td>2025-06-30</td><td>74247.46</td><td>Cash Deposit</td></tr>
 <tr><th colspan='3'>Case Summary:</th></tr><tr><td colspan='3'>On 2024-08-27, a female reported to police that between 2024-06-24 and 2024-08-27, she acquainted with an unknown person on the social media app """"WeChat"""" and became cyber lovers. The female was then lured by that unknown person and had deposited a total of HK$170000 into 2 bank accounts (including the above listed transactions) for investment. The female later lost contact with the unknown person</td></tr>
 <tr><th colspan='3'>Notification Letter issued before on the same case:</th></tr><tr><td colspan='3'> [ ] Yes
 
@@ -8055,12 +8121,12 @@ for Commissioner of Police
 cc SP JFIU FIIB
 (email: jfiu-noti-letter@police.gov.hk)","{
   ""fraud_type"": ""Romance Scam"",
-  ""police_reference"": ""C RN 8055263628"",
+  ""police_reference"": ""ESPS 201/1048 and TYDIV 6633401 (DIT 6-4215634)"",
   ""police_team"": ""District Investigation Team 2, Kwai Tsing District, Kwai Chung Police Station"",
   ""alerted_transactions"": [
     {
-      ""date"": ""2025-02-14"",
-      ""amount"": 45979.51,
+      ""date"": ""2025-06-30"",
+      ""amount"": 74247.46,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": null,
@@ -8068,9 +8134,9 @@ cc SP JFIU FIIB
         ""bank"": null
       },
       ""to"": {
-        ""name"": ""LAU SIN YEE"",
-        ""account_number"": ""299-482140-570"",
-        ""bank"": ""The Hongkong and Shanghai Banking Corporation Limited""
+        ""name"": ""TSANG MEI LIN"",
+        ""account_number"": ""994-535790-316"",
+        ""bank"": ""Bank of East Asia, Limited""
       },
       ""channel"": ""cash"",
       ""can_be_located"": true,
@@ -8079,14 +8145,14 @@ cc SP JFIU FIIB
       ]
     }
   ]
-}",51,1,1,"Policeref1 --> C RN 8055263628
-2024-07-25 --> 2025-02-14
-50000 --> 45979.51
-CHAN --> LAU
-TAI --> SIN
-MAN --> YEE
-111-111111-101 --> 299-482140-570
-BANK:HASE --> The Hongkong and Shanghai Banking Corporation Limited"
+}",51,1,1,"Policeref1 --> ESPS 201/1048 and TYDIV 6633401 (DIT 6-4215634)
+2024-07-25 --> 2025-06-30
+50000 --> 74247.46
+CHAN --> TSANG
+TAI --> MEI
+MAN --> LIN
+111-111111-101 --> 994-535790-316
+BANK:HASE --> Bank of East Asia, Limited"
 Police Letter,2560,10,1,"[1, 3]","You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -8096,13 +8162,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -8190,11 +8258,11 @@ JSON Schema:
     }
   ]
 }","Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
-2024-02-19,HKD,2591.42,C,,,857-784096-413,992-404601-250,TANG SIU KWAN,KWOK HOI KWAN,Beneficiary,CUTF,ATM TRANSFER UNRELATED   DEPOSIT,,,3000,7a47c599-776e-40fb-80f5-45e585c3291a
+2024-05-28,HKD,3897.64,C,,,857-784096-413,992-404601-250,TANG SIU KWAN,KWOK HOI KWAN,Beneficiary,CUTF,ATM TRANSFER UNRELATED   DEPOSIT,,,3000,7a47c599-776e-40fb-80f5-45e585c3291a
 2023-08-10,HKD,30262.65,C,,,,371-703836-371,,LO HOI,Beneficiary,,CCCS,CASH DEP VIA CDM/BCDM -  AC INPUT (TOUCH SCREEN),,50000,ed194421-0dd2-4eb4-8f2f-3c85d9d905c6
 ","**<u>Annex H6</u>**
 **PERSONAL DATA**
-*Our Ref.:* YMT RN 5520
+*Our Ref.:* ESPS 86233/9653 and TY RN 5704445
 *Your Ref.:* 
 *Tel.:* 366■■■■■
 *Fax:* 239■■■■■
@@ -8224,7 +8292,7 @@ I write to you in connection with the following bank account, which is believed 
 <tr><th colspan='3'>Suspected nature of transactions:</th><tr><tr><td colspan='3'> - [X] Might have been used in receicing proceeds of crime</td></tr><tr><td colspan='3'> - [ ] Might have been used to receive funds related to terrorist financing</td></tr><tr><td colspan='3'> - [ ] Exhibited transaction patterns which were incommensurate with holder's background</td></tr><tr><td colspan='3'> - [ ] Others (please specify) </td></tr>
 <tr><th colspan='3'>If the predicate offence is deception related, please state the type of deception:</th><tr><tr><td colspan='3'> - [X] Telephone Deception</td></tr><tr><td colspan='3'> - [ ] E-shopping Fraud</td></tr><tr><td colspan='3'> - [ ] Romance Scam</td></tr><tr><td colspan='3'> - [ ] Investment Scam</td></tr><tr><td colspan='3'> - [ ] Employment Fraud</td></tr><tr><td colspan='3'> - [ ] Others (please specify) </td></tr><tr><td colspan='3'>(please tick if appropriate)</td></tr>
 <tr><th colspan='3'>Transaction Details:</th><tr><tr><th>Date</th><th>Amount</th><th>Transferor's Bank and Account</th></tr>
-<tr><td>2024-02-19</td><td>2591.42</td><td>Citibank (Hong Kong) Limited 857-784096-413 </td></tr>
+<tr><td>2024-05-28</td><td>3897.64</td><td>Citibank (Hong Kong) Limited 857-784096-413 </td></tr>
 <tr><th colspan='3'>Case Summary:</th></tr><tr><td colspan='3'>On 2023-08-10, a female reported that on 2024-05-15, she successfully borrowed $8,000- HKD from an unknown money lenders company. On 2024-05-22 a male (SUSP) threatened her to settle outstanding payment, or else her home would be splashed with red paint.Victim felt afraid and complied with SUSP instruction by depositing amounting to $110,200-HKD to 3 bank accounts.</td></tr>
 <tr><th colspan='3'>Notification Letter issued before on the same case:</th></tr><tr><td colspan='3'> [ ] Yes
 
@@ -8275,12 +8343,12 @@ for Commissioner of Police
 cc SP JFIU FIIB
 (email: jfiu-noti-letter@police.gov.hk)","{
   ""fraud_type"": ""Telephone Deception"",
-  ""police_reference"": ""YMT RN 5520"",
+  ""police_reference"": ""ESPS 86233/9653 and TY RN 5704445"",
   ""police_team"": ""District Investigation Team 4, Mong Kok District, Mong Kok Police Station"",
   ""alerted_transactions"": [
     {
-      ""date"": ""2024-02-19"",
-      ""amount"": 2591.42,
+      ""date"": ""2024-05-28"",
+      ""amount"": 3897.64,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""TANG SIU KWAN"",
@@ -8319,9 +8387,9 @@ cc SP JFIU FIIB
       ]
     }
   ]
-}",51,1,1,"Policeref1 --> YMT RN 5520
-2024-05-22 --> 2024-02-19
-3000 --> 2591.42
+}",51,1,1,"Policeref1 --> ESPS 86233/9653 and TY RN 5704445
+2024-05-22 --> 2024-05-28
+3000 --> 3897.64
 CHEUNG --> TANG
 TAK --> SIU
 SHING --> KWAN
@@ -8347,13 +8415,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -8556,13 +8626,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -8763,13 +8835,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -8970,13 +9044,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -9070,7 +9146,7 @@ JSON Schema:
 Contact Person: PC 1■■■■
 Contact Number: 366■■■■■
 
-Case No. <u>NTK RN 26389816254</u>
+Case No. <u>DIT8-51676</u>
 Information No. <u>6■■■</u>
 Writ No. <u>8■■■</u>
 
@@ -9091,14 +9167,14 @@ Magistrate
 (\*delete as appropriate)
 Pol.866 (Rev.2001)","{
   ""fraud_type"": ""Not provided"",
-  ""police_reference"": ""NTK RN 26389816254"",
-  ""writ_no"": ""234536"",
-  ""contact_person"": ""PC 13386"",
+  ""police_reference"": ""DIT8-51676"",
+  ""writ_no"": ""TM5596 /2232"",
+  ""contact_person"": ""SGT 69760"",
   ""police_team"": ""District Technology and Financial Crime Squad, Kwun Tong District, Hong Kong Police Force"",
   ""alerted_transactions"": []
-}",66,1,1,"KTRN230■■■■ --> NTK RN 26389816254
-8■■■ --> 234536
-PC 1■■■■ --> PC 13386"
+}",66,1,1,"KTRN230■■■■ --> DIT8-51676
+8■■■ --> TM5596 /2232
+PC 1■■■■ --> SGT 69760"
 Search Warrant,3307,7,3,2,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -9108,13 +9184,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -9217,7 +9295,7 @@ JSON Schema:
 Contact Person: PC 2■■■■
 Contact Number: 641■■■■■
 
-Case No. <u>Policeref3</u>
+Case No. <u>ESPS  3644/4011 and WTSDIST 99514370 (DIT 2-4342491)</u>
 Information No. <u>4■■■</u>
 Writ No. <u>67■■</u>
 
@@ -9238,14 +9316,14 @@ Magistrate
 (\*delete as appropriate)
 Pol.866 (Rev.2001)","{
   ""fraud_type"": ""Not provided"",
-  ""police_reference"": ""Policeref3"",
-  ""writ_no"": ""577461"",
-  ""contact_person"": ""PC 16054"",
+  ""police_reference"": ""ESPS  3644/4011 and WTSDIST 99514370 (DIT 2-4342491)"",
+  ""writ_no"": ""259631"",
+  ""contact_person"": ""PC 77442"",
   ""police_team"": ""District Investigation Team 7, Sha Tin District, Hong Kong POLICE"",
   ""alerted_transactions"": []
-}",66,1,1,"STRN240■■■■ --> Policeref3
-67■■ --> 577461
-PC 2■■■■ --> PC 16054"
+}",66,1,1,"STRN240■■■■ --> ESPS  3644/4011 and WTSDIST 99514370 (DIT 2-4342491)
+67■■ --> 259631
+PC 2■■■■ --> PC 77442"
 Search Warrant,3325,25,3,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -9255,13 +9333,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -9353,12 +9433,12 @@ JSON Schema:
 ","Police Force Ordinance
 (Cap. 232)
 
-Contact Person: PC 92254
+Contact Person: PC88231
 Contact Number: 366■■■■■
 
-Case No. <u>DIT 8-5991977</u>
+Case No. <u>C RN 2325095636</u>
 Information No. <u>1■■■■</u>
-Writ No. <u>353858</u>
+Writ No. <u>TM 3855</u>
 
 **SEARCH WARRANT**
 **IN THE MAGISTRATE'S COURT AT <u>TUEN MUN</u> HONGKONG**
@@ -9377,14 +9457,14 @@ Principal Magistrate/Magistrate
 (\*delete as appropriate)
 Pol.866 (Rev.2001)","{
   ""fraud_type"": ""Not provided"",
-  ""police_reference"": ""DIT 8-5991977"",
-  ""writ_no"": ""353858"",
-  ""contact_person"": ""PC 92254"",
+  ""police_reference"": ""C RN 2325095636"",
+  ""writ_no"": ""TM 3855"",
+  ""contact_person"": ""PC88231"",
   ""police_team"": ""District Technology and Financial Crime Squad 1 of Yuen Long District"",
   ""alerted_transactions"": []
-}",66,1,1,"TSWRN240■■■■ --> DIT 8-5991977
-TM12■■■/2024 --> 353858
-SGT 2■■■■ --> PC 92254"
+}",66,1,1,"TSWRN240■■■■ --> C RN 2325095636
+TM12■■■/2024 --> TM 3855
+SGT 2■■■■ --> PC88231"
 UAR,4302,2,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -9394,13 +9474,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -9492,8 +9574,8 @@ JSON Schema:
     }
   ]
 }","Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
-2025-05-25,HKD,14330.10,C,,,,872-701233-955,,SO       LING YAN MAN,Beneficiary,CCCS,ATM/CDM CASH CREDIT USINGACCOUNT INPUT,,,29787.42,d144dec7-8032-463c-b66c-21caed6abdab
-2024-12-19,HKD,20000,C,,,,357-812543-628,,WU   MEI SIU,Beneficiary,CCCS,ATM/CDM CASH CREDIT USINGACCOUNT INPUT,,,20000,4064485e-8e70-4cf1-9303-99ba85cc0014
+2024-09-25,HKD,26255.13,C,,,,269-747318-156,,TSANG       MEI LIN MAN,Beneficiary,CCCS,ATM/CDM CASH CREDIT USINGACCOUNT INPUT,,,26136.31,d144dec7-8032-463c-b66c-21caed6abdab
+2024-07-25,HKD,20000,C,,,,925-199224-571,,POON   FONG SIU,Beneficiary,CCCS,ATM/CDM CASH CREDIT USINGACCOUNT INPUT,,,20000,4064485e-8e70-4cf1-9303-99ba85cc0014
 2024-08-28,HKD,50000,C,,,,111-111111-102,,MR    CHUNG SIU,Beneficiary,CCCS,ATM/CDM CASH CREDIT USINGACCOUNT INPUT,,,50000,3e024257-694b-4138-bb70-c8e9082160d6
 ","FC-UAR document
 Page x of y
@@ -9504,23 +9586,23 @@ Submitted Date:
 This document has been generated by the UCM Request Portal from the original Case Request details. All the data provided by the original creator are shown below.
 
 Step 1- About Yourself
-<table style='text-align:left'><tr><th>What is the main country your financial crime concern relates to?</th><td>Hong Kong The Hongkong and Shanghai Banking Corporation Limited</td><th>Which Business Area/Legal Enity?</th><td>The Hongkong and Shanghai Banking Corporation Limited</td></tr><tr><th>Name:</th><td>FU LINGSAN</td><th>Telephone:</th><td></td></tr><tr><th>Role:</th><td>BRANCH SERVICE MANAGER II</td><th>Department:</th><td>MOSTOWN BRANCH-DEPOSIT SER</td></tr><tr><th>Manager:</th><td>LIAO BOBO</td><th>Country:</th><td>HONG KONG</td></tr><tr><th>What Global Function do you work in?</th><td>Retail Banking and Wealth Management</td><th>What Global Sub-Function do you work in?</th><td>Other</td></tr><tr><th>Do you work in a Global Service Center?</th><td>N</td><th>Which Global Service Center do you work in?</th><td></td></tr><tr><th>Are you reporting this on someone's behalf?</th><td>N</td><th>Mail Address:</th><td>fu.siusan@noexternalmail.The Hongkong and Shanghai Banking Corporation Limitedc.com</td></tr><tr><th>Does anyone else need to be notified about this?</th><td></td></tr></table>
+<table style='text-align:left'><tr><th>What is the main country your financial crime concern relates to?</th><td>Hong Kong Chiyu Banking Corporation Limited</td><th>Which Business Area/Legal Enity?</th><td>Chiyu Banking Corporation Limited</td></tr><tr><th>Name:</th><td>FU FONGSAN</td><th>Telephone:</th><td></td></tr><tr><th>Role:</th><td>BRANCH SERVICE MANAGER II</td><th>Department:</th><td>MOSTOWN BRANCH-DEPOSIT SER</td></tr><tr><th>Manager:</th><td>LIAO BOBO</td><th>Country:</th><td>HONG KONG</td></tr><tr><th>What Global Function do you work in?</th><td>Retail Banking and Wealth Management</td><th>What Global Sub-Function do you work in?</th><td>Other</td></tr><tr><th>Do you work in a Global Service Center?</th><td>N</td><th>Which Global Service Center do you work in?</th><td></td></tr><tr><th>Are you reporting this on someone's behalf?</th><td>N</td><th>Mail Address:</th><td>fu.siusan@noexternalmail.Chiyu Banking Corporation Limitedc.com</td></tr><tr><th>Does anyone else need to be notified about this?</th><td></td></tr></table>
 
 Area of Concern
-<table style='text-align:left'><tr><th>What is the referral concerning?</th><td>Financial Crime Concern</td><th>Financial Crime Type:</th><td>External Fraud</td></tr><tr><th>Clearly describe your Financial Crime Concern:</th><td>有客人到分行上報稱代朋友到ATM入數買野,入數後聯絡不到買家,懷疑受騙.由於代朋友入數,未能向客人了解太多詳情.</td><th>Date submitter became aware of the activity:</th><td></td></tr><tr><th>Is this an urgent referral?</th><td>No</td><th>Is there a date a response is required by?</th><td></td></tr><tr><th colspan='4'>If this referral Is urgent or has a required response date, clearly explain why.</th></tr><tr><th colspan='2'>Activity Period:</th><th>From:</th><td>29-August-2024</td></tr><tr><th>To:</th><td colspan='3'>30-August-2024</td></tr><tr><th colspan='4'>Fraud Information:</th></tr><tr><th>Fraud Type:</th><td>Payments(Authorised/Scams)</td><th>Saved Amount:</th><td></td></tr><tr><th>Actual Loss Amount</th><td>40000</td><th>Currency:</th><td>HKD</td></tr><tr><th>Description of events in chronological order:</th><td>8月29日 12:08 存入HKD14330.10 至 872-701233-955 
-8月30日 16:32 存入HKD29787.42 至 357-812543-628 </td><th>Has any action been taken?</th><td>No</td></tr><tr><th>What action has been taken?</th><td colspan='3'>叫客人盡快報案</td></tr><tr><th>Is this related to a previous referral?</th><td colspan='3'>No</td></tr></table>
+<table style='text-align:left'><tr><th>What is the referral concerning?</th><td>Financial Crime Concern</td><th>Financial Crime Type:</th><td>External Fraud</td></tr><tr><th>Clearly describe your Financial Crime Concern:</th><td>有客人到分行上報稱代朋友到ATM入數買野,入數後聯絡不到買家,懷疑受騙.由於代朋友入數,未能向客人了解太多詳情.</td><th>Date submitter became aware of the activity:</th><td></td></tr><tr><th>Is this an urgent referral?</th><td>No</td><th>Is there a date a response is required by?</th><td></td></tr><tr><th colspan='4'>If this referral Is urgent or has a required response date, clearly explain why.</th></tr><tr><th colspan='2'>Activity Period:</th><th>From:</th><td>29-August-2024</td></tr><tr><th>To:</th><td colspan='3'>30-August-2024</td></tr><tr><th colspan='4'>Fraud Information:</th></tr><tr><th>Fraud Type:</th><td>Payments(Authorised/Scams)</td><th>Saved Amount:</th><td></td></tr><tr><th>Actual Loss Amount</th><td>40000</td><th>Currency:</th><td>HKD</td></tr><tr><th>Description of events in chronological order:</th><td>8月29日 12:08 存入HKD26255.13 至 269-747318-156 
+8月30日 16:32 存入HKD26136.31 至 925-199224-571 </td><th>Has any action been taken?</th><td>No</td></tr><tr><th>What action has been taken?</th><td colspan='3'>叫客人盡快報案</td></tr><tr><th>Is this related to a previous referral?</th><td colspan='3'>No</td></tr></table>
 
 Involved Parties
 Individual Information:
-|First Name|Last Name|Alias|ID Type|ID Number|Date of Birth|Nationality|Nature of Relationship|Line of Business|The Hongkong and Shanghai Banking Corporation LimitedC Customer / Account|CIN|Involvement Type|Address Line 1|Address Line 2|Address Line 3|City or Town|Country or State|Zip or Postal Code|Country|Commentary|
+|First Name|Last Name|Alias|ID Type|ID Number|Date of Birth|Nationality|Nature of Relationship|Line of Business|Chiyu Banking Corporation LimitedC Customer / Account|CIN|Involvement Type|Address Line 1|Address Line 2|Address Line 3|City or Town|Country or State|Zip or Postal Code|Country|Commentary|
 |----------|---------|-----|-------|---------|-------------|-----------|----------------------|----------------|------------------------|---|----------------|--------------|--------------|--------------|------------|----------------|------------------|-------|---------- |
-|YAN MAN|SIU||||||||Y|205■■■■■|Suspect|||||||||
-|Siu|MEI||||||||Y|923■■■■■|Suspect|||||||||
+|LIN MAN|MEI||||||||Y|205■■■■■|Suspect|||||||||
+|Siu|SIU||||||||Y|923■■■■■|Suspect|||||||||
 
 Organisation Information:
 No Data
 
-The Hongkong and Shanghai Banking Corporation LimitedC Employee Involvement:
+Chiyu Banking Corporation LimitedC Employee Involvement:
 No Data
 
 External Agency
@@ -9531,8 +9613,8 @@ Additional Deatils:
   ""fraud_type"": ""Payments(Authorised/Scams)"",
   ""alerted_transactions"": [
     {
-      ""date"": ""2025-05-25"",
-      ""amount"": 14330.1,
+      ""date"": ""2024-09-25"",
+      ""amount"": 26255.13,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": null,
@@ -9540,9 +9622,9 @@ Additional Deatils:
         ""bank"": null
       },
       ""to"": {
-        ""name"": ""SO SIU YAN"",
-        ""account_number"": ""872-701233-955"",
-        ""bank"": ""The Hongkong and Shanghai Banking Corporation Limited""
+        ""name"": ""TSANG MEI LIN"",
+        ""account_number"": ""269-747318-156"",
+        ""bank"": ""Chiyu Banking Corporation Limited""
       },
       ""channel"": ""cash deposits via ATM"",
       ""can_be_located"": true,
@@ -9552,8 +9634,8 @@ Additional Deatils:
       ""cancel_amount_requested"": null
     },
     {
-      ""date"": ""2024-12-19"",
-      ""amount"": 29787.42,
+      ""date"": ""2024-07-25"",
+      ""amount"": 26136.31,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": null,
@@ -9561,9 +9643,9 @@ Additional Deatils:
         ""bank"": null
       },
       ""to"": {
-        ""name"": ""WU MEI LING"",
-        ""account_number"": ""357-812543-628"",
-        ""bank"": ""Chiyu Banking Corporation Limited""
+        ""name"": ""POON SIU FONG"",
+        ""account_number"": ""925-199224-571"",
+        ""bank"": ""Hang Seng Bank Ltd.""
       },
       ""channel"": ""cash deposits via ATM"",
       ""can_be_located"": true,
@@ -9573,20 +9655,20 @@ Additional Deatils:
       ""cancel_amount_requested"": null
     }
   ]
-}",86,1,1,"2024-08-29 --> 2025-05-25
-20000 --> 14330.10
-MR --> SO
-CHAN --> SIU
-TAI --> YAN
-111-111111-101 --> 872-701233-955
-BANK:HASE --> The Hongkong and Shanghai Banking Corporation Limited
-2024-08-30 --> 2024-12-19
-20000 --> 29787.42
-MR --> WU
-CHUNG --> MEI
-SIU --> LING
-111-111111-102 --> 357-812543-628
-BANK:HASE --> Chiyu Banking Corporation Limited"
+}",86,1,1,"2024-08-29 --> 2024-09-25
+20000 --> 26255.13
+MR --> TSANG
+CHAN --> MEI
+TAI --> LIN
+111-111111-101 --> 269-747318-156
+BANK:HASE --> Chiyu Banking Corporation Limited
+2024-08-30 --> 2024-07-25
+20000 --> 26136.31
+MR --> POON
+CHUNG --> SIU
+SIU --> FONG
+111-111111-102 --> 925-199224-571
+BANK:HASE --> Hang Seng Bank Ltd."
 UAR,4303,3,2,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -9596,13 +9678,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -9694,7 +9778,7 @@ JSON Schema:
     }
   ]
 }","Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
-2024-11-26,HKD,0.57,C,Bank of Communications (Hong Kong) Limited,Bank of Communications (Hong Kong) Limited,583-89517-520,594-124331-140,FUNG KAM LING,YAU SIN WAI MAN       AND OTHERS,Beneficiary,CWTF,Default transaction,,Bank of Communications (Hong Kong) Limited    HK,1,b7f9e8c1-b04e-4077-99b4-a53517b57e4d
+2023-07-29,HKD,0.67,C,Chong Hing Bank Limited,Bank of East Asia, Limited,739-29369-070,795-641433-761,WU MEI LING,LEUNG CHI FAI MAN       AND OTHERS,Beneficiary,CWTF,Default transaction,,Bank of East Asia, Limited    HK,1,b7f9e8c1-b04e-4077-99b4-a53517b57e4d
 ","FC-UAR document
 Page x of y
 
@@ -9704,21 +9788,21 @@ Submitted Date:
 This document has been generated by the UCM Request Portal from the original Case Request details. All the data provided by the original creator are shown below.
 
 Step 1- About Yourself
-<table style='text-align:left'><tr><th>What is the main country your financial crime concern relates to?</th><td>Hong Kong Bank of Communications (Hong Kong) Limited</td><th>Which Business Area/Legal Enity?</th><td>Bank of Communications (Hong Kong) Limited</td></tr><tr><th>Name:</th><td>TANG WING</td><th>Telephone:</th><td></td></tr><tr><th>Role:</th><td>FINANCIAL SERVICES SPECIALIST</td><th>Department:</th><td>Bank of Communications (Hong Kong) Limited PIV - NH (NON-CORE)</td></tr><tr><th>Manager:</th><td>LUI SAN SAN</td><th>Country:</th><td>HONG KONG</td></tr><tr><th>What Global Function do you work in?</th><td>Not Applicable</td><th>What Global Sub-Function do you work in?</th><td>Not Applicable</td></tr><tr><th>Do you work in a Global Service Center?</th><td>N</td><th>Which Global Service Center do you work in?</th><td></td></tr><tr><th>Are you reporting this on someone's behalf?</th><td>N</td><th>Mail Address:</th><td>tang,wing@noexternalmail.Bank of Communications (Hong Kong) Limited.com</td></tr><tr><th>Does anyone else need to be notified about this?</th><td></td></tr></table>
+<table style='text-align:left'><tr><th>What is the main country your financial crime concern relates to?</th><td>Hong Kong Chong Hing Bank Limited</td><th>Which Business Area/Legal Enity?</th><td>Chong Hing Bank Limited</td></tr><tr><th>Name:</th><td>TANG WING</td><th>Telephone:</th><td></td></tr><tr><th>Role:</th><td>FINANCIAL SERVICES SPECIALIST</td><th>Department:</th><td>Chong Hing Bank Limited PIV - NH (NON-CORE)</td></tr><tr><th>Manager:</th><td>LUI SAN SAN</td><th>Country:</th><td>HONG KONG</td></tr><tr><th>What Global Function do you work in?</th><td>Not Applicable</td><th>What Global Sub-Function do you work in?</th><td>Not Applicable</td></tr><tr><th>Do you work in a Global Service Center?</th><td>N</td><th>Which Global Service Center do you work in?</th><td></td></tr><tr><th>Are you reporting this on someone's behalf?</th><td>N</td><th>Mail Address:</th><td>tang,wing@noexternalmail.Bank of East Asia, Limited.com</td></tr><tr><th>Does anyone else need to be notified about this?</th><td></td></tr></table>
 
 Area of Concern
-<table style='text-align:left'><tr><th>What is the referral concerning?</th><td>Financial Crime Concern</td><th>Financial Crime Type:</th><td>External Fraud</td></tr><tr><th>Clearly describe your Financial Crime Concern:</th><td>The below cable message from Bank of Communications (Hong Kong) LimitedHKHH :20:HK1240711-■■■■■■■■■■ :21:HC1247■■■■■■■■■■ :79:RE OUR FPS PAYMENT DATED 10 JUL 2024 FOR HKD 0.57 FPS REF NO. FRN■■■■■■■■■■PAYC0101■■■■■■■■■■ PLS ADVD THAT OUR CM CLAIMED THAT THE ABV PYMT IS SUSPECT A FRAUD PYMT. PLEASE URGENTLY ARRANGE TO CANCEL ABOVE PAYMENT AND RETURN PROCEEDS TO US VIA CHATS QUOTING OUR REF HK1240711-■■■■■■■■■■ UNDER SWIFT CONFIRMATION TO US. PLS IMMEDIATELY HOLD ENOUGH FUNDS IN BNF'S A/C TILL REC'D THEIR D/A FOR REFUND AND REPORT CASE TO YR SECURITY DEPARTMENT. IN REPLY, PLS QUOTE OUR REF HK1240711-■■■■■■■■■■ IN FIELD 21 OF YOUR SWF MSG REGARDS PYMT DEWAILS: 594-124331-140  HKD 240710 20:25:49 HD1247■■■■■■■ FRN20240710PAY■■■■■■■ HKD 1.00 C01 Y CXPSNL ACCEPT E2E ID NOTPROVIDED TRAN ID HC124710■■■■■■■ HKD 0.00 DR 004 BBAN 01211■■■■■■■HKD 1.00 CR 024 BBAN 111-111111-101  LOB RBWM SENDER NAME FUNG KAM LING BENE.NAME SIN TAI MAN CUSTOMER TYPE: CORPORATE TYPE : RISK LEVEL : ADDRESSING OPTION 1 : ADDRESSING SUB-OPTION 1 : ADDRESSING SUB-OPTION 2 : ADDRESSING OPTION 2 : ADDRESSING SUB-OPTION 1 : ADDRESSING SUB-OPTION 2 : REMITTANCE INFO ICT INSTR MSG 240710 20:25:49 ACCP STATUS PRT MSG 240710 20:25:50 ACSC</td><th>Date submitter became aware of the activity:</th><td> </td></tr><tr><th>Is this an urgent referral?</th><td>No</td><th>Is there a date a response is required by?</th><td></td></tr><tr><th colspan='4'>If this referral Is urgent or has a required response date, clearly explain why.</th></tr><tr><th colspan='2'>Activity Period:</th><th>From:</th><td></td></tr><tr><th>To:</th><td colspan='3'></td></tr><tr><th colspan='4'>Fraud Information:</th></tr><tr><th>Fraud Type:</th><td></td><th>Saved Amount:</th><td></td></tr><tr><th>Actual Loss Amount</th><td></td><th>Currency:</th><td></td></tr><tr><th>Description of events in chronological order:</th><td></td><th>Has any action been taken?</th><td>No</td></tr><tr><th>What action has been taken?</th><td colspan='3'></td></tr><tr><th>Is this related to a previous referral?</th><td colspan='3'>No</td></tr></table>
+<table style='text-align:left'><tr><th>What is the referral concerning?</th><td>Financial Crime Concern</td><th>Financial Crime Type:</th><td>External Fraud</td></tr><tr><th>Clearly describe your Financial Crime Concern:</th><td>The below cable message from Bank of East Asia, LimitedHKHH :20:HK1240711-■■■■■■■■■■ :21:HC1247■■■■■■■■■■ :79:RE OUR FPS PAYMENT DATED 10 JUL 2024 FOR HKD 0.67 FPS REF NO. FRN■■■■■■■■■■PAYC0101■■■■■■■■■■ PLS ADVD THAT OUR CM CLAIMED THAT THE ABV PYMT IS SUSPECT A FRAUD PYMT. PLEASE URGENTLY ARRANGE TO CANCEL ABOVE PAYMENT AND RETURN PROCEEDS TO US VIA CHATS QUOTING OUR REF HK1240711-■■■■■■■■■■ UNDER SWIFT CONFIRMATION TO US. PLS IMMEDIATELY HOLD ENOUGH FUNDS IN BNF'S A/C TILL REC'D THEIR D/A FOR REFUND AND REPORT CASE TO YR SECURITY DEPARTMENT. IN REPLY, PLS QUOTE OUR REF HK1240711-■■■■■■■■■■ IN FIELD 21 OF YOUR SWF MSG REGARDS PYMT DEFAILS: 795-641433-761  HKD 240710 20:25:49 HD1247■■■■■■■ FRN20240710PAY■■■■■■■ HKD 1.00 C01 Y CXPSNL ACCEPT E2E ID NOTPROVIDED TRAN ID HC124710■■■■■■■ HKD 0.00 DR 004 BBAN 01211■■■■■■■HKD 1.00 CR 024 BBAN 111-111111-101  LOB RBWM SENDER NAME WU MEI LING BENE.NAME CHI TAI MAN CUSTOMER TYPE: CORPORATE TYPE : RISK LEVEL : ADDRESSING OPTION 1 : ADDRESSING SUB-OPTION 1 : ADDRESSING SUB-OPTION 2 : ADDRESSING OPTION 2 : ADDRESSING SUB-OPTION 1 : ADDRESSING SUB-OPTION 2 : REMITTANCE INFO ICT INSTR MSG 240710 20:25:49 ACCP STATUS PRT MSG 240710 20:25:50 ACSC</td><th>Date submitter became aware of the activity:</th><td> </td></tr><tr><th>Is this an urgent referral?</th><td>No</td><th>Is there a date a response is required by?</th><td></td></tr><tr><th colspan='4'>If this referral Is urgent or has a required response date, clearly explain why.</th></tr><tr><th colspan='2'>Activity Period:</th><th>From:</th><td></td></tr><tr><th>To:</th><td colspan='3'></td></tr><tr><th colspan='4'>Fraud Information:</th></tr><tr><th>Fraud Type:</th><td></td><th>Saved Amount:</th><td></td></tr><tr><th>Actual Loss Amount</th><td></td><th>Currency:</th><td></td></tr><tr><th>Description of events in chronological order:</th><td></td><th>Has any action been taken?</th><td>No</td></tr><tr><th>What action has been taken?</th><td colspan='3'></td></tr><tr><th>Is this related to a previous referral?</th><td colspan='3'>No</td></tr></table>
 
 Involved Parties
 Individual Information:
-|First Name|Last Name|Alias|ID Type|ID Number|Date of Birth|Nationality|Nature of Relationship|Line of Business|Bank of Communications (Hong Kong) Limited Customer / Account|CIN|Involvement Type|Address Line 1|Address Line 2|Address Line 3|City or Town|Country or State|Zip or Postal Code|Country|Commentary|
+|First Name|Last Name|Alias|ID Type|ID Number|Date of Birth|Nationality|Nature of Relationship|Line of Business|Bank of East Asia, Limited Customer / Account|CIN|Involvement Type|Address Line 1|Address Line 2|Address Line 3|City or Town|Country or State|Zip or Postal Code|Country|Commentary|
 |----------|---------|-----|-------|---------|-------------|-----------|----------------------|----------------|------------------------|---|----------------|--------------|--------------|--------------|------------|----------------|------------------|-------|---------- |
 |TAI MAN|CHAN||||||||Y|347■■■■■|Suspect|||||||||
 
 Organisation Information:
 No Data
 
-Bank of Communications (Hong Kong) Limited Employee Involvement:
+Bank of East Asia, Limited Employee Involvement:
 No Data
 
 External Agency
@@ -9729,18 +9813,18 @@ Additional Deatils:
   ""fraud_type"": ""Not provided"",
   ""alerted_transactions"": [
     {
-      ""date"": ""2024-11-26"",
-      ""amount"": 0.57,
+      ""date"": ""2023-07-29"",
+      ""amount"": 0.67,
       ""currency"": ""HKD"",
       ""from"": {
-        ""name"": ""FUNG KAM LING"",
-        ""account_number"": ""583-89517-520"",
-        ""bank"": ""Bank of Communications (Hong Kong) Limited""
+        ""name"": ""WU MEI LING"",
+        ""account_number"": ""739-29369-070"",
+        ""bank"": ""Bank of East Asia, Limited""
       },
       ""to"": {
-        ""name"": ""YAU SIN WAI"",
-        ""account_number"": ""594-124331-140"",
-        ""bank"": ""Bank of Communications (Hong Kong) Limited""
+        ""name"": ""LEUNG CHI FAI"",
+        ""account_number"": ""795-641433-761"",
+        ""bank"": ""Chong Hing Bank Limited""
       },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
@@ -9750,18 +9834,18 @@ Additional Deatils:
       ""cancel_amount_requested"": 1
     }
   ]
-}",86,1,1,"2024-07-10 --> 2024-11-26
-1 --> 0.57
-MISS --> FUNG
-YEUNG --> KAM
+}",86,1,1,"2024-07-10 --> 2023-07-29
+1 --> 0.67
+MISS --> WU
+YEUNG --> MEI
 KAI --> LING
-666-66666-601 --> 583-89517-520
-BANK:The Hongkong and Shanghai Banking Corporation Limited --> Bank of Communications (Hong Kong) Limited
-Mr --> YAU
-CHAN --> SIN
-TAI --> WAI
-111-111111-101 --> 594-124331-140
-BANK:HASE --> Bank of Communications (Hong Kong) Limited"
+666-66666-601 --> 739-29369-070
+BANK:The Hongkong and Shanghai Banking Corporation Limited --> Bank of East Asia, Limited
+Mr --> LEUNG
+CHAN --> CHI
+TAI --> FAI
+111-111111-101 --> 795-641433-761
+BANK:HASE --> Chong Hing Bank Limited"
 UAR,4305,5,3,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -9771,13 +9855,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -9869,17 +9955,17 @@ JSON Schema:
     }
   ]
 }","Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
-2025-03-02,HKD,18305.67,C,Bank of Communications (Hong Kong) Limited,United Overseas Bank (Hong Kong) Limited,460-590273-443,961-905478-400,TSE KA LEI,AU        HOI LAAM MAN,Beneficiary,CWTF,Default transaction,,United Overseas Bank (Hong Kong) Limited    HK,25500,1fd9e993-bbbb-44ca-ba74-56f5359e0e03
-2024-11-12,HKD,50000,C,Bank of Communications (Hong Kong) Limited,United Overseas Bank (Hong Kong) Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,United Overseas Bank (Hong Kong) Limited    HK,50000,191ec06e-88eb-4ccd-bc9f-c426d9f4d1ab
-2024-11-12,HKD,56000,C,Bank of Communications (Hong Kong) Limited,United Overseas Bank (Hong Kong) Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,United Overseas Bank (Hong Kong) Limited    HK,56000,bf09dff6-4fa6-4ad9-8767-2ecbac3572a5
-2024-11-12,HKD,93000,C,Bank of Communications (Hong Kong) Limited,United Overseas Bank (Hong Kong) Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,United Overseas Bank (Hong Kong) Limited    HK,93000,d1fbfe47-51a4-4db9-83e6-17472b01cad7
-2024-11-12,HKD,90000,C,Bank of Communications (Hong Kong) Limited,United Overseas Bank (Hong Kong) Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,United Overseas Bank (Hong Kong) Limited    HK,90000,1ba89dc3-a477-450d-a7f7-bd55469f5628
-2024-11-12,HKD,200000,C,Bank of Communications (Hong Kong) Limited,United Overseas Bank (Hong Kong) Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,United Overseas Bank (Hong Kong) Limited    HK,200000,7b17ff77-05ab-4618-90b1-f5f41deac2a8
-2024-11-12,HKD,100000,C,Bank of Communications (Hong Kong) Limited,United Overseas Bank (Hong Kong) Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,United Overseas Bank (Hong Kong) Limited    HK,100000,fe57572e-f967-4a0c-9a9d-3315d2ccaf93
-2024-11-12,HKD,77000,C,Bank of Communications (Hong Kong) Limited,United Overseas Bank (Hong Kong) Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,United Overseas Bank (Hong Kong) Limited    HK,77000,c4ae19d2-61c0-443e-9dfe-c007ddaf6432
-2024-11-12,HKD,50000,C,Bank of Communications (Hong Kong) Limited,United Overseas Bank (Hong Kong) Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,United Overseas Bank (Hong Kong) Limited    HK,50000,ecd331fd-3f2b-48af-8102-36e9dd9ba457
-2024-11-11,HKD,19990,C,Bank of Communications (Hong Kong) Limited,United Overseas Bank (Hong Kong) Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,United Overseas Bank (Hong Kong) Limited    HK,19990,47bf0cc4-cbc9-4dde-ab99-3a8e4d40d5e7
-2024-11-12,HKD,16500,C,Bank of Communications (Hong Kong) Limited,United Overseas Bank (Hong Kong) Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,United Overseas Bank (Hong Kong) Limited    HK,16500,98d894e4-be10-4096-8afa-21d4d4259d2f
+2025-06-28,HKD,23344.94,C,China CITIC Bank International Limited,Chong Hing Bank Limited,156-864477-641,615-405900-782,WONG SIU MING,KAN        CHI WING MAN,Beneficiary,CWTF,Default transaction,,Chong Hing Bank Limited    HK,25500,1fd9e993-bbbb-44ca-ba74-56f5359e0e03
+2024-11-12,HKD,50000,C,China CITIC Bank International Limited,Chong Hing Bank Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,Chong Hing Bank Limited    HK,50000,191ec06e-88eb-4ccd-bc9f-c426d9f4d1ab
+2024-11-12,HKD,56000,C,China CITIC Bank International Limited,Chong Hing Bank Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,Chong Hing Bank Limited    HK,56000,bf09dff6-4fa6-4ad9-8767-2ecbac3572a5
+2024-11-12,HKD,93000,C,China CITIC Bank International Limited,Chong Hing Bank Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,Chong Hing Bank Limited    HK,93000,d1fbfe47-51a4-4db9-83e6-17472b01cad7
+2024-11-12,HKD,90000,C,China CITIC Bank International Limited,Chong Hing Bank Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,Chong Hing Bank Limited    HK,90000,1ba89dc3-a477-450d-a7f7-bd55469f5628
+2024-11-12,HKD,200000,C,China CITIC Bank International Limited,Chong Hing Bank Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,Chong Hing Bank Limited    HK,200000,7b17ff77-05ab-4618-90b1-f5f41deac2a8
+2024-11-12,HKD,100000,C,China CITIC Bank International Limited,Chong Hing Bank Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,Chong Hing Bank Limited    HK,100000,fe57572e-f967-4a0c-9a9d-3315d2ccaf93
+2024-11-12,HKD,77000,C,China CITIC Bank International Limited,Chong Hing Bank Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,Chong Hing Bank Limited    HK,77000,c4ae19d2-61c0-443e-9dfe-c007ddaf6432
+2024-11-12,HKD,50000,C,China CITIC Bank International Limited,Chong Hing Bank Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,Chong Hing Bank Limited    HK,50000,ecd331fd-3f2b-48af-8102-36e9dd9ba457
+2024-11-11,HKD,19990,C,China CITIC Bank International Limited,Chong Hing Bank Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,Chong Hing Bank Limited    HK,19990,47bf0cc4-cbc9-4dde-ab99-3a8e4d40d5e7
+2024-11-12,HKD,16500,C,China CITIC Bank International Limited,Chong Hing Bank Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,Chong Hing Bank Limited    HK,16500,98d894e4-be10-4096-8afa-21d4d4259d2f
 ","FC-UAR document
 Page x of y
 
@@ -9889,21 +9975,21 @@ Submitted Date:
 This document has been generated by the UCM Request Portal from the original Case Request details. All the data provided by the original creator are shown below.
 
 Step 1- About Yourself
-<table style='text-align:left'><tr><th>What is the main country your financial crime concern relates to?</th><td>Hong Kong Bank of Communications (Hong Kong) Limited</td><th>Which Business Area/Legal Enity?</th><td>Bank of Communications (Hong Kong) Limited</td></tr><tr><th>Name:</th><td>FU SIUSAN</td><th>Telephone:</th><td></td></tr><tr><th>Role:</th><td>FINANCIAL SERVICES SPECIALIST</td><th>Department:</th><td>PIV</td></tr><tr><th>Manager:</th><td>LIAO BOBO</td><th>Country:</th><td>HONG KONG</td></tr><tr><th>What Global Function do you work in?</th><td>Not Applicable</td><th>What Global Sub-Function do you work in?</th><td>Not Applicable</td></tr><tr><th>Do you work in a Global Service Center?</th><td>N</td><th>Which Global Service Center do you work in?</th><td></td></tr><tr><th>Are you reporting this on someone's behalf?</th><td>N</td><th>Mail Address:</th><td>fu.siusan@noexternalmail.United Overseas Bank (Hong Kong) Limited.com</td></tr><tr><th>Does anyone else need to be notified about this?</th><td></td></tr></table>
+<table style='text-align:left'><tr><th>What is the main country your financial crime concern relates to?</th><td>Hong Kong China CITIC Bank International Limited</td><th>Which Business Area/Legal Enity?</th><td>China CITIC Bank International Limited</td></tr><tr><th>Name:</th><td>FU SIUSAN</td><th>Telephone:</th><td></td></tr><tr><th>Role:</th><td>FINANCIAL SERVICES SPECIALIST</td><th>Department:</th><td>PIV</td></tr><tr><th>Manager:</th><td>LIAO BOBO</td><th>Country:</th><td>HONG KONG</td></tr><tr><th>What Global Function do you work in?</th><td>Not Applicable</td><th>What Global Sub-Function do you work in?</th><td>Not Applicable</td></tr><tr><th>Do you work in a Global Service Center?</th><td>N</td><th>Which Global Service Center do you work in?</th><td></td></tr><tr><th>Are you reporting this on someone's behalf?</th><td>N</td><th>Mail Address:</th><td>fu.siusan@noexternalmail.Chong Hing Bank Limited.com</td></tr><tr><th>Does anyone else need to be notified about this?</th><td></td></tr></table>
 
 Area of Concern
-<table style='text-align:left'><tr><th>What is the referral concerning?</th><td>Financial Crime Concern</td><th>Financial Crime Type:</th><td>External Fraud</td></tr><tr><th>Clearly describe your Financial Crime Concern:</th><td>PAYMENT DEKALS ACCOUNT NAME: AU TSE LAAM LEI ACCOUNT NUMBER:961-905478-400  REMITING BANK ADVISED FRAUD REMITTING BANK'S CABLE :20:HK124■■■■■-■■■■■■■■■■  :21:HC124B■■■■■■■■■■  :79:RE OUR FPS PAYMENT DATED 12NOV24 FOR HKD18305.67 FPS REF NO. FRN■■■■■■■■■■ PAYD01020■■■■■■■■■■  PLS BE ADVISED THAT THE FUND IS SUSPECTED TO BE FROM FRAUDULENT SOURCE. PLEASE URGENTLY ARRANGE TO CANCEL PARTIAL AMOUNT HKD25,381.00 AND RETURN PROCEEDS TO US VIA CHATS QUOTING OUR REF HK1241115-■■■■■■■■■■  UNDER SWIFT CONFIRMATION TO US. PLS IMMEDIATELY HOLD ENOUGH FUNDS IN BNF'S A/C TILL REC'D THEIR D/A FOR REFUND AND REPORT CASE TO YR SECURITY DEPARTMENT. IN REPLY, PLS QUOTE OUR REF HK1241115-■■■■■■■■■■  IN FIELD 21 OF YOUR SWF MSG REGARDS PAYMENT ORDER DTL DDEBIT PAYD01 DDTOPU FRN20241112PAYD010■■■■■■■■■■  HD124B■■■■■■■■■■  024/SDDA20241111■■■■■■■■■■ 24 MR HOI TAI MAN 111-111111-101  BBAN 4 CHAN TAI MAN 460-590273-443 BBAN HKD 25500 ACSC 11/12/2024 16:20 677■■■■ MQH HD124B■■■■■■■■■■ D 0.304 N</td><th>Date submitter became aware of the activity:</th><td> </td></tr><tr><th>Is this an urgent referral?</th><td>No</td><th>Is there a date a response is required by?</th><td></td></tr><tr><th colspan='4'>If this referral Is urgent or has a required response date, clearly explain why.</th></tr><tr><th colspan='2'>Activity Period:</th><th>From:</th><td></td></tr><tr><th>To:</th><td colspan='3'></td></tr><tr><th colspan='4'>Fraud Information:</th></tr><tr><th>Fraud Type:</th><td></td><th>Saved Amount:</th><td></td></tr><tr><th>Actual Loss Amount</th><td></td><th>Currency:</th><td></td></tr><tr><th>Description of events in chronological order:</th><td></td><th>Has any action been taken?</th><td>No</td></tr><tr><th>What action has been taken?</th><td colspan='3'></td></tr><tr><th>Is this related to a previous referral?</th><td colspan='3'>No</td></tr></table>
+<table style='text-align:left'><tr><th>What is the referral concerning?</th><td>Financial Crime Concern</td><th>Financial Crime Type:</th><td>External Fraud</td></tr><tr><th>Clearly describe your Financial Crime Concern:</th><td>PAYMENT DESIULS ACCOUNT NAME: KAN WONG WING MING ACCOUNT NUMBER:615-405900-782  REMITING BANK ADVISED FRAUD REMITTING BANK'S CABLE :20:HK124■■■■■-■■■■■■■■■■  :21:HC124B■■■■■■■■■■  :79:RE OUR FPS PAYMENT DATED 12NOV24 FOR HKD23344.94 FPS REF NO. FRN■■■■■■■■■■ PAYD01020■■■■■■■■■■  PLS BE ADVISED THAT THE FUND IS SUSPECTED TO BE FROM FRAUDULENT SOURCE. PLEASE URGENTLY ARRANGE TO CANCEL PARTIAL AMOUNT HKD25,381.00 AND RETURN PROCEEDS TO US VIA CHATS QUOTING OUR REF HK1241115-■■■■■■■■■■  UNDER SWIFT CONFIRMATION TO US. PLS IMMEDIATELY HOLD ENOUGH FUNDS IN BNF'S A/C TILL REC'D THEIR D/A FOR REFUND AND REPORT CASE TO YR SECURITY DEPARTMENT. IN REPLY, PLS QUOTE OUR REF HK1241115-■■■■■■■■■■  IN FIELD 21 OF YOUR SWF MSG REGARDS PAYMENT ORDER DTL DDEBIT PAYD01 DDTOPU FRN20241112PAYD010■■■■■■■■■■  HD124B■■■■■■■■■■  024/SDDA20241111■■■■■■■■■■ 24 MR CHI TAI MAN 111-111111-101  BBAN 4 CHAN TAI MAN 156-864477-641 BBAN HKD 25500 ACSC 11/12/2024 16:20 677■■■■ MQH HD124B■■■■■■■■■■ D 0.304 N</td><th>Date submitter became aware of the activity:</th><td> </td></tr><tr><th>Is this an urgent referral?</th><td>No</td><th>Is there a date a response is required by?</th><td></td></tr><tr><th colspan='4'>If this referral Is urgent or has a required response date, clearly explain why.</th></tr><tr><th colspan='2'>Activity Period:</th><th>From:</th><td></td></tr><tr><th>To:</th><td colspan='3'></td></tr><tr><th colspan='4'>Fraud Information:</th></tr><tr><th>Fraud Type:</th><td></td><th>Saved Amount:</th><td></td></tr><tr><th>Actual Loss Amount</th><td></td><th>Currency:</th><td></td></tr><tr><th>Description of events in chronological order:</th><td></td><th>Has any action been taken?</th><td>No</td></tr><tr><th>What action has been taken?</th><td colspan='3'></td></tr><tr><th>Is this related to a previous referral?</th><td colspan='3'>No</td></tr></table>
 
 Involved Parties
 Individual Information:
-|First Name|Last Name|Alias|ID Type|ID Number|Date of Birth|Nationality|Nature of Relationship|Line of Business|United Overseas Bank (Hong Kong) Limited Customer / Account|CIN|Involvement Type|Address Line 1|Address Line 2|Address Line 3|City or Town|Country or State|Zip or Postal Code|Country|Commentary|
+|First Name|Last Name|Alias|ID Type|ID Number|Date of Birth|Nationality|Nature of Relationship|Line of Business|Chong Hing Bank Limited Customer / Account|CIN|Involvement Type|Address Line 1|Address Line 2|Address Line 3|City or Town|Country or State|Zip or Postal Code|Country|Commentary|
 |----------|---------|-----|-------|---------|-------------|-----------|----------------------|----------------|------------------------|---|----------------|--------------|--------------|--------------|------------|----------------|------------------|-------|---------- |
 |TAI MAN|CHAN||||||||Y||Suspect|||||||||
 
 Organisation Information:
 No Data
 
-United Overseas Bank (Hong Kong) Limited Employee Involvement:
+Chong Hing Bank Limited Employee Involvement:
 No Data
 
 External Agency
@@ -9914,18 +10000,18 @@ Additional Deatils:
   ""fraud_type"": ""Not provided"",
   ""alerted_transactions"": [
     {
-      ""date"": ""2025-03-02"",
-      ""amount"": 18305.67,
+      ""date"": ""2025-06-28"",
+      ""amount"": 23344.94,
       ""currency"": ""HKD"",
       ""from"": {
-        ""name"": ""TSE KA LEI"",
-        ""account_number"": ""460-590273-443"",
-        ""bank"": ""United Overseas Bank (Hong Kong) Limited""
+        ""name"": ""WONG SIU MING"",
+        ""account_number"": ""156-864477-641"",
+        ""bank"": ""Chong Hing Bank Limited""
       },
       ""to"": {
-        ""name"": ""AU HOI LAAM"",
-        ""account_number"": ""961-905478-400"",
-        ""bank"": ""Bank of Communications (Hong Kong) Limited""
+        ""name"": ""KAN CHI WING"",
+        ""account_number"": ""615-405900-782"",
+        ""bank"": ""China CITIC Bank International Limited""
       },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
@@ -9935,18 +10021,18 @@ Additional Deatils:
       ""cancel_amount_requested"": 25381
     }
   ]
-}",86,1,1,"2024-11-12 --> 2025-03-02
-25500 --> 18305.67
-CHAN --> TSE
-TAI --> KA
-MAN --> LEI
-333-333333-101 --> 460-590273-443
-BANK:The Hongkong and Shanghai Banking Corporation Limited --> United Overseas Bank (Hong Kong) Limited
-MR --> AU
-CHAN --> HOI
-TAI --> LAAM
-111-111111-101 --> 961-905478-400
-BANK:HASE --> Bank of Communications (Hong Kong) Limited"
+}",86,1,1,"2024-11-12 --> 2025-06-28
+25500 --> 23344.94
+CHAN --> WONG
+TAI --> SIU
+MAN --> MING
+333-333333-101 --> 156-864477-641
+BANK:The Hongkong and Shanghai Banking Corporation Limited --> Chong Hing Bank Limited
+MR --> KAN
+CHAN --> CHI
+TAI --> WING
+111-111111-101 --> 615-405900-782
+BANK:HASE --> China CITIC Bank International Limited"
 UAR,4305,5,7,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -9956,13 +10042,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -10054,17 +10142,17 @@ JSON Schema:
     }
   ]
 }","Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
-2024-04-05,HKD,25500,C,United Overseas Bank (Hong Kong) Limited,United Overseas Bank (Hong Kong) Limited,605-457854-123,315-253540-923,CHIU MEI FONG,LUNG        KA WAI MAN,Beneficiary,CWTF,Default transaction,,United Overseas Bank (Hong Kong) Limited    HK,25500,1fd9e993-bbbb-44ca-ba74-56f5359e0e03
-2024-11-12,HKD,50000,C,United Overseas Bank (Hong Kong) Limited,United Overseas Bank (Hong Kong) Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,United Overseas Bank (Hong Kong) Limited    HK,50000,191ec06e-88eb-4ccd-bc9f-c426d9f4d1ab
-2024-11-12,HKD,56000,C,United Overseas Bank (Hong Kong) Limited,United Overseas Bank (Hong Kong) Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,United Overseas Bank (Hong Kong) Limited    HK,56000,bf09dff6-4fa6-4ad9-8767-2ecbac3572a5
-2024-11-12,HKD,93000,C,United Overseas Bank (Hong Kong) Limited,United Overseas Bank (Hong Kong) Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,United Overseas Bank (Hong Kong) Limited    HK,93000,d1fbfe47-51a4-4db9-83e6-17472b01cad7
-2024-11-12,HKD,90000,C,United Overseas Bank (Hong Kong) Limited,United Overseas Bank (Hong Kong) Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,United Overseas Bank (Hong Kong) Limited    HK,90000,1ba89dc3-a477-450d-a7f7-bd55469f5628
-2024-11-12,HKD,200000,C,United Overseas Bank (Hong Kong) Limited,United Overseas Bank (Hong Kong) Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,United Overseas Bank (Hong Kong) Limited    HK,200000,7b17ff77-05ab-4618-90b1-f5f41deac2a8
-2024-11-12,HKD,100000,C,United Overseas Bank (Hong Kong) Limited,United Overseas Bank (Hong Kong) Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,United Overseas Bank (Hong Kong) Limited    HK,100000,fe57572e-f967-4a0c-9a9d-3315d2ccaf93
-2024-11-12,HKD,12463.69,C,United Overseas Bank (Hong Kong) Limited,United Overseas Bank (Hong Kong) Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,United Overseas Bank (Hong Kong) Limited    HK,77000,c4ae19d2-61c0-443e-9dfe-c007ddaf6432
-2024-11-12,HKD,50000,C,United Overseas Bank (Hong Kong) Limited,United Overseas Bank (Hong Kong) Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,United Overseas Bank (Hong Kong) Limited    HK,50000,ecd331fd-3f2b-48af-8102-36e9dd9ba457
-2024-11-11,HKD,19990,C,United Overseas Bank (Hong Kong) Limited,United Overseas Bank (Hong Kong) Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,United Overseas Bank (Hong Kong) Limited    HK,19990,47bf0cc4-cbc9-4dde-ab99-3a8e4d40d5e7
-2024-11-12,HKD,16500,C,United Overseas Bank (Hong Kong) Limited,United Overseas Bank (Hong Kong) Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,United Overseas Bank (Hong Kong) Limited    HK,16500,98d894e4-be10-4096-8afa-21d4d4259d2f
+2024-12-18,HKD,25500,C,Dah Sing Bank, Limited,DBS Bank (Hong Kong) Limited,786-417904-259,289-990790-575,TSE KA LEI,TONG        SIU WAI MAN,Beneficiary,CWTF,Default transaction,,DBS Bank (Hong Kong) Limited    HK,25500,1fd9e993-bbbb-44ca-ba74-56f5359e0e03
+2024-11-12,HKD,50000,C,Dah Sing Bank, Limited,DBS Bank (Hong Kong) Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,DBS Bank (Hong Kong) Limited    HK,50000,191ec06e-88eb-4ccd-bc9f-c426d9f4d1ab
+2024-11-12,HKD,56000,C,Dah Sing Bank, Limited,DBS Bank (Hong Kong) Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,DBS Bank (Hong Kong) Limited    HK,56000,bf09dff6-4fa6-4ad9-8767-2ecbac3572a5
+2024-11-12,HKD,93000,C,Dah Sing Bank, Limited,DBS Bank (Hong Kong) Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,DBS Bank (Hong Kong) Limited    HK,93000,d1fbfe47-51a4-4db9-83e6-17472b01cad7
+2024-11-12,HKD,90000,C,Dah Sing Bank, Limited,DBS Bank (Hong Kong) Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,DBS Bank (Hong Kong) Limited    HK,90000,1ba89dc3-a477-450d-a7f7-bd55469f5628
+2024-11-12,HKD,200000,C,Dah Sing Bank, Limited,DBS Bank (Hong Kong) Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,DBS Bank (Hong Kong) Limited    HK,200000,7b17ff77-05ab-4618-90b1-f5f41deac2a8
+2024-11-12,HKD,100000,C,Dah Sing Bank, Limited,DBS Bank (Hong Kong) Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,DBS Bank (Hong Kong) Limited    HK,100000,fe57572e-f967-4a0c-9a9d-3315d2ccaf93
+2024-11-12,HKD,8723.67,C,Dah Sing Bank, Limited,DBS Bank (Hong Kong) Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,DBS Bank (Hong Kong) Limited    HK,77000,c4ae19d2-61c0-443e-9dfe-c007ddaf6432
+2024-11-12,HKD,50000,C,Dah Sing Bank, Limited,DBS Bank (Hong Kong) Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,DBS Bank (Hong Kong) Limited    HK,50000,ecd331fd-3f2b-48af-8102-36e9dd9ba457
+2024-11-11,HKD,19990,C,Dah Sing Bank, Limited,DBS Bank (Hong Kong) Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,DBS Bank (Hong Kong) Limited    HK,19990,47bf0cc4-cbc9-4dde-ab99-3a8e4d40d5e7
+2024-11-12,HKD,16500,C,Dah Sing Bank, Limited,DBS Bank (Hong Kong) Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,DBS Bank (Hong Kong) Limited    HK,16500,98d894e4-be10-4096-8afa-21d4d4259d2f
 ","FC-UAR document
 Page x of y
 
@@ -10074,21 +10162,21 @@ Submitted Date:
 This document has been generated by the UCM Request Portal from the original Case Request details. All the data provided by the original creator are shown below.
 
 Step 1- About Yourself
-<table style='text-align:left'><tr><th>What is the main country your financial crime concern relates to?</th><td>Hong Kong United Overseas Bank (Hong Kong) Limited</td><th>Which Business Area/Legal Enity?</th><td>United Overseas Bank (Hong Kong) Limited</td></tr><tr><th>Name:</th><td>DING SUISUI</td><th>Telephone:</th><td></td></tr><tr><th>Role:</th><td>FINANCIAL SERVICES SPECIALIST</td><th>Department:</th><td>United Overseas Bank (Hong Kong) Limited PIV - NH (NON-CORE)</td></tr><tr><th>Manager:</th><td>ZHAO SUIMEN</td><th>Country:</th><td>HONG KONG</td></tr><tr><th>What Global Function do you work in?</th><td>Not Applicable</td><th>What Global Sub-Function do you work in?</th><td>Not Applicable</td></tr><tr><th>Do you work in a Global Service Center?</th><td>N</td><th>Which Global Service Center do you work in?</th><td></td></tr><tr><th>Are you reporting this on someone's behalf?</th><td>N</td><th>Mail Address:</th><td>ding.suisui@noexternalmail.United Overseas Bank (Hong Kong) Limited.com</td></tr><tr><th>Does anyone else need to be notified about this?</th><td></td></tr></table>
+<table style='text-align:left'><tr><th>What is the main country your financial crime concern relates to?</th><td>Hong Kong Dah Sing Bank, Limited</td><th>Which Business Area/Legal Enity?</th><td>Dah Sing Bank, Limited</td></tr><tr><th>Name:</th><td>DING SUISUI</td><th>Telephone:</th><td></td></tr><tr><th>Role:</th><td>FINANCIAL SERVICES SPECIALIST</td><th>Department:</th><td>Dah Sing Bank, Limited PIV - NH (NON-CORE)</td></tr><tr><th>Manager:</th><td>ZHAO SUIMEN</td><th>Country:</th><td>HONG KONG</td></tr><tr><th>What Global Function do you work in?</th><td>Not Applicable</td><th>What Global Sub-Function do you work in?</th><td>Not Applicable</td></tr><tr><th>Do you work in a Global Service Center?</th><td>N</td><th>Which Global Service Center do you work in?</th><td></td></tr><tr><th>Are you reporting this on someone's behalf?</th><td>N</td><th>Mail Address:</th><td>ding.suisui@noexternalmail.DBS Bank (Hong Kong) Limited.com</td></tr><tr><th>Does anyone else need to be notified about this?</th><td></td></tr></table>
 
 Area of Concern
-<table style='text-align:left'><tr><th>What is the referral concerning?</th><td>Financial Crime Concern</td><th>Financial Crime Type:</th><td>External Fraud</td></tr><tr><th>Clearly describe your Financial Crime Concern:</th><td>{1:F01United Overseas Bank (Hong Kong) LimitedHK■■■■■■■■■■}{2:O199■■■■■■■■■■United Overseas Bank (Hong Kong) LimitedHKHHXXXX000000■■■■■■■■■■}{3:{108:24355■■■■■■■■■■}}{4: :20:HK124■■■■■■■■■■ :21:HC124B■■■■■■■■■■ :79:RE OUR FPS PAYMENT DATED 12NOV2024 FOR HKD12463.69 FPS REF NO. FRN■■■■■■■■■■PAYD01020■■■■■■■■■■ PLS BE ADVISED THAT THE FUND IS SUSPECTED TO BE FROM FRAUDULENT SOURCE. PLEASE URGENTLY ARRANGE TO CANCEL PARTIAL AMOUNT HKD20,000.00 AND RETURN PROCEEDS TO US VIA CHATS QUOTING OUR REF HK124■■■■■■■■■■-■■■■■■■■■■ UNDER SWIFT CONFIRMATION TO US. PLS IMMEDIATELY HOLD ENOUGH FUNDS IN BNF'S A/C TILL REC'D THEIR D/A FOR REFUND AND REPORT CASE TO YR SECURITY DEPARTMENT. IN REPLY, PLS QUOTE OUR REF HK124■■■■■■■■■■-000■■■■■■■■■■ IN FIELD 21 OF YOUR SWF MSG REGARDS -}{5:{CHK:000000000000}} DTL DDEBIT PAYD01 DDTOPU FRN2024■■■■■■■■■■PAYD010■■■■■■■■■■ HD124B■■■■■■■■■■ 024/SDDA20241111■■■■■■■■■■ 24 CHIU MEI FONG 315-253540-923  BBAN 4 KA WAI MAN 605-457854-123 BBAN HKD 77000 ACSC 2024/11/12 11:02 ■■■■■■■■ MQH HD124B1■■■■■■■■ D 0.315 N</td><th>Date submitter became aware of the activity:</th><td> </td></tr><tr><th>Is this an urgent referral?</th><td>No</td><th>Is there a date a response is required by?</th><td></td></tr><tr><th colspan='4'>If this referral Is urgent or has a required response date, clearly explain why.</th></tr><tr><th colspan='2'>Activity Period:</th><th>From:</th><td></td></tr><tr><th>To:</th><td colspan='3'></td></tr><tr><th colspan='4'>Fraud Information:</th></tr><tr><th>Fraud Type:</th><td></td><th>Saved Amount:</th><td></td></tr><tr><th>Actual Loss Amount</th><td></td><th>Currency:</th><td></td></tr><tr><th>Description of events in chronological order:</th><td></td><th>Has any action been taken?</th><td>No</td></tr><tr><th>What action has been taken?</th><td colspan='3'></td></tr><tr><th>Is this related to a previous referral?</th><td colspan='3'>No</td></tr></table>
+<table style='text-align:left'><tr><th>What is the referral concerning?</th><td>Financial Crime Concern</td><th>Financial Crime Type:</th><td>External Fraud</td></tr><tr><th>Clearly describe your Financial Crime Concern:</th><td>{1:F01Dah Sing Bank, LimitedHK■■■■■■■■■■}{2:O199■■■■■■■■■■DBS Bank (Hong Kong) LimitedHKHHXXXX000000■■■■■■■■■■}{3:{108:24355■■■■■■■■■■}}{4: :20:HK124■■■■■■■■■■ :21:HC124B■■■■■■■■■■ :79:RE OUR FPS PAYMENT DATED 12NOV2024 FOR HKD8723.67 FPS REF NO. FRN■■■■■■■■■■PAYD01020■■■■■■■■■■ PLS BE ADVISED THAT THE FUND IS SUSPECTED TO BE FROM FRAUDULENT SOURCE. PLEASE URGENTLY ARRANGE TO CANCEL PARTIAL AMOUNT HKD20,000.00 AND RETURN PROCEEDS TO US VIA CHATS QUOTING OUR REF HK124■■■■■■■■■■-■■■■■■■■■■ UNDER SWIFT CONFIRMATION TO US. PLS IMMEDIATELY HOLD ENOUGH FUNDS IN BNF'S A/C TILL REC'D THEIR D/A FOR REFUND AND REPORT CASE TO YR SECURITY DEPARTMENT. IN REPLY, PLS QUOTE OUR REF HK124■■■■■■■■■■-000■■■■■■■■■■ IN FIELD 21 OF YOUR SWF MSG REGARDS -}{5:{CHK:000000000000}} DTL DDEBIT PAYD01 DDTOPU FRN2024■■■■■■■■■■PAYD010■■■■■■■■■■ HD124B■■■■■■■■■■ 024/SDDA20241111■■■■■■■■■■ 24 TSE KA LEI 289-990790-575  BBAN 4 SIU WAI MAN 786-417904-259 BBAN HKD 77000 ACSC 2024/11/12 11:02 ■■■■■■■■ MQH HD124B1■■■■■■■■ D 0.315 N</td><th>Date submitter became aware of the activity:</th><td> </td></tr><tr><th>Is this an urgent referral?</th><td>No</td><th>Is there a date a response is required by?</th><td></td></tr><tr><th colspan='4'>If this referral Is urgent or has a required response date, clearly explain why.</th></tr><tr><th colspan='2'>Activity Period:</th><th>From:</th><td></td></tr><tr><th>To:</th><td colspan='3'></td></tr><tr><th colspan='4'>Fraud Information:</th></tr><tr><th>Fraud Type:</th><td></td><th>Saved Amount:</th><td></td></tr><tr><th>Actual Loss Amount</th><td></td><th>Currency:</th><td></td></tr><tr><th>Description of events in chronological order:</th><td></td><th>Has any action been taken?</th><td>No</td></tr><tr><th>What action has been taken?</th><td colspan='3'></td></tr><tr><th>Is this related to a previous referral?</th><td colspan='3'>No</td></tr></table>
 
 Involved Parties
 Individual Information:
-|First Name|Last Name|Alias|ID Type|ID Number|Date of Birth|Nationality|Nature of Relationship|Line of Business|United Overseas Bank (Hong Kong) Limited Customer / Account|CIN|Involvement Type|Address Line 1|Address Line 2|Address Line 3|City or Town|Country or State|Zip or Postal Code|Country|Commentary|
+|First Name|Last Name|Alias|ID Type|ID Number|Date of Birth|Nationality|Nature of Relationship|Line of Business|DBS Bank (Hong Kong) Limited Customer / Account|CIN|Involvement Type|Address Line 1|Address Line 2|Address Line 3|City or Town|Country or State|Zip or Postal Code|Country|Commentary|
 |----------|---------|-----|-------|---------|-------------|-----------|----------------------|----------------|------------------------|---|----------------|--------------|--------------|--------------|------------|----------------|------------------|-------|---------- |
 |TAI MAN|CHAN||||||||Y||Suspect|||||||||
 
 Organisation Information:
 No Data
 
-United Overseas Bank (Hong Kong) Limited Employee Involvement:
+DBS Bank (Hong Kong) Limited Employee Involvement:
 No Data
 
 External Agency
@@ -10099,18 +10187,18 @@ Additional Deatils:
   ""fraud_type"": ""Not provided"",
   ""alerted_transactions"": [
     {
-      ""date"": ""2024-04-05"",
-      ""amount"": 12463.69,
+      ""date"": ""2024-12-18"",
+      ""amount"": 8723.67,
       ""currency"": ""HKD"",
       ""from"": {
-        ""name"": ""CHIU MEI FONG"",
-        ""account_number"": ""605-457854-123"",
-        ""bank"": ""Hang Seng Bank Ltd.""
+        ""name"": ""TSE KA LEI"",
+        ""account_number"": ""786-417904-259"",
+        ""bank"": ""DBS Bank (Hong Kong) Limited""
       },
       ""to"": {
-        ""name"": ""LUNG KA WAI"",
-        ""account_number"": ""315-253540-923"",
-        ""bank"": ""United Overseas Bank (Hong Kong) Limited""
+        ""name"": ""TONG SIU WAI"",
+        ""account_number"": ""289-990790-575"",
+        ""bank"": ""Dah Sing Bank, Limited""
       },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
@@ -10120,18 +10208,18 @@ Additional Deatils:
       ""cancel_amount_requested"": 20000
     }
   ]
-}",86,1,1,"2024-11-12 --> 2024-04-05
-77000 --> 12463.69
-CHAN --> CHIU
-TAI --> MEI
-MAN --> FONG
-333-333333-101 --> 605-457854-123
-BANK:The Hongkong and Shanghai Banking Corporation Limited --> Hang Seng Bank Ltd.
-MR --> LUNG
-CHAN --> KA
+}",86,1,1,"2024-11-12 --> 2024-12-18
+77000 --> 8723.67
+CHAN --> TSE
+TAI --> KA
+MAN --> LEI
+333-333333-101 --> 786-417904-259
+BANK:The Hongkong and Shanghai Banking Corporation Limited --> DBS Bank (Hong Kong) Limited
+MR --> TONG
+CHAN --> SIU
 TAI --> WAI
-111-111111-101 --> 315-253540-923
-BANK:HASE --> United Overseas Bank (Hong Kong) Limited"
+111-111111-101 --> 289-990790-575
+BANK:HASE --> Dah Sing Bank, Limited"
 UAR,4305,5,8,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -10141,13 +10229,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -10239,17 +10329,17 @@ JSON Schema:
     }
   ]
 }","Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
-2024-11-12,HKD,25500,C,Hang Seng Bank Ltd. Bank Ltd. Bank Ltd. Bank Ltd. Bank Ltd. Ltd. Ltd. Ltd. Ltd.....,China Construction Bank (Asia) Corporation Limited,419-739407-386,881-988778-277,MUI KA MING,TSANG        MEI LIN MAN,Beneficiary,CWTF,Default transaction,,China Construction Bank (Asia) Corporation Limited    HK,25500,1fd9e993-bbbb-44ca-ba74-56f5359e0e03
-2024-11-12,HKD,50000,C,Hang Seng Bank Ltd. Bank Ltd. Bank Ltd. Bank Ltd. Bank Ltd. Ltd. Ltd. Ltd. Ltd.....,China Construction Bank (Asia) Corporation Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,China Construction Bank (Asia) Corporation Limited    HK,50000,191ec06e-88eb-4ccd-bc9f-c426d9f4d1ab
-2024-11-12,HKD,56000,C,Hang Seng Bank Ltd. Bank Ltd. Bank Ltd. Bank Ltd. Bank Ltd. Ltd. Ltd. Ltd. Ltd.....,China Construction Bank (Asia) Corporation Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,China Construction Bank (Asia) Corporation Limited    HK,56000,bf09dff6-4fa6-4ad9-8767-2ecbac3572a5
-2024-11-12,HKD,93000,C,Hang Seng Bank Ltd. Bank Ltd. Bank Ltd. Bank Ltd. Bank Ltd. Ltd. Ltd. Ltd. Ltd.....,China Construction Bank (Asia) Corporation Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,China Construction Bank (Asia) Corporation Limited    HK,93000,d1fbfe47-51a4-4db9-83e6-17472b01cad7
-2024-11-12,HKD,90000,C,Hang Seng Bank Ltd. Bank Ltd. Bank Ltd. Bank Ltd. Bank Ltd. Ltd. Ltd. Ltd. Ltd.....,China Construction Bank (Asia) Corporation Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,China Construction Bank (Asia) Corporation Limited    HK,90000,1ba89dc3-a477-450d-a7f7-bd55469f5628
-2024-11-12,HKD,200000,C,Hang Seng Bank Ltd. Bank Ltd. Bank Ltd. Bank Ltd. Bank Ltd. Ltd. Ltd. Ltd. Ltd.....,China Construction Bank (Asia) Corporation Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,China Construction Bank (Asia) Corporation Limited    HK,200000,7b17ff77-05ab-4618-90b1-f5f41deac2a8
-2024-11-12,HKD,100000,C,Hang Seng Bank Ltd. Bank Ltd. Bank Ltd. Bank Ltd. Bank Ltd. Ltd. Ltd. Ltd. Ltd.....,China Construction Bank (Asia) Corporation Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,China Construction Bank (Asia) Corporation Limited    HK,100000,fe57572e-f967-4a0c-9a9d-3315d2ccaf93
-2024-11-12,HKD,77000,C,Hang Seng Bank Ltd. Bank Ltd. Bank Ltd. Bank Ltd. Bank Ltd. Ltd. Ltd. Ltd. Ltd.....,China Construction Bank (Asia) Corporation Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,China Construction Bank (Asia) Corporation Limited    HK,77000,c4ae19d2-61c0-443e-9dfe-c007ddaf6432
-2024-11-12,HKD,50000,C,Hang Seng Bank Ltd. Bank Ltd. Bank Ltd. Bank Ltd. Bank Ltd. Ltd. Ltd. Ltd. Ltd.....,China Construction Bank (Asia) Corporation Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,China Construction Bank (Asia) Corporation Limited    HK,50000,ecd331fd-3f2b-48af-8102-36e9dd9ba457
-2024-03-24,HKD,17071.33,C,Hang Seng Bank Ltd. Bank Ltd. Bank Ltd. Bank Ltd. Bank Ltd. Ltd. Ltd. Ltd. Ltd.....,China Construction Bank (Asia) Corporation Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,China Construction Bank (Asia) Corporation Limited    HK,19990,47bf0cc4-cbc9-4dde-ab99-3a8e4d40d5e7
-2024-11-12,HKD,16500,C,Hang Seng Bank Ltd. Bank Ltd. Bank Ltd. Bank Ltd. Bank Ltd. Ltd. Ltd. Ltd. Ltd.....,China Construction Bank (Asia) Corporation Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,China Construction Bank (Asia) Corporation Limited    HK,16500,98d894e4-be10-4096-8afa-21d4d4259d2f
+2024-11-12,HKD,25500,C,DBS Bank (Hong Kong) Limited,Shanghai Commercial Bank Limited,443-484002-809,419-248419-695,YAU SIN WAI,POON        SIU FONG MAN,Beneficiary,CWTF,Default transaction,,Shanghai Commercial Bank Limited    HK,25500,1fd9e993-bbbb-44ca-ba74-56f5359e0e03
+2024-11-12,HKD,50000,C,DBS Bank (Hong Kong) Limited,Shanghai Commercial Bank Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,Shanghai Commercial Bank Limited    HK,50000,191ec06e-88eb-4ccd-bc9f-c426d9f4d1ab
+2024-11-12,HKD,56000,C,DBS Bank (Hong Kong) Limited,Shanghai Commercial Bank Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,Shanghai Commercial Bank Limited    HK,56000,bf09dff6-4fa6-4ad9-8767-2ecbac3572a5
+2024-11-12,HKD,93000,C,DBS Bank (Hong Kong) Limited,Shanghai Commercial Bank Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,Shanghai Commercial Bank Limited    HK,93000,d1fbfe47-51a4-4db9-83e6-17472b01cad7
+2024-11-12,HKD,90000,C,DBS Bank (Hong Kong) Limited,Shanghai Commercial Bank Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,Shanghai Commercial Bank Limited    HK,90000,1ba89dc3-a477-450d-a7f7-bd55469f5628
+2024-11-12,HKD,200000,C,DBS Bank (Hong Kong) Limited,Shanghai Commercial Bank Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,Shanghai Commercial Bank Limited    HK,200000,7b17ff77-05ab-4618-90b1-f5f41deac2a8
+2024-11-12,HKD,100000,C,DBS Bank (Hong Kong) Limited,Shanghai Commercial Bank Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,Shanghai Commercial Bank Limited    HK,100000,fe57572e-f967-4a0c-9a9d-3315d2ccaf93
+2024-11-12,HKD,77000,C,DBS Bank (Hong Kong) Limited,Shanghai Commercial Bank Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,Shanghai Commercial Bank Limited    HK,77000,c4ae19d2-61c0-443e-9dfe-c007ddaf6432
+2024-11-12,HKD,50000,C,DBS Bank (Hong Kong) Limited,Shanghai Commercial Bank Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,Shanghai Commercial Bank Limited    HK,50000,ecd331fd-3f2b-48af-8102-36e9dd9ba457
+2024-12-15,HKD,15218.09,C,DBS Bank (Hong Kong) Limited,Shanghai Commercial Bank Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,Shanghai Commercial Bank Limited    HK,19990,47bf0cc4-cbc9-4dde-ab99-3a8e4d40d5e7
+2024-11-12,HKD,16500,C,DBS Bank (Hong Kong) Limited,Shanghai Commercial Bank Limited,333-333333-101,111-111111-101,CHAN TAI MAN,MR        CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,Shanghai Commercial Bank Limited    HK,16500,98d894e4-be10-4096-8afa-21d4d4259d2f
 ","FC-UAR document
 Page x of y
 
@@ -10259,21 +10349,21 @@ Submitted Date:
 This document has been generated by the UCM Request Portal from the original Case Request details. All the data provided by the original creator are shown below.
 
 Step 1- About Yourself
-<table style='text-align:left'><tr><th>What is the main country your financial crime concern relates to?</th><td>Hong Kong Hang Seng Bank Ltd.</td><th>Which Business Area/Legal Enity?</th><td>Hang Seng Bank Ltd.</td></tr><tr><th>Name:</th><td>TANG WING</td><th>Telephone:</th><td></td></tr><tr><th>Role:</th><td>FINANCIAL SERVICES SPECIALIST</td><th>Department:</th><td>PIV</td></tr><tr><th>Manager:</th><td>LUI SAN SAN</td><th>Country:</th><td>HONG KONG</td></tr><tr><th>What Global Function do you work in?</th><td>Not Applicable</td><th>What Global Sub-Function do you work in?</th><td>Not Applicable</td></tr><tr><th>Do you work in a Global Service Center?</th><td>N</td><th>Which Global Service Center do you work in?</th><td></td></tr><tr><th>Are you reporting this on someone's behalf?</th><td>N</td><th>Mail Address:</th><td>tang,wing@noexternalmail.China Construction Bank (Asia) Corporation Limited.com</td></tr><tr><th>Does anyone else need to be notified about this?</th><td></td></tr></table>
+<table style='text-align:left'><tr><th>What is the main country your financial crime concern relates to?</th><td>Hong Kong DBS Bank (Hong Kong) Limited</td><th>Which Business Area/Legal Enity?</th><td>DBS Bank (Hong Kong) Limited</td></tr><tr><th>Name:</th><td>TANG WING</td><th>Telephone:</th><td></td></tr><tr><th>Role:</th><td>FINANCIAL SERVICES SPECIALIST</td><th>Department:</th><td>PIV</td></tr><tr><th>Manager:</th><td>LUI SAN SAN</td><th>Country:</th><td>HONG KONG</td></tr><tr><th>What Global Function do you work in?</th><td>Not Applicable</td><th>What Global Sub-Function do you work in?</th><td>Not Applicable</td></tr><tr><th>Do you work in a Global Service Center?</th><td>N</td><th>Which Global Service Center do you work in?</th><td></td></tr><tr><th>Are you reporting this on someone's behalf?</th><td>N</td><th>Mail Address:</th><td>tang,wing@noexternalmail.Shanghai Commercial Bank Limited.com</td></tr><tr><th>Does anyone else need to be notified about this?</th><td></td></tr></table>
 
 Area of Concern
-<table style='text-align:left'><tr><th>What is the referral concerning?</th><td>Financial Crime Concern</td><th>Financial Crime Type:</th><td>External Fraud</td></tr><tr><th>Clearly describe your Financial Crime Concern:</th><td>Related details: account number: 881-988778-277  account name: TSANG MUI KA MING Payment order: DTL DDEBIT PAYD01 DDTOPU FRN2024■■■■■■■■■■PAYD01020■■■■■■■■■■ HD124B■■■■■■■■■■ 024/SDDA20241111■■■■■■■■■■ 24MEI LIN MAN 111-111111-101  BBAN 4 CHAN TAI MAN 419-739407-386 BBAN HKD 19990 ACSC 11/11/2024 15:58 676■■■■■■■ MQH HD124B110■■■■■■■ D 0.29 N Remitting bank cable: The below cable message from China Construction Bank (Asia) Corporation LimitedH■■■: :20:HK124■■■■■■■-■■■■■■■ :21:HC124B110■■■■■■■ :79:RE OUR FPS PAYMENT DATED 11NOV24 FOR HKD17071.33 FPS REF NO. FRN■■■■■■■PAYD010■■■■■■■ PLS BE ADVISED THAT THE FUND IS FROM FRAUDULENT SOURCE. PLEASE URGENTLY ARRANGE TO CANCEL ABOVE PAYMENT AND RETURN PROCEEDS TO US VIA CHATS QUOTING OUR REF HK124■■■■■■■-000■■■■■■■ UNDER SWIFT CONFIRMATION TO US. PLS IMMEDIATELY HOLD ENOUGH FUNDS IN BNF'S A/C TILL REC'D THEIR D/A FOR REFUND AND REPORT CASE TO YR SECURITY DEPARTMENT. IN REPLY, PLS QUOTE OUR REF HK124■■■■■■■-■■■■■■■ IN FIELD 21 OF YOUR SWF MSG REGARDS -}</td><th>Date submitter became aware of the activity:</th><td> </td></tr><tr><th>Is this an urgent referral?</th><td>No</td><th>Is there a date a response is required by?</th><td></td></tr><tr><th colspan='4'>If this referral Is urgent or has a required response date, clearly explain why.</th></tr><tr><th colspan='2'>Activity Period:</th><th>From:</th><td></td></tr><tr><th>To:</th><td colspan='3'></td></tr><tr><th colspan='4'>Fraud Information:</th></tr><tr><th>Fraud Type:</th><td></td><th>Saved Amount:</th><td></td></tr><tr><th>Actual Loss Amount</th><td></td><th>Currency:</th><td></td></tr><tr><th>Description of events in chronological order:</th><td></td><th>Has any action been taken?</th><td>No</td></tr><tr><th>What action has been taken?</th><td colspan='3'></td></tr><tr><th>Is this related to a previous referral?</th><td colspan='3'>No</td></tr></table>
+<table style='text-align:left'><tr><th>What is the referral concerning?</th><td>Financial Crime Concern</td><th>Financial Crime Type:</th><td>External Fraud</td></tr><tr><th>Clearly describe your Financial Crime Concern:</th><td>Related details: account number: 419-248419-695  account name: POON YAU SIN WAI Payment order: DTL DDEBIT PAYD01 DDTOPU FRN2024■■■■■■■■■■PAYD01020■■■■■■■■■■ HD124B■■■■■■■■■■ 024/SDDA20241111■■■■■■■■■■ 24SIU FONG MAN 111-111111-101  BBAN 4 CHAN TAI MAN 443-484002-809 BBAN HKD 19990 ACSC 11/11/2024 15:58 676■■■■■■■ MQH HD124B110■■■■■■■ D 0.29 N Remitting bank cable: The below cable message from Shanghai Commercial Bank LimitedH■■■: :20:HK124■■■■■■■-■■■■■■■ :21:HC124B110■■■■■■■ :79:RE OUR FPS PAYMENT DATED 11NOV24 FOR HKD15218.09 FPS REF NO. FRN■■■■■■■PAYD010■■■■■■■ PLS BE ADVISED THAT THE FUND IS FROM FRAUDULENT SOURCE. PLEASE URGENTLY ARRANGE TO CANCEL ABOVE PAYMENT AND RETURN PROCEEDS TO US VIA CHATS QUOTING OUR REF HK124■■■■■■■-000■■■■■■■ UNDER SWIFT CONFIRMATION TO US. PLS IMMEDIATELY HOLD ENOUGH FUNDS IN BNF'S A/C TILL REC'D THEIR D/A FOR REFUND AND REPORT CASE TO YR SECURITY DEPARTMENT. IN REPLY, PLS QUOTE OUR REF HK124■■■■■■■-■■■■■■■ IN FIELD 21 OF YOUR SWF MSG REGARDS -}</td><th>Date submitter became aware of the activity:</th><td> </td></tr><tr><th>Is this an urgent referral?</th><td>No</td><th>Is there a date a response is required by?</th><td></td></tr><tr><th colspan='4'>If this referral Is urgent or has a required response date, clearly explain why.</th></tr><tr><th colspan='2'>Activity Period:</th><th>From:</th><td></td></tr><tr><th>To:</th><td colspan='3'></td></tr><tr><th colspan='4'>Fraud Information:</th></tr><tr><th>Fraud Type:</th><td></td><th>Saved Amount:</th><td></td></tr><tr><th>Actual Loss Amount</th><td></td><th>Currency:</th><td></td></tr><tr><th>Description of events in chronological order:</th><td></td><th>Has any action been taken?</th><td>No</td></tr><tr><th>What action has been taken?</th><td colspan='3'></td></tr><tr><th>Is this related to a previous referral?</th><td colspan='3'>No</td></tr></table>
 
 Involved Parties
 Individual Information:
-|First Name|Last Name|Alias|ID Type|ID Number|Date of Birth|Nationality|Nature of Relationship|Line of Business|China Construction Bank (Asia) Corporation Limited Customer / Account|CIN|Involvement Type|Address Line 1|Address Line 2|Address Line 3|City or Town|Country or State|Zip or Postal Code|Country|Commentary|
+|First Name|Last Name|Alias|ID Type|ID Number|Date of Birth|Nationality|Nature of Relationship|Line of Business|Shanghai Commercial Bank Limited Customer / Account|CIN|Involvement Type|Address Line 1|Address Line 2|Address Line 3|City or Town|Country or State|Zip or Postal Code|Country|Commentary|
 |----------|---------|-----|-------|---------|-------------|-----------|----------------------|----------------|------------------------|---|----------------|--------------|--------------|--------------|------------|----------------|------------------|-------|---------- |
 |TAI MAN|CHAN||||||||Y|205■■■■■|Unknown|||||||||
 
 Organisation Information:
 No Data
 
-China Construction Bank (Asia) Corporation Limited Employee Involvement:
+Shanghai Commercial Bank Limited Employee Involvement:
 No Data
 
 External Agency
@@ -10284,18 +10374,18 @@ Additional Deatils:
   ""fraud_type"": ""Not provided"",
   ""alerted_transactions"": [
     {
-      ""date"": ""2024-03-24"",
-      ""amount"": 17071.33,
+      ""date"": ""2024-12-15"",
+      ""amount"": 15218.09,
       ""currency"": ""HKD"",
       ""from"": {
-        ""name"": ""MUI KA MING"",
-        ""account_number"": ""419-739407-386"",
-        ""bank"": ""China Construction Bank (Asia) Corporation Limited""
+        ""name"": ""YAU SIN WAI"",
+        ""account_number"": ""443-484002-809"",
+        ""bank"": ""Shanghai Commercial Bank Limited""
       },
       ""to"": {
-        ""name"": ""TSANG MEI LIN"",
-        ""account_number"": ""881-988778-277"",
-        ""bank"": ""Hang Seng Bank Ltd.""
+        ""name"": ""POON SIU FONG"",
+        ""account_number"": ""419-248419-695"",
+        ""bank"": ""DBS Bank (Hong Kong) Limited""
       },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
@@ -10305,18 +10395,18 @@ Additional Deatils:
       ""cancel_amount_requested"": 19990
     }
   ]
-}",86,1,1,"2024-11-11 --> 2024-03-24
-19990 --> 17071.33
-CHAN --> MUI
-TAI --> KA
-MAN --> MING
-333-333333-101 --> 419-739407-386
-BANK:The Hongkong and Shanghai Banking Corporation Limited --> China Construction Bank (Asia) Corporation Limited
-MR --> TSANG
-CHAN --> MEI
-TAI --> LIN
-111-111111-101 --> 881-988778-277
-BANK:HASE --> Hang Seng Bank Ltd."
+}",86,1,1,"2024-11-11 --> 2024-12-15
+19990 --> 15218.09
+CHAN --> YAU
+TAI --> SIN
+MAN --> WAI
+333-333333-101 --> 443-484002-809
+BANK:The Hongkong and Shanghai Banking Corporation Limited --> Shanghai Commercial Bank Limited
+MR --> POON
+CHAN --> SIU
+TAI --> FONG
+111-111111-101 --> 419-248419-695
+BANK:HASE --> DBS Bank (Hong Kong) Limited"
 UAR,4308,8,2,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -10326,13 +10416,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -10468,13 +10560,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -10566,7 +10660,7 @@ JSON Schema:
     }
   ]
 }","Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
-2024-10-29,HKD,1101.41,C,,,463-283175-295,381-738668-660,CHU HOI SHAN,NG HOK YIN,Beneficiary,CUTF,ATM TRANSFER UNRELATED   DEPOSIT,,,1244,840c69f6-b9ea-494f-85b8-3a2920de7719
+2025-01-09,HKD,1236.16,C,,,188-732294-315,233-842379-517,WONG SIU MING,CHEUNG TAK SHING,Beneficiary,CUTF,ATM TRANSFER UNRELATED   DEPOSIT,,,1244,840c69f6-b9ea-494f-85b8-3a2920de7719
 ","FC-UAR document
 Page x of y
 
@@ -10576,21 +10670,21 @@ Submitted Date:
 This document has been generated by the UCM Request Portal from the original Case Request details. All the data provided by the original creator are shown below.
 
 Step 1- About Yourself
-<table style='text-align:left'><tr><th>What is the main country your financial crime concern relates to?</th><td>Hong Kong China CITIC Bank International Limited</td><th>Which Business Area/Legal Enity?</th><td>China CITIC Bank International Limited</td></tr><tr><th>Name:</th><td>YEUNG KAI</td><th>Telephone:</th><td>30000001</td></tr><tr><th>Role:</th><td>CONTACT CENTRE REPRESENTATIVE II</td><th>Department:</th><td>LIFE CALL CENTRE (China CITIC Bank International Limited)</td></tr><tr><th>Manager:</th><td>TSANG SIU MING</td><th>Country:</th><td>HONG KONG</td></tr><tr><th>What Global Function do you work in?</th><td>Retail Banking and Wealth Management</td><th>What Global Sub-Function do you work in?</th><td>Other</td></tr><tr><th>Do you work in a Global Service Center?</th><td>N</td><th>Which Global Service Center do you work in?</th><td></td></tr><tr><th>Are you reporting this on someone's behalf?</th><td>N</td><th>Mail Address:</th><td>yeung.kai@noexternalmail.China CITIC Bank International Limitedc.com</td></tr><tr><th>Does anyone else need to be notified about this?</th><td>N</td></tr></table>
+<table style='text-align:left'><tr><th>What is the main country your financial crime concern relates to?</th><td>Hong Kong China Construction Bank (Asia) Corporation Limited</td><th>Which Business Area/Legal Enity?</th><td>China Construction Bank (Asia) Corporation Limited</td></tr><tr><th>Name:</th><td>YEUNG KAI</td><th>Telephone:</th><td>30000001</td></tr><tr><th>Role:</th><td>CONTACT CENTRE REPRESENTATIVE II</td><th>Department:</th><td>LIFE CALL CENTRE (China Construction Bank (Asia) Corporation Limited)</td></tr><tr><th>Manager:</th><td>TSANG SIU MING</td><th>Country:</th><td>HONG KONG</td></tr><tr><th>What Global Function do you work in?</th><td>Retail Banking and Wealth Management</td><th>What Global Sub-Function do you work in?</th><td>Other</td></tr><tr><th>Do you work in a Global Service Center?</th><td>N</td><th>Which Global Service Center do you work in?</th><td></td></tr><tr><th>Are you reporting this on someone's behalf?</th><td>N</td><th>Mail Address:</th><td>yeung.kai@noexternalmail.China Construction Bank (Asia) Corporation Limitedc.com</td></tr><tr><th>Does anyone else need to be notified about this?</th><td>N</td></tr></table>
 
 Area of Concern
-<table style='text-align:left'><tr><th>What is the referral concerning?</th><td>Financial Crime Concern</td><th>Financial Crime Type:</th><td>External Fraud</td></tr><tr><th>Clearly describe your Financial Crime Concern:</th><td>Customer Mr Cheung transferred HKD1101.41 on ATM to account number 381-738668-660 on 21-Aug-2024 to buy a vacuum cleaner. Fund recipient first said the deposit voucher is unclear on whatsapp. Then the recipient is not responding to Mr Cheung any more. Mr. Cheung now thinks he is being fraud</td><th>Date submitter became aware of the activity:</th><td></td></tr><tr><th>Is this an urgent referral?</th><td>No</td><th>Is there a date a response is required by?</th><td></td></tr><tr><th colspan='4'>If this referral Is urgent or has a required response date, clearly explain why.</th></tr><tr><th colspan='2'>Activity Period:</th><th>From:</th><td></td></tr><tr><th>To:</th><td colspan='3'></td></tr><tr><th colspan='4'>Fraud Information:</th></tr><tr><th>Fraud Type:</th><td></td><th>Saved Amount:</th><td></td></tr><tr><th>Actual Loss Amount</th><td></td><th>Currency:</th><td></td></tr><tr><th>Description of events in chronological order:</th><td></td><th>Has any action been taken?</th><td>No</td></tr><tr><th>What action has been taken?</th><td colspan='3'></td></tr><tr><th>Is this related to a previous referral?</th><td colspan='3'>No</td></tr></table>
+<table style='text-align:left'><tr><th>What is the referral concerning?</th><td>Financial Crime Concern</td><th>Financial Crime Type:</th><td>External Fraud</td></tr><tr><th>Clearly describe your Financial Crime Concern:</th><td>Customer Mr Cheung transferred HKD1236.16 on ATM to account number 233-842379-517 on 21-Aug-2024 to buy a vacuum cleaner. Fund recipient first said the deposit voucher is unclear on whatsapp. Then the recipient is not responding to Mr Cheung any more. Mr. Cheung now thinks he is being fraud</td><th>Date submitter became aware of the activity:</th><td></td></tr><tr><th>Is this an urgent referral?</th><td>No</td><th>Is there a date a response is required by?</th><td></td></tr><tr><th colspan='4'>If this referral Is urgent or has a required response date, clearly explain why.</th></tr><tr><th colspan='2'>Activity Period:</th><th>From:</th><td></td></tr><tr><th>To:</th><td colspan='3'></td></tr><tr><th colspan='4'>Fraud Information:</th></tr><tr><th>Fraud Type:</th><td></td><th>Saved Amount:</th><td></td></tr><tr><th>Actual Loss Amount</th><td></td><th>Currency:</th><td></td></tr><tr><th>Description of events in chronological order:</th><td></td><th>Has any action been taken?</th><td>No</td></tr><tr><th>What action has been taken?</th><td colspan='3'></td></tr><tr><th>Is this related to a previous referral?</th><td colspan='3'>No</td></tr></table>
 
 Involved Parties
 Individual Information:
-|First Name|Last Name|Alias|ID Type|ID Number|Date of Birth|Nationality|Nature of Relationship|Line of Business|China CITIC Bank International LimitedC Customer / Account|CIN|Involvement Type|Address Line 1|Address Line 2|Address Line 3|City or Town|Country or State|Zip or Postal Code|Country|Commentary|
+|First Name|Last Name|Alias|ID Type|ID Number|Date of Birth|Nationality|Nature of Relationship|Line of Business|China Construction Bank (Asia) Corporation LimitedC Customer / Account|CIN|Involvement Type|Address Line 1|Address Line 2|Address Line 3|City or Town|Country or State|Zip or Postal Code|Country|Commentary|
 |----------|---------|-----|-------|---------|-------------|-----------|----------------------|----------------|------------------------|---|----------------|--------------|--------------|--------------|------------|----------------|------------------|-------|---------- |
 |Tak Shing|Cheung||||||||Y|HK22■■■■■■■■■■■■|Victim|Rm01, 2/F|222 Argyle Street|Mong Kok|Hong Kong|||Hong Kong||
 
 Organisation Information:
 No Data
 
-China CITIC Bank International LimitedC Employee Involvement:
+China Construction Bank (Asia) Corporation LimitedC Employee Involvement:
 No Data
 
 External Agency
@@ -10601,17 +10695,17 @@ Additional Deatils:
   ""fraud_type"": ""Purchase"",
   ""alerted_transactions"": [
     {
-      ""date"": ""2024-10-29"",
-      ""amount"": 1101.41,
+      ""date"": ""2025-01-09"",
+      ""amount"": 1236.16,
       ""currency"": ""HKD"",
       ""from"": {
-        ""name"": ""CHU HOI SHAN"",
-        ""account_number"": ""463-283175-295"",
-        ""bank"": ""China CITIC Bank International Limited""
+        ""name"": ""WONG SIU MING"",
+        ""account_number"": ""188-732294-315"",
+        ""bank"": ""China Construction Bank (Asia) Corporation Limited""
       },
       ""to"": {
-        ""name"": ""NG HOK YIN"",
-        ""account_number"": ""381-738668-660"",
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""233-842379-517"",
         ""bank"": ""Dah Sing Bank, Limited""
       },
       ""channel"": ""ATM"",
@@ -10622,17 +10716,17 @@ Additional Deatils:
       ""cancel_amount_requested"": null
     }
   ]
-}",86,1,1,"2024-08-21 --> 2024-10-29
-1244 --> 1101.41
-CHEUNG --> CHU
-TAK --> HOI
-SHING --> SHAN
-222-222222-101 --> 463-283175-295
-BANK:HASE --> China CITIC Bank International Limited
-CHAN --> NG
-TAI --> HOK
-MAN --> YIN
-111-111111-101 --> 381-738668-660
+}",86,1,1,"2024-08-21 --> 2025-01-09
+1244 --> 1236.16
+CHEUNG --> WONG
+TAK --> SIU
+SHING --> MING
+222-222222-101 --> 188-732294-315
+BANK:HASE --> China Construction Bank (Asia) Corporation Limited
+CHAN --> CHEUNG
+TAI --> TAK
+MAN --> SHING
+111-111111-101 --> 233-842379-517
 BANK:HASE --> Dah Sing Bank, Limited"
 UAR,4325,25,2,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
@@ -10643,13 +10737,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -10741,7 +10837,7 @@ JSON Schema:
     }
   ]
 }","Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
-2024-11-26,HKD,16070.24,C,Agricultural Bank of China (Hong Kong) Limited,Tai Yau Bank, Limited,896-201211-513,527-739739-110,CHEN WEI HONG,HUNG        CHI HO MAN,Beneficiary,CWTF,Default transaction,,Tai Yau Bank, Limited,25900,c348a28c-7710-4c42-9305-ab33cd935d21
+2025-05-02,HKD,15919.71,C,Dah Sing Bank, Limited,China CITIC Bank International Limited,599-175402-851,953-232192-706,CHEN WEI HONG,MUI        KA MING MAN,Beneficiary,CWTF,Default transaction,,China CITIC Bank International Limited,25900,c348a28c-7710-4c42-9305-ab33cd935d21
 ","FC-UAR document
 Page x of y
 
@@ -10751,21 +10847,21 @@ Submitted Date:
 This document has been generated by the UCM Request Portal from the original Case Request details. All the data provided by the original creator are shown below.
 
 Step 1- About Yourself
-<table style='text-align:left'><tr><th>What is the main country your financial crime concern relates to?</th><td>Hong Kong Agricultural Bank of China (Hong Kong) Limited</td><th>Which Business Area/Legal Enity?</th><td>Agricultural Bank of China (Hong Kong) Limited</td></tr><tr><th>Name:</th><td>FU SIUSAN</td><th>Telephone:</th><td>30000001</td></tr><tr><th>Role:</th><td>FINANCIAL SERVICES SPECIALIST</td><th>Department:</th><td>Agricultural Bank of China (Hong Kong) Limited PIV - NH (NON-CORE)</td></tr><tr><th>Manager:</th><td>LIAO BOBO</td><th>Country:</th><td>HONG KONG</td></tr><tr><th>What Global Function do you work in?</th><td>Not Applicable</td><th>What Global Sub-Function do you work in?</th><td>Not Applicable</td></tr><tr><th>Do you work in a Global Service Center?</th><td>N</td><th>Which Global Service Center do you work in?</th><td></td></tr><tr><th>Are you reporting this on someone's behalf?</th><td>N</td><th>Mail Address:</th><td>fu.siusan@noexternalmail.Tai Yau Bank, Limited.com</td></tr><tr><th>Does anyone else need to be notified about this?</th><td></td></tr></table>
+<table style='text-align:left'><tr><th>What is the main country your financial crime concern relates to?</th><td>Hong Kong Dah Sing Bank, Limited</td><th>Which Business Area/Legal Enity?</th><td>Dah Sing Bank, Limited</td></tr><tr><th>Name:</th><td>FU SIUSAN</td><th>Telephone:</th><td>30000001</td></tr><tr><th>Role:</th><td>FINANCIAL SERVICES SPECIALIST</td><th>Department:</th><td>Dah Sing Bank, Limited PIV - NH (NON-CORE)</td></tr><tr><th>Manager:</th><td>LIAO BOBO</td><th>Country:</th><td>HONG KONG</td></tr><tr><th>What Global Function do you work in?</th><td>Not Applicable</td><th>What Global Sub-Function do you work in?</th><td>Not Applicable</td></tr><tr><th>Do you work in a Global Service Center?</th><td>N</td><th>Which Global Service Center do you work in?</th><td></td></tr><tr><th>Are you reporting this on someone's behalf?</th><td>N</td><th>Mail Address:</th><td>fu.siusan@noexternalmail.China CITIC Bank International Limited.com</td></tr><tr><th>Does anyone else need to be notified about this?</th><td></td></tr></table>
 
 Area of Concern
-<table style='text-align:left'><tr><th>What is the referral concerning?</th><td>Financial Crime Concern</td><th>Financial Crime Type:</th><td>External Fraud</td></tr><tr><th>Clearly describe your Financial Crime Concern:</th><td>1:F01Agricultural Bank of China (Hong Kong) LimitedHKHH■■■■■■■■■■}{2:O19919■■■■■■■■■■Tai Yau Bank, LimitedHKHHXXXX0000000000■■■■■■■■■■}{3:{108:■■■■■■■■■■}}{4: :20:HK124■■■■■■■■■■-■■■■■■■■■■ :21:HC124B■■■■■■■■■■ :79:RE OUR FPS PAYMENT DATED 08NOV24 FOR HKD16070.24 FPS REF NO. FRN2024■■■■■■■■■■PAYD0102037■■■■■■■■■■PLS BE ADVISED THAT THE FUND IS SUSPECTED TO BE FROM FRAUDULENT SOURCE. PLEASE URGENTLY ARRANGE TO CANCEL PARTIAL AMOUNT HKD17,833.00 AND RETURN PROCEEDS TO US VIA CHATS QUOTING OUR REF HK124■■■■■■■■■■-■■■■■■■■■■ UNDER SWIFT CONFIRMATION TO US. PLS IMMEDIATELY HOLD ENOUGH FUNDS IN BNF'S A/C TILL REC'D THEIR D/A FOR REFUND AND REPORT CASE TO YR SECURITY DEPARTMENT. IN REPLY, PLS QUOTE OUR REF HK124■■■■■■■■■■-■■■■■■■■■■ IN FIELD 21 OF YOUR SWF MSG REGARDS -}{5:{CHK:000000000000}} DTL DDEBIT PAYD01 DDTOPU FRN2024■■■■■■■■■■AYD0102037■■■■■■■■■■ HD124B0898■■■■■■■■■■ 024/SDDA20241106■■■■■■■■■■ 24 CHEN WEI HONG  527-739739-110  BBAN 4 CHI HO MAN  896-201211-513 BBAN HKD 25900 ACSC 2024/11/8 12:34 674■■■■■■ MQH HD124B0■■■■■■■■■■ D 0.278 N</td><th>Date submitter became aware of the activity:</th><td> </td></tr><tr><th>Is this an urgent referral?</th><td>No</td><th>Is there a date a response is required by?</th><td></td></tr><tr><th colspan='4'>If this referral Is urgent or has a required response date, clearly explain why.</th></tr><tr><th colspan='2'>Activity Period:</th><th>From:</th><td></td></tr><tr><th>To:</th><td colspan='3'></td></tr><tr><th colspan='4'>Fraud Information:</th></tr><tr><th>Fraud Type:</th><td></td><th>Saved Amount:</th><td></td></tr><tr><th>Actual Loss Amount</th><td></td><th>Currency:</th><td></td></tr><tr><th>Description of events in chronological order:</th><td></td><th>Has any action been taken?</th><td>No</td></tr><tr><th>What action has been taken?</th><td colspan='3'></td></tr><tr><th>Is this related to a previous referral?</th><td colspan='3'>No</td></tr></table>
+<table style='text-align:left'><tr><th>What is the referral concerning?</th><td>Financial Crime Concern</td><th>Financial Crime Type:</th><td>External Fraud</td></tr><tr><th>Clearly describe your Financial Crime Concern:</th><td>1:F01Dah Sing Bank, LimitedHKHH■■■■■■■■■■}{2:O19919■■■■■■■■■■China CITIC Bank International LimitedHKHHXXXX0000000000■■■■■■■■■■}{3:{108:■■■■■■■■■■}}{4: :20:HK124■■■■■■■■■■-■■■■■■■■■■ :21:HC124B■■■■■■■■■■ :79:RE OUR FPS PAYMENT DATED 08NOV24 FOR HKD15919.71 FPS REF NO. FRN2024■■■■■■■■■■PAYD0102037■■■■■■■■■■PLS BE ADVISED THAT THE FUND IS SUSPECTED TO BE FROM FRAUDULENT SOURCE. PLEASE URGENTLY ARRANGE TO CANCEL PARTIAL AMOUNT HKD17,833.00 AND RETURN PROCEEDS TO US VIA CHATS QUOTING OUR REF HK124■■■■■■■■■■-■■■■■■■■■■ UNDER SWIFT CONFIRMATION TO US. PLS IMMEDIATELY HOLD ENOUGH FUNDS IN BNF'S A/C TILL REC'D THEIR D/A FOR REFUND AND REPORT CASE TO YR SECURITY DEPARTMENT. IN REPLY, PLS QUOTE OUR REF HK124■■■■■■■■■■-■■■■■■■■■■ IN FIELD 21 OF YOUR SWF MSG REGARDS -}{5:{CHK:000000000000}} DTL DDEBIT PAYD01 DDTOPU FRN2024■■■■■■■■■■AYD0102037■■■■■■■■■■ HD124B0898■■■■■■■■■■ 024/SDDA20241106■■■■■■■■■■ 24 CHEN WEI HONG  953-232192-706  BBAN 4 KA MING MAN  599-175402-851 BBAN HKD 25900 ACSC 2024/11/8 12:34 674■■■■■■ MQH HD124B0■■■■■■■■■■ D 0.278 N</td><th>Date submitter became aware of the activity:</th><td> </td></tr><tr><th>Is this an urgent referral?</th><td>No</td><th>Is there a date a response is required by?</th><td></td></tr><tr><th colspan='4'>If this referral Is urgent or has a required response date, clearly explain why.</th></tr><tr><th colspan='2'>Activity Period:</th><th>From:</th><td></td></tr><tr><th>To:</th><td colspan='3'></td></tr><tr><th colspan='4'>Fraud Information:</th></tr><tr><th>Fraud Type:</th><td></td><th>Saved Amount:</th><td></td></tr><tr><th>Actual Loss Amount</th><td></td><th>Currency:</th><td></td></tr><tr><th>Description of events in chronological order:</th><td></td><th>Has any action been taken?</th><td>No</td></tr><tr><th>What action has been taken?</th><td colspan='3'></td></tr><tr><th>Is this related to a previous referral?</th><td colspan='3'>No</td></tr></table>
 
 Involved Parties
 Individual Information:
-|First Name|Last Name|Alias|ID Type|ID Number|Date of Birth|Nationality|Nature of Relationship|Line of Business|Tai Yau Bank, Limited Customer / Account|CIN|Involvement Type|Address Line 1|Address Line 2|Address Line 3|City or Town|Country or State|Zip or Postal Code|Country|Commentary|
+|First Name|Last Name|Alias|ID Type|ID Number|Date of Birth|Nationality|Nature of Relationship|Line of Business|China CITIC Bank International Limited Customer / Account|CIN|Involvement Type|Address Line 1|Address Line 2|Address Line 3|City or Town|Country or State|Zip or Postal Code|Country|Commentary|
 |----------|---------|-----|-------|---------|-------------|-----------|----------------------|----------------|------------------------|---|----------------|--------------|--------------|--------------|------------|----------------|------------------|-------|---------- |
 |Tai Man|CHAN||||||||Y||Suspect|||||||||
 
 Organisation Information:
 No Data
 
-Tai Yau Bank, Limited Employee Involvement:
+China CITIC Bank International Limited Employee Involvement:
 No Data
 
 External Agency
@@ -10776,18 +10872,18 @@ Additional Deatils:
   ""fraud_type"": ""Not provided"",
   ""alerted_transactions"": [
     {
-      ""date"": ""2024-11-26"",
-      ""amount"": 16070.24,
+      ""date"": ""2025-05-02"",
+      ""amount"": 15919.71,
       ""currency"": ""HKD"",
       ""from"": {
         ""name"": ""CHEN WEI HONG"",
-        ""account_number"": ""896-201211-513"",
-        ""bank"": ""Tai Yau Bank, Limited""
+        ""account_number"": ""599-175402-851"",
+        ""bank"": ""China CITIC Bank International Limited""
       },
       ""to"": {
-        ""name"": ""HUNG CHI HO"",
-        ""account_number"": ""527-739739-110"",
-        ""bank"": ""Agricultural Bank of China (Hong Kong) Limited""
+        ""name"": ""MUI KA MING"",
+        ""account_number"": ""953-232192-706"",
+        ""bank"": ""Dah Sing Bank, Limited""
       },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
@@ -10797,18 +10893,18 @@ Additional Deatils:
       ""cancel_amount_requested"": 17833
     }
   ]
-}",86,1,1,"2024-11-08 --> 2024-11-26
-25900 --> 16070.24
+}",86,1,1,"2024-11-08 --> 2025-05-02
+25900 --> 15919.71
 CHAN --> CHEN
 TAI --> WEI
 MAN --> HONG
-333-333333-101 --> 896-201211-513
-BANK:The Hongkong and Shanghai Banking Corporation Limited --> Tai Yau Bank, Limited
-MR --> HUNG
-CHAN --> CHI
-TAI --> HO
-111-111111-101 --> 527-739739-110
-BANK:HASE --> Agricultural Bank of China (Hong Kong) Limited"
+333-333333-101 --> 599-175402-851
+BANK:The Hongkong and Shanghai Banking Corporation Limited --> China CITIC Bank International Limited
+MR --> MUI
+CHAN --> KA
+TAI --> MING
+111-111111-101 --> 953-232192-706
+BANK:HASE --> Dah Sing Bank, Limited"
 ODFT,5062,12,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -10818,13 +10914,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -10901,7 +10999,7 @@ JSON Schema:
     }
   ]
 }","Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
-2025-04-12,HKD,28785.48,C,,,946-122496-473,630-654660-760,TANG SIU KWAN,YUEN CHI KEUNG,Beneficiary,CUTF,ATM TRANSFER UNRELATED   DEPOSIT,,,30000,2810da47-1684-450f-94d9-aef6064774b4
+2024-02-09,HKD,20149.98,C,,,807-511061-957,945-202486-777,LUNG KA WAI,CHEN WEI HONG,Beneficiary,CUTF,ATM TRANSFER UNRELATED   DEPOSIT,,,30000,2810da47-1684-450f-94d9-aef6064774b4
 2024-07-17,HKD,9000,C,,,,111-111111-101,,CHAN TAI MAN,Beneficiary,CCCS,CASH DEP VIA CDM/BCDM -  AC INPUT (TOUCH SCREEN),,,9000,40a3a6a4-78d6-4031-aa6c-7b536057a13f
 2024-07-15,HKD,40000,C,,,,111-111111-101,,CHAN TAI MAN,Beneficiary,CCCS,CASH DEP VIA CDM/BCDM -  AC INPUT (TOUCH SCREEN),,,40000,798d401c-512f-4779-8a01-a46353179106
 ","## 4.Victim with financial loss
@@ -10909,17 +11007,17 @@ JSON Schema:
 | --- | --- |
 | Fraud case reported date<br>(FO Received Date)<br>e.g. ""Ctrl+;"" 即可快捷輸入當日日期 | 2024-07-24 00:00:00 |
 | Special Attention<br> | NaN |
-| Account No. <br>（如沒有戶口號碼則提供ID No.） | 946-122496-473 |
-| Customer Name | TANG SIU KWAN |
+| Account No. <br>（如沒有戶口號碼則提供ID No.） | 807-511061-957 |
+| Customer Name | LUNG KA WAI |
 | Alert ID (if any) | NaN |
 | Fraud Payment Details <br>(Attached SAS records with bene details)<br>請提供有關懷疑被盜用交易的記錄，包括金額，日期，幣種以及透過咩渠道支付 | NaN |
 | SAS Reason Code (if any)<br> | AP-Impersonation (Others) |
 | MO | Impersonation |
-| Total Loss Amount in Citibank (Hong Kong) Limited | HKD28785.48 |
+| Total Loss Amount in Tai Yau Bank, Limited | HKD20149.98 |
 | Channel | Others |
 | Remark: (If Others is selected, please specify) | 冒充建設銀行職員和律師假裝為客人辦理低息貸款 |
 | Case details | NaN |
-| 請你先講講你係點樣發現被騙，有關整個事件經過 | 冒充建設銀行職員和律師假裝為客人的先生（Citibank (Hong Kong) Limited客人CHEUNG先生B000001）辦理低息貸款，說需要先生轉賬配合申請，客人通過ATM機轉賬給騙子幫助先生申請貸款。後面騙子又說先生涉嫌洗錢，再要求先生轉賬，至此客人發現被騙。 |
+| 請你先講講你係點樣發現被騙，有關整個事件經過 | 冒充建設銀行職員和律師假裝為客人的先生（Tai Yau Bank, Limited客人CHEUNG先生B000001）辦理低息貸款，說需要先生轉賬配合申請，客人通過ATM機轉賬給騙子幫助先生申請貸款。後面騙子又說先生涉嫌洗錢，再要求先生轉賬，至此客人發現被騙。 |
 | 請問有關交易係由你本人操作定係提供左資料俾第三者或者親友操作？<br> | Yes - Authorised |
 | 是否有泄露個人賬戶密碼（包括但不限於櫃員機密碼，電話理財密碼）以及e-banking用戶名及登入密碼給第三者或親友 | No |
 | Suspend PIB?<br> | Yes |
@@ -10928,7 +11026,7 @@ JSON Schema:
 | Reason if customer not willing to suspend account (if any): | NaN |
 | 我地最近都收到好多關於 要求客戶下載第三方應用程式享購物優惠 / 自稱執法人員話你涉嫌犯罪活動 / 低風險高回報投資 / 未見過真人既網絡情緣 嘅騙案，請問你有無收到類似嘅電話/短訊/網頁或軟件推介?<br> | No |
 | 如客戶回應有曾點擊僞冒電郵/連結 -> ""請提供有關可疑連結地址 或/及 電郵地址"" | NaN |
-| Script - <br>如涉及僞冒Citibank (Hong Kong) Limited銀行（例如僞冒Citibank (Hong Kong) Limited職員，Citibank (Hong Kong) Limited推廣等） -> “强烈建議閣下提供有關僞冒Citibank (Hong Kong) Limited嘅短訊/電郵連結 或/及 社交媒體如whatsapp, facebook等截圖，然後發送至phishing@hangseng.com 作跟進 | NaN |
+| Script - <br>如涉及僞冒Tai Yau Bank, Limited銀行（例如僞冒Tai Yau Bank, Limited職員，Tai Yau Bank, Limited推廣等） -> “强烈建議閣下提供有關僞冒Tai Yau Bank, Limited嘅短訊/電郵連結 或/及 社交媒體如whatsapp, facebook等截圖，然後發送至phishing@hangseng.com 作跟進 | NaN |
 | 你有冇收過或者click開過任何可疑嘅短訊或email連結，並且透露左你嘅個人資料及一次性驗證碼俾第三者或者親友？""<br>如客戶回應有<br>請提供有關短訊/電郵連結及截圖，以及詢問客人“具體提供左咩資料""：<br> | No |
 | 請問你有冇透露或者寫低過電話理財密碼，網上理財密碼以及櫃員機密碼等個人密碼俾第三者或者親友？<br> | No |
 | 請問你有冇將你手機或者你手機嘅SIM咭直接俾左第三者或者親友？<br> | No |
@@ -10940,7 +11038,7 @@ JSON Schema:
 | “你有冇係嗰 個App 上輸入過咩資料? 例如戶口號碼，e-Banking用戶名，e-Banking密碼，櫃員機密碼，電話理財密碼等“ | NaN |
 | “你係點樣意識到未經授權的交易/被人地呃咗” | NaN |
 | “下載惡意軟件之前或之後，你有冇曾經向第三方轉賬，包括資金受益人姓名、交易日期和金額？ | NaN |
-| “發現非本人操作交易""或下載App""當天，是否曾登入，您有無否登入Citibank (Hong Kong) Limited的流動理財？您是否已成功登入手機銀行？“<br>• 當時係用咩方式登入？（PIN、FACE ID、指紋）<br>• 大概係幾時 | NaN |
+| “發現非本人操作交易""或下載App""當天，是否曾登入，您有無否登入Tai Yau Bank, Limited的流動理財？您是否已成功登入手機銀行？“<br>• 當時係用咩方式登入？（PIN、FACE ID、指紋）<br>• 大概係幾時 | NaN |
 | “請問你係用緊咩型號手機，同埋係咩系統"" | NaN |
 | “請問你有冇用網上理財既相同密碼(PIN)或流動保安編碼(Mobile security Key)去解鎖手機/登記其他金融機構/其他軟件嘅應用程序，例如WhatsApp雙向身份驗證。"" | NaN |
 | “請問個App 有冇delete 左？"" | NaN |
@@ -10959,18 +11057,18 @@ JSON Schema:
   ""fraud_type"": ""AP-Impersonation (Others)"",
   ""alerted_transactions"": [
     {
-      ""date"": ""2025-04-12"",
-      ""amount"": 28785.48,
+      ""date"": ""2024-02-09"",
+      ""amount"": 20149.98,
       ""currency"": ""HKD"",
       ""from"": {
-        ""name"": ""TANG SIU KWAN"",
-        ""account_number"": ""946-122496-473"",
-        ""bank"": ""Citibank (Hong Kong) Limited""
+        ""name"": ""LUNG KA WAI"",
+        ""account_number"": ""807-511061-957"",
+        ""bank"": ""Tai Yau Bank, Limited""
       },
       ""to"": {
-        ""name"": ""YUEN CHI KEUNG"",
-        ""account_number"": ""630-654660-760"",
-        ""bank"": ""Fubon Bank (Hong Kong) Limited""
+        ""name"": ""CHEN WEI HONG"",
+        ""account_number"": ""945-202486-777"",
+        ""bank"": ""Public Bank (Hong Kong) Limited""
       },
       ""channel"": ""ATM"",
       ""can_be_located"": true,
@@ -10979,18 +11077,18 @@ JSON Schema:
       ]
     }
   ]
-}",101,1,1,"2024-07-17 --> 2025-04-12
-30000 --> 28785.48
-CHEUNG --> TANG
-TAK --> SIU
-SHING --> KWAN
-222-222222-101 --> 946-122496-473
-BANK:HASE --> Citibank (Hong Kong) Limited
-CHAN --> YUEN
-TAI --> CHI
-MAN --> KEUNG
-111-111111-101 --> 630-654660-760
-BANK:HASE --> Fubon Bank (Hong Kong) Limited"
+}",101,1,1,"2024-07-17 --> 2024-02-09
+30000 --> 20149.98
+CHEUNG --> LUNG
+TAK --> KA
+SHING --> WAI
+222-222222-101 --> 807-511061-957
+BANK:HASE --> Tai Yau Bank, Limited
+CHAN --> CHEN
+TAI --> WEI
+MAN --> HONG
+111-111111-101 --> 945-202486-777
+BANK:HASE --> Public Bank (Hong Kong) Limited"
 ODFT,5070,20,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -11000,13 +11098,15 @@ Step-by-Step Process:
 **Step 1: Extract Reported Transactions from Source**
 - Extract all transactions explicitly mentioned with both date and amount and exclude transactions missing either field
 - Preserve each transaction exactly as reported in the source and preserve all required fields
+- Trim leading and trailing whitespace from each extracted field value, but do not alter internal whitespace or any other content
 - Only proceed to Step 2 after completing this extraction
 
 **Step 2: Match Each Reported Transaction to CSV**
 For each transaction extracted in Step 1:
 - First, search for exact match: same date + same amount + (originator account/name OR beneficiary account/name match)
 - If exact match found: Use that single Transaction ID
-- **IMPORTANT**: transaction_references can contain at most one single Transaction ID
+- Do not repeat selecting the same transaction - each CSV transaction can only be used once
+- Even if multiple CSV transactions match the criteria, always select only one transaction
 - If no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
@@ -11083,20 +11183,20 @@ JSON Schema:
     }
   ]
 }","Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
-2025-05-21,HKD,36914.14,D,,,792-127410-388,816-135211-695,,HO WING,Originator,DUTF,ATM TRANSFER UNRELATED   WITHDRAWAL,,,62356.96,6a957023-8798-4cf5-9b6d-d0bd6fbf0c66
-2025-10-31,HKD,46000,C,,,953-805669-515,786-964051-346,CHI HO WAI,""CHAN, TAIMAN"",Beneficiary,CUTF,ATM TRANSFER UNRELATED   DEPOSIT,,,46000,dfc3902b-ad86-42bb-a146-4e8a32e58eda
+2025-05-10,HKD,58522.91,D,,,413-792162-294,306-827899-373,,LIU MING,Originator,DUTF,ATM TRANSFER UNRELATED   WITHDRAWAL,,,34277.84,6a957023-8798-4cf5-9b6d-d0bd6fbf0c66
+2025-03-26,HKD,46000,C,,,473-322997-675,641-776706-775,SIU MING MING,""CHAN, TAIMAN"",Beneficiary,CUTF,ATM TRANSFER UNRELATED   DEPOSIT,,,46000,dfc3902b-ad86-42bb-a146-4e8a32e58eda
 ","## 5.Victim with financial loss
 | 5.Victim with financial loss (ATM Card payment) | Unnamed: 1 |
 | --- | --- |
 | \*必填\* Fraud case reported date (DD/MM/YYYY)<br>(FO Received Date)<br>""Ctrl+;"" 即可快捷輸入當日日期 | 2024-12-12 00:00:00 |
 | Special Attention<br> | NaN |
-| \*必填\* Victim Account No. （如沒有戶口號碼則提供Victim ID No.）<br>直接填寫12位或10位戶口號碼，無須空格或符號 e.g. 123456789882<br>身份證號碼格式ID type+ID number,無需括弧及空格，e.g. IA123456<br>如多於一個戶口或身份證，用“&”區分 | 792-127410-388 |
-| \*必填\* Customer Name | HUNG CHI HO WAI |
+| \*必填\* Victim Account No. （如沒有戶口號碼則提供Victim ID No.）<br>直接填寫12位或10位戶口號碼，無須空格或符號 e.g. 123456789882<br>身份證號碼格式ID type+ID number,無需括弧及空格，e.g. IA123456<br>如多於一個戶口或身份證，用“&”區分 | 413-792162-294 |
+| \*必填\* Customer Name | SIT MING MING MING |
 | \*必填\* Alert ID (if any) | 46556459 |
-| \*必填\* Fraud Payment Details <br>(Attached SAS / OBS / MWS records with bene details)<br>請提供有關懷疑被盜用交易的記錄，包括金額，日期，幣種以及透過咩渠道支付 | HKD36914.14 HKD62356.96 |
+| \*必填\* Fraud Payment Details <br>(Attached SAS / OBS / MWS records with bene details)<br>請提供有關懷疑被盜用交易的記錄，包括金額，日期，幣種以及透過咩渠道支付 | HKD58522.91 HKD34277.84 |
 | \*必填\* SAS Reason Code (if any)<br> | AP-Impersonation (Police/Bank) |
 | \*必填\* MO | Impersonation |
-| \*必填\*Total Loss Amount in Fubon Bank (Hong Kong) Limited<br>直接填寫總數，無須於此欄寫明細<br>填寫貨幣及縂金額，格式currency+digits(無空格)， 例如HKD30,000<br>此欄位只追對non-card fraud loss, 如涉及信用卡損失則另外填寫 | HKD92,000.00 |
+| \*必填\*Total Loss Amount in Nanyang Commercial Bank, Limited<br>直接填寫總數，無須於此欄寫明細<br>填寫貨幣及縂金額，格式currency+digits(無空格)， 例如HKD30,000<br>此欄位只追對non-card fraud loss, 如涉及信用卡損失則另外填寫 | HKD92,000.00 |
 | \*必填\* Channel | Others |
 | Remark (If Others is selected, please specify) | NaN |
 | 適用於牽涉信用卡/扣賬卡有損失時填寫 | NaN |
@@ -11107,7 +11207,7 @@ JSON Schema:
 | 信用卡/扣賬卡方面損失總額<br>填寫貨幣及縂金額，格式currency+digits(無空格)， 例如HKD30,000 | NaN |
 | 如需展開調查，填寫PEGA / UCM No.<br>如同一個案涉及多張卡，請一并填寫case no. 並用 ""&""區分 | NaN |
 | Case details | NaN |
-| \*必填\* 請你先講講你係點樣發現被騙，有關整個事件經過 | 客人声称收到一个自称是Fubon Bank (Hong Kong) Limited行政经理的张小姐的电话，称可以协助客人办理一个循坏贷款，从而要求客人提供其身份证以及户口号码，骗徒还称由于客人的年龄较大，所以要验证客人的还款能力，于是就客人转账到指定的第三方户口，称之后会给回客人，只不过是作验证还款能力的用途，于是客人10DEC和11DEC分别经由柜员机做了两笔HKD46,000.00的交易，之后还不断说服客人称还需要继续转账才可以通过贷款批核，但客人已经思疑奇怪，于是拨打了官方客户服务热线，才发现Fubon Bank (Hong Kong) Limited没有这个名职员，才意识自己被骗。 |
+| \*必填\* 請你先講講你係點樣發現被騙，有關整個事件經過 | 客人声称收到一个自称是Nanyang Commercial Bank, Limited行政经理的张小姐的电话，称可以协助客人办理一个循坏贷款，从而要求客人提供其身份证以及户口号码，骗徒还称由于客人的年龄较大，所以要验证客人的还款能力，于是就客人转账到指定的第三方户口，称之后会给回客人，只不过是作验证还款能力的用途，于是客人10DEC和11DEC分别经由柜员机做了两笔HKD46,000.00的交易，之后还不断说服客人称还需要继续转账才可以通过贷款批核，但客人已经思疑奇怪，于是拨打了官方客户服务热线，才发现Nanyang Commercial Bank, Limited没有这个名职员，才意识自己被骗。 |
 | \*必填\* 請問有關交易係由你本人操作定係提供左資料俾第三者或者親友操作？<br> | Yes - Authorised |
 | \*必填\* 是否有泄露個人賬戶密碼（包括但不限於櫃員機密碼，電話理財密碼）以及e-banking用戶名及登入密碼給第三者或親友 | No |
 | \*必填\* Suspend PIB?<br> | No |
@@ -11116,7 +11216,7 @@ JSON Schema:
 | Reason if customer not willing to suspend account (if any): | NaN |
 | \*必填\* 我地最近都收到好多關於 要求客戶下載第三方應用程式享購物優惠 / 自稱執法人員話你涉嫌犯罪活動 / 低風險高回報投資 / 未見過真人既網絡情緣 嘅騙案，請問你有無收到類似嘅電話/短訊/網頁或軟件推介?<br> | No |
 | 如客戶回應有曾點擊僞冒電郵/連結 -> ""請提供有關可疑連結地址 或/及 電郵地址"" | NaN |
-| Script - <br>如涉及僞冒Fubon Bank (Hong Kong) Limited銀行（例如僞冒Fubon Bank (Hong Kong) Limited職員，Fubon Bank (Hong Kong) Limited推廣等） -> “强烈建議閣下提供有關僞冒Fubon Bank (Hong Kong) Limited嘅短訊/電郵連結 或/及 社交媒體如whatsapp, facebook等截圖，然後發送至phishing@hangseng.com 作跟進 | NaN |
+| Script - <br>如涉及僞冒Nanyang Commercial Bank, Limited銀行（例如僞冒Nanyang Commercial Bank, Limited職員，Nanyang Commercial Bank, Limited推廣等） -> “强烈建議閣下提供有關僞冒Nanyang Commercial Bank, Limited嘅短訊/電郵連結 或/及 社交媒體如whatsapp, facebook等截圖，然後發送至phishing@hangseng.com 作跟進 | NaN |
 | \*必填\* 你有冇收過或者click開過任何可疑嘅短訊或email連結，並且透露左你嘅個人資料及一次性驗證碼俾第三者或者親友？""<br>如客戶回應有<br>請提供有關短訊/電郵連結及截圖，以及詢問客人“具體提供左咩資料""：<br> | No |
 | \*必填\* 請問你有冇透露或者寫低過電話理財密碼，網上理財密碼以及櫃員機密碼等個人密碼俾第三者或者親友？<br> | No |
 | \*必填\* 請問你有冇將你手機或者你手機嘅SIM咭直接俾左第三者或者親友？<br> | No |
@@ -11135,18 +11235,18 @@ JSON Schema:
   ""fraud_type"": ""Impersonation"",
   ""alerted_transactions"": [
     {
-      ""date"": ""2025-05-21"",
-      ""amount"": 36914.14,
+      ""date"": ""2025-05-10"",
+      ""amount"": 58522.91,
       ""currency"": ""HKD"",
       ""from"": {
-        ""name"": ""HUNG CHI HO"",
-        ""account_number"": ""792-127410-388"",
-        ""bank"": ""Fubon Bank (Hong Kong) Limited""
+        ""name"": ""SIT SIU MING"",
+        ""account_number"": ""413-792162-294"",
+        ""bank"": ""Nanyang Commercial Bank, Limited""
       },
       ""to"": {
-        ""name"": ""HO WING KEI"",
-        ""account_number"": ""816-135211-695"",
-        ""bank"": ""Dah Sing Bank, Limited""
+        ""name"": ""LIU MING FUNG"",
+        ""account_number"": ""306-827899-373"",
+        ""bank"": ""Tai Yau Bank, Limited""
       },
       ""channel"": ""ATM"",
       ""can_be_located"": true,
@@ -11155,18 +11255,18 @@ JSON Schema:
       ]
     },
     {
-      ""date"": ""2025-10-31"",
-      ""amount"": 62356.96,
+      ""date"": ""2025-03-26"",
+      ""amount"": 34277.84,
       ""currency"": ""HKD"",
       ""from"": {
-        ""name"": ""YAU SIN WAI"",
-        ""account_number"": ""953-805669-515"",
-        ""bank"": ""Shanghai Commercial Bank Limited""
+        ""name"": ""WONG SIU MING"",
+        ""account_number"": ""473-322997-675"",
+        ""bank"": ""China CITIC Bank International Limited""
       },
       ""to"": {
         ""name"": ""CHAN, TAIMAN"",
-        ""account_number"": ""786-964051-346"",
-        ""bank"": ""Standard Chartered Bank (Hong Kong) Limited""
+        ""account_number"": ""641-776706-775"",
+        ""bank"": ""Tai Yau Bank, Limited""
       },
       ""channel"": ""ATM"",
       ""can_be_located"": true,
@@ -11175,24 +11275,24 @@ JSON Schema:
       ]
     }
   ]
-}",101,1,1,"2024-12-10 --> 2025-05-21
-46000 --> 36914.14
-MR --> HUNG
-CHEUNG --> CHI
-TAK --> HO
-222-222222-101 --> 792-127410-388
-BANK:HASE --> Fubon Bank (Hong Kong) Limited
-CHUNG --> HO
-SIU --> WING
-333-333333-102 --> 816-135211-695
-BANK:HASE --> Dah Sing Bank, Limited
-2024-12-11 --> 2025-10-31
-46000 --> 62356.96
-CHEUNG --> YAU
-TAK --> SIN
-SHING --> WAI
-222-222222-101 --> 953-805669-515
-BANK:HASE --> Shanghai Commercial Bank Limited
+}",101,1,1,"2024-12-10 --> 2025-05-10
+46000 --> 58522.91
+MR --> SIT
+CHEUNG --> SIU
+TAK --> MING
+222-222222-101 --> 413-792162-294
+BANK:HASE --> Nanyang Commercial Bank, Limited
+CHUNG --> LIU
+SIU --> MING
+333-333333-102 --> 306-827899-373
+BANK:HASE --> Tai Yau Bank, Limited
+2024-12-11 --> 2025-03-26
+46000 --> 34277.84
+CHEUNG --> WONG
+TAK --> SIU
+SHING --> MING
+222-222222-101 --> 473-322997-675
+BANK:HASE --> China CITIC Bank International Limited
 Name not randomized due to special characters: 'CHAN, TAIMAN' --> SKIPPED
-111-111111-101 --> 786-964051-346
-BANK:HASE --> Standard Chartered Bank (Hong Kong) Limited"
+111-111111-101 --> 641-776706-775
+BANK:HASE --> Tai Yau Bank, Limited"
