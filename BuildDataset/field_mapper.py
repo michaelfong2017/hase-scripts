@@ -65,26 +65,30 @@ class FieldMapper:
 
     def _find_matching_replacement_name(self, normalized_name: str) -> str:
         """Find best matching replacement name from available options"""
-        # First, try exact match
-        for replacement_name in REPLACEMENT_OPTIONS['names']:
-            if normalized_name == replacement_name:
-                continue  # Don't replace with same name
-            return replacement_name
+        # Get all available replacement names
+        available_names = [name for name in REPLACEMENT_OPTIONS['names'] if name != normalized_name]
         
-        # If no exact match, try pattern matching
+        if not available_names:
+            return REPLACEMENT_OPTIONS['names'][0]
+        
+        # Try to find a replacement with different surname
         name_parts = normalized_name.split()
         if len(name_parts) >= 2:
             surname = name_parts[0]
             
-            # Look for replacement names with different surname
-            for replacement_name in REPLACEMENT_OPTIONS['names']:
+            # Get all names with different surnames
+            different_surname_names = []
+            for replacement_name in available_names:
                 replacement_parts = replacement_name.split()
                 if len(replacement_parts) >= 2 and replacement_parts[0] != surname:
-                    return replacement_name
+                    different_surname_names.append(replacement_name)
+            
+            if different_surname_names:
+                # FIXED: Return a random choice instead of the first one
+                return random.choice(different_surname_names)
         
-        # Fallback to random selection
-        available_names = [name for name in REPLACEMENT_OPTIONS['names'] if name != normalized_name]
-        return random.choice(available_names) if available_names else REPLACEMENT_OPTIONS['names'][0]
+        # Fallback to random selection from all available names
+        return random.choice(available_names)
     
     def _collect_unique_values(self, obj: Any, parent_key: str = "") -> Dict[str, Set[Any]]:
         """Recursively collect all unique values by field type"""
@@ -138,10 +142,9 @@ class FieldMapper:
                     self.field_types[amount_str] = 'cancel_amount_requested'
                     
                 elif key == "name" and isinstance(value, str):
-                    # Normalize the name for consistent mapping
                     normalized_name = self._normalize_name(value)
                     
-                    # Track all variants of this normalized name
+                    # Initialize variants list if not exists
                     if normalized_name not in self.name_variants:
                         self.name_variants[normalized_name] = []
                     
@@ -149,11 +152,11 @@ class FieldMapper:
                     if value not in self.name_variants[normalized_name]:
                         self.name_variants[normalized_name].append(value)
                     
-                    # Add the normalized name itself as a variant (if different from original)
+                    # CRITICAL: Also add the normalized name itself as a variant if different
                     if normalized_name != value and normalized_name not in self.name_variants[normalized_name]:
                         self.name_variants[normalized_name].append(normalized_name)
                     
-                    # IMPORTANT: Only add the normalized name to unique_values (not the original)
+                    # Only add the normalized name to unique_values
                     unique_values['names'].add(normalized_name)
                     
                     # Map ALL variants to the same field type
@@ -166,12 +169,14 @@ class FieldMapper:
                     self.field_types[value] = 'account_numbers'
                     
                 elif key == "bank" and isinstance(value, str):
+                    # DISABLED: Bank randomization turned off
+                    pass
                     # Only collect bank names for ADCC and Police Letter document types
-                    if self.document_type in ['ADCC', 'Police Letter']:
-                        # Only collect from "from" section for these document types
-                        if parent_key == "from":
-                            unique_values['banks'].add(value)
-                            self.field_types[value] = 'banks'
+                    # if self.document_type in ['ADCC', 'Police Letter']:
+                    #     # Only collect from "from" section for these document types
+                    #     if parent_key == "from":
+                    #         unique_values['banks'].add(value)
+                    #         self.field_types[value] = 'banks'
                     # For other document types, completely skip bank collection
                         
                 elif key == "police_reference" and value:
@@ -226,13 +231,13 @@ class FieldMapper:
         for normalized_name in unique_values['names']:
             replacement_name = self._randomize_name(normalized_name)
             
+            # Map the normalized name
+            self.mappings[normalized_name] = replacement_name
+            
             # Map ALL variants of this normalized name to the same replacement
             if normalized_name in self.name_variants:
                 for variant in self.name_variants[normalized_name]:
                     self.mappings[variant] = replacement_name
-            
-            # ADDED: Ensure the normalized name itself is also mapped
-            self.mappings[normalized_name] = replacement_name
         
         # Generate account number mappings
         for account in unique_values['account_numbers']:
@@ -260,36 +265,47 @@ class FieldMapper:
     def _randomize_date(self, date_str: str) -> str:
         """Randomize date to YYYY-MM-DD format"""
         try:
-            # Parse date in various formats
             parsed_date = None
             for pattern, fmt in DATE_FORMAT_PATTERNS:
                 match = re.search(pattern, date_str, re.IGNORECASE)
                 if match:
                     try:
-                        # Handle different capture group structures
+                        groups = match.groups()
+                        
                         if '月' in fmt:  # Chinese format
-                            month, day = match.groups()
-                            parsed_date = datetime(2024, int(month), int(day))  # Use current year as default
+                            month, day = groups
+                            parsed_date = datetime(2024, int(month), int(day))
+                        elif '%Y%m%d' in fmt:  # 8-digit format like 20241227
+                            date_string = groups[0]
+                            parsed_date = datetime.strptime(date_string, '%Y%m%d')
+                        elif '%d %b %Y' in fmt:  # Day Month Year format like "05 Jan 2025"
+                            day, month_name, year = groups
+                            month_abbr = {'jan': 1, 'feb': 2, 'mar': 3, 'apr': 4, 'may': 5, 'jun': 6,
+                                        'jul': 7, 'aug': 8, 'sep': 9, 'oct': 10, 'nov': 11, 'dec': 12}
+                            month_num = month_abbr.get(month_name.lower(), 1)
+                            parsed_date = datetime(int(year), month_num, int(day))
+                        elif '%d%b%Y' in fmt:  # Day+Month+Year concatenated like "12NOV2024"
+                            day, month_name, year = groups
+                            month_abbr = {'jan': 1, 'feb': 2, 'mar': 3, 'apr': 4, 'may': 5, 'jun': 6,
+                                        'jul': 7, 'aug': 8, 'sep': 9, 'oct': 10, 'nov': 11, 'dec': 12}
+                            month_num = month_abbr.get(month_name.lower(), 1)
+                            parsed_date = datetime(int(year), month_num, int(day))
+                        elif '%d%b' in fmt:  # Day+Month without year like "07AUG"
+                            day, month_name = groups
+                            month_abbr = {'jan': 1, 'feb': 2, 'mar': 3, 'apr': 4, 'may': 5, 'jun': 6,
+                                        'jul': 7, 'aug': 8, 'sep': 9, 'oct': 10, 'nov': 11, 'dec': 12}
+                            month_num = month_abbr.get(month_name.lower(), 1)
+                            parsed_date = datetime(2024, month_num, int(day))  # Use default year
                         elif '%Y' in fmt and fmt.startswith('%Y'):  # YYYY first
-                            year, month, day = match.groups()
+                            year, month, day = groups
                             parsed_date = datetime(int(year), int(month), int(day))
                         elif '%Y' in fmt and fmt.endswith('%Y'):  # YYYY last
-                            if '%b' in fmt or '%B' in fmt:  # Month name formats
-                                if len(match.groups()) == 3:
-                                    day, month_name, year = match.groups()
-                                    # Convert month name to number
-                                    month_abbr = {'jan': 1, 'feb': 2, 'mar': 3, 'apr': 4, 'may': 5, 'jun': 6,
-                                                'jul': 7, 'aug': 8, 'sep': 9, 'oct': 10, 'nov': 11, 'dec': 12}
-                                    month_num = month_abbr.get(month_name.lower()[:3], 1)
-                                    parsed_date = datetime(int(year), month_num, int(day))
-                            else:  # Numeric formats
-                                parts = match.groups()
-                                if len(parts) == 3:
-                                    if fmt.startswith('%m'):  # MM-DD-YYYY
-                                        month, day, year = parts
-                                    else:  # DD-MM-YYYY
-                                        day, month, year = parts
-                                    parsed_date = datetime(int(year), int(month), int(day))
+                            if len(groups) == 3:
+                                if fmt.startswith('%m'):  # MM-DD-YYYY
+                                    month, day, year = groups
+                                else:  # DD-MM-YYYY
+                                    day, month, year = groups
+                                parsed_date = datetime(int(year), int(month), int(day))
                         
                         if parsed_date:
                             break
@@ -299,57 +315,52 @@ class FieldMapper:
             if not parsed_date:
                 return date_str
             
-            # Generate random offset
             random_offset = random.randint(-365, 365)
             new_date = parsed_date + timedelta(days=random_offset)
             
-            # Always return YYYY-MM-DD format
             return new_date.strftime('%Y-%m-%d')
             
         except:
             return date_str
     
     def _randomize_amount(self, amount_str: str) -> str:
-        """Randomize amount to numeric format without currency, preserving decimal format"""
+        """Randomize amount preserving format"""
         try:
-            # Handle currency prefixes
             currency_prefix = ""
             clean_str = amount_str.strip()
             
-            # Extract currency prefix if present
             currency_match = re.match(r'^(HKD|USD|CNY|SGD)\s*', clean_str, re.IGNORECASE)
             if currency_match:
                 currency_prefix = currency_match.group(1).upper() + " "
                 clean_str = clean_str[len(currency_match.group(0)):]
             
-            # Remove commas and parse numeric value
             clean_str = clean_str.replace(',', '')
             numeric_value = float(clean_str)
             
-            # Generate new value (50% to 150% of original)
             variation = random.uniform(0.5, 1.5)
             new_value = numeric_value * variation
             
-            # Format the result
+            # Format based on original decimal presence
             if '.' in clean_str:
-                # Original was float, preserve decimal format
                 formatted_amount = f"{new_value:.2f}"
             else:
-                # Original was integer, return as integer
-                formatted_amount = str(int(new_value))
+                formatted_amount = str(int(round(new_value)))
             
-            # Add commas for thousands if original had them
+            # FIXED: Proper comma formatting that preserves decimals
             if ',' in amount_str:
-                # Add comma formatting
-                parts = formatted_amount.split('.')
-                parts[0] = f"{int(parts[0]):,}"
-                formatted_amount = '.'.join(parts)
+                if '.' in formatted_amount:
+                    # Split into integer and decimal parts
+                    integer_part, decimal_part = formatted_amount.split('.')
+                    # Add commas to integer part only
+                    integer_with_commas = f"{int(integer_part):,}"
+                    formatted_amount = f"{integer_with_commas}.{decimal_part}"
+                else:
+                    # No decimals, just add commas to the whole number
+                    formatted_amount = f"{int(formatted_amount):,}"
             
-            # Return with original currency prefix if it existed
             return currency_prefix + formatted_amount
             
         except:
-            # Fallback to random number with same format as original
             random_value = random.uniform(1000, 100000)
             if 'HKD' in amount_str.upper():
                 return f"HKD {random_value:,.2f}"
@@ -357,63 +368,56 @@ class FieldMapper:
                 return f"{random_value:.2f}"
 
     def _randomize_cancel_amount(self, amount_str: str, all_amounts: List[float]) -> str:
-        """Randomize cancel_amount_requested with constraints, preserving decimal format and currency"""
+        """Randomize cancel_amount_requested with constraints"""
         try:
-            # Handle currency prefixes
             currency_prefix = ""
             clean_str = amount_str.strip()
             
-            # Extract currency prefix if present
             currency_match = re.match(r'^(HKD|USD|CNY|SGD)\s*', clean_str, re.IGNORECASE)
             if currency_match:
                 currency_prefix = currency_match.group(1).upper() + " "
                 clean_str = clean_str[len(currency_match.group(0)):]
             
-            # Remove commas and parse numeric value
             clean_str = clean_str.replace(',', '')
             original_value = float(clean_str)
             
-            # Find the reference amount (lowest amount for safety)
             if all_amounts:
                 reference_amount = min(all_amounts)
             else:
-                # Fallback if no amounts available
                 reference_amount = original_value if original_value > 0 else 1000
             
-            # Ensure reference amount is positive
             if reference_amount <= 0:
                 reference_amount = 1000
             
-            # With at least 50% chance, keep the same if valid
             if original_value > 0 and original_value <= reference_amount and random.random() < 0.5:
                 new_value = original_value
             else:
-                # Generate new value between 0.01 and reference_amount
                 new_value = random.uniform(0.01, reference_amount)
             
-            # Format the result
+            # Format based on original decimal presence
             if '.' in clean_str:
-                # Original was float, preserve decimal format
                 formatted_amount = f"{new_value:.2f}"
             else:
-                # Original was integer, return as integer if new value is whole
                 if new_value.is_integer():
                     formatted_amount = str(int(new_value))
                 else:
                     formatted_amount = f"{new_value:.2f}"
             
-            # Add commas for thousands if original had them
+            # FIXED: Proper comma formatting that preserves decimals
             if ',' in amount_str:
-                # Add comma formatting
-                parts = formatted_amount.split('.')
-                parts[0] = f"{int(float(parts[0])):,}"
-                formatted_amount = '.'.join(parts)
+                if '.' in formatted_amount:
+                    # Split into integer and decimal parts
+                    integer_part, decimal_part = formatted_amount.split('.')
+                    # Add commas to integer part only
+                    integer_with_commas = f"{int(integer_part):,}"
+                    formatted_amount = f"{integer_with_commas}.{decimal_part}"
+                else:
+                    # No decimals, just add commas to the whole number
+                    formatted_amount = f"{int(formatted_amount):,}"
             
-            # Return with original currency prefix if it existed
             return currency_prefix + formatted_amount
             
         except:
-            # Fallback to a reasonable default with same format as original
             fallback_amount = min(all_amounts) if all_amounts else 1000
             random_value = random.uniform(0.01, fallback_amount)
             
