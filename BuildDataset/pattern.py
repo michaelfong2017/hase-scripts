@@ -146,21 +146,34 @@ BANK_ROOT_TO_FULL_NAME = {
 
 # Date format patterns for parsing and preserving format
 DATE_FORMAT_PATTERNS = [
-    (r'\b(\d{4})-(\d{2})-(\d{2})\b', '%Y-%m-%d'),  # YYYY-MM-DD
+    # Numeric formats with different separators
+    (r'\b(\d{4})[-/](\d{1,2})[-/](\d{1,2})\b', '%Y-%m-%d'),  # YYYY-MM-DD or YYYY/MM/DD
+    (r'\b(\d{1,2})[-/](\d{1,2})[-/](\d{4})\b', '%m-%d-%Y'),  # MM-DD-YYYY or MM/DD/YYYY
     (r'\b(\d{1,2})/(\d{1,2})/(\d{4})\b', '%m/%d/%Y'),  # MM/DD/YYYY
-    (r'\b(\d{1,2})-(\d{1,2})-(\d{4})\b', '%m-%d-%Y'),  # MM-DD-YYYY
+    
+    # English month names (abbreviated, case insensitive)
+    (r'\b(\d{1,2})\s*(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s*(\d{4})\b', '%d %b %Y'),  # 8 Jan 2024
+    (r'\b(\d{1,2})\s*(JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)\s*(\d{4})\b', '%d %b %Y'),  # 8 JAN 2024
+    
+    # English month names (full, case insensitive)
+    (r'\b(\d{1,2})\s*(January|February|March|April|May|June|July|August|September|October|November|December)\s*(\d{4})\b', '%d %B %Y'),  # 8 January 2024
+    (r'\b(\d{1,2})\s*(january|february|march|april|may|june|july|august|september|october|november|december)\s*(\d{4})\b', '%d %B %Y'),  # 8 january 2024
+    
+    # Chinese date format
+    (r'\b(\d{1,2})月(\d{1,2})日\b', '%m月%d日'),  # 8月7日
+    
+    # Other common variations with hyphens and slashes
+    (r'\b(\d{1,2})-(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)-?(\d{2,4})\b', '%d-%b-%Y'),  # 8-Jan-24 or 8-Jan-2024
+    (r'\b(\d{1,2})/(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)/?(\d{2,4})\b', '%d/%b/%Y'),  # 8/Jan/24 or 8/Jan/2024
+    
+    # Additional common formats
+    (r'\b(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s*(\d{1,2}),?\s*(\d{4})\b', '%b %d %Y'),  # Jan 8, 2024 or Jan 8 2024
+    (r'\b(January|February|March|April|May|June|July|August|September|October|November|December)\s*(\d{1,2}),?\s*(\d{4})\b', '%B %d %Y'),  # January 8, 2024
+    
+    # ISO format variations
+    (r'\b(\d{4})\.(\d{1,2})\.(\d{1,2})\b', '%Y.%m.%d'),  # YYYY.MM.DD
+    (r'\b(\d{1,2})\.(\d{1,2})\.(\d{4})\b', '%d.%m.%Y'),  # DD.MM.YYYY
 ]
-
-# Amount format patterns for parsing and preserving format
-AMOUNT_FORMAT_PATTERNS = [
-    (r'\b([A-Z]{3})([\d,]+\.?\d*)\b', 'currency_prefix'),  # HKD40,000.00
-    (r'\b(\$)([\d,]+\.?\d*)\b', 'dollar_prefix'),  # $40,000.00
-    (r'\b([\d,]+\.?\d*)\s*([A-Z]{3})\b', 'currency_suffix'),  # 40,000.00 HKD
-    (r'\b([\d,]+\.?\d*)\b(?=\s|$)', 'number_only'),  # Standalone numbers
-]
-
-# Name validation pattern
-NAME_VALIDATION_PATTERN = r'^[A-Za-z0-9\s]+$'
 
 # Replacement options - using template randomization with {num}, {code}, {digit}
 REPLACEMENT_OPTIONS = {
@@ -222,139 +235,12 @@ REPLACEMENT_OPTIONS = {
         "CSGT {num}"
     ],
     
-    'police_teams': [
-        "DIT {digit} {num}",
-        "DIT {digit}-{num}",
-        "DIT{digit}-{num}",
-        "DIT {digit} KWTDIST",
-        "DIT {digit} KCDIST",
-        "DTFCS {digit} YLDIST",
-        "E-HUB-{num}",
-        "District Crime Squad One, Tuen Mun Police District",
-        "District Crime Squad Team {digit} of Western District",
-        "District Investigation Team {digit}, Shatin District, Shatin Police Station",
-        "District Investigation Team {digit}, Eastern District, North Point Police Station",
-        "District Investigation Team {digit}, Kwai Tsing District, Kwai Chung Police Station",
-        "District Investigation Team {digit}, Tai Po District, Tai Po Police Station",
-        "District Investigation Team {digit}, Kowloon City District, Hung Hom Police Station",
-        "District Investigation Team {digit}, Shamshuipo District, Sham Shui Po Police Station",
-        "District Investigation Team {digit}, Tuen Mun District, Tuen Mun Police Station",
-        "District Investigation Team {digit}, Yuen Long District",
-        "District Investigation Team {digit} of Western District",
-        "District Investigation Team {digit}, Mong Kok District, Mong Kok Police Station",
-        "District Investigation Team {digit}, Sau Mau Ping District, Sau Mau Ping Police Station",
-        "District Investigation Team {digit}, Tuen Mun District, New Territories North",
-        "District Investigation Team {digit}, Western District, Aberdeen Police Station",
-        "District Investigation Team {digit}, Central District, Central Police Station",
-        "District Investigation Team {digit}, Lantau District",
-        "District Investigation Team {digit}, Kowloon City Police District",
-        "District Investigation Team {digit}, Kwun Tong District, Kwun Tong Police Station",
-        "District Investigation Team {digit}, Sha Tin District, Hong Kong POLICE",
-        "District Investigation Team {digit}, Wan Chai District, Wan Chai Police Station",
-        "District Investigation Team {digit}, Yau Tsim District, Tsim Sha Tsui Police Station",
-        "District Technology & Financial Crime Unit, Tuen Mun District",
-        "District Technology & Financial Crime Unit, Tuen Mun, Tuen Mun District, Tuen Mun Police Station",
-        "District Technology and Financial Crime Squad {digit} of Yuen Long District",
-        "District Technology and Financial Crime Squad Yuen Long District, Hong Kong Police Force",
-        "District Technology and Financial Crime Squad of Tai Po Police District",
-        "District Technology and Financial Crime Squad, Kwun Tong District, Hong Kong Police Force",
-        "District investigation Team {digit} Western District",
-        "Miscellaneous Enquiries Sub Unit of Kwai Chung Division"
-    ],
-    
     'names': [
         "CHAN TAI MAN", "WONG SIU MING", "LEE KA WAI", "LAM HOI SHAN",
         "CHEN WEI HONG", "LIU MING FUNG", "NG HOK YIN", "TANG SIU KWAN",
         "YEUNG KAI CHUNG", "HO WING KEI", "MA CHI KEUNG", "TSANG MEI LIN",
     ]
 }
-
-# Special ADCC patterns that appear in actual text (with real numbers)
-ADCC_SPECIAL_PATTERNS = {
-    'police_team_patterns': [
-        r'\bE-HUB-\d+\b',  # E-HUB-123
-        r'\bDIT\s*\d+\s*-\s*\d+\b',  # DIT 7-1234567, DIT7-12345
-        r'\bDIT\s+\d+\s+\d+\b',  # DIT 4 1234567
-        r'\bDIT\d+-\d+\b',  # DIT2-12345, DIT3-12345, DIT8-12345
-    ],
-    
-    'police_reference_patterns': [
-        r'\bESPS\s+\d+/\d{4}\s+and\s+[A-Z]+\d+\s*\([^)]+\)\b',  # ESPS 1234/2024 and ERC241001234567 (E-HUB-123)
-        r'\bESPS\s+\d+\s+and\s+[A-Z]+\s+\d+\s*\([^)]+\)\b',  # ESPS 71234 and WCHDIV 251234 (DIT7-12345)
-    ]
-}
-
-# ADCC replacement templates for special patterns
-ADCC_REPLACEMENT_TEMPLATES = {
-    'police_teams': [
-        "E-HUB-{code}",
-        "DIT {digit}-{num}",
-        "DIT{digit}-{num}",
-        "DIT {digit} {num}",
-    ],
-    
-    'police_references': [
-        "ESPS {num}/2024 and ERC24100{num}",
-        "ESPS {num}/2024 and TY RN {num}",
-        "ESPS {digit}{num} and WCHDIV {num}",
-        "ESPS {num}/2025 and MKDIST {num}",
-        "ESPS {num}/2024 and WTSDIST {num}",
-    ]
-}
-
-def replace_symbol_with_digit(match):
-    """Replace ■ symbol with random digit"""
-    return str(random.randint(0, 9))
-
-def process_adcc_special_patterns(text: str, document_type: str) -> List[Tuple[str, str]]:
-    """Process special ADCC patterns that appear in actual text"""
-    changes = []
-    
-    if document_type != 'ADCC':
-        return changes
-    
-    # Process police team patterns
-    for pattern in ADCC_SPECIAL_PATTERNS['police_team_patterns']:
-        matches = re.finditer(pattern, text)
-        for match in matches:
-            original_value = match.group(0)
-            
-            # Generate replacement
-            template = random.choice(ADCC_REPLACEMENT_TEMPLATES['police_teams'])
-            new_value = replace_placeholders(template)
-            
-            changes.append((original_value, new_value))
-    
-    # Process police reference patterns  
-    for pattern in ADCC_SPECIAL_PATTERNS['police_reference_patterns']:
-        matches = re.finditer(pattern, text)
-        for match in matches:
-            original_value = match.group(0)
-            
-            # Generate replacement
-            template = random.choice(ADCC_REPLACEMENT_TEMPLATES['police_references'])
-            new_value = replace_placeholders(template)
-            
-            changes.append((original_value, new_value))
-    
-    return changes
-
-def apply_adcc_special_replacements(text: str, changes: List[Tuple[str, str]]) -> str:
-    """Apply ADCC special pattern replacements"""
-    modified_text = text
-    
-    for old_value, new_value in changes:
-        if old_value in modified_text:
-            modified_text = modified_text.replace(old_value, new_value)
-    
-    return modified_text
-
-def replace_placeholders(template: str) -> str:
-    """Replace placeholders like {num}, {code}, {digit} with random values"""
-    result = template
-    for placeholder, func in PLACEHOLDER_FUNCTIONS.items():
-        result = result.replace(placeholder, func())
-    return result
 
 # Placeholder replacement functions
 def get_random_num():

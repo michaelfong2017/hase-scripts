@@ -110,17 +110,22 @@ def main():
                         # Generate all reports
                         original_values = reporter.get_original_values()
                         replacement_values = reporter.get_replacement_values()
-                        replacement_summary = reporter.generate_replacement_summary(original_input, original_transactions, ground_truth_str)  # UPDATED: pass original texts
+                        replacement_summary = reporter.generate_replacement_summary(original_input, original_transactions, ground_truth_str)
                         replacement_alerts = reporter.generate_alerts(original_input, original_transactions, ground_truth_str, document_type)
+                        field_specific_alerts = reporter.generate_field_specific_alerts(original_input, original_transactions, ground_truth_str, document_type)
 
-                        # Update the DataFrame (remove the separate count_replacements call)
+                        # Update the DataFrame with all columns including field-specific alerts
                         randomized_df.at[index, input_column] = randomized_input
                         randomized_df.at[index, json_column] = randomized_ground_truth_str
                         randomized_df.at[index, transaction_column] = randomized_transactions
                         randomized_df.at[index, 'Original_Values'] = original_values
                         randomized_df.at[index, 'Replacement_Values'] = replacement_values
-                        randomized_df.at[index, 'Replacement_Summary'] = replacement_summary  # This now contains everything
+                        randomized_df.at[index, 'Replacement_Summary'] = replacement_summary
                         randomized_df.at[index, 'Replacement_Alerts'] = replacement_alerts
+
+                        # Add field-specific alert columns
+                        for field_name, alert_content in field_specific_alerts.items():
+                            randomized_df.at[index, field_name] = alert_content
                         
                     except Exception as e:
                         print(f"Error processing row {index}, randomization {randomization_num}: {str(e)}")
@@ -128,6 +133,13 @@ def main():
                         randomized_df.at[index, 'Replacement_Values'] = ""
                         randomized_df.at[index, 'Replacement_Summary'] = f"Error: {str(e)}"
                         randomized_df.at[index, 'Replacement_Alerts'] = ""
+                        
+                        # Set all field alert columns to empty on error
+                        field_alert_columns = ['Alert_Dates', 'Alert_Amounts', 'Alert_Names', 'Alert_Account_Numbers', 
+                                            'Alert_Banks', 'Alert_Police_References', 'Alert_Contact_Persons', 
+                                            'Alert_Writ_Numbers', 'Alert_Cancel_Amount_Requested']
+                        for col in field_alert_columns:
+                            randomized_df.at[index, col] = ""
 
                 all_dataframes.append(randomized_df)
     

@@ -138,8 +138,6 @@ class DiffReporter:
                     # For other document types, banks should not be randomized, so skip alerting
                     continue
                     
-            # REMOVED: police_teams from alert logic since they're not randomized
-                    
             else:
                 # Only truly unknown field types
                 alerts.append(f"⚠️  UNKNOWN FIELD TYPE: {field_type} for value '{old_value}'")
@@ -167,3 +165,113 @@ class DiffReporter:
         else:
             header = ["REPLACEMENT ALERTS", "=" * 30, ""]
             return "\n".join(header + alerts)
+    
+    def generate_field_specific_alerts(self, original_input: str, original_transactions: str, original_ground_truth: str, document_type: str = None) -> Dict[str, str]:
+        """Generate field-specific alert columns"""
+        has_transactions = bool(original_transactions.strip())
+        
+        # Initialize all field alert columns
+        field_alerts = {
+            'Alert_Dates': "",
+            'Alert_Amounts': "",
+            'Alert_Names': "",
+            'Alert_Account_Numbers': "",
+            'Alert_Banks': "",
+            'Alert_Police_References': "",
+            'Alert_Contact_Persons': "",
+            'Alert_Writ_Numbers': "",
+            'Alert_Cancel_Amount_Requested': ""
+        }
+        
+        for old_value in self.mappings.keys():
+            field_type = self.field_types.get(old_value, 'unknown')
+            
+            # Check where replacements were actually done
+            found_in_input = old_value in original_input
+            found_in_transactions = old_value in original_transactions  
+            found_in_ground_truth = old_value in original_ground_truth
+            
+            # Build actual locations set
+            actual_locations = set()
+            if found_in_input:
+                actual_locations.add("Input")
+            if found_in_transactions:
+                actual_locations.add("Transactions")
+            if found_in_ground_truth:
+                actual_locations.add("Ground Truth")
+            
+            # Determine expected locations based on field type and rules
+            expected_locations = None
+            
+            if field_type in ['police_references', 'contact_persons', 'writ_numbers', 'cancel_amount_requested']:
+                expected_locations = {"Input", "Ground Truth"}
+                
+            elif field_type in ['dates', 'amounts', 'names', 'account_numbers']:
+                if not has_transactions:
+                    expected_locations = {"Input", "Ground Truth"}
+                else:
+                    expected_locations = {"Input", "Transactions", "Ground Truth"}
+                    
+            elif field_type == 'banks':
+                # Banks follow same rules as transaction fields, but only for ADCC and Police Letter
+                if document_type in ['ADCC', 'Police Letter']:
+                    if not has_transactions:
+                        expected_locations = {"Input", "Ground Truth"}
+                    else:
+                        expected_locations = {"Input", "Transactions", "Ground Truth"}
+                else:
+                    # For other document types, banks should not be randomized, so skip
+                    continue
+            
+            # Check if there's an alert for this field
+            if expected_locations and actual_locations != expected_locations:
+                missing = expected_locations - actual_locations
+                extra = actual_locations - expected_locations
+                
+                alert_msg = f"{old_value}: "
+                if missing:
+                    alert_msg += f"Missing from {', '.join(sorted(missing))}"
+                if extra:
+                    if missing:
+                        alert_msg += "; "
+                    alert_msg += f"Unexpected in {', '.join(sorted(extra))}"
+                
+                # Add to appropriate field alert column
+                if field_type == 'dates':
+                    if field_alerts['Alert_Dates']:
+                        field_alerts['Alert_Dates'] += "\n"
+                    field_alerts['Alert_Dates'] += alert_msg
+                elif field_type == 'amounts':
+                    if field_alerts['Alert_Amounts']:
+                        field_alerts['Alert_Amounts'] += "\n"
+                    field_alerts['Alert_Amounts'] += alert_msg
+                elif field_type == 'names':
+                    if field_alerts['Alert_Names']:
+                        field_alerts['Alert_Names'] += "\n"
+                    field_alerts['Alert_Names'] += alert_msg
+                elif field_type == 'account_numbers':
+                    if field_alerts['Alert_Account_Numbers']:
+                        field_alerts['Alert_Account_Numbers'] += "\n"
+                    field_alerts['Alert_Account_Numbers'] += alert_msg
+                elif field_type == 'banks':
+                    if field_alerts['Alert_Banks']:
+                        field_alerts['Alert_Banks'] += "\n"
+                    field_alerts['Alert_Banks'] += alert_msg
+                elif field_type == 'police_references':
+                    if field_alerts['Alert_Police_References']:
+                        field_alerts['Alert_Police_References'] += "\n"
+                    field_alerts['Alert_Police_References'] += alert_msg
+                elif field_type == 'contact_persons':
+                    if field_alerts['Alert_Contact_Persons']:
+                        field_alerts['Alert_Contact_Persons'] += "\n"
+                    field_alerts['Alert_Contact_Persons'] += alert_msg
+                elif field_type == 'writ_numbers':
+                    if field_alerts['Alert_Writ_Numbers']:
+                        field_alerts['Alert_Writ_Numbers'] += "\n"
+                    field_alerts['Alert_Writ_Numbers'] += alert_msg
+                elif field_type == 'cancel_amount_requested':
+                    if field_alerts['Alert_Cancel_Amount_Requested']:
+                        field_alerts['Alert_Cancel_Amount_Requested'] += "\n"
+                    field_alerts['Alert_Cancel_Amount_Requested'] += alert_msg
+        
+        return field_alerts
