@@ -1,0 +1,73 @@
+﻿Type,Field,total,mismatch_count,accuracy_rate,Model,,,Type,Field,total,mismatch_count,accuracy_rate,Model
+ADCC,amount,20,9,55.00%,cycle2_final32B_full60,,,ADCC,amount,20,3,85.00%,cycle3_32Bv1_full60
+ADCC,can_be_located,20,9,55.00%,cycle2_final32B_full60,,,ADCC,can_be_located,20,0,100.00%,cycle3_32Bv1_full60
+ADCC,cancel_amount_requested,9,0,100.00%,cycle2_final32B_full60,,,ADCC,cancel_amount_requested,5,0,100.00%,cycle3_32Bv1_full60
+ADCC,channel,15,4,73.33%,cycle2_final32B_full60,,,ADCC,channel,15,5,66.67%,cycle3_32Bv1_full60
+ADCC,currency,20,9,55.00%,cycle2_final32B_full60,,,ADCC,currency,20,0,100.00%,cycle3_32Bv1_full60
+ADCC,date,20,9,55.00%,cycle2_final32B_full60,,,ADCC,date,20,0,100.00%,cycle3_32Bv1_full60
+ADCC,from.account_number,18,8,55.56%,cycle2_final32B_full60,,,ADCC,from.account_number,18,0,100.00%,cycle3_32Bv1_full60
+ADCC,from.bank,18,8,55.56%,cycle2_final32B_full60,,,ADCC,from.bank,18,12,33.33%,cycle3_32Bv1_full60
+ADCC,from.name,20,11,45.00%,cycle2_final32B_full60,,,ADCC,from.name,20,6,70.00%,cycle3_32Bv1_full60
+ADCC,to.account_number,20,9,55.00%,cycle2_final32B_full60,,,ADCC,to.account_number,20,0,100.00%,cycle3_32Bv1_full60
+ADCC,to.bank,20,9,55.00%,cycle2_final32B_full60,,,ADCC,to.bank,20,8,60.00%,cycle3_32Bv1_full60
+ADCC,to.name,20,9,55.00%,cycle2_final32B_full60,,,ADCC,to.name,20,4,80.00%,cycle3_32Bv1_full60
+HSBC Referral,amount,43,13,69.77%,cycle2_final32B_full60,,,HSBC Referral,amount,40,5,87.50%,cycle3_32Bv1_full60
+HSBC Referral,can_be_located,43,11,74.42%,cycle2_final32B_full60,,,HSBC Referral,can_be_located,40,4,90.00%,cycle3_32Bv1_full60
+HSBC Referral,cancel_amount_requested,19,0,100.00%,cycle2_final32B_full60,,,HSBC Referral,cancel_amount_requested,20,0,100.00%,cycle3_32Bv1_full60
+HSBC Referral,channel,43,13,69.77%,cycle2_final32B_full60,,,HSBC Referral,channel,40,4,90.00%,cycle3_32Bv1_full60
+HSBC Referral,currency,43,11,74.42%,cycle2_final32B_full60,,,HSBC Referral,currency,40,4,90.00%,cycle3_32Bv1_full60
+HSBC Referral,date,43,18,58.14%,cycle2_final32B_full60,,,HSBC Referral,date,40,10,75.00%,cycle3_32Bv1_full60
+HSBC Referral,from.account_number,43,18,58.14%,cycle2_final32B_full60,,,HSBC Referral,from.account_number,40,10,75.00%,cycle3_32Bv1_full60
+HSBC Referral,from.bank,43,23,46.51%,cycle2_final32B_full60,,,HSBC Referral,from.bank,40,13,67.50%,cycle3_32Bv1_full60
+HSBC Referral,from.name,43,22,48.84%,cycle2_final32B_full60,,,HSBC Referral,from.name,40,16,60.00%,cycle3_32Bv1_full60
+HSBC Referral,to.account_number,43,18,58.14%,cycle2_final32B_full60,,,HSBC Referral,to.account_number,40,10,75.00%,cycle3_32Bv1_full60
+HSBC Referral,to.bank,43,22,48.84%,cycle2_final32B_full60,,,HSBC Referral,to.bank,40,13,67.50%,cycle3_32Bv1_full60
+HSBC Referral,to.name,43,24,44.19%,cycle2_final32B_full60,,,HSBC Referral,to.name,40,17,57.50%,cycle3_32Bv1_full60
+ODFT,amount,5,3,40.00%,cycle2_final32B_full60,,,ODFT,amount,6,3,50.00%,cycle3_32Bv1_full60
+ODFT,can_be_located,5,2,60.00%,cycle2_final32B_full60,,,ODFT,can_be_located,6,2,66.67%,cycle3_32Bv1_full60
+ODFT,cancel_amount_requested,1,0,100.00%,cycle2_final32B_full60,,,ODFT,cancel_amount_requested,1,0,100.00%,cycle3_32Bv1_full60
+ODFT,channel,5,2,60.00%,cycle2_final32B_full60,,,ODFT,channel,6,2,66.67%,cycle3_32Bv1_full60
+ODFT,currency,5,2,60.00%,cycle2_final32B_full60,,,ODFT,currency,6,2,66.67%,cycle3_32Bv1_full60
+ODFT,date,5,4,20.00%,cycle2_final32B_full60,,,ODFT,date,6,4,33.33%,cycle3_32Bv1_full60
+ODFT,from.account_number,5,3,40.00%,cycle2_final32B_full60,,,ODFT,from.account_number,6,3,50.00%,cycle3_32Bv1_full60
+ODFT,from.bank,5,3,40.00%,cycle2_final32B_full60,,,ODFT,from.bank,6,3,50.00%,cycle3_32Bv1_full60
+ODFT,from.name,5,3,40.00%,cycle2_final32B_full60,,,ODFT,from.name,6,4,33.33%,cycle3_32Bv1_full60
+ODFT,to.account_number,5,4,20.00%,cycle2_final32B_full60,,,ODFT,to.account_number,6,4,33.33%,cycle3_32Bv1_full60
+ODFT,to.bank,5,3,40.00%,cycle2_final32B_full60,,,ODFT,to.bank,6,4,33.33%,cycle3_32Bv1_full60
+ODFT,to.name,5,4,20.00%,cycle2_final32B_full60,,,ODFT,to.name,6,3,50.00%,cycle3_32Bv1_full60
+Police Letter,amount,14,0,100.00%,cycle2_final32B_full60,,,Police Letter,amount,14,0,100.00%,cycle3_32Bv1_full60
+Police Letter,can_be_located,14,0,100.00%,cycle2_final32B_full60,,,Police Letter,can_be_located,14,0,100.00%,cycle3_32Bv1_full60
+Police Letter,cancel_amount_requested,9,0,100.00%,cycle2_final32B_full60,,,Police Letter,cancel_amount_requested,8,0,100.00%,cycle3_32Bv1_full60
+Police Letter,channel,14,0,100.00%,cycle2_final32B_full60,,,Police Letter,channel,14,0,100.00%,cycle3_32Bv1_full60
+Police Letter,currency,14,0,100.00%,cycle2_final32B_full60,,,Police Letter,currency,14,0,100.00%,cycle3_32Bv1_full60
+Police Letter,date,14,1,92.86%,cycle2_final32B_full60,,,Police Letter,date,14,1,92.86%,cycle3_32Bv1_full60
+Police Letter,from.account_number,12,1,91.67%,cycle2_final32B_full60,,,Police Letter,from.account_number,11,0,100.00%,cycle3_32Bv1_full60
+Police Letter,from.bank,11,1,90.91%,cycle2_final32B_full60,,,Police Letter,from.bank,11,1,90.91%,cycle3_32Bv1_full60
+Police Letter,from.name,11,0,100.00%,cycle2_final32B_full60,,,Police Letter,from.name,11,0,100.00%,cycle3_32Bv1_full60
+Police Letter,to.account_number,14,0,100.00%,cycle2_final32B_full60,,,Police Letter,to.account_number,14,0,100.00%,cycle3_32Bv1_full60
+Police Letter,to.bank,14,4,71.43%,cycle2_final32B_full60,,,Police Letter,to.bank,14,4,71.43%,cycle3_32Bv1_full60
+Police Letter,to.name,14,2,85.71%,cycle2_final32B_full60,,,Police Letter,to.name,14,2,85.71%,cycle3_32Bv1_full60
+Search Warrant,amount,6,0,100.00%,cycle2_final32B_full60,,,Search Warrant,amount,6,0,100.00%,cycle3_32Bv1_full60
+Search Warrant,can_be_located,6,0,100.00%,cycle2_final32B_full60,,,Search Warrant,can_be_located,6,0,100.00%,cycle3_32Bv1_full60
+Search Warrant,cancel_amount_requested,6,0,100.00%,cycle2_final32B_full60,,,Search Warrant,cancel_amount_requested,6,0,100.00%,cycle3_32Bv1_full60
+Search Warrant,channel,6,0,100.00%,cycle2_final32B_full60,,,Search Warrant,channel,6,0,100.00%,cycle3_32Bv1_full60
+Search Warrant,currency,6,0,100.00%,cycle2_final32B_full60,,,Search Warrant,currency,6,0,100.00%,cycle3_32Bv1_full60
+Search Warrant,date,6,0,100.00%,cycle2_final32B_full60,,,Search Warrant,date,6,0,100.00%,cycle3_32Bv1_full60
+Search Warrant,from.account_number,6,0,100.00%,cycle2_final32B_full60,,,Search Warrant,from.account_number,6,0,100.00%,cycle3_32Bv1_full60
+Search Warrant,from.bank,6,0,100.00%,cycle2_final32B_full60,,,Search Warrant,from.bank,6,0,100.00%,cycle3_32Bv1_full60
+Search Warrant,from.name,6,0,100.00%,cycle2_final32B_full60,,,Search Warrant,from.name,6,0,100.00%,cycle3_32Bv1_full60
+Search Warrant,to.account_number,6,0,100.00%,cycle2_final32B_full60,,,Search Warrant,to.account_number,6,0,100.00%,cycle3_32Bv1_full60
+Search Warrant,to.bank,6,0,100.00%,cycle2_final32B_full60,,,Search Warrant,to.bank,6,0,100.00%,cycle3_32Bv1_full60
+Search Warrant,to.name,6,0,100.00%,cycle2_final32B_full60,,,Search Warrant,to.name,6,0,100.00%,cycle3_32Bv1_full60
+UAR,amount,18,1,94.44%,cycle2_final32B_full60,,,UAR,amount,18,2,88.89%,cycle3_32Bv1_full60
+UAR,can_be_located,18,1,94.44%,cycle2_final32B_full60,,,UAR,can_be_located,18,2,88.89%,cycle3_32Bv1_full60
+UAR,cancel_amount_requested,14,3,78.57%,cycle2_final32B_full60,,,UAR,cancel_amount_requested,10,0,100.00%,cycle3_32Bv1_full60
+UAR,channel,18,1,94.44%,cycle2_final32B_full60,,,UAR,channel,18,6,66.67%,cycle3_32Bv1_full60
+UAR,currency,18,1,94.44%,cycle2_final32B_full60,,,UAR,currency,18,2,88.89%,cycle3_32Bv1_full60
+UAR,date,18,3,83.33%,cycle2_final32B_full60,,,UAR,date,18,2,88.89%,cycle3_32Bv1_full60
+UAR,from.account_number,14,2,85.71%,cycle2_final32B_full60,,,UAR,from.account_number,14,2,85.71%,cycle3_32Bv1_full60
+UAR,from.bank,15,3,80.00%,cycle2_final32B_full60,,,UAR,from.bank,14,3,78.57%,cycle3_32Bv1_full60
+UAR,from.name,17,4,76.47%,cycle2_final32B_full60,,,UAR,from.name,14,2,85.71%,cycle3_32Bv1_full60
+UAR,to.account_number,18,3,83.33%,cycle2_final32B_full60,,,UAR,to.account_number,18,2,88.89%,cycle3_32Bv1_full60
+UAR,to.bank,18,5,72.22%,cycle2_final32B_full60,,,UAR,to.bank,18,4,77.78%,cycle3_32Bv1_full60
+UAR,to.name,18,11,38.89%,cycle2_final32B_full60,,,UAR,to.name,18,3,83.33%,cycle3_32Bv1_full60

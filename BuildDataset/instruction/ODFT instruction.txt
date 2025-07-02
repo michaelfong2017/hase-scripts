@@ -16,7 +16,8 @@ For each transaction extracted in Step 1:
 - If exact match found: Use that single Transaction ID
 - Do not repeat selecting the same transaction - each CSV transaction can only be used once
 - Even if multiple CSV transactions match the criteria, always select only one transaction
-- If no match found: Set can_be_located: false and transaction_references: []
+- If no exact date match found: Search for transactions with **previous dates** (earlier than the reported transaction date) using same amount + account/name match criteria, prioritizing the closest previous date
+- If still no match found: Set can_be_located: false and transaction_references: []
 
 **Step 3: Merge Data for Each Matched Transaction**
 - First: Extract transaction_references (Transaction IDs) from CSV

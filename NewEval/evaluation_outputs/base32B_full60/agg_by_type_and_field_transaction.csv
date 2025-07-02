@@ -1,0 +1,73 @@
+﻿Type,Field,total,mismatch_count,accuracy_rate
+ADCC,amount,20,3,85.00%
+ADCC,can_be_located,20,0,100.00%
+ADCC,cancel_amount_requested,3,0,100.00%
+ADCC,channel,15,6,60.00%
+ADCC,currency,20,0,100.00%
+ADCC,date,20,0,100.00%
+ADCC,from.account_number,18,0,100.00%
+ADCC,from.bank,18,12,33.33%
+ADCC,from.name,20,6,70.00%
+ADCC,to.account_number,20,0,100.00%
+ADCC,to.bank,20,10,50.00%
+ADCC,to.name,20,4,80.00%
+HSBC Referral,amount,43,16,62.79%
+HSBC Referral,can_be_located,43,14,67.44%
+HSBC Referral,cancel_amount_requested,16,0,100.00%
+HSBC Referral,channel,42,17,59.52%
+HSBC Referral,currency,43,14,67.44%
+HSBC Referral,date,43,21,51.16%
+HSBC Referral,from.account_number,43,21,51.16%
+HSBC Referral,from.bank,43,27,37.21%
+HSBC Referral,from.name,43,25,41.86%
+HSBC Referral,to.account_number,43,21,51.16%
+HSBC Referral,to.bank,43,25,41.86%
+HSBC Referral,to.name,43,27,37.21%
+ODFT,amount,8,5,37.50%
+ODFT,can_be_located,8,4,50.00%
+ODFT,cancel_amount_requested,1,0,100.00%
+ODFT,channel,8,4,50.00%
+ODFT,currency,8,4,50.00%
+ODFT,date,8,6,25.00%
+ODFT,from.account_number,6,3,50.00%
+ODFT,from.bank,6,4,33.33%
+ODFT,from.name,6,4,33.33%
+ODFT,to.account_number,8,6,25.00%
+ODFT,to.bank,7,6,14.29%
+ODFT,to.name,8,6,25.00%
+Police Letter,amount,14,2,85.71%
+Police Letter,can_be_located,14,2,85.71%
+Police Letter,cancel_amount_requested,8,0,100.00%
+Police Letter,channel,14,3,78.57%
+Police Letter,currency,14,2,85.71%
+Police Letter,date,14,3,78.57%
+Police Letter,from.account_number,11,3,72.73%
+Police Letter,from.bank,9,1,88.89%
+Police Letter,from.name,10,2,80.00%
+Police Letter,to.account_number,14,2,85.71%
+Police Letter,to.bank,14,6,57.14%
+Police Letter,to.name,14,4,71.43%
+Search Warrant,amount,7,3,57.14%
+Search Warrant,can_be_located,7,3,57.14%
+Search Warrant,cancel_amount_requested,4,0,100.00%
+Search Warrant,channel,7,3,57.14%
+Search Warrant,currency,7,3,57.14%
+Search Warrant,date,7,3,57.14%
+Search Warrant,from.account_number,7,3,57.14%
+Search Warrant,from.bank,7,3,57.14%
+Search Warrant,from.name,7,3,57.14%
+Search Warrant,to.account_number,7,3,57.14%
+Search Warrant,to.bank,7,3,57.14%
+Search Warrant,to.name,7,3,57.14%
+UAR,amount,19,7,63.16%
+UAR,can_be_located,19,7,63.16%
+UAR,cancel_amount_requested,13,4,69.23%
+UAR,channel,16,5,68.75%
+UAR,currency,19,7,63.16%
+UAR,date,16,7,56.25%
+UAR,from.account_number,14,4,71.43%
+UAR,from.bank,16,6,62.50%
+UAR,from.name,15,5,66.67%
+UAR,to.account_number,17,6,64.71%
+UAR,to.bank,17,8,52.94%
+UAR,to.name,17,8,52.94%

@@ -1,0 +1,34 @@
+﻿Type,Field,total,mismatch_count,accuracy_rate
+ADCC,fraud_type,4,0,100.00%
+ADCC,police_reference,4,2,50.00%
+ADCC,police_team,4,0,100.00%
+HSBC Referral,amount,1,1,0.00%
+HSBC Referral,can_be_located,1,1,0.00%
+HSBC Referral,channel,1,1,0.00%
+HSBC Referral,currency,1,1,0.00%
+HSBC Referral,date,1,1,0.00%
+HSBC Referral,fraud_type,18,4,77.78%
+HSBC Referral,from.account_number,1,1,0.00%
+HSBC Referral,from.bank,1,1,0.00%
+HSBC Referral,from.name,1,1,0.00%
+HSBC Referral,to.account_number,1,1,0.00%
+HSBC Referral,to.bank,1,1,0.00%
+HSBC Referral,to.name,1,1,0.00%
+ODFT,amount,1,1,0.00%
+ODFT,channel,1,1,0.00%
+ODFT,currency,1,1,0.00%
+ODFT,date,1,1,0.00%
+ODFT,fraud_type,4,2,50.00%
+ODFT,from.account_number,1,1,0.00%
+ODFT,from.name,1,1,0.00%
+ODFT,to.account_number,1,1,0.00%
+ODFT,to.name,1,1,0.00%
+Police Letter,fraud_type,12,0,100.00%
+Police Letter,police_reference,12,4,66.67%
+Police Letter,police_team,12,0,100.00%
+Search Warrant,contact_person,6,2,66.67%
+Search Warrant,fraud_type,6,6,0.00%
+Search Warrant,police_reference,6,2,66.67%
+Search Warrant,police_team,6,1,83.33%
+Search Warrant,writ_no,6,2,66.67%
+UAR,fraud_type,16,14,12.50%

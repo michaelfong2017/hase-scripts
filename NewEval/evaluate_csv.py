@@ -253,7 +253,13 @@ def aggregate_by_type_and_field(df):
 def main():
     df = pd.read_csv(INPUT_PATH)
     gt_col = "Ground Truth"
-    job_col = next(c for c in df.columns if c.startswith("job_"))
+    # Look for job_ column first, then fallback to -Instruct column
+    job_cols = [c for c in df.columns if c.startswith("job_")]
+    if not job_cols:
+        job_cols = [c for c in df.columns if c.endswith("-Instruct")]
+    if not job_cols:
+        raise ValueError(f"No LLM response column found. Expected column starting with 'job_' or ending with '-Instruct'. Available columns: {list(df.columns)}")
+    job_col = job_cols[0]
 
     global_rows = []
     tx_rows = []
