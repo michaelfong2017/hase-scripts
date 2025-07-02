@@ -22,34 +22,44 @@ class FieldMapper:
         return self.mappings, self.field_types
     
     def _normalize_name(self, name_str: str) -> str:
-        """Normalize name to standard format for consistent mapping"""
+        """Normalize name using regex patterns for consistent mapping"""
         if not name_str:
             return ""
         
-        # Convert to uppercase for consistency
+        # Convert to uppercase for consistency and strip
         normalized = name_str.upper().strip()
         
-        # Remove titles and prefixes
-        normalized = re.sub(r'\b(MR\.?|MRS\.?|MS\.?|MISS|DR\.?|PROF\.?)\s*', '', normalized)
+        # Step 1: Remove titles and prefixes (more explicit pattern)
+        normalized = re.sub(r'^(MR\.?|MRS\.?|MS\.?|MISS|DR\.?|PROF\.?)\s+', '', normalized, flags=re.IGNORECASE)
         
-        # Remove suffixes like "AND OTHERS"
-        normalized = re.sub(r'\s+(AND\s+OTHERS?|& OTHERS?|ET AL\.?).*$', '', normalized)
+        # Step 2: Remove suffixes like "AND OTHERS"
+        normalized = re.sub(r'\s+(AND\s+OTHERS?|& OTHERS?|ET AL\.?).*$', '', normalized, flags=re.IGNORECASE)
         
-        # Remove extra whitespace and normalize spacing
-        normalized = re.sub(r'\s+', ' ', normalized).strip()
-        
-        # Remove commas and normalize spacing around them
+        # Step 3: Remove commas and normalize spacing around them
         normalized = re.sub(r'\s*,\s*', ' ', normalized)
         
-        # Handle initials - convert single letters to full format
-        # e.g., "CHAN T M" -> "CHAN TAI MAN" (if we have a mapping)
+        # Step 4: Normalize multiple spaces to single space
+        normalized = re.sub(r'\s+', ' ', normalized)
+        
+        # Step 5: Handle concatenated names - check if we have surname + long concatenated name
         parts = normalized.split()
-        if len(parts) >= 2:
-            # If last parts are single letters, they might be initials
-            if len(parts) >= 3 and all(len(part) == 1 for part in parts[1:]):
-                # This looks like "SURNAME INITIAL INITIAL" format
-                # We'll keep it as is for now, but mark it for potential expansion
-                pass
+        if len(parts) == 2:
+            surname = parts[0]
+            given_names = parts[1]
+            
+            # If given names are concatenated (6+ chars, no spaces), try to split
+            if len(given_names) >= 6:
+                # Apply splitting patterns
+                for split_pattern, split_replacement in NAME_SPLIT_PATTERNS:
+                    new_given = re.sub(split_pattern, split_replacement, given_names)
+                    if new_given != given_names:
+                        given_names = new_given
+                        break
+                
+                normalized = f"{surname} {given_names}"
+        
+        # Final cleanup
+        normalized = re.sub(r'\s+', ' ', normalized).strip()
         
         return normalized
 
@@ -104,12 +114,28 @@ class FieldMapper:
                     self.field_types[value] = 'dates'
                     
                 elif key == "amount" and isinstance(value, (str, int, float)):
-                    unique_values['amounts'].add(str(value))
-                    self.field_types[str(value)] = 'amounts'
+                    # Clean and normalize the amount string for collection
+                    amount_str = str(value).strip()
+                    
+                    # Remove currency prefixes and clean formatting
+                    clean_amount = re.sub(r'^(HKD|USD|CNY|SGD)\s*', '', amount_str, flags=re.IGNORECASE)
+                    clean_amount = clean_amount.replace(',', '').strip()
+                    
+                    # Store the original format for mapping
+                    unique_values['amounts'].add(amount_str)
+                    self.field_types[amount_str] = 'amounts'
                     
                 elif key == "cancel_amount_requested" and isinstance(value, (str, int, float)):
-                    unique_values['cancel_amount_requested'].add(str(value))
-                    self.field_types[str(value)] = 'cancel_amount_requested'
+                    # Clean and normalize the cancel amount string for collection
+                    amount_str = str(value).strip()
+                    
+                    # Remove currency prefixes and clean formatting for processing
+                    clean_amount = re.sub(r'^(HKD|USD|CNY|SGD)\s*', '', amount_str, flags=re.IGNORECASE)
+                    clean_amount = clean_amount.replace(',', '').strip()
+                    
+                    # Store the original format for mapping
+                    unique_values['cancel_amount_requested'].add(amount_str)
+                    self.field_types[amount_str] = 'cancel_amount_requested'
                     
                 elif key == "name" and isinstance(value, str):
                     # Normalize the name for consistent mapping
@@ -118,13 +144,22 @@ class FieldMapper:
                     # Track all variants of this normalized name
                     if normalized_name not in self.name_variants:
                         self.name_variants[normalized_name] = []
-                    self.name_variants[normalized_name].append(value)
                     
-                    # Only add the normalized name to unique_values (not the original)
+                    # Add the original value as a variant
+                    if value not in self.name_variants[normalized_name]:
+                        self.name_variants[normalized_name].append(value)
+                    
+                    # Add the normalized name itself as a variant (if different from original)
+                    if normalized_name != value and normalized_name not in self.name_variants[normalized_name]:
+                        self.name_variants[normalized_name].append(normalized_name)
+                    
+                    # IMPORTANT: Only add the normalized name to unique_values (not the original)
                     unique_values['names'].add(normalized_name)
                     
                     # Map ALL variants to the same field type
                     self.field_types[value] = 'names'
+                    if normalized_name != value:
+                        self.field_types[normalized_name] = 'names'
                     
                 elif key == "account_number" and isinstance(value, str):
                     unique_values['account_numbers'].add(value)
@@ -195,6 +230,9 @@ class FieldMapper:
             if normalized_name in self.name_variants:
                 for variant in self.name_variants[normalized_name]:
                     self.mappings[variant] = replacement_name
+            
+            # ADDED: Ensure the normalized name itself is also mapped
+            self.mappings[normalized_name] = replacement_name
         
         # Generate account number mappings
         for account in unique_values['account_numbers']:
@@ -274,32 +312,65 @@ class FieldMapper:
     def _randomize_amount(self, amount_str: str) -> str:
         """Randomize amount to numeric format without currency, preserving decimal format"""
         try:
+            # Handle currency prefixes
+            currency_prefix = ""
+            clean_str = amount_str.strip()
+            
+            # Extract currency prefix if present
+            currency_match = re.match(r'^(HKD|USD|CNY|SGD)\s*', clean_str, re.IGNORECASE)
+            if currency_match:
+                currency_prefix = currency_match.group(1).upper() + " "
+                clean_str = clean_str[len(currency_match.group(0)):]
+            
             # Remove commas and parse numeric value
-            clean_str = amount_str.replace(',', '')
+            clean_str = clean_str.replace(',', '')
             numeric_value = float(clean_str)
             
             # Generate new value (50% to 150% of original)
             variation = random.uniform(0.5, 1.5)
             new_value = numeric_value * variation
             
-            # Check if original was integer or float format
+            # Format the result
             if '.' in clean_str:
                 # Original was float, preserve decimal format
-                return str(round(new_value, 2))
+                formatted_amount = f"{new_value:.2f}"
             else:
                 # Original was integer, return as integer
-                return str(int(new_value))
-                
+                formatted_amount = str(int(new_value))
+            
+            # Add commas for thousands if original had them
+            if ',' in amount_str:
+                # Add comma formatting
+                parts = formatted_amount.split('.')
+                parts[0] = f"{int(parts[0]):,}"
+                formatted_amount = '.'.join(parts)
+            
+            # Return with original currency prefix if it existed
+            return currency_prefix + formatted_amount
+            
         except:
-            # Fallback to random number
+            # Fallback to random number with same format as original
             random_value = random.uniform(1000, 100000)
-            return str(round(random_value, 2))
+            if 'HKD' in amount_str.upper():
+                return f"HKD {random_value:,.2f}"
+            else:
+                return f"{random_value:.2f}"
 
     def _randomize_cancel_amount(self, amount_str: str, all_amounts: List[float]) -> str:
-        """Randomize cancel_amount_requested with constraints, preserving decimal format"""
+        """Randomize cancel_amount_requested with constraints, preserving decimal format and currency"""
         try:
-            # Parse the original cancel amount
-            clean_str = amount_str.replace(',', '')
+            # Handle currency prefixes
+            currency_prefix = ""
+            clean_str = amount_str.strip()
+            
+            # Extract currency prefix if present
+            currency_match = re.match(r'^(HKD|USD|CNY|SGD)\s*', clean_str, re.IGNORECASE)
+            if currency_match:
+                currency_prefix = currency_match.group(1).upper() + " "
+                clean_str = clean_str[len(currency_match.group(0)):]
+            
+            # Remove commas and parse numeric value
+            clean_str = clean_str.replace(',', '')
             original_value = float(clean_str)
             
             # Find the reference amount (lowest amount for safety)
@@ -320,22 +391,36 @@ class FieldMapper:
                 # Generate new value between 0.01 and reference_amount
                 new_value = random.uniform(0.01, reference_amount)
             
-            # Check if original was integer or float format
+            # Format the result
             if '.' in clean_str:
                 # Original was float, preserve decimal format
-                return str(round(new_value, 2))
+                formatted_amount = f"{new_value:.2f}"
             else:
                 # Original was integer, return as integer if new value is whole
                 if new_value.is_integer():
-                    return str(int(new_value))
+                    formatted_amount = str(int(new_value))
                 else:
-                    return str(round(new_value, 2))
-                
+                    formatted_amount = f"{new_value:.2f}"
+            
+            # Add commas for thousands if original had them
+            if ',' in amount_str:
+                # Add comma formatting
+                parts = formatted_amount.split('.')
+                parts[0] = f"{int(float(parts[0])):,}"
+                formatted_amount = '.'.join(parts)
+            
+            # Return with original currency prefix if it existed
+            return currency_prefix + formatted_amount
+            
         except:
-            # Fallback to a reasonable default
+            # Fallback to a reasonable default with same format as original
             fallback_amount = min(all_amounts) if all_amounts else 1000
             random_value = random.uniform(0.01, fallback_amount)
-            return str(round(random_value, 2))
+            
+            if 'HKD' in amount_str.upper():
+                return f"HKD {random_value:,.2f}"
+            else:
+                return f"{random_value:.2f}"
     
     def _randomize_name(self, name: str) -> str:
         """Randomize name with pattern matching and normalization"""
@@ -346,7 +431,7 @@ class FieldMapper:
         normalized_name = self._normalize_name(name)
         
         # Basic validation - skip if contains special characters
-        if not re.match(r'^[A-Za-z0-9\s,\.&\-\']+$', name):
+        if not re.match(NAME_VALIDATION_PATTERN, name):
             return name
         
         # Find appropriate replacement

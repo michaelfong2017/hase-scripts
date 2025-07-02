@@ -175,6 +175,47 @@ DATE_FORMAT_PATTERNS = [
     (r'\b(\d{1,2})\.(\d{1,2})\.(\d{4})\b', '%d.%m.%Y'),  # DD.MM.YYYY
 ]
 
+# Enhanced name validation pattern to handle more cases
+NAME_VALIDATION_PATTERN = r'^[A-Za-z0-9\s,\.&\-\']+$'
+
+# Add these regex patterns to pattern.py
+NAME_NORMALIZATION_PATTERNS = [
+    # Remove titles and prefixes (case insensitive, flexible spacing)
+    (r'\b(MR\.?|MRS\.?|MS\.?|MISS|DR\.?|PROF\.?)\s+', ''),
+    
+    # Remove suffixes like "AND OTHERS" (case insensitive)
+    (r'\s+(AND\s+OTHERS?|& OTHERS?|ET AL\.?).*$', ''),
+    
+    # Normalize multiple spaces to single space
+    (r'\s+', ' '),
+    
+    # Remove commas and spaces around them
+    (r'\s*,\s*', ' '),
+    
+    # Handle concatenated names - split likely concatenated given names
+    # This pattern looks for surname followed by concatenated names (6+ chars, no spaces)
+    (r'^([A-Z]+)\s+([A-Z]{6,})$', r'\1 \2_SPLIT'),
+]
+
+# Common name splitting patterns for concatenated names
+NAME_SPLIT_PATTERNS = [
+    # Split at consonant-vowel boundaries for likely name breaks
+    (r'([A-Z][AEIOU]*[BCDFGHJKLMNPQRSTVWXYZ])([A-Z][AEIOU])', r'\1 \2'),
+    
+    # Split common Chinese name patterns
+    (r'(TAI)(MAN|MING|WAI|KEUNG)', r'\1 \2'),
+    (r'(SIU)(MING|MAN|WAI|KEUNG)', r'\1 \2'),
+    (r'(KA)(WAI|MAN|MING)', r'\1 \2'),
+    (r'(HOI)(SHAN|MAN)', r'\1 \2'),
+    (r'(WEI)(HONG|MING)', r'\1 \2'),
+    (r'(MING)(FUNG)', r'\1 \2'),
+    (r'(HOK)(YIN)', r'\1 \2'),
+    (r'(KAI)(CHUNG)', r'\1 \2'),
+    (r'(WING)(KEI)', r'\1 \2'),
+    (r'(CHI)(KEUNG)', r'\1 \2'),
+    (r'(MEI)(LIN)', r'\1 \2'),
+]
+
 # Replacement options - using template randomization with {num}, {code}, {digit}
 REPLACEMENT_OPTIONS = {
     'police_references': [
