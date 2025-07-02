@@ -13,14 +13,21 @@ class TextReplacer:
     def replace_in_text(self, text: str) -> str:
         """Replace values in plain text using placeholder approach"""
         modified_text = text
+        
+        # ADDED: Remove UAR Involved Parties block for all document types
+        marker = "Involved Parties\nIndividual Information:"
+        index = modified_text.find(marker)
+        if index != -1:
+            modified_text = modified_text[:index].rstrip('\n')
+        
+        # ... rest of your existing replacement logic
         replacement_map = {}
         
         # Sort mappings by length (longest first) to avoid partial replacements
         sorted_mappings = sorted(self.mappings.items(), key=lambda x: len(x[0]), reverse=True)
         
-        # ADDED: Also try to match normalized versions of text patterns
         # Find amount patterns in text and normalize them for matching
-        amount_patterns = re.finditer(r'(HKD|USD|CNY|SGD)?\s*[\d,]+\.?\d*', text, re.IGNORECASE)
+        amount_patterns = re.finditer(r'(HKD|USD|CNY|SGD)?\s*[\d,]+\.?\d*', modified_text, re.IGNORECASE)
         
         for match in amount_patterns:
             original_amount = match.group(0)

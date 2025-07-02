@@ -114,8 +114,10 @@ class FieldMapper:
                 
                 # Record field type when collecting values
                 if key == "date" and isinstance(value, str):
-                    unique_values['dates'].add(value)
-                    self.field_types[value] = 'dates'
+                    # Skip date randomization for specific document types
+                    if self.document_type not in ['UAR', 'ODFT', 'HSBC Referral']:
+                        unique_values['dates'].add(value)
+                        self.field_types[value] = 'dates'
                     
                 elif key == "amount" and isinstance(value, (str, int, float)):
                     # Clean and normalize the amount string for collection
