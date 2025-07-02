@@ -786,7 +786,7 @@ def main():
             trust_remote_code=True,
             device_map=device_map,
             low_cpu_mem_usage=True,
-            max_memory={i: "72GB" for i in range(num_gpus)},  # Reduced from 12GB to 8GB
+            max_memory={i: "64GB" for i in range(num_gpus)},  # Reduced from 12GB to 8GB
         )
 
         metrics_tracker.end_step("model_loading")
