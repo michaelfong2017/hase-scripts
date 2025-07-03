@@ -1,0 +1,10 @@
+Transaction Date (value),Account ID,Counterparty Name,Counterparty ID,Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Beneficiary Name,Originator Account Number,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount
+2025-06-10,111-111111-107,CHUANG HUNG,666-666666-106,HKD,3500,C,Hang Seng Bank Ltd.,The Hongkong and Shanghai Banking Corporation Limited,MOK YUN,666-666666-106,CUTF,Default transaction,,,3500
+2025-06-12,111-111111-107,CHI FU,666-666666-107,HKD,10900,C,Hang Seng Bank Ltd.,The Hongkong and Shanghai Banking Corporation Limited,MOK YUN,666-666666-107,CUTF,Default transaction,,,10900
+2025-06-12,111-111111-107,POON TO,333-333333-108,HKD,5702,C,Hang Seng Bank Ltd.,The Hongkong and Shanghai Banking Corporation Limited,MOK YUN,333-333333-108,CUTF,Default transaction,,,5702
+2025-06-13,111-111111-107,MOK YUN,333-333333-107,HKD,20100,D,Ant Bank (Hong Kong) Limited,Hang Seng Bank Ltd.,MR MOK YUN,111-111111-107,DWTF,Default transaction,,,20100
+2025-06-13,111-111111-107,MOK YUN,333-333333-107,HKD,139401,D,Ant Bank (Hong Kong) Limited,Hang Seng Bank Ltd.,MR MOK YUN,111-111111-107,DWTF,Default transaction,,,139401
+2025-06-13,111-111111-107,PANG YA SHI,666-666666-105,HKD,139401,C,Hang Seng Bank Ltd.,Bank of China (Hong Kong) Limited,MOK YUN,666-666666-105,CUTF,Default transaction,,,139401
+2025-06-13,111-111111-107,HUANG JUAN,666-666666-101,HKD,41701,C,Hang Seng Bank Ltd.,STANDARD CHARTERED BANK (HONG KONG) LIMITED,MOK YUN,666-666666-101,CUTF,Default transaction,,STANDARD CHARTERED BANK (HONG KONG) LIMITED,41701
+2025-06-13,111-111111-107,CHI FU,666-666666-107,HKD,39100,C,Hang Seng Bank Ltd.,The Hongkong and Shanghai Banking Corporation Limited,MOK YUN,666-666666-107,CUTF,Default transaction,,,39100
+2025-06-13,111-111111-107,MOK YUN,333-333333-117,HKD,80800,D,Livi Bank Limited,Hang Seng Bank Ltd.,MR MOK YUN,111-111111-107,DWTF,Default transaction,,,80800

@@ -1,0 +1,4 @@
+Transaction Date (value),Account ID,Counterparty Name,Counterparty ID,Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Beneficiary Name,Originator Account Number,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount
+2025-04-14,111-111111-109,YIP KAI DONG,222-222222-109,HKD,120200,C,,,SUN YEUNG,222-222222-109,CUTF,DCP UNRELATED ELECTRONIC TRANSFER CREDIT FROM PIB,,,120200
+2025-04-14,111-111111-109,FONG LAI,222-222222-110,HKD,8300,C,,,SUN YEUNG,222-222222-110,CUTF,DCP UNRELATED ELECTRONIC TRANSFER CREDIT FROM PIB,,,8300
+2025-04-15,111-111111-109,CHUN MING,444-4444444-108,HKD,60000,C,Hang Seng Bank Ltd.,Bank of China (Hong Kong) Limited,SUN YEUNG,444-4444444-108,CUTF,DCP UNRELATED ELECTRONIC TRANSFER CREDIT FROM PIB,,,60000

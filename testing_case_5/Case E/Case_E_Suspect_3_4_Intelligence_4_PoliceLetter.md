@@ -26,7 +26,22 @@ I write to you in connection with the following bank account, which is believed 
 <table>
 <thead><tr><th colspan='3'>Account Details</th></tr></thead>
 <tbody>
-<tr><th>Account Name:</th><td colspan='2'>111111111104</td></tr><tr><th>Account Number:</th><td colspan='2'>CHONG MAN</td></tr>
+<tr><th>Account Name:</th><td colspan='2'>CHIU YAN</td></tr><tr><th>Account Number:</th><td colspan='2'>111111111103</td></tr>
+<tr><th colspan='3'>Suspected nature of transactions:</th><tr><tr><td colspan='3'> - [X] Might have been used in receicing proceeds of crime</td></tr><tr><td colspan='3'> - [ ] Might have been used to receive funds related to terrorist financing</td></tr><tr><td colspan='3'> - [ ] Exhibited transaction patterns which were incommensurate with holder's background</td></tr><tr><td colspan='3'> - [ ] Others (please specify) </td></tr>
+<tr><th colspan='3'>If the predicate offence is deception related, please state the type of deception:</th><tr><tr><td colspan='3'> - [X] Telephone Deception</td></tr><tr><td colspan='3'> - [ ] E-shopping Fraud</td></tr><tr><td colspan='3'> - [ ] Romance Scam</td></tr><tr><td colspan='3'> - [ ] Investment Scam</td></tr><tr><td colspan='3'> - [ ] Employment Fraud</td></tr><tr><td colspan='3'> - [ ] Others (please specify) </td></tr><tr><td colspan='3'>(please tick if appropriate)</td></tr>
+<tr><th colspan='3'>Transaction Details:</th><tr><tr><th>Date</th><th>Amount</th><th>Transferor's Bank and Account</th></tr>
+<tr><td>2025-03-07</td><td>1000</td><td>Cash Nil</td></tr>
+<tr><th colspan='3'>Case Summary:</th></tr><tr><td colspan='3'>On 2025-03-11, a male reported to police that on 2025-01-07, he received a telephone call purportedly made from the Financial institution and transferred a total of HK$9,800 into three accounts (including the above listed transactions) as instructed to repayment.</td></tr>
+<tr><th colspan='3'>Notification Letter issued before on the same case:</th></tr><tr><td colspan='3'> [ ] Yes
+
+Under case reference: dated </td></tr>
+</tbody>
+</table>
+
+<table>
+<thead><tr><th colspan='3'>Account Details</th></tr></thead>
+<tbody>
+<tr><th>Account Name:</th><td colspan='2'>CHONG MAN</td></tr><tr><th>Account Number:</th><td colspan='2'>111111111104</td></tr>
 <tr><th colspan='3'>Suspected nature of transactions:</th><tr><tr><td colspan='3'> - [X] Might have been used in receicing proceeds of crime</td></tr><tr><td colspan='3'> - [ ] Might have been used to receive funds related to terrorist financing</td></tr><tr><td colspan='3'> - [ ] Exhibited transaction patterns which were incommensurate with holder's background</td></tr><tr><td colspan='3'> - [ ] Others (please specify) </td></tr>
 <tr><th colspan='3'>If the predicate offence is deception related, please state the type of deception:</th><tr><tr><td colspan='3'> - [X] Telephone Deception</td></tr><tr><td colspan='3'> - [ ] E-shopping Fraud</td></tr><tr><td colspan='3'> - [ ] Romance Scam</td></tr><tr><td colspan='3'> - [ ] Investment Scam</td></tr><tr><td colspan='3'> - [ ] Employment Fraud</td></tr><tr><td colspan='3'> - [ ] Others (please specify) </td></tr><tr><td colspan='3'>(please tick if appropriate)</td></tr>
 <tr><th colspan='3'>Transaction Details:</th><tr><tr><th>Date</th><th>Amount</th><th>Transferor's Bank and Account</th></tr>

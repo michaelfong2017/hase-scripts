@@ -1,0 +1,5 @@
+File,Transaction_Date,Originator_Account,Beneficiary_Account,Amount,C_Record_Row,D_Record_Row,C_Record_Fraud_Payment,D_Record_Fraud_Payment,C_Record_Subject_Type,D_Record_Subject_Type,Action
+Case_A_transaction_records.csv,23/4/2025,444-4444444-882,444-4444444-001,80000,2,3,,,Beneficiary,Originator,"D record dropped, C record kept"
+Case_B_transaction_records.csv,2025-04-14,222-222222-110,111-111111-109,8300,6,2,,,Beneficiary,Originator,"D record dropped, C record kept"
+Case_D_transaction_records.csv,2025-04-29,222-222222-102,111-111111-103,49873,9,6,,,Beneficiary,Originator,"D record dropped, C record kept"
+Case_D_transaction_records.csv,2025-04-29,222-222222-882,222-222222-102,80000,7,8,,,Beneficiary,Originator,"D record dropped, C record kept"

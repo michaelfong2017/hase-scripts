@@ -1,0 +1,16 @@
+File,Row,Column,OriginalValue
+Case_A_Suspect_1_transaction_record.csv,2,Counterparty Name,COUNTERPARTY_NOT_STATED 111-111111-101 - CARD TXN CREDIT-
+Case_A_Suspect_1_transaction_record.csv,2,Counterparty ID,COUNTERPARTY_NOT_STATED -111-111111-101 - CARD TXN CREDIT
+Case_A_Suspect_1_transaction_record.csv,2,Originator Account Number,nan
+Case_E_Suspect_4_transaction_record.csv,2,Counterparty Name,COUNTERPARTY_NOT_STATED -111111111104- CASH TXN CREDIT
+Case_E_Suspect_4_transaction_record.csv,2,Counterparty ID,COUNTERPARTY_NOT_STATED -111111111104- CASH TXN CREDIT
+Case_E_Suspect_4_transaction_record.csv,2,Originator Account Number,COUNTERPARTY_NOT_STATED -111111111104- CASH TXN CREDIT
+Case_E_Suspect_4_transaction_record.csv,6,Counterparty Name,COUNTERPARTY_NOT_STATED -111111111104- CASH TXN CREDIT
+Case_E_Suspect_4_transaction_record.csv,6,Counterparty ID,COUNTERPARTY_NOT_STATED -111111111104- CASH TXN CREDIT
+Case_E_Suspect_4_transaction_record.csv,6,Originator Account Number,COUNTERPARTY_NOT_STATED -111111111104- CASH TXN CREDIT
+Case_E_Suspect_4_transaction_record.csv,7,Counterparty Name,COUNTERPARTY_NOT_STATED -111111111104- CASH TXN CREDIT
+Case_E_Suspect_4_transaction_record.csv,7,Counterparty ID,COUNTERPARTY_NOT_STATED -111111111104- CASH TXN CREDIT
+Case_E_Suspect_4_transaction_record.csv,7,Originator Account Number,COUNTERPARTY_NOT_STATED -111111111104- CASH TXN CREDIT
+Case_E_Suspect_3_transaction_record.csv,3,Counterparty Name,COUNTERPARTY_NOT_STATED -111111111103- CASH TXN CREDIT
+Case_E_Suspect_3_transaction_record.csv,3,Counterparty ID,COUNTERPARTY_NOT_STATED -111111111103- CASH TXN CREDIT
+Case_E_Suspect_3_transaction_record.csv,3,Originator Account Number,COUNTERPARTY_NOT_STATED -111111111103- CASH TXN CREDIT

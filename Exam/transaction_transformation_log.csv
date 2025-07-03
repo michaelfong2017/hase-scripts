@@ -1,0 +1,56 @@
+File,Row,Fraud_Payment,Debit_Credit_Indicator,Dropped_Account_ID,Dropped_Counterparty_Name,Dropped_Counterparty_ID,Added_Originator_Name,Added_Beneficiary_Account_Number,Added_Subject_Type,Preservation_Actions,Conflicts_Resolved,Conflict_Type,Original_Value,Dropped_Value,Action
+Case_A_transaction_records.csv,2,,C,444-4444444-001,,444-4444444-882,,444-4444444-001,Beneficiary,,Replaced Originator Account Number 'nan' with Counterparty ID '444-4444444-882',,,,
+Case_A_transaction_records.csv,3,,D,444-4444444-882,MS        YAN          MEI MEI        AND OTHERS,444-4444444-001,,444-4444444-001,Originator,,Replaced Originator Account Number 'nan' with Account ID '444-4444444-882'; Replaced Beneficiary Name 'nan' with Counterparty Name 'MS        YAN          MEI MEI        AND OTHERS',,,,
+Case_A_transaction_records.csv,4,,D,444-4444444-001,COUNTERPARTY_NOT_STATED -444-4444444-001- CARD TXN DEBIT,COUNTERPARTY_NOT_STATED -444-4444444-001- CARD TXN DEBIT,,COUNTERPARTY_NOT_STATED -444-4444444-001- CARD TXN DEBIT,Originator,,Replaced Originator Account Number 'nan' with Account ID '444-4444444-001'; Replaced Beneficiary Name 'nan' with Counterparty Name 'COUNTERPARTY_NOT_STATED -444-4444444-001- CARD TXN DEBIT',,,,
+Case_A_transaction_records.csv,5,,C,111-111111-101,,,,111-111111-101,Beneficiary,,,,,,
+Case_E_transaction_records.csv,2,,C,111111111101,LUI SAN SAN,66666666605,LUI SAN SAN,111111111101,Beneficiary,,,,,,
+Case_E_transaction_records.csv,3,,C,333333333101,CHEUNG TAK SHING,222222222101,CHEUNG TAK SHING,333333333101,Beneficiary,,,,,,
+Case_E_transaction_records.csv,4,,C,111111111101,CHEUNG TAK SHING,444444444101,CHEUNG TAK SHING,111111111101,Beneficiary,,,,,,
+Case_E_transaction_records.csv,5,,C,111-111111-102,TANG WING,66666666606,TANG WING,111-111111-102,Beneficiary,,,,,,
+Case_E_transaction_records.csv,6,,C,111-111111-102,TSANG SIU MING,66666666602,TSANG SIU MING,111-111111-102,Beneficiary,,,,,,
+Case_E_transaction_records.csv,7,,C,111-111111-102,TANG WING,66666666606,TANG WING,111-111111-102,Beneficiary,,,,,,
+Case_E_transaction_records.csv,8,,C,111111111104,,,,111111111104,Beneficiary,,,,,,
+Case_E_transaction_records.csv,9,,C,111111111104,ZHAO SUIMEN,66666666607,ZHAO SUIMEN,111111111104,Beneficiary,,,,,,
+Case_E_transaction_records.csv,10,,C,111111111104,YAN MEI MEI,222222222102,YAN MEI MEI,111111111104,Beneficiary,,,,,,
+Case_E_transaction_records.csv,11,,C,111111111104,HUANG JUAN,222222222105,HUANG JUAN,111111111104,Beneficiary,,,,,,
+Case_E_transaction_records.csv,12,,C,111111111104,,,,111111111104,Beneficiary,,,,,,
+Case_E_transaction_records.csv,13,,C,111111111104,,,,111111111104,Beneficiary,,,,,,
+Case_E_transaction_records.csv,14,,C,111111111103,LUI SAN SAN,66666666605,LUI SAN SAN,111111111103,Beneficiary,,,,,,
+Case_E_transaction_records.csv,15,,C,111111111103,,,,111111111103,Beneficiary,,,,,,
+Case_E_transaction_records.csv,16,,C,111111111103,YAN MEI MEI,222222222102,YAN MEI MEI,111111111103,Beneficiary,,,,,,
+Case_E_transaction_records.csv,17,,C,111111111103,XIE PANGAN,66666666603,XIE PANGAN,111111111103,Beneficiary,,,,,,
+Case_B_transaction_records.csv,2,,D,222-222222-110,SUN YEUNG,111-111111-109,,111-111111-109,Originator,,,,,,
+Case_B_transaction_records.csv,3,,C,111-111111-110,CHUN MING,444-4444444-108,CHUN MING,111-111111-110,Beneficiary,,,,,,
+Case_B_transaction_records.csv,4,,C,111-111111-110,CHEUNG TAK SHING,444-4444444-101,CHEUNG TAK SHING,111-111111-110,Beneficiary,,,,,,
+Case_B_transaction_records.csv,5,,C,111-111111-109,YIP KAI DONG,222-222222-109,YIP KAI DONG,111-111111-109,Beneficiary,,,,,,
+Case_B_transaction_records.csv,6,,C,111-111111-109,FONG LAI,222-222222-110,FONG LAI,111-111111-109,Beneficiary,,,,,,
+Case_B_transaction_records.csv,7,,C,111-111111-109,CHUN MING,444-4444444-108,CHUN MING,111-111111-109,Beneficiary,,,,,,
+Case_D_transaction_records.csv,2,,C,111-111111-102,YEUNG KAI,66666666601,YEUNG KAI,111-111111-102,Beneficiary,,,,,,
+Case_D_transaction_records.csv,3,,C,111-111111-102,TANG WING,66666666606,TANG WING,111-111111-102,Beneficiary,,,,,,
+Case_D_transaction_records.csv,4,,C,111-111111-101,LUI SAN SAN,66666666605,LUI SAN SAN,111-111111-101,Beneficiary,,,,,,
+Case_D_transaction_records.csv,5,,C,111-111111-101,CHEUNG TAK SHING,444-4444444-101,CHEUNG TAK SHING,111-111111-101,Beneficiary,,,,,,
+Case_D_transaction_records.csv,6,,D,222-222222-102,MR CHIU YAN,111-111111-103,,111-111111-103,Originator,,,,,,
+Case_D_transaction_records.csv,7,,C,222-222222-102,,222-222222-882,,222-222222-102,Beneficiary,,Replaced Originator Account Number 'nan' with Counterparty ID '222-222222-882',,,,
+Case_D_transaction_records.csv,8,,D,222-222222-882,MS        YAN          MEI MEI        AND OTHERS,222-222222-102,,222-222222-102,Originator,,Replaced Originator Account Number 'nan' with Account ID '222-222222-882'; Replaced Beneficiary Name 'nan' with Counterparty Name 'MS        YAN          MEI MEI        AND OTHERS',,,,
+Case_D_transaction_records.csv,9,,C,111-111111-103,YAN MEI MEI,222-222222-102,YAN MEI MEI,111-111111-103,Beneficiary,,,,,,
+Case_D_transaction_records.csv,10,,C,111-111111-103,ZHAO SUIMEN,66666666607,ZHAO SUIMEN,111-111111-103,Beneficiary,,,,,,
+Case_C_transaction_records.csv,2,,C,111-111111-107,CHUANG HUNG,666-666666-106,CHUANG HUNG,111-111111-107,Beneficiary,,,,,,
+Case_C_transaction_records.csv,3,,C,111-111111-107,CHI FU,666-666666-107,CHI FU,111-111111-107,Beneficiary,,,,,,
+Case_C_transaction_records.csv,4,,C,111-111111-107,POON TO,333-333333-108,POON TO,111-111111-107,Beneficiary,,,,,,
+Case_C_transaction_records.csv,5,,D,111-111111-107,MOK YUN,333-333333-107,,333-333333-107,Originator,,Replaced Beneficiary Name 'MR MOK YUN' with Counterparty Name 'MOK YUN',,,,
+Case_C_transaction_records.csv,6,,D,111-111111-107,MOK YUN,333-333333-107,,333-333333-107,Originator,,Replaced Beneficiary Name 'MR MOK YUN' with Counterparty Name 'MOK YUN',,,,
+Case_C_transaction_records.csv,7,,C,111-111111-107,PANG YA SHI,666-666666-105,PANG YA SHI,111-111111-107,Beneficiary,,,,,,
+Case_C_transaction_records.csv,8,,C,111-111111-107,HUANG JUAN,666-666666-101,HUANG JUAN,111-111111-107,Beneficiary,,,,,,
+Case_C_transaction_records.csv,9,,C,111-111111-107,CHI FU,666-666666-107,CHI FU,111-111111-107,Beneficiary,,,,,,
+Case_C_transaction_records.csv,10,,D,111-111111-107,MOK YUN,333-333333-117,,333-333333-117,Originator,,Replaced Beneficiary Name 'MR MOK YUN' with Counterparty Name 'MOK YUN',,,,
+Case_A_transaction_records.csv,2,,,,,,,,,,,Originator Account Number vs Counterparty ID,,444-4444444-882,Replaced with dropped value
+Case_A_transaction_records.csv,3,,,,,,,,,,,Originator Account Number vs Account ID,,444-4444444-882,Replaced with dropped value
+Case_A_transaction_records.csv,3,,,,,,,,,,,Beneficiary Name vs Counterparty Name,,MS        YAN          MEI MEI        AND OTHERS,Replaced with dropped value
+Case_A_transaction_records.csv,4,,,,,,,,,,,Originator Account Number vs Account ID,,444-4444444-001,Replaced with dropped value
+Case_A_transaction_records.csv,4,,,,,,,,,,,Beneficiary Name vs Counterparty Name,,COUNTERPARTY_NOT_STATED -444-4444444-001- CARD TXN DEBIT,Replaced with dropped value
+Case_D_transaction_records.csv,7,,,,,,,,,,,Originator Account Number vs Counterparty ID,,222-222222-882,Replaced with dropped value
+Case_D_transaction_records.csv,8,,,,,,,,,,,Originator Account Number vs Account ID,,222-222222-882,Replaced with dropped value
+Case_D_transaction_records.csv,8,,,,,,,,,,,Beneficiary Name vs Counterparty Name,,MS        YAN          MEI MEI        AND OTHERS,Replaced with dropped value
+Case_C_transaction_records.csv,5,,,,,,,,,,,Beneficiary Name vs Counterparty Name,MR MOK YUN,MOK YUN,Replaced with dropped value
+Case_C_transaction_records.csv,6,,,,,,,,,,,Beneficiary Name vs Counterparty Name,MR MOK YUN,MOK YUN,Replaced with dropped value
+Case_C_transaction_records.csv,10,,,,,,,,,,,Beneficiary Name vs Counterparty Name,MR MOK YUN,MOK YUN,Replaced with dropped value

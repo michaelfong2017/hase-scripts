@@ -1,0 +1,3 @@
+Transaction Date (value),Account ID,Counterparty Name,Counterparty ID,Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Beneficiary Name,Originator Account Number,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount
+2025-04-29,111-111111-103,YAN MEI MEI,222-222222-102,HKD,49873,C,,,CHIU YAN,222-222222-102,CUTF,ATM TRANSFER UNRELATED   DEPOSIT,,,49873
+2025-04-29,111-111111-103,ZHAO SUIMEN,66666666607,HKD,50000,C,,,CHIU YAN,66666666607,CWTF,Default transaction,,,50000

@@ -1,0 +1,17 @@
+Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount
+2025-04-19,HKD,80000,C,Hang Seng Bank Ltd.,Ant Bank (Hong Kong) Limited,66666666605,111111111101,LUI SAN SAN,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,Ant Bank (Hong Kong) Limited,80000
+2025-04-19,HKD,30000,C,,,222222222101,333333333101,CHEUNG TAK SHING,CHAN TAI MAN,Beneficiary,CUTF,ATM TRANSFER UNRELATED   DEPOSIT,,,30000
+2025-04-23,HKD,150000,C,Hang Seng Bank Ltd.,ZA Bank Limited,444444444101,111111111101,CHEUNG TAK SHING,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,ZA Bank Limited,150000
+2025-04-01,HKD,110000,C,Hang Seng Bank Ltd.,STANDARD CHARTERED BANK (HONG KONG) LIMITED,66666666606,111-111111-102,TANG WING,CHUNG SIU,Beneficiary,CWTF,Default transaction,,STANDARD CHARTERED BANK (HONG KONG) LIMITED,110000
+2025-04-01,HKD,200000,C,Hang Seng Bank Ltd.,Bank of China (Hong Kong) Limited,66666666602,111-111111-102,TSANG SIU MING,CHUNG SIU,Beneficiary,CWTF,Default transaction,,Bank of China (Hong Kong) Limited,200000
+2025-03-31,HKD,20000,C,Hang Seng Bank Ltd.,STANDARD CHARTERED BANK (HONG KONG) LIMITED,66666666606,111-111111-102,TANG WING,CHUNG SIU,Beneficiary,CWTF,Default transaction,,STANDARD CHARTERED BANK (HONG KONG) LIMITED,20000
+2025-02-07,HKD,18000,C,,,,111111111104,,CHONG MAN,Beneficiary,CCCS,CASH DEP VIA CDM/BCDM -  AC INPUT (TOUCH SCREEN),,,18000
+2025-02-07,HKD,350,C,Hang Seng Bank Ltd.,HKT Payment Limited,66666666607,111111111104,ZHAO SUIMEN,CHONG MAN,Beneficiary,CWTF,Default transaction,,HKT Payment Limited,350
+2025-02-06,HKD,2000,C,,,222222222102,111111111104,YAN MEI MEI,CHONG MAN,Beneficiary,CUTF,ATM TRANSFER UNRELATED   DEPOSIT,,,2000
+2025-01-21,HKD,3000,C,Hang Seng Bank Ltd.,Alipay Financial Services (HK) Limited,222222222105,111111111104,HUANG JUAN,CHONG MAN,Beneficiary,CWTF,Default transaction,,Alipay Financial Services (HK) Limited,3000
+2025-01-20,HKD,1000,C,,,,111111111104,,CHONG MAN,Beneficiary,CCCS,CASH DEP VIA CDM/BCDM -  AC INPUT (TOUCH SCREEN),,,1000
+2025-01-20,HKD,1000,C,,,,111111111104,,CHONG MAN,Beneficiary,CCCS,CASH DEP VIA CDM/BCDM -  AC INPUT (TOUCH SCREEN),,,1000
+2025-03-07,HKD,20000,C,Hang Seng Bank Ltd.,Livi Bank Limited,66666666605,111111111103,LUI SAN SAN,CHIU YAN,Beneficiary,CWTF,Default transaction,,Livi Bank Limited,20000
+2025-03-07,HKD,1000,C,,,,111111111103,,CHIU YAN,Beneficiary,CCCS,CASH DEP VIA CDM/BCDM -  AC INPUT (TOUCH SCREEN),,,1000
+2025-03-06,HKD,1900,C,,,222222222102,111111111103,YAN MEI MEI,CHIU YAN,Beneficiary,CUTF,ATM TRANSFER UNRELATED   DEPOSIT,,,1900
+2025-03-06,HKD,1200,C,Hang Seng Bank Ltd.,Alipay Financial Services (HK) Limited,66666666603,111111111103,XIE PANGAN,CHIU YAN,Beneficiary,CWTF,Default transaction,,Alipay Financial Services (HK) Limited,1200

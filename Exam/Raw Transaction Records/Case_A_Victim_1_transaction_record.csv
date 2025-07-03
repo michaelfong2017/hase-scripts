@@ -1,0 +1,4 @@
+Transaction Date (value),Account ID,Counterparty Name,Counterparty ID,Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Beneficiary Name,Originator Account Number,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount
+23/4/2025,444-4444444-001,,444-4444444-882,HKD,80000,C,,,,,CMTF,TRANSFER DEPOSIT,,,80000
+23/4/2025,444-4444444-882,MS        YAN          MEI MEI        AND OTHERS,444-4444444-001,HKD,80000,D,,,,,DMTF,TRANSFER WITHDRAWAL,,,80000
+22/4/2025,444-4444444-001,COUNTERPARTY_NOT_STATED -444-4444444-001- CARD TXN DEBIT,COUNTERPARTY_NOT_STATED -444-4444444-001- CARD TXN DEBIT,HKD,95500,D,,,,,DCHQ,CHEQUE WITHDRAWAL,,,95500
