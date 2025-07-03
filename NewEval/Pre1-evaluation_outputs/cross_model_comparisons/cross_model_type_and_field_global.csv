@@ -1,0 +1,113 @@
+﻿Type,Field,total,mismatch_count,accuracy_rate,Model
+ADCC,fraud_type,4,2,50.00%,cycle2_final8B_full60
+ADCC,police_team,4,2,50.00%,cycle2_final8B_full60
+HSBC Referral,fraud_type,18,4,77.78%,cycle2_final8B_full60
+ODFT,fraud_type,4,0,100.00%,cycle2_final8B_full60
+Police Letter,fraud_type,12,1,91.67%,cycle2_final8B_full60
+Police Letter,police_team,12,1,91.67%,cycle2_final8B_full60
+Search Warrant,contact_person,6,2,66.67%,cycle2_final8B_full60
+Search Warrant,fraud_type,6,0,100.00%,cycle2_final8B_full60
+Search Warrant,police_team,6,0,100.00%,cycle2_final8B_full60
+Search Warrant,writ_no,6,2,66.67%,cycle2_final8B_full60
+UAR,fraud_type,16,6,62.50%,cycle2_final8B_full60
+ADCC,fraud_type,4,0,100.00%,base32B_full60
+ADCC,police_team,4,0,100.00%,base32B_full60
+HSBC Referral,fraud_type,18,2,88.89%,base32B_full60
+ODFT,fraud_type,4,1,75.00%,base32B_full60
+Police Letter,fraud_type,12,7,41.67%,base32B_full60
+Police Letter,police_team,12,2,83.33%,base32B_full60
+Search Warrant,contact_person,6,2,66.67%,base32B_full60
+Search Warrant,fraud_type,6,0,100.00%,base32B_full60
+Search Warrant,police_team,6,4,33.33%,base32B_full60
+Search Warrant,writ_no,6,2,66.67%,base32B_full60
+UAR,Subject Type,1,1,0.00%,base32B_full60
+UAR,fraud_type,16,5,68.75%,base32B_full60
+ADCC,fraud_type,4,2,50.00%,base8B_full60
+ADCC,police_team,4,2,50.00%,base8B_full60
+HSBC Referral,fraud_type,18,9,50.00%,base8B_full60
+ODFT,fraud_type,4,1,75.00%,base8B_full60
+Police Letter,fraud_type,12,11,8.33%,base8B_full60
+Police Letter,police_team,12,2,83.33%,base8B_full60
+Search Warrant,contact_person,6,4,33.33%,base8B_full60
+Search Warrant,fraud_type,6,3,50.00%,base8B_full60
+Search Warrant,police_team,6,2,66.67%,base8B_full60
+Search Warrant,writ_no,6,4,33.33%,base8B_full60
+UAR,cable_message,1,1,0.00%,base8B_full60
+UAR,fraud_type,16,9,43.75%,base8B_full60
+ADCC,fraud_type,4,3,25.00%,base14B_full60
+ADCC,police_team,4,3,25.00%,base14B_full60
+HSBC Referral,fraud_type,18,4,77.78%,base14B_full60
+ODFT,fraud_type,4,2,50.00%,base14B_full60
+Police Letter,fraud_type,12,7,41.67%,base14B_full60
+Police Letter,police_team,12,4,66.67%,base14B_full60
+Search Warrant,contact_person,6,3,50.00%,base14B_full60
+Search Warrant,fraud_type,6,0,100.00%,base14B_full60
+Search Warrant,police_team,6,2,66.67%,base14B_full60
+Search Warrant,writ_no,6,2,66.67%,base14B_full60
+UAR,fraud_type,16,8,50.00%,base14B_full60
+ADCC,fraud_type,4,0,100.00%,cycle3_32Bv1_full60
+ADCC,police_team,4,0,100.00%,cycle3_32Bv1_full60
+HSBC Referral,fraud_type,18,0,100.00%,cycle3_32Bv1_full60
+ODFT,fraud_type,4,0,100.00%,cycle3_32Bv1_full60
+Police Letter,fraud_type,12,0,100.00%,cycle3_32Bv1_full60
+Police Letter,police_team,12,0,100.00%,cycle3_32Bv1_full60
+Search Warrant,contact_person,6,2,66.67%,cycle3_32Bv1_full60
+Search Warrant,fraud_type,6,0,100.00%,cycle3_32Bv1_full60
+Search Warrant,police_team,6,0,100.00%,cycle3_32Bv1_full60
+Search Warrant,writ_no,6,2,66.67%,cycle3_32Bv1_full60
+UAR,fraud_type,16,4,75.00%,cycle3_32Bv1_full60
+ADCC,fraud_type,4,3,25.00%,cycle2_final7B_full60
+ADCC,police_team,4,3,25.00%,cycle2_final7B_full60
+HSBC Referral,fraud_type,18,9,50.00%,cycle2_final7B_full60
+ODFT,fraud_type,4,0,100.00%,cycle2_final7B_full60
+Police Letter,fraud_type,12,3,75.00%,cycle2_final7B_full60
+Police Letter,police_team,12,3,75.00%,cycle2_final7B_full60
+Search Warrant,contact_person,6,2,66.67%,cycle2_final7B_full60
+Search Warrant,fraud_type,6,0,100.00%,cycle2_final7B_full60
+Search Warrant,police_team,6,0,100.00%,cycle2_final7B_full60
+Search Warrant,writ_no,6,2,66.67%,cycle2_final7B_full60
+UAR,fraud_type,16,8,50.00%,cycle2_final7B_full60
+ADCC,fraud_type,4,2,50.00%,base7B_full60
+ADCC,police_team,4,2,50.00%,base7B_full60
+HSBC Referral,fraud_type,18,8,55.56%,base7B_full60
+ODFT,fraud_type,4,3,25.00%,base7B_full60
+Police Letter,fraud_type,12,5,58.33%,base7B_full60
+Police Letter,police_team,12,3,75.00%,base7B_full60
+Search Warrant,contact_person,6,3,50.00%,base7B_full60
+Search Warrant,fraud_type,6,1,83.33%,base7B_full60
+Search Warrant,police_team,6,4,33.33%,base7B_full60
+Search Warrant,writ_no,6,3,50.00%,base7B_full60
+UAR,fraud_type,16,7,56.25%,base7B_full60
+ADCC,fraud_type,4,1,75.00%,cycle2_final32B_full60
+ADCC,police_team,4,1,75.00%,cycle2_final32B_full60
+HSBC Referral,fraud_type,18,2,88.89%,cycle2_final32B_full60
+ODFT,fraud_type,4,0,100.00%,cycle2_final32B_full60
+Police Letter,fraud_type,12,0,100.00%,cycle2_final32B_full60
+Police Letter,police_team,12,0,100.00%,cycle2_final32B_full60
+Search Warrant,contact_person,6,2,66.67%,cycle2_final32B_full60
+Search Warrant,fraud_type,6,0,100.00%,cycle2_final32B_full60
+Search Warrant,police_team,6,4,33.33%,cycle2_final32B_full60
+Search Warrant,writ_no,6,2,66.67%,cycle2_final32B_full60
+UAR,fraud_type,16,4,75.00%,cycle2_final32B_full60
+ADCC,fraud_type,4,0,100.00%,cycle2_final14B_full60
+ADCC,police_team,4,0,100.00%,cycle2_final14B_full60
+HSBC Referral,fraud_type,18,4,77.78%,cycle2_final14B_full60
+ODFT,fraud_type,4,1,75.00%,cycle2_final14B_full60
+Police Letter,fraud_type,12,0,100.00%,cycle2_final14B_full60
+Police Letter,police_team,12,0,100.00%,cycle2_final14B_full60
+Search Warrant,contact_person,6,2,66.67%,cycle2_final14B_full60
+Search Warrant,fraud_type,6,0,100.00%,cycle2_final14B_full60
+Search Warrant,police_team,6,1,83.33%,cycle2_final14B_full60
+Search Warrant,writ_no,6,2,66.67%,cycle2_final14B_full60
+UAR,fraud_type,16,4,75.00%,cycle2_final14B_full60
+ADCC,fraud_type,4,3,25.00%,cycle3_8Bv1_full60
+ADCC,police_team,4,3,25.00%,cycle3_8Bv1_full60
+HSBC Referral,fraud_type,18,6,66.67%,cycle3_8Bv1_full60
+ODFT,fraud_type,4,0,100.00%,cycle3_8Bv1_full60
+Police Letter,fraud_type,12,2,83.33%,cycle3_8Bv1_full60
+Police Letter,police_team,12,2,83.33%,cycle3_8Bv1_full60
+Search Warrant,contact_person,6,2,66.67%,cycle3_8Bv1_full60
+Search Warrant,fraud_type,6,0,100.00%,cycle3_8Bv1_full60
+Search Warrant,police_team,6,0,100.00%,cycle3_8Bv1_full60
+Search Warrant,writ_no,6,2,66.67%,cycle3_8Bv1_full60
+UAR,fraud_type,16,6,62.50%,cycle3_8Bv1_full60

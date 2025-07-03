@@ -1,0 +1,7 @@
+﻿Type,total,all_fields_correct,mismatch_count,accuracy_rate
+ADCC,20,3,17,15.00%
+HSBC Referral,43,16,27,37.21%
+Police Letter,14,8,6,57.14%
+Search Warrant,7,4,3,57.14%
+UAR,19,8,11,42.11%
+ODFT,8,1,7,12.50%

@@ -1,617 +1,211 @@
 ﻿Type,Field,total,mismatch_count,accuracy_rate,Model
-ADCC,amount,20,18,10.00%,cycle2_final8B_full60
-ADCC,can_be_located,20,18,10.00%,cycle2_final8B_full60
-ADCC,channel,10,9,10.00%,cycle2_final8B_full60
-ADCC,currency,20,18,10.00%,cycle2_final8B_full60
-ADCC,date,20,19,5.00%,cycle2_final8B_full60
-ADCC,from.account_number,18,16,11.11%,cycle2_final8B_full60
-ADCC,from.bank,18,16,11.11%,cycle2_final8B_full60
-ADCC,from.name,20,19,5.00%,cycle2_final8B_full60
-ADCC,to.account_number,20,18,10.00%,cycle2_final8B_full60
-ADCC,to.bank,20,19,5.00%,cycle2_final8B_full60
-ADCC,to.name,20,18,10.00%,cycle2_final8B_full60
-ADCC,transaction_references.0,20,18,10.00%,cycle2_final8B_full60
-HSBC Referral,amount,48,38,20.83%,cycle2_final8B_full60
-HSBC Referral,can_be_located,48,37,22.92%,cycle2_final8B_full60
-HSBC Referral,cancel_amount_requested,7,0,100.00%,cycle2_final8B_full60
-HSBC Referral,channel,45,35,22.22%,cycle2_final8B_full60
-HSBC Referral,currency,48,37,22.92%,cycle2_final8B_full60
-HSBC Referral,date,48,38,20.83%,cycle2_final8B_full60
-HSBC Referral,from.account_number,48,38,20.83%,cycle2_final8B_full60
-HSBC Referral,from.bank,48,38,20.83%,cycle2_final8B_full60
-HSBC Referral,from.name,48,40,16.67%,cycle2_final8B_full60
-HSBC Referral,to.account_number,48,38,20.83%,cycle2_final8B_full60
-HSBC Referral,to.bank,48,37,22.92%,cycle2_final8B_full60
-HSBC Referral,to.name,48,41,14.58%,cycle2_final8B_full60
-HSBC Referral,transaction_references.0,48,37,22.92%,cycle2_final8B_full60
-ODFT,amount,5,2,60.00%,cycle2_final8B_full60
-ODFT,can_be_located,5,1,80.00%,cycle2_final8B_full60
-ODFT,channel,5,3,40.00%,cycle2_final8B_full60
-ODFT,currency,5,1,80.00%,cycle2_final8B_full60
-ODFT,date,5,4,20.00%,cycle2_final8B_full60
-ODFT,from.account_number,5,2,60.00%,cycle2_final8B_full60
-ODFT,from.bank,5,3,40.00%,cycle2_final8B_full60
-ODFT,from.name,5,2,60.00%,cycle2_final8B_full60
-ODFT,to.account_number,5,3,40.00%,cycle2_final8B_full60
-ODFT,to.bank,5,3,40.00%,cycle2_final8B_full60
-ODFT,to.name,5,2,60.00%,cycle2_final8B_full60
-ODFT,transaction_references.0,5,1,80.00%,cycle2_final8B_full60
-Police Letter,amount,15,4,73.33%,cycle2_final8B_full60
-Police Letter,can_be_located,15,7,53.33%,cycle2_final8B_full60
-Police Letter,cancel_amount_requested,4,0,100.00%,cycle2_final8B_full60
-Police Letter,channel,15,4,73.33%,cycle2_final8B_full60
-Police Letter,currency,15,4,73.33%,cycle2_final8B_full60
-Police Letter,date,15,6,60.00%,cycle2_final8B_full60
-Police Letter,from.account_number,7,1,85.71%,cycle2_final8B_full60
-Police Letter,from.bank,6,0,100.00%,cycle2_final8B_full60
-Police Letter,from.name,6,0,100.00%,cycle2_final8B_full60
-Police Letter,to.account_number,15,5,66.67%,cycle2_final8B_full60
-Police Letter,to.bank,14,10,28.57%,cycle2_final8B_full60
-Police Letter,to.name,15,6,60.00%,cycle2_final8B_full60
-Police Letter,transaction_references.0,15,4,73.33%,cycle2_final8B_full60
-Search Warrant,amount,4,1,75.00%,cycle2_final8B_full60
-Search Warrant,can_be_located,7,4,42.86%,cycle2_final8B_full60
-Search Warrant,cancel_amount_requested,3,0,100.00%,cycle2_final8B_full60
-Search Warrant,channel,4,1,75.00%,cycle2_final8B_full60
-Search Warrant,currency,4,1,75.00%,cycle2_final8B_full60
-Search Warrant,date,5,2,60.00%,cycle2_final8B_full60
-Search Warrant,from.account_number,7,4,42.86%,cycle2_final8B_full60
-Search Warrant,from.bank,7,4,42.86%,cycle2_final8B_full60
-Search Warrant,from.name,4,1,75.00%,cycle2_final8B_full60
-Search Warrant,to.account_number,7,4,42.86%,cycle2_final8B_full60
-Search Warrant,to.bank,7,4,42.86%,cycle2_final8B_full60
-Search Warrant,to.name,4,1,75.00%,cycle2_final8B_full60
-Search Warrant,transaction_references.0,4,1,75.00%,cycle2_final8B_full60
-UAR,amount,23,12,47.83%,cycle2_final8B_full60
-UAR,can_be_located,23,13,43.48%,cycle2_final8B_full60
-UAR,cancel_amount_requested,12,4,66.67%,cycle2_final8B_full60
-UAR,channel,22,11,50.00%,cycle2_final8B_full60
-UAR,currency,23,12,47.83%,cycle2_final8B_full60
-UAR,date,21,12,42.86%,cycle2_final8B_full60
-UAR,from.account_number,20,12,40.00%,cycle2_final8B_full60
-UAR,from.bank,21,16,23.81%,cycle2_final8B_full60
-UAR,from.name,20,14,30.00%,cycle2_final8B_full60
-UAR,to.account_number,20,10,50.00%,cycle2_final8B_full60
-UAR,to.bank,23,17,26.09%,cycle2_final8B_full60
-UAR,to.name,20,17,15.00%,cycle2_final8B_full60
-UAR,transaction_references.0,22,11,50.00%,cycle2_final8B_full60
-ADCC,amount,20,3,85.00%,base32B_full60
-ADCC,can_be_located,20,0,100.00%,base32B_full60
-ADCC,cancel_amount_requested,3,0,100.00%,base32B_full60
-ADCC,channel,15,6,60.00%,base32B_full60
-ADCC,currency,20,0,100.00%,base32B_full60
-ADCC,date,20,0,100.00%,base32B_full60
-ADCC,from.account_number,18,0,100.00%,base32B_full60
-ADCC,from.bank,18,12,33.33%,base32B_full60
-ADCC,from.name,20,6,70.00%,base32B_full60
-ADCC,to.account_number,20,0,100.00%,base32B_full60
-ADCC,to.bank,20,10,50.00%,base32B_full60
-ADCC,to.name,20,4,80.00%,base32B_full60
-ADCC,transaction_references.0,20,0,100.00%,base32B_full60
-HSBC Referral,amount,43,16,62.79%,base32B_full60
-HSBC Referral,can_be_located,43,14,67.44%,base32B_full60
-HSBC Referral,cancel_amount_requested,16,0,100.00%,base32B_full60
-HSBC Referral,channel,42,17,59.52%,base32B_full60
-HSBC Referral,currency,43,14,67.44%,base32B_full60
-HSBC Referral,date,43,21,51.16%,base32B_full60
-HSBC Referral,from.account_number,43,21,51.16%,base32B_full60
-HSBC Referral,from.bank,43,27,37.21%,base32B_full60
-HSBC Referral,from.name,43,25,41.86%,base32B_full60
-HSBC Referral,to.account_number,43,21,51.16%,base32B_full60
-HSBC Referral,to.bank,43,25,41.86%,base32B_full60
-HSBC Referral,to.name,43,27,37.21%,base32B_full60
-HSBC Referral,transaction_references.0,43,14,67.44%,base32B_full60
-ODFT,amount,8,5,37.50%,base32B_full60
-ODFT,can_be_located,8,4,50.00%,base32B_full60
-ODFT,cancel_amount_requested,1,0,100.00%,base32B_full60
-ODFT,channel,8,4,50.00%,base32B_full60
-ODFT,currency,8,4,50.00%,base32B_full60
-ODFT,date,8,6,25.00%,base32B_full60
-ODFT,from.account_number,6,3,50.00%,base32B_full60
-ODFT,from.bank,6,4,33.33%,base32B_full60
-ODFT,from.name,6,4,33.33%,base32B_full60
-ODFT,to.account_number,8,6,25.00%,base32B_full60
-ODFT,to.bank,7,6,14.29%,base32B_full60
-ODFT,to.name,8,6,25.00%,base32B_full60
-ODFT,transaction_references.0,8,4,50.00%,base32B_full60
-Police Letter,amount,14,2,85.71%,base32B_full60
-Police Letter,can_be_located,14,2,85.71%,base32B_full60
-Police Letter,cancel_amount_requested,8,0,100.00%,base32B_full60
-Police Letter,channel,14,3,78.57%,base32B_full60
-Police Letter,currency,14,2,85.71%,base32B_full60
-Police Letter,date,14,3,78.57%,base32B_full60
-Police Letter,from.account_number,11,3,72.73%,base32B_full60
-Police Letter,from.bank,9,1,88.89%,base32B_full60
-Police Letter,from.name,10,2,80.00%,base32B_full60
-Police Letter,to.account_number,14,2,85.71%,base32B_full60
-Police Letter,to.bank,14,6,57.14%,base32B_full60
-Police Letter,to.name,14,4,71.43%,base32B_full60
-Police Letter,transaction_references.0,14,2,85.71%,base32B_full60
-Search Warrant,amount,7,3,57.14%,base32B_full60
-Search Warrant,can_be_located,7,3,57.14%,base32B_full60
-Search Warrant,cancel_amount_requested,4,0,100.00%,base32B_full60
-Search Warrant,channel,7,3,57.14%,base32B_full60
-Search Warrant,currency,7,3,57.14%,base32B_full60
-Search Warrant,date,7,3,57.14%,base32B_full60
-Search Warrant,from.account_number,7,3,57.14%,base32B_full60
-Search Warrant,from.bank,7,3,57.14%,base32B_full60
-Search Warrant,from.name,7,3,57.14%,base32B_full60
-Search Warrant,to.account_number,7,3,57.14%,base32B_full60
-Search Warrant,to.bank,7,3,57.14%,base32B_full60
-Search Warrant,to.name,7,3,57.14%,base32B_full60
-Search Warrant,transaction_references.0,7,3,57.14%,base32B_full60
-UAR,amount,19,7,63.16%,base32B_full60
-UAR,can_be_located,19,7,63.16%,base32B_full60
-UAR,cancel_amount_requested,13,4,69.23%,base32B_full60
-UAR,channel,16,5,68.75%,base32B_full60
-UAR,currency,19,7,63.16%,base32B_full60
-UAR,date,16,7,56.25%,base32B_full60
-UAR,from.account_number,14,4,71.43%,base32B_full60
-UAR,from.bank,16,6,62.50%,base32B_full60
-UAR,from.name,15,5,66.67%,base32B_full60
-UAR,to.account_number,17,6,64.71%,base32B_full60
-UAR,to.bank,17,8,52.94%,base32B_full60
-UAR,to.name,17,8,52.94%,base32B_full60
-UAR,transaction_references.0,16,4,75.00%,base32B_full60
-ADCC,amount,20,18,10.00%,base8B_full60
-ADCC,can_be_located,20,18,10.00%,base8B_full60
-ADCC,channel,10,8,20.00%,base8B_full60
-ADCC,currency,20,18,10.00%,base8B_full60
-ADCC,date,20,18,10.00%,base8B_full60
-ADCC,from.account_number,18,16,11.11%,base8B_full60
-ADCC,from.bank,18,17,5.56%,base8B_full60
-ADCC,from.name,20,19,5.00%,base8B_full60
-ADCC,to.account_number,20,18,10.00%,base8B_full60
-ADCC,to.bank,20,18,10.00%,base8B_full60
-ADCC,to.name,20,18,10.00%,base8B_full60
-ADCC,transaction_references.0,20,18,10.00%,base8B_full60
-HSBC Referral,amount,50,48,4.00%,base8B_full60
-HSBC Referral,can_be_located,50,39,22.00%,base8B_full60
-HSBC Referral,cancel_amount_requested,1,0,100.00%,base8B_full60
-HSBC Referral,channel,47,35,25.53%,base8B_full60
-HSBC Referral,currency,48,45,6.25%,base8B_full60
-HSBC Referral,date,50,39,22.00%,base8B_full60
-HSBC Referral,from.account_number,50,39,22.00%,base8B_full60
-HSBC Referral,from.bank,50,48,4.00%,base8B_full60
-HSBC Referral,from.name,50,48,4.00%,base8B_full60
-HSBC Referral,from_account_number,1,0,100.00%,base8B_full60
-HSBC Referral,from_bank,1,0,100.00%,base8B_full60
-HSBC Referral,from_name,1,0,100.00%,base8B_full60
-HSBC Referral,to.account_number,50,40,20.00%,base8B_full60
-HSBC Referral,to.bank,50,39,22.00%,base8B_full60
-HSBC Referral,to.name,50,49,2.00%,base8B_full60
-HSBC Referral,to_account_number,1,0,100.00%,base8B_full60
-HSBC Referral,to_bank,1,0,100.00%,base8B_full60
-HSBC Referral,to_name,1,0,100.00%,base8B_full60
-HSBC Referral,transaction_references.0,49,37,24.49%,base8B_full60
-ODFT,amount,7,4,42.86%,base8B_full60
-ODFT,can_be_located,5,3,40.00%,base8B_full60
-ODFT,channel,7,4,42.86%,base8B_full60
-ODFT,currency,5,3,40.00%,base8B_full60
-ODFT,date,7,6,14.29%,base8B_full60
-ODFT,from.account_number,5,3,40.00%,base8B_full60
-ODFT,from.bank,5,4,20.00%,base8B_full60
-ODFT,from.name,5,3,40.00%,base8B_full60
-ODFT,from_account_number,3,3,0.00%,base8B_full60
-ODFT,from_bank,3,3,0.00%,base8B_full60
-ODFT,from_name,3,3,0.00%,base8B_full60
-ODFT,to.account_number,5,4,20.00%,base8B_full60
-ODFT,to.bank,5,4,20.00%,base8B_full60
-ODFT,to.name,5,4,20.00%,base8B_full60
-ODFT,to_account_number,1,1,0.00%,base8B_full60
-ODFT,to_bank,3,3,0.00%,base8B_full60
-ODFT,to_name,1,1,0.00%,base8B_full60
-ODFT,transaction_references.0,7,4,42.86%,base8B_full60
-Police Letter,amount,17,7,58.82%,base8B_full60
-Police Letter,can_be_located,17,8,52.94%,base8B_full60
-Police Letter,cancel_amount_requested,1,0,100.00%,base8B_full60
-Police Letter,channel,17,7,58.82%,base8B_full60
-Police Letter,currency,17,6,64.71%,base8B_full60
-Police Letter,date,17,7,58.82%,base8B_full60
-Police Letter,from.account_number,7,6,14.29%,base8B_full60
-Police Letter,from.bank,5,3,40.00%,base8B_full60
-Police Letter,from.name,5,3,40.00%,base8B_full60
-Police Letter,from_account_number,1,0,100.00%,base8B_full60
-Police Letter,from_bank,1,0,100.00%,base8B_full60
-Police Letter,from_name,1,0,100.00%,base8B_full60
-Police Letter,to.account_number,17,10,41.18%,base8B_full60
-Police Letter,to.bank,17,12,29.41%,base8B_full60
-Police Letter,to.name,17,10,41.18%,base8B_full60
-Police Letter,to_account_number,1,0,100.00%,base8B_full60
-Police Letter,to_bank,1,0,100.00%,base8B_full60
-Police Letter,to_name,1,0,100.00%,base8B_full60
-Police Letter,transaction_references.0,17,6,64.71%,base8B_full60
-Search Warrant,amount,4,0,100.00%,base8B_full60
-Search Warrant,can_be_located,6,2,66.67%,base8B_full60
-Search Warrant,cancel_amount_requested,4,0,100.00%,base8B_full60
-Search Warrant,channel,5,1,80.00%,base8B_full60
-Search Warrant,currency,4,0,100.00%,base8B_full60
-Search Warrant,date,5,1,80.00%,base8B_full60
-Search Warrant,from.account_number,5,1,80.00%,base8B_full60
-Search Warrant,from.bank,5,1,80.00%,base8B_full60
-Search Warrant,from.name,5,1,80.00%,base8B_full60
-Search Warrant,from_account_number,4,0,100.00%,base8B_full60
-Search Warrant,from_bank,4,0,100.00%,base8B_full60
-Search Warrant,from_name,4,0,100.00%,base8B_full60
-Search Warrant,to.account_number,5,1,80.00%,base8B_full60
-Search Warrant,to.bank,5,1,80.00%,base8B_full60
-Search Warrant,to.name,5,1,80.00%,base8B_full60
-Search Warrant,to_account_number,4,0,100.00%,base8B_full60
-Search Warrant,to_bank,4,0,100.00%,base8B_full60
-Search Warrant,to_name,4,0,100.00%,base8B_full60
-Search Warrant,transaction_references.0,5,1,80.00%,base8B_full60
-UAR,amount,20,13,35.00%,base8B_full60
-UAR,can_be_located,20,17,15.00%,base8B_full60
-UAR,cancel_amount_requested,11,7,36.36%,base8B_full60
-UAR,channel,18,13,27.78%,base8B_full60
-UAR,currency,20,12,40.00%,base8B_full60
-UAR,date,17,14,17.65%,base8B_full60
-UAR,from.account_number,15,13,13.33%,base8B_full60
-UAR,from.bank,14,12,14.29%,base8B_full60
-UAR,from.name,16,12,25.00%,base8B_full60
-UAR,to.account_number,18,16,11.11%,base8B_full60
-UAR,to.bank,18,17,5.56%,base8B_full60
-UAR,to.name,18,16,11.11%,base8B_full60
-UAR,transaction_references.0,18,10,44.44%,base8B_full60
-ADCC,amount,20,19,5.00%,base14B_full60
-ADCC,can_be_located,20,19,5.00%,base14B_full60
-ADCC,channel,10,9,10.00%,base14B_full60
-ADCC,currency,20,19,5.00%,base14B_full60
-ADCC,date,20,20,0.00%,base14B_full60
-ADCC,from.account_number,18,17,5.56%,base14B_full60
-ADCC,from.bank,18,17,5.56%,base14B_full60
-ADCC,from.name,20,20,0.00%,base14B_full60
-ADCC,to.account_number,20,19,5.00%,base14B_full60
-ADCC,to.bank,20,19,5.00%,base14B_full60
-ADCC,to.name,20,19,5.00%,base14B_full60
-ADCC,transaction_references.0,20,19,5.00%,base14B_full60
-HSBC Referral,amount,43,23,46.51%,base14B_full60
-HSBC Referral,can_be_located,43,21,51.16%,base14B_full60
-HSBC Referral,cancel_amount_requested,18,0,100.00%,base14B_full60
-HSBC Referral,channel,43,22,48.84%,base14B_full60
-HSBC Referral,currency,43,21,51.16%,base14B_full60
-HSBC Referral,date,43,22,48.84%,base14B_full60
-HSBC Referral,from.account_number,43,22,48.84%,base14B_full60
-HSBC Referral,from.bank,43,25,41.86%,base14B_full60
-HSBC Referral,from.name,43,23,46.51%,base14B_full60
-HSBC Referral,to.account_number,43,22,48.84%,base14B_full60
-HSBC Referral,to.bank,43,24,44.19%,base14B_full60
-HSBC Referral,to.name,43,25,41.86%,base14B_full60
-HSBC Referral,transaction_references.0,43,21,51.16%,base14B_full60
-ODFT,amount,5,4,20.00%,base14B_full60
-ODFT,can_be_located,5,4,20.00%,base14B_full60
-ODFT,channel,5,4,20.00%,base14B_full60
-ODFT,currency,5,4,20.00%,base14B_full60
-ODFT,date,5,5,0.00%,base14B_full60
-ODFT,from.account_number,5,4,20.00%,base14B_full60
-ODFT,from.bank,5,4,20.00%,base14B_full60
-ODFT,from.name,5,5,0.00%,base14B_full60
-ODFT,to.account_number,5,5,0.00%,base14B_full60
-ODFT,to.bank,4,4,0.00%,base14B_full60
-ODFT,to.name,5,5,0.00%,base14B_full60
-ODFT,transaction_references.0,5,4,20.00%,base14B_full60
-Police Letter,amount,14,4,71.43%,base14B_full60
-Police Letter,can_be_located,14,4,71.43%,base14B_full60
-Police Letter,cancel_amount_requested,5,0,100.00%,base14B_full60
-Police Letter,channel,14,4,71.43%,base14B_full60
-Police Letter,currency,14,4,71.43%,base14B_full60
-Police Letter,date,14,5,64.29%,base14B_full60
-Police Letter,from.account_number,9,4,55.56%,base14B_full60
-Police Letter,from.bank,7,2,71.43%,base14B_full60
-Police Letter,from.name,9,4,55.56%,base14B_full60
-Police Letter,to.account_number,14,5,64.29%,base14B_full60
-Police Letter,to.bank,14,6,57.14%,base14B_full60
-Police Letter,to.name,14,7,50.00%,base14B_full60
-Police Letter,transaction_references.0,14,4,71.43%,base14B_full60
-Search Warrant,amount,6,0,100.00%,base14B_full60
-Search Warrant,can_be_located,6,0,100.00%,base14B_full60
-Search Warrant,cancel_amount_requested,6,0,100.00%,base14B_full60
-Search Warrant,channel,6,0,100.00%,base14B_full60
-Search Warrant,currency,6,0,100.00%,base14B_full60
-Search Warrant,date,6,0,100.00%,base14B_full60
-Search Warrant,from.account_number,6,0,100.00%,base14B_full60
-Search Warrant,from.bank,6,0,100.00%,base14B_full60
-Search Warrant,from.name,6,0,100.00%,base14B_full60
-Search Warrant,to.account_number,6,0,100.00%,base14B_full60
-Search Warrant,to.bank,6,0,100.00%,base14B_full60
-Search Warrant,to.name,6,0,100.00%,base14B_full60
-Search Warrant,transaction_references.0,6,0,100.00%,base14B_full60
-UAR,amount,18,4,77.78%,base14B_full60
-UAR,can_be_located,18,4,77.78%,base14B_full60
-UAR,cancel_amount_requested,11,3,72.73%,base14B_full60
-UAR,channel,17,7,58.82%,base14B_full60
-UAR,currency,18,4,77.78%,base14B_full60
-UAR,date,18,9,50.00%,base14B_full60
-UAR,from.account_number,13,4,69.23%,base14B_full60
-UAR,from.bank,14,10,28.57%,base14B_full60
-UAR,from.name,14,5,64.29%,base14B_full60
-UAR,to.account_number,17,3,82.35%,base14B_full60
-UAR,to.bank,18,10,44.44%,base14B_full60
-UAR,to.name,18,8,55.56%,base14B_full60
-UAR,transaction_references.0,17,3,82.35%,base14B_full60
-ADCC,amount,20,3,85.00%,cycle3_32Bv1_full60
-ADCC,can_be_located,20,0,100.00%,cycle3_32Bv1_full60
-ADCC,cancel_amount_requested,5,0,100.00%,cycle3_32Bv1_full60
-ADCC,channel,15,5,66.67%,cycle3_32Bv1_full60
-ADCC,currency,20,0,100.00%,cycle3_32Bv1_full60
-ADCC,date,20,0,100.00%,cycle3_32Bv1_full60
-ADCC,from.account_number,18,0,100.00%,cycle3_32Bv1_full60
-ADCC,from.bank,18,12,33.33%,cycle3_32Bv1_full60
-ADCC,from.name,20,6,70.00%,cycle3_32Bv1_full60
-ADCC,to.account_number,20,0,100.00%,cycle3_32Bv1_full60
-ADCC,to.bank,20,8,60.00%,cycle3_32Bv1_full60
-ADCC,to.name,20,4,80.00%,cycle3_32Bv1_full60
-ADCC,transaction_references.0,20,0,100.00%,cycle3_32Bv1_full60
-HSBC Referral,amount,40,5,87.50%,cycle3_32Bv1_full60
-HSBC Referral,can_be_located,40,4,90.00%,cycle3_32Bv1_full60
-HSBC Referral,cancel_amount_requested,20,0,100.00%,cycle3_32Bv1_full60
-HSBC Referral,channel,40,4,90.00%,cycle3_32Bv1_full60
-HSBC Referral,currency,40,4,90.00%,cycle3_32Bv1_full60
-HSBC Referral,date,40,10,75.00%,cycle3_32Bv1_full60
-HSBC Referral,from.account_number,40,10,75.00%,cycle3_32Bv1_full60
-HSBC Referral,from.bank,40,13,67.50%,cycle3_32Bv1_full60
-HSBC Referral,from.name,40,16,60.00%,cycle3_32Bv1_full60
-HSBC Referral,to.account_number,40,10,75.00%,cycle3_32Bv1_full60
-HSBC Referral,to.bank,40,13,67.50%,cycle3_32Bv1_full60
-HSBC Referral,to.name,40,17,57.50%,cycle3_32Bv1_full60
-HSBC Referral,transaction_references.0,40,4,90.00%,cycle3_32Bv1_full60
-ODFT,amount,6,3,50.00%,cycle3_32Bv1_full60
-ODFT,can_be_located,6,2,66.67%,cycle3_32Bv1_full60
-ODFT,cancel_amount_requested,1,0,100.00%,cycle3_32Bv1_full60
-ODFT,channel,6,2,66.67%,cycle3_32Bv1_full60
-ODFT,currency,6,2,66.67%,cycle3_32Bv1_full60
-ODFT,date,6,4,33.33%,cycle3_32Bv1_full60
-ODFT,from.account_number,6,3,50.00%,cycle3_32Bv1_full60
-ODFT,from.bank,6,3,50.00%,cycle3_32Bv1_full60
-ODFT,from.name,6,4,33.33%,cycle3_32Bv1_full60
-ODFT,to.account_number,6,4,33.33%,cycle3_32Bv1_full60
-ODFT,to.bank,6,4,33.33%,cycle3_32Bv1_full60
-ODFT,to.name,6,3,50.00%,cycle3_32Bv1_full60
-ODFT,transaction_references.0,6,2,66.67%,cycle3_32Bv1_full60
-Police Letter,amount,14,0,100.00%,cycle3_32Bv1_full60
-Police Letter,can_be_located,14,0,100.00%,cycle3_32Bv1_full60
-Police Letter,cancel_amount_requested,8,0,100.00%,cycle3_32Bv1_full60
-Police Letter,channel,14,0,100.00%,cycle3_32Bv1_full60
-Police Letter,currency,14,0,100.00%,cycle3_32Bv1_full60
-Police Letter,date,14,1,92.86%,cycle3_32Bv1_full60
-Police Letter,from.account_number,11,0,100.00%,cycle3_32Bv1_full60
-Police Letter,from.bank,11,1,90.91%,cycle3_32Bv1_full60
-Police Letter,from.name,11,0,100.00%,cycle3_32Bv1_full60
-Police Letter,to.account_number,14,0,100.00%,cycle3_32Bv1_full60
-Police Letter,to.bank,14,4,71.43%,cycle3_32Bv1_full60
-Police Letter,to.name,14,2,85.71%,cycle3_32Bv1_full60
-Police Letter,transaction_references.0,14,0,100.00%,cycle3_32Bv1_full60
-Search Warrant,amount,6,0,100.00%,cycle3_32Bv1_full60
-Search Warrant,can_be_located,6,0,100.00%,cycle3_32Bv1_full60
-Search Warrant,cancel_amount_requested,6,0,100.00%,cycle3_32Bv1_full60
-Search Warrant,channel,6,0,100.00%,cycle3_32Bv1_full60
-Search Warrant,currency,6,0,100.00%,cycle3_32Bv1_full60
-Search Warrant,date,6,0,100.00%,cycle3_32Bv1_full60
-Search Warrant,from.account_number,6,0,100.00%,cycle3_32Bv1_full60
-Search Warrant,from.bank,6,0,100.00%,cycle3_32Bv1_full60
-Search Warrant,from.name,6,0,100.00%,cycle3_32Bv1_full60
-Search Warrant,to.account_number,6,0,100.00%,cycle3_32Bv1_full60
-Search Warrant,to.bank,6,0,100.00%,cycle3_32Bv1_full60
-Search Warrant,to.name,6,0,100.00%,cycle3_32Bv1_full60
-Search Warrant,transaction_references.0,6,0,100.00%,cycle3_32Bv1_full60
-UAR,amount,18,2,88.89%,cycle3_32Bv1_full60
-UAR,can_be_located,18,2,88.89%,cycle3_32Bv1_full60
-UAR,cancel_amount_requested,10,0,100.00%,cycle3_32Bv1_full60
-UAR,channel,18,6,66.67%,cycle3_32Bv1_full60
-UAR,currency,18,2,88.89%,cycle3_32Bv1_full60
-UAR,date,18,2,88.89%,cycle3_32Bv1_full60
-UAR,from.account_number,14,2,85.71%,cycle3_32Bv1_full60
-UAR,from.bank,14,3,78.57%,cycle3_32Bv1_full60
-UAR,from.name,14,2,85.71%,cycle3_32Bv1_full60
-UAR,to.account_number,18,2,88.89%,cycle3_32Bv1_full60
-UAR,to.bank,18,4,77.78%,cycle3_32Bv1_full60
-UAR,to.name,18,3,83.33%,cycle3_32Bv1_full60
-UAR,transaction_references.0,18,2,88.89%,cycle3_32Bv1_full60
-ADCC,amount,20,20,0.00%,cycle2_final7B_full60
-ADCC,can_be_located,20,20,0.00%,cycle2_final7B_full60
-ADCC,channel,10,10,0.00%,cycle2_final7B_full60
-ADCC,currency,20,20,0.00%,cycle2_final7B_full60
-ADCC,date,20,20,0.00%,cycle2_final7B_full60
-ADCC,from.account_number,18,18,0.00%,cycle2_final7B_full60
-ADCC,from.bank,18,18,0.00%,cycle2_final7B_full60
-ADCC,from.name,20,20,0.00%,cycle2_final7B_full60
-ADCC,to.account_number,20,20,0.00%,cycle2_final7B_full60
-ADCC,to.bank,20,20,0.00%,cycle2_final7B_full60
-ADCC,to.name,20,20,0.00%,cycle2_final7B_full60
-ADCC,transaction_references.0,20,20,0.00%,cycle2_final7B_full60
-HSBC Referral,amount,45,36,20.00%,cycle2_final7B_full60
-HSBC Referral,can_be_located,45,35,22.22%,cycle2_final7B_full60
-HSBC Referral,cancel_amount_requested,5,0,100.00%,cycle2_final7B_full60
-HSBC Referral,channel,44,36,18.18%,cycle2_final7B_full60
-HSBC Referral,currency,45,35,22.22%,cycle2_final7B_full60
-HSBC Referral,date,45,37,17.78%,cycle2_final7B_full60
-HSBC Referral,from.account_number,45,36,20.00%,cycle2_final7B_full60
-HSBC Referral,from.bank,45,39,13.33%,cycle2_final7B_full60
-HSBC Referral,from.name,45,39,13.33%,cycle2_final7B_full60
-HSBC Referral,to.account_number,45,36,20.00%,cycle2_final7B_full60
-HSBC Referral,to.bank,45,36,20.00%,cycle2_final7B_full60
-HSBC Referral,to.name,45,40,11.11%,cycle2_final7B_full60
-HSBC Referral,transaction_references.0,44,34,22.73%,cycle2_final7B_full60
-ODFT,amount,5,2,60.00%,cycle2_final7B_full60
-ODFT,can_be_located,5,1,80.00%,cycle2_final7B_full60
-ODFT,cancel_amount_requested,1,0,100.00%,cycle2_final7B_full60
-ODFT,channel,5,2,60.00%,cycle2_final7B_full60
-ODFT,currency,5,1,80.00%,cycle2_final7B_full60
-ODFT,date,5,3,40.00%,cycle2_final7B_full60
-ODFT,from.account_number,5,2,60.00%,cycle2_final7B_full60
-ODFT,from.bank,5,3,40.00%,cycle2_final7B_full60
-ODFT,from.name,5,3,40.00%,cycle2_final7B_full60
-ODFT,to.account_number,5,3,40.00%,cycle2_final7B_full60
-ODFT,to.bank,5,3,40.00%,cycle2_final7B_full60
-ODFT,to.name,5,3,40.00%,cycle2_final7B_full60
-ODFT,transaction_references.0,5,1,80.00%,cycle2_final7B_full60
-Police Letter,amount,15,7,53.33%,cycle2_final7B_full60
-Police Letter,can_be_located,15,7,53.33%,cycle2_final7B_full60
-Police Letter,cancel_amount_requested,3,0,100.00%,cycle2_final7B_full60
-Police Letter,channel,15,7,53.33%,cycle2_final7B_full60
-Police Letter,currency,15,7,53.33%,cycle2_final7B_full60
-Police Letter,date,15,7,53.33%,cycle2_final7B_full60
-Police Letter,from.account_number,8,5,37.50%,cycle2_final7B_full60
-Police Letter,from.bank,10,7,30.00%,cycle2_final7B_full60
-Police Letter,from.name,7,4,42.86%,cycle2_final7B_full60
-Police Letter,to.account_number,15,8,46.67%,cycle2_final7B_full60
-Police Letter,to.bank,15,11,26.67%,cycle2_final7B_full60
-Police Letter,to.name,15,8,46.67%,cycle2_final7B_full60
-Police Letter,transaction_references.0,15,7,53.33%,cycle2_final7B_full60
-Search Warrant,amount,22,18,18.18%,cycle2_final7B_full60
-Search Warrant,can_be_located,22,18,18.18%,cycle2_final7B_full60
-Search Warrant,cancel_amount_requested,4,0,100.00%,cycle2_final7B_full60
-Search Warrant,channel,22,18,18.18%,cycle2_final7B_full60
-Search Warrant,currency,22,18,18.18%,cycle2_final7B_full60
-Search Warrant,date,22,18,18.18%,cycle2_final7B_full60
-Search Warrant,from.account_number,22,18,18.18%,cycle2_final7B_full60
-Search Warrant,from.bank,22,18,18.18%,cycle2_final7B_full60
-Search Warrant,from.name,22,18,18.18%,cycle2_final7B_full60
-Search Warrant,to.account_number,22,18,18.18%,cycle2_final7B_full60
-Search Warrant,to.bank,22,18,18.18%,cycle2_final7B_full60
-Search Warrant,to.name,22,18,18.18%,cycle2_final7B_full60
-Search Warrant,transaction_references.0,22,18,18.18%,cycle2_final7B_full60
-UAR,amount,19,7,63.16%,cycle2_final7B_full60
-UAR,can_be_located,19,6,68.42%,cycle2_final7B_full60
-UAR,cancel_amount_requested,12,4,66.67%,cycle2_final7B_full60
-UAR,channel,19,11,42.11%,cycle2_final7B_full60
-UAR,currency,19,6,68.42%,cycle2_final7B_full60
-UAR,date,19,8,57.89%,cycle2_final7B_full60
-UAR,from.account_number,14,6,57.14%,cycle2_final7B_full60
-UAR,from.bank,14,5,64.29%,cycle2_final7B_full60
-UAR,from.name,19,12,36.84%,cycle2_final7B_full60
-UAR,to.account_number,19,8,57.89%,cycle2_final7B_full60
-UAR,to.bank,18,8,55.56%,cycle2_final7B_full60
-UAR,to.name,19,15,21.05%,cycle2_final7B_full60
-UAR,transaction_references.0,19,6,68.42%,cycle2_final7B_full60
-ADCC,amount,20,18,10.00%,base7B_full60
-ADCC,can_be_located,20,18,10.00%,base7B_full60
-ADCC,channel,10,10,0.00%,base7B_full60
-ADCC,currency,20,18,10.00%,base7B_full60
-ADCC,date,20,18,10.00%,base7B_full60
-ADCC,from.account_number,18,16,11.11%,base7B_full60
-ADCC,from.bank,18,16,11.11%,base7B_full60
-ADCC,from.name,20,19,5.00%,base7B_full60
-ADCC,to.account_number,20,18,10.00%,base7B_full60
-ADCC,to.bank,20,18,10.00%,base7B_full60
-ADCC,to.name,20,18,10.00%,base7B_full60
-ADCC,transaction_references.0,20,18,10.00%,base7B_full60
-HSBC Referral,amount,45,35,22.22%,base7B_full60
-HSBC Referral,can_be_located,45,34,24.44%,base7B_full60
-HSBC Referral,cancel_amount_requested,6,0,100.00%,base7B_full60
-HSBC Referral,channel,43,35,18.60%,base7B_full60
-HSBC Referral,currency,45,34,24.44%,base7B_full60
-HSBC Referral,date,45,35,22.22%,base7B_full60
-HSBC Referral,from.account_number,45,35,22.22%,base7B_full60
-HSBC Referral,from.bank,45,39,13.33%,base7B_full60
-HSBC Referral,from.name,45,36,20.00%,base7B_full60
-HSBC Referral,to.account_number,45,36,20.00%,base7B_full60
-HSBC Referral,to.bank,45,37,17.78%,base7B_full60
-HSBC Referral,to.name,45,39,13.33%,base7B_full60
-HSBC Referral,transaction_references.0,43,32,25.58%,base7B_full60
-ODFT,amount,5,3,40.00%,base7B_full60
-ODFT,can_be_located,5,3,40.00%,base7B_full60
-ODFT,cancel_amount_requested,1,0,100.00%,base7B_full60
-ODFT,channel,5,3,40.00%,base7B_full60
-ODFT,currency,5,3,40.00%,base7B_full60
-ODFT,date,5,4,20.00%,base7B_full60
-ODFT,from.account_number,5,3,40.00%,base7B_full60
-ODFT,from.bank,5,3,40.00%,base7B_full60
-ODFT,from.name,5,4,20.00%,base7B_full60
-ODFT,to.account_number,5,4,20.00%,base7B_full60
-ODFT,to.bank,5,3,40.00%,base7B_full60
-ODFT,to.name,5,4,20.00%,base7B_full60
-ODFT,transaction_references.0,5,3,40.00%,base7B_full60
-Police Letter,amount,14,5,64.29%,base7B_full60
-Police Letter,can_be_located,14,5,64.29%,base7B_full60
-Police Letter,cancel_amount_requested,2,0,100.00%,base7B_full60
-Police Letter,channel,14,6,57.14%,base7B_full60
-Police Letter,currency,14,5,64.29%,base7B_full60
-Police Letter,date,14,5,64.29%,base7B_full60
-Police Letter,from.account_number,10,6,40.00%,base7B_full60
-Police Letter,from.bank,7,5,28.57%,base7B_full60
-Police Letter,from.name,10,6,40.00%,base7B_full60
-Police Letter,to.account_number,14,8,42.86%,base7B_full60
-Police Letter,to.bank,14,9,35.71%,base7B_full60
-Police Letter,to.name,14,9,35.71%,base7B_full60
-Police Letter,transaction_references.0,14,5,64.29%,base7B_full60
-Search Warrant,amount,12,9,25.00%,base7B_full60
-Search Warrant,can_be_located,12,9,25.00%,base7B_full60
-Search Warrant,cancel_amount_requested,3,0,100.00%,base7B_full60
-Search Warrant,channel,12,9,25.00%,base7B_full60
-Search Warrant,currency,12,9,25.00%,base7B_full60
-Search Warrant,date,12,9,25.00%,base7B_full60
-Search Warrant,from.account_number,12,9,25.00%,base7B_full60
-Search Warrant,from.bank,12,9,25.00%,base7B_full60
-Search Warrant,from.name,12,9,25.00%,base7B_full60
-Search Warrant,to.account_number,12,9,25.00%,base7B_full60
-Search Warrant,to.bank,12,9,25.00%,base7B_full60
-Search Warrant,to.name,12,9,25.00%,base7B_full60
-Search Warrant,transaction_references.0,12,9,25.00%,base7B_full60
-UAR,amount,18,4,77.78%,base7B_full60
-UAR,can_be_located,18,4,77.78%,base7B_full60
-UAR,cancel_amount_requested,13,5,61.54%,base7B_full60
-UAR,channel,17,10,41.18%,base7B_full60
-UAR,currency,18,4,77.78%,base7B_full60
-UAR,date,18,8,55.56%,base7B_full60
-UAR,from.account_number,17,8,52.94%,base7B_full60
-UAR,from.bank,17,12,29.41%,base7B_full60
-UAR,from.name,17,9,47.06%,base7B_full60
-UAR,to.account_number,18,8,55.56%,base7B_full60
-UAR,to.bank,18,14,22.22%,base7B_full60
-UAR,to.name,18,12,33.33%,base7B_full60
-UAR,transaction_references.0,18,4,77.78%,base7B_full60
-ADCC,amount,20,9,55.00%,cycle2_final32B_full60
-ADCC,can_be_located,20,9,55.00%,cycle2_final32B_full60
-ADCC,cancel_amount_requested,9,0,100.00%,cycle2_final32B_full60
-ADCC,channel,15,4,73.33%,cycle2_final32B_full60
-ADCC,currency,20,9,55.00%,cycle2_final32B_full60
-ADCC,date,20,9,55.00%,cycle2_final32B_full60
-ADCC,from.account_number,18,8,55.56%,cycle2_final32B_full60
-ADCC,from.bank,18,8,55.56%,cycle2_final32B_full60
-ADCC,from.name,20,11,45.00%,cycle2_final32B_full60
-ADCC,to.account_number,20,9,55.00%,cycle2_final32B_full60
-ADCC,to.bank,20,9,55.00%,cycle2_final32B_full60
-ADCC,to.name,20,9,55.00%,cycle2_final32B_full60
-ADCC,transaction_references.0,20,9,55.00%,cycle2_final32B_full60
-HSBC Referral,amount,43,13,69.77%,cycle2_final32B_full60
-HSBC Referral,can_be_located,43,11,74.42%,cycle2_final32B_full60
-HSBC Referral,cancel_amount_requested,19,0,100.00%,cycle2_final32B_full60
-HSBC Referral,channel,43,13,69.77%,cycle2_final32B_full60
-HSBC Referral,currency,43,11,74.42%,cycle2_final32B_full60
-HSBC Referral,date,43,18,58.14%,cycle2_final32B_full60
-HSBC Referral,from.account_number,43,18,58.14%,cycle2_final32B_full60
-HSBC Referral,from.bank,43,23,46.51%,cycle2_final32B_full60
-HSBC Referral,from.name,43,22,48.84%,cycle2_final32B_full60
-HSBC Referral,to.account_number,43,18,58.14%,cycle2_final32B_full60
-HSBC Referral,to.bank,43,22,48.84%,cycle2_final32B_full60
-HSBC Referral,to.name,43,24,44.19%,cycle2_final32B_full60
-HSBC Referral,transaction_references.0,43,11,74.42%,cycle2_final32B_full60
-ODFT,amount,5,3,40.00%,cycle2_final32B_full60
-ODFT,can_be_located,5,2,60.00%,cycle2_final32B_full60
-ODFT,cancel_amount_requested,1,0,100.00%,cycle2_final32B_full60
-ODFT,channel,5,2,60.00%,cycle2_final32B_full60
-ODFT,currency,5,2,60.00%,cycle2_final32B_full60
-ODFT,date,5,4,20.00%,cycle2_final32B_full60
-ODFT,from.account_number,5,3,40.00%,cycle2_final32B_full60
-ODFT,from.bank,5,3,40.00%,cycle2_final32B_full60
-ODFT,from.name,5,3,40.00%,cycle2_final32B_full60
-ODFT,to.account_number,5,4,20.00%,cycle2_final32B_full60
-ODFT,to.bank,5,3,40.00%,cycle2_final32B_full60
-ODFT,to.name,5,4,20.00%,cycle2_final32B_full60
-ODFT,transaction_references.0,5,2,60.00%,cycle2_final32B_full60
+ADCC,amount,20,18,10.00%,base32B_full60
+ADCC,can_be_located,20,18,10.00%,base32B_full60
+ADCC,cancel_amount_requested,20,0,100.00%,base32B_full60
+ADCC,channel,20,10,50.00%,base32B_full60
+ADCC,currency,20,18,10.00%,base32B_full60
+ADCC,date,20,18,10.00%,base32B_full60
+ADCC,from.account_number,20,16,20.00%,base32B_full60
+ADCC,from.bank,20,16,20.00%,base32B_full60
+ADCC,from.name,20,18,10.00%,base32B_full60
+ADCC,to.account_number,20,18,10.00%,base32B_full60
+ADCC,to.bank,20,18,10.00%,base32B_full60
+ADCC,to.name,20,18,10.00%,base32B_full60
+ADCC,transaction_references.0,20,18,10.00%,base32B_full60
+HSBC Referral,amount,39,1,97.44%,base32B_full60
+HSBC Referral,can_be_located,39,1,97.44%,base32B_full60
+HSBC Referral,cancel_amount_requested,39,0,100.00%,base32B_full60
+HSBC Referral,channel,39,8,79.49%,base32B_full60
+HSBC Referral,currency,39,1,97.44%,base32B_full60
+HSBC Referral,date,39,1,97.44%,base32B_full60
+HSBC Referral,from.account_number,39,1,97.44%,base32B_full60
+HSBC Referral,from.bank,39,39,0.00%,base32B_full60
+HSBC Referral,from.name,39,16,58.97%,base32B_full60
+HSBC Referral,to.account_number,39,1,97.44%,base32B_full60
+HSBC Referral,to.bank,39,1,97.44%,base32B_full60
+HSBC Referral,to.name,39,35,10.26%,base32B_full60
+HSBC Referral,transaction_references.0,39,1,97.44%,base32B_full60
+ODFT,amount,6,0,100.00%,base32B_full60
+ODFT,can_be_located,6,0,100.00%,base32B_full60
+ODFT,cancel_amount_requested,6,0,100.00%,base32B_full60
+ODFT,channel,6,0,100.00%,base32B_full60
+ODFT,currency,6,0,100.00%,base32B_full60
+ODFT,date,6,0,100.00%,base32B_full60
+ODFT,from.account_number,6,0,100.00%,base32B_full60
+ODFT,from.bank,6,0,100.00%,base32B_full60
+ODFT,from.name,6,2,66.67%,base32B_full60
+ODFT,to.account_number,6,0,100.00%,base32B_full60
+ODFT,to.bank,6,2,66.67%,base32B_full60
+ODFT,to.name,6,1,83.33%,base32B_full60
+ODFT,transaction_references.0,6,0,100.00%,base32B_full60
+Police Letter,amount,14,0,100.00%,base32B_full60
+Police Letter,can_be_located,14,0,100.00%,base32B_full60
+Police Letter,cancel_amount_requested,14,0,100.00%,base32B_full60
+Police Letter,channel,14,0,100.00%,base32B_full60
+Police Letter,currency,14,0,100.00%,base32B_full60
+Police Letter,date,14,0,100.00%,base32B_full60
+Police Letter,from.account_number,14,0,100.00%,base32B_full60
+Police Letter,from.bank,14,3,78.57%,base32B_full60
+Police Letter,from.name,14,0,100.00%,base32B_full60
+Police Letter,to.account_number,14,0,100.00%,base32B_full60
+Police Letter,to.bank,14,0,100.00%,base32B_full60
+Police Letter,to.name,14,1,92.86%,base32B_full60
+Police Letter,transaction_references.0,14,0,100.00%,base32B_full60
+Search Warrant,amount,22,19,13.64%,base32B_full60
+Search Warrant,can_be_located,22,19,13.64%,base32B_full60
+Search Warrant,cancel_amount_requested,22,0,100.00%,base32B_full60
+Search Warrant,channel,22,9,59.09%,base32B_full60
+Search Warrant,currency,22,19,13.64%,base32B_full60
+Search Warrant,date,22,19,13.64%,base32B_full60
+Search Warrant,from.account_number,22,17,22.73%,base32B_full60
+Search Warrant,from.bank,22,3,86.36%,base32B_full60
+Search Warrant,from.name,22,17,22.73%,base32B_full60
+Search Warrant,to.account_number,22,19,13.64%,base32B_full60
+Search Warrant,to.bank,22,19,13.64%,base32B_full60
+Search Warrant,to.name,22,19,13.64%,base32B_full60
+Search Warrant,transaction_references.0,22,19,13.64%,base32B_full60
+UAR,amount,18,1,94.44%,base32B_full60
+UAR,can_be_located,18,0,100.00%,base32B_full60
+UAR,cancel_amount_requested,18,2,88.89%,base32B_full60
+UAR,channel,18,2,88.89%,base32B_full60
+UAR,currency,18,0,100.00%,base32B_full60
+UAR,date,18,0,100.00%,base32B_full60
+UAR,from.account_number,18,0,100.00%,base32B_full60
+UAR,from.bank,18,12,33.33%,base32B_full60
+UAR,from.name,18,4,77.78%,base32B_full60
+UAR,to.account_number,18,0,100.00%,base32B_full60
+UAR,to.bank,18,0,100.00%,base32B_full60
+UAR,to.name,18,9,50.00%,base32B_full60
+UAR,transaction_references.0,18,0,100.00%,base32B_full60
+ADCC,amount,20,0,100.00%,cycle3_32Bv2_full60
+ADCC,can_be_located,20,0,100.00%,cycle3_32Bv2_full60
+ADCC,cancel_amount_requested,20,0,100.00%,cycle3_32Bv2_full60
+ADCC,channel,20,0,100.00%,cycle3_32Bv2_full60
+ADCC,currency,20,0,100.00%,cycle3_32Bv2_full60
+ADCC,date,20,0,100.00%,cycle3_32Bv2_full60
+ADCC,from.account_number,20,0,100.00%,cycle3_32Bv2_full60
+ADCC,from.bank,20,1,95.00%,cycle3_32Bv2_full60
+ADCC,from.name,20,1,95.00%,cycle3_32Bv2_full60
+ADCC,to.account_number,20,0,100.00%,cycle3_32Bv2_full60
+ADCC,to.bank,20,0,100.00%,cycle3_32Bv2_full60
+ADCC,to.name,20,0,100.00%,cycle3_32Bv2_full60
+ADCC,transaction_references.0,20,0,100.00%,cycle3_32Bv2_full60
+HSBC Referral,amount,38,0,100.00%,cycle3_32Bv2_full60
+HSBC Referral,can_be_located,38,0,100.00%,cycle3_32Bv2_full60
+HSBC Referral,cancel_amount_requested,38,0,100.00%,cycle3_32Bv2_full60
+HSBC Referral,channel,38,0,100.00%,cycle3_32Bv2_full60
+HSBC Referral,currency,38,0,100.00%,cycle3_32Bv2_full60
+HSBC Referral,date,38,0,100.00%,cycle3_32Bv2_full60
+HSBC Referral,from.account_number,38,0,100.00%,cycle3_32Bv2_full60
+HSBC Referral,from.bank,38,0,100.00%,cycle3_32Bv2_full60
+HSBC Referral,from.name,38,5,86.84%,cycle3_32Bv2_full60
+HSBC Referral,to.account_number,38,0,100.00%,cycle3_32Bv2_full60
+HSBC Referral,to.bank,38,0,100.00%,cycle3_32Bv2_full60
+HSBC Referral,to.name,38,1,97.37%,cycle3_32Bv2_full60
+HSBC Referral,transaction_references.0,38,0,100.00%,cycle3_32Bv2_full60
+ODFT,amount,6,0,100.00%,cycle3_32Bv2_full60
+ODFT,can_be_located,6,0,100.00%,cycle3_32Bv2_full60
+ODFT,cancel_amount_requested,6,0,100.00%,cycle3_32Bv2_full60
+ODFT,channel,6,0,100.00%,cycle3_32Bv2_full60
+ODFT,currency,6,0,100.00%,cycle3_32Bv2_full60
+ODFT,date,6,0,100.00%,cycle3_32Bv2_full60
+ODFT,from.account_number,6,0,100.00%,cycle3_32Bv2_full60
+ODFT,from.bank,6,0,100.00%,cycle3_32Bv2_full60
+ODFT,from.name,6,1,83.33%,cycle3_32Bv2_full60
+ODFT,to.account_number,6,0,100.00%,cycle3_32Bv2_full60
+ODFT,to.bank,6,0,100.00%,cycle3_32Bv2_full60
+ODFT,to.name,6,0,100.00%,cycle3_32Bv2_full60
+ODFT,transaction_references.0,6,0,100.00%,cycle3_32Bv2_full60
+Police Letter,amount,14,0,100.00%,cycle3_32Bv2_full60
+Police Letter,can_be_located,14,0,100.00%,cycle3_32Bv2_full60
+Police Letter,cancel_amount_requested,14,0,100.00%,cycle3_32Bv2_full60
+Police Letter,channel,14,0,100.00%,cycle3_32Bv2_full60
+Police Letter,currency,14,0,100.00%,cycle3_32Bv2_full60
+Police Letter,date,14,0,100.00%,cycle3_32Bv2_full60
+Police Letter,from.account_number,14,0,100.00%,cycle3_32Bv2_full60
+Police Letter,from.bank,14,2,85.71%,cycle3_32Bv2_full60
+Police Letter,from.name,14,0,100.00%,cycle3_32Bv2_full60
+Police Letter,to.account_number,14,0,100.00%,cycle3_32Bv2_full60
+Police Letter,to.bank,14,0,100.00%,cycle3_32Bv2_full60
+Police Letter,to.name,14,1,92.86%,cycle3_32Bv2_full60
+Police Letter,transaction_references.0,14,0,100.00%,cycle3_32Bv2_full60
+Search Warrant,amount,6,0,100.00%,cycle3_32Bv2_full60
+Search Warrant,can_be_located,6,0,100.00%,cycle3_32Bv2_full60
+Search Warrant,cancel_amount_requested,6,0,100.00%,cycle3_32Bv2_full60
+Search Warrant,channel,6,0,100.00%,cycle3_32Bv2_full60
+Search Warrant,currency,6,0,100.00%,cycle3_32Bv2_full60
+Search Warrant,date,6,0,100.00%,cycle3_32Bv2_full60
+Search Warrant,from.account_number,6,0,100.00%,cycle3_32Bv2_full60
+Search Warrant,from.bank,6,0,100.00%,cycle3_32Bv2_full60
+Search Warrant,from.name,6,0,100.00%,cycle3_32Bv2_full60
+Search Warrant,to.account_number,6,0,100.00%,cycle3_32Bv2_full60
+Search Warrant,to.bank,6,0,100.00%,cycle3_32Bv2_full60
+Search Warrant,to.name,6,0,100.00%,cycle3_32Bv2_full60
+Search Warrant,transaction_references.0,6,0,100.00%,cycle3_32Bv2_full60
+UAR,amount,18,3,83.33%,cycle3_32Bv2_full60
+UAR,can_be_located,18,3,83.33%,cycle3_32Bv2_full60
+UAR,cancel_amount_requested,18,1,94.44%,cycle3_32Bv2_full60
+UAR,channel,18,6,66.67%,cycle3_32Bv2_full60
+UAR,currency,18,3,83.33%,cycle3_32Bv2_full60
+UAR,date,18,3,83.33%,cycle3_32Bv2_full60
+UAR,from.account_number,18,2,88.89%,cycle3_32Bv2_full60
+UAR,from.bank,18,10,44.44%,cycle3_32Bv2_full60
+UAR,from.name,18,2,88.89%,cycle3_32Bv2_full60
+UAR,to.account_number,18,3,83.33%,cycle3_32Bv2_full60
+UAR,to.bank,18,3,83.33%,cycle3_32Bv2_full60
+UAR,to.name,18,3,83.33%,cycle3_32Bv2_full60
+UAR,transaction_references.0,18,2,88.89%,cycle3_32Bv2_full60
+ADCC,amount,20,0,100.00%,cycle2_final32B_full60
+ADCC,can_be_located,20,0,100.00%,cycle2_final32B_full60
+ADCC,cancel_amount_requested,20,0,100.00%,cycle2_final32B_full60
+ADCC,channel,20,9,55.00%,cycle2_final32B_full60
+ADCC,currency,20,0,100.00%,cycle2_final32B_full60
+ADCC,date,20,2,90.00%,cycle2_final32B_full60
+ADCC,from.account_number,20,0,100.00%,cycle2_final32B_full60
+ADCC,from.bank,20,3,85.00%,cycle2_final32B_full60
+ADCC,from.name,20,2,90.00%,cycle2_final32B_full60
+ADCC,to.account_number,20,0,100.00%,cycle2_final32B_full60
+ADCC,to.bank,20,1,95.00%,cycle2_final32B_full60
+ADCC,to.name,20,0,100.00%,cycle2_final32B_full60
+ADCC,transaction_references.0,20,0,100.00%,cycle2_final32B_full60
+HSBC Referral,amount,39,2,94.87%,cycle2_final32B_full60
+HSBC Referral,can_be_located,39,2,94.87%,cycle2_final32B_full60
+HSBC Referral,cancel_amount_requested,39,0,100.00%,cycle2_final32B_full60
+HSBC Referral,channel,39,6,84.62%,cycle2_final32B_full60
+HSBC Referral,currency,39,2,94.87%,cycle2_final32B_full60
+HSBC Referral,date,39,2,94.87%,cycle2_final32B_full60
+HSBC Referral,from.account_number,39,2,94.87%,cycle2_final32B_full60
+HSBC Referral,from.bank,39,39,0.00%,cycle2_final32B_full60
+HSBC Referral,from.name,39,17,56.41%,cycle2_final32B_full60
+HSBC Referral,to.account_number,39,2,94.87%,cycle2_final32B_full60
+HSBC Referral,to.bank,39,2,94.87%,cycle2_final32B_full60
+HSBC Referral,to.name,39,37,5.13%,cycle2_final32B_full60
+HSBC Referral,transaction_references.0,39,2,94.87%,cycle2_final32B_full60
+ODFT,amount,6,1,83.33%,cycle2_final32B_full60
+ODFT,can_be_located,6,1,83.33%,cycle2_final32B_full60
+ODFT,cancel_amount_requested,6,0,100.00%,cycle2_final32B_full60
+ODFT,channel,6,1,83.33%,cycle2_final32B_full60
+ODFT,currency,6,1,83.33%,cycle2_final32B_full60
+ODFT,date,6,1,83.33%,cycle2_final32B_full60
+ODFT,from.account_number,6,1,83.33%,cycle2_final32B_full60
+ODFT,from.bank,6,3,50.00%,cycle2_final32B_full60
+ODFT,from.name,6,2,66.67%,cycle2_final32B_full60
+ODFT,to.account_number,6,1,83.33%,cycle2_final32B_full60
+ODFT,to.bank,6,2,66.67%,cycle2_final32B_full60
+ODFT,to.name,6,2,66.67%,cycle2_final32B_full60
+ODFT,transaction_references.0,6,1,83.33%,cycle2_final32B_full60
 Police Letter,amount,14,0,100.00%,cycle2_final32B_full60
 Police Letter,can_be_located,14,0,100.00%,cycle2_final32B_full60
-Police Letter,cancel_amount_requested,9,0,100.00%,cycle2_final32B_full60
+Police Letter,cancel_amount_requested,14,0,100.00%,cycle2_final32B_full60
 Police Letter,channel,14,0,100.00%,cycle2_final32B_full60
 Police Letter,currency,14,0,100.00%,cycle2_final32B_full60
-Police Letter,date,14,1,92.86%,cycle2_final32B_full60
-Police Letter,from.account_number,12,1,91.67%,cycle2_final32B_full60
-Police Letter,from.bank,11,1,90.91%,cycle2_final32B_full60
-Police Letter,from.name,11,0,100.00%,cycle2_final32B_full60
+Police Letter,date,14,0,100.00%,cycle2_final32B_full60
+Police Letter,from.account_number,14,0,100.00%,cycle2_final32B_full60
+Police Letter,from.bank,14,2,85.71%,cycle2_final32B_full60
+Police Letter,from.name,14,0,100.00%,cycle2_final32B_full60
 Police Letter,to.account_number,14,0,100.00%,cycle2_final32B_full60
-Police Letter,to.bank,14,4,71.43%,cycle2_final32B_full60
-Police Letter,to.name,14,2,85.71%,cycle2_final32B_full60
+Police Letter,to.bank,14,0,100.00%,cycle2_final32B_full60
+Police Letter,to.name,14,1,92.86%,cycle2_final32B_full60
 Police Letter,transaction_references.0,14,0,100.00%,cycle2_final32B_full60
 Search Warrant,amount,6,0,100.00%,cycle2_final32B_full60
 Search Warrant,can_be_located,6,0,100.00%,cycle2_final32B_full60
@@ -627,174 +221,15 @@ Search Warrant,to.bank,6,0,100.00%,cycle2_final32B_full60
 Search Warrant,to.name,6,0,100.00%,cycle2_final32B_full60
 Search Warrant,transaction_references.0,6,0,100.00%,cycle2_final32B_full60
 UAR,amount,18,1,94.44%,cycle2_final32B_full60
-UAR,can_be_located,18,1,94.44%,cycle2_final32B_full60
-UAR,cancel_amount_requested,14,3,78.57%,cycle2_final32B_full60
-UAR,channel,18,1,94.44%,cycle2_final32B_full60
-UAR,currency,18,1,94.44%,cycle2_final32B_full60
-UAR,date,18,3,83.33%,cycle2_final32B_full60
-UAR,from.account_number,14,2,85.71%,cycle2_final32B_full60
-UAR,from.bank,15,3,80.00%,cycle2_final32B_full60
-UAR,from.name,17,4,76.47%,cycle2_final32B_full60
-UAR,to.account_number,18,3,83.33%,cycle2_final32B_full60
-UAR,to.bank,18,5,72.22%,cycle2_final32B_full60
-UAR,to.name,18,11,38.89%,cycle2_final32B_full60
-UAR,transaction_references.0,18,1,94.44%,cycle2_final32B_full60
-ADCC,amount,20,7,65.00%,cycle2_final14B_full60
-ADCC,can_be_located,20,7,65.00%,cycle2_final14B_full60
-ADCC,cancel_amount_requested,4,0,100.00%,cycle2_final14B_full60
-ADCC,channel,15,9,40.00%,cycle2_final14B_full60
-ADCC,currency,20,7,65.00%,cycle2_final14B_full60
-ADCC,date,20,8,60.00%,cycle2_final14B_full60
-ADCC,from.account_number,18,6,66.67%,cycle2_final14B_full60
-ADCC,from.bank,18,7,61.11%,cycle2_final14B_full60
-ADCC,from.name,20,9,55.00%,cycle2_final14B_full60
-ADCC,to.account_number,20,7,65.00%,cycle2_final14B_full60
-ADCC,to.bank,20,15,25.00%,cycle2_final14B_full60
-ADCC,to.name,20,8,60.00%,cycle2_final14B_full60
-ADCC,transaction_references.0,20,7,65.00%,cycle2_final14B_full60
-HSBC Referral,amount,44,24,45.45%,cycle2_final14B_full60
-HSBC Referral,can_be_located,44,23,47.73%,cycle2_final14B_full60
-HSBC Referral,cancel_amount_requested,15,0,100.00%,cycle2_final14B_full60
-HSBC Referral,channel,44,25,43.18%,cycle2_final14B_full60
-HSBC Referral,currency,44,23,47.73%,cycle2_final14B_full60
-HSBC Referral,date,44,25,43.18%,cycle2_final14B_full60
-HSBC Referral,from.account_number,44,25,43.18%,cycle2_final14B_full60
-HSBC Referral,from.bank,44,29,34.09%,cycle2_final14B_full60
-HSBC Referral,from.name,44,27,38.64%,cycle2_final14B_full60
-HSBC Referral,to.account_number,44,25,43.18%,cycle2_final14B_full60
-HSBC Referral,to.bank,44,26,40.91%,cycle2_final14B_full60
-HSBC Referral,to.name,44,28,36.36%,cycle2_final14B_full60
-HSBC Referral,transaction_references.0,44,23,47.73%,cycle2_final14B_full60
-ODFT,amount,6,4,33.33%,cycle2_final14B_full60
-ODFT,can_be_located,6,3,50.00%,cycle2_final14B_full60
-ODFT,channel,6,3,50.00%,cycle2_final14B_full60
-ODFT,currency,6,3,50.00%,cycle2_final14B_full60
-ODFT,date,6,5,16.67%,cycle2_final14B_full60
-ODFT,from.account_number,6,4,33.33%,cycle2_final14B_full60
-ODFT,from.bank,6,5,16.67%,cycle2_final14B_full60
-ODFT,from.name,6,5,16.67%,cycle2_final14B_full60
-ODFT,to.account_number,6,5,16.67%,cycle2_final14B_full60
-ODFT,to.bank,5,5,0.00%,cycle2_final14B_full60
-ODFT,to.name,6,5,16.67%,cycle2_final14B_full60
-ODFT,transaction_references.0,6,3,50.00%,cycle2_final14B_full60
-Police Letter,amount,14,1,92.86%,cycle2_final14B_full60
-Police Letter,can_be_located,14,0,100.00%,cycle2_final14B_full60
-Police Letter,cancel_amount_requested,6,0,100.00%,cycle2_final14B_full60
-Police Letter,channel,14,1,92.86%,cycle2_final14B_full60
-Police Letter,currency,14,0,100.00%,cycle2_final14B_full60
-Police Letter,date,14,2,85.71%,cycle2_final14B_full60
-Police Letter,from.account_number,9,2,77.78%,cycle2_final14B_full60
-Police Letter,from.bank,8,1,87.50%,cycle2_final14B_full60
-Police Letter,from.name,8,1,87.50%,cycle2_final14B_full60
-Police Letter,to.account_number,14,0,100.00%,cycle2_final14B_full60
-Police Letter,to.bank,14,5,64.29%,cycle2_final14B_full60
-Police Letter,to.name,14,4,71.43%,cycle2_final14B_full60
-Police Letter,transaction_references.0,14,0,100.00%,cycle2_final14B_full60
-Search Warrant,amount,6,0,100.00%,cycle2_final14B_full60
-Search Warrant,can_be_located,6,0,100.00%,cycle2_final14B_full60
-Search Warrant,cancel_amount_requested,6,0,100.00%,cycle2_final14B_full60
-Search Warrant,channel,6,0,100.00%,cycle2_final14B_full60
-Search Warrant,currency,6,0,100.00%,cycle2_final14B_full60
-Search Warrant,date,6,0,100.00%,cycle2_final14B_full60
-Search Warrant,from.account_number,6,0,100.00%,cycle2_final14B_full60
-Search Warrant,from.bank,6,0,100.00%,cycle2_final14B_full60
-Search Warrant,from.name,6,0,100.00%,cycle2_final14B_full60
-Search Warrant,to.account_number,6,0,100.00%,cycle2_final14B_full60
-Search Warrant,to.bank,6,0,100.00%,cycle2_final14B_full60
-Search Warrant,to.name,6,0,100.00%,cycle2_final14B_full60
-Search Warrant,transaction_references.0,6,0,100.00%,cycle2_final14B_full60
-UAR,amount,18,1,94.44%,cycle2_final14B_full60
-UAR,can_be_located,18,1,94.44%,cycle2_final14B_full60
-UAR,cancel_amount_requested,12,1,91.67%,cycle2_final14B_full60
-UAR,channel,17,0,100.00%,cycle2_final14B_full60
-UAR,currency,18,1,94.44%,cycle2_final14B_full60
-UAR,date,17,1,94.12%,cycle2_final14B_full60
-UAR,from.account_number,17,5,70.59%,cycle2_final14B_full60
-UAR,from.bank,17,8,52.94%,cycle2_final14B_full60
-UAR,from.name,18,6,66.67%,cycle2_final14B_full60
-UAR,to.account_number,17,3,82.35%,cycle2_final14B_full60
-UAR,to.bank,18,8,55.56%,cycle2_final14B_full60
-UAR,to.name,18,12,33.33%,cycle2_final14B_full60
-UAR,transaction_references.0,17,0,100.00%,cycle2_final14B_full60
-ADCC,amount,20,19,5.00%,cycle3_8Bv1_full60
-ADCC,can_be_located,20,19,5.00%,cycle3_8Bv1_full60
-ADCC,cancel_amount_requested,1,0,100.00%,cycle3_8Bv1_full60
-ADCC,channel,10,9,10.00%,cycle3_8Bv1_full60
-ADCC,currency,20,19,5.00%,cycle3_8Bv1_full60
-ADCC,date,20,19,5.00%,cycle3_8Bv1_full60
-ADCC,from.account_number,18,17,5.56%,cycle3_8Bv1_full60
-ADCC,from.bank,18,17,5.56%,cycle3_8Bv1_full60
-ADCC,from.name,20,19,5.00%,cycle3_8Bv1_full60
-ADCC,to.account_number,20,19,5.00%,cycle3_8Bv1_full60
-ADCC,to.bank,20,19,5.00%,cycle3_8Bv1_full60
-ADCC,to.name,20,19,5.00%,cycle3_8Bv1_full60
-ADCC,transaction_id,1,0,100.00%,cycle3_8Bv1_full60
-ADCC,transaction_references.0,20,19,5.00%,cycle3_8Bv1_full60
-HSBC Referral,amount,42,26,38.10%,cycle3_8Bv1_full60
-HSBC Referral,can_be_located,42,25,40.48%,cycle3_8Bv1_full60
-HSBC Referral,cancel_amount_requested,8,0,100.00%,cycle3_8Bv1_full60
-HSBC Referral,channel,41,26,36.59%,cycle3_8Bv1_full60
-HSBC Referral,currency,42,25,40.48%,cycle3_8Bv1_full60
-HSBC Referral,date,42,26,38.10%,cycle3_8Bv1_full60
-HSBC Referral,from.account_number,42,26,38.10%,cycle3_8Bv1_full60
-HSBC Referral,from.bank,42,29,30.95%,cycle3_8Bv1_full60
-HSBC Referral,from.name,42,30,28.57%,cycle3_8Bv1_full60
-HSBC Referral,to.account_number,42,26,38.10%,cycle3_8Bv1_full60
-HSBC Referral,to.bank,42,29,30.95%,cycle3_8Bv1_full60
-HSBC Referral,to.name,42,29,30.95%,cycle3_8Bv1_full60
-HSBC Referral,transaction_id,8,0,100.00%,cycle3_8Bv1_full60
-HSBC Referral,transaction_references.0,42,25,40.48%,cycle3_8Bv1_full60
-ODFT,amount,5,2,60.00%,cycle3_8Bv1_full60
-ODFT,can_be_located,5,1,80.00%,cycle3_8Bv1_full60
-ODFT,channel,5,1,80.00%,cycle3_8Bv1_full60
-ODFT,currency,5,1,80.00%,cycle3_8Bv1_full60
-ODFT,date,5,5,0.00%,cycle3_8Bv1_full60
-ODFT,from.account_number,5,2,60.00%,cycle3_8Bv1_full60
-ODFT,from.bank,5,2,60.00%,cycle3_8Bv1_full60
-ODFT,from.name,5,2,60.00%,cycle3_8Bv1_full60
-ODFT,to.account_number,5,3,40.00%,cycle3_8Bv1_full60
-ODFT,to.bank,5,3,40.00%,cycle3_8Bv1_full60
-ODFT,to.name,5,2,60.00%,cycle3_8Bv1_full60
-ODFT,transaction_references.0,5,1,80.00%,cycle3_8Bv1_full60
-Police Letter,amount,14,2,85.71%,cycle3_8Bv1_full60
-Police Letter,can_be_located,14,2,85.71%,cycle3_8Bv1_full60
-Police Letter,cancel_amount_requested,7,0,100.00%,cycle3_8Bv1_full60
-Police Letter,channel,14,3,78.57%,cycle3_8Bv1_full60
-Police Letter,currency,14,2,85.71%,cycle3_8Bv1_full60
-Police Letter,date,14,4,71.43%,cycle3_8Bv1_full60
-Police Letter,from.account_number,10,1,90.00%,cycle3_8Bv1_full60
-Police Letter,from.bank,10,1,90.00%,cycle3_8Bv1_full60
-Police Letter,from.name,10,1,90.00%,cycle3_8Bv1_full60
-Police Letter,to.account_number,14,2,85.71%,cycle3_8Bv1_full60
-Police Letter,to.bank,14,5,64.29%,cycle3_8Bv1_full60
-Police Letter,to.name,14,3,78.57%,cycle3_8Bv1_full60
-Police Letter,transaction_id,7,0,100.00%,cycle3_8Bv1_full60
-Police Letter,transaction_references.0,14,2,85.71%,cycle3_8Bv1_full60
-Search Warrant,amount,3,0,100.00%,cycle3_8Bv1_full60
-Search Warrant,can_be_located,6,3,50.00%,cycle3_8Bv1_full60
-Search Warrant,cancel_amount_requested,3,0,100.00%,cycle3_8Bv1_full60
-Search Warrant,channel,3,0,100.00%,cycle3_8Bv1_full60
-Search Warrant,currency,6,3,50.00%,cycle3_8Bv1_full60
-Search Warrant,date,6,3,50.00%,cycle3_8Bv1_full60
-Search Warrant,from.account_number,3,0,100.00%,cycle3_8Bv1_full60
-Search Warrant,from.bank,5,2,60.00%,cycle3_8Bv1_full60
-Search Warrant,from.name,3,0,100.00%,cycle3_8Bv1_full60
-Search Warrant,to.account_number,4,1,75.00%,cycle3_8Bv1_full60
-Search Warrant,to.bank,6,3,50.00%,cycle3_8Bv1_full60
-Search Warrant,to.name,4,1,75.00%,cycle3_8Bv1_full60
-Search Warrant,transaction_id,3,0,100.00%,cycle3_8Bv1_full60
-Search Warrant,transaction_references.0,3,0,100.00%,cycle3_8Bv1_full60
-UAR,amount,18,5,72.22%,cycle3_8Bv1_full60
-UAR,can_be_located,18,5,72.22%,cycle3_8Bv1_full60
-UAR,cancel_amount_requested,12,6,50.00%,cycle3_8Bv1_full60
-UAR,channel,16,7,56.25%,cycle3_8Bv1_full60
-UAR,currency,18,5,72.22%,cycle3_8Bv1_full60
-UAR,date,16,3,81.25%,cycle3_8Bv1_full60
-UAR,from.account_number,16,7,56.25%,cycle3_8Bv1_full60
-UAR,from.bank,17,11,35.29%,cycle3_8Bv1_full60
-UAR,from.name,16,7,56.25%,cycle3_8Bv1_full60
-UAR,to.account_number,16,5,68.75%,cycle3_8Bv1_full60
-UAR,to.bank,18,7,61.11%,cycle3_8Bv1_full60
-UAR,to.name,17,6,64.71%,cycle3_8Bv1_full60
-UAR,transaction_id,8,2,75.00%,cycle3_8Bv1_full60
-UAR,transaction_references.0,16,3,81.25%,cycle3_8Bv1_full60
+UAR,can_be_located,18,0,100.00%,cycle2_final32B_full60
+UAR,cancel_amount_requested,18,2,88.89%,cycle2_final32B_full60
+UAR,channel,18,2,88.89%,cycle2_final32B_full60
+UAR,currency,18,0,100.00%,cycle2_final32B_full60
+UAR,date,18,0,100.00%,cycle2_final32B_full60
+UAR,from.account_number,18,0,100.00%,cycle2_final32B_full60
+UAR,from.bank,18,6,66.67%,cycle2_final32B_full60
+UAR,from.name,18,4,77.78%,cycle2_final32B_full60
+UAR,to.account_number,18,0,100.00%,cycle2_final32B_full60
+UAR,to.bank,18,7,61.11%,cycle2_final32B_full60
+UAR,to.name,18,12,33.33%,cycle2_final32B_full60
+UAR,transaction_references.0,18,0,100.00%,cycle2_final32B_full60
