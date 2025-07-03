@@ -11,6 +11,8 @@ ADCC,from.name,20,19,5.00%
 ADCC,to.account_number,20,19,5.00%
 ADCC,to.bank,20,19,5.00%
 ADCC,to.name,20,19,5.00%
+ADCC,transaction_id,1,0,100.00%
+ADCC,transaction_references.0,20,19,5.00%
 HSBC Referral,amount,42,26,38.10%
 HSBC Referral,can_be_located,42,25,40.48%
 HSBC Referral,cancel_amount_requested,8,0,100.00%
@@ -23,6 +25,8 @@ HSBC Referral,from.name,42,30,28.57%
 HSBC Referral,to.account_number,42,26,38.10%
 HSBC Referral,to.bank,42,29,30.95%
 HSBC Referral,to.name,42,29,30.95%
+HSBC Referral,transaction_id,8,0,100.00%
+HSBC Referral,transaction_references.0,42,25,40.48%
 ODFT,amount,5,2,60.00%
 ODFT,can_be_located,5,1,80.00%
 ODFT,channel,5,1,80.00%
@@ -34,6 +38,7 @@ ODFT,from.name,5,2,60.00%
 ODFT,to.account_number,5,3,40.00%
 ODFT,to.bank,5,3,40.00%
 ODFT,to.name,5,2,60.00%
+ODFT,transaction_references.0,5,1,80.00%
 Police Letter,amount,14,2,85.71%
 Police Letter,can_be_located,14,2,85.71%
 Police Letter,cancel_amount_requested,7,0,100.00%
@@ -46,6 +51,8 @@ Police Letter,from.name,10,1,90.00%
 Police Letter,to.account_number,14,2,85.71%
 Police Letter,to.bank,14,5,64.29%
 Police Letter,to.name,14,3,78.57%
+Police Letter,transaction_id,7,0,100.00%
+Police Letter,transaction_references.0,14,2,85.71%
 Search Warrant,amount,3,0,100.00%
 Search Warrant,can_be_located,6,3,50.00%
 Search Warrant,cancel_amount_requested,3,0,100.00%
@@ -58,6 +65,8 @@ Search Warrant,from.name,3,0,100.00%
 Search Warrant,to.account_number,4,1,75.00%
 Search Warrant,to.bank,6,3,50.00%
 Search Warrant,to.name,4,1,75.00%
+Search Warrant,transaction_id,3,0,100.00%
+Search Warrant,transaction_references.0,3,0,100.00%
 UAR,amount,18,5,72.22%
 UAR,can_be_located,18,5,72.22%
 UAR,cancel_amount_requested,12,6,50.00%
@@ -70,3 +79,5 @@ UAR,from.name,16,7,56.25%
 UAR,to.account_number,16,5,68.75%
 UAR,to.bank,18,7,61.11%
 UAR,to.name,17,6,64.71%
+UAR,transaction_id,8,2,75.00%
+UAR,transaction_references.0,16,3,81.25%

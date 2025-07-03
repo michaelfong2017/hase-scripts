@@ -1,27 +1,13 @@
 ﻿Type,Field,total,mismatch_count,accuracy_rate
 ADCC,fraud_type,4,0,100.00%
-ADCC,police_reference,4,2,50.00%
 ADCC,police_team,4,0,100.00%
 HSBC Referral,fraud_type,18,2,88.89%
-ODFT,fraud_type,4,3,25.00%
+ODFT,fraud_type,4,1,75.00%
 Police Letter,fraud_type,12,7,41.67%
-Police Letter,police_reference,12,4,66.67%
 Police Letter,police_team,12,2,83.33%
 Search Warrant,contact_person,6,2,66.67%
-Search Warrant,fraud_type,6,2,66.67%
-Search Warrant,police_reference,6,2,66.67%
+Search Warrant,fraud_type,6,0,100.00%
 Search Warrant,police_team,6,4,33.33%
 Search Warrant,writ_no,6,2,66.67%
-UAR,Beneficiary Account Number,1,1,0.00%
-UAR,Beneficiary Bank Raw,1,1,0.00%
-UAR,Beneficiary Name,1,1,0.00%
-UAR,Converted Amount,1,1,0.00%
-UAR,Debit Credit Indicator,1,1,0.00%
-UAR,Originating Amount,1,1,0.00%
-UAR,Originating Currency,1,1,0.00%
-UAR,Originator Account Number,1,1,0.00%
-UAR,Originator Bank Raw,1,1,0.00%
-UAR,Originator Name,1,1,0.00%
-UAR,Sending Bank Address,1,1,0.00%
 UAR,Subject Type,1,1,0.00%
-UAR,fraud_type,16,14,12.50%
+UAR,fraud_type,16,5,68.75%

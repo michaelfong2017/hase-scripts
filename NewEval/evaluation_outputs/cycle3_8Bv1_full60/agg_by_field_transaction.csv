@@ -10,4 +10,6 @@ to.account_number,101,56,44.55%
 to.bank,105,66,37.14%
 channel,89,46,48.31%
 can_be_located,105,55,47.62%
+transaction_references.0,100,50,50.00%
 cancel_amount_requested,31,6,80.65%
+transaction_id,27,2,92.59%

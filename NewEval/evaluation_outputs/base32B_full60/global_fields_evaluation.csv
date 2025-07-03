@@ -1,4 +1,4 @@
-﻿Type,Case Number,Original Case Number,Intelligence Number,Suspect Number,Instruction,Transactions,Input,Ground Truth,Set Number,Variant Number,Randomization Set,Diff,Qwen2.5-32B-Instruct,input_tokens,output_tokens,extracted_gt_json,extracted_llm_json,gt_fraud_type,llm_fraud_type,gt_police_reference,llm_police_reference,gt_police_team,llm_police_team,gt_writ_no,llm_writ_no,gt_contact_person,llm_contact_person,gt_Originating Amount,llm_Originating Amount,gt_Sending Bank Address,llm_Sending Bank Address,gt_Originator Account Number,llm_Originator Account Number,gt_Originator Name,llm_Originator Name,gt_Beneficiary Name,llm_Beneficiary Name,gt_Subject Type,llm_Subject Type,gt_Originator Bank Raw,llm_Originator Bank Raw,gt_Beneficiary Account Number,llm_Beneficiary Account Number,gt_Beneficiary Bank Raw,llm_Beneficiary Bank Raw,gt_Converted Amount,llm_Converted Amount,gt_Sending Bank Account Number,llm_Sending Bank Account Number,gt_Originating Currency,llm_Originating Currency,gt_Debit Credit Indicator,llm_Debit Credit Indicator
+﻿Type,Case Number,Original Case Number,Intelligence Number,Suspect Number,Instruction,Transactions,Input,Ground Truth,Set Number,Variant Number,Randomization Set,Diff,Qwen2.5-32B-Instruct,input_tokens,output_tokens,extracted_gt_json,extracted_llm_json,gt_fraud_type,llm_fraud_type,gt_police_team,llm_police_team,gt_writ_no,llm_writ_no,gt_contact_person,llm_contact_person,gt_Subject Type,llm_Subject Type
 ADCC,7,7,2,"[1, 2]","You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -959,7 +959,7 @@ This JSON output consolidates the fraud alert source with the CSV transaction re
       ]
     }
   ]
-}",Investment Fraud,Investment Fraud,ESPS 7■■■■■■ and NTKDIV 24■■■■■,ESPS 7■■■■■■ and NTKDIV 24■■■■■,DIT2-■■■■■,DIT2-■■■■■,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",Investment Fraud,Investment Fraud,DIT2-■■■■■,DIT2-■■■■■,,,,,,
 ADCC,8,8,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -1261,7 +1261,7 @@ This JSON output strictly follows the schema and includes all required fields ba
       ]
     }
   ]
-}",Social Media Deception,Social Media Deception,ESPS ■■■■/2024 and ERC24100■■■■■■■■,ESPS ■■■■/2024 and ERC24100■■■■■■■■ (E-HUB-■■■),E-HUB-■■■,E-HUB-■■■,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",Social Media Deception,Social Media Deception,E-HUB-■■■,E-HUB-■■■,,,,,,
 HSBC Referral,3,3,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -1530,7 +1530,7 @@ This JSON represents the consolidated data according to the given rules and sche
       ]
     }
   ]
-}",UAP-Impersonation (Other),UAP-Impersonation (Other),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",UAP-Impersonation (Other),UAP-Impersonation (Other),,,,,,,,
 HSBC Referral,5,5,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -1806,7 +1806,7 @@ This JSON output consolidates the extracted and matched transaction data accordi
       ]
     }
   ]
-}",AP- Impersonation(others),AP- Impersonation(others),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",AP- Impersonation(others),AP- Impersonation(others),,,,,,,,
 HSBC Referral,5,5,2,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -2187,7 +2187,7 @@ This JSON represents the consolidated and processed data based on the provided f
       ]
     }
   ]
-}",AP-Impersonation (Other),AP-Impersonation (Other),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",AP-Impersonation (Other),AP-Impersonation (Other),,,,,,,,
 HSBC Referral,5,5,4,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -2562,7 +2562,7 @@ This JSON output consolidates the fraud alert details with the matched transacti
       ]
     }
   ]
-}",Employment Fraud (Boosting Sales Scam),Employment Fraud (Boosting Sales Scam),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",Employment Fraud (Boosting Sales Scam),Employment Fraud (Boosting Sales Scam),,,,,,,,
 HSBC Referral,5,5,5,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -2894,7 +2894,7 @@ This JSON represents the consolidated and processed data according to the given 
       ]
     }
   ]
-}",AP- Employment Fraud (Boosting Sales Scam),AP- Employment Fraud (Boosting Sales Scam),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",AP- Employment Fraud (Boosting Sales Scam),AP- Employment Fraud (Boosting Sales Scam),,,,,,,,
 HSBC Referral,5,5,6,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -3799,7 +3799,7 @@ This JSON output consolidates the fraud alert data with the transaction records 
       ]
     }
   ]
-}",AP-Impersonation (Other),AP-Impersonation (Other),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",AP-Impersonation (Other),AP-Impersonation (Other),,,,,,,,
 HSBC Referral,5,5,9,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -4070,7 +4070,7 @@ This JSON output reflects the fraud alert and the matched transaction from the C
       ]
     }
   ]
-}",AP-Impersonation (Other),AP-Impersonation (Other),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",AP-Impersonation (Other),AP-Impersonation (Other),,,,,,,,
 HSBC Referral,7,7,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -4343,7 +4343,7 @@ This JSON output consolidates the information from the fraud alert source and th
       ]
     }
   ]
-}",Not provided,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",Not provided,,,,,,,,,
 HSBC Referral,25,25,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -4600,7 +4600,7 @@ This JSON output consolidates the information from both the fraud alert source a
       ]
     }
   ]
-}",AP-Impersonation (Other),AP-Impersonation (Other),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",AP-Impersonation (Other),AP-Impersonation (Other),,,,,,,,
 Police Letter,2,2,2,"[1, 2]","You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -4943,7 +4943,7 @@ This JSON structure consolidates the extracted and matched transaction data alon
       ]
     }
   ]
-}",Investment Scam,Money Laundering,TSW RN 240■■■■■■■,TSW RN 240■■■■■■■,"District Investigation Team 3, Yuen Long District","District Investigation Team 3, Yuen Long District",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",Investment Scam,Money Laundering,"District Investigation Team 3, Yuen Long District","District Investigation Team 3, Yuen Long District",,,,,,
 Police Letter,9,9,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -5284,7 +5284,7 @@ This JSON consolidates the extracted transaction details from the fraud alert so
       ]
     }
   ]
-}",Romance Scam,Money Laundering,Policeref1,Policeref1,"District Investigation Team 2, Kwai Tsing District, Kwai Chung Police Station","District Investigation Team 2, Kwai Tsing District, Kwai Chung Police Station",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",Romance Scam,Money Laundering,"District Investigation Team 2, Kwai Tsing District, Kwai Chung Police Station","District Investigation Team 2, Kwai Tsing District, Kwai Chung Police Station",,,,,,
 Police Letter,10,10,1,"[1, 3]","You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -5741,7 +5741,7 @@ This JSON output consolidates the extracted and matched transactions according t
       ]
     }
   ]
-}",Telephone Deception,Money Laundering,Policeref1,Policeref1,"District Investigation Team 4, Mong Kok District, Mong Kok Police Station",District Investigation Team 4 Mong Kok District Mong Kok Police Station,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",Telephone Deception,Money Laundering,"District Investigation Team 4, Mong Kok District, Mong Kok Police Station",District Investigation Team 4 Mong Kok District Mong Kok Police Station,,,,,,
 Police Letter,11,11,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -6080,7 +6080,7 @@ This JSON structure adheres to the specified schema and includes all the necessa
       ]
     }
   ]
-}",Telephone Deception,Money Laundering,Policeref1,Policeref1,"District Investigation Team 3, Tuen Mun District, Tuen Mun Police Station","District Investigation Team 3, Tuen Mun District, Tuen Mun Police Station",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",Telephone Deception,Money Laundering,"District Investigation Team 3, Tuen Mun District, Tuen Mun Police Station","District Investigation Team 3, Tuen Mun District, Tuen Mun Police Station",,,,,,
 Police Letter,12,12,2,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -6436,7 +6436,7 @@ This JSON object consolidates the extracted and matched transaction data along w
       ]
     }
   ]
-}",Telephone Deception,Money Laundering,POLICEREF1,POLICEREF1,"District Investigation Team 5, Mong Kok District, Mong Kok Police Station","District Investigation Team 5, Mong Kok District, Mong Kok Police Station",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",Telephone Deception,Money Laundering,"District Investigation Team 5, Mong Kok District, Mong Kok Police Station","District Investigation Team 5, Mong Kok District, Mong Kok Police Station",,,,,,
 Police Letter,12,12,3,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -6781,7 +6781,7 @@ This JSON represents the consolidated data extracted from the fraud alert source
       ]
     }
   ]
-}",Employment Fraud,Money Laundering,POLICEREF2,POLICEREF2,"District Investigation Team 2, Eastern District, North Point Police Station",District Investigation Team 2 Eastern District North Point Police Station,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",Employment Fraud,Money Laundering,"District Investigation Team 2, Eastern District, North Point Police Station",District Investigation Team 2 Eastern District North Point Police Station,,,,,,
 Search Warrant,6,6,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -6972,7 +6972,7 @@ Since there were no transactions to extract and match, the `alerted_transactions
   ""contact_person"": ""PC 1■■■■"",
   ""police_team"": ""Detective Police Constable 15■■■ CHENG ■■■■■■ of District Technology and Financial Crime Squad, Kwun Tong District, Hong Kong Police Force"",
   ""alerted_transactions"": []
-}",Not provided,Not provided,KTRN230■■■■,KTRN230■■■■,"District Technology and Financial Crime Squad, Kwun Tong District, Hong Kong Police Force","Detective Police Constable 15■■■ CHENG ■■■■■■ of District Technology and Financial Crime Squad, Kwun Tong District, Hong Kong Police Force",8■■■,8■■■,PC 1■■■■,PC 1■■■■,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",Not provided,Not provided,"District Technology and Financial Crime Squad, Kwun Tong District, Hong Kong Police Force","Detective Police Constable 15■■■ CHENG ■■■■■■ of District Technology and Financial Crime Squad, Kwun Tong District, Hong Kong Police Force",8■■■,8■■■,PC 1■■■■,PC 1■■■■,,
 Search Warrant,7,7,3,2,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -7270,7 +7270,7 @@ This JSON represents the consolidated data based on the provided fraud alert sou
       ]
     }
   ]
-}",Not provided,Obtaining Property By Deception,STRN240■■■■,STRN240■■■■,"District Investigation Team 7, Sha Tin District, Hong Kong POLICE","Detective Police Constable 12■■■ CHOI  ■■■■■■ of District Investigation Team 7, Sha Tin District, Hong Kong POLICE",67■■,67■■,PC 2■■■■,PC 2■■■■,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",Not provided,Obtaining Property By Deception,"District Investigation Team 7, Sha Tin District, Hong Kong POLICE","Detective Police Constable 12■■■ CHOI  ■■■■■■ of District Investigation Team 7, Sha Tin District, Hong Kong POLICE",67■■,67■■,PC 2■■■■,PC 2■■■■,,
 Search Warrant,25,25,3,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -7522,7 +7522,7 @@ This JSON represents the consolidated data based on the provided CSV and fraud a
       ]
     }
   ]
-}",Not provided,Not provided,TSWRN240■■■■,TSWRN240■■■■,District Technology and Financial Crime Squad 1 of Yuen Long District,District Technology and Financial Crime Squad 1 of Yuen Long District,TM12■■■/2024,TM12■■■/2024,SGT 2■■■■,SGT 2■■■■,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",Not provided,Not provided,District Technology and Financial Crime Squad 1 of Yuen Long District,District Technology and Financial Crime Squad 1 of Yuen Long District,TM12■■■/2024,TM12■■■/2024,SGT 2■■■■,SGT 2■■■■,,
 UAR,2,2,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -7947,7 +7947,7 @@ This JSON output consolidates the fraud alert details and matches them with the 
       ]
     }
   ]
-}",Payments(Authorised/Scams),Payments(Authorised/Scams),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",Payments(Authorised/Scams),Payments(Authorised/Scams),,,,,,,,
 UAR,3,3,2,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -8246,7 +8246,7 @@ This JSON represents the consolidated information from the fraud alert source an
       ]
     }
   ]
-}",Not provided,External Fraud,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",Not provided,External Fraud,,,,,,,,
 UAR,5,5,3,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -8565,7 +8565,7 @@ This JSON represents the consolidated data extracted from the fraud alert source
       ]
     }
   ]
-}",Not provided,External Fraud,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",Not provided,External Fraud,,,,,,,,
 UAR,5,5,7,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -8876,7 +8876,7 @@ This JSON represents the consolidated and enriched data based on the provided fr
       ]
     }
   ]
-}",Not provided,External Fraud,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",Not provided,External Fraud,,,,,,,,
 UAR,5,5,8,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -9201,7 +9201,7 @@ This JSON represents the consolidated and processed data based on the provided d
       ]
     }
   ]
-}",Not provided,External Fraud,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",Not provided,External Fraud,,,,,,,,
 UAR,8,8,2,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -9438,7 +9438,7 @@ This JSON structure adheres to the provided schema and includes all required fie
       ""transaction_references"": []
     }
   ]
-}",Investment,External Fraud,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",Investment,External Fraud,,,,,,,,
 UAR,13,13,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -9739,7 +9739,7 @@ This JSON represents the consolidated data based on the provided fraud alert sou
       ]
     }
   ]
-}",Purchase,External Fraud,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",Purchase,External Fraud,,,,,,,,
 UAR,25,25,2,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -10036,7 +10036,7 @@ This JSON output consolidates the information from the fraud alert source and th
       ]
     }
   ]
-}",Not provided,External Fraud,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",Not provided,External Fraud,,,,,,,,
 ODFT,12,12,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -10469,7 +10469,7 @@ This JSON represents the consolidated and enriched data based on the provided CS
       ]
     }
   ]
-}",AP-Impersonation (Others),Impersonation,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",AP-Impersonation (Others),Impersonation,,,,,,,,
 ODFT,20,20,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -10860,7 +10860,7 @@ This JSON output consolidates the extracted transactions from the fraud alert so
       ]
     }
   ]
-}",Impersonation,Impersonation,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",Impersonation,Impersonation,,,,,,,,
 ADCC,307,7,2,"[1, 2]","You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -11987,7 +11987,7 @@ This JSON output consolidates the transactions from the fraud alert source, matc
       ]
     }
   ]
-}",Investment Fraud,Investment Fraud,ESPS 433/2824 and WTSDIST 21819600 (DIT 0 1338908),ESPS 433/2824 and WTSDIST 21819600 (DIT 0 1338908) (DIT2-■■■■■),DIT2-■■■■■,DIT2-■■■■■,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",Investment Fraud,Investment Fraud,DIT2-■■■■■,DIT2-■■■■■,,,,,,
 ADCC,308,8,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -12300,7 +12300,7 @@ This JSON output consolidates the data from the fraud alert source and the CSV t
       ]
     }
   ]
-}",Social Media Deception,Social Media Deception,ESPS 8281/1053 and e-Hub 48932528 (DIT 4-80957),ESPS 8281/1053 and e-Hub 48932528 (DIT 4-80957) (E-HUB-■■■),E-HUB-■■■,E-HUB-■■■,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",Social Media Deception,Social Media Deception,E-HUB-■■■,E-HUB-■■■,,,,,,
 HSBC Referral,1803,3,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -12568,7 +12568,7 @@ This JSON output adheres to the specified schema and rules.",1445.0,824.0,"{
       ""transaction_references"": []
     }
   ]
-}",UAP-Impersonation (Other),UAP-Impersonation (Other),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",UAP-Impersonation (Other),UAP-Impersonation (Other),,,,,,,,
 HSBC Referral,1805,5,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -12852,7 +12852,7 @@ This JSON represents the consolidated data from the fraud alert source and the C
       ]
     }
   ]
-}",AP- Impersonation(others),AP- Impersonation(others),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",AP- Impersonation(others),AP- Impersonation(others),,,,,,,,
 HSBC Referral,1805,5,2,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -13247,7 +13247,7 @@ This JSON output consolidates the transactions extracted from the fraud alert so
       ]
     }
   ]
-}",AP-Impersonation (Other),AP-Impersonation (Other),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",AP-Impersonation (Other),AP-Impersonation (Other),,,,,,,,
 HSBC Referral,1805,5,4,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -13591,7 +13591,7 @@ This JSON output reflects the fraud alert details and the matched (or unmatched)
       ""transaction_references"": []
     }
   ]
-}",Employment Fraud (Boosting Sales Scam),Employment Fraud (Boosting Sales Scam),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",Employment Fraud (Boosting Sales Scam),Employment Fraud (Boosting Sales Scam),,,,,,,,
 HSBC Referral,1805,5,5,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -13994,7 +13994,7 @@ This JSON consolidates the extracted and matched transactions with the necessary
       ]
     }
   ]
-}",AP- Employment Fraud (Boosting Sales Scam),AP- Employment Fraud (Boosting Sales Scam),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",AP- Employment Fraud (Boosting Sales Scam),AP- Employment Fraud (Boosting Sales Scam),,,,,,,,
 HSBC Referral,1805,5,6,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -15027,7 +15027,7 @@ This JSON output consolidates the transactions from the fraud alert source and m
       ]
     }
   ]
-}",AP-Impersonation (Other),AP-Impersonation (Other),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",AP-Impersonation (Other),AP-Impersonation (Other),,,,,,,,
 HSBC Referral,1805,5,9,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -15294,7 +15294,7 @@ This JSON represents the consolidated and processed information based on the pro
       ""transaction_references"": []
     }
   ]
-}",AP-Impersonation (Other),AP-Impersonation (Other),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",AP-Impersonation (Other),AP-Impersonation (Other),,,,,,,,
 HSBC Referral,1807,7,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -15551,7 +15551,7 @@ This JSON output consolidates the extracted transaction details from the fraud a
       ""transaction_references"": []
     }
   ]
-}",Not provided,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",Not provided,,,,,,,,,
 HSBC Referral,1825,25,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -15822,7 +15822,7 @@ This JSON strictly follows the schema and includes all required fields.",1457.0,
       ]
     }
   ]
-}",AP-Impersonation (Other),AP-Impersonation (Other),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",AP-Impersonation (Other),AP-Impersonation (Other),,,,,,,,
 Police Letter,2552,2,2,"[1, 2]","You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -16168,7 +16168,7 @@ This JSON consolidates the data from the fraud alert source and the CSV file acc
       ]
     }
   ]
-}",Investment Scam,Investment Scam,ESPS 7645/3511 and ERC223931770223 (E-HUB-804),ESPS 7645/3511 and ERC223931770223,"District Investigation Team 3, Yuen Long District","District Investigation Team 3, Yuen Long District",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",Investment Scam,Investment Scam,"District Investigation Team 3, Yuen Long District","District Investigation Team 3, Yuen Long District",,,,,,
 Police Letter,2559,9,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -16510,7 +16510,7 @@ This JSON structure consolidates the data from the fraud alert source and the CS
       ]
     }
   ]
-}",Romance Scam,Romance Scam,ESPS 201/1048 and TYDIV 6633401 (DIT 6-4215634),ESPS 201/1048 and TYDIV 6633401,"District Investigation Team 2, Kwai Tsing District, Kwai Chung Police Station","District Investigation Team 2, Kwai Tsing District, Kwai Chung Police Station",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",Romance Scam,Romance Scam,"District Investigation Team 2, Kwai Tsing District, Kwai Chung Police Station","District Investigation Team 2, Kwai Tsing District, Kwai Chung Police Station",,,,,,
 Police Letter,2560,10,1,"[1, 3]","You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -16998,7 +16998,7 @@ This JSON output consolidates the transactions extracted from the fraud alert so
       ]
     }
   ]
-}",Telephone Deception,Telephone Deception,ESPS 86233/9653 and TY RN 5704445,ESPS 86233/9653 and TY RN 5704445,"District Investigation Team 4, Mong Kok District, Mong Kok Police Station",District Investigation Team 4 Mong Kok District Mong Kok Police Station,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",Telephone Deception,Telephone Deception,"District Investigation Team 4, Mong Kok District, Mong Kok Police Station",District Investigation Team 4 Mong Kok District Mong Kok Police Station,,,,,,
 Police Letter,2561,11,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -17338,7 +17338,7 @@ This JSON output reflects the extracted and processed data according to the spec
       ""transaction_references"": []
     }
   ]
-}",Telephone Deception,Telephone Deception,TM 440,TM 440,"District Investigation Team 3, Tuen Mun District, Tuen Mun Police Station","District Investigation Team 3, Tuen Mun District, Tuen Mun Police Station",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",Telephone Deception,Telephone Deception,"District Investigation Team 3, Tuen Mun District, Tuen Mun Police Station","District Investigation Team 3, Tuen Mun District, Tuen Mun Police Station",,,,,,
 Police Letter,2562,12,2,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -17656,7 +17656,7 @@ This JSON structure adheres to the specified schema and includes the required fi
       ""transaction_references"": []
     }
   ]
-}",Telephone Deception,Money Laundering,ESPS 381/5919 and WTSDIST 51291164 (DIT 6 7924642),ESPS 381/5919 and WTSDIST 51291164,"District Investigation Team 5, Mong Kok District, Mong Kok Police Station","District Investigation Team 5, Mong Kok District, Mong Kok Police Station",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",Telephone Deception,Money Laundering,"District Investigation Team 5, Mong Kok District, Mong Kok Police Station","District Investigation Team 5, Mong Kok District, Mong Kok Police Station",,,,,,
 Police Letter,2562,12,3,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -18001,7 +18001,7 @@ This JSON output consolidates the extracted and matched transaction details acco
       ]
     }
   ]
-}",Employment Fraud,Employment Fraud,ESPS 53/4347 and e-Hub 99875915 (E-HUB-300),ESPS 53/4347 and e-Hub 99875915,"District Investigation Team 2, Eastern District, North Point Police Station","District Investigation Team 2, Eastern District, North Point Police Station",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",Employment Fraud,Employment Fraud,"District Investigation Team 2, Eastern District, North Point Police Station","District Investigation Team 2, Eastern District, North Point Police Station",,,,,,
 Search Warrant,3306,6,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -18196,7 +18196,7 @@ This JSON reflects the information extracted from the fraud alert source and adh
   ""contact_person"": ""PC 1■■■■"",
   ""police_team"": ""Detective Police Constable 15■■■ CHENG ■■■■■■ of District Technology and Financial Crime Squad, Kwun Tong District, Hong Kong Police Force"",
   ""alerted_transactions"": []
-}",Not provided,"Obtaining Property By Deception, contrary to Section 17 (1 ) of the Theft Ordinance, Cap. 210",DIT8-51676,DIT8-51676,"District Technology and Financial Crime Squad, Kwun Tong District, Hong Kong Police Force","Detective Police Constable 15■■■ CHENG ■■■■■■ of District Technology and Financial Crime Squad, Kwun Tong District, Hong Kong Police Force",TM5596 /2232,8■■■,SGT 69760,PC 1■■■■,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",Not provided,"Obtaining Property By Deception, contrary to Section 17 (1 ) of the Theft Ordinance, Cap. 210","District Technology and Financial Crime Squad, Kwun Tong District, Hong Kong Police Force","Detective Police Constable 15■■■ CHENG ■■■■■■ of District Technology and Financial Crime Squad, Kwun Tong District, Hong Kong Police Force",TM5596 /2232,8■■■,SGT 69760,PC 1■■■■,,
 Search Warrant,3307,7,3,2,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -18408,7 +18408,7 @@ This JSON represents the consolidated data from the fraud alert source, includin
   ""contact_person"": ""PC 2■■■■"",
   ""police_team"": ""District Investigation Team 7, Sha Tin District, Hong Kong POLICE"",
   ""alerted_transactions"": []
-}",Not provided,Not provided,ESPS  3644/4011 and WTSDIST 99514370 (DIT 2-4342491),ESPS 3644/4011 and WTSDIST 99514370,"District Investigation Team 7, Sha Tin District, Hong Kong POLICE","District Investigation Team 7, Sha Tin District, Hong Kong POLICE",259631,67■■,PC 77442,PC 2■■■■,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",Not provided,Not provided,"District Investigation Team 7, Sha Tin District, Hong Kong POLICE","District Investigation Team 7, Sha Tin District, Hong Kong POLICE",259631,67■■,PC 77442,PC 2■■■■,,
 Search Warrant,3325,25,3,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -18604,7 +18604,7 @@ This JSON output strictly follows the schema and includes all required fields ba
   ""contact_person"": ""PC88231"",
   ""police_team"": ""Detective Police Constable 24■■■ LIU ■■■■■■ of District Technology and Financial Crime Squad 1 of Yuen Long District"",
   ""alerted_transactions"": []
-}",Not provided,Not provided,C RN 2325095636,"C RN 2325095636, 1■■■■",District Technology and Financial Crime Squad 1 of Yuen Long District,Detective Police Constable 24■■■ LIU ■■■■■■ of District Technology and Financial Crime Squad 1 of Yuen Long District,TM 3855,TM 3855,PC88231,PC88231,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",Not provided,Not provided,District Technology and Financial Crime Squad 1 of Yuen Long District,Detective Police Constable 24■■■ LIU ■■■■■■ of District Technology and Financial Crime Squad 1 of Yuen Long District,TM 3855,TM 3855,PC88231,PC88231,,
 UAR,4302,2,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -19025,7 +19025,7 @@ This JSON represents the processed transactions according to the given rules and
       ""transaction_references"": []
     }
   ]
-}",Payments(Authorised/Scams),Payments(Authorised/Scams),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",Payments(Authorised/Scams),Payments(Authorised/Scams),,,,,,,,
 UAR,4303,3,2,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -19320,7 +19320,7 @@ This JSON output reflects the extracted and processed data according to the prov
       ""transaction_references"": []
     }
   ]
-}",Not provided,External Fraud,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",Not provided,External Fraud,,,,,,,,
 UAR,4305,5,3,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -19645,7 +19645,7 @@ This JSON output consolidates the extracted and matched transaction data accordi
       ]
     }
   ]
-}",Not provided,External Fraud,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",Not provided,External Fraud,,,,,,,,
 UAR,4305,5,7,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -19963,7 +19963,7 @@ This JSON output strictly follows the schema and includes all required fields.",
   ""Sending Bank Address"": ""DBS Bank (Hong Kong) Limited    HK"",
   ""Converted Amount"": 77000,
   ""Transaction ID"": ""c4ae19d2-61c0-443e-9dfe-c007ddaf6432""
-}",Not provided,,,,,,,,,,,8723.67,,DBS Bank (Hong Kong) Limited    HK,,333-333333-101,,CHAN TAI MAN,,MR        CHAN TAI MAN,,Beneficiary,,DBS Bank (Hong Kong) Limited,,111-111111-101,,"Dah Sing Bank, Limited",,77000.0,,,,HKD,,C
+}",Not provided,,,,,,,,,Beneficiary
 UAR,4305,5,8,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -20293,7 +20293,7 @@ This JSON strictly follows the schema and includes all required fields based on 
       ]
     }
   ]
-}",Not provided,External Fraud,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",Not provided,External Fraud,,,,,,,,
 UAR,4308,8,2,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -20561,7 +20561,7 @@ This JSON reflects the fact that the transactions could not be located due to th
       ""transaction_references"": []
     }
   ]
-}",Investment,External Fraud,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",Investment,External Fraud,,,,,,,,
 UAR,4313,13,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -20873,7 +20873,7 @@ This JSON strictly follows the schema and includes all required fields based on 
       ]
     }
   ]
-}",Purchase,External Fraud,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",Purchase,External Fraud,,,,,,,,
 UAR,4325,25,2,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -21174,7 +21174,7 @@ This JSON strictly follows the schema and includes all required fields based on 
       ""transaction_references"": []
     }
   ]
-}",Not provided,External Fraud,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",Not provided,External Fraud,,,,,,,,
 ODFT,5062,12,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -21478,7 +21478,7 @@ This JSON output consolidates the extracted information from the fraud alert sou
       ]
     }
   ]
-}",AP-Impersonation (Others),Impersonation,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",AP-Impersonation (Others),Impersonation,,,,,,,,
 ODFT,5070,20,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -21884,4 +21884,4 @@ This JSON represents the consolidated and enriched transactions based on the pro
       ]
     }
   ]
-}",Impersonation,Not provided,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+}",Impersonation,Not provided,,,,,,,,

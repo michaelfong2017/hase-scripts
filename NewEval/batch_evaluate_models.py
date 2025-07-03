@@ -1,21 +1,17 @@
 import os
 import pandas as pd
 import json
+import glob
 from collections import defaultdict
 from core_logic import extract_json_content, compare_structures_for_eval, are_exact_match_for_eval
 
-# Define input files list
-input_files = [
-    "../Cycle3 Results Raw/cycle2_final32B_full60_test_set_v5_test_set_model_responses.csv",
-    "../Cycle3 Results Raw/cycle2_final14B_full60_test_set_v5_test_set_model_responses.csv",
-    "../Cycle3 Results Raw/cycle2_final7B_full60_test_set_v5_test_set_model_responses.csv",
-    "../Cycle3 Results Raw/base32B_full60_test_set_v5_test_set_model_responses.csv",
-    "../Cycle3 Results Raw/base14B_full60_test_set_v5_test_set_model_responses.csv",
-    "../Cycle3 Results Raw/base8B_full60_test_set_v5_test_set_model_responses.csv",
-    "../Cycle3 Results Raw/base7B_full60_test_set_v5_test_set_model_responses.csv",
-    "../Cycle3 Results Raw/cycle3_8Bv1_full60_test_set_v5_test_set_model_responses.csv",
-    "../Cycle3 Results Raw/cycle3_32Bv1_full60_test_set_v5_test_set_model_responses.csv",
-]
+# Define input folder and automatically find all CSV files
+input_folder = "../Cycle3 Results Raw/"
+input_files = glob.glob(os.path.join(input_folder, "*.csv"))
+
+print(f"Found {len(input_files)} CSV files in {input_folder}:")
+for file in input_files:
+    print(f"  - {os.path.basename(file)}")
 
 # Define output base folder
 output_base_folder = "evaluation_outputs"
@@ -64,10 +60,31 @@ def flatten_tx(tx):
     return flatten_json(tx) if isinstance(tx, dict) else {}
 
 def is_transaction_field(field_name):
-    """Check if a field name is transaction-related."""
-    transaction_keywords = ['transaction', 'tx', 'alerted', 'alert']
+    """Check if a field name is transaction-related - COMPREHENSIVE VERSION."""
+    transaction_keywords = [
+        'transaction', 'tx', 'alerted', 'alert',
+        'from', 'to', 'bank', 'account', 'date', 'amount', 'currency',
+        'originator', 'beneficiary', 'reference', 'swift', 'iban',
+        'transfer', 'payment', 'deposit', 'withdrawal', 'balance',
+        'sender', 'receiver', 'payer', 'payee', 'routing',
+        'transaction_references', 'can_be_located', 'channel',
+        'name', 'account_number'  # These appear in transaction context
+    ]
     field_lower = field_name.lower()
-    return any(keyword in field_lower for keyword in transaction_keywords)
+    
+    # Check for direct keyword matches
+    if any(keyword in field_lower for keyword in transaction_keywords):
+        return True
+    
+    # Check for nested transaction field patterns like "to.name", "from.bank", etc.
+    transaction_patterns = [
+        'to.', 'from.', '.name', '.bank', '.account', '.amount', '.date', 
+        '.currency', '.channel', '.can_be_located', '.transaction_references'
+    ]
+    if any(pattern in field_lower for pattern in transaction_patterns):
+        return True
+    
+    return False
 
 def aggregate_by_type(df):
     """Aggregate results by Type - requires ALL fields to be correct for accuracy."""
@@ -149,14 +166,23 @@ def aggregate_by_type(df):
     
     return pd.DataFrame(rows)
 
-def aggregate_by_field(df):
+def aggregate_by_field(df, is_global_analysis=True):
     """Aggregate results by individual fields using enhanced comparison logic."""
     agg = defaultdict(lambda: {"total": 0, "mismatch_count": 0})
     
     # Find all gt_ columns and their corresponding llm_ columns
-    # EXCLUDE transaction fields from global field aggregation more aggressively
-    gt_cols = [col for col in df.columns if col.startswith('gt_') and not is_transaction_field(col[3:])]
+    # ONLY exclude transaction fields for GLOBAL analysis, not transaction analysis
+    gt_cols = []
+    for col in df.columns:
+        if col.startswith('gt_'):
+            field_name = col[3:]  # Remove 'gt_' prefix
+            # Only filter transaction fields for global analysis
+            if is_global_analysis and is_transaction_field(field_name):
+                print(f"🚫 Excluding transaction field from global stats: {field_name}")
+                continue
+            gt_cols.append(col)
     
+    # Rest of function remains the same...
     for gt_col in gt_cols:
         field_name = gt_col[3:]  # Remove 'gt_' prefix
         llm_col = f"llm_{field_name}"
@@ -206,13 +232,21 @@ def aggregate_by_field(df):
         rows.append(row)
     return pd.DataFrame(rows)
 
-def aggregate_by_type_and_field(df):
+def aggregate_by_type_and_field(df, is_global_analysis=True):
     """Aggregate results by both Type and Field together (composite)."""
     agg = defaultdict(lambda: {"total": 0, "mismatch_count": 0})
     
     # Find all gt_ columns and their corresponding llm_ columns
-    # EXCLUDE transaction fields from global field aggregation more aggressively
-    gt_cols = [col for col in df.columns if col.startswith('gt_') and not is_transaction_field(col[3:])]
+    # ONLY exclude transaction fields for GLOBAL analysis, not transaction analysis
+    gt_cols = []
+    for col in df.columns:
+        if col.startswith('gt_'):
+            field_name = col[3:]  # Remove 'gt_' prefix
+            # Only filter transaction fields for global analysis
+            if is_global_analysis and is_transaction_field(field_name):
+                print(f"🚫 Excluding transaction field from global type+field stats: {field_name}")
+                continue
+            gt_cols.append(col)
     
     for gt_col in gt_cols:
         field_name = gt_col[3:]  # Remove 'gt_' prefix
@@ -220,7 +254,7 @@ def aggregate_by_type_and_field(df):
         
         if llm_col in df.columns:
             for _, row in df.iterrows():
-                type_val = row.get("Type", "Unknown")
+                type_val = row.get("Type", "Unknown")  # Use 'Unknown' if Type column missing
                 
                 # FIRST: Check if this row is already marked as correct via mismatches column
                 if 'mismatches' in df.columns:
@@ -274,22 +308,39 @@ def aggregate_by_type_and_field(df):
         row["accuracy_rate"] = f"{((v['total'] - v['mismatch_count']) / v['total'] * 100):.2f}%" if v["total"] > 0 else "0.00%"
         rows.append(row)
     
-    # Sort by Type then Field for better readability
-    return pd.DataFrame(rows).sort_values(['Type', 'Field'])
+    # SAFE SORTING: Check if we have rows and if 'Type' column exists
+    if rows:
+        df_result = pd.DataFrame(rows)
+        # Only sort by Type if it exists in the DataFrame
+        if 'Type' in df_result.columns and 'Field' in df_result.columns:
+            return df_result.sort_values(['Type', 'Field'])
+        elif 'Field' in df_result.columns:
+            return df_result.sort_values(['Field'])
+        else:
+            return df_result
+    else:
+        # Return empty DataFrame with correct columns
+        return pd.DataFrame(columns=['Type', 'Field', 'total', 'mismatch_count', 'accuracy_rate'])
 
 def process_file(file_path):
     """Process a single model file and generate all outputs."""
     folder, model_name = get_model_folder(file_path)
     print(f"Processing {file_path} into folder {folder}")
 
-    df = pd.read_csv(file_path)
+    try:
+        df = pd.read_csv(file_path)
+    except Exception as e:
+        print(f"❌ Error reading {file_path}: {e}")
+        return None
+
     gt_col = "Ground Truth"
     # Look for job_ column first, then fallback to -Instruct column
     job_cols = [c for c in df.columns if c.startswith("job_")]
     if not job_cols:
         job_cols = [c for c in df.columns if c.endswith("-Instruct")]
     if not job_cols:
-        raise ValueError(f"No LLM response column found. Expected column starting with 'job_' or ending with '-Instruct'. Available columns: {list(df.columns)}")
+        print(f"⚠️ No LLM response column found in {file_path}. Expected column starting with 'job_' or ending with '-Instruct'. Available columns: {list(df.columns)}")
+        return None
     job_col = job_cols[0]
 
     global_rows = []
@@ -421,12 +472,12 @@ def process_file(file_path):
     
     # Generate aggregation files
     agg_type_global = aggregate_by_type(global_df)
-    agg_field_global = aggregate_by_field(global_df)
-    agg_composite_global = aggregate_by_type_and_field(global_df)
-    
+    agg_field_global = aggregate_by_field(global_df, is_global_analysis=True)  # Filter transaction fields
+    agg_composite_global = aggregate_by_type_and_field(global_df, is_global_analysis=True)  # Filter transaction fields
+
     agg_type_tx = aggregate_by_type(tx_df)
-    agg_field_tx = aggregate_by_field(tx_df)
-    agg_composite_tx = aggregate_by_type_and_field(tx_df)
+    agg_field_tx = aggregate_by_field(tx_df, is_global_analysis=False)  # DON'T filter transaction fields
+    agg_composite_tx = aggregate_by_type_and_field(tx_df, is_global_analysis=False)  # DON'T filter transaction fields
     
     # Save aggregation files
     agg_type_global.to_csv(os.path.join(folder, "agg_by_type_global.csv"), index=False, encoding="utf-8-sig")
@@ -532,17 +583,16 @@ def main():
     
     # Process each file
     for file_path in input_files:
-        if os.path.exists(file_path):
-            result = process_file(file_path)
+        result = process_file(file_path)
+        if result:  # Only add successful results
             all_results.append(result)
-        else:
-            print(f"⚠️  File not found: {file_path}")
     
     # Create cross-model comparisons
     if all_results:
         create_cross_model_comparisons(all_results)
     
     print(f"\n🎉 All processing complete! Check the '{output_base_folder}' folder for results.")
+    print(f"Successfully processed {len(all_results)} out of {len(input_files)} files.")
 
 if __name__ == "__main__":
     main()

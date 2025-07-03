@@ -1,5 +1,5 @@
 ﻿Field,total,mismatch_count,accuracy_rate
-fraud_type,60,7,88.33%
-police_team,22,5,77.27%
+fraud_type,60,13,78.33%
+police_team,22,3,86.36%
 writ_no,6,2,66.67%
 contact_person,6,2,66.67%
