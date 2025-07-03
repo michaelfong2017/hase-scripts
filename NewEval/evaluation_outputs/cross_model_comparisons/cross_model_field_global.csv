@@ -1,13 +1,13 @@
 ﻿Field,total,mismatch_count,accuracy_rate,Model
-police_team,60,8,86.67%,base32B_full60
 fraud_type,60,18,70.00%,base32B_full60
+police_team,60,8,86.67%,base32B_full60
 contact_person,60,0,100.00%,base32B_full60
 writ_no,60,0,100.00%,base32B_full60
-police_team,60,0,100.00%,cycle3_32Bv2_full60
 fraud_type,60,4,93.33%,cycle3_32Bv2_full60
+police_team,60,0,100.00%,cycle3_32Bv2_full60
 contact_person,60,0,100.00%,cycle3_32Bv2_full60
 writ_no,60,0,100.00%,cycle3_32Bv2_full60
-police_team,60,4,93.33%,cycle2_final32B_full60
 fraud_type,60,6,90.00%,cycle2_final32B_full60
+police_team,60,4,93.33%,cycle2_final32B_full60
 contact_person,60,0,100.00%,cycle2_final32B_full60
 writ_no,60,0,100.00%,cycle2_final32B_full60

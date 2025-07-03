@@ -1,0 +1,4 @@
+## Transaction record
+| Transaction Date (value) | Account ID | Counterparty Name | Counterparty ID | Originating Currency | Originating Amount | Debit Credit Indicator | Beneficiary Bank Raw | Originator Bank Raw | Beneficiary Name | Originator Account Number | Transaction Type Source | Transaction Code Description | Sending Bank Account Number | Sending Bank Address | Converted Amount |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2025-04-14 | 222-222222-110 | SUN YEUNG | 111-111111-109 | HKD | 8300 | D | NaN | NaN | SUN YEUNG | 222-222222-110 | DUTF | DCP UNRELATED ELECTRONIC TRANSFER DEBIT FROM PIB | NaN | NaN | 8300 |

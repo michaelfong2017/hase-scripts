@@ -1,0 +1,5 @@
+## Transaction record
+| Transaction Date (value) | Account ID | Counterparty Name | Counterparty ID | Originating Currency | Originating Amount | Debit Credit Indicator | Beneficiary Bank Raw | Originator Bank Raw | Beneficiary Name | Originator Account Number | Transaction Type Source | Transaction Code Description | Sending Bank Account Number | Sending Bank Address | Converted Amount |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2025-04-24 | 111-111111-102 | YEUNG KAI | 66666666601 | HKD | 101890 | C | Hang Seng Bank Ltd. | . | CHUNG SIU | 66666666601 | CWTF | INWARD TELEGRAPHIC TRANSFER (R22) | NaN | PCBCHKHH | 101890 |
+| 2025-04-23 | 111-111111-102 | TANG WING | 66666666606 | HKD | 110000 | C | Hang Seng Bank Ltd. | STANDARD CHARTERED BANK (HONG KONG) LIMITED | CHUNG SIU | 66666666606 | CWTF | Default transaction | NaN | STANDARD CHARTERED BANK (HONG KONG) LIMITED | 110000 |

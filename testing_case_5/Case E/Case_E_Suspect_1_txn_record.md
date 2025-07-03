@@ -1,0 +1,6 @@
+## Transaction record
+| Transaction Date (value) | Account ID | Counterparty Name | Counterparty ID | Originating Currency | Originating Amount | Debit Credit Indicator | Beneficiary Bank Raw | Originator Bank Raw | Beneficiary Name | Originator Account Number | Transaction Type Source | Transaction Code Description | Sending Bank Account Number | Sending Bank Address | Converted Amount |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2025-04-19 | 111111111101 | LUI SAN SAN | 66666666605 | HKD | 80000 | C | Hang Seng Bank Ltd. | Ant Bank (Hong Kong) Limited | CHAN TAI MAN | 66666666605 | CWTF | Default transaction | NaN | Ant Bank (Hong Kong) Limited | 80000 |
+| 2025-04-19 | 333333333101 | CHEUNG TAK SHING | 222222222101 | HKD | 30000 | C | NaN | NaN | CHAN TAI MAN | 222222222101 | CUTF | ATM TRANSFER UNRELATED DEPOSIT | NaN | NaN | 30000 |
+| 2025-04-23 | 111111111101 | CHEUNG TAK SHING | 444444444101 | HKD | 150000 | C | Hang Seng Bank Ltd. | ZA Bank Limited | CHAN TAI MAN | 444444444101 | CWTF | Default transaction | NaN | ZA Bank Limited | 150000 |

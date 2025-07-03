@@ -1,0 +1,7 @@
+## Transaction record
+| Transaction Date (value) | Account ID | Counterparty Name | Counterparty ID | Originating Currency | Originating Amount | Debit Credit Indicator | Beneficiary Bank Raw | Originator Bank Raw | Beneficiary Name | Originator Account Number | Transaction Type Source | Transaction Code Description | Sending Bank Account Number | Sending Bank Address | Converted Amount |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2025-03-07 | 111111111103 | LUI SAN SAN | 66666666605 | HKD | 20000 | C | Hang Seng Bank Ltd. | Livi Bank Limited | CHIU YAN | 66666666605 | CWTF | Default transaction | NaN | Livi Bank Limited | 20000 |
+| 2025-03-07 | 111111111103 | COUNTERPARTY\_NOT\_STATED -111111111103- CASH TXN CREDIT | COUNTERPARTY\_NOT\_STATED -111111111103- CASH TXN CREDIT | HKD | 1000 | C | NaN | NaN | CHIU YAN | COUNTERPARTY\_NOT\_STATED -111111111103- CASH TXN CREDIT | CCCS | CASH DEP VIA CDM/BCDM - AC INPUT (TOUCH SCREEN) | NaN | NaN | 1000 |
+| 2025-03-06 | 111111111103 | YAN MEI MEI | 222222222102 | HKD | 1900 | C | NaN | NaN | CHIU YAN | 222222222102 | CUTF | ATM TRANSFER UNRELATED DEPOSIT | NaN | NaN | 1900 |
+| 2025-03-06 | 111111111103 | XIE PANGAN | 66666666603 | HKD | 1200 | C | Hang Seng Bank Ltd. | Alipay Financial Services (HK) Limited | CHIU YAN | 66666666603 | CWTF | Default transaction | NaN | Alipay Financial Services (HK) Limited | 1200 |

@@ -1,0 +1,4 @@
+## Transaction record
+| Transaction Date (value) | Account ID | Counterparty Name | Counterparty ID | Originating Currency | Originating Amount | Debit Credit Indicator | Beneficiary Bank Raw | Originator Bank Raw | Beneficiary Name | Originator Account Number | Transaction Type Source | Transaction Code Description | Sending Bank Account Number | Sending Bank Address | Converted Amount | Fraud payment |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2025-04-22 | 111-111111-101 | COUNTERPARTY\_NOT\_STATED 111-111111-101 - CARD TXN CREDIT- | COUNTERPARTY\_NOT\_STATED -111-111111-101 - CARD TXN CREDIT | HKD | 95500 | C | NaN | NaN | NaN | NaN | CCHQ | CDM CHEQUE DEPOSIT | NaN | NaN | 95500 | 1 |

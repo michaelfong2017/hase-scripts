@@ -4,6 +4,7 @@ import glob
 from step1_create_outputs import create_model_outputs
 from step2_aggregate_results import aggregate_model_results
 from step3_cross_model_comparison import create_cross_model_comparisons
+from step4_custom_aggregation import aggregate_custom_results
 
 def main():
     """Main function to process all files and create comparisons."""
@@ -37,6 +38,11 @@ def main():
     print("\n🔄 Step 3: Creating cross-model comparisons...")
     if all_results:
         create_cross_model_comparisons(all_results, output_base_folder)
+    
+    # Step 4: Create custom aggregation (detailed files, half analysis, type analysis)
+    print("\n🔄 Step 4: Creating custom aggregation...")
+    if all_results:
+        aggregate_custom_results(all_results, output_base_folder)
     
     print(f"\n🎉 All processing complete! Check the '{output_base_folder}' folder for results.")
     print(f"Successfully processed {len(all_results)} out of {len(input_files)} files.")

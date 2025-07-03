@@ -1,0 +1,6 @@
+## Transaction record
+| Transaction Date (value) | Account ID | Counterparty Name | Counterparty ID | Originating Currency | Originating Amount | Debit Credit Indicator | Beneficiary Bank Raw | Originator Bank Raw | Beneficiary Name | Originator Account Number | Transaction Type Source | Transaction Code Description | Sending Bank Account Number | Sending Bank Address | Converted Amount | Fraud payment |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2025-04-23 | 444-4444444-001 | NaN | 444-4444444-882 | HKD | 80000 | C | NaN | NaN | NaN | NaN | CMTF | TRANSFER DEPOSIT | NaN | NaN | 80000 | NaN |
+| 2025-04-23 | 444-4444444-882 | MS YAN MEI MEI AND OTHERS | 444-4444444-001 | HKD | 80000 | D | NaN | NaN | NaN | NaN | DMTF | TRANSFER WITHDRAWAL | NaN | NaN | 80000 | NaN |
+| 2025-04-22 | 444-4444444-001 | COUNTERPARTY\_NOT\_STATED -444-4444444-001- CARD TXN DEBIT | COUNTERPARTY\_NOT\_STATED -444-4444444-001- CARD TXN DEBIT | HKD | 95500 | D | NaN | NaN | NaN | NaN | DCHQ | CHEQUE WITHDRAWAL | NaN | NaN | 95500 | 1.0 |
