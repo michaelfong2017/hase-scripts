@@ -8,12 +8,15 @@ base8b_full60,Alerted Transactions Pass,4,30,13.33%,3,30,10.00%,7,60,11.67%
 cycle3_llama8b_full60,Overall Pass,11,30,36.67%,9,30,30.00%,20,60,33.33%
 cycle3_llama8b_full60,Global Field Pass,18,30,60.00%,16,30,53.33%,34,60,56.67%
 cycle3_llama8b_full60,Alerted Transactions Pass,12,30,40.00%,10,30,33.33%,22,60,36.67%
-cycle3_qwen32b_full60,Overall Pass,24,30,80.00%,25,30,83.33%,49,60,81.67%
+cycle3_qwen32b_full60,Overall Pass,24,30,80.00%,26,30,86.67%,50,60,83.33%
 cycle3_qwen32b_full60,Global Field Pass,28,30,93.33%,28,30,93.33%,56,60,93.33%
-cycle3_qwen32b_full60,Alerted Transactions Pass,24,30,80.00%,25,30,83.33%,49,60,81.67%
+cycle3_qwen32b_full60,Alerted Transactions Pass,24,30,80.00%,26,30,86.67%,50,60,83.33%
 cycle2_llama8b_full60,Overall Pass,9,30,30.00%,9,30,30.00%,18,60,30.00%
 cycle2_llama8b_full60,Global Field Pass,24,30,80.00%,25,30,83.33%,49,60,81.67%
 cycle2_llama8b_full60,Alerted Transactions Pass,10,30,33.33%,10,30,33.33%,20,60,33.33%
 cycle2_qwen32b_full60,Overall Pass,18,30,60.00%,8,30,26.67%,26,60,43.33%
 cycle2_qwen32b_full60,Global Field Pass,25,30,83.33%,25,30,83.33%,50,60,83.33%
 cycle2_qwen32b_full60,Alerted Transactions Pass,23,30,76.67%,13,30,43.33%,36,60,60.00%
+cycle3_4355_32b_full60,Overall Pass,29,30,96.67%,28,30,93.33%,57,60,95.00%
+cycle3_4355_32b_full60,Global Field Pass,30,30,100.00%,30,30,100.00%,60,60,100.00%
+cycle3_4355_32b_full60,Alerted Transactions Pass,29,30,96.67%,28,30,93.33%,57,60,95.00%

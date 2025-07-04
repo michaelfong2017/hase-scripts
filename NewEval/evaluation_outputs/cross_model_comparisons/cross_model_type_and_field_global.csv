@@ -143,3 +143,27 @@ UAR,contact_person,16,0,100.00%,cycle2_qwen32b_full60
 UAR,fraud_type,16,4,75.00%,cycle2_qwen32b_full60
 UAR,police_team,16,0,100.00%,cycle2_qwen32b_full60
 UAR,writ_no,16,0,100.00%,cycle2_qwen32b_full60
+ADCC,contact_person,4,0,100.00%,cycle3_4355_32b_full60
+ADCC,fraud_type,4,0,100.00%,cycle3_4355_32b_full60
+ADCC,police_team,4,0,100.00%,cycle3_4355_32b_full60
+ADCC,writ_no,4,0,100.00%,cycle3_4355_32b_full60
+HSBC Referral,contact_person,18,0,100.00%,cycle3_4355_32b_full60
+HSBC Referral,fraud_type,18,0,100.00%,cycle3_4355_32b_full60
+HSBC Referral,police_team,18,0,100.00%,cycle3_4355_32b_full60
+HSBC Referral,writ_no,18,0,100.00%,cycle3_4355_32b_full60
+ODFT,contact_person,4,0,100.00%,cycle3_4355_32b_full60
+ODFT,fraud_type,4,0,100.00%,cycle3_4355_32b_full60
+ODFT,police_team,4,0,100.00%,cycle3_4355_32b_full60
+ODFT,writ_no,4,0,100.00%,cycle3_4355_32b_full60
+Police Letter,contact_person,12,0,100.00%,cycle3_4355_32b_full60
+Police Letter,fraud_type,12,0,100.00%,cycle3_4355_32b_full60
+Police Letter,police_team,12,0,100.00%,cycle3_4355_32b_full60
+Police Letter,writ_no,12,0,100.00%,cycle3_4355_32b_full60
+Search Warrant,contact_person,6,0,100.00%,cycle3_4355_32b_full60
+Search Warrant,fraud_type,6,0,100.00%,cycle3_4355_32b_full60
+Search Warrant,police_team,6,0,100.00%,cycle3_4355_32b_full60
+Search Warrant,writ_no,6,0,100.00%,cycle3_4355_32b_full60
+UAR,contact_person,16,0,100.00%,cycle3_4355_32b_full60
+UAR,fraud_type,16,0,100.00%,cycle3_4355_32b_full60
+UAR,police_team,16,0,100.00%,cycle3_4355_32b_full60
+UAR,writ_no,16,0,100.00%,cycle3_4355_32b_full60

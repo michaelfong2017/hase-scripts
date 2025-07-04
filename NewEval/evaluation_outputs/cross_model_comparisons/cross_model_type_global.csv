@@ -35,3 +35,9 @@ Police Letter,12,12,0,100.00%,cycle2_qwen32b_full60
 Search Warrant,6,2,4,33.33%,cycle2_qwen32b_full60
 UAR,16,12,4,75.00%,cycle2_qwen32b_full60
 ODFT,4,4,0,100.00%,cycle2_qwen32b_full60
+ADCC,4,4,0,100.00%,cycle3_4355_32b_full60
+HSBC Referral,18,18,0,100.00%,cycle3_4355_32b_full60
+Police Letter,12,12,0,100.00%,cycle3_4355_32b_full60
+Search Warrant,6,6,0,100.00%,cycle3_4355_32b_full60
+UAR,16,16,0,100.00%,cycle3_4355_32b_full60
+ODFT,4,4,0,100.00%,cycle3_4355_32b_full60

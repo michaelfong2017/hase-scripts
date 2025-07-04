@@ -1257,7 +1257,7 @@ Extracted transactions:
       ]
     }
   ]
-}",1,1,0,,,,3412.0,5339.0,,False,True,False,1e485d99-8478-482d-86fa-5d73f54d3347; f847cb22-e7dc-438a-884e-d4ce7e4f913d; c58f42ff-c525-4ae4-bc47-497948bed752; acee7754-75b4-444d-a9ed-f710c8fb1cd2; ed5b6314-0a34-4938-9d4d-538699aa09bc; a4cd895d-9a5f-4c6d-9121-fed86198a1fb; ec6432d4-61cb-4f08-8b30-dec84c08498c
+}",1,1,0,,,,3412.0,5339.0,,False,True,False,1e485d99-8478-482d-86fa-5d73f54d3347; a4cd895d-9a5f-4c6d-9121-fed86198a1fb; f847cb22-e7dc-438a-884e-d4ce7e4f913d; acee7754-75b4-444d-a9ed-f710c8fb1cd2; c58f42ff-c525-4ae4-bc47-497948bed752; ed5b6314-0a34-4938-9d4d-538699aa09bc; ec6432d4-61cb-4f08-8b30-dec84c08498c
 ADCC,8,8,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -2719,7 +2719,7 @@ Final JSON output:
       ]
     }
   ]
-}",1,1,0,,,,2514.0,1297.0,,False,True,False,d1fbfe47-51a4-4db9-83e6-17472b01cad7; 1fd9e993-bbbb-44ca-ba74-56f5359e0e03; 1ba89dc3-a477-450d-a7f7-bd55469f5628; 191ec06e-88eb-4ccd-bc9f-c426d9f4d1ab
+}",1,1,0,,,,2514.0,1297.0,,False,True,False,1ba89dc3-a477-450d-a7f7-bd55469f5628; 191ec06e-88eb-4ccd-bc9f-c426d9f4d1ab; d1fbfe47-51a4-4db9-83e6-17472b01cad7; 1fd9e993-bbbb-44ca-ba74-56f5359e0e03
 HSBC Referral,5,5,5,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -4296,7 +4296,7 @@ Final JSON output:
       ]
     }
   ]
-}",1,1,0,,,,2460.0,744.0,,False,True,False,98d894e4-be10-4096-8afa-21d4d4259d2f; 1fd9e993-bbbb-44ca-ba74-56f5359e0e03
+}",1,1,0,,,,2460.0,744.0,,False,True,False,1fd9e993-bbbb-44ca-ba74-56f5359e0e03; 98d894e4-be10-4096-8afa-21d4d4259d2f
 HSBC Referral,7,7,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -5885,7 +5885,7 @@ Extracted transactions:
       ]
     }
   ]
-}",1,1,0,,,,3204.0,1045.0,,False,True,False,ed194421-0dd2-4eb4-8f2f-3c85d9d905c6; 7a47c599-776e-40fb-80f5-45e585c3291a
+}",1,1,0,,,,3204.0,1045.0,,False,True,False,7a47c599-776e-40fb-80f5-45e585c3291a; ed194421-0dd2-4eb4-8f2f-3c85d9d905c6
 Police Letter,11,11,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -10629,7 +10629,7 @@ channel = ""ATM""
       ]
     }
   ]
-}",1,1,0,,,,3495.0,894.0,,False,True,False,6a957023-8798-4cf5-9b6d-d0bd6fbf0c66; dfc3902b-ad86-42bb-a146-4e8a32e58eda
+}",1,1,0,,,,3495.0,894.0,,False,True,False,dfc3902b-ad86-42bb-a146-4e8a32e58eda; 6a957023-8798-4cf5-9b6d-d0bd6fbf0c66
 ADCC,307,7,2,"[1, 2]","You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -11805,7 +11805,7 @@ SUMMARY TOTALS:
 Input: 49 total replacements
 Transactions: 61 total replacements
 Ground Truth: 54 total replacements
-Grand Total: 164 replacements",3387.0,3987.0,,False,True,False,1e485d99-8478-482d-86fa-5d73f54d3347; f847cb22-e7dc-438a-884e-d4ce7e4f913d; c58f42ff-c525-4ae4-bc47-497948bed752; acee7754-75b4-444d-a9ed-f710c8fb1cd2; ed5b6314-0a34-4938-9d4d-538699aa09bc; a4cd895d-9a5f-4c6d-9121-fed86198a1fb; 1e9b06fb-f8eb-4b63-820a-25546c6bcb95; ec6432d4-61cb-4f08-8b30-dec84c08498c
+Grand Total: 164 replacements",3387.0,3987.0,,False,True,False,1e485d99-8478-482d-86fa-5d73f54d3347; 1e9b06fb-f8eb-4b63-820a-25546c6bcb95; a4cd895d-9a5f-4c6d-9121-fed86198a1fb; f847cb22-e7dc-438a-884e-d4ce7e4f913d; acee7754-75b4-444d-a9ed-f710c8fb1cd2; c58f42ff-c525-4ae4-bc47-497948bed752; ed5b6314-0a34-4938-9d4d-538699aa09bc; ec6432d4-61cb-4f08-8b30-dec84c08498c
 ADCC,308,8,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -13139,7 +13139,7 @@ SUMMARY TOTALS:
 Input: 16 total replacements
 Transactions: 50 total replacements
 Ground Truth: 12 total replacements
-Grand Total: 78 replacements",2614.0,1323.0,,False,True,False,1fd9e993-bbbb-44ca-ba74-56f5359e0e03; bf09dff6-4fa6-4ad9-8767-2ecbac3572a5; 191ec06e-88eb-4ccd-bc9f-c426d9f4d1ab
+Grand Total: 78 replacements",2614.0,1323.0,,False,True,False,1fd9e993-bbbb-44ca-ba74-56f5359e0e03; 191ec06e-88eb-4ccd-bc9f-c426d9f4d1ab; bf09dff6-4fa6-4ad9-8767-2ecbac3572a5
 HSBC Referral,1805,5,4,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -13924,7 +13924,7 @@ SUMMARY TOTALS:
 Input: 16 total replacements
 Transactions: 48 total replacements
 Ground Truth: 12 total replacements
-Grand Total: 76 replacements",2563.0,1342.0,,False,True,False,fe57572e-f967-4a0c-9a9d-3315d2ccaf93; 1fd9e993-bbbb-44ca-ba74-56f5359e0e03; 7b17ff77-05ab-4618-90b1-f5f41deac2a8; 191ec06e-88eb-4ccd-bc9f-c426d9f4d1ab
+Grand Total: 76 replacements",2563.0,1342.0,,False,True,False,191ec06e-88eb-4ccd-bc9f-c426d9f4d1ab; fe57572e-f967-4a0c-9a9d-3315d2ccaf93; 7b17ff77-05ab-4618-90b1-f5f41deac2a8; 1fd9e993-bbbb-44ca-ba74-56f5359e0e03
 HSBC Referral,1805,5,6,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -14915,7 +14915,7 @@ SUMMARY TOTALS:
 Input: 72 total replacements
 Transactions: 62 total replacements
 Ground Truth: 54 total replacements
-Grand Total: 188 replacements",3369.0,5548.0,,False,True,False,1fd9e993-bbbb-44ca-ba74-56f5359e0e03; fe57572e-f967-4a0c-9a9d-3315d2ccaf93; 47bf0cc4-cbc9-4dde-ab99-3a8e4d40d5e7; 98d894e4-be10-4096-8afa-21d4d4259d2f; 191ec06e-88eb-4ccd-bc9f-c426d9f4d1ab; d1fbfe47-51a4-4db9-83e6-17472b01cad7; ecd331fd-3f2b-48af-8102-36e9dd9ba457; 1ba89dc3-a477-450d-a7f7-bd55469f5628; 7b17ff77-05ab-4618-90b1-f5f41deac2a8; c4ae19d2-61c0-443e-9dfe-c007ddaf6432
+Grand Total: 188 replacements",3369.0,5548.0,,False,True,False,c4ae19d2-61c0-443e-9dfe-c007ddaf6432; 191ec06e-88eb-4ccd-bc9f-c426d9f4d1ab; 47bf0cc4-cbc9-4dde-ab99-3a8e4d40d5e7; ecd331fd-3f2b-48af-8102-36e9dd9ba457; 1ba89dc3-a477-450d-a7f7-bd55469f5628; fe57572e-f967-4a0c-9a9d-3315d2ccaf93; 7b17ff77-05ab-4618-90b1-f5f41deac2a8; d1fbfe47-51a4-4db9-83e6-17472b01cad7; 98d894e4-be10-4096-8afa-21d4d4259d2f; 1fd9e993-bbbb-44ca-ba74-56f5359e0e03
 HSBC Referral,1805,5,9,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -16977,7 +16977,7 @@ SUMMARY TOTALS:
 Input: 14 total replacements
 Transactions: 12 total replacements
 Ground Truth: 11 total replacements
-Grand Total: 37 replacements",3210.0,1096.0,,False,True,False,ed194421-0dd2-4eb4-8f2f-3c85d9d905c6; 7a47c599-776e-40fb-80f5-45e585c3291a
+Grand Total: 37 replacements",3210.0,1096.0,,False,True,False,7a47c599-776e-40fb-80f5-45e585c3291a; ed194421-0dd2-4eb4-8f2f-3c85d9d905c6
 Police Letter,2561,11,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -22206,4 +22206,4 @@ SUMMARY TOTALS:
 Input: 9 total replacements
 Transactions: 11 total replacements
 Ground Truth: 10 total replacements
-Grand Total: 30 replacements",3484.0,1140.0,,False,True,False,6a957023-8798-4cf5-9b6d-d0bd6fbf0c66; dfc3902b-ad86-42bb-a146-4e8a32e58eda
+Grand Total: 30 replacements",3484.0,1140.0,,False,True,False,dfc3902b-ad86-42bb-a146-4e8a32e58eda; 6a957023-8798-4cf5-9b6d-d0bd6fbf0c66

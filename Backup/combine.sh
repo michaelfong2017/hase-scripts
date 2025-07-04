@@ -13,7 +13,7 @@ find . -type d | while read -r dir; do
     cd "$dir" || continue
 
     # Match files with the pattern ${prefix}_test_set_model_responses_chunk_*.csv
-    chunk_files=(${prefix}_test_set_model_responses_chunk_*.csv)
+    chunk_files=(${prefix}_model_responses_chunk_*.csv)
     # Skip if no such files exist in this directory
     if [ ! -e "${chunk_files[0]}" ]; then
         cd - > /dev/null
@@ -26,10 +26,10 @@ find . -type d | while read -r dir; do
     # Extract everything after "chunk_" and before ".csv"
     suffix=$(echo "$first_file" | sed "s/.*chunk_\(.*\)\.csv/\1/")
     
-    output_file="${prefix}_test_set_model_responses_${suffix}.csv"
+    output_file="${prefix}_model_responses_${suffix}.csv"
     [ -f "$output_file" ] && rm "$output_file"
 
-    for file in ${prefix}_test_set_model_responses_chunk_*.csv; do
+    for file in ${prefix}_model_responses_chunk_*.csv; do
         if [ -f "$file" ]; then
             if [ ! -s "$output_file" ]; then
                 cat "$file" >> "$output_file"

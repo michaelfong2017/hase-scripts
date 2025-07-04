@@ -43,16 +43,16 @@ Model: cycle3_llama8b_full60
 Model: cycle3_qwen32b_full60
 - Overall Pass (pass all global fields and all transactions)
   First half (30): 24 out of 30 (80.00%)
-  Second half (30): 25 out of 30 (83.33%)
-  Total (60): 49 out of 60 (81.67%)
+  Second half (30): 26 out of 30 (86.67%)
+  Total (60): 50 out of 60 (83.33%)
 - Global Field Pass (pass all global fields)
   First half (30): 28 out of 30 (93.33%)
   Second half (30): 28 out of 30 (93.33%)
   Total (60): 56 out of 60 (93.33%)
 - Alerted Transactions Pass (must pass all transactions together)
   First half (30): 24 out of 30 (80.00%)
-  Second half (30): 25 out of 30 (83.33%)
-  Total (60): 49 out of 60 (81.67%)
+  Second half (30): 26 out of 30 (86.67%)
+  Total (60): 50 out of 60 (83.33%)
 
 Model: cycle2_llama8b_full60
 - Overall Pass (pass all global fields and all transactions)
@@ -81,3 +81,17 @@ Model: cycle2_qwen32b_full60
   First half (30): 23 out of 30 (76.67%)
   Second half (30): 13 out of 30 (43.33%)
   Total (60): 36 out of 60 (60.00%)
+
+Model: cycle3_4355_32b_full60
+- Overall Pass (pass all global fields and all transactions)
+  First half (30): 29 out of 30 (96.67%)
+  Second half (30): 28 out of 30 (93.33%)
+  Total (60): 57 out of 60 (95.00%)
+- Global Field Pass (pass all global fields)
+  First half (30): 30 out of 30 (100.00%)
+  Second half (30): 30 out of 30 (100.00%)
+  Total (60): 60 out of 60 (100.00%)
+- Alerted Transactions Pass (must pass all transactions together)
+  First half (30): 29 out of 30 (96.67%)
+  Second half (30): 28 out of 30 (93.33%)
+  Total (60): 57 out of 60 (95.00%)

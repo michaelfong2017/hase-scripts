@@ -10358,7 +10358,7 @@ SUMMARY TOTALS:
 Input: 23 total replacements
 Transactions: 21 total replacements
 Ground Truth: 21 total replacements
-Grand Total: 65 replacements",1433.0,228.0,,False,True,False,b7f9e8c1-b04e-4077-99b4-a53517b57e4d
+Grand Total: 65 replacements",1433.0,228.0,,True,True,True,
 HSBC Referral,1805,5,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
