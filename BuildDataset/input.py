@@ -554,23 +554,23 @@ for idx, row in set2_df.iterrows():
         # Build ground truth based on type using Source_ columns
         if row_type == 'ADCC' or row_type == 'Police Letter':
             gt_dict = {
-                "fraud_type": treat_null(gt_row.get("Source_Fraud Type", None)),
-                "police_reference": treat_null(gt_row.get("Source_Police Reference", None)),
-                "police_team": treat_null(gt_row.get("Source_Police Team", None)),
+                "fraud_type": treat_null(gt_row.get("GroundTruth_Fraud Type", None)),
+                "police_reference": treat_null(gt_row.get("GroundTruth_Police Reference", None)),
+                "police_team": treat_null(gt_row.get("GroundTruth_Police Team", None)),
                 "alerted_transactions": alerted_transactions
             }
         elif row_type in ['HSBC Referral', 'UAR', 'ODFT']:
             gt_dict = {
-                "fraud_type": treat_null(gt_row.get("Source_Fraud Type", None)),
+                "fraud_type": treat_null(gt_row.get("GroundTruth_Fraud Type", None)),
                 "alerted_transactions": alerted_transactions
             }
         elif row_type == 'Search Warrant':
             gt_dict = {
-                "fraud_type": treat_null(gt_row.get("Source_Fraud Type", None)),
-                "police_reference": treat_null(gt_row.get("Source_Police Reference", None)),
-                "writ_no": treat_null(gt_row.get("Source_Writ No", None)),
-                "contact_person": treat_null(gt_row.get("Source_Contact Person", None)),
-                "police_team": treat_null(gt_row.get("Source_Police Team", None)),
+                "fraud_type": treat_null(gt_row.get("GroundTruth_Fraud Type", None)),
+                "police_reference": treat_null(gt_row.get("GroundTruth_Police Reference", None)),
+                "writ_no": treat_null(gt_row.get("GroundTruth_Writ No", None)),
+                "contact_person": treat_null(gt_row.get("GroundTruth_Contact Person", None)),
+                "police_team": treat_null(gt_row.get("GroundTruth_Police Team", None)),
                 "alerted_transactions": alerted_transactions
             }
         else:
