@@ -1,4 +1,4 @@
-﻿Type,Case Number,Original Case Number,Intelligence Number,Suspect Number,Instruction,Transactions,Input,Ground Truth,Set Number,Variant Number,Randomization Set,Original_Values,Replacement_Values,Replacement_Summary,Qwen2.5-32B-Instruct,input_tokens,output_tokens
+Type,Case Number,Original Case Number,Intelligence Number,Suspect Number,Instruction,Transactions,Input,Ground Truth,Set Number,Variant Number,Randomization Set,Original_Values,Replacement_Values,Replacement_Summary,Qwen2.5-32B-Instruct,input_tokens,output_tokens
 ADCC,7,7,2,"[1, 2]","You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.

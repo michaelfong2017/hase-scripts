@@ -1,19 +1,37 @@
 ﻿Model,Type,Total,Overall_Pass,Overall_Pass_Rate,Global_Field_Pass,Global_Field_Pass_Rate,Alerted_Transactions_Pass,Alerted_Transactions_Pass_Rate
-base32B_full60,ADCC,4,1,25.00%,2,50.00%,2,50.00%
-base32B_full60,HSBC Referral,18,8,44.44%,16,88.89%,10,55.56%
-base32B_full60,Police Letter,12,4,33.33%,4,33.33%,12,100.00%
-base32B_full60,Search Warrant,6,0,0.00%,2,33.33%,4,66.67%
-base32B_full60,UAR,16,6,37.50%,11,68.75%,10,62.50%
-base32B_full60,ODFT,4,2,50.00%,3,75.00%,3,75.00%
-cycle3_32Bv2_full60,ADCC,4,4,100.00%,4,100.00%,4,100.00%
-cycle3_32Bv2_full60,HSBC Referral,18,17,94.44%,18,100.00%,17,94.44%
-cycle3_32Bv2_full60,Police Letter,12,12,100.00%,12,100.00%,12,100.00%
-cycle3_32Bv2_full60,Search Warrant,6,6,100.00%,6,100.00%,6,100.00%
-cycle3_32Bv2_full60,UAR,16,10,62.50%,12,75.00%,13,81.25%
-cycle3_32Bv2_full60,ODFT,4,4,100.00%,4,100.00%,4,100.00%
-cycle2_final32B_full60,ADCC,4,2,50.00%,4,100.00%,2,50.00%
-cycle2_final32B_full60,HSBC Referral,18,9,50.00%,16,88.89%,11,61.11%
-cycle2_final32B_full60,Police Letter,12,11,91.67%,12,100.00%,11,91.67%
-cycle2_final32B_full60,Search Warrant,6,2,33.33%,2,33.33%,6,100.00%
-cycle2_final32B_full60,UAR,16,6,37.50%,12,75.00%,10,62.50%
-cycle2_final32B_full60,ODFT,4,3,75.00%,4,100.00%,3,75.00%
+base32b_full60,ADCC,4,1,25.00%,2,50.00%,2,50.00%
+base32b_full60,HSBC Referral,18,8,44.44%,16,88.89%,10,55.56%
+base32b_full60,Police Letter,12,4,33.33%,4,33.33%,12,100.00%
+base32b_full60,Search Warrant,6,0,0.00%,2,33.33%,4,66.67%
+base32b_full60,UAR,16,6,37.50%,11,68.75%,10,62.50%
+base32b_full60,ODFT,4,2,50.00%,3,75.00%,3,75.00%
+base8b_full60,ADCC,4,1,25.00%,1,25.00%,2,50.00%
+base8b_full60,HSBC Referral,18,8,44.44%,14,77.78%,10,55.56%
+base8b_full60,Police Letter,12,0,0.00%,0,0.00%,6,50.00%
+base8b_full60,Search Warrant,6,2,33.33%,2,33.33%,5,83.33%
+base8b_full60,UAR,16,3,18.75%,7,43.75%,9,56.25%
+base8b_full60,ODFT,4,2,50.00%,4,100.00%,2,50.00%
+cycle3_llama8b_full60,ADCC,4,2,50.00%,2,50.00%,3,75.00%
+cycle3_llama8b_full60,HSBC Referral,18,10,55.56%,12,66.67%,12,66.67%
+cycle3_llama8b_full60,Police Letter,12,6,50.00%,6,50.00%,9,75.00%
+cycle3_llama8b_full60,Search Warrant,6,2,33.33%,4,66.67%,4,66.67%
+cycle3_llama8b_full60,UAR,16,5,31.25%,7,43.75%,10,62.50%
+cycle3_llama8b_full60,ODFT,4,2,50.00%,3,75.00%,3,75.00%
+cycle3_qwen32b_full60,ADCC,4,4,100.00%,4,100.00%,4,100.00%
+cycle3_qwen32b_full60,HSBC Referral,18,17,94.44%,18,100.00%,17,94.44%
+cycle3_qwen32b_full60,Police Letter,12,12,100.00%,12,100.00%,12,100.00%
+cycle3_qwen32b_full60,Search Warrant,6,6,100.00%,6,100.00%,6,100.00%
+cycle3_qwen32b_full60,UAR,16,10,62.50%,12,75.00%,13,81.25%
+cycle3_qwen32b_full60,ODFT,4,4,100.00%,4,100.00%,4,100.00%
+cycle2_llama8b_full60,ADCC,4,3,75.00%,4,100.00%,3,75.00%
+cycle2_llama8b_full60,HSBC Referral,18,12,66.67%,15,83.33%,14,77.78%
+cycle2_llama8b_full60,Police Letter,12,6,50.00%,10,83.33%,7,58.33%
+cycle2_llama8b_full60,Search Warrant,6,4,66.67%,6,100.00%,4,66.67%
+cycle2_llama8b_full60,UAR,16,5,31.25%,10,62.50%,10,62.50%
+cycle2_llama8b_full60,ODFT,4,3,75.00%,4,100.00%,3,75.00%
+cycle2_qwen32b_full60,ADCC,4,2,50.00%,4,100.00%,2,50.00%
+cycle2_qwen32b_full60,HSBC Referral,18,9,50.00%,16,88.89%,11,61.11%
+cycle2_qwen32b_full60,Police Letter,12,11,91.67%,12,100.00%,11,91.67%
+cycle2_qwen32b_full60,Search Warrant,6,2,33.33%,2,33.33%,6,100.00%
+cycle2_qwen32b_full60,UAR,16,6,37.50%,12,75.00%,10,62.50%
+cycle2_qwen32b_full60,ODFT,4,3,75.00%,4,100.00%,3,75.00%

@@ -336,25 +336,37 @@ def aggregate_by_type_intelligence_level(global_df, tx_df):
     return pd.DataFrame(rows)
 
 def aggregate_model_results(result, output_base_folder):
-    """Step 2: Generate aggregation files for a single model."""
+    """Step 2: Generate aggregation files with enhanced validation."""
     folder = result['folder']
     model_name = result['model_name']
     global_df = result['global_df']
     tx_df = result['tx_df']
     
     print(f"Aggregating results for {model_name}...")
+    print(f"  Global DF shape: {global_df.shape}")
+    print(f"  Transaction DF shape: {tx_df.shape}")
     
-    # Generate aggregation files
+    # Validate data integrity
+    if 'mismatches' in global_df.columns:
+        print(f"  Warning: Global DF unexpectedly has mismatches column")
+    if 'mismatches' not in tx_df.columns:
+        print(f"  Warning: Transaction DF missing mismatches column")
+    
+    # Generate aggregation files with validation
     agg_type_global = aggregate_by_type(global_df)
-    agg_field_global = aggregate_by_field(global_df, is_global_analysis=True)  # Filter transaction fields
-    agg_composite_global = aggregate_by_type_and_field(global_df, is_global_analysis=True)  # Filter transaction fields
+    agg_field_global = aggregate_by_field(global_df, is_global_analysis=True)
+    agg_composite_global = aggregate_by_type_and_field(global_df, is_global_analysis=True)
 
     agg_type_tx = aggregate_by_type(tx_df)
-    agg_field_tx = aggregate_by_field(tx_df, is_global_analysis=False)  # DON'T filter transaction fields
-    agg_composite_tx = aggregate_by_type_and_field(tx_df, is_global_analysis=False)  # DON'T filter transaction fields
+    agg_field_tx = aggregate_by_field(tx_df, is_global_analysis=False)
+    agg_composite_tx = aggregate_by_type_and_field(tx_df, is_global_analysis=False)
     
-    # NEW: Intelligence-level aggregation
     agg_type_intelligence = aggregate_by_type_intelligence_level(global_df, tx_df)
+    
+    # Enhanced validation of aggregation results
+    print(f"  Global type aggregation: {len(agg_type_global)} types")
+    print(f"  Transaction type aggregation: {len(agg_type_tx)} types")
+    print(f"  Intelligence level aggregation: {len(agg_type_intelligence)} types")
     
     # Save aggregation files
     agg_type_global.to_csv(os.path.join(folder, "agg_by_type_global.csv"), index=False, encoding="utf-8-sig")
@@ -365,7 +377,6 @@ def aggregate_model_results(result, output_base_folder):
     agg_field_tx.to_csv(os.path.join(folder, "agg_by_field_transaction.csv"), index=False, encoding="utf-8-sig")
     agg_composite_tx.to_csv(os.path.join(folder, "agg_by_type_and_field_transaction.csv"), index=False, encoding="utf-8-sig")
     
-    # NEW: Save intelligence-level results
     agg_type_intelligence.to_csv(os.path.join(folder, "agg_by_type_intelligence_level.csv"), index=False, encoding="utf-8-sig")
     
     # Update result with aggregation data
@@ -376,7 +387,7 @@ def aggregate_model_results(result, output_base_folder):
         'agg_type_tx': agg_type_tx,
         'agg_field_tx': agg_field_tx,
         'agg_composite_tx': agg_composite_tx,
-        'agg_type_intelligence': agg_type_intelligence  # NEW
+        'agg_type_intelligence': agg_type_intelligence
     })
     
-    print(f"✅ Aggregated results for {model_name}")
+    print(f"✅ Enhanced aggregation completed for {model_name}")

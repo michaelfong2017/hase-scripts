@@ -1,0 +1,85 @@
+﻿Type,Field,total,mismatch_count,accuracy_rate
+ADCC,amount,20,2,90.00%
+ADCC,can_be_located,20,2,90.00%
+ADCC,cancel_amount_requested,20,0,100.00%
+ADCC,channel,20,12,40.00%
+ADCC,currency,20,2,90.00%
+ADCC,date,20,3,85.00%
+ADCC,from.account_number,20,5,75.00%
+ADCC,from.bank,20,12,40.00%
+ADCC,from.name,20,4,80.00%
+ADCC,to.account_number,20,3,85.00%
+ADCC,to.bank,20,20,0.00%
+ADCC,to.name,20,3,85.00%
+ADCC,transaction_references.0,20,2,90.00%
+ADCC,transaction_references.1,20,0,100.00%
+HSBC Referral,amount,82,72,12.20%
+HSBC Referral,can_be_located,82,59,28.05%
+HSBC Referral,cancel_amount_requested,82,0,100.00%
+HSBC Referral,channel,82,55,32.93%
+HSBC Referral,currency,82,45,45.12%
+HSBC Referral,date,82,59,28.05%
+HSBC Referral,from.account_number,82,58,29.27%
+HSBC Referral,from.bank,82,81,1.22%
+HSBC Referral,from.name,82,74,9.76%
+HSBC Referral,to.account_number,82,57,30.49%
+HSBC Referral,to.bank,82,59,28.05%
+HSBC Referral,to.name,82,76,7.32%
+HSBC Referral,transaction_references.0,82,58,29.27%
+HSBC Referral,transaction_references.1,82,0,100.00%
+ODFT,amount,10,7,30.00%
+ODFT,can_be_located,10,7,30.00%
+ODFT,cancel_amount_requested,10,0,100.00%
+ODFT,channel,10,7,30.00%
+ODFT,currency,10,7,30.00%
+ODFT,date,10,9,10.00%
+ODFT,from.account_number,10,7,30.00%
+ODFT,from.bank,10,7,30.00%
+ODFT,from.name,10,8,20.00%
+ODFT,to.account_number,10,8,20.00%
+ODFT,to.bank,10,7,30.00%
+ODFT,to.name,10,8,20.00%
+ODFT,transaction_references.0,10,7,30.00%
+ODFT,transaction_references.1,10,1,90.00%
+Police Letter,amount,17,6,64.71%
+Police Letter,can_be_located,17,5,70.59%
+Police Letter,cancel_amount_requested,17,0,100.00%
+Police Letter,channel,17,8,52.94%
+Police Letter,currency,17,5,70.59%
+Police Letter,date,17,5,70.59%
+Police Letter,from.account_number,17,11,35.29%
+Police Letter,from.bank,17,4,76.47%
+Police Letter,from.name,17,7,58.82%
+Police Letter,to.account_number,17,11,35.29%
+Police Letter,to.bank,17,7,58.82%
+Police Letter,to.name,17,12,29.41%
+Police Letter,transaction_references.0,17,5,70.59%
+Police Letter,transaction_references.1,17,0,100.00%
+Search Warrant,amount,16,9,43.75%
+Search Warrant,can_be_located,16,13,18.75%
+Search Warrant,cancel_amount_requested,16,0,100.00%
+Search Warrant,channel,16,4,75.00%
+Search Warrant,currency,16,9,43.75%
+Search Warrant,date,16,12,25.00%
+Search Warrant,from.account_number,16,1,93.75%
+Search Warrant,from.bank,16,5,68.75%
+Search Warrant,from.name,16,4,75.00%
+Search Warrant,to.account_number,16,1,93.75%
+Search Warrant,to.bank,16,3,81.25%
+Search Warrant,to.name,16,2,87.50%
+Search Warrant,transaction_references.0,16,1,93.75%
+Search Warrant,transaction_references.1,16,0,100.00%
+UAR,amount,20,10,50.00%
+UAR,can_be_located,20,9,55.00%
+UAR,cancel_amount_requested,20,7,65.00%
+UAR,channel,20,14,30.00%
+UAR,currency,20,9,55.00%
+UAR,date,20,9,55.00%
+UAR,from.account_number,20,16,20.00%
+UAR,from.bank,20,19,5.00%
+UAR,from.name,20,14,30.00%
+UAR,to.account_number,20,13,35.00%
+UAR,to.bank,20,15,25.00%
+UAR,to.name,20,16,20.00%
+UAR,transaction_references.0,20,7,65.00%
+UAR,transaction_references.1,20,0,100.00%
