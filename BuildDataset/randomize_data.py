@@ -1,6 +1,7 @@
 import pandas as pd
 import json
 import random
+import re
 from data_processor import (
     random_generation_functions, strict_normalization_functions,
     replace_in_dataframe, NORMALIZED_NAMES, save_json_utf8, load_json_utf8,
@@ -40,36 +41,65 @@ def apply_mappings_to_row(row, value_mappings):
     row_mappings = {}
     current_values = extract_values_from_row(row)
     
+    # Track all transformations
+    transformation_records = []
+    
     for field_type, current_vals in current_values.items():
         if field_type in value_mappings:
             available_randoms = value_mappings[field_type]
             for i, val in enumerate(current_vals):
                 if val not in row_mappings:
                     random_val = available_randoms[i % len(available_randoms)]
+                    
+                    # Record the transformation
+                    if field_type in strict_normalization_functions:
+                        normalizer = strict_normalization_functions[field_type]
+                        normalized_original = normalizer(val)
+                        normalized_random = normalizer(random_val)
+                    else:
+                        normalized_original = val
+                        normalized_random = random_val
+                    
                     # Apply ■ randomization during this step
-                    random_val = randomize_masked_value(random_val)
-                    row_mappings[val] = random_val
+                    random_val_final = randomize_masked_value(random_val)
+                    normalized_random_final = randomize_masked_value(normalized_random)
+                    
+                    row_mappings[val] = random_val_final
+                    
+                    # Record all four values
+                    transformation_records.append({
+                        'normalized_original': str(normalized_original),
+                        'original_value': str(val),
+                        'randomized_normalized': str(normalized_random_final),
+                        'randomized_value': str(random_val_final)
+                    })
     
     new_row['Input'] = apply_mappings_to_text(row['Input'], row_mappings)
     new_row['Transactions'] = apply_mappings_to_transactions(row['Transactions'], row_mappings)
     new_row['Ground Truth'] = apply_mappings_to_ground_truth(row['Ground Truth'], row_mappings)
     
-    # Add the two new columns
+    # Create the four columns with newline-separated values
+    normalized_original_values = []
     original_values = []
-    replaced_values = []
+    randomized_normalized_values = []
+    randomized_values = []
     
-    for original, replacement in row_mappings.items():
-        if str(original).strip() and str(replacement).strip():  # Only non-empty values
-            original_values.append(str(original))
-            replaced_values.append(str(replacement))
+    for record in transformation_records:
+        if record['original_value'].strip():  # Only non-empty values
+            normalized_original_values.append(record['normalized_original'])
+            original_values.append(record['original_value'])
+            randomized_normalized_values.append(record['randomized_normalized'])
+            randomized_values.append(record['randomized_value'])
     
-    new_row['Values_To_Be_Replaced'] = '\n'.join(original_values)
-    new_row['Values_After_Replacement'] = '\n'.join(replaced_values)
+    new_row['Normalized_Original'] = '\n'.join(normalized_original_values)
+    new_row['Original_Values'] = '\n'.join(original_values)
+    new_row['Randomized_Normalized'] = '\n'.join(randomized_normalized_values)
+    new_row['Randomized_Values'] = '\n'.join(randomized_values)
     
     return new_row
 
 def extract_values_from_row(row):
-    """Extract all values of target fields from a row"""
+    """Extract all values of target fields from a row with better amount handling - exclude nulls"""
     values = {field: [] for field in random_generation_functions.keys()}
     
     try:
@@ -77,31 +107,75 @@ def extract_values_from_row(row):
         ground_truth = json.loads(ground_truth_str) if pd.notna(ground_truth_str) else {}
         
         for transaction in ground_truth.get('alerted_transactions', []):
-            if 'date' in transaction:
+            # Date - exclude null/None
+            if 'date' in transaction and transaction['date'] is not None and str(transaction['date']).strip():
                 values['date'].append(transaction['date'])
-            if 'amount' in transaction:
-                values['amount'].append(str(transaction['amount']))
-            if 'from' in transaction and 'name' in transaction['from']:
-                values['name'].append(transaction['from']['name'])
-            if 'to' in transaction and 'name' in transaction['to']:
-                values['name'].append(transaction['to']['name'])
-            if 'from' in transaction and 'account_number' in transaction['from']:
-                values['account_number'].append(transaction['from']['account_number'])
-            if 'to' in transaction and 'account_number' in transaction['to']:
-                values['account_number'].append(transaction['to']['account_number'])
-            if 'from' in transaction and 'bank' in transaction['from']:
-                values['bank'].append(transaction['from']['bank'])
-            if 'to' in transaction and 'bank' in transaction['to']:
-                values['bank'].append(transaction['to']['bank'])
-            if 'cancel_amount_requested' in transaction:
-                values['cancel_amount_requested'].append(str(transaction['cancel_amount_requested']))
+                
+            # Amount - exclude null/None
+            if 'amount' in transaction and transaction['amount'] is not None:
+                amount_val = str(transaction['amount'])
+                if amount_val.strip():  # Exclude empty strings
+                    values['amount'].append(amount_val)
+                    # Use the function from data_processor
+                    from data_processor import strict_normalization_functions
+                    normalized_amount = strict_normalization_functions['amount'](amount_val)
+                    if normalized_amount != amount_val and normalized_amount.strip():
+                        values['amount'].append(normalized_amount)
+            
+            # Names - exclude null/None/empty
+            if 'from' in transaction and 'name' in transaction['from'] and transaction['from']['name'] is not None:
+                name_val = str(transaction['from']['name']).strip()
+                if name_val:
+                    values['name'].append(name_val)
+            if 'to' in transaction and 'name' in transaction['to'] and transaction['to']['name'] is not None:
+                name_val = str(transaction['to']['name']).strip()
+                if name_val:
+                    values['name'].append(name_val)
+            
+            # Account numbers - exclude null/None/empty
+            if 'from' in transaction and 'account_number' in transaction['from'] and transaction['from']['account_number'] is not None:
+                account_val = str(transaction['from']['account_number']).strip()
+                if account_val:
+                    values['account_number'].append(account_val)
+            if 'to' in transaction and 'account_number' in transaction['to'] and transaction['to']['account_number'] is not None:
+                account_val = str(transaction['to']['account_number']).strip()
+                if account_val:
+                    values['account_number'].append(account_val)
+            
+            # Banks - exclude null/None/empty
+            if 'from' in transaction and 'bank' in transaction['from'] and transaction['from']['bank'] is not None:
+                bank_val = str(transaction['from']['bank']).strip()
+                if bank_val:
+                    values['bank'].append(bank_val)
+            if 'to' in transaction and 'bank' in transaction['to'] and transaction['to']['bank'] is not None:
+                bank_val = str(transaction['to']['bank']).strip()
+                if bank_val:
+                    values['bank'].append(bank_val)
+            
+            # Cancel amount - exclude null/None/empty
+            if 'cancel_amount_requested' in transaction and transaction['cancel_amount_requested'] is not None:
+                cancel_amount_val = str(transaction['cancel_amount_requested']).strip()
+                if cancel_amount_val:
+                    values['cancel_amount_requested'].append(cancel_amount_val)
+                    normalized_cancel = strict_normalization_functions['cancel_amount_requested'](cancel_amount_val)
+                    if normalized_cancel != cancel_amount_val and normalized_cancel.strip():
+                        values['cancel_amount_requested'].append(normalized_cancel)
         
-        if 'police_reference' in ground_truth:
-            values['police_reference'].append(ground_truth['police_reference'])
-        if 'writ_no' in ground_truth:
-            values['writ_no'].append(ground_truth['writ_no'])
-        if 'contact_person' in ground_truth:
-            values['contact_person'].append(ground_truth['contact_person'])
+        # Other fields - exclude null/None/empty
+        if 'police_reference' in ground_truth and ground_truth['police_reference'] is not None:
+            police_val = str(ground_truth['police_reference']).strip()
+            if police_val:
+                values['police_reference'].append(police_val)
+                
+        if 'writ_no' in ground_truth and ground_truth['writ_no'] is not None:
+            writ_val = str(ground_truth['writ_no']).strip()
+            if writ_val:
+                values['writ_no'].append(writ_val)
+                
+        if 'contact_person' in ground_truth and ground_truth['contact_person'] is not None:
+            contact_val = str(ground_truth['contact_person']).strip()
+            if contact_val:
+                values['contact_person'].append(contact_val)
             
     except (json.JSONDecodeError, TypeError):
         pass
@@ -143,17 +217,74 @@ def apply_mappings_to_transactions(transactions_csv, mappings):
         return transactions_csv
 
 def apply_mappings_to_ground_truth(json_str, mappings):
-    """Apply value mappings to ground truth JSON string"""
+    """Apply value mappings to ground truth JSON string with proper amount handling"""
     if not json_str or pd.isna(json_str):
         return json_str
     
     try:
         ground_truth = json.loads(json_str)
-        ground_truth = apply_mappings_recursive(ground_truth, mappings)
-        return json.dumps(ground_truth, ensure_ascii=False)
+        
+        # Apply mappings recursively with special handling for amounts
+        ground_truth = apply_mappings_recursive_enhanced(ground_truth, mappings)
+        
+        return json.dumps(ground_truth, indent=2, ensure_ascii=False)
     except Exception as e:
         print(f"Error processing ground truth: {e}")
         return json_str
+
+def apply_mappings_recursive_enhanced(obj, mappings):
+    """Apply mappings recursively with enhanced amount handling"""
+    if isinstance(obj, dict):
+        new_obj = {}
+        for k, v in obj.items():
+            if k in ['amount', 'cancel_amount_requested'] and v is not None:
+                # Handle amount fields specifically
+                str_value = str(v)
+                # Try exact match first
+                if str_value in mappings:
+                    try:
+                        # Convert to number if possible
+                        new_obj[k] = float(mappings[str_value]) if '.' in mappings[str_value] else int(mappings[str_value])
+                    except ValueError:
+                        new_obj[k] = mappings[str_value]
+                else:
+                    # Try normalized amount matching
+                    from data_processor import strict_normalization_functions
+                    normalized_amount = strict_normalization_functions['amount'](str_value)
+                    if normalized_amount in mappings:
+                        try:
+                            new_obj[k] = float(mappings[normalized_amount]) if '.' in mappings[normalized_amount] else int(mappings[normalized_amount])
+                        except ValueError:
+                            new_obj[k] = mappings[normalized_amount]
+                    else:
+                        new_obj[k] = v
+            else:
+                new_obj[k] = apply_mappings_recursive_enhanced(v, mappings)
+        return new_obj
+    elif isinstance(obj, list):
+        return [apply_mappings_recursive_enhanced(item, mappings) for item in obj]
+    elif isinstance(obj, str):
+        return apply_single_mapping(obj, mappings)
+    elif isinstance(obj, (int, float)) and obj is not None:
+        # Handle numeric values
+        str_value = str(obj)
+        if str_value in mappings:
+            try:
+                return float(mappings[str_value]) if '.' in mappings[str_value] else int(mappings[str_value])
+            except ValueError:
+                return mappings[str_value]
+        else:
+            # Try normalized amount matching
+            from data_processor import strict_normalization_functions
+            normalized_amount = strict_normalization_functions['amount'](str_value)
+            if normalized_amount in mappings:
+                try:
+                    return float(mappings[normalized_amount]) if '.' in mappings[normalized_amount] else int(mappings[normalized_amount])
+                except ValueError:
+                    return mappings[normalized_amount]
+        return obj
+    else:
+        return obj
 
 def apply_single_mapping(value, mappings):
     """Apply mappings to a single value"""
@@ -167,17 +298,6 @@ def apply_single_mapping(value, mappings):
         replacement = randomize_masked_value(replacement)
         str_value = str_value.replace(str(original), str(replacement))
     return str_value
-
-def apply_mappings_recursive(obj, mappings):
-    """Apply mappings recursively to nested objects"""
-    if isinstance(obj, dict):
-        return {k: apply_mappings_recursive(v, mappings) for k, v in obj.items()}
-    elif isinstance(obj, list):
-        return [apply_mappings_recursive(item, mappings) for item in obj]
-    elif isinstance(obj, str):
-        return apply_single_mapping(obj, mappings)
-    else:
-        return obj
 
 def save_csv_with_indented_json(df, output_file, json_columns=['Ground Truth']):
     """Save CSV with properly indented JSON in specified columns"""
@@ -196,15 +316,16 @@ def save_csv_with_indented_json(df, output_file, json_columns=['Ground Truth']):
         if col in df_copy.columns:
             df_copy[col] = df_copy[col].apply(indent_json_str)
     
-    # Ensure the new columns are at the end
+    # Ensure the new columns are at the end in the correct order
     cols = df_copy.columns.tolist()
-    if 'Values_To_Be_Replaced' in cols and 'Values_After_Replacement' in cols:
-        # Move the new columns to the end
-        cols.remove('Values_To_Be_Replaced')
-        cols.remove('Values_After_Replacement')
-        cols.extend(['Values_To_Be_Replaced', 'Values_After_Replacement'])
-        df_copy = df_copy[cols]
+    new_cols = ['Normalized_Original', 'Original_Values', 'Randomized_Normalized', 'Randomized_Values']
     
+    for col in new_cols:
+        if col in cols:
+            cols.remove(col)
+    cols.extend([col for col in new_cols if col in df_copy.columns])
+    
+    df_copy = df_copy[cols]
     df_copy.to_csv(output_file, index=False, encoding='utf-8-sig')
     return df_copy
 
@@ -222,7 +343,7 @@ def main():
         randomized_df = create_randomized_rows(df, num_new_rows=50)
         print(f"Randomized dataset has {len(randomized_df)} rows")
         
-        # Save with properly indented JSON - REPLACE THIS PART
+        # Save with properly indented JSON
         randomized_df = save_csv_with_indented_json(randomized_df, output_file, ['Ground Truth'])
         print(f"Randomized dataset saved to {output_file} with properly indented JSON")
         
