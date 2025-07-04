@@ -1,8 +1,8 @@
-Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount
-24/4/2025,HKD,101890,C,Hang Seng Bank Ltd.,,66666666601,111-111111-102,YEUNG KAI,CHUNG SIU,Beneficiary,CWTF,INWARD TELEGRAPHIC       TRANSFER (R22),,PCBCHKHH,101890
-23/4/2025,HKD,110000,C,Hang Seng Bank Ltd.,STANDARD CHARTERED BANK (HONG KONG) LIMITED,66666666606,111-111111-102,TANG WING,CHUNG SIU,Beneficiary,CWTF,Default transaction,,STANDARD CHARTERED BANK (HONG KONG) LIMITED,110000
-2025-06-23,HKD,100000,C,Hang Seng Bank Ltd.,Ant Bank (Hong Kong) Limited,66666666605,111-111111-101,LUI SAN SAN,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,Ant Bank (Hong Kong) Limited,100000
-2025-06-23,HKD,150000,C,Hang Seng Bank Ltd.,ZA Bank Limited,444-4444444-101,111-111111-101,CHEUNG TAK SHING,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,ZA Bank Limited,150000
-2025-04-29,HKD,80000,C,,,222-222222-882,222-222222-102,,,Beneficiary,CMTF,TRANSFER DEPOSIT,,,80000
-2025-04-29,HKD,49873,C,,,222-222222-102,111-111111-103,YAN MEI MEI,CHIU YAN,Beneficiary,CUTF,ATM TRANSFER UNRELATED   DEPOSIT,,,49873
-2025-04-29,HKD,50000,C,,,66666666607,111-111111-103,ZHAO SUIMEN,CHIU YAN,Beneficiary,CWTF,Default transaction,,,50000
+Transaction Date (value),Originating Currency,Originating Amount,Debit Credit Indicator,Beneficiary Bank Raw,Originator Bank Raw,Originator Account Number,Beneficiary Account Number,Originator Name,Beneficiary Name,Subject Type,Transaction Type Source,Transaction Code Description,Sending Bank Account Number,Sending Bank Address,Converted Amount,Transaction ID
+24/4/2025,HKD,101890,C,Hang Seng Bank Ltd.,,66666666601,111-111111-102,YEUNG KAI,CHUNG SIU,Beneficiary,CWTF,INWARD TELEGRAPHIC       TRANSFER (R22),,PCBCHKHH,101890,e2e3fef9-5cd8-4934-b0e7-1238978c78b8
+23/4/2025,HKD,110000,C,Hang Seng Bank Ltd.,STANDARD CHARTERED BANK (HONG KONG) LIMITED,66666666606,111-111111-102,TANG WING,CHUNG SIU,Beneficiary,CWTF,Default transaction,,STANDARD CHARTERED BANK (HONG KONG) LIMITED,110000,e0ae4c0a-f2a8-4c14-ab9d-14249f03048e
+2025-06-23,HKD,100000,C,Hang Seng Bank Ltd.,Ant Bank (Hong Kong) Limited,66666666605,111-111111-101,LUI SAN SAN,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,Ant Bank (Hong Kong) Limited,100000,a77ecf32-867a-405a-9216-d904a5822a43
+2025-06-23,HKD,150000,C,Hang Seng Bank Ltd.,ZA Bank Limited,444-4444444-101,111-111111-101,CHEUNG TAK SHING,CHAN TAI MAN,Beneficiary,CWTF,Default transaction,,ZA Bank Limited,150000,fadf5307-0459-4fee-bb77-6d942d29c1e9
+2025-04-29,HKD,80000,C,,,222-222222-882,222-222222-102,,,Beneficiary,CMTF,TRANSFER DEPOSIT,,,80000,cde06f56-73ec-42c5-a5a0-5aace0c3cc78
+2025-04-29,HKD,49873,C,,,222-222222-102,111-111111-103,YAN MEI MEI,CHIU YAN,Beneficiary,CUTF,ATM TRANSFER UNRELATED   DEPOSIT,,,49873,ef8945ad-bd19-461f-b8c8-cc01dea6df98
+2025-04-29,HKD,50000,C,,,66666666607,111-111111-103,ZHAO SUIMEN,CHIU YAN,Beneficiary,CWTF,Default transaction,,,50000,6c326fd8-e8f6-4f5d-8ef3-d28344e90395
