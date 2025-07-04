@@ -122,7 +122,7 @@ CONTACT_PERSON_PATTERNS = [
 ]
 
 def save_json_utf8(data, filename):
-    """Save JSON data with proper UTF-8 encoding"""
+    """Save JSON data with proper UTF-8 encoding and indentation"""
     with open(filename, 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
 
@@ -132,12 +132,75 @@ def load_json_utf8(filename):
         return json.load(f)
 
 def extract_unique_values(csv_file_path):
-    """Extract all unique values from target fields across the dataset."""
+    """Extract all unique values from target fields across the dataset with enhanced patterns."""
     df = pd.read_csv(csv_file_path, encoding='utf-8-sig')
     unique_values = defaultdict(set)
     
+    # Enhanced patterns for better recognition
+    date_patterns = [
+        r'\d{4}-\d{2}-\d{2}(?:\s+\d{2}:\d{2}:\d{2})?',  # 2024-08-24, 2024-08-24 00:00:00
+        r'\d{1,2}\s+\w{3}\s+\d{4}',  # 24 Aug 2024, 11 Aug 2024
+        r'\d{1,2}/\d{1,2}/\d{4}',  # 24/08/2024
+        r'\d{1,2}\w{3}\d{2,4}',  # 24AUG2024, 07AUG24
+        r'\d{1,2}\w{3}',  # 07AUG, 10DEC
+        r'\d{1,2}月\d{1,2}日',  # 8月7日
+        r'\d{6,8}',  # 241210, 20240824
+    ]
+    
+    name_patterns = [
+        r'(?:MR\.?\s+|MISS\s+|MS\.?\s+|DR\.?\s+)?[A-Z][A-Z\s,■]+(?:\s+AND\s+OTHERS)?',
+        r'"[A-Z\s,]+"',  # "CHAN, TAI MAN"
+        r'\d+/[A-Z\s]+',  # 1/CHAN TAI MAN
+    ]
+    
+    account_patterns = [
+        r'\d{3}-\d{6,7}-\d{3}',  # 111-111111-101
+        r'\d{8,11}',  # 66666666601
+        r'FPS:?\s*\d+',  # FPS:122222221
+        r'\d+■+',  # 000402■■■■■■■
+        r'024N\d*■*',  # 024N2501■■■■■■■■■■■
+    ]
+    
+    bank_patterns = [
+        r'The Hongkong and Shanghai Banking Corporation Limited\s*',
+        r'STANDARD CHARTERED BANK[^,]*',
+        r'Bank of China[^,]*',
+        r'Hang Seng Bank[^,]*',
+        r'CHINA CONSTRUCTION BANK[^,]*',
+        r'\d{3}\s+BBAN',  # 004 BBAN
+        r'BBAN\s+\d+',  # BBAN 4
+        r'[A-Z]{3,8}■+',  # ICBKCNB■■■■
+        r'滙豐|渣打银行|恆生銀行|恆生|中國建設銀行[^,]*',
+    ]
+    
+    def extract_patterns(text, patterns):
+        """Extract patterns from text"""
+        matches = []
+        if text and pd.notna(text):
+            text_str = str(text)
+            for pattern in patterns:
+                matches.extend(re.findall(pattern, text_str, re.IGNORECASE))
+        return matches
+    
     for idx, row in df.iterrows():
-        ground_truth_str = row['Ground Truth']
+        # Extract from Input column
+        if pd.notna(row.get('Input')):
+            input_text = str(row['Input'])
+            unique_values['date'].update(extract_patterns(input_text, date_patterns))
+            unique_values['name'].update(extract_patterns(input_text, name_patterns))
+            unique_values['account_number'].update(extract_patterns(input_text, account_patterns))
+            unique_values['bank'].update(extract_patterns(input_text, bank_patterns))
+        
+        # Extract from Transactions column
+        if pd.notna(row.get('Transactions')):
+            trans_text = str(row['Transactions'])
+            unique_values['date'].update(extract_patterns(trans_text, date_patterns))
+            unique_values['name'].update(extract_patterns(trans_text, name_patterns))
+            unique_values['account_number'].update(extract_patterns(trans_text, account_patterns))
+            unique_values['bank'].update(extract_patterns(trans_text, bank_patterns))
+        
+        # Extract from Ground Truth JSON (existing logic)
+        ground_truth_str = row.get('Ground Truth')
         try:
             ground_truth = json.loads(ground_truth_str) if isinstance(ground_truth_str, str) else {}
         except (json.JSONDecodeError, TypeError):
@@ -397,19 +460,28 @@ def randomize_masked_value(value):
     return result
 
 def generate_name_variation_pattern(normalized_name):
-    """Generate regex pattern to find variations of a normalized name"""
-    escaped_name = re.escape(normalized_name)
+    """Generate enhanced regex pattern for name variations"""
     words = normalized_name.split()
-    pattern_words = [re.escape(word) + r'[ ,]*' for word in words]
-    pattern_core = ''.join(pattern_words).rstrip('[ ,]*')
     
-    prefix_pattern = r'(?:MR|MRS|MS|DR|PROF|MISS)?[ ]*'
-    suffix_pattern = r'(?:JR|SR|III|IV)?'
-    additional_words_pattern = r'(?:\s+AND\s+OTHERS)?'
+    # Create flexible pattern for each word
+    word_patterns = []
+    for word in words:
+        word_pattern = re.escape(word) + r'[,]?\s*'
+        word_patterns.append(word_pattern)
     
-    full_pattern = f'{prefix_pattern}{pattern_core}{suffix_pattern}{additional_words_pattern}'
-    regex = re.compile(full_pattern, re.IGNORECASE)
-    return regex
+    core_pattern = r'\s*'.join(word_patterns)
+    
+    # Enhanced prefixes and suffixes
+    prefix_pattern = r'(?:MR\.?\s*|MRS\.?\s*|MS\.?\s*|MISS\s*|DR\.?\s*|PROF\.?\s*|SIR\s*|MADAM\s*)?'
+    suffix_pattern = r'(?:\s*JR\.?|\s*SR\.?|\s*III|\s*IV|\s*AND\s+OTHERS)?'
+    
+    # Allow for quotes and slashes
+    quote_pattern = r'["\']?'
+    slash_pattern = r'(?:\d+/)?'
+    
+    full_pattern = f'{quote_pattern}{slash_pattern}{prefix_pattern}{core_pattern}{suffix_pattern}{quote_pattern}'
+    
+    return re.compile(full_pattern, re.IGNORECASE)
 
 def find_variations(text, normalized_value):
     """Find all variations of a normalized value in a text"""

@@ -54,6 +54,18 @@ def apply_mappings_to_row(row, value_mappings):
     new_row['Transactions'] = apply_mappings_to_transactions(row['Transactions'], row_mappings)
     new_row['Ground Truth'] = apply_mappings_to_ground_truth(row['Ground Truth'], row_mappings)
     
+    # Add the two new columns
+    original_values = []
+    replaced_values = []
+    
+    for original, replacement in row_mappings.items():
+        if str(original).strip() and str(replacement).strip():  # Only non-empty values
+            original_values.append(str(original))
+            replaced_values.append(str(replacement))
+    
+    new_row['Values_To_Be_Replaced'] = '\n'.join(original_values)
+    new_row['Values_After_Replacement'] = '\n'.join(replaced_values)
+    
     return new_row
 
 def extract_values_from_row(row):
@@ -167,6 +179,35 @@ def apply_mappings_recursive(obj, mappings):
     else:
         return obj
 
+def save_csv_with_indented_json(df, output_file, json_columns=['Ground Truth']):
+    """Save CSV with properly indented JSON in specified columns"""
+    df_copy = df.copy()
+    
+    def indent_json_str(json_str):
+        try:
+            if pd.isna(json_str) or json_str == '':
+                return json_str
+            obj = json.loads(json_str)
+            return json.dumps(obj, indent=2, ensure_ascii=False)
+        except Exception:
+            return json_str
+    
+    for col in json_columns:
+        if col in df_copy.columns:
+            df_copy[col] = df_copy[col].apply(indent_json_str)
+    
+    # Ensure the new columns are at the end
+    cols = df_copy.columns.tolist()
+    if 'Values_To_Be_Replaced' in cols and 'Values_After_Replacement' in cols:
+        # Move the new columns to the end
+        cols.remove('Values_To_Be_Replaced')
+        cols.remove('Values_After_Replacement')
+        cols.extend(['Values_To_Be_Replaced', 'Values_After_Replacement'])
+        df_copy = df_copy[cols]
+    
+    df_copy.to_csv(output_file, index=False, encoding='utf-8-sig')
+    return df_copy
+
 def main():
     """Main function to create randomized dataset"""
     input_file = "Dataset_Source_v5_updated_with_groundtruth.csv"
@@ -181,9 +222,9 @@ def main():
         randomized_df = create_randomized_rows(df, num_new_rows=50)
         print(f"Randomized dataset has {len(randomized_df)} rows")
         
-        # Save with utf-8-sig encoding for ■ and Chinese characters
-        randomized_df.to_csv(output_file, index=False, encoding='utf-8-sig')
-        print(f"Randomized dataset saved to {output_file} with utf-8-sig encoding")
+        # Save with properly indented JSON - REPLACE THIS PART
+        randomized_df = save_csv_with_indented_json(randomized_df, output_file, ['Ground Truth'])
+        print(f"Randomized dataset saved to {output_file} with properly indented JSON")
         
         print("\nSample of randomized rows:")
         new_rows = randomized_df.iloc[len(df):len(df)+3]
