@@ -1,0 +1,498 @@
+{
+  "file_info": {
+    "rows": 293,
+    "columns": 66,
+    "transaction_columns": 11,
+    "source_columns": 11
+  },
+  "transaction_analysis": {
+    "Transaction_Fraud Payment": {
+      "non_null_count": 251,
+      "field_patterns": [
+        "column_value",
+        "value_9",
+        "value_2",
+        "value_8",
+        "value_10",
+        "value_1",
+        "value_5",
+        "value_7",
+        "value_3",
+        "value_4",
+        "value_6"
+      ],
+      "sample_values": [
+        "2",
+        "3",
+        "4"
+      ]
+    },
+    "Transaction_Located": {
+      "non_null_count": 259,
+      "field_patterns": [
+        "column_value",
+        "value_1.0"
+      ],
+      "sample_values": [
+        "1.0",
+        "1.0",
+        "1.0"
+      ]
+    },
+    "Transaction_Transaction Date (value)": {
+      "non_null_count": 251,
+      "field_patterns": [
+        "value_2024-10-07 00:00:00",
+        "column_value",
+        "value_2024-08-24 00:00:00",
+        "value_2024-08-25 00:00:00"
+      ],
+      "sample_values": [
+        "2024-08-24 00:00:00",
+        "2024-08-25 00:00:00",
+        "2024-08-24 00:00:00"
+      ]
+    },
+    "Transaction_Originating Amount": {
+      "non_null_count": 251,
+      "field_patterns": [
+        "value_31000.0",
+        "column_value",
+        "value_30000.0",
+        "value_39000.0",
+        "value_10000.0",
+        "value_50000.0",
+        "value_60000.0",
+        "value_192500.0"
+      ],
+      "sample_values": [
+        "50000.0",
+        "10000.0",
+        "31000.0"
+      ]
+    },
+    "Transaction_Originating Currency": {
+      "non_null_count": 251,
+      "field_patterns": [
+        "column_value",
+        "value_HKD"
+      ],
+      "sample_values": [
+        "HKD",
+        "HKD",
+        "HKD"
+      ]
+    },
+    "Transaction_Originator Name": {
+      "non_null_count": 216,
+      "field_patterns": [
+        "column_value",
+        "value_TSANG SIU MING",
+        "value_YEUNG KAI",
+        "value_CHEUNG TAK SHING"
+      ],
+      "sample_values": [
+        "CHEUNG TAK SHING",
+        "CHEUNG TAK SHING",
+        "CHEUNG TAK SHING"
+      ]
+    },
+    "Transaction_Originator Account Number": {
+      "non_null_count": 219,
+      "field_patterns": [
+        "column_value",
+        "value_66666666601",
+        "value_444-4444444-101",
+        "value_222-222222-101",
+        "value_66666666602"
+      ],
+      "sample_values": [
+        "444-4444444-101",
+        "444-4444444-101",
+        "222-222222-101"
+      ]
+    },
+    "Transaction_Originator Bank Raw": {
+      "non_null_count": 163,
+      "field_patterns": [
+        "column_value",
+        "value_The Hongkong and Shanghai Banking Corporation Limited",
+        "value_DBS Bank (Hong Kong) Ltd.",
+        "value_China Construction Bank (Asia) Corporation Limited",
+        "value_Bank of China (Hong Kong) Limited",
+        "value_Bank of Communications (Hong Kong) Ltd."
+      ],
+      "sample_values": [
+        "The Hongkong and Shanghai Banking Corporation Limited",
+        "Bank of China (Hong Kong) Limited",
+        "The Hongkong and Shanghai Banking Corporation Limited"
+      ]
+    },
+    "Transaction_Beneficiary Name": {
+      "non_null_count": 250,
+      "field_patterns": [
+        "value_CHAN TAI MAN",
+        "column_value",
+        "value_CHUNG SIU"
+      ],
+      "sample_values": [
+        "CHAN TAI MAN",
+        "CHAN TAI MAN",
+        "CHAN TAI MAN"
+      ]
+    },
+    "Transaction_Beneficiary Account Number": {
+      "non_null_count": 251,
+      "field_patterns": [
+        "value_111-111111-101",
+        "value_111-111111-102",
+        "column_value"
+      ],
+      "sample_values": [
+        "111-111111-101",
+        "111-111111-101",
+        "111-111111-101"
+      ]
+    },
+    "Transaction_Beneficiary Bank Raw": {
+      "non_null_count": 158,
+      "field_patterns": [
+        "column_value",
+        "value_Hang Seng Bank Ltd."
+      ],
+      "sample_values": [
+        "Hang Seng Bank Ltd.",
+        "Hang Seng Bank Ltd.",
+        "Hang Seng Bank Ltd."
+      ]
+    }
+  },
+  "source_analysis": {
+    "Source_Transaction Date (value)": {
+      "non_null_count": 254,
+      "data_types": {
+        "string": 10
+      },
+      "sample_values": [
+        {
+          "raw": "2024-08-24",
+          "type": "string",
+          "parsed": "same"
+        },
+        {
+          "raw": "2024-08-25",
+          "type": "string",
+          "parsed": "same"
+        },
+        {
+          "raw": "2024-08-24",
+          "type": "string",
+          "parsed": "same"
+        }
+      ]
+    },
+    "Source_Originating Amount": {
+      "non_null_count": 253,
+      "data_types": {
+        "number": 10
+      },
+      "sample_values": [
+        {
+          "raw": "50000.0",
+          "type": "number",
+          "parsed": "50000.0"
+        },
+        {
+          "raw": "10000.0",
+          "type": "number",
+          "parsed": "10000.0"
+        },
+        {
+          "raw": "31000.0",
+          "type": "number",
+          "parsed": "31000.0"
+        }
+      ]
+    },
+    "Source_Originating Currency": {
+      "non_null_count": 254,
+      "data_types": {
+        "string": 10
+      },
+      "sample_values": [
+        {
+          "raw": "HKD",
+          "type": "string",
+          "parsed": "same"
+        },
+        {
+          "raw": "HKD",
+          "type": "string",
+          "parsed": "same"
+        },
+        {
+          "raw": "HKD",
+          "type": "string",
+          "parsed": "same"
+        }
+      ]
+    },
+    "Source_Cancel Amount Requested": {
+      "non_null_count": 41,
+      "data_types": {
+        "number": 10
+      },
+      "sample_values": [
+        {
+          "raw": "1.0",
+          "type": "number",
+          "parsed": "1.0"
+        },
+        {
+          "raw": "2010.0",
+          "type": "number",
+          "parsed": "2010.0"
+        },
+        {
+          "raw": "2460.0",
+          "type": "number",
+          "parsed": "2460.0"
+        }
+      ]
+    },
+    "Source_Originator Name": {
+      "non_null_count": 198,
+      "data_types": {
+        "string": 10
+      },
+      "sample_values": [
+        {
+          "raw": "CHEUNG TAK SHING ",
+          "type": "string",
+          "parsed": "CHEUNG TAK SHING"
+        },
+        {
+          "raw": "CHEUNG TAK SHING ",
+          "type": "string",
+          "parsed": "CHEUNG TAK SHING"
+        },
+        {
+          "raw": "CHEUNG TAK SHING ",
+          "type": "string",
+          "parsed": "CHEUNG TAK SHING"
+        }
+      ]
+    },
+    "Source_Originator Account Number": {
+      "non_null_count": 239,
+      "data_types": {
+        "string": 8,
+        "number": 2
+      },
+      "sample_values": [
+        {
+          "raw": "444-4444444-101",
+          "type": "string",
+          "parsed": "same"
+        },
+        {
+          "raw": "444-4444444-101",
+          "type": "string",
+          "parsed": "same"
+        },
+        {
+          "raw": "222-222222-101 ",
+          "type": "string",
+          "parsed": "222-222222-101"
+        }
+      ]
+    },
+    "Source_Originator Bank Raw": {
+      "non_null_count": 241,
+      "data_types": {
+        "string": 10
+      },
+      "sample_values": [
+        {
+          "raw": "HSBC",
+          "type": "string",
+          "parsed": "same"
+        },
+        {
+          "raw": "HSBC",
+          "type": "string",
+          "parsed": "same"
+        },
+        {
+          "raw": "HSB",
+          "type": "string",
+          "parsed": "same"
+        }
+      ]
+    },
+    "Source_Beneficiary Name": {
+      "non_null_count": 240,
+      "data_types": {
+        "string": 10
+      },
+      "sample_values": [
+        {
+          "raw": "CHAN TAI MAN",
+          "type": "string",
+          "parsed": "same"
+        },
+        {
+          "raw": "CHAN TAI MAN",
+          "type": "string",
+          "parsed": "same"
+        },
+        {
+          "raw": "CHAN TAI MAN",
+          "type": "string",
+          "parsed": "same"
+        }
+      ]
+    },
+    "Source_Beneficiary Account Number": {
+      "non_null_count": 240,
+      "data_types": {
+        "string": 10
+      },
+      "sample_values": [
+        {
+          "raw": "111-111111-101",
+          "type": "string",
+          "parsed": "same"
+        },
+        {
+          "raw": "111-111111-101",
+          "type": "string",
+          "parsed": "same"
+        },
+        {
+          "raw": "111-111111-101",
+          "type": "string",
+          "parsed": "same"
+        }
+      ]
+    },
+    "Source_Beneficiary Bank Raw": {
+      "non_null_count": 193,
+      "data_types": {
+        "string": 10
+      },
+      "sample_values": [
+        {
+          "raw": "HSB",
+          "type": "string",
+          "parsed": "same"
+        },
+        {
+          "raw": "HSB",
+          "type": "string",
+          "parsed": "same"
+        },
+        {
+          "raw": "HSB",
+          "type": "string",
+          "parsed": "same"
+        }
+      ]
+    },
+    "Source_Transaction Channel": {
+      "non_null_count": 73,
+      "data_types": {
+        "string": 10
+      },
+      "sample_values": [
+        {
+          "raw": "FPS",
+          "type": "string",
+          "parsed": "same"
+        },
+        {
+          "raw": "FPS",
+          "type": "string",
+          "parsed": "same"
+        },
+        {
+          "raw": "ATM",
+          "type": "string",
+          "parsed": "same"
+        }
+      ]
+    }
+  },
+  "field_mappings": {
+    "transaction_mappings": {
+      "date": [
+        "Transaction_Transaction Date (value)"
+      ],
+      "amount": [
+        "Transaction_Originating Amount"
+      ],
+      "currency": [
+        "Transaction_Originating Currency"
+      ],
+      "name": [
+        "Transaction_Originator Name",
+        "Transaction_Beneficiary Name"
+      ],
+      "bank": [
+        "Transaction_Originator Bank Raw",
+        "Transaction_Beneficiary Bank Raw"
+      ]
+    },
+    "source_mappings": {
+      "date": [
+        "Source_Transaction Date (value)"
+      ],
+      "amount": [
+        "Source_Originating Amount",
+        "Source_Cancel Amount Requested"
+      ],
+      "currency": [
+        "Source_Originating Currency"
+      ],
+      "name": [
+        "Source_Originator Name",
+        "Source_Beneficiary Name"
+      ],
+      "bank": [
+        "Source_Originator Bank Raw",
+        "Source_Beneficiary Bank Raw"
+      ],
+      "channel": [
+        "Source_Transaction Channel"
+      ]
+    }
+  },
+  "column_lists": {
+    "transaction_columns": [
+      "Transaction_Fraud Payment",
+      "Transaction_Located",
+      "Transaction_Transaction Date (value)",
+      "Transaction_Originating Amount",
+      "Transaction_Originating Currency",
+      "Transaction_Originator Name",
+      "Transaction_Originator Account Number",
+      "Transaction_Originator Bank Raw",
+      "Transaction_Beneficiary Name",
+      "Transaction_Beneficiary Account Number",
+      "Transaction_Beneficiary Bank Raw"
+    ],
+    "source_columns": [
+      "Source_Transaction Date (value)",
+      "Source_Originating Amount",
+      "Source_Originating Currency",
+      "Source_Cancel Amount Requested",
+      "Source_Originator Name",
+      "Source_Originator Account Number",
+      "Source_Originator Bank Raw",
+      "Source_Beneficiary Name",
+      "Source_Beneficiary Account Number",
+      "Source_Beneficiary Bank Raw",
+      "Source_Transaction Channel"
+    ]
+  }
+}
