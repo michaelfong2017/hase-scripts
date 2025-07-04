@@ -1,4 +1,4 @@
-﻿Type,Case Number,Intelligence Number,Suspect Number,Instruction,Transactions,Input,job_67902_20250704_1444_Qwen2.5-32B-Instruct_LoRA,input_tokens,output_tokens
+﻿Type,Case Number,Intelligence Number,Suspect Number,Instruction,Transactions,Input,Ground Truth,job_67902_20250704_1444_Qwen2.5-32B-Instruct_LoRA,input_tokens,output_tokens
 UAR,A,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -165,7 +165,32 @@ Additional Deatils:
       ""cancel_amount_requested"": null
     }
   ]
-}",2909.0,223.0
+}","{
+  ""fraud_type"": ""Cheque Fraud"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2025-04-22"",
+      ""amount"": 95500,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""YAN MEI MEI"",
+        ""account_number"": ""444-4444444-001"",
+        ""bank"": ""HASE""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HASE""
+      },
+      ""channel"": null,
+      ""can_be_located"": true,
+      ""transaction_references"": [
+        ""f786021b-b725-4182-ba86-eb055f182542""
+      ],
+      ""cancel_amount_requested"": null
+    }
+  ]
+}",2909,223
 ODFT,A,2,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -319,7 +344,31 @@ JSON Schema:
 | X小姐/先生，如果確定支票號碼XXXXXX(e.g.123456)呢張係你最後開出嘅支票，我地會幫你由123457開始停直到123506，共XX張，請問有冇問題？ | NaN | NaN | NaN |
 | \*必填\* 請問你報左警未?\n | 已報警 -> ""請你提供報案編號俾我地做返記錄，並於稍後將口供紙副本以電郵/郵寄方式交俾我地。""\n\n | NaN | NaN |
 | 如客戶提供報案編號 (if any) | ERC 2504■■■■■■■■■ | NaN | NaN |
-| 注：上報時已清楚告知客戶需為有關損失附上全部責任 | NaN | NaN | NaN |","```json
+| 注：上報時已清楚告知客戶需為有關損失附上全部責任 | NaN | NaN | NaN |","{
+  ""fraud_type"": ""Not provided"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2025-04-22"",
+      ""amount"": 95500,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""YAN MEI MEI"",
+        ""account_number"": ""444-4444444-001"",
+        ""bank"": ""HASE""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HASE""
+      },
+      ""channel"": ""cheque"",
+      ""can_be_located"": true,
+      ""transaction_references"": [
+        ""f786021b-b725-4182-ba86-eb055f182542""
+      ]
+    }
+  ]
+}","```json
 {
   ""fraud_type"": ""Not provided"",
   ""alerted_transactions"": [
@@ -345,7 +394,7 @@ JSON Schema:
     }
   ]
 }
-```",4186.0,218.0
+```",4186,218
 ODFT,B,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -502,7 +551,31 @@ JSON Schema:
 | X小姐/先生，如果確定支票號碼XXXXXX(e.g.123456)呢張係你最後開出嘅支票，我地會幫你由123457開始停直到123506，共XX張，請問有冇問題？ | NaN | NaN | NaN |
 | \*必填\* 請問你報左警未?\n | 未報警 -> ""請你儘快去報案，你可經由警局報案中心或網上電子報案中心報案。向警方報案時請說明個案詳情及提供口供紙副本或網上報案詳情及報案編號，並於稍後將口供紙已電郵/郵寄方式交俾我地。"" | NaN | NaN |
 | 如客戶提供報案編號 (if any) | NaN | NaN | NaN |
-| 注：上報時已清楚告知客戶需為有關損失附上全部責任 | NaN | NaN | NaN |","```json
+| 注：上報時已清楚告知客戶需為有關損失附上全部責任 | NaN | NaN | NaN |","{
+  ""fraud_type"": ""Social Media Scam"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2025-04-14"",
+      ""amount"": 8300,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""FONG LAI"",
+        ""account_number"": ""222-222222-110"",
+        ""bank"": ""HASE""
+      },
+      ""to"": {
+        ""name"": ""SUN YEUNG"",
+        ""account_number"": ""111-111111-109"",
+        ""bank"": ""HASE""
+      },
+      ""channel"": null,
+      ""can_be_located"": true,
+      ""transaction_references"": [
+        ""a042a4df-8333-47de-b89e-abd0a352a550""
+      ]
+    }
+  ]
+}","```json
 {
   ""fraud_type"": ""Social Media Scam"",
   ""alerted_transactions"": [
@@ -528,7 +601,7 @@ JSON Schema:
     }
   ]
 }
-```",4518.0,214.0
+```",4518,214
 ADCC,B,2,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -698,6 +771,52 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
         ""account_number"": ""111-111111-109"",
         ""bank"": ""HASE""
       },
+      ""channel"": null,
+      ""can_be_located"": true,
+      ""transaction_references"": [
+        ""af603fb0-0de9-47cf-88df-8cf06bbc1778""
+      ]
+    },
+    {
+      ""date"": ""2025-04-15"",
+      ""amount"": 58000,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""CHUN MING"",
+        ""account_number"": ""444-4444444-108"",
+        ""bank"": ""Bank of China (Hong Kong) Limited""
+      },
+      ""to"": {
+        ""name"": ""WONG CHUN HEI"",
+        ""account_number"": ""111-111111-110"",
+        ""bank"": ""HASE""
+      },
+      ""channel"": null,
+      ""can_be_located"": true,
+      ""transaction_references"": [
+        ""9c501229-b7ff-457a-90aa-d2069b47a0a1""
+      ]
+    }
+  ]
+}","{
+  ""fraud_type"": ""Telephone Deception - Pretend Customer Service"",
+  ""police_reference"": ""ESPS ■■■/2025 and TSW RN ■■■■■■■■"",
+  ""police_team"": ""DIT 3 ■■■■■■"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2025-04-15"",
+      ""amount"": 60000,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""CHUN MING"",
+        ""account_number"": ""444-4444444-108"",
+        ""bank"": ""Bank of China (Hong Kong) Limited""
+      },
+      ""to"": {
+        ""name"": ""SUN YEUNG"",
+        ""account_number"": ""111-111111-109"",
+        ""bank"": ""HASE""
+      },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
       ""transaction_references"": [
@@ -725,7 +844,7 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
       ]
     }
   ]
-}",2833.0,467.0
+}",2833,467
 HSBC Referral,C,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -844,6 +963,50 @@ Best Regards,","{
   ""fraud_type"": ""AP-Impersonation (Other)"",
   ""alerted_transactions"": [
     {
+      ""date"": ""2025-06-12"",
+      ""amount"": 10900,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""CHI FU"",
+        ""account_number"": ""666-666666-107"",
+        ""bank"": ""The Hongkong and Shanghai Banking Corporation Limited""
+      },
+      ""to"": {
+        ""name"": ""MOK YUN"",
+        ""account_number"": ""111-111111-107"",
+        ""bank"": ""HASE""
+      },
+      ""channel"": null,
+      ""can_be_located"": true,
+      ""transaction_references"": [
+        ""1454c14e-3a98-4919-b2d3-dce7ba0eb729""
+      ]
+    },
+    {
+      ""date"": ""2025-06-13"",
+      ""amount"": 39100,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""CHI FU"",
+        ""account_number"": ""666-666666-107"",
+        ""bank"": ""The Hongkong and Shanghai Banking Corporation Limited""
+      },
+      ""to"": {
+        ""name"": ""MOK YUN"",
+        ""account_number"": ""111-111111-107"",
+        ""bank"": ""HASE""
+      },
+      ""channel"": null,
+      ""can_be_located"": true,
+      ""transaction_references"": [
+        ""8b2dae8c-0835-4958-a2a0-88bbc71e40dc""
+      ]
+    }
+  ]
+}","{
+  ""fraud_type"": ""AP-Impersonation (Other)"",
+  ""alerted_transactions"": [
+    {
       ""date"": ""2025-06-13"",
       ""amount"": 10900,
       ""currency"": ""HKD"",
@@ -884,7 +1047,7 @@ Best Regards,","{
       ]
     }
   ]
-}",2500.0,415.0
+}",2500,415
 HSBC Referral,C,2,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -1014,6 +1177,30 @@ Best Regards,","{
         ""account_number"": ""111-111111-107"",
         ""bank"": ""HASE""
       },
+      ""channel"": null,
+      ""can_be_located"": true,
+      ""transaction_references"": [
+        ""4afa975e-4dbb-439a-ab4b-5fb30412f0fb""
+      ]
+    }
+  ]
+}","{
+  ""fraud_type"": ""AP-Impersonation (Other)"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2025-06-12"",
+      ""amount"": 5702,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""POON TO"",
+        ""account_number"": ""333-333333-108"",
+        ""bank"": ""The Hongkong and Shanghai Banking Corporation Limited""
+      },
+      ""to"": {
+        ""name"": ""MOK YUN"",
+        ""account_number"": ""111-111111-107"",
+        ""bank"": ""HASE""
+      },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
       ""transaction_references"": [
@@ -1021,7 +1208,7 @@ Best Regards,","{
       ]
     }
   ]
-}",2409.0,218.0
+}",2409,218
 HSBC Referral,C,3,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -1151,6 +1338,30 @@ Best Regards,","{
         ""account_number"": ""111-111111-107"",
         ""bank"": ""HASE""
       },
+      ""channel"": null,
+      ""can_be_located"": true,
+      ""transaction_references"": [
+        ""4e73b21d-72f8-475e-b702-6880cc1a394f""
+      ]
+    }
+  ]
+}","{
+  ""fraud_type"": ""Impersonation (Other)"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2025-06-10"",
+      ""amount"": 3500,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""CHUANG HUNG"",
+        ""account_number"": ""666-666666-106"",
+        ""bank"": ""The Hongkong and Shanghai Banking Corporation Limited""
+      },
+      ""to"": {
+        ""name"": ""MOK YUN"",
+        ""account_number"": ""111-111111-107"",
+        ""bank"": ""HASE""
+      },
       ""channel"": ""FPS"",
       ""can_be_located"": true,
       ""transaction_references"": [
@@ -1158,7 +1369,7 @@ Best Regards,","{
       ]
     }
   ]
-}",2387.0,223.0
+}",2387,223
 Police Letter,C,4,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -1353,6 +1564,32 @@ cc SP JFIU FIIB
       ""amount"": 139401,
       ""currency"": ""HKD"",
       ""from"": {
+        ""name"": ""PANG YA SHI"",
+        ""account_number"": ""666-666666-105"",
+        ""bank"": ""Bank of China (Hong Kong) Limited""
+      },
+      ""to"": {
+        ""name"": ""MOK YUN"",
+        ""account_number"": ""111-111111-107"",
+        ""bank"": ""HASE""
+      },
+      ""channel"": ""FPS"",
+      ""can_be_located"": true,
+      ""transaction_references"": [
+        ""635eac01-253a-42af-a99e-8ebf18d5801e""
+      ]
+    }
+  ]
+}","{
+  ""fraud_type"": ""Telephone Deception"",
+  ""police_reference"": ""SS RN 25■■■■■"",
+  ""police_team"": ""District Investigation Team 6, Tai Po District, Tai Po Police Station"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2025-06-13"",
+      ""amount"": 139401,
+      ""currency"": ""HKD"",
+      ""from"": {
         ""name"": null,
         ""account_number"": ""666-666666-105"",
         ""bank"": ""Bank of China (Hong Kong) Limited""
@@ -1369,7 +1606,7 @@ cc SP JFIU FIIB
       ]
     }
   ]
-}",3691.0,255.0
+}",3691,255
 UAR,C,5,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -1542,7 +1779,32 @@ Additional Deatils:
       ""cancel_amount_requested"": 41701
     }
   ]
-}",4094.0,235.0
+}","{
+  ""fraud_type"": ""Not provided"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2025-06-13"",
+      ""amount"": 41701,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""HUANG JUAN"",
+        ""account_number"": ""666-666666-101"",
+        ""bank"": ""STANDARD CHARTERED BANK (HONG KONG) LIMITED""
+      },
+      ""to"": {
+        ""name"": ""MOK YUN"",
+        ""account_number"": ""111-111111-107"",
+        ""bank"": ""HASE""
+      },
+      ""channel"": ""FPS"",
+      ""can_be_located"": true,
+      ""transaction_references"": [
+        ""4b42e9c0-9bd4-404e-ae94-bb4cdacf713c""
+      ],
+      ""cancel_amount_requested"": 41701
+    }
+  ]
+}",4094,235
 Search Warrant,D,1,"[1, 2, 3]","You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -1683,7 +1945,14 @@ Mary
 Magistrate
 
 (\*delete as appropriate)
-Pol.866 (Rev.2001)","```json
+Pol.866 (Rev.2001)","{
+  ""fraud_type"": ""Not provided"",
+  ""police_reference"": ""POLICEREF1"",
+  ""writ_no"": ""2■■■■■"",
+  ""contact_person"": ""PC ■■■■■"",
+  ""police_team"": ""District investigation Team 2 Western District"",
+  ""alerted_transactions"": []
+}","```json
 {
   ""fraud_type"": ""Not provided"",
   ""police_reference"": ""POLICEREF1"",
@@ -1692,7 +1961,7 @@ Pol.866 (Rev.2001)","```json
   ""police_team"": ""District investigation Team 2 Western District"",
   ""alerted_transactions"": []
 }
-```",2920.0,78.0
+```",2920,78
 ADCC,D,2,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -1859,7 +2128,33 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
       ]
     }
   ]
-}",2840.0,271.0
+}","{
+  ""fraud_type"": ""Social Media Deception - Pig-butchering Scam"",
+  ""police_reference"": ""ESPS 5■■■■■■ and TPDIV 25■■■■■"",
+  ""police_team"": ""DIT9-■■■■■"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2025-06-23"",
+      ""amount"": 150000,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""444-4444444-101"",
+        ""bank"": ""ZA Bank Limited""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HASE""
+      },
+      ""channel"": ""FPS"",
+      ""can_be_located"": true,
+      ""transaction_references"": [
+        ""fadf5307-0459-4fee-bb77-6d942d29c1e9""
+      ]
+    }
+  ]
+}",2840,271
 Police Letter,D,3,2,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -2044,6 +2339,32 @@ cc SP JFIU FIIB
   ""alerted_transactions"": [
     {
       ""date"": ""2025-04-24"",
+      ""amount"": 101890,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""YEUNG KAI"",
+        ""account_number"": ""66666666601"",
+        ""bank"": ""CCB""
+      },
+      ""to"": {
+        ""name"": ""CHUNG SIU"",
+        ""account_number"": ""111-111111-102"",
+        ""bank"": ""HASE""
+      },
+      ""channel"": ""Remittance"",
+      ""can_be_located"": true,
+      ""transaction_references"": [
+        ""e2e3fef9-5cd8-4934-b0e7-1238978c78b8""
+      ]
+    }
+  ]
+}","{
+  ""fraud_type"": ""Investment Scam"",
+  ""police_reference"": ""POLICEREF2"",
+  ""police_team"": ""District Investigation Team 3, Kwai Tsing District, Kwai Chung Police Station"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2025-04-24"",
       ""amount"": 102000,
       ""currency"": ""HKD"",
       ""from"": {
@@ -2061,7 +2382,7 @@ cc SP JFIU FIIB
       ""transaction_references"": []
     }
   ]
-}",3331.0,207.0
+}",3331,207
 UAR,D,4,3,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -2233,7 +2554,32 @@ Additional Deatils:
       ""cancel_amount_requested"": null
     }
   ]
-}",3612.0,223.0
+}","{
+  ""fraud_type"": ""Payments(Authorised/Scams)"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2025-04-29"",
+      ""amount"": 49873,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""YAN MEI MEI"",
+        ""account_number"": ""222-222222-102"",
+        ""bank"": ""HSBC""
+      },
+      ""to"": {
+        ""name"": ""CHIU YAN"",
+        ""account_number"": ""111-111111-103"",
+        ""bank"": ""HASE""
+      },
+      ""channel"": ""ATM"",
+      ""can_be_located"": true,
+      ""transaction_references"": [
+        ""ef8945ad-bd19-461f-b8c8-cc01dea6df98""
+      ],
+      ""cancel_amount_requested"": null
+    }
+  ]
+}",3612,223
 HSBC Referral,E,1,1,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -2353,7 +2699,31 @@ There is a fraud case reporting involved HASE  suspect, please review the accoun
 <tr><td>2025-04-19</td><td>333333333101</td><td>NIL</td><td>024</td></tr>
 </table>
 
-Best Regards,","```json
+Best Regards,","{
+  ""fraud_type"": ""AP- Impersonation (others)"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2025-04-19"",
+      ""amount"": 30000,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""222222222101"",
+        ""bank"": ""HSBC""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""333333333101"",
+        ""bank"": ""HASE""
+      },
+      ""channel"": ""ATM"",
+      ""can_be_located"": true,
+      ""transaction_references"": [
+        ""125eef90-cb29-4065-941f-df28b88a75a2""
+      ]
+    }
+  ]
+}","```json
 {
   ""fraud_type"": ""AP- Impersonation (others)"",
   ""alerted_transactions"": [
@@ -2379,7 +2749,7 @@ Best Regards,","```json
     }
   ]
 }
-```",3172.0,220.0
+```",3172,220
 ADCC,E,2,2,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -2555,7 +2925,33 @@ Tel: 286■■■■■ / Fax: 220■■■■■","{
       ]
     }
   ]
-}",3858.0,268.0
+}","{
+  ""fraud_type"": ""Investment Fraud - Stock"",
+  ""police_reference"": ""ESPS 4■■■■■■■ and CDIST 25■■■■■■"",
+  ""police_team"": ""DIT3-■■■■■"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2025-04-01"",
+      ""amount"": 200000,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""TSANG SIU MING"",
+        ""account_number"": ""66666666602"",
+        ""bank"": ""Bank of China (Hong Kong) Limited""
+      },
+      ""to"": {
+        ""name"": ""CHUNG SIU"",
+        ""account_number"": ""111-111111-102"",
+        ""bank"": ""HASE""
+      },
+      ""channel"": ""FPS"",
+      ""can_be_located"": true,
+      ""transaction_references"": [
+        ""01bd7599-6f93-4047-9783-6afe9f0dc772""
+      ]
+    }
+  ]
+}",3858,268
 Police Letter,E,3,3,"You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -2743,7 +3139,33 @@ DIP NIP  ■■■■■■■■
 DIT 10 YLDIST
 for Commissioner of Police
 cc SP JFIU FIIB
-(email: jfiu-noti-letter@police.gov.hk)","```json
+(email: jfiu-noti-letter@police.gov.hk)","{
+  ""fraud_type"": ""Employment Fraud"",
+  ""police_reference"": ""POLICEREF2"",
+  ""police_team"": ""District Investigation Team 10, Yuen Long District"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2025-03-06"",
+      ""amount"": 1200,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": ""XIE PANGAN"",
+        ""account_number"": ""66666666603"",
+        ""bank"": ""Alipay Financial Services (HK) Limited""
+      },
+      ""to"": {
+        ""name"": ""CHIU YAN"",
+        ""account_number"": ""111111111103"",
+        ""bank"": ""HASE""
+      },
+      ""channel"": ""FPS"",
+      ""can_be_located"": true,
+      ""transaction_references"": [
+        ""a9b89f6a-c489-4114-b76f-0e0545ec0898""
+      ]
+    }
+  ]
+}","```json
 {
   ""fraud_type"": ""Employment Fraud"",
   ""police_reference"": ""POLICEREF2"",
@@ -2771,7 +3193,7 @@ cc SP JFIU FIIB
     }
   ]
 }
-```",4374.0,250.0
+```",4374,250
 Police Letter,E,4,"[3, 4]","You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -2974,7 +3396,53 @@ IP LIU  ■■■-■■
 Eastern District""
 for Commissioner of Police
 cc SP JFIU FIIB
-(email: jfiu-noti-letter@police.gov.hk)","```json
+(email: jfiu-noti-letter@police.gov.hk)","{
+  ""fraud_type"": ""Telephone Deception"",
+  ""police_reference"": ""POLICEREF3"",
+  ""police_team"": ""District Investigation Team 1, Eastern District, North Point Police Station"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2025-03-07"",
+      ""amount"": 1000,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": null,
+        ""account_number"": null,
+        ""bank"": null
+      },
+      ""to"": {
+        ""name"": ""CHIU YAN"",
+        ""account_number"": ""111111111103"",
+        ""bank"": ""HASE""
+      },
+      ""channel"": ""cash"",
+      ""can_be_located"": true,
+      ""transaction_references"": [
+        ""247f1ba8-be03-4953-a87a-f9aa6cdf404f""
+      ]
+    },
+    {
+      ""date"": ""2025-01-20"",
+      ""amount"": 1000,
+      ""currency"": ""HKD"",
+      ""from"": {
+        ""name"": null,
+        ""account_number"": null,
+        ""bank"": null
+      },
+      ""to"": {
+        ""name"": ""CHONG MAN"",
+        ""account_number"": ""111111111104"",
+        ""bank"": ""HASE""
+      },
+      ""channel"": ""cash"",
+      ""can_be_located"": true,
+      ""transaction_references"": [
+        ""ffa353a0-e1e3-473a-9241-944a2cbe8824""
+      ]
+    }
+  ]
+}","```json
 {
   ""fraud_type"": ""Telephone Deception"",
   ""police_reference"": ""POLICEREF3"",
@@ -3042,7 +3510,7 @@ cc SP JFIU FIIB
     }
   ]
 }
-```",4896.0,553.0
+```",4896,553
 Search Warrant,E,5,"[1, 2, 3, 4, 5, 6, 7, 8]","You are an advanced AI assistant specializing in data extraction and record linkage. You will be provided with a fraud alert source and a CSV file of transaction records.
 
 Your task: Extract transactions from the fraud alert source, match them to CSV records, and produce consolidated JSON output using a step-by-step approach.
@@ -3209,4 +3677,11 @@ Pol.866 (Rev.2001)","{
   ""contact_person"": ""PC ■■■■■"",
   ""police_team"": ""Regional Crime Support Centre New Territories South, Hong Kong Police Force"",
   ""alerted_transactions"": []
-}",4185.0,76.0
+}","{
+  ""fraud_type"": ""Not provided"",
+  ""police_reference"": ""POLICEREF4"",
+  ""writ_no"": ""9■■"",
+  ""contact_person"": ""PC ■■■■■"",
+  ""police_team"": ""Regional Crime Support Centre New Territories South, Hong Kong Police Force"",
+  ""alerted_transactions"": []
+}",4185,76
