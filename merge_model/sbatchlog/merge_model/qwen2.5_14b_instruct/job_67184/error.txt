@@ -1,0 +1,24 @@
+INFO:__main__:Found 1 GPUs
+INFO:__main__:Memory configuration: {0: '67GB', 'cpu': '1007GB'}
+INFO:__main__:Available GPUs: 1
+INFO:__main__:Loading base model from: /cm/shared/llm_models/Qwen/Qwen2.5-14B-Instruct
+INFO:__main__:Available GPUs: 1, Total memory: 79.1GB
+INFO:__main__:Loading base model with config: {'torch_dtype': torch.float16, 'trust_remote_code': True, 'low_cpu_mem_usage': True, 'device_map': {'': 0}}
+Sliding Window Attention is enabled but not implemented for `sdpa`; unexpected results may be encountered.
+Loading checkpoint shards:   0%|          | 0/8 [00:00<?, ?it/s]Loading checkpoint shards:  12%|█▎        | 1/8 [00:01<00:07,  1.12s/it]Loading checkpoint shards:  25%|██▌       | 2/8 [00:01<00:04,  1.24it/s]Loading checkpoint shards:  38%|███▊      | 3/8 [00:03<00:05,  1.08s/it]Loading checkpoint shards:  50%|█████     | 4/8 [00:03<00:03,  1.14it/s]Loading checkpoint shards:  62%|██████▎   | 5/8 [00:04<00:02,  1.31it/s]Loading checkpoint shards:  75%|███████▌  | 6/8 [00:04<00:01,  1.43it/s]Loading checkpoint shards:  88%|████████▊ | 7/8 [00:05<00:00,  1.53it/s]Loading checkpoint shards: 100%|██████████| 8/8 [00:05<00:00,  1.91it/s]Loading checkpoint shards: 100%|██████████| 8/8 [00:05<00:00,  1.42it/s]
+INFO:__main__:Base model device map: {'': 0}
+INFO:__main__:Loading LoRA adapter from: /home/projects/fraudagent/hase-michael/V4/output_models/job_65282_20250616_1709_Qwen2.5-14B-Instruct_LoRA
+INFO:__main__:Models loaded successfully
+INFO:__main__:GPU 0: 28.03GB allocated, 30.98GB cached, 79.11GB total
+INFO:__main__:Merging LoRA weights into base model (safe mode)...
+INFO:__main__:Direct merge successful
+INFO:__main__:LoRA weights merge process completed
+INFO:__main__:GPU 0: 27.54GB allocated, 28.96GB cached, 79.11GB total
+INFO:__main__:Validating merged model...
+INFO:__main__:Test generation successful: Hello, how are you today? In this article we want to explain to you everything that you need to know about the topic: How to make a 3D model of a building. Run into this article if you want to learn more.
+Table
+INFO:__main__:Saving merged model to: ./merged_models/Qwen2.5-14B-Instruct
+INFO:__main__:Device map saved
+INFO:__main__:Merged model saved successfully
+INFO:__main__:Memory cleanup completed
+INFO:__main__:LoRA merge completed successfully!

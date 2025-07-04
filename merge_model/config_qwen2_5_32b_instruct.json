@@ -1,0 +1,34 @@
+{
+  "model": {
+    "model_path": "/cm/shared/llm_models/Qwen/Qwen2.5-32B-Instruct",
+    "model_family": "qwen",
+    "model_type": "instruct"
+  },
+  "data": {
+    "train_file": "dataset/refined_training_dataset_new.yaml",
+    "eval_file": "dataset/evaluation_dataset.yaml"
+  },
+  "lora": {
+    "use_lora": true,
+    "lora_r": 16,
+    "lora_alpha": 32,
+    "lora_dropout": 0.05
+  },
+  "training": {
+    "batch_size": 1,
+    "learning_rate": 2e-05,
+    "num_epochs": 2,
+    "max_seq_length": 1024,
+    "gradient_accumulation_steps": 8,
+    "warmup_steps": 16,
+    "max_steps": 300,
+    "save_steps": 100,
+    "save_total_limit": 2,
+    "eval_steps": 100,
+    "logging_steps": 50
+  },
+  "output": {
+    "output_dir": "./output_model/qwen2.5_32b_instruct",
+    "output_model_path": "./output_model/qwen2.5_32b_instruct/model"
+  }
+}
