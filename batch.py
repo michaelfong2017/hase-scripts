@@ -40,7 +40,7 @@ def create_slurm_symlinks(output_dir, job_id):
 def process_chunk(chunk, model_name, gpu_index, input_csv, timestamp, job_id):
     folder_name = model_name.split('/')[-1] if model_name.split('/')[-1].startswith("job_") else f"Base_{timestamp}_{model_name.split('/')[-1]}"
     output_csv_path = (
-        f"model_responses/{folder_name}/{input_csv.split('/')[-1].split('.')[0]}_model_responses_chunk_{gpu_index}.csv"
+        f"model_responses/{folder_name}/{input_csv.split('/')[-1].split('.')[0]}_model_responses_chunk_{gpu_index}_job_{job_id}.csv"
     )
     output_dir = os.path.dirname(output_csv_path)
     os.makedirs(output_dir, exist_ok=True)
@@ -107,7 +107,7 @@ def process_chunk(chunk, model_name, gpu_index, input_csv, timestamp, job_id):
         chunk.at[index, "input_tokens"] = input_tokens
         chunk.at[index, "output_tokens"] = output_tokens
 
-        chunk.to_csv(output_csv_path, index=False)
+        chunk.to_csv(output_csv_path, index=False, encoding='utf-8-sig')
         end_inference = time.time()
         duration = end_inference - start_inference
         row_times.append(duration)
