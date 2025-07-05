@@ -1,0 +1,12 @@
+srun: error: ioctl(TIOCGWINSZ): Inappropriate ioctl for device
+srun: error: Not using a pseudo-terminal, disregarding --pty option
+[ERROR] File already exists: /raid/local/containers/enroot-data/user-1787/pytorch
+Traceback (most recent call last):
+  File "/home/projects/fraudagent/hase-michael/V3/finetune.py", line 1447, in <module>
+    success = main()
+  File "/home/projects/fraudagent/hase-michael/V3/finetune.py", line 662, in main
+    validate_config(config)
+  File "/home/projects/fraudagent/hase-michael/V3/finetune.py", line 440, in validate_config
+    raise FileNotFoundError(f"Training file not found: {config['data']['train_csv']}")
+FileNotFoundError: Training file not found: dataset/train_set.csv
+srun: error: klb-dgx-002: task 0: Exited with exit code 1

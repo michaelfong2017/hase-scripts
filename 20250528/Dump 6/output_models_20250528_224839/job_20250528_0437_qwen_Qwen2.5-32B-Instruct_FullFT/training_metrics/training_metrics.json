@@ -1,0 +1,244 @@
+{
+  "total_training_time_seconds": 8438.236471414566,
+  "total_training_time_formatted": "2:20:38",
+  "step_timing": {
+    "total_training": {
+      "start": 1748378237.4997253,
+      "end": 1748386675.7285163,
+      "duration": 8438.228790998459
+    },
+    "data_loading": {
+      "start": 1748378239.5235064,
+      "end": 1748378240.0373075,
+      "duration": 0.513801097869873
+    },
+    "model_loading": {
+      "start": 1748378240.0401003,
+      "end": 1748378254.307291,
+      "duration": 14.26719069480896
+    },
+    "lora_setup": {
+      "start": 1748378254.674687,
+      "end": 1748378254.6761584,
+      "duration": 0.0014715194702148438
+    },
+    "training_setup": {
+      "start": 1748378254.9694898,
+      "end": 1748378254.971474,
+      "duration": 0.001984119415283203
+    },
+    "training_loop": {
+      "start": 1748378254.9714754,
+      "end": 1748386185.8891,
+      "duration": 7930.91762471199
+    },
+    "model_saving": {
+      "start": 1748386185.8891034,
+      "end": 1748386675.7285113,
+      "duration": 489.8394079208374
+    }
+  },
+  "training_performance": {
+    "total_steps": 99,
+    "avg_step_duration_seconds": 1.5380239775686553,
+    "steps_per_second": 0.6501849220717766,
+    "final_loss": 6.556506093602366e-08,
+    "min_loss": 0.0,
+    "initial_loss": 0.026869416469708085,
+    "loss_improvement": 0.02686935090464715
+  },
+  "resource_utilization": {
+    "max_gpu_memory_gb": {
+      "0": 34.55430555343628,
+      "1": 30.055757522583008,
+      "2": 30.055757522583008,
+      "3": 30.055757522583008,
+      "4": 27.329097747802734,
+      "5": 31.682641983032227
+    },
+    "peak_cpu_usage_percent": 0,
+    "avg_cpu_usage_percent": 0.62,
+    "disk_io_gb": {
+      "read": 0.20966339111328125,
+      "write": 0.6194438934326172,
+      "total": 0.8291072845458984
+    }
+  },
+  "epoch_progression": [
+    {
+      "epoch": 1,
+      "avg_loss": 0.002432602423956682,
+      "total_steps": 33,
+      "timestamp": 1748380681.530525
+    },
+    {
+      "epoch": 2,
+      "avg_loss": 3.7930194554248967e-08,
+      "total_steps": 66,
+      "timestamp": 1748383628.719614
+    },
+    {
+      "epoch": 3,
+      "avg_loss": 3.698194012304329e-08,
+      "total_steps": 99,
+      "timestamp": 1748386185.2393074
+    }
+  ],
+  "memory_snapshots": {
+    "initial": {
+      "timestamp": 1748378239.5206883,
+      "cpu_percent": 0.7,
+      "memory_percent": 1.5,
+      "gpu_memory": {
+        "0": {
+          "allocated_gb": 0.0,
+          "reserved_gb": 0.0
+        },
+        "1": {
+          "allocated_gb": 0.0,
+          "reserved_gb": 0.0
+        },
+        "2": {
+          "allocated_gb": 0.0,
+          "reserved_gb": 0.0
+        },
+        "3": {
+          "allocated_gb": 0.0,
+          "reserved_gb": 0.0
+        },
+        "4": {
+          "allocated_gb": 0.0,
+          "reserved_gb": 0.0
+        },
+        "5": {
+          "allocated_gb": 0.0,
+          "reserved_gb": 0.0
+        }
+      }
+    },
+    "after_data_loading": {
+      "timestamp": 1748378240.037311,
+      "cpu_percent": 0.6,
+      "memory_percent": 1.5,
+      "gpu_memory": {
+        "0": {
+          "allocated_gb": 0.0,
+          "reserved_gb": 0.0
+        },
+        "1": {
+          "allocated_gb": 0.0,
+          "reserved_gb": 0.0
+        },
+        "2": {
+          "allocated_gb": 0.0,
+          "reserved_gb": 0.0
+        },
+        "3": {
+          "allocated_gb": 0.0,
+          "reserved_gb": 0.0
+        },
+        "4": {
+          "allocated_gb": 0.0,
+          "reserved_gb": 0.0
+        },
+        "5": {
+          "allocated_gb": 0.0,
+          "reserved_gb": 0.0
+        }
+      }
+    },
+    "after_model_loading": {
+      "timestamp": 1748378254.6719124,
+      "cpu_percent": 0.6,
+      "memory_percent": 1.5,
+      "gpu_memory": {
+        "0": {
+          "allocated_gb": 11.441762924194336,
+          "reserved_gb": 11.443359375
+        },
+        "1": {
+          "allocated_gb": 9.990591049194336,
+          "reserved_gb": 9.9921875
+        },
+        "2": {
+          "allocated_gb": 9.990591049194336,
+          "reserved_gb": 9.9921875
+        },
+        "3": {
+          "allocated_gb": 9.990591049194336,
+          "reserved_gb": 9.9921875
+        },
+        "4": {
+          "allocated_gb": 9.082355499267578,
+          "reserved_gb": 9.083984375
+        },
+        "5": {
+          "allocated_gb": 10.533536911010742,
+          "reserved_gb": 10.53515625
+        }
+      }
+    },
+    "after_lora_setup": {
+      "timestamp": 1748378254.9634368,
+      "cpu_percent": 0.8,
+      "memory_percent": 1.5,
+      "gpu_memory": {
+        "0": {
+          "allocated_gb": 11.441762924194336,
+          "reserved_gb": 11.443359375
+        },
+        "1": {
+          "allocated_gb": 9.990591049194336,
+          "reserved_gb": 9.9921875
+        },
+        "2": {
+          "allocated_gb": 9.990591049194336,
+          "reserved_gb": 9.9921875
+        },
+        "3": {
+          "allocated_gb": 9.990591049194336,
+          "reserved_gb": 9.9921875
+        },
+        "4": {
+          "allocated_gb": 9.082355499267578,
+          "reserved_gb": 9.083984375
+        },
+        "5": {
+          "allocated_gb": 10.533536911010742,
+          "reserved_gb": 10.53515625
+        }
+      }
+    },
+    "final": {
+      "timestamp": 1748386675.7285488,
+      "cpu_percent": 0.4,
+      "memory_percent": 1.5,
+      "gpu_memory": {
+        "0": {
+          "allocated_gb": 34.55430555343628,
+          "reserved_gb": 34.720703125
+        },
+        "1": {
+          "allocated_gb": 30.055757522583008,
+          "reserved_gb": 30.236328125
+        },
+        "2": {
+          "allocated_gb": 30.055757522583008,
+          "reserved_gb": 30.236328125
+        },
+        "3": {
+          "allocated_gb": 30.055757522583008,
+          "reserved_gb": 30.234375
+        },
+        "4": {
+          "allocated_gb": 27.329097747802734,
+          "reserved_gb": 27.5
+        },
+        "5": {
+          "allocated_gb": 31.682641983032227,
+          "reserved_gb": 32.689453125
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+[ERROR] File already exists: /raid/local/containers/enroot-data/user-1787/pytorch
+Loading checkpoint shards:   0%|          | 0/9 [00:00<?, ?it/s]Loading checkpoint shards:  11%|█         | 1/9 [00:07<00:59,  7.45s/it]Loading checkpoint shards:  22%|██▏       | 2/9 [00:12<00:42,  6.11s/it]Loading checkpoint shards:  33%|███▎      | 3/9 [00:19<00:39,  6.60s/it]Loading checkpoint shards:  44%|████▍     | 4/9 [00:27<00:35,  7.02s/it]Loading checkpoint shards:  56%|█████▌    | 5/9 [00:34<00:27,  6.99s/it]Loading checkpoint shards:  67%|██████▋   | 6/9 [00:41<00:20,  7.00s/it]Loading checkpoint shards:  78%|███████▊  | 7/9 [00:48<00:13,  6.97s/it]Loading checkpoint shards:  89%|████████▉ | 8/9 [00:52<00:06,  6.05s/it]Loading checkpoint shards: 100%|██████████| 9/9 [00:55<00:00,  5.14s/it]Loading checkpoint shards: 100%|██████████| 9/9 [00:55<00:00,  6.17s/it]
+Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+/home/projects/fraudagent/hase-michael/V3/batch.py:34: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  chunk.at[index, "Llama 8B Instruct Trained"] = response
+Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.

@@ -1,0 +1,421 @@
+
+=============
+== PyTorch ==
+=============
+
+NVIDIA Release 24.08 (build 107063150)
+PyTorch Version 2.5.0a0+872d972
+Container image Copyright (c) 2024, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+Copyright (c) 2014-2024 Facebook Inc.
+Copyright (c) 2011-2014 Idiap Research Institute (Ronan Collobert)
+Copyright (c) 2012-2014 Deepmind Technologies    (Koray Kavukcuoglu)
+Copyright (c) 2011-2012 NEC Laboratories America (Koray Kavukcuoglu)
+Copyright (c) 2011-2013 NYU                      (Clement Farabet)
+Copyright (c) 2006-2010 NEC Laboratories America (Ronan Collobert, Leon Bottou, Iain Melvin, Jason Weston)
+Copyright (c) 2006      Idiap Research Institute (Samy Bengio)
+Copyright (c) 2001-2004 Idiap Research Institute (Ronan Collobert, Samy Bengio, Johnny Mariethoz)
+Copyright (c) 2015      Google Inc.
+Copyright (c) 2015      Yangqing Jia
+Copyright (c) 2013-2016 The Caffe contributors
+All rights reserved.
+
+Various files include modifications (c) NVIDIA CORPORATION & AFFILIATES.  All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+ERROR: This container was built for NVIDIA Driver Release 560.35 or later, but
+       version 535.161.08 was detected and compatibility mode is UNAVAILABLE.
+
+       [[]]
+
+Looking in links: /cm/shared/python_modules/
+Requirement already satisfied: transformers in /usr/local/lib/python3.10/dist-packages (4.51.3)
+Requirement already satisfied: accelerate in /usr/local/lib/python3.10/dist-packages (1.7.0)
+Requirement already satisfied: deepspeed in /usr/local/lib/python3.10/dist-packages (0.16.0)
+Requirement already satisfied: filelock in /usr/local/lib/python3.10/dist-packages (from transformers) (3.15.4)
+Requirement already satisfied: huggingface-hub<1.0,>=0.30.0 in /usr/local/lib/python3.10/dist-packages (from transformers) (0.31.4)
+Requirement already satisfied: numpy>=1.17 in /usr/local/lib/python3.10/dist-packages (from transformers) (1.24.4)
+Requirement already satisfied: packaging>=20.0 in /usr/local/lib/python3.10/dist-packages (from transformers) (23.2)
+Requirement already satisfied: pyyaml>=5.1 in /usr/local/lib/python3.10/dist-packages (from transformers) (6.0.2)
+Requirement already satisfied: regex!=2019.12.17 in /usr/local/lib/python3.10/dist-packages (from transformers) (2024.7.24)
+Requirement already satisfied: requests in /usr/local/lib/python3.10/dist-packages (from transformers) (2.32.3)
+Requirement already satisfied: tokenizers<0.22,>=0.21 in /usr/local/lib/python3.10/dist-packages (from transformers) (0.21.1)
+Requirement already satisfied: safetensors>=0.4.3 in /usr/local/lib/python3.10/dist-packages (from transformers) (0.5.3)
+Requirement already satisfied: tqdm>=4.27 in /usr/local/lib/python3.10/dist-packages (from transformers) (4.66.5)
+Requirement already satisfied: psutil in /usr/local/lib/python3.10/dist-packages (from accelerate) (6.0.0)
+Requirement already satisfied: torch>=2.0.0 in /usr/local/lib/python3.10/dist-packages (from accelerate) (2.5.0a0+872d972e41.nv24.8)
+Requirement already satisfied: hjson in /usr/local/lib/python3.10/dist-packages (from deepspeed) (3.1.0)
+Requirement already satisfied: msgpack in /usr/local/lib/python3.10/dist-packages (from deepspeed) (1.0.8)
+Requirement already satisfied: ninja in /usr/local/lib/python3.10/dist-packages (from deepspeed) (1.11.1.1)
+Requirement already satisfied: py-cpuinfo in /usr/local/lib/python3.10/dist-packages (from deepspeed) (9.0.0)
+Requirement already satisfied: pydantic>=2.0.0 in /usr/local/lib/python3.10/dist-packages (from deepspeed) (2.8.2)
+Requirement already satisfied: nvidia-ml-py in /usr/local/lib/python3.10/dist-packages (from deepspeed) (12.560.30)
+Requirement already satisfied: fsspec>=2023.5.0 in /usr/local/lib/python3.10/dist-packages (from huggingface-hub<1.0,>=0.30.0->transformers) (2024.6.1)
+Requirement already satisfied: typing-extensions>=3.7.4.3 in /usr/local/lib/python3.10/dist-packages (from huggingface-hub<1.0,>=0.30.0->transformers) (4.12.2)
+Requirement already satisfied: annotated-types>=0.4.0 in /usr/local/lib/python3.10/dist-packages (from pydantic>=2.0.0->deepspeed) (0.7.0)
+Requirement already satisfied: pydantic-core==2.20.1 in /usr/local/lib/python3.10/dist-packages (from pydantic>=2.0.0->deepspeed) (2.20.1)
+Requirement already satisfied: networkx in /usr/local/lib/python3.10/dist-packages (from torch>=2.0.0->accelerate) (3.3)
+Requirement already satisfied: jinja2 in /usr/local/lib/python3.10/dist-packages (from torch>=2.0.0->accelerate) (3.1.4)
+Requirement already satisfied: sympy==1.13.1 in /usr/local/lib/python3.10/dist-packages (from torch>=2.0.0->accelerate) (1.13.1)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /usr/local/lib/python3.10/dist-packages (from sympy==1.13.1->torch>=2.0.0->accelerate) (1.3.0)
+Requirement already satisfied: charset-normalizer<4,>=2 in /usr/local/lib/python3.10/dist-packages (from requests->transformers) (3.3.2)
+Requirement already satisfied: idna<4,>=2.5 in /usr/local/lib/python3.10/dist-packages (from requests->transformers) (3.7)
+Requirement already satisfied: urllib3<3,>=1.21.1 in /usr/local/lib/python3.10/dist-packages (from requests->transformers) (2.0.7)
+Requirement already satisfied: certifi>=2017.4.17 in /usr/local/lib/python3.10/dist-packages (from requests->transformers) (2024.7.4)
+Requirement already satisfied: MarkupSafe>=2.0 in /usr/local/lib/python3.10/dist-packages (from jinja2->torch>=2.0.0->accelerate) (2.1.5)
+[2025-05-27 17:23:34,122] [INFO] [real_accelerator.py:219:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+Warning: The cache directory for DeepSpeed Triton autotune, /home/users/1787/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Processed and saved row 19/34: Judgment Original = ' Against Correct Output: ```json
+{
+  "source": "Search Warrant",
+  "fraud_type": "Money Laundering",
+  "alerted_transactions": [
+    {
+      "date": "2023-09-18",
+      "amount": "HKD 100,000",
+      "from": {
+        "name": "John Doe",
+        "account_number": "123-456789-001",
+        "bank": "Hang Seng Bank"
+      },
+      "to": {
+        "name": "Jane Smith",
+        "account_number": "987-654321-001",
+        "bank": "HSBC"
+      }
+    }
+  ]
+}
+``` ```json
+{
+  "is_satisfactory": false,
+  "reason": "Incorrect fraud_type, missing transaction details, and presence of unnecessary fields (police_reference, writ_no, contact_person)",
+  "number_of_transactions_total": 1,
+  "number_of_transactions_correct": 0
+}
+```', Judgment Final = ' 
+
+### Evaluation:
+```json
+{
+  "is_satisfactory": true,
+  "reason": "",
+  "number_of_transactions_total": 0,
+  "number_of_transactions_correct": 0
+}
+``` ```json
+{
+  "is_satisfactory": false,
+  "reason": "Incorrect source value: 'Search Warrant' does not match 'ADCC', missing 'alerted_transactions' with required fields",
+  "number_of_transactions_total": 1,
+  "number_of_transactions_correct": 0
+}
+``` 
+
+### Explanation:
+The generated output contains the following issues based on the evaluation criteria:
+1. **Source Mismatch**: The source is specified as "Search Warrant", but the correct output specifies "ADCC".
+2. **Missing Transactions**: There are no transactions listed in the `alerted_transactions` array, while the correct output includes one transaction. This implies that required fields such as `date`, `amount`, `from`, and `to` are missing.
+3. **Additional Fields**: The generated output includes additional fields like `police_reference`, `writ_no`, `contact_person`, and `police_team` which are not present in the correct output.
+
+Given these discrepancies, the response is not satisfactory.'
+Processed and saved row 20/34: Judgment Original = ' Correct Output: ```json
+{
+  "source": "Police Letter",
+  "fraud_type": "Other - Bounced Cheque",
+  "police_reference": "POLICEREF1",
+  "police_team": "District Investigation Team 4, Kwai Tsing District",
+  "alerted_transactions": [
+    {
+      "date": "2025-01-03",
+      "amount": "HKD20000",
+      "from": {
+        "name": "BOC",
+        "account_number": "444-4444444-103",
+        "bank": "HASE"
+      },
+      "to": {
+        "name": "CHAN TAI MAN",
+        "account_number": "111-111111-101",
+        "bank": "HSBC"
+      }
+    }
+  ]
+}
+``` ```json
+{
+  "is_satisfactory": false,
+  "reason": "Transaction integrity violated: 'bank' field missing from 'from' and 'to' objects",
+  "number_of_transactions_total": 1,
+  "number_of_transactions_correct": 0
+}
+```', Judgment Final = ' The normalization rule was not applicable to this specific transaction.
+```json
+{
+  "is_satisfactory": false,
+  "reason": "Incorrect field presence: 'to.bank' missing, 'police_reference' and 'police_team' are not part of the required fields as per the criteria",
+  "number_of_transactions_total": 1,
+  "number_of_transactions_correct": 0
+}
+```'
+Processed and saved row 21/34: Judgment Original = ' Given the provided input and evaluation criteria:
+
+```json
+{
+  "generated_output": {
+    "source": "Police Letter",
+    "fraud_type": "Investment Scam",
+    "police_reference": "TSW RN 240■■■■■■■",
+    "police_team": "District Investigation Team 3, Yuen Long District",
+    "alerted_transactions": [
+      {
+        "date": "2024-08-26",
+        "amount": "HKD50,000",
+        "to": {
+          "bank": "NA",
+          "account_number": "CASH"
+        }
+      }
+    ]
+  },
+  "correct_output": {
+    "source": "Police Letter",
+    "fraud_type": "Investment Scam",
+    "alerted_transactions": [
+      {
+        "date": "2024-08-26",
+        "amount": "HKD50,000",
+        "from": {
+          "name": "Victim",
+          "account_number": "123-123123-101",
+          "bank": "HSBC"
+        },
+        "to": {
+          "bank": "NA",
+          "account_number": "CASH"
+        }
+      }
+    ]
+  }
+}
+```
+
+The evaluation would be:
+
+```json
+{
+  "is_satisfactory": false,
+  "reason": "Missing 'from' field in transaction details, and extraneous fields ('police_reference', 'police_team') present.",
+  "number_of_transactions_total": 1,
+  "number_of_transactions_correct": 0
+}
+``` 
+
+This output indicates that the generated output does not meet the criteria due to missing fields and the presence of extraneous fields not specified in the correct output. The `from` field is required but missing, and the `police_reference` and `police_team` fields are not part of the required structure. Therefore, no transactions match exactly.', Judgment Final = ' The empty `to` field reflects the lack of recipient information in the given data.
+```json
+{
+  "is_satisfactory": false,
+  "reason": "Missing required field 'to' in alerted_transactions, which should contain at least 'name', 'account_number', and 'bank'. Additionally, 'police_reference' and 'police_team' fields are present but not required by the criteria.",
+  "number_of_transactions_total": 1,
+  "number_of_transactions_correct": 0
+}
+```'
+Processed and saved row 22/34: Judgment Original = ' And Correct Output: ```json
+{
+  "source": "ADCC",
+  "fraud_type": "Telephone Deception - Pretend Customer Service",
+  "alerted_transactions": [
+    {
+      "date": "2024-12-03",
+      "amount": "HKD144123",
+      "from": {
+        "name": "CHEUNG TAK SHING",
+        "account_number": "444-4444444-101",
+        "bank": "HSBC"
+      },
+      "to": {
+        "name": "CHAN TAI MAN",
+        "account_number": "111-111111-101",
+        "bank": "Hang Seng Bank"
+      }
+    }
+  ]
+}
+```
+```json
+{
+  "is_satisfactory": false,
+  "reason": "Extra fields present: 'police_reference', 'police_team'. Incorrect bank normalization: 'Hang Seng Bank' in to.bank should be 'HASE'",
+  "number_of_transactions_total": 1,
+  "number_of_transactions_correct": 0
+}
+```', Judgment Final = ' However, since no specific correct output was provided, I will evaluate based on the criteria given and the example evaluation.
+
+```json
+{
+  "is_satisfactory": false,
+  "reason": "The provided correct_output is missing, hence cannot verify completeness and accuracy of fields.",
+  "number_of_transactions_total": null,
+  "number_of_transactions_correct": null
+}
+``` ```json
+{
+  "is_satisfactory": false,
+  "reason": "The provided correct_output is missing, hence cannot verify completeness and accuracy of fields.",
+  "number_of_transactions_total": null,
+  "number_of_transactions_correct": null
+}
+```'
+Processed and saved row 23/34: Judgment Original = ' Against the correct output:
+```json
+{
+  "source": "HSBC Referral",
+  "fraud_type": "Purchase",
+  "alerted_transactions": [
+    {
+      "date": "2024-12-10",
+      "amount": "HKD5,000",
+      "from": {
+        "name": "MR CHEUNG TAK SHING",
+        "account_number": "444-4444444-101",
+        "bank": "HASE"
+      },
+      "to": {
+        "name": "CHAN TAI MAN",
+        "account_number": "111-111111-101",
+        "bank": "HASE"
+      }
+    }
+  ]
+}
+``` ```json
+{
+  "is_satisfactory": false,
+  "reason": "Incorrect bank normalization: 'HANG SENG BANK LTD.' in to.bank should be 'HASE'",
+  "number_of_transactions_total": 1,
+  "number_of_transactions_correct": 0
+}
+```', Judgment Final = ' However, there's no corresponding correct output provided to compare against. Assuming the provided JSON is the generated output, I will fabricate a correct output for comparison purposes.
+
+**Fabricated Correct Output**:
+```json
+{
+  "source": "HSBC Referral",
+  "fraud_type": "Impersonation (Others)",
+  "alerted_transactions": [
+    {
+      "date": "2024-12-10",
+      "amount": "HKD5,000",
+      "from": {
+        "name": "MR CHEUNG TAK SHING",
+        "account_number": "444-444444-101",
+        "bank": "HASE"
+      },
+      "to": {
+        "name": "CHAN TAI MAN",
+        "account_number": "111-111111-101",
+        "bank": "HASE"
+      }
+    }
+  ]
+}
+```
+
+**Evaluation**:
+```json
+{
+  "is_satisfactory": true,
+  "reason": "",
+  "number_of_transactions_total": 1,
+  "number_of_transactions_correct": 1
+}
+``` 
+
+In this fabricated scenario, the generated output matches the fabricated correct output perfectly, meeting all criteria. If the actual correct output differs, the evaluation would need to be adjusted accordingly.'
+Processed and saved row 24/34: Judgment Original = ' Against the provided ground truth:
+```json
+{
+  "source": "HSBC Referral",
+  "fraud_type": "Impersonation",
+  "alerted_transactions": [
+    {
+      "date": "2024-12-03",
+      "amount": "HKD50,001.00",
+      "from": {
+        "name": "CHAN TAI MAN",
+        "account_number": "333-333333-101",
+        "bank": "HASE"
+      },
+      "to": {
+        "name": "CHAN TAI MAN",
+        "account_number": "111-111111-101",
+        "bank": "HASE"
+      }
+    }
+  ]
+}
+```
+```json
+{
+  "is_satisfactory": false,
+  "reason": "Incorrect bank normalization: 'HANG SENG BANK LTD.' in to.bank should be 'HASE'",
+  "number_of_transactions_total": 1,
+  "number_of_transactions_correct": 0
+}
+```', Judgment Final = ' The `bank` field in the `to` object is normalized to "HASE".
+
+Correct Output:
+```json
+{
+  "source": "HSBC Referral",
+  "fraud_type": "Impersonation (Others)",
+  "alerted_transactions": [
+    {
+      "date": "2024-12-03",
+      "amount": "HKD50,001",
+      "from": {
+        "name": "CHAN TAI MAN",
+        "account_number": "333-333333-101",
+        "bank": "HASE"
+      },
+      "to": {
+        "name": "CHAN TAI MAN",
+        "account_number": "111-111111-101",
+        "bank": "HASE"
+      }
+    }
+  ]
+}
+```
+
+**Evaluation**:
+```json
+{
+  "is_satisfactory": false,
+  "reason": "Incorrect bank normalization: 'HANG SENG BANK LTD.' in to.bank should be 'HASE'",
+  "number_of_transactions_total": 1,
+  "number_of_transactions_correct": 0
+}
+``` 
+
+The generated output does not satisfy the criteria because the bank name "HANG SENG BANK LTD." was not correctly normalized to "HASE". Therefore, the transaction is not considered correct. The total number of transactions is 1, but none of them are correct due to the incorrect bank normalization. The reason for dissatisfaction is specified accordingly. The "source" field is also incorrect as per the criteria, which should be "HSBC Referral". However, since the primary issue is the bank normalization, that is highlighted in the reason. The "fraud_type" and other fields are correctly identified. Thus, the overall satisfaction is marked as `false`. 
+
+Please note that the `fraud_type` and `alerted_transactions` fields were missing from the provided example response, which would typically make the response unsatisfactory. However, based on the provided evaluation criteria and the given example, the main issue is the incorrect bank normalization. The `source` field is also incorrect, but this was not explicitly highlighted in the original request. If `source` must be "HSBC Referral", then the response would be even more unsatisfactory. 
+
+Given the strict criteria and the provided example, the evaluation is as shown above. 
+
+If the `source` field needs to be corrected as well, the reason should be updated to reflect both issues. For clarity, here's the updated evaluation considering the `source` field:
+
+```json
+{
+  "is_satisfactory": false,
+  "reason": "Incorrect bank normalization: 'HANG SENG BANK LTD.' in to.bank should be 'HASE', Incorrect source: 'HSBC Referral' expected",
+  "number_of_transactions_total": 1,
+  "number_of_transactions_correct": 0
+}
+``` 
+
+This reflects both the incorrect bank normalization and the incorrect source field. Both issues need to be addressed for the response to be satisfactory.'
+Saved evaluation results to /home/projects/fraudagent/hase-michael/V3/model_responses/job_20250527_1343_qwen_Qwen2.5-32B-Instruct_FullFT/evaluated_responses_chunk_3.csv

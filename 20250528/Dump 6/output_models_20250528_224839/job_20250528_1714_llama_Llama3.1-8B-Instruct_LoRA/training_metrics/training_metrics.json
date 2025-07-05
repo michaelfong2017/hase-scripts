@@ -1,0 +1,139 @@
+{
+  "total_training_time_seconds": 212.20995163917542,
+  "total_training_time_formatted": "0:03:32",
+  "step_timing": {
+    "total_training": {
+      "start": 1748423698.4656248,
+      "end": 1748423910.584089,
+      "duration": 212.1184642314911
+    },
+    "data_loading": {
+      "start": 1748423699.0395944,
+      "end": 1748423701.4413047,
+      "duration": 2.401710271835327
+    },
+    "model_loading": {
+      "start": 1748423701.44275,
+      "end": 1748423705.9701583,
+      "duration": 4.5274083614349365
+    },
+    "lora_setup": {
+      "start": 1748423706.3173099,
+      "end": 1748423707.3953147,
+      "duration": 1.0780048370361328
+    },
+    "training_setup": {
+      "start": 1748423707.7892425,
+      "end": 1748423707.792387,
+      "duration": 0.003144502639770508
+    },
+    "training_loop": {
+      "start": 1748423707.7923884,
+      "end": 1748423907.0548153,
+      "duration": 199.26242685317993
+    },
+    "model_saving": {
+      "start": 1748423907.0548186,
+      "end": 1748423910.584087,
+      "duration": 3.529268264770508
+    }
+  },
+  "training_performance": {
+    "total_steps": 99,
+    "avg_step_duration_seconds": 0.016157357379643605,
+    "steps_per_second": 61.89130911097404,
+    "final_loss": 0.7275940527906641,
+    "min_loss": 0.002195232009398751,
+    "initial_loss": 2.0111913308501244,
+    "loss_improvement": 1.2835972780594602
+  },
+  "resource_utilization": {
+    "max_gpu_memory_gb": {
+      "0": 16.16994285583496
+    },
+    "peak_cpu_usage_percent": 0,
+    "avg_cpu_usage_percent": 1.1,
+    "disk_io_gb": {
+      "read": 0.040139198303222656,
+      "write": 0.019306659698486328,
+      "total": 0.059445858001708984
+    }
+  },
+  "epoch_progression": [
+    {
+      "epoch": 1,
+      "avg_loss": 0.34028631320247904,
+      "total_steps": 33,
+      "timestamp": 1748423772.1038427
+    },
+    {
+      "epoch": 2,
+      "avg_loss": 0.13805946285134324,
+      "total_steps": 66,
+      "timestamp": 1748423843.0767646
+    },
+    {
+      "epoch": 3,
+      "avg_loss": 0.08625983855816258,
+      "total_steps": 99,
+      "timestamp": 1748423906.6980464
+    }
+  ],
+  "memory_snapshots": {
+    "initial": {
+      "timestamp": 1748423699.0381527,
+      "cpu_percent": 0.9,
+      "memory_percent": 1.5,
+      "gpu_memory": {
+        "0": {
+          "allocated_gb": 0.0,
+          "reserved_gb": 0.0
+        }
+      }
+    },
+    "after_data_loading": {
+      "timestamp": 1748423701.4413097,
+      "cpu_percent": 0.4,
+      "memory_percent": 1.5,
+      "gpu_memory": {
+        "0": {
+          "allocated_gb": 0.0,
+          "reserved_gb": 0.0
+        }
+      }
+    },
+    "after_model_loading": {
+      "timestamp": 1748423706.3158262,
+      "cpu_percent": 1.0,
+      "memory_percent": 1.5,
+      "gpu_memory": {
+        "0": {
+          "allocated_gb": 14.95752763748169,
+          "reserved_gb": 15.083984375
+        }
+      }
+    },
+    "after_lora_setup": {
+      "timestamp": 1748423707.780763,
+      "cpu_percent": 2.0,
+      "memory_percent": 1.5,
+      "gpu_memory": {
+        "0": {
+          "allocated_gb": 15.28711748123169,
+          "reserved_gb": 15.29296875
+        }
+      }
+    },
+    "final": {
+      "timestamp": 1748423910.584115,
+      "cpu_percent": 1.2,
+      "memory_percent": 1.6,
+      "gpu_memory": {
+        "0": {
+          "allocated_gb": 16.16994285583496,
+          "reserved_gb": 16.66015625
+        }
+      }
+    }
+  }
+}

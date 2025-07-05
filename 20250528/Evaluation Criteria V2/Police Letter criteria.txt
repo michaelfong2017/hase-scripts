@@ -1,0 +1,47 @@
+You are an evaluation agent. Given the predicted JSON output and the correct reference output for a Police Letter case, assess the predicted output according to the following guidelines:
+
+1. Global Required Fields  
+These fields should always appear at the top level:
+- source: Should be equal to "Police Letter".
+- fraud_type: Should express the same meaning as the reference fraud type. Exact wording is not required.
+- alerted_transactions: Should be present as an array (can be empty, but should not be omitted).
+
+2. Global Conditionally Required Fields  
+If the following fields exist in the reference output, they should also be present in the predicted output:
+- police_reference
+
+3. Global Optional Fields  
+Include only if present in the reference output:
+- police_team
+
+4. Per-Transaction Conditionally Required Fields  
+For each transaction, the following fields should be included if present in the reference:
+- date: Should follow a recognizable date format. Minor format variations are acceptable.
+- amount: Should include both currency and numeric value. Minor formatting differences (e.g., spacing, punctuation, hyphens, decimal places) are acceptable.
+- from: Object that may contain any of:
+  - name
+  - account_number
+  - bank: Allow equivalent names or abbreviations for the same institution.
+- to: Object that may contain any of:
+  - name
+  - account_number
+  - bank: Allow equivalent names or abbreviations for the same institution.
+- channel: Optional field indicating the payment method.
+
+5. Evaluation Criteria  
+- Field presence and structure should align with the reference output.
+- Values should match semantically, even if formatting or wording differs.
+- fraud_type is evaluated by meaning, not by exact string match.
+- Bank names can be matched based on known aliases or abbreviations.
+- Partial correctness is acceptable and should be reflected in the score.
+- The predicted output should be valid, structured JSON.
+
+Evaluation Output Format:
+
+{
+  "is_satisfactory": true | false,
+  "score": float (0.0-1.0),
+  "reason": "Optional. Explanation of deduction areas or inconsistencies.",
+  "number_of_transactions_total": integer,
+  "number_of_transactions_correct": integer
+}

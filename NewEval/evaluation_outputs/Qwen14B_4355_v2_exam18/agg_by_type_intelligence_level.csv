@@ -1,0 +1,7 @@
+﻿Type,total_intelligences,all_correct_intelligences,incorrect_intelligences,intelligence_accuracy_rate
+UAR,3,0,3,0.00%
+ODFT,2,1,1,50.00%
+ADCC,3,2,1,66.67%
+HSBC Referral,4,4,0,100.00%
+Police Letter,4,2,2,50.00%
+Search Warrant,2,2,0,100.00%

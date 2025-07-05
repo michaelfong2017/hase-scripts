@@ -1,0 +1,11 @@
+[ERROR] File already exists: /raid/local/containers/enroot-data/user-1787/pytorch
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:02<00:07,  2.37s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:04<00:04,  2.20s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:05<00:01,  1.78s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:06<00:00,  1.19s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:06<00:00,  1.50s/it]
+Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+/home/projects/fraudagent/hase-michael/V3/batch.py:34: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  chunk.at[index, "Llama 8B Instruct Trained"] = response
+Setting `pad_token_id` to `eos_token_id`:128001 for open-end generation.
+slurmstepd: error: *** JOB 62392 ON klb-dgx-002 CANCELLED AT 2025-05-28T17:21:38 ***

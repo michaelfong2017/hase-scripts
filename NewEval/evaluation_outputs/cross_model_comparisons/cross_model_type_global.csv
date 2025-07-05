@@ -1,7 +1,31 @@
 ﻿Type,total,all_fields_correct,mismatch_count,accuracy_rate,Model
-ADCC,4,4,0,100.00%,cycle3_qwen32b_4380_full60
-HSBC Referral,18,18,0,100.00%,cycle3_qwen32b_4380_full60
-Police Letter,12,11,1,91.67%,cycle3_qwen32b_4380_full60
-Search Warrant,6,6,0,100.00%,cycle3_qwen32b_4380_full60
-UAR,16,12,4,75.00%,cycle3_qwen32b_4380_full60
-ODFT,4,4,0,100.00%,cycle3_qwen32b_4380_full60
+UAR,3,3,0,100.00%,Qwen32B_rematch_exam18
+ODFT,2,2,0,100.00%,Qwen32B_rematch_exam18
+ADCC,3,3,0,100.00%,Qwen32B_rematch_exam18
+HSBC Referral,4,4,0,100.00%,Qwen32B_rematch_exam18
+Police Letter,4,4,0,100.00%,Qwen32B_rematch_exam18
+Search Warrant,2,2,0,100.00%,Qwen32B_rematch_exam18
+UAR,3,1,2,33.33%,Qwen14B_4355_v2_exam18
+ODFT,2,1,1,50.00%,Qwen14B_4355_v2_exam18
+ADCC,3,3,0,100.00%,Qwen14B_4355_v2_exam18
+HSBC Referral,4,4,0,100.00%,Qwen14B_4355_v2_exam18
+Police Letter,4,4,0,100.00%,Qwen14B_4355_v2_exam18
+Search Warrant,2,2,0,100.00%,Qwen14B_4355_v2_exam18
+UAR,3,3,0,100.00%,Qwen32B_4355_v2_exam18
+ODFT,2,1,1,50.00%,Qwen32B_4355_v2_exam18
+ADCC,3,3,0,100.00%,Qwen32B_4355_v2_exam18
+HSBC Referral,4,4,0,100.00%,Qwen32B_4355_v2_exam18
+Police Letter,4,4,0,100.00%,Qwen32B_4355_v2_exam18
+Search Warrant,2,2,0,100.00%,Qwen32B_4355_v2_exam18
+UAR,3,2,1,66.67%,Qwen14B_4355_v3_exam18
+ODFT,2,1,1,50.00%,Qwen14B_4355_v3_exam18
+ADCC,3,3,0,100.00%,Qwen14B_4355_v3_exam18
+HSBC Referral,4,4,0,100.00%,Qwen14B_4355_v3_exam18
+Police Letter,4,3,1,75.00%,Qwen14B_4355_v3_exam18
+Search Warrant,2,2,0,100.00%,Qwen14B_4355_v3_exam18
+UAR,3,3,0,100.00%,Qwen32B_4355_v3_exam18
+ODFT,2,2,0,100.00%,Qwen32B_4355_v3_exam18
+ADCC,3,3,0,100.00%,Qwen32B_4355_v3_exam18
+HSBC Referral,4,4,0,100.00%,Qwen32B_4355_v3_exam18
+Police Letter,4,4,0,100.00%,Qwen32B_4355_v3_exam18
+Search Warrant,2,2,0,100.00%,Qwen32B_4355_v3_exam18

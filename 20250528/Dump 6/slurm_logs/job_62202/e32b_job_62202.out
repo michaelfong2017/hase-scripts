@@ -1,0 +1,276 @@
+
+=============
+== PyTorch ==
+=============
+
+NVIDIA Release 24.08 (build 107063150)
+PyTorch Version 2.5.0a0+872d972
+Container image Copyright (c) 2024, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+Copyright (c) 2014-2024 Facebook Inc.
+Copyright (c) 2011-2014 Idiap Research Institute (Ronan Collobert)
+Copyright (c) 2012-2014 Deepmind Technologies    (Koray Kavukcuoglu)
+Copyright (c) 2011-2012 NEC Laboratories America (Koray Kavukcuoglu)
+Copyright (c) 2011-2013 NYU                      (Clement Farabet)
+Copyright (c) 2006-2010 NEC Laboratories America (Ronan Collobert, Leon Bottou, Iain Melvin, Jason Weston)
+Copyright (c) 2006      Idiap Research Institute (Samy Bengio)
+Copyright (c) 2001-2004 Idiap Research Institute (Ronan Collobert, Samy Bengio, Johnny Mariethoz)
+Copyright (c) 2015      Google Inc.
+Copyright (c) 2015      Yangqing Jia
+Copyright (c) 2013-2016 The Caffe contributors
+All rights reserved.
+
+Various files include modifications (c) NVIDIA CORPORATION & AFFILIATES.  All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+ERROR: This container was built for NVIDIA Driver Release 560.35 or later, but
+       version 535.161.08 was detected and compatibility mode is UNAVAILABLE.
+
+       [[]]
+
+Looking in links: /cm/shared/python_modules/
+Requirement already satisfied: transformers in /usr/local/lib/python3.10/dist-packages (4.51.3)
+Requirement already satisfied: accelerate in /usr/local/lib/python3.10/dist-packages (1.7.0)
+Requirement already satisfied: deepspeed in /usr/local/lib/python3.10/dist-packages (0.16.0)
+Requirement already satisfied: filelock in /usr/local/lib/python3.10/dist-packages (from transformers) (3.15.4)
+Requirement already satisfied: huggingface-hub<1.0,>=0.30.0 in /usr/local/lib/python3.10/dist-packages (from transformers) (0.31.4)
+Requirement already satisfied: numpy>=1.17 in /usr/local/lib/python3.10/dist-packages (from transformers) (1.24.4)
+Requirement already satisfied: packaging>=20.0 in /usr/local/lib/python3.10/dist-packages (from transformers) (23.2)
+Requirement already satisfied: pyyaml>=5.1 in /usr/local/lib/python3.10/dist-packages (from transformers) (6.0.2)
+Requirement already satisfied: regex!=2019.12.17 in /usr/local/lib/python3.10/dist-packages (from transformers) (2024.7.24)
+Requirement already satisfied: requests in /usr/local/lib/python3.10/dist-packages (from transformers) (2.32.3)
+Requirement already satisfied: tokenizers<0.22,>=0.21 in /usr/local/lib/python3.10/dist-packages (from transformers) (0.21.1)
+Requirement already satisfied: safetensors>=0.4.3 in /usr/local/lib/python3.10/dist-packages (from transformers) (0.5.3)
+Requirement already satisfied: tqdm>=4.27 in /usr/local/lib/python3.10/dist-packages (from transformers) (4.66.5)
+Requirement already satisfied: psutil in /usr/local/lib/python3.10/dist-packages (from accelerate) (6.0.0)
+Requirement already satisfied: torch>=2.0.0 in /usr/local/lib/python3.10/dist-packages (from accelerate) (2.5.0a0+872d972e41.nv24.8)
+Requirement already satisfied: hjson in /usr/local/lib/python3.10/dist-packages (from deepspeed) (3.1.0)
+Requirement already satisfied: msgpack in /usr/local/lib/python3.10/dist-packages (from deepspeed) (1.0.8)
+Requirement already satisfied: ninja in /usr/local/lib/python3.10/dist-packages (from deepspeed) (1.11.1.1)
+Requirement already satisfied: py-cpuinfo in /usr/local/lib/python3.10/dist-packages (from deepspeed) (9.0.0)
+Requirement already satisfied: pydantic>=2.0.0 in /usr/local/lib/python3.10/dist-packages (from deepspeed) (2.8.2)
+Requirement already satisfied: nvidia-ml-py in /usr/local/lib/python3.10/dist-packages (from deepspeed) (12.560.30)
+Requirement already satisfied: fsspec>=2023.5.0 in /usr/local/lib/python3.10/dist-packages (from huggingface-hub<1.0,>=0.30.0->transformers) (2024.6.1)
+Requirement already satisfied: typing-extensions>=3.7.4.3 in /usr/local/lib/python3.10/dist-packages (from huggingface-hub<1.0,>=0.30.0->transformers) (4.12.2)
+Requirement already satisfied: annotated-types>=0.4.0 in /usr/local/lib/python3.10/dist-packages (from pydantic>=2.0.0->deepspeed) (0.7.0)
+Requirement already satisfied: pydantic-core==2.20.1 in /usr/local/lib/python3.10/dist-packages (from pydantic>=2.0.0->deepspeed) (2.20.1)
+Requirement already satisfied: networkx in /usr/local/lib/python3.10/dist-packages (from torch>=2.0.0->accelerate) (3.3)
+Requirement already satisfied: jinja2 in /usr/local/lib/python3.10/dist-packages (from torch>=2.0.0->accelerate) (3.1.4)
+Requirement already satisfied: sympy==1.13.1 in /usr/local/lib/python3.10/dist-packages (from torch>=2.0.0->accelerate) (1.13.1)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /usr/local/lib/python3.10/dist-packages (from sympy==1.13.1->torch>=2.0.0->accelerate) (1.3.0)
+Requirement already satisfied: charset-normalizer<4,>=2 in /usr/local/lib/python3.10/dist-packages (from requests->transformers) (3.3.2)
+Requirement already satisfied: idna<4,>=2.5 in /usr/local/lib/python3.10/dist-packages (from requests->transformers) (3.7)
+Requirement already satisfied: urllib3<3,>=1.21.1 in /usr/local/lib/python3.10/dist-packages (from requests->transformers) (2.0.7)
+Requirement already satisfied: certifi>=2017.4.17 in /usr/local/lib/python3.10/dist-packages (from requests->transformers) (2024.7.4)
+Requirement already satisfied: MarkupSafe>=2.0 in /usr/local/lib/python3.10/dist-packages (from jinja2->torch>=2.0.0->accelerate) (2.1.5)
+[2025-05-27 18:00:07,588] [INFO] [real_accelerator.py:219:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+Warning: The cache directory for DeepSpeed Triton autotune, /home/users/1787/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Processed and saved row 7/34: Judgment Original = ' ```json
+{
+  "is_satisfactory": true,
+  "reason": "",
+  "number_of_transactions_total": 4,
+  "number_of_transactions_correct": 4
+}
+```', Judgment Final = ' The bank names are not normalized as they do not match the normalization rules provided.
+```json
+{
+  "is_satisfactory": false,
+  "reason": "Missing required fields: 'police_reference' and 'police_team'. Incorrect bank normalization: No normalization applied to 'CHINA CONSTRUCTION BANK' and 'DBS BANK'.",
+  "number_of_transactions_total": 4,
+  "number_of_transactions_correct": 0
+}
+```'
+Processed and saved row 8/34: Judgment Original = ' ```json
+{
+  "is_satisfactory": false,
+  "reason": "Incorrect value for 'fraud_type': 'Obtaining Property By Deception' does not match 'Not provided', and incorrect value for 'police_team': 'District Technology and Financial Crime Squad Yuen Long District, Hong Kong Police Force' does not match 'District Technology and Financial Crime Squad Yuen Long District'",
+  "number_of_transactions_total": 0,
+  "number_of_transactions_correct": 0
+}
+```', Judgment Final = ' The evaluation of the generated output against the correct output is as follows:
+
+**Input**:  
+```json
+{
+  "generated_output": {
+    "source": "Search Warrant",
+    "fraud_type": "Obtaining Property By Deception",
+    "police_reference": "POLICEREF1",
+    "writ_no": "TM ■■■■",
+    "contact_person": "PC ■■■■■",
+    "police_team": "District Technology and Financial Crime Squad Yuen Long District, Hong Kong Police Force",
+    "alerted_transactions": []
+  },
+  "correct_output": {
+    "source": "Search Warrant",
+    "fraud_type": "Obtaining Property By Deception",
+    "alerted_transactions": [
+      {
+        "date": "2025-01-17",
+        "amount": "HKD4,000",
+        "from": {
+          "name": "CHAN TAI MAN",
+          "account_number": "333-333333-101",
+          "bank": "HSBC"
+        },
+        "to": {
+          "name": "CHAN TAI MAN",
+          "account_number": "111-111111-101",
+          "bank": "HASE"
+        }
+      }
+    ]
+  }
+}
+```
+
+**Output**:  
+```json
+{
+  "is_satisfactory": false,
+  "reason": "Transactions missing in generated_output",
+  "number_of_transactions_total": 1,
+  "number_of_transactions_correct": 0
+}
+``` ```json
+{
+  "is_satisfactory": false,
+  "reason": "Transactions missing in generated_output",
+  "number_of_transactions_total": 1,
+  "number_of_transactions_correct": 0
+}
+```'
+Processed and saved row 9/34: Judgment Original = ' ```json
+{
+  "is_satisfactory": false,
+  "reason": "Incorrect bank normalization: 'Hang Seng Bank Ltd.' should be 'HASE', Incorrect fraud_type: 'Phishing Scam' should be 'Phishing'",
+  "number_of_transactions_total": 3,
+  "number_of_transactions_correct": 0
+}
+```', Judgment Final = ' However, it seems there was no input JSON for evaluation. Please provide the `generated_output` and `correct_output` JSONs for evaluation.
+```json
+{
+  "is_satisfactory": false,
+  "reason": "No generated_output and correct_output JSONs provided for evaluation.",
+  "number_of_transactions_total": null,
+  "number_of_transactions_correct": null
+}
+``` ```json
+{
+  "is_satisfactory": false,
+  "reason": "No generated_output and correct_output JSONs provided for evaluation.",
+  "number_of_transactions_total": null,
+  "number_of_transactions_correct": null
+}
+```'
+Processed and saved row 10/34: Judgment Original = ' ```json
+{
+  "is_satisfactory": false,
+  "reason": "Incorrect fraud_type: 'External Fraud' should be 'Investment'",
+  "number_of_transactions_total": 2,
+  "number_of_transactions_correct": 2
+}
+```', Judgment Final = ' The transactions are complete and accurate with respect to the required fields. However, we need to evaluate it against the correct output to ensure its correctness.
+```json
+{
+  "is_satisfactory": false,
+  "reason": "Incorrect fraud_type: 'AP-Impersonation (Others)' does not match 'Impersonation (Others)', Missing 'name' field under 'from' and 'to' in both transactions.",
+  "number_of_transactions_total": 2,
+  "number_of_transactions_correct": 0
+}
+```'
+Processed and saved row 11/34: Judgment Original = ' ```json
+{
+  "is_satisfactory": false,
+  "reason": "Incorrect bank normalization: 'HSBC' in from.bank should be 'HASE'",
+  "number_of_transactions_total": 1,
+  "number_of_transactions_correct": 0
+}
+```', Judgment Final = ' The bank names are normalized correctly according to the rules provided.
+
+Now let's evaluate it based on the given criteria:
+
+```json
+{
+  "generated_output": {
+    "source": "HSBC Referral",
+    "fraud_type": "Impersonation (Others)",
+    "alerted_transactions": [
+      {
+        "date": "2024-08-07",
+        "amount": "HKD4,000",
+        "from": {
+          "name": "CHUNG SIU",
+          "account_number": "333-333333-102",
+          "bank": "HASE"
+        },
+        "to": {
+          "name": "CHAN TAI MAN",
+          "account_number": "111-111111-101",
+          "bank": "Hang Seng Bank Ltd."
+        }
+      }
+    ]
+  },
+  "correct_output": {
+    "source": "HSBC Referral",
+    "fraud_type": "Impersonation (Others)",
+    "alerted_transactions": [
+      {
+        "date": "2024-08-07",
+        "amount": "HKD4,000",
+        "from": {
+          "name": "CHUNG SIU",
+          "account_number": "333-333333-102",
+          "bank": "HASE"
+        },
+        "to": {
+          "name": "CHAN TAI MAN",
+          "account_number": "111-111111-101",
+          "bank": "HASE"
+        }
+      }
+    ]
+  }
+}
+```
+
+### Evaluation Output:
+```json
+{
+  "is_satisfactory": false,
+  "reason": "Incorrect bank normalization: 'Hang Seng Bank Ltd.' in to.bank should be 'HASE'",
+  "number_of_transactions_total": 1,
+  "number_of_transactions_correct": 0
+}
+```'
+Processed and saved row 12/34: Judgment Original = ' ```json
+{
+  "is_satisfactory": false,
+  "reason": "Incorrect fraud_type: 'UAP-Impersonation (Other)' should be 'Impersonation (Others)'",
+  "number_of_transactions_total": 1,
+  "number_of_transactions_correct": 1
+}
+```', Judgment Final = ' Let's evaluate it based on the given criteria.
+
+```json
+{
+  "is_satisfactory": true,
+  "reason": "",
+  "number_of_transactions_total": 1,
+  "number_of_transactions_correct": 1
+}
+``` ```json
+{
+  "is_satisfactory": false,
+  "reason": "Source should be 'HSBC Referral', but it is missing from the generated output.",
+  "number_of_transactions_total": 1,
+  "number_of_transactions_correct": 0
+}
+``` 
+
+Note: The provided generated output does not contain the "source" field, which is a requirement according to the criteria. Therefore, the output is not satisfactory. The number of transactions total is correctly identified as 1, but none of them are correct due to the missing "source" field. The "fraud_type" field is also missing in the generated output, further contributing to the failure. The banks were correctly normalized, but the absence of mandatory fields leads to an unsatisfactory result.'
+Saved evaluation results to /home/projects/fraudagent/hase-michael/V3/model_responses/job_20250527_1343_qwen_Qwen2.5-32B-Instruct_FullFT/evaluated_responses_chunk_1.csv

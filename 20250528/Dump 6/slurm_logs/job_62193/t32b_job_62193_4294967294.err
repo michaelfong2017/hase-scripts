@@ -1,0 +1,16 @@
+srun: error: ioctl(TIOCGWINSZ): Inappropriate ioctl for device
+srun: error: Not using a pseudo-terminal, disregarding --pty option
+[ERROR] File already exists: /raid/local/containers/enroot-data/user-1787/pytorch
+Sliding Window Attention is enabled but not implemented for `sdpa`; unexpected results may be encountered.
+Loading checkpoint shards:   0%|          | 0/37 [00:00<?, ?it/s]Loading checkpoint shards:  92%|█████████▏| 34/37 [00:00<00:00, 331.56it/s]Loading checkpoint shards: 100%|██████████| 37/37 [00:00<00:00, 337.21it/s]
+Traceback (most recent call last):
+  File "/home/projects/fraudagent/hase-michael/V3/test-72b.py", line 72, in <module>
+    main()
+  File "/home/projects/fraudagent/hase-michael/V3/test-72b.py", line 49, in main
+    model, tokenizer = load_model(model_name, num_gpus)
+  File "/home/projects/fraudagent/hase-michael/V3/test-72b.py", line 30, in load_model
+    model.parallelize(device_map)  # Distribute model layers across GPUs
+  File "/usr/local/lib/python3.10/dist-packages/torch/nn/modules/module.py", line 1893, in __getattr__
+    raise AttributeError(
+AttributeError: 'Qwen2ForCausalLM' object has no attribute 'parallelize'
+srun: error: klb-dgx-002: task 0: Exited with exit code 1

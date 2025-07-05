@@ -1,0 +1,2439 @@
+Type,Case Number,Instruction,Input,Output,Evaluation Criteria,Source Markdown File,IR Markdown File,IR Raw File,Suspect Number,Intelligence Number,Llama 8B Instruct Base,Llama 70B Instruct Base,Qwen 32B Instruct Base,Qwen 72B Instruct Base,Llama 8B Instruct Trained
+Search Warrant,15,"You are given the content of a Search Warrant case. Extract and summarize the information into JSON. Follow these rules:
+
+1. Global Required Fields  
+These must always appear at the top level of the JSON output:
+- source: Always ""Search Warrant"".
+- fraud_type: string - Must always be present.
+- alerted_transactions: array - Must always be present. Empty if no transactions are found.
+
+2. Global Conditionally Required Fields  
+These must be included at the top level if they appear in the input:
+- police_reference: string - Extract the full police reference if present.
+- writ_no: string - Extract the writ number if present.
+- contact_person: string - Name or title of the contact person, if provided.
+
+3. Global Optional Fields  
+Include these fields at the top level only if present in the input:
+- police_team: string
+
+4. Per-Transaction Conditionally Required Fields  
+For each entry in alerted_transactions, include the following fields only if present in the input:
+- date: string - Format must be YYYY-MM-DD.
+- amount: string - Must include the currency.
+- from: object - Include this object only if any of the following subfields are present:
+  - name: string
+  - account_number: string
+  - bank: string
+- to: object - Include this object only if any of the following subfields are present:
+  - name: string
+  - account_number: string
+  - bank: string
+- channel: string - Optional. Payment method used.
+
+JSON Output Format:
+
+{
+  ""source"": ""Search Warrant"",
+  ""fraud_type"": string,
+  ""police_reference"": string (if exists),
+  ""writ_no"": string (if exists),
+  ""contact_person"": string (if exists),
+  ""police_team"": string (if exists),
+  ""alerted_transactions"": [
+    {
+      ""date"": string (YYYY-MM-DD, if exists),
+      ""amount"": string (with currency),
+      ""from"": {
+        ""name"": string (if exists),
+        ""account_number"": string (if exists),
+        ""bank"": string (if exists)
+      } (omit if all subfields are missing),
+      ""to"": {
+        ""name"": string (if exists),
+        ""account_number"": string (if exists),
+        ""bank"": string (if exists)
+      } (omit if all subfields are missing),
+      ""channel"": string (if exists)
+    },
+    ...
+  ]
+}","Police Force Ordinance
+(Cap. 232)
+
+Contact Person: PC ■■■■■
+Contact Number: 366■■■■■
+
+Case No. <u>POLICEREF2</u>
+Information No. <u>5■■■</u>
+Writ No. <u>TM ■■■■</u>
+
+**SEARCH WARRANT**
+**IN THE MAGISTRATE'S COURT AT <u>TUEN MUN</u> HONGKONG**
+
+To each and all of the Police Officers of Hong Kong
+#N/A
+You are herewith empowered to enter ~~and if necessary to break into or forcibly enter~~ the said building or place, namely **<u>Hang Seng Bank Limited</u>** and situated at **<u>AML - Financial Crime Compliance, 8/F, Hang Seng 113, 113 Argyle Street, Mongkok, Kowloon, Hong Kong</u>** and to search for and take possession of the said books or other documents or portion of or extract therefrom or any other article, namely **<u>(1) the opening mandates & personal identity documents of bank accounts no.:  111-111111-101; (2) the above mentioned accounts transaction record from opening date to present, (3) all the swift message/ voucher,</u>** which may be found therein; ~~and to detain during such period as is reasonably required to permit such a search to be carried out, any person who may appear to have such book or other document or portion thereof or extract therefrom or other article in his possession or under his control and who, if not so detained, might prejudice the purpose of the search.~~
+
+This warrant can only be executed on or before <u> **2024-9-12** </u> after which date it will automatically lapse unless it has been extend.
+
+Dated this <u> **12<sup>th</sup>**</u> day of <u> **August**</u> 2024
+
+Raymond Wong
+Magistrate
+
+(\*delete as appropriate)
+Pol.866 (Rev.2001)","{
+  ""source"": ""Search Warrant"",
+  ""fraud_type"": ""Financial Crime Compliance"",
+  ""police_reference"": ""POLICEREF2"",
+  ""writ_no"": ""TM ■■■■"",
+  ""contact_person"": ""PC ■■■■■"",
+  ""police_team"": ""N/A"",
+  ""alerted_transactions"": []
+}","You are an evaluation agent. Given the predicted JSON output and the correct reference output for a Search Warrant case, assess the predicted output according to the following guidelines:
+
+1. Global Required Fields  
+These fields should always appear at the top level:
+- source: Should be equal to ""Search Warrant"".
+- fraud_type: Should express the same meaning as the reference fraud type. Exact wording is not required.
+- alerted_transactions: Should be present as an array (can be empty, but should not be omitted).
+
+2. Global Conditionally Required Fields  
+If the following fields exist in the reference output, they should also be present in the predicted output:
+- police_reference
+- writ_no
+- contact_person
+
+3. Global Optional Fields  
+Include only if present in the reference output:
+- police_team
+
+4. Per-Transaction Conditionally Required Fields  
+For each transaction, the following fields should be included if present in the reference:
+- date: Should follow a recognizable date format. Minor format variations are acceptable.
+- amount: Should include both currency and numeric value. Minor differences in formatting (e.g., spacing, punctuation, hyphens, decimal places) are acceptable.
+- from: Object that may contain any of:
+  - name
+  - account_number
+  - bank: Allow equivalent names or abbreviations for the same institution.
+- to: Object that may contain any of:
+  - name
+  - account_number
+  - bank: Allow equivalent names or abbreviations for the same institution.
+- channel: Optional field indicating the payment method.
+
+5. Evaluation Criteria  
+- Field presence and structure should align with the reference output.
+- Values should match semantically, even if formatting or wording differs.
+- fraud_type is evaluated by meaning, not by exact string match.
+- Bank names can be matched based on known aliases or abbreviations.
+- Partial correctness is acceptable and should be reflected in the score.
+- The predicted output should be valid, structured JSON.
+
+Evaluation Output Format:
+
+{
+  ""is_satisfactory"": true | false,
+  ""score"": float (0.0-1.0),
+  ""reason"": ""Optional. Explanation of deduction areas or inconsistencies."",
+  ""number_of_transactions_total"": integer,
+  ""number_of_transactions_correct"": integer
+}",Case_15_Suspect_1_Intelligence_4_SearchWarrant.md,Case_15_IR.md,IR - C2415.docx,1,4,"{
+  ""source"": ""Search Warrant"",
+  ""fraud_type"": ""Financial Crime Compliance"",
+  ""police_reference"": ""POLICEREF2"",
+  ""writ_no"": ""TM ■■■■"",
+  ""contact_person"": ""PC ■■■■■"",
+  ""alerted_transactions"": []
+}","{
+  ""source"": ""Search Warrant"",
+  ""fraud_type"": """",
+  ""police_reference"": ""POLICEREF2"",
+  ""writ_no"": ""TM ■■■■"",
+  ""contact_person"": ""PC ■■■■■"",
+  ""alerted_transactions"": []
+}","{
+  ""source"": ""Search Warrant"",
+  ""fraud_type"": ""Financial Crime Compliance"",
+  ""police_reference"": ""POLICEREF2"",
+  ""writ_no"": ""TM ■■■■"",
+  ""contact_person"": ""PC ■■■■■"",
+  ""police_team"": ""N/A"",
+  ""alerted_transactions"": []
+}","{
+  ""source"": ""Search Warrant"",
+  ""fraud_type"": """",
+  ""police_reference"": ""POLICEREF2"",
+  ""writ_no"": ""TM ■■■■"",
+  ""contact_person"": ""PC ■■■■■"",
+  ""police_team"": """",
+  ""alerted_transactions"": []
+}","{
+  ""source"": ""Search Warrant"",
+  ""fraud_type"": ""Unknown"",
+  ""police_reference"": ""POLICEREF2"",
+  ""writ_no"": ""TM ■■■■"",
+  ""contact_person"": ""PC ■■■■■"",
+  ""alerted_transactions"": []
+}"
+Police Letter,33,"You are given the content of a Police Letter case. Extract and summarize the information into JSON. Follow these rules:
+
+1. Global Required Fields  
+These must always appear at the top level of the JSON output:
+- source: Always ""Police Letter"".
+- fraud_type: string - Must always be present.
+- alerted_transactions: array - Must always be present. Empty if no transactions are found.
+
+2. Global Conditionally Required Fields  
+These must be included at the top level if they appear in the input:
+- police_reference: string - Extract the full police reference if present.
+
+3. Global Optional Fields  
+Include these fields at the top level only if present in the input:
+- police_team: string
+
+4. Per-Transaction Conditionally Required Fields  
+For each entry in alerted_transactions, include the following fields only if present in the input:
+- date: string - Format must be YYYY-MM-DD.
+- amount: string - Must include the currency.
+- from: object - Include this object only if any of the following subfields are present:
+  - name: string
+  - account_number: string
+  - bank: string
+- to: object - Include this object only if any of the following subfields are present:
+  - name: string
+  - account_number: string
+  - bank: string
+- channel: string - Optional. Payment method used.
+
+JSON Output Format:
+
+{
+  ""source"": ""Police Letter"",
+  ""fraud_type"": string,
+  ""police_reference"": string (if exists),
+  ""police_team"": string (if exists),
+  ""alerted_transactions"": [
+    {
+      ""date"": string (YYYY-MM-DD, if exists),
+      ""amount"": string (with currency),
+      ""from"": {
+        ""name"": string (if exists),
+        ""account_number"": string (if exists),
+        ""bank"": string (if exists)
+      } (omit if all subfields are missing),
+      ""to"": {
+        ""name"": string (if exists),
+        ""account_number"": string (if exists),
+        ""bank"": string (if exists)
+      } (omit if all subfields are missing),
+      ""channel"": string (if exists)
+    },
+    ...
+  ]
+}","**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* POLICEREF1
+*Your Ref.:* 
+*Tel.:* 366■■■■■
+*Fax:* 249■■■■■
+
+District Investigation Team 4 
+Kwai Tsing District
+Kwai Chung Police Station
+999 Kwai Chung Road
+Kwai Chung
+2025-01-04
+
+HANG SENG BANK, LIMITED
+Money Laundering Reporting Officer
+Hang Seng Bank Ltd
+Financial Crime Investigations
+13/F, 83 Des Voeux Road Central,
+Hong Kong
+
+Dear Sir/Madam,
+
+I write to you in connection with the following bank account, which is believed to be held with your institution. Information received by the Hong Kong Polive indicated that the below account:-
+
+<table>
+<thead><tr><th colspan='3'>Account Details</th></tr></thead>
+<tbody>
+<tr><th>Account Name:</th><td colspan='2'>111-111111-101</td></tr><tr><th>Account Number:</th><td colspan='2'>CHAN TAI MAN</td></tr>
+<tr><th colspan='3'>Suspected nature of transactions:</th><tr><tr><td colspan='3'> - [X] Might have been used in receicing proceeds of crime</td></tr><tr><td colspan='3'> - [ ] Might have been used to receive funds related to terrorist financing</td></tr><tr><td colspan='3'> - [ ] Exhibited transaction patterns which were incommensurate with holder's background</td></tr><tr><td colspan='3'> - [ ] Others (please specify) </td></tr>
+<tr><th colspan='3'>If the predicate offence is deception related, please state the type of deception:</th><tr><tr><td colspan='3'> - [ ] Telephone Deception</td></tr><tr><td colspan='3'> - [ ] E-shopping Fraud</td></tr><tr><td colspan='3'> - [ ] Romance Scam</td></tr><tr><td colspan='3'> - [ ] Investment Scam</td></tr><tr><td colspan='3'> - [ ] Employment Fraud</td></tr><tr><td colspan='3'> - [X] Others (please specify) Bounced Cheque</td></tr><tr><td colspan='3'>(please tick if appropriate)</td></tr>
+<tr><th colspan='3'>Transaction Details:</th><tr><tr><th>Date</th><th>Amount</th><th>Transferor's Bank and Account</th></tr>
+<tr><td>2025-01-03</td><td>20000</td><td>BOC 444-4444444-103</td></tr>
+<tr><th colspan='3'>Case Summary:</th></tr><tr><td colspan='3'>WP order back tattoos .WP then claimed to have paid VTM and VTM transferred 20000 to WP upon checking his bank account and seeing the deposits from WP. VTM later received a phone call from BOC notifying him that the one cheques deposited by WP were bounced and no payment was made. WP also became out of reach. Scam was unveiled and case was thus reported</td></tr>
+<tr><th colspan='3'>Notification Letter issued before on the same case:</th></tr><tr><td colspan='3'> [ ] Yes
+
+Under case reference: dated </td></tr>
+</tbody>
+</table>
+
+I suggest that you examine the above/past transactions in the above account to ascertain whether or not you are satisfied that the provenance of the deposits into the said account is legitimate.
+
+Furthermore, I would like to draw your attention to chapter 3.1 of the ""Guideline on Anti-Money Laundering and Counter- Financing of Terrorism (for Authorized Institutions)"" published by the Hong Kong Monetary Authority under section 7 of the Anti-Money Laundering and Counter-Terrorist Financing Ordinance, Cap. 615 (""AMLO""), which states that:-
+
+*""An Authorized Institution should take all reasonable measures to ensure that proper safeguards exist to mitigate the risks of money laundering and terrorist financing and to prevent a contravention of any requirement under Part 2 or 3 of Schedule 2 [to the AMLO]"".*
+
+May I also remind you of sections 25(1) and 25A(1) of the Organized and Serious Crimes Ordinance, Cap. 455, Laws of Hong Kong, which state that:-
+
+*""Subject to section 25A, a person commits an offence if, knowing or having reasonable grounds to believe that any property in whole or in part directly or indirectly represents any person's proceeds of an indictable offence, he deals with that property. "" (section 25(1))*
+
+*\""Where a person knows or suspects that any property:-
+(a) in whole or in part directly or indirectly represents any person's proceeds of;
+(b) was used in connection with; or
+(c) is intended to be used in connection with,
+an indictable offence, he shall as soon as it is reasonable for him to do so disclose that knowledge or suspicion, together with any matter on which that knowledge or suspicion is based, to an authorized officer.\"" (section 25A(1))*
+
+Please treat this notification in confidence. Disclosure of the contents of this notification, directly or indirectly, to any unauthorized persons including the subjects under investigation, may prejudice the police investigation.
+
+Should you have any queries concerning this matter, please contact the Officer-in-Charge of the case IP YUEN ■■■■ ■■■ on telephone number 366■■■■■
+
+Yours faithfully,
+(Original Signed)
+IP YUEN ■■■■ ■■■
+District Investigation Team 4
+for Commissioner of Police
+cc SP JFIU FIIB
+(email: jfiu-noti-letter@police.gov.hk)","{
+  ""source"": ""Police Letter"",
+  ""fraud_type"": ""Bounced Cheque"",
+  ""police_reference"": ""POLICEREF1"",
+  ""police_team"": ""District Investigation Team 4"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2025-01-03"",
+      ""amount"": ""20000 HKD"",
+      ""from"": {
+        ""account_number"": ""444-4444444-103"",
+        ""bank"": ""BOC""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101""
+      }
+    }
+  ]
+}","You are an evaluation agent. Given the predicted JSON output and the correct reference output for a Police Letter case, assess the predicted output according to the following guidelines:
+
+1. Global Required Fields  
+These fields should always appear at the top level:
+- source: Should be equal to ""Police Letter"".
+- fraud_type: Should express the same meaning as the reference fraud type. Exact wording is not required.
+- alerted_transactions: Should be present as an array (can be empty, but should not be omitted).
+
+2. Global Conditionally Required Fields  
+If the following fields exist in the reference output, they should also be present in the predicted output:
+- police_reference
+
+3. Global Optional Fields  
+Include only if present in the reference output:
+- police_team
+
+4. Per-Transaction Conditionally Required Fields  
+For each transaction, the following fields should be included if present in the reference:
+- date: Should follow a recognizable date format. Minor format variations are acceptable.
+- amount: Should include both currency and numeric value. Minor formatting differences (e.g., spacing, punctuation, hyphens, decimal places) are acceptable.
+- from: Object that may contain any of:
+  - name
+  - account_number
+  - bank: Allow equivalent names or abbreviations for the same institution.
+- to: Object that may contain any of:
+  - name
+  - account_number
+  - bank: Allow equivalent names or abbreviations for the same institution.
+- channel: Optional field indicating the payment method.
+
+5. Evaluation Criteria  
+- Field presence and structure should align with the reference output.
+- Values should match semantically, even if formatting or wording differs.
+- fraud_type is evaluated by meaning, not by exact string match.
+- Bank names can be matched based on known aliases or abbreviations.
+- Partial correctness is acceptable and should be reflected in the score.
+- The predicted output should be valid, structured JSON.
+
+Evaluation Output Format:
+
+{
+  ""is_satisfactory"": true | false,
+  ""score"": float (0.0-1.0),
+  ""reason"": ""Optional. Explanation of deduction areas or inconsistencies."",
+  ""number_of_transactions_total"": integer,
+  ""number_of_transactions_correct"": integer
+}",Case_33_Suspect_1_Intelligence_4_PoliceLetter.md,Case_33_IR.md,IR - C2533.docx,1,4,"{
+  ""source"": ""Police Letter"",
+  ""fraud_type"": ""Money Laundering"",
+  ""police_reference"": ""POLICEREF1"",
+  ""police_team"": ""District Investigation Team 4"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2025-01-03"",
+      ""amount"": ""20000"",
+      ""from"": {
+        ""bank"": ""BOC"",
+        ""account_number"": ""444-4444444-103""
+      },
+      ""channel"": ""Unknown""
+    }
+  ]
+}","{
+  ""source"": ""Police Letter"",
+  ""fraud_type"": ""Might have been used in receiving proceeds of crime"",
+  ""police_reference"": ""POLICEREF1"",
+  ""police_team"": ""District Investigation Team 4"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2025-01-03"",
+      ""amount"": ""20000 HKD"",
+      ""from"": {
+        ""name"": """",
+        ""account_number"": ""444-4444444-103"",
+        ""bank"": ""BOC""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HANG SENG BANK, LIMITED""
+      },
+      ""channel"": """"
+    }
+  ]
+}","{
+  ""source"": ""Police Letter"",
+  ""fraud_type"": ""Bounced Cheque"",
+  ""police_reference"": ""POLICEREF1"",
+  ""police_team"": ""District Investigation Team 4"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2025-01-03"",
+      ""amount"": ""20000 HKD"",
+      ""from"": {
+        ""account_number"": ""444-4444444-103"",
+        ""bank"": ""BOC""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101""
+      }
+    }
+  ]
+}","{
+  ""source"": ""Police Letter"",
+  ""fraud_type"": ""Bounced Cheque"",
+  ""police_reference"": ""POLICEREF1"",
+  ""police_team"": ""District Investigation Team 4"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2025-01-03"",
+      ""amount"": ""20000"",
+      ""from"": {
+        ""account_number"": ""444-4444444-103"",
+        ""bank"": ""BOC""
+      },
+      ""to"": {
+        ""account_number"": ""111-111111-101"",
+        ""name"": ""CHAN TAI MAN""
+      }
+    }
+  ]
+}","Here is the extracted and summarized information in JSON format:
+
+```json
+{
+  ""source"": ""Police Letter"",
+  ""fraud_type"": ""Money Laundering"",
+  ""police_reference"": ""POLICEREF1"",
+  ""police_team"": ""District Investigation Team 4"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2025-01-03"",
+      ""amount"": ""20000"",
+      ""from"": {
+        ""account_number"": ""444-4444444-103""
+      },
+      ""to"": {
+        ""account_number"": ""111-111111-101""
+      },
+      ""channel"": ""Bank Transfer""
+    }
+  ]
+}
+```"
+Police Letter,2,"You are given the content of a Police Letter case. Extract and summarize the information into JSON. Follow these rules:
+
+1. Global Required Fields  
+These must always appear at the top level of the JSON output:
+- source: Always ""Police Letter"".
+- fraud_type: string - Must always be present.
+- alerted_transactions: array - Must always be present. Empty if no transactions are found.
+
+2. Global Conditionally Required Fields  
+These must be included at the top level if they appear in the input:
+- police_reference: string - Extract the full police reference if present.
+
+3. Global Optional Fields  
+Include these fields at the top level only if present in the input:
+- police_team: string
+
+4. Per-Transaction Conditionally Required Fields  
+For each entry in alerted_transactions, include the following fields only if present in the input:
+- date: string - Format must be YYYY-MM-DD.
+- amount: string - Must include the currency.
+- from: object - Include this object only if any of the following subfields are present:
+  - name: string
+  - account_number: string
+  - bank: string
+- to: object - Include this object only if any of the following subfields are present:
+  - name: string
+  - account_number: string
+  - bank: string
+- channel: string - Optional. Payment method used.
+
+JSON Output Format:
+
+{
+  ""source"": ""Police Letter"",
+  ""fraud_type"": string,
+  ""police_reference"": string (if exists),
+  ""police_team"": string (if exists),
+  ""alerted_transactions"": [
+    {
+      ""date"": string (YYYY-MM-DD, if exists),
+      ""amount"": string (with currency),
+      ""from"": {
+        ""name"": string (if exists),
+        ""account_number"": string (if exists),
+        ""bank"": string (if exists)
+      } (omit if all subfields are missing),
+      ""to"": {
+        ""name"": string (if exists),
+        ""account_number"": string (if exists),
+        ""bank"": string (if exists)
+      } (omit if all subfields are missing),
+      ""channel"": string (if exists)
+    },
+    ...
+  ]
+}","**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* TSW RN 240■■■■■■■
+*Your Ref.:* 
+*Tel.:* 366■■■■■
+*Fax:* 244■■■■■
+
+District Investigation Team 3
+Yuen Long District
+
+246 Castle Peak Road
+Yuen Long
+2024-09-10
+
+HANG SENG BANK, LIMITED
+Money Laundering Reporting Officer
+Hang Seng Bank Ltd
+Financial Crime Investigations
+13/F, 83 Des Voeux Road Central,
+Hong Kong
+
+Dear Sir/Madam,
+
+I write to you in connection with the following bank account, which is believed to be held with your institution. Information received by the Hong Kong Polive indicated that the below account:-
+
+<table>
+<thead><tr><th colspan='3'>Account Details</th></tr></thead>
+<tbody>
+<tr><th>Account Name:</th><td colspan='2'></td></tr><tr><th>Account Number:</th><td colspan='2'></td></tr>
+<tr><th colspan='3'>Suspected nature of transactions:</th><tr><tr><td colspan='3'> - [X] Might have been used in receicing proceeds of crime</td></tr><tr><td colspan='3'> - [ ] Might have been used to receive funds related to terrorist financing</td></tr><tr><td colspan='3'> - [ ] Exhibited transaction patterns which were incommensurate with holder's background</td></tr><tr><td colspan='3'> - [ ] Others (please specify) </td></tr>
+<tr><th colspan='3'>If the predicate offence is deception related, please state the type of deception:</th><tr><tr><td colspan='3'> - [ ] Telephone Deception</td></tr><tr><td colspan='3'> - [ ] E-shopping Fraud</td></tr><tr><td colspan='3'> - [ ] Romance Scam</td></tr><tr><td colspan='3'> - [X] Investment Scam</td></tr><tr><td colspan='3'> - [ ] Employment Fraud</td></tr><tr><td colspan='3'> - [ ] Others (please specify) </td></tr><tr><td colspan='3'>(please tick if appropriate)</td></tr>
+<tr><th colspan='3'>Transaction Details:</th><tr><tr><th>Date</th><th>Amount</th><th>Transferor's Bank and Account</th></tr>
+<tr><td>2024-08-26</td><td>50000</td><td>NA CASH</td></tr>
+<tr><th colspan='3'>Case Summary:</th></tr><tr><td colspan='3'>On 2024-08-22, a female reported to police that on 2024-09-09, she was lured to invest into
+cryptocurrencies and had deposited a total of HK$1,267,000 into 26 bank accounts
+(including the above listed transactions). The female later found she could not withdraw the
+cryptocurrencies and lost contact with the seller.</td></tr>
+<tr><th colspan='3'>Notification Letter issued before on the same case:</th></tr><tr><td colspan='3'> [ ] Yes
+
+Under case reference: dated </td></tr>
+</tbody>
+</table>
+
+I suggest that you examine the above/past transactions in the above account to ascertain whether or not you are satisfied that the provenance of the deposits into the said account is legitimate.
+
+Furthermore, I would like to draw your attention to chapter 3.1 of the ""Guideline on Anti-Money Laundering and Counter- Financing of Terrorism (for Authorized Institutions)"" published by the Hong Kong Monetary Authority under section 7 of the Anti-Money Laundering and Counter-Terrorist Financing Ordinance, Cap. 615 (""AMLO""), which states that:-
+
+*""An Authorized Institution should take all reasonable measures to ensure that proper safeguards exist to mitigate the risks of money laundering and terrorist financing and to prevent a contravention of any requirement under Part 2 or 3 of Schedule 2 [to the AMLO]"".*
+
+May I also remind you of sections 25(1) and 25A(1) of the Organized and Serious Crimes Ordinance, Cap. 455, Laws of Hong Kong, which state that:-
+
+*""Subject to section 25A, a person commits an offence if, knowing or having reasonable grounds to believe that any property in whole or in part directly or indirectly represents any person's proceeds of an indictable offence, he deals with that property. "" (section 25(1))*
+
+*\""Where a person knows or suspects that any property:-
+(a) in whole or in part directly or indirectly represents any person's proceeds of;
+(b) was used in connection with; or
+(c) is intended to be used in connection with,
+an indictable offence, he shall as soon as it is reasonable for him to do so disclose that knowledge or suspicion, together with any matter on which that knowledge or suspicion is based, to an authorized officer.\"" (section 25A(1))*
+
+Please treat this notification in confidence. Disclosure of the contents of this notification, directly or indirectly, to any unauthorized persons including the subjects under investigation, may prejudice the police investigation.
+
+Should you have any queries concerning this matter, please contact the Officer-in-Charge of the case DSIP LAM ■■■■■■■ on telephone number 366■■■■■
+
+Yours faithfully,
+(Original Signed)
+DSIP LAM ■■■■■■■
+OC DIT ■■■■■
+for Commissioner of Police
+cc SP JFIU FIIB
+(email: jfiu-noti-letter@police.gov.hk)","{
+  ""source"": ""Police Letter"",
+  ""fraud_type"": ""Investment Scam"",
+  ""police_reference"": ""TSW RN 240■■■■■■■"",
+  ""police_team"": ""District Investigation Team 3"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2024-08-26"",
+      ""amount"": ""HK$50000"",
+      ""channel"": ""RTGS""
+    }
+  ]
+}","You are an evaluation agent. Given the predicted JSON output and the correct reference output for a Police Letter case, assess the predicted output according to the following guidelines:
+
+1. Global Required Fields  
+These fields should always appear at the top level:
+- source: Should be equal to ""Police Letter"".
+- fraud_type: Should express the same meaning as the reference fraud type. Exact wording is not required.
+- alerted_transactions: Should be present as an array (can be empty, but should not be omitted).
+
+2. Global Conditionally Required Fields  
+If the following fields exist in the reference output, they should also be present in the predicted output:
+- police_reference
+
+3. Global Optional Fields  
+Include only if present in the reference output:
+- police_team
+
+4. Per-Transaction Conditionally Required Fields  
+For each transaction, the following fields should be included if present in the reference:
+- date: Should follow a recognizable date format. Minor format variations are acceptable.
+- amount: Should include both currency and numeric value. Minor formatting differences (e.g., spacing, punctuation, hyphens, decimal places) are acceptable.
+- from: Object that may contain any of:
+  - name
+  - account_number
+  - bank: Allow equivalent names or abbreviations for the same institution.
+- to: Object that may contain any of:
+  - name
+  - account_number
+  - bank: Allow equivalent names or abbreviations for the same institution.
+- channel: Optional field indicating the payment method.
+
+5. Evaluation Criteria  
+- Field presence and structure should align with the reference output.
+- Values should match semantically, even if formatting or wording differs.
+- fraud_type is evaluated by meaning, not by exact string match.
+- Bank names can be matched based on known aliases or abbreviations.
+- Partial correctness is acceptable and should be reflected in the score.
+- The predicted output should be valid, structured JSON.
+
+Evaluation Output Format:
+
+{
+  ""is_satisfactory"": true | false,
+  ""score"": float (0.0-1.0),
+  ""reason"": ""Optional. Explanation of deduction areas or inconsistencies."",
+  ""number_of_transactions_total"": integer,
+  ""number_of_transactions_correct"": integer
+}",Case_2_Suspect_2_Intelligence_2_PoliceLetter.md,Case_2_IR.md,C2402.docx,"[1, 2]",2,"{
+  ""source"": ""Police Letter"",
+  ""fraud_type"": ""Money Laundering and Counter-Terrorist Financing"",
+  ""police_reference"": ""TSW RN 240■■■■■■■"",
+  ""police_team"": ""District Investigation Team 3"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2024-08-26"",
+      ""amount"": ""50000 HKD"",
+      ""from"": {
+        ""account_number"": ""NA CASH""
+      },
+      ""channel"": ""NA CASH""
+    }
+  ]
+}","{
+  ""source"": ""Police Letter"",
+  ""fraud_type"": ""Investment Scam"",
+  ""police_reference"": ""TSW RN 240■■■■■■■"",
+  ""police_team"": ""District Investigation Team 3"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2024-08-26"",
+      ""amount"": ""50000"",
+      ""from"": {
+        ""bank"": ""NA CASH""
+      }
+    }
+  ]
+}","{
+  ""source"": ""Police Letter"",
+  ""fraud_type"": ""Investment Scam"",
+  ""police_reference"": ""TSW RN 240■■■■■■■"",
+  ""police_team"": ""District Investigation Team 3"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2024-08-26"",
+      ""amount"": ""HK$50000"",
+      ""from"": {
+        ""name"": ""NA"",
+        ""account_number"": ""CASH""
+      }
+    }
+  ]
+}","{
+  ""source"": ""Police Letter"",
+  ""fraud_type"": ""Investment Scam"",
+  ""police_reference"": ""TSW RN 240■■■■■■■"",
+  ""police_team"": ""District Investigation Team 3, Yuen Long District"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2024-08-26"",
+      ""amount"": ""HK$50000"",
+      ""from"": {},
+      ""to"": {},
+      ""channel"": ""CASH""
+    }
+  ]
+}","Here is the extracted and summarized information in JSON format:
+
+```json
+{
+  ""source"": ""Police Letter"",
+  ""fraud_type"": ""Money Laundering"",
+  ""police_reference"": ""TSW RN 240■■■■■■■"",
+  ""police_team"": ""District Investigation Team 3"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2024-08-26"",
+      ""amount"": ""50000 HKD"",
+      ""from"": {
+        ""account_number"": ""NA CASH""
+      },
+      ""to"": {
+        ""account_name"": """"
+      }
+    }
+  ]
+}
+```"
+ADCC,23,"You are given the content of an ADCC case. Extract and summarize the information into JSON. Follow these rules:
+
+1. Global Required Fields
+These must always appear at the top level of the JSON output:
+- source: Always ""ADCC"".
+- fraud_type: string - Must always be present.
+- alerted_transactions: array - Must always be present. Empty if no transactions are found.
+
+2. Global Conditionally Required Fields
+These must be included at the top level if they appear in the input:
+- police_reference: string - Extract the full police reference if present.
+
+3. Global Optional Fields
+Include these fields at the top level only if present in the input:
+- police_team: string
+
+4. Per-Transaction Conditionally Required Fields
+For each entry in alerted_transactions, include the following fields only if present in the input:
+- date: string - Format must be YYYY-MM-DD.
+- amount: string - Must include the currency.
+- from: object - Include this object only if any of the following subfields are present:
+  - name: string
+  - account_number: string
+  - bank: string
+- to: object - Include this object only if any of the following subfields are present:
+  - name: string
+  - account_number: string
+  - bank: string
+- channel: string - Optional. Payment method used.
+
+JSON Output Format:
+
+{
+  ""source"": ""ADCC"",
+  ""fraud_type"": string,
+  ""police_reference"": string (if exists),
+  ""police_team"": string (if exists),
+  ""alerted_transactions"": [
+    {
+      ""date"": string (YYYY-MM-DD, if exists),
+      ""amount"": string (with currency, if exists),
+      ""from"": {
+        ""name"": string (if exists),
+        ""account_number"": string (if exists),
+        ""bank"": string (if exists)
+      } (omit if all subfields are missing),
+      ""to"": {
+        ""name"": string (if exists),
+        ""account_number"": string (if exists),
+        ""bank"": string (if exists)
+      } (omit if all subfields are missing),
+      ""channel"": string (if exists)
+    },
+    ...
+  ]
+}","Dear HSB,
+
+Please be informed of a case of **""Telephone Deception - Pretend Customer Service""** reported on **2024-12-05** and it is under the investigation by **DIT 4 ■■■■■■■**. It is alleged that the relevant crime proceeds were transferred to the account(s) below **[from the victim / from a suspicious account, which had received crime proceeds directly from the victim]**
+
+As a matter of urgency, please inform the ADCC of the following:
+i) The latest balance of the beneficiary account(s);
+ii) Whether the beneficiary account(s) has been suspended after your review. If yes, what functions are blocked;
+Details of Beneficiary
+| Ref. | Beneficiary Bank | Layer | Beneficiary Account No. | Beneficiary Account Name |
+| ---- | ---------------- | ----- | ----------------------- | ------------------------ |
+| AC1 | HSB | 1st | 111-111111-101 | CHAN TAI MAN |
+
+Transaction Details
+| S/N | Date | Currency | Involved Amounts | Approx. HKD | Remitting Bank | AC Location | Depositor AC No. | Depositor AC Name |
+| --- | ---- | -------- | ---------------- | ----------- | -------------- | ----------- | ---------------- | ----------------- |
+| 12 | 2024-12-03 | HKD | 144123 | 144123 | HSBC | Hong Kong | 444-4444444-101 | CHEUNG TAK SHING |
+
+\*\*NO STR\*\*
+
+We have examined each report referred by the subject investigation team and we believe that **that the beneficiary account(s) might have been used to deal with suspected proceeds of crime**. Therefore, you are advised (i) **to critically examine the alleged transaction(s) in the relevant account(s)** to ascertain whether or not you are satisfied that the provenance of the deposits into the said account(s) is legitimate and (ii) **to actively consider appropriate actions** to avoid dealing with property in whole or in part directly or indirectly represent any person's proceeds of an indictable offence, which may be liable to a prosecution for a criminal offence under sections 25(1) and (3) of the Organized and Serious Crimes Ordinance, Cap. 455. A person includes a financial institution.
+
+When fulfilling the reporting obligations by filing Suspicious Transaction Reports (STR) to the Joint Financial Intelligence Unit (""JFIU""), if any, please state **ESPS ■■■■■/2024 and TY RN ■■■■■■■ (DIT 4 ■■■■■■■)** for ease of reference.
+
+We confirm that the requested information is required for the purpose of section 58(1)(a) under the Personal Data (Privacy) Ordinance, Cap 486. Failure to provide the requested information may lead to possibly failure or unnecessary delay on prevention or detection of crime. In view of the above, we consider that section 58(2) as read with section 58(1)(a) of the Personal Data (Privacy) Ordinance, Cap. 486 is the applicable exemption under the circumstances.
+
+You are also advised to refer to the ""Guideline on Anti-Money Laundering and Counter-Terrorist Financing"" published by the Hong Kong Monetary Authority (HKMA) under the Anti-Money Laundering and Counter-Terrorist Financing (Financial Institutions) Ordinance, Cap. 615 (""AMLO"") and to take all reasonable measures to prevent a contravention and to mitigate Money Laundering risks.
+
+Should you have any enquiry, please feel free to contact the undersigned or our officers at 286■■■■■. Thank you! 
+
+Best regards, 
+SGT  ■■■■■ ■■■■■ ■■■■
+Anti-Deception Coordination Centre 
+Commercial Crime Bureau 
+Hong Kong Police Force
+Tel: 286■■■■■ / Fax: 220■■■■■","{
+  ""source"": ""ADCC"",
+  ""fraud_type"": ""Telephone Deception - Pretend Customer Service"",
+  ""police_reference"": ""ESPS ■■■■■/2024 and TY RN ■■■■■■■ (DIT 4 ■■■■■■■)"",
+  ""police_team"": ""DIT 4 ■■■■■■■"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2024-12-03"",
+      ""amount"": ""HKD 144123"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""444-4444444-101"",
+        ""bank"": ""HSBC""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HSB""
+      }
+    }
+  ]
+}","You are an evaluation agent. Given the predicted JSON output and the correct reference output for an ADCC case, assess the predicted output according to the following guidelines:
+
+1. Global Required Fields  
+These fields should always appear at the top level:
+- source: Should be equal to ""ADCC"".
+- fraud_type: Should express the same meaning as the reference fraud type. Exact wording is not required.
+- alerted_transactions: Should be present as an array (can be empty, but should not be omitted).
+
+2. Global Conditionally Required Fields  
+If the following fields exist in the reference output, they should also be present in the predicted output:
+- police_reference
+
+3. Global Optional Fields  
+Include only if present in the reference output:
+- police_team
+
+4. Per-Transaction Conditionally Required Fields  
+For each transaction, the following fields should be included if present in the reference:
+- date: Should follow a recognizable date format. Minor format variations are acceptable.
+- amount: Should include both currency and numeric value. Minor formatting differences (e.g., spacing, punctuation, hyphens, decimal places) are acceptable.
+- from: Object that may contain any of:
+  - name
+  - account_number
+  - bank: Accept equivalent names or abbreviations for the same institution.
+- to: Object that may contain any of:
+  - name
+  - account_number
+  - bank: Accept equivalent names or abbreviations for the same institution.
+- channel: Optional field indicating the payment method.
+
+5. Evaluation Criteria  
+- Field presence and structure should align with the reference output.
+- Values should match semantically, even if formatting or wording differs.
+- fraud_type is evaluated by meaning, not by exact string match.
+- Bank names can be matched based on known aliases or abbreviations.
+- Partial correctness is acceptable and should be reflected in the score.
+- The predicted output should be valid, structured JSON.
+
+Evaluation Output Format:
+
+{
+  ""is_satisfactory"": true | false,
+  ""score"": float (0.0-1.0),
+  ""reason"": ""Optional. Explanation of deduction areas or inconsistencies."",
+  ""number_of_transactions_total"": integer,
+  ""number_of_transactions_correct"": integer
+}",Case_23_Suspect_1_Intelligence_12_ADCC.md,Case_23_IR.md,IR - C2523.docx,1,12,"{
+  ""source"": ""ADCC"",
+  ""fraud_type"": ""Telephone Deception - Pretend Customer Service"",
+  ""police_reference"": ""ESPS ■■■■■/2024 and TY RN ■■■■■■■ (DIT 4 ■■■■■■■)"",
+  ""police_team"": ""DIT 4 ■■■■■■■"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2024-12-03"",
+      ""amount"": ""144123 HKD"",
+      ""from"": {
+        ""account_number"": ""444-4444444-101"",
+        ""name"": ""CHEUNG TAK SHING""
+      },
+      ""to"": {
+        ""beneficiary_bank"": ""HSB"",
+        ""beneficiary_account_no"": ""111-111111-101"",
+        ""beneficiary_account_name"": ""CHAN TAI MAN""
+      },
+      ""channel"": ""NO STR""
+    }
+  ]
+}","{
+  ""source"": ""ADCC"",
+  ""fraud_type"": ""Telephone Deception - Pretend Customer Service"",
+  ""police_reference"": ""ESPS ■■■■■/2024 and TY RN ■■■■■■■ (DIT 4 ■■■■■■■)"",
+  ""police_team"": ""DIT 4 ■■■■■■■"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2024-12-03"",
+      ""amount"": ""HKD 144123"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""444-4444444-101"",
+        ""bank"": ""HSBC""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HSB""
+      }
+    }
+  ]
+}","{
+  ""source"": ""ADCC"",
+  ""fraud_type"": ""Telephone Deception - Pretend Customer Service"",
+  ""police_reference"": ""ESPS ■■■■■/2024 and TY RN ■■■■■■■ (DIT 4 ■■■■■■■)"",
+  ""police_team"": ""DIT 4 ■■■■■■■"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2024-12-03"",
+      ""amount"": ""HKD 144123"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""444-4444444-101"",
+        ""bank"": ""HSBC""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HSB""
+      }
+    }
+  ]
+}","{
+  ""source"": ""ADCC"",
+  ""fraud_type"": ""Telephone Deception - Pretend Customer Service"",
+  ""police_reference"": ""ESPS ■■■■■/2024 and TY RN ■■■■■■■ (DIT 4 ■■■■■■■)"",
+  ""police_team"": ""DIT 4 ■■■■■■■"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2024-12-03"",
+      ""amount"": ""HKD 144123"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""444-4444444-101"",
+        ""bank"": ""HSBC""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HSB""
+      },
+      ""channel"": ""Deposit""
+    }
+  ]
+}","{
+  ""source"": ""ADCC"",
+  ""fraud_type"": ""Telephone Deception - Pretend Customer Service"",
+  ""police_reference"": ""ESPS ■■■■■/2024 and TY RN ■■■■■■■ (DIT 4 ■■■■■■■)"",
+  ""police_team"": ""DIT 4 ■■■■■■■"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2024-12-03"",
+      ""amount"": ""144123 HKD"",
+      ""from"": {
+        ""account_number"": ""444-4444444-101"",
+        ""name"": ""CHEUNG TAK SHING""
+      },
+      ""to"": {
+        ""bank"": ""HSB"",
+        ""account_number"": ""111-111111-101"",
+        ""account_name"": ""CHAN TAI MAN""
+      },
+      ""channel"": ""Remitting Bank: HSBC""
+    }
+  ]
+}"
+HSBC Referral,18,"You are given the content of an HSBC Referral case. Extract and summarize the information into JSON. Follow these rules:
+
+1. Global Required Fields  
+These must always appear at the top level of the JSON output:
+- source: Always ""HSBC Referral"".
+- fraud_type: string - Must always be present.
+- alerted_transactions: array - Must always be present. Empty if no transactions are found.
+
+2. Per-Transaction Conditionally Required Fields  
+For each entry in alerted_transactions, include the following fields only if present in the input:
+- date: string - Format must be YYYY-MM-DD.
+- amount: string - Must include the currency.
+- from: object - Include this object only if any of the following subfields are present:
+  - name: string
+  - account_number: string
+  - bank: string
+- to: object - Include this object only if any of the following subfields are present:
+  - name: string
+  - account_number: string
+  - bank: string
+- channel: string - Optional. Payment method used.
+
+JSON Output Format:
+
+{
+  ""source"": ""HSBC Referral"",
+  ""fraud_type"": string,
+  ""alerted_transactions"": [
+    {
+      ""date"": string (YYYY-MM-DD, if exists),
+      ""amount"": string (with currency),
+      ""from"": {
+        ""name"": string (if exists),
+        ""account_number"": string (if exists),
+        ""bank"": string (if exists)
+      } (omit if all subfields are missing),
+      ""to"": {
+        ""name"": string (if exists),
+        ""account_number"": string (if exists),
+        ""bank"": string (if exists)
+      } (omit if all subfields are missing),
+      ""channel"": string (if exists)
+    },
+    ...
+  ]
+}","Dear team,
+
+There is a fraud case reporting involved HASE  suspect, please review the account information and take actions where appropriate. Thanks
+\- AMH UCM No.C2402
+\- Fraud Type (L5): Purchase
+\- Source: HSBC Referral
+
+\- Originator Role: Victim ~~/1st layer/2nd layer~~ (select appropriate)
+<table>
+<tr><th>Originator A/C number</th><th>Originator Name</th><th>Originator Bank</th><th>Currency / Amount</th><th>Transaction ref. number</th></tr>
+<tr><td>444-4444444-101</td><td>MR CHEUNG TAK SHING</td><td>THE HONGKONG AND SHANGHAI BANKING CORPORATION LIMITED (HSBC)</td><td>HKD 5,000.00</td><td>NC10■■■■■■</td></tr>
+</table>
+
+\- Beneficiary Role: 1st layer
+<table>
+<tr><th>Transaction Date</th><th>Beneficiary A/C number</th><th>Beneficiary Name (if any)</th><th>Beneficiary Bank</th></tr>
+<tr><td>10 Dec 2024</td><td>111-111111-101 </td><td>CHAN TAI MAN</td><td>HANG SENG BANK LTD.</td></tr>
+</table>
+
+Best Regards,","{
+  ""source"": ""HSBC Referral"",
+  ""fraud_type"": ""Purchase"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2024-12-10"",
+      ""amount"": ""HKD 5,000.00"",
+      ""from"": {
+        ""name"": ""MR CHEUNG TAK SHING"",
+        ""account_number"": ""444-4444444-101"",
+        ""bank"": ""THE HONGKONG AND SHANGHAI BANKING CORPORATION LIMITED (HSBC)""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HANG SENG BANK LTD.""
+      }
+    }
+  ]
+}","You are an evaluation agent. Given the predicted JSON output and the correct reference output for an HSBC Referral case, assess the predicted output according to the following guidelines:
+
+1. Global Required Fields  
+These fields should always appear at the top level:
+- source: Should be equal to ""HSBC Referral"".
+- fraud_type: Should express the same meaning as the reference fraud type. Exact wording is not required.
+- alerted_transactions: Should be present as an array (can be empty, but should not be omitted).
+
+2. Per-Transaction Conditionally Required Fields  
+For each transaction, the following fields should be included if present in the reference:
+- date: Should follow a recognizable date format. Minor format variations are acceptable.
+- amount: Should include both currency and numeric value. Minor formatting differences (e.g., spacing, punctuation, hyphens, decimal places) are acceptable.
+- from: Object that may contain any of:
+  - name
+  - account_number
+  - bank: Accept equivalent names or abbreviations for the same institution.
+- to: Object that may contain any of:
+  - name
+  - account_number
+  - bank: Accept equivalent names or abbreviations for the same institution.
+- channel: Optional field indicating the payment method.
+
+3. Evaluation Criteria  
+- Field presence and structure should align with the reference output.
+- Values should match semantically, even if formatting or wording differs.
+- fraud_type is evaluated by meaning, not by exact string match.
+- Bank names can be matched based on known aliases or abbreviations.
+- Partial correctness is acceptable and should be reflected in the score.
+- The predicted output should be valid, structured JSON.
+
+Evaluation Output Format:
+
+{
+  ""is_satisfactory"": true | false,
+  ""score"": float (0.0-1.0),
+  ""reason"": ""Optional. Explanation of deduction areas or inconsistencies."",
+  ""number_of_transactions_total"": integer,
+  ""number_of_transactions_correct"": integer
+}",Case_18_Suspect_1_Intelligence_1_CrossBorder.md,Case_18_IR.md,IR - C2418.docx,1,1,"{
+  ""source"": ""HSBC Referral"",
+  ""fraud_type"": ""Purchase"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2024-12-10"",
+      ""amount"": ""HKD 5,000.00"",
+      ""from"": {
+        ""name"": ""MR CHEUNG TAK SHING"",
+        ""account_number"": ""444-4444444-101"",
+        ""bank"": ""THE HONGKONG AND SHANGHAI BANKING CORPORATION LIMITED (HSBC)""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HANG SENG BANK LTD.""
+      },
+      ""channel"": ""NC10■■■■■■""  // Channel is not a standard payment method, so it's kept as is.
+    }
+  ]
+}","{
+  ""source"": ""HSBC Referral"",
+  ""fraud_type"": ""Purchase"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2024-12-10"",
+      ""amount"": ""HKD 5,000.00"",
+      ""from"": {
+        ""name"": ""MR CHEUNG TAK SHING"",
+        ""account_number"": ""444-4444444-101"",
+        ""bank"": ""THE HONGKONG AND SHANGHAI BANKING CORPORATION LIMITED (HSBC)""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HANG SENG BANK LTD.""
+      }
+    }
+  ]
+}","{
+  ""source"": ""HSBC Referral"",
+  ""fraud_type"": ""Purchase"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2024-12-10"",
+      ""amount"": ""HKD 5,000.00"",
+      ""from"": {
+        ""name"": ""MR CHEUNG TAK SHING"",
+        ""account_number"": ""444-4444444-101"",
+        ""bank"": ""THE HONGKONG AND SHANGHAI BANKING CORPORATION LIMITED (HSBC)""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HANG SENG BANK LTD.""
+      }
+    }
+  ]
+}","{
+  ""source"": ""HSBC Referral"",
+  ""fraud_type"": ""Purchase"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2024-12-10"",
+      ""amount"": ""HKD 5,000.00"",
+      ""from"": {
+        ""name"": ""MR CHEUNG TAK SHING"",
+        ""account_number"": ""444-4444444-101"",
+        ""bank"": ""THE HONGKONG AND SHANGHAI BANKING CORPORATION LIMITED (HSBC)""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HANG SENG BANK LTD.""
+      }
+    }
+  ]
+}","{
+  ""source"": ""HSBC Referral"",
+  ""fraud_type"": ""L5: Purchase"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""10 Dec 2024"",
+      ""amount"": ""HKD 5,000.00"",
+      ""from"": {
+        ""account_number"": ""444-4444444-101"",
+        ""name"": ""MR CHEUNG TAK SHING"",
+        ""bank"": ""THE HONGKONG AND SHANGHAI BANKING CORPORATION LIMITED (HSBC)""
+      },
+      ""to"": {
+        ""account_number"": ""111-111111-101"",
+        ""name"": ""CHAN TAI MAN"",
+        ""bank"": ""HANG SENG BANK LTD.""
+      }
+    }
+  ]
+}"
+HSBC Referral,23,"You are given the content of an HSBC Referral case. Extract and summarize the information into JSON. Follow these rules:
+
+1. Global Required Fields  
+These must always appear at the top level of the JSON output:
+- source: Always ""HSBC Referral"".
+- fraud_type: string - Must always be present.
+- alerted_transactions: array - Must always be present. Empty if no transactions are found.
+
+2. Per-Transaction Conditionally Required Fields  
+For each entry in alerted_transactions, include the following fields only if present in the input:
+- date: string - Format must be YYYY-MM-DD.
+- amount: string - Must include the currency.
+- from: object - Include this object only if any of the following subfields are present:
+  - name: string
+  - account_number: string
+  - bank: string
+- to: object - Include this object only if any of the following subfields are present:
+  - name: string
+  - account_number: string
+  - bank: string
+- channel: string - Optional. Payment method used.
+
+JSON Output Format:
+
+{
+  ""source"": ""HSBC Referral"",
+  ""fraud_type"": string,
+  ""alerted_transactions"": [
+    {
+      ""date"": string (YYYY-MM-DD, if exists),
+      ""amount"": string (with currency),
+      ""from"": {
+        ""name"": string (if exists),
+        ""account_number"": string (if exists),
+        ""bank"": string (if exists)
+      } (omit if all subfields are missing),
+      ""to"": {
+        ""name"": string (if exists),
+        ""account_number"": string (if exists),
+        ""bank"": string (if exists)
+      } (omit if all subfields are missing),
+      ""channel"": string (if exists)
+    },
+    ...
+  ]
+}","Dear team,
+
+There is a fraud case reporting involved HASE  suspect, please review the account information and take actions where appropriate. Thanks
+\- AMH UCM No.C201
+\- Fraud Type (L5): Impersonation
+\- Source: HSBC Referral
+
+\- Originator Role: ~~Victim/~~ 1st layer ~~/2nd layer~~ (select appropriate)
+<table>
+<tr><th>Originator A/C number</th><th>Originator Name</th><th>Originator Bank</th><th>Currency / Amount</th><th>Transaction ref. number</th></tr>
+<tr><td>333-333333-101</td><td>CHAN TAI MAN </td><td>The Hongkong and Shanghai Banking Corporation Limited</td><td>HKD 50,001.00 </td><td>HC12■■■■■■■■■■■■</td></tr>
+</table>
+
+\- Beneficiary Role: 2nd layer
+<table>
+<tr><th>Transaction Date</th><th>Beneficiary A/C number</th><th>Beneficiary Name (if any)</th><th>Beneficiary Bank</th></tr>
+<tr><td>3 Dec 2024</td><td>111-111111-101 </td><td>CHAN TAI MAN</td><td>HANG SENG BANK LTD.</td></tr>
+</table>
+
+Best Regards,","{
+  ""source"": ""HSBC Referral"",
+  ""fraud_type"": ""Impersonation"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2024-12-03"",
+      ""amount"": ""HKD 50,001.00"",
+      ""from"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""333-333333-101"",
+        ""bank"": ""The Hongkong and Shanghai Banking Corporation Limited""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HANG SENG BANK LTD.""
+      }
+    }
+  ]
+}","You are an evaluation agent. Given the predicted JSON output and the correct reference output for an HSBC Referral case, assess the predicted output according to the following guidelines:
+
+1. Global Required Fields  
+These fields should always appear at the top level:
+- source: Should be equal to ""HSBC Referral"".
+- fraud_type: Should express the same meaning as the reference fraud type. Exact wording is not required.
+- alerted_transactions: Should be present as an array (can be empty, but should not be omitted).
+
+2. Per-Transaction Conditionally Required Fields  
+For each transaction, the following fields should be included if present in the reference:
+- date: Should follow a recognizable date format. Minor format variations are acceptable.
+- amount: Should include both currency and numeric value. Minor formatting differences (e.g., spacing, punctuation, hyphens, decimal places) are acceptable.
+- from: Object that may contain any of:
+  - name
+  - account_number
+  - bank: Accept equivalent names or abbreviations for the same institution.
+- to: Object that may contain any of:
+  - name
+  - account_number
+  - bank: Accept equivalent names or abbreviations for the same institution.
+- channel: Optional field indicating the payment method.
+
+3. Evaluation Criteria  
+- Field presence and structure should align with the reference output.
+- Values should match semantically, even if formatting or wording differs.
+- fraud_type is evaluated by meaning, not by exact string match.
+- Bank names can be matched based on known aliases or abbreviations.
+- Partial correctness is acceptable and should be reflected in the score.
+- The predicted output should be valid, structured JSON.
+
+Evaluation Output Format:
+
+{
+  ""is_satisfactory"": true | false,
+  ""score"": float (0.0-1.0),
+  ""reason"": ""Optional. Explanation of deduction areas or inconsistencies."",
+  ""number_of_transactions_total"": integer,
+  ""number_of_transactions_correct"": integer
+}",Case_23_Suspect_1_Intelligence_2_CrossBorder.md,Case_23_IR.md,IR - C2523.docx,1,2,"{
+  ""source"": ""HSBC Referral"",
+  ""fraud_type"": ""Impersonation"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2024-12-03"",
+      ""amount"": ""HKD 50,001.00"",
+      ""from"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""333-333333-101"",
+        ""bank"": ""The Hongkong and Shanghai Banking Corporation Limited""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HANG SENG BANK LTD.""
+      },
+      ""channel"": ""Unknown""
+    }
+  ]
+}","{
+  ""source"": ""HSBC Referral"",
+  ""fraud_type"": ""Impersonation"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2024-12-03"",
+      ""amount"": ""HKD 50,001.00"",
+      ""from"": {
+        ""account_number"": ""333-333333-101"",
+        ""name"": ""CHAN TAI MAN"",
+        ""bank"": ""The Hongkong and Shanghai Banking Corporation Limited""
+      },
+      ""to"": {
+        ""account_number"": ""111-111111-101"",
+        ""name"": ""CHAN TAI MAN"",
+        ""bank"": ""HANG SENG BANK LTD.""
+      }
+    }
+  ]
+}","{
+  ""source"": ""HSBC Referral"",
+  ""fraud_type"": ""Impersonation"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2024-12-03"",
+      ""amount"": ""HKD 50,001.00"",
+      ""from"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""333-333333-101"",
+        ""bank"": ""The Hongkong and Shanghai Banking Corporation Limited""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HANG SENG BANK LTD.""
+      }
+    }
+  ]
+}","{
+  ""source"": ""HSBC Referral"",
+  ""fraud_type"": ""Impersonation"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2024-12-03"",
+      ""amount"": ""HKD 50,001.00"",
+      ""from"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""333-333333-101"",
+        ""bank"": ""The Hongkong and Shanghai Banking Corporation Limited""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HANG SENG BANK LTD.""
+      }
+    }
+  ]
+}","{
+  ""source"": ""HSBC Referral"",
+  ""fraud_type"": ""Impersonation"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2024-12-03"",
+      ""amount"": ""HKD 50,001.00"",
+      ""from"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""333-333333-101"",
+        ""bank"": ""The Hongkong and Shanghai Banking Corporation Limited""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HANG SENG BANK LTD.""
+      }
+    }
+  ]
+}"
+Internal Referral,3,"You are given the content of an Internal Referral case. Extract and summarize the information into JSON. Follow these rules:
+
+1. Global Required Fields  
+These must always appear at the top level of the JSON output:
+- source: Always ""Internal Referral"".
+- fraud_type: string - Must always be present.
+- alerted_transactions: array - Must always be present. Empty if no transactions are found.
+
+2. Per-Transaction Conditionally Required Fields  
+For each entry in alerted_transactions, include the following fields only if present in the input:
+- date: string - Format must be YYYY-MM-DD.
+- amount: string - Must include the currency.
+- from: object - Include this object only if any of the following subfields are present:
+  - name: string
+  - account_number: string
+  - bank: string
+- to: object - Include this object only if any of the following subfields are present:
+  - name: string
+  - account_number: string
+  - bank: string
+- channel: string - Optional. Payment method used.
+
+JSON Output Format:
+
+{
+  ""source"": ""Internal Referral"",
+  ""fraud_type"": string,
+  ""alerted_transactions"": [
+    {
+      ""date"": string (YYYY-MM-DD, if exists),
+      ""amount"": string (with currency),
+      ""from"": {
+        ""name"": string (if exists),
+        ""account_number"": string (if exists),
+        ""bank"": string (if exists)
+      } (omit if all subfields are missing),
+      ""to"": {
+        ""name"": string (if exists),
+        ""account_number"": string (if exists),
+        ""bank"": string (if exists)
+      } (omit if all subfields are missing),
+      ""channel"": string (if exists)
+    },
+    ...
+  ]
+}","FC-UAR document
+Page x of y
+
+URP-0000000001 - Original Case Request Details
+Submitted Date:
+
+This document has been generated by the UCM Request Portal from the original Case Request details. All the data provided by the original creator are shown below.
+
+Step 1- About Yourself
+<table style='text-align:left'><tr><th>What is the main country your financial crime concern relates to?</th><td>Hong Kong HASE</td><th>Which Business Area/Legal Enity?</th><td>HASE</td></tr><tr><th>Name:</th><td>TANG WING</td><th>Telephone:</th><td></td></tr><tr><th>Role:</th><td>FINANCIAL SERVICES SPECIALIST</td><th>Department:</th><td>HASE PIV - NH (NON-CORE)</td></tr><tr><th>Manager:</th><td>LUI SAN SAN</td><th>Country:</th><td>HONG KONG</td></tr><tr><th>What Global Function do you work in?</th><td>Not Applicable</td><th>What Global Sub-Function do you work in?</th><td>Not Applicable</td></tr><tr><th>Do you work in a Global Service Center?</th><td>N</td><th>Which Global Service Center do you work in?</th><td></td></tr><tr><th>Are you reporting this on someone's behalf?</th><td>N</td><th>Mail Address:</th><td>tang,wing@noexternalmail.hsbc.com</td></tr><tr><th>Does anyone else need to be notified about this?</th><td></td></tr></table>
+
+Area of Concern
+<table style='text-align:left'><tr><th>What is the referral concerning?</th><td>Financial Crime Concern</td><th>Financial Crime Type:</th><td>External Fraud</td></tr><tr><th>Clearly describe your Financial Crime Concern:</th><td>The below cable message from HSBCHKHH :20:HK1240711-■■■■■■■■■■ :21:HC1247■■■■■■■■■■ :79:RE OUR FPS PAYMENT DATED 10 JUL 2024 FOR HKD 1.00 FPS REF NO. FRN■■■■■■■■■■PAYC0101■■■■■■■■■■ PLS ADVD THAT OUR CM CLAIMED THAT THE ABV PYMT IS SUSPECT A FRAUD PYMT. PLEASE URGENTLY ARRANGE TO CANCEL ABOVE PAYMENT AND RETURN PROCEEDS TO US VIA CHATS QUOTING OUR REF HK1240711-■■■■■■■■■■ UNDER SWIFT CONFIRMATION TO US. PLS IMMEDIATELY HOLD ENOUGH FUNDS IN BNF'S A/C TILL REC'D THEIR D/A FOR REFUND AND REPORT CASE TO YR SECURITY DEPARTMENT. IN REPLY, PLS QUOTE OUR REF HK1240711-■■■■■■■■■■ IN FIELD 21 OF YOUR SWF MSG REGARDS PYMT DETAILS: 111-111111-101  HKD 240710 20:25:49 HD1247■■■■■■■ FRN20240710PAY■■■■■■■ HKD 1.00 C01 Y CXPSNL ACCEPT E2E ID NOTPROVIDED TRAN ID HC124710■■■■■■■ HKD 0.00 DR 004 BBAN 01211■■■■■■■HKD 1.00 CR 024 BBAN 111-111111-101  LOB RBWM SENDER NAME MISS YEUNG KAI BENE.NAME CHAN TAI MAN CUSTOMER TYPE: CORPORATE TYPE : RISK LEVEL : ADDRESSING OPTION 1 : ADDRESSING SUB-OPTION 1 : ADDRESSING SUB-OPTION 2 : ADDRESSING OPTION 2 : ADDRESSING SUB-OPTION 1 : ADDRESSING SUB-OPTION 2 : REMITTANCE INFO ICT INSTR MSG 240710 20:25:49 ACCP STATUS PRT MSG 240710 20:25:50 ACSC</td><th>Date submitter became aware of the activity:</th><td> </td></tr><tr><th>Is this an urgent referral?</th><td>No</td><th>Is there a date a response is required by?</th><td></td></tr><tr><th colspan='4'>If this referral Is urgent or has a required response date, clearly explain why.</th></tr><tr><th colspan='2'>Activity Period:</th><th>From:</th><td></td></tr><tr><th>To:</th><td colspan='3'></td></tr><tr><th colspan='4'>Fraud Information:</th></tr><tr><th>Fraud Type:</th><td></td><th>Saved Amount:</th><td></td></tr><tr><th>Actual Loss Amount</th><td></td><th>Currency:</th><td></td></tr><tr><th>Description of events in chronological order:</th><td></td><th>Has any action been taken?</th><td>No</td></tr><tr><th>What action has been taken?</th><td colspan='3'></td></tr><tr><th>Is this related to a previous referral?</th><td colspan='3'>No</td></tr></table>
+
+Involved Parties
+Individual Information:
+|First Name|Last Name|Alias|ID Type|ID Number|Date of Birth|Nationality|Nature of Relationship|Line of Business|HSBC Customer / Account|CIN|Involvement Type|Address Line 1|Address Line 2|Address Line 3|City or Town|Country or State|Zip or Postal Code|Country|Commentary|
+|----------|---------|-----|-------|---------|-------------|-----------|----------------------|----------------|------------------------|---|----------------|--------------|--------------|--------------|------------|----------------|------------------|-------|---------- |
+|TAI MAN|CHAN||||||||Y|347■■■■■|Suspect|||||||||
+
+Organisation Information:
+No Data
+
+HSBC Employee Involvement:
+No Data
+
+External Agency
+<table style='text-align:left'><tr><th>Did this request originate from an external agency?</th><td>No</td><th>Name of the Agency:</th><td></td></tr><tr><th>Agency Department:</th><td></td><th>Contact Name:</th><td></td></tr><tr><th>Email Address:</th><td></td><th>Telephone Number:</th><td></td></tr><tr><th>Address line 1:</th><td></td><th>Address line 2:</th><td></td></tr><tr><th>Address line 3:</th><td></td><th>Town:</th><td></td></tr><tr><th>Country or State:</th><td></td><th>Postal Code:</th><td></td></tr><tr><th>Country:</th><td colspan='3'></td></tr></table>
+
+Additional Deatils:
+<table style='text-align:leff'><tr><th>Attach other documents pertinent to this referral (Up to 5MB per attachment):</th><td colspan='3'>No Data</td></tr>","{
+  ""source"": ""Internal Referral"",
+  ""fraud_type"": ""External Fraud"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2024-07-10"",
+      ""amount"": ""HKD 1.00"",
+      ""from"": {
+        ""name"": ""MISS YEUNG KAI""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101""
+      },
+      ""channel"": ""FPS""
+    }
+  ]
+}","You are an evaluation agent. Given the predicted JSON output and the correct reference output for an Internal Referral case, assess the predicted output according to the following guidelines:
+
+1. Global Required Fields  
+These fields should always appear at the top level:
+- source: Should be equal to ""Internal Referral"".
+- fraud_type: Should express the same meaning as the reference fraud type. Exact wording is not required.
+- alerted_transactions: Should be present as an array (can be empty, but should not be omitted).
+
+2. Per-Transaction Conditionally Required Fields  
+For each transaction, the following fields should be included if present in the reference:
+- date: Should follow a recognizable date format. Minor format variations are acceptable.
+- amount: Should include both currency and numeric value. Minor formatting differences (e.g., spacing, punctuation, hyphens, decimal places) are acceptable.
+- from: Object that may contain any of:
+  - name
+  - account_number
+  - bank: Accept equivalent names or abbreviations for the same institution.
+- to: Object that may contain any of:
+  - name
+  - account_number
+  - bank: Accept equivalent names or abbreviations for the same institution.
+- channel: Optional field indicating the payment method.
+
+3. Evaluation Criteria  
+- Field presence and structure should align with the reference output.
+- Values should match semantically, even if formatting or wording differs.
+- fraud_type is evaluated by meaning, not by exact string match.
+- Bank names can be matched based on known aliases or abbreviations.
+- Partial correctness is acceptable and should be reflected in the score.
+- The predicted output should be valid, structured JSON.
+
+Evaluation Output Format:
+
+{
+  ""is_satisfactory"": true | false,
+  ""score"": float (0.0-1.0),
+  ""reason"": ""Optional. Explanation of deduction areas or inconsistencies."",
+  ""number_of_transactions_total"": integer,
+  ""number_of_transactions_correct"": integer
+}",Case_3_Suspect_1_Intelligence_2_UAR.md,Case_3_IR.md,C2403.docx,1,2,"{
+  ""source"": ""Internal Referral"",
+  ""fraud_type"": ""External Fraud"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2024-07-10"",
+      ""amount"": ""HKD 1.00"",
+      ""from"": {
+        ""name"": ""MISS YEUNG KAI"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HSBC""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""01211■■■■■HKD"",
+        ""bank"": ""HSBC""
+      },
+      ""channel"": ""FPS""
+    }
+  ]
+}","{
+  ""source"": ""Internal Referral"",
+  ""fraud_type"": ""External Fraud"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2024-07-10"",
+      ""amount"": ""HKD 1.00"",
+      ""from"": {
+        ""name"": ""MISS YEUNG KAI"",
+        ""account_number"": ""111-111111-101""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""01211■■■■■■■""
+      },
+      ""channel"": ""FPS""
+    }
+  ]
+}","{
+  ""source"": ""Internal Referral"",
+  ""fraud_type"": ""External Fraud"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2024-07-10"",
+      ""amount"": ""HKD 1.00"",
+      ""from"": {
+        ""name"": ""MISS YEUNG KAI""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101""
+      },
+      ""channel"": ""FPS""
+    }
+  ]
+}","{
+  ""source"": ""Internal Referral"",
+  ""fraud_type"": ""External Fraud"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2024-07-10"",
+      ""amount"": ""HKD 1.00"",
+      ""from"": {
+        ""name"": ""MISS YEUNG KAI"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HSBC""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""01211■■■■■■■"",
+        ""bank"": ""HSBC""
+      },
+      ""channel"": ""FPS""
+    }
+  ]
+}","{
+  ""source"": ""Internal Referral"",
+  ""fraud_type"": ""External Fraud"",
+  ""alerted_transactions"": []
+}"
+ADCC,37,"You are given the content of an ADCC case. Extract and summarize the information into JSON. Follow these rules:
+
+1. Global Required Fields
+These must always appear at the top level of the JSON output:
+- source: Always ""ADCC"".
+- fraud_type: string - Must always be present.
+- alerted_transactions: array - Must always be present. Empty if no transactions are found.
+
+2. Global Conditionally Required Fields
+These must be included at the top level if they appear in the input:
+- police_reference: string - Extract the full police reference if present.
+
+3. Global Optional Fields
+Include these fields at the top level only if present in the input:
+- police_team: string
+
+4. Per-Transaction Conditionally Required Fields
+For each entry in alerted_transactions, include the following fields only if present in the input:
+- date: string - Format must be YYYY-MM-DD.
+- amount: string - Must include the currency.
+- from: object - Include this object only if any of the following subfields are present:
+  - name: string
+  - account_number: string
+  - bank: string
+- to: object - Include this object only if any of the following subfields are present:
+  - name: string
+  - account_number: string
+  - bank: string
+- channel: string - Optional. Payment method used.
+
+JSON Output Format:
+
+{
+  ""source"": ""ADCC"",
+  ""fraud_type"": string,
+  ""police_reference"": string (if exists),
+  ""police_team"": string (if exists),
+  ""alerted_transactions"": [
+    {
+      ""date"": string (YYYY-MM-DD, if exists),
+      ""amount"": string (with currency, if exists),
+      ""from"": {
+        ""name"": string (if exists),
+        ""account_number"": string (if exists),
+        ""bank"": string (if exists)
+      } (omit if all subfields are missing),
+      ""to"": {
+        ""name"": string (if exists),
+        ""account_number"": string (if exists),
+        ""bank"": string (if exists)
+      } (omit if all subfields are missing),
+      ""channel"": string (if exists)
+    },
+    ...
+  ]
+}","Dear HSB,
+
+Please be informed of a case of **""Employment Fraud (Boosting Sales Scam)""** reported on **2025-01-02** and it is under the investigation by **DIT 2 ■■■■■■**. It is alleged that the relevant crime proceeds were transferred to the account(s) below **[from the victim / from a suspicious account, which had received crime proceeds directly from the victim]**
+
+As a matter of urgency, please inform the ADCC of the following:
+i) The latest balance of the beneficiary account(s);
+ii) Whether the beneficiary account(s) has been suspended after your review. If yes, what functions are blocked;
+Details of Beneficiary
+| Ref. | Beneficiary Bank | Layer | Beneficiary Account No. | Beneficiary Account Name |
+| ---- | ---------------- | ----- | ----------------------- | ------------------------ |
+| AC3 | HSB | 1st | 111-111111-101  | CHAN TAI MAN |
+| AC4 | HSB | 1st | 111-111111-102 | CHUNG SIU |
+
+Transaction Details
+| S/N | Date | Currency | Involved Amounts | Approx. HKD | Remitting Bank | AC Location | Depositor AC No. | Depositor AC Name |
+| --- | ---- | -------- | ---------------- | ----------- | -------------- | ----------- | ---------------- | ----------------- |
+| 1 | 2024-12-31 | HKD | 55100 | 55100 | HSB | Hong Kong | 222-222222-101 | CHEUNG TAK SHING |
+| 1 | 2024-12-31 | HKD | 66120 | 66120 | HSB | Hong Kong | 222-222222-101 | CHEUNG TAK SHING |
+| 1 | 2025-01-01 | HKD | 52460 | 52460 | HSB | Hong Kong | 222-222222-101 | CHEUNG TAK SHING |
+| 1 | 2025-01-02 | HKD | 113504 | 113504 | HSB | Hong Kong | 222-222222-101 | CHEUNG TAK SHING |
+
+\*\*NO STR\*\*
+
+We have examined each report referred by the subject investigation team and we believe that **that the beneficiary account(s) might have been used to deal with suspected proceeds of crime**. Therefore, you are advised (i) **to critically examine the alleged transaction(s) in the relevant account(s)** to ascertain whether or not you are satisfied that the provenance of the deposits into the said account(s) is legitimate and (ii) **to actively consider appropriate actions** to avoid dealing with property in whole or in part directly or indirectly represent any person's proceeds of an indictable offence, which may be liable to a prosecution for a criminal offence under sections 25(1) and (3) of the Organized and Serious Crimes Ordinance, Cap. 455. A person includes a financial institution.
+
+When fulfilling the reporting obligations by filing Suspicious Transaction Reports (STR) to the Joint Financial Intelligence Unit (""JFIU""), if any, please state **ESPS ■■/2025 and KT RN ■■■■■■■■ (DIT 2 ■■■■■■)** for ease of reference.
+
+We confirm that the requested information is required for the purpose of section 58(1)(a) under the Personal Data (Privacy) Ordinance, Cap 486. Failure to provide the requested information may lead to possibly failure or unnecessary delay on prevention or detection of crime. In view of the above, we consider that section 58(2) as read with section 58(1)(a) of the Personal Data (Privacy) Ordinance, Cap. 486 is the applicable exemption under the circumstances.
+
+You are also advised to refer to the ""Guideline on Anti-Money Laundering and Counter-Terrorist Financing"" published by the Hong Kong Monetary Authority (HKMA) under the Anti-Money Laundering and Counter-Terrorist Financing (Financial Institutions) Ordinance, Cap. 615 (""AMLO"") and to take all reasonable measures to prevent a contravention and to mitigate Money Laundering risks.
+
+Should you have any enquiry, please feel free to contact the undersigned or our officers at 286■■■■■. Thank you! 
+
+Best regards, 
+SGT  ■■■■■ ■■■ ■■
+""Anti-Deception Coordination Centre 
+Commercial Crime Bureau 
+Hong Kong Police Force""
+Tel: 286■■■■■ / Fax: 220■■■■■","{
+  ""source"": ""ADCC"",
+  ""fraud_type"": ""Employment Fraud (Boosting Sales Scam)"",
+  ""police_reference"": ""KT RN ■■■■■■■■ (DIT 2 ■■■■■■)"",
+  ""police_team"": ""DIT 2 ■■■■■■"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2024-12-31"",
+      ""amount"": ""HKD 55100"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""222-222222-101"",
+        ""bank"": ""HSB""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HSB""
+      }
+    },
+    {
+      ""date"": ""2024-12-31"",
+      ""amount"": ""HKD 66120"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""222-222222-101"",
+        ""bank"": ""HSB""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HSB""
+      }
+    },
+    {
+      ""date"": ""2025-01-01"",
+      ""amount"": ""HKD 52460"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""222-222222-101"",
+        ""bank"": ""HSB""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HSB""
+      }
+    },
+    {
+      ""date"": ""2025-01-02"",
+      ""amount"": ""HKD 113504"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""222-222222-101"",
+        ""bank"": ""HSB""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HSB""
+      }
+    }
+  ]
+}","You are an evaluation agent. Given the predicted JSON output and the correct reference output for an ADCC case, assess the predicted output according to the following guidelines:
+
+1. Global Required Fields  
+These fields should always appear at the top level:
+- source: Should be equal to ""ADCC"".
+- fraud_type: Should express the same meaning as the reference fraud type. Exact wording is not required.
+- alerted_transactions: Should be present as an array (can be empty, but should not be omitted).
+
+2. Global Conditionally Required Fields  
+If the following fields exist in the reference output, they should also be present in the predicted output:
+- police_reference
+
+3. Global Optional Fields  
+Include only if present in the reference output:
+- police_team
+
+4. Per-Transaction Conditionally Required Fields  
+For each transaction, the following fields should be included if present in the reference:
+- date: Should follow a recognizable date format. Minor format variations are acceptable.
+- amount: Should include both currency and numeric value. Minor formatting differences (e.g., spacing, punctuation, hyphens, decimal places) are acceptable.
+- from: Object that may contain any of:
+  - name
+  - account_number
+  - bank: Accept equivalent names or abbreviations for the same institution.
+- to: Object that may contain any of:
+  - name
+  - account_number
+  - bank: Accept equivalent names or abbreviations for the same institution.
+- channel: Optional field indicating the payment method.
+
+5. Evaluation Criteria  
+- Field presence and structure should align with the reference output.
+- Values should match semantically, even if formatting or wording differs.
+- fraud_type is evaluated by meaning, not by exact string match.
+- Bank names can be matched based on known aliases or abbreviations.
+- Partial correctness is acceptable and should be reflected in the score.
+- The predicted output should be valid, structured JSON.
+
+Evaluation Output Format:
+
+{
+  ""is_satisfactory"": true | false,
+  ""score"": float (0.0-1.0),
+  ""reason"": ""Optional. Explanation of deduction areas or inconsistencies."",
+  ""number_of_transactions_total"": integer,
+  ""number_of_transactions_correct"": integer
+}",Case_37_Suspect_1_Intelligence_1_ADCC.md,Case_37_IR.md,IR - C2537.docx,1,1,"{
+  ""source"": ""ADCC"",
+  ""fraud_type"": ""Employment Fraud (Boosting Sales Scam)"",
+  ""police_reference"": ""ESPS ■■/2025 and KT RN ■■■■■■■■ (DIT 2 ■■■■■■)"",
+  ""police_team"": ""DIT 2 ■■■■■■"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2025-01-02"",
+      ""amount"": ""113504 HKD"",
+      ""from"": {
+        ""account_number"": ""222-222222-101"",
+        ""bank"": ""HSB"",
+        ""name"": ""CHEUNG TAK SHING""
+      },
+      ""to"": {
+        ""bank"": ""HSB"",
+        ""account_number"": ""111-111111-101"",
+        ""name"": ""CHAN TAI MAN""
+      },
+      ""channel"": ""Hong Kong""
+    },
+    {
+      ""date"": ""2025-01-01"",
+      ""amount"": ""52460 HKD"",
+      ""from"": {
+        ""account_number"": ""222-222222-101"",
+        ""bank"": ""HSB"",
+        ""name"": ""CHEUNG TAK SHING""
+      },
+      ""to"": {
+        ""bank"": ""HSB"",
+        ""account_number"": ""111-111111-101"",
+        ""name"": ""CHAN TAI MAN""
+      },
+      ""channel"": ""Hong Kong""
+    },
+    {
+      ""date"": ""2024-12-31"",
+      ""amount"": ""55100 HKD"",
+      ""from"": {
+        ""account_number"": ""222-222222-101"",
+        ""bank"": ""HSB"",
+        ""name"": ""CHEUNG TAK SHING""
+      },
+      ""to"": {
+        ""bank"": ""HSB"",
+        ""account_number"": ""111-111111-101"",
+        ""name"": ""CHAN TAI MAN""
+      },
+      ""channel"": ""Hong Kong""
+    },
+    {
+      ""date"": ""2024-12-31"",
+      ""amount"": ""66120 HKD"",
+      ""from"": {
+        ""account_number"": ""222-222222-101"",
+        ""bank"": ""HSB"",
+        ""name"": ""CHEUNG TAK SHING""
+      },
+      ""to"": {
+        ""bank"": ""HSB"",
+        ""account_number"": ""111-111111-101"",
+        ""name"": ""CHAN TAI MAN""
+      },
+      ""channel"": ""Hong Kong""
+    }
+  ]
+}","{
+  ""source"": ""ADCC"",
+  ""fraud_type"": ""Employment Fraud (Boosting Sales Scam)"",
+  ""police_reference"": ""ESPS ■■/2025 and KT RN ■■■■■■■■ (DIT 2 ■■■■■■)"",
+  ""police_team"": ""DIT 2 ■■■■■■"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2024-12-31"",
+      ""amount"": ""HKD 55,100"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""222-222222-101"",
+        ""bank"": ""HSB""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HSB""
+      }
+    },
+    {
+      ""date"": ""2024-12-31"",
+      ""amount"": ""HKD 66,120"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""222-222222-101"",
+        ""bank"": ""HSB""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HSB""
+      }
+    },
+    {
+      ""date"": ""2025-01-01"",
+      ""amount"": ""HKD 52,460"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""222-222222-101"",
+        ""bank"": ""HSB""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HSB""
+      }
+    },
+    {
+      ""date"": ""2025-01-02"",
+      ""amount"": ""HKD 113,504"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""222-222222-101"",
+        ""bank"": ""HSB""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HSB""
+      }
+    }
+  ]
+}","{
+  ""source"": ""ADCC"",
+  ""fraud_type"": ""Employment Fraud (Boosting Sales Scam)"",
+  ""police_reference"": ""KT RN ■■■■■■■■ (DIT 2 ■■■■■■)"",
+  ""police_team"": ""DIT 2 ■■■■■■"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2024-12-31"",
+      ""amount"": ""HKD 55100"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""222-222222-101"",
+        ""bank"": ""HSB""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HSB""
+      }
+    },
+    {
+      ""date"": ""2024-12-31"",
+      ""amount"": ""HKD 66120"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""222-222222-101"",
+        ""bank"": ""HSB""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HSB""
+      }
+    },
+    {
+      ""date"": ""2025-01-01"",
+      ""amount"": ""HKD 52460"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""222-222222-101"",
+        ""bank"": ""HSB""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HSB""
+      }
+    },
+    {
+      ""date"": ""2025-01-02"",
+      ""amount"": ""HKD 113504"",
+      ""from"": {
+        ""name"": ""CHEUNG TAK SHING"",
+        ""account_number"": ""222-222222-101"",
+        ""bank"": ""HSB""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HSB""
+      }
+    }
+  ]
+}","{
+  ""source"": ""ADCC"",
+  ""fraud_type"": ""Employment Fraud (Boosting Sales Scam)"",
+  ""police_reference"": ""ESPS ■■/2025 and KT RN ■■■■■■■■ (DIT 2 ■■■■■■)"",
+  ""police_team"": ""DIT 2 ■■■■■■"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2024-12-31"",
+      ""amount"": ""HKD 55100"",
+      ""from"": {
+        ""account_number"": ""222-222222-101"",
+        ""name"": ""CHEUNG TAK SHING"",
+        ""bank"": ""HSB""
+      },
+      ""to"": {
+        ""account_number"": ""111-111111-101"",
+        ""name"": ""CHAN TAI MAN"",
+        ""bank"": ""HSB""
+      }
+    },
+    {
+      ""date"": ""2024-12-31"",
+      ""amount"": ""HKD 66120"",
+      ""from"": {
+        ""account_number"": ""222-222222-101"",
+        ""name"": ""CHEUNG TAK SHING"",
+        ""bank"": ""HSB""
+      },
+      ""to"": {
+        ""account_number"": ""111-111111-101"",
+        ""name"": ""CHAN TAI MAN"",
+        ""bank"": ""HSB""
+      }
+    },
+    {
+      ""date"": ""2025-01-01"",
+      ""amount"": ""HKD 52460"",
+      ""from"": {
+        ""account_number"": ""222-222222-101"",
+        ""name"": ""CHEUNG TAK SHING"",
+        ""bank"": ""HSB""
+      },
+      ""to"": {
+        ""account_number"": ""111-111111-101"",
+        ""name"": ""CHAN TAI MAN"",
+        ""bank"": ""HSB""
+      }
+    },
+    {
+      ""date"": ""2025-01-02"",
+      ""amount"": ""HKD 113504"",
+      ""from"": {
+        ""account_number"": ""222-222222-101"",
+        ""name"": ""CHEUNG TAK SHING"",
+        ""bank"": ""HSB""
+      },
+      ""to"": {
+        ""account_number"": ""111-111111-101"",
+        ""name"": ""CHAN TAI MAN"",
+        ""bank"": ""HSB""
+      }
+    }
+  ]
+}","{
+  ""source"": ""ADCC"",
+  ""fraud_type"": ""Employment Fraud (Boosting Sales Scam)"",
+  ""police_reference"": ""ESPS ■■/2025 and KT RN ■■■■■■■■ (DIT 2 ■■■■■■)"",
+  ""police_team"": ""DIT 2 ■■■■■■"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2025-01-02"",
+      ""amount"": ""113504 HKD"",
+      ""from"": {
+        ""account_number"": ""222-222222-101"",
+        ""name"": ""CHEUNG TAK SHING""
+      },
+      ""to"": {
+        ""account_number"": ""111-111111-101"",
+        ""name"": ""CHAN TAI MAN""
+      }
+    },
+    {
+      ""date"": ""2025-01-02"",
+      ""amount"": ""113504 HKD"",
+      ""from"": {
+        ""account_number"": ""222-222222-101"",
+        ""name"": ""CHEUNG TAK SHING""
+      },
+      ""to"": {
+        ""account_number"": ""111-111111-102"",
+        ""name"": ""CHUNG SIU""
+      }
+    },
+    {
+      ""date"": ""2024-12-31"",
+      ""amount"": ""55100 HKD"",
+      ""from"": {
+        ""account_number"": ""222-222222-101"",
+        ""name"": ""CHEUNG TAK SHING""
+      }
+    },
+    {
+      ""date"": ""2024-12-31"",
+      ""amount"": ""66120 HKD"",
+      ""from"": {
+        ""account_number"": ""222-222222-101"",
+        ""name"": ""CHEUNG TAK SHING""
+      }
+    },
+    {
+      ""date"": ""2025-01-01"",
+      ""amount"": ""52460 HKD"",
+      ""from"": {
+        ""account_number"": ""222-222222-101"",
+        ""name"": ""CHEUNG TAK SHING""
+      }
+    }
+  ]
+}"
+Police Letter,11,"You are given the content of a Police Letter case. Extract and summarize the information into JSON. Follow these rules:
+
+1. Global Required Fields  
+These must always appear at the top level of the JSON output:
+- source: Always ""Police Letter"".
+- fraud_type: string - Must always be present.
+- alerted_transactions: array - Must always be present. Empty if no transactions are found.
+
+2. Global Conditionally Required Fields  
+These must be included at the top level if they appear in the input:
+- police_reference: string - Extract the full police reference if present.
+
+3. Global Optional Fields  
+Include these fields at the top level only if present in the input:
+- police_team: string
+
+4. Per-Transaction Conditionally Required Fields  
+For each entry in alerted_transactions, include the following fields only if present in the input:
+- date: string - Format must be YYYY-MM-DD.
+- amount: string - Must include the currency.
+- from: object - Include this object only if any of the following subfields are present:
+  - name: string
+  - account_number: string
+  - bank: string
+- to: object - Include this object only if any of the following subfields are present:
+  - name: string
+  - account_number: string
+  - bank: string
+- channel: string - Optional. Payment method used.
+
+JSON Output Format:
+
+{
+  ""source"": ""Police Letter"",
+  ""fraud_type"": string,
+  ""police_reference"": string (if exists),
+  ""police_team"": string (if exists),
+  ""alerted_transactions"": [
+    {
+      ""date"": string (YYYY-MM-DD, if exists),
+      ""amount"": string (with currency),
+      ""from"": {
+        ""name"": string (if exists),
+        ""account_number"": string (if exists),
+        ""bank"": string (if exists)
+      } (omit if all subfields are missing),
+      ""to"": {
+        ""name"": string (if exists),
+        ""account_number"": string (if exists),
+        ""bank"": string (if exists)
+      } (omit if all subfields are missing),
+      ""channel"": string (if exists)
+    },
+    ...
+  ]
+}","**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* Policeref1
+*Your Ref.:* 
+*Tel.:* 366■■■■■
+*Fax:* 246■■■■■
+
+District Investigation Team 3 
+Tuen Mun District
+Tuen Mun Police Station
+No.100 Pui To Road
+Tuen Mun
+2024-06-29
+
+HANG SENG BANK, LIMITED
+Money Laundering Reporting Officer
+Hang Seng Bank Ltd
+Financial Crime Investigations
+13/F, 83 Des Voeux Road Central,
+Hong Kong
+
+Dear Sir/Madam,
+
+I write to you in connection with the following bank account, which is believed to be held with your institution. Information received by the Hong Kong Polive indicated that the below account:-
+
+<table>
+<thead><tr><th colspan='3'>Account Details</th></tr></thead>
+<tbody>
+<tr><th>Account Name:</th><td colspan='2'>111-111111-101</td></tr><tr><th>Account Number:</th><td colspan='2'>CHAN TAI MAN</td></tr>
+<tr><th colspan='3'>Suspected nature of transactions:</th><tr><tr><td colspan='3'> - [X] Might have been used in receicing proceeds of crime</td></tr><tr><td colspan='3'> - [ ] Might have been used to receive funds related to terrorist financing</td></tr><tr><td colspan='3'> - [ ] Exhibited transaction patterns which were incommensurate with holder's background</td></tr><tr><td colspan='3'> - [ ] Others (please specify) </td></tr>
+<tr><th colspan='3'>If the predicate offence is deception related, please state the type of deception:</th><tr><tr><td colspan='3'> - [X] Telephone Deception</td></tr><tr><td colspan='3'> - [ ] E-shopping Fraud</td></tr><tr><td colspan='3'> - [ ] Romance Scam</td></tr><tr><td colspan='3'> - [ ] Investment Scam</td></tr><tr><td colspan='3'> - [ ] Employment Fraud</td></tr><tr><td colspan='3'> - [ ] Others (please specify) </td></tr><tr><td colspan='3'>(please tick if appropriate)</td></tr>
+<tr><th colspan='3'>Transaction Details:</th><tr><tr><th>Date</th><th>Amount</th><th>Transferor's Bank and Account</th></tr>
+<tr><td>2024-06-29</td><td>25500</td><td>Heng Sang Bank 222-222222-101</td></tr>
+<tr><th colspan='3'>Case Summary:</th></tr><tr><td colspan='3'>On 2024-06-27, a male reported to police that on 2024-05-29, he received a telephone call purportedly made from the loan company and transferred a total of HK$201,500 into 4 accounts (including the above listed transactions) as instructed to clear his criminality in an alleged crime</td></tr>
+<tr><th colspan='3'>Notification Letter issued before on the same case:</th></tr><tr><td colspan='3'> [ ] Yes
+
+Under case reference: dated </td></tr>
+</tbody>
+</table>
+
+I suggest that you examine the above/past transactions in the above account to ascertain whether or not you are satisfied that the provenance of the deposits into the said account is legitimate.
+
+Furthermore, I would like to draw your attention to chapter 3.1 of the ""Guideline on Anti-Money Laundering and Counter- Financing of Terrorism (for Authorized Institutions)"" published by the Hong Kong Monetary Authority under section 7 of the Anti-Money Laundering and Counter-Terrorist Financing Ordinance, Cap. 615 (""AMLO""), which states that:-
+
+*""An Authorized Institution should take all reasonable measures to ensure that proper safeguards exist to mitigate the risks of money laundering and terrorist financing and to prevent a contravention of any requirement under Part 2 or 3 of Schedule 2 [to the AMLO]"".*
+
+May I also remind you of sections 25(1) and 25A(1) of the Organized and Serious Crimes Ordinance, Cap. 455, Laws of Hong Kong, which state that:-
+
+*""Subject to section 25A, a person commits an offence if, knowing or having reasonable grounds to believe that any property in whole or in part directly or indirectly represents any person's proceeds of an indictable offence, he deals with that property. "" (section 25(1))*
+
+*\""Where a person knows or suspects that any property:-
+(a) in whole or in part directly or indirectly represents any person's proceeds of;
+(b) was used in connection with; or
+(c) is intended to be used in connection with,
+an indictable offence, he shall as soon as it is reasonable for him to do so disclose that knowledge or suspicion, together with any matter on which that knowledge or suspicion is based, to an authorized officer.\"" (section 25A(1))*
+
+Please treat this notification in confidence. Disclosure of the contents of this notification, directly or indirectly, to any unauthorized persons including the subjects under investigation, may prejudice the police investigation.
+
+Should you have any queries concerning this matter, please contact the Officer-in-Charge of the case DSIP TSANG ■■■■ ■■■ on telephone number 366■■■■■
+
+Yours faithfully,
+(Original Signed)
+DSIP TSANG ■■■■ ■■■
+District investigation Team 3
+for Commissioner of Police
+cc SP JFIU FIIB
+(email: jfiu-noti-letter@police.gov.hk)","{
+  ""source"": ""Police Letter"",
+  ""fraud_type"": ""Telephone Deception"",
+  ""police_reference"": ""Policeref1"",
+  ""police_team"": ""District Investigation Team 3"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2024-06-29"",
+      ""amount"": ""HK$25500"",
+      ""from"": {
+        ""account_number"": ""222-222222-101"",
+        ""bank"": ""Heng Sang Bank""
+      },
+      ""to"": {
+        ""account_number"": ""111-111111-101"",
+        ""name"": ""CHAN TAI MAN""
+      }
+    }
+  ]
+}","You are an evaluation agent. Given the predicted JSON output and the correct reference output for a Police Letter case, assess the predicted output according to the following guidelines:
+
+1. Global Required Fields  
+These fields should always appear at the top level:
+- source: Should be equal to ""Police Letter"".
+- fraud_type: Should express the same meaning as the reference fraud type. Exact wording is not required.
+- alerted_transactions: Should be present as an array (can be empty, but should not be omitted).
+
+2. Global Conditionally Required Fields  
+If the following fields exist in the reference output, they should also be present in the predicted output:
+- police_reference
+
+3. Global Optional Fields  
+Include only if present in the reference output:
+- police_team
+
+4. Per-Transaction Conditionally Required Fields  
+For each transaction, the following fields should be included if present in the reference:
+- date: Should follow a recognizable date format. Minor format variations are acceptable.
+- amount: Should include both currency and numeric value. Minor formatting differences (e.g., spacing, punctuation, hyphens, decimal places) are acceptable.
+- from: Object that may contain any of:
+  - name
+  - account_number
+  - bank: Allow equivalent names or abbreviations for the same institution.
+- to: Object that may contain any of:
+  - name
+  - account_number
+  - bank: Allow equivalent names or abbreviations for the same institution.
+- channel: Optional field indicating the payment method.
+
+5. Evaluation Criteria  
+- Field presence and structure should align with the reference output.
+- Values should match semantically, even if formatting or wording differs.
+- fraud_type is evaluated by meaning, not by exact string match.
+- Bank names can be matched based on known aliases or abbreviations.
+- Partial correctness is acceptable and should be reflected in the score.
+- The predicted output should be valid, structured JSON.
+
+Evaluation Output Format:
+
+{
+  ""is_satisfactory"": true | false,
+  ""score"": float (0.0-1.0),
+  ""reason"": ""Optional. Explanation of deduction areas or inconsistencies."",
+  ""number_of_transactions_total"": integer,
+  ""number_of_transactions_correct"": integer
+}",Case_11_Suspect_1_Intelligence_1_PoliceLetter.md,Case_11_IR.md,IR - C2411.docx,1,1,"{
+  ""source"": ""Police Letter"",
+  ""fraud_type"": ""Money Laundering"",
+  ""police_reference"": ""Policeref1"",
+  ""police_team"": ""District Investigation Team 3"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2024-06-29"",
+      ""amount"": ""HK$25,500"",
+      ""from"": {
+        ""account_number"": ""222-222222-101""
+      },
+      ""to"": {
+        ""account_number"": ""111-111111-101"",
+        ""name"": ""CHAN TAI MAN""
+      },
+      ""channel"": ""Bank Transfer""
+    }
+  ]
+}","{
+  ""source"": ""Police Letter"",
+  ""fraud_type"": ""Telephone Deception"",
+  ""police_reference"": ""Policeref1"",
+  ""police_team"": ""District Investigation Team 3"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2024-06-29"",
+      ""amount"": ""HK$25,500"",
+      ""from"": {
+        ""name"": """",
+        ""account_number"": ""222-222222-101"",
+        ""bank"": ""Heng Sang Bank""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""Hang Seng Bank Ltd""
+      }
+    }
+  ]
+}","{
+  ""source"": ""Police Letter"",
+  ""fraud_type"": ""Telephone Deception"",
+  ""police_reference"": ""Policeref1"",
+  ""police_team"": ""District Investigation Team 3"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2024-06-29"",
+      ""amount"": ""HK$25500"",
+      ""from"": {
+        ""account_number"": ""222-222222-101"",
+        ""bank"": ""Heng Sang Bank""
+      },
+      ""to"": {
+        ""account_number"": ""111-111111-101"",
+        ""name"": ""CHAN TAI MAN""
+      }
+    }
+  ]
+}","{
+  ""source"": ""Police Letter"",
+  ""fraud_type"": ""Telephone Deception"",
+  ""police_reference"": ""Policeref1"",
+  ""police_team"": ""District Investigation Team 3"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2024-06-29"",
+      ""amount"": ""HK$25500"",
+      ""from"": {
+        ""account_number"": ""222-222222-101"",
+        ""bank"": ""Heng Sang Bank""
+      },
+      ""to"": {
+        ""name"": ""CHAN TAI MAN"",
+        ""account_number"": ""111-111111-101"",
+        ""bank"": ""HANG SENG BANK, LIMITED""
+      }
+    }
+  ]
+}","Here is the extracted and summarized information in JSON format:
+
+```json
+{
+  ""source"": ""Police Letter"",
+  ""fraud_type"": ""Money Laundering"",
+  ""police_reference"": ""Policeref1"",
+  ""police_team"": ""District Investigation Team 3"",
+  ""alerted_transactions"": [
+    {
+      ""date"": ""2024-06-29"",
+      ""amount"": ""25500 HKD"",
+      ""from"": {
+        ""bank"": ""Heng Sang Bank"",
+        ""account_number"": ""222-222222-101""
+      },
+      ""to"": {
+        ""account_number"": ""111-111111-101"",
+        ""name"": ""CHAN TAI MAN""
+      },
+      ""channel"": ""Unknown""
+    }
+  ]
+}
+```"

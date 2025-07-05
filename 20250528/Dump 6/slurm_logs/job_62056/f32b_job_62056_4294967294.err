@@ -1,0 +1,8 @@
+srun: error: ioctl(TIOCGWINSZ): Inappropriate ioctl for device
+srun: error: Not using a pseudo-terminal, disregarding --pty option
+[ERROR] File already exists: /raid/local/containers/enroot-data/user-1787/pytorch
+  File "/home/projects/fraudagent/hase-michael/V3/finetune.py", line 683
+    output_model_path = f"./output_models/job_{timestamp}_{model_family}_{model_name.split("/")[-1]}_{model_type}"
+                                                                                            ^
+SyntaxError: f-string: unmatched '('
+srun: error: klb-dgx-002: task 0: Exited with exit code 1

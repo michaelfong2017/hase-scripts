@@ -1,0 +1,34 @@
+{
+  "original_config": {
+    "model": {
+      "model_path": "/cm/shared/llm_models/DeepSeek/DeepSeek-R1-Distill-Qwen-32B",
+      "model_family": "deepseek"
+    },
+    "data": {
+      "train_csv": "dataset/train_set.csv",
+      "eval_csv": "dataset/test_set.csv"
+    },
+    "lora": {
+      "use_lora": false,
+      "lora_r": 16,
+      "lora_alpha": 32,
+      "lora_dropout": 0.05
+    },
+    "training": {
+      "batch_size": 1,
+      "learning_rate": 3e-05,
+      "num_epochs": 3,
+      "max_seq_length": 512,
+      "gradient_accumulation_steps": 4,
+      "save_total_limit": 2,
+      "warmup_steps": 10
+    },
+    "output": {
+      "output_dir": null
+    }
+  },
+  "model_family": "deepseek",
+  "use_lora": false,
+  "output_model_path": "./output_models/job_20250526_1211_deepseek_FullFT",
+  "training_completed": true
+}

@@ -1,0 +1,23 @@
+[ERROR] File already exists: /raid/local/containers/enroot-data/user-1787/pytorch
+Sliding Window Attention is enabled but not implemented for `sdpa`; unexpected results may be encountered.
+Loading checkpoint shards:   0%|          | 0/37 [00:00<?, ?it/s]Loading checkpoint shards:   3%|▎         | 1/37 [00:00<00:34,  1.04it/s]Loading checkpoint shards:   5%|▌         | 2/37 [00:01<00:29,  1.20it/s]Loading checkpoint shards:   8%|▊         | 3/37 [00:02<00:25,  1.31it/s]Loading checkpoint shards:  11%|█         | 4/37 [00:03<00:24,  1.35it/s]Loading checkpoint shards:  14%|█▎        | 5/37 [00:03<00:23,  1.38it/s]Loading checkpoint shards:  16%|█▌        | 6/37 [00:04<00:22,  1.39it/s]Loading checkpoint shards:  19%|█▉        | 7/37 [00:05<00:20,  1.43it/s]Loading checkpoint shards:  22%|██▏       | 8/37 [00:05<00:19,  1.52it/s]Loading checkpoint shards:  24%|██▍       | 9/37 [00:06<00:17,  1.61it/s]Loading checkpoint shards:  27%|██▋       | 10/37 [00:06<00:16,  1.67it/s]Loading checkpoint shards:  30%|██▉       | 11/37 [00:07<00:14,  1.74it/s]Loading checkpoint shards:  32%|███▏      | 12/37 [00:07<00:14,  1.76it/s]Loading checkpoint shards:  35%|███▌      | 13/37 [00:08<00:13,  1.77it/s]Loading checkpoint shards:  38%|███▊      | 14/37 [00:09<00:13,  1.74it/s]Loading checkpoint shards:  41%|████      | 15/37 [00:09<00:12,  1.72it/s]Loading checkpoint shards:  43%|████▎     | 16/37 [00:10<00:12,  1.69it/s]Loading checkpoint shards:  46%|████▌     | 17/37 [00:10<00:12,  1.66it/s]Loading checkpoint shards:  49%|████▊     | 18/37 [00:11<00:11,  1.65it/s]Loading checkpoint shards:  51%|█████▏    | 19/37 [00:12<00:10,  1.66it/s]Loading checkpoint shards:  54%|█████▍    | 20/37 [00:12<00:10,  1.64it/s]Loading checkpoint shards:  57%|█████▋    | 21/37 [00:13<00:09,  1.63it/s]Loading checkpoint shards:  57%|█████▋    | 21/37 [00:13<00:10,  1.55it/s]
+Traceback (most recent call last):
+  File "/home/projects/fraudagent/hase-michael/V3/batch.py", line 64, in <module>
+    main()
+  File "/home/projects/fraudagent/hase-michael/V3/batch.py", line 61, in main
+    process_chunk(chunks[gpu_index], model_name, gpu_index)
+  File "/home/projects/fraudagent/hase-michael/V3/batch.py", line 8, in process_chunk
+    model = AutoModelForCausalLM.from_pretrained(
+  File "/usr/local/lib/python3.10/dist-packages/transformers/models/auto/auto_factory.py", line 571, in from_pretrained
+    return model_class.from_pretrained(
+  File "/usr/local/lib/python3.10/dist-packages/transformers/modeling_utils.py", line 279, in _wrapper
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/transformers/modeling_utils.py", line 4399, in from_pretrained
+    ) = cls._load_pretrained_model(
+  File "/usr/local/lib/python3.10/dist-packages/transformers/modeling_utils.py", line 4833, in _load_pretrained_model
+    disk_offload_index, cpu_offload_index = _load_state_dict_into_meta_model(
+  File "/usr/local/lib/python3.10/dist-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/transformers/modeling_utils.py", line 787, in _load_state_dict_into_meta_model
+    param = param[...]
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 462.00 MiB. GPU 0 has a total capacity of 79.11 GiB of which 66.88 MiB is free. Including non-PyTorch memory, this process has 79.04 GiB memory in use. Of the allocated memory 78.42 GiB is allocated by PyTorch, and 109.65 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)

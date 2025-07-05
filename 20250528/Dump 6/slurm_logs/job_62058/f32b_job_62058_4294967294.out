@@ -1,0 +1,4538 @@
+
+=============
+== PyTorch ==
+=============
+
+NVIDIA Release 24.08 (build 107063150)
+PyTorch Version 2.5.0a0+872d972
+Container image Copyright (c) 2024, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+Copyright (c) 2014-2024 Facebook Inc.
+Copyright (c) 2011-2014 Idiap Research Institute (Ronan Collobert)
+Copyright (c) 2012-2014 Deepmind Technologies    (Koray Kavukcuoglu)
+Copyright (c) 2011-2012 NEC Laboratories America (Koray Kavukcuoglu)
+Copyright (c) 2011-2013 NYU                      (Clement Farabet)
+Copyright (c) 2006-2010 NEC Laboratories America (Ronan Collobert, Leon Bottou, Iain Melvin, Jason Weston)
+Copyright (c) 2006      Idiap Research Institute (Samy Bengio)
+Copyright (c) 2001-2004 Idiap Research Institute (Ronan Collobert, Samy Bengio, Johnny Mariethoz)
+Copyright (c) 2015      Google Inc.
+Copyright (c) 2015      Yangqing Jia
+Copyright (c) 2013-2016 The Caffe contributors
+All rights reserved.
+
+Various files include modifications (c) NVIDIA CORPORATION & AFFILIATES.  All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+ERROR: This container was built for NVIDIA Driver Release 560.35 or later, but
+       version 535.161.08 was detected and compatibility mode is UNAVAILABLE.
+
+       [[]]
+
+Looking in links: /cm/shared/python_modules/
+Requirement already satisfied: transformers in /usr/local/lib/python3.10/dist-packages (4.51.3)
+Requirement already satisfied: accelerate in /usr/local/lib/python3.10/dist-packages (1.7.0)
+Requirement already satisfied: deepspeed in /usr/local/lib/python3.10/dist-packages (0.16.0)
+Requirement already satisfied: filelock in /usr/local/lib/python3.10/dist-packages (from transformers) (3.15.4)
+Requirement already satisfied: huggingface-hub<1.0,>=0.30.0 in /usr/local/lib/python3.10/dist-packages (from transformers) (0.31.4)
+Requirement already satisfied: numpy>=1.17 in /usr/local/lib/python3.10/dist-packages (from transformers) (1.24.4)
+Requirement already satisfied: packaging>=20.0 in /usr/local/lib/python3.10/dist-packages (from transformers) (23.2)
+Requirement already satisfied: pyyaml>=5.1 in /usr/local/lib/python3.10/dist-packages (from transformers) (6.0.2)
+Requirement already satisfied: regex!=2019.12.17 in /usr/local/lib/python3.10/dist-packages (from transformers) (2024.7.24)
+Requirement already satisfied: requests in /usr/local/lib/python3.10/dist-packages (from transformers) (2.32.3)
+Requirement already satisfied: tokenizers<0.22,>=0.21 in /usr/local/lib/python3.10/dist-packages (from transformers) (0.21.1)
+Requirement already satisfied: safetensors>=0.4.3 in /usr/local/lib/python3.10/dist-packages (from transformers) (0.5.3)
+Requirement already satisfied: tqdm>=4.27 in /usr/local/lib/python3.10/dist-packages (from transformers) (4.66.5)
+Requirement already satisfied: psutil in /usr/local/lib/python3.10/dist-packages (from accelerate) (6.0.0)
+Requirement already satisfied: torch>=2.0.0 in /usr/local/lib/python3.10/dist-packages (from accelerate) (2.5.0a0+872d972e41.nv24.8)
+Requirement already satisfied: hjson in /usr/local/lib/python3.10/dist-packages (from deepspeed) (3.1.0)
+Requirement already satisfied: msgpack in /usr/local/lib/python3.10/dist-packages (from deepspeed) (1.0.8)
+Requirement already satisfied: ninja in /usr/local/lib/python3.10/dist-packages (from deepspeed) (1.11.1.1)
+Requirement already satisfied: py-cpuinfo in /usr/local/lib/python3.10/dist-packages (from deepspeed) (9.0.0)
+Requirement already satisfied: pydantic>=2.0.0 in /usr/local/lib/python3.10/dist-packages (from deepspeed) (2.8.2)
+Requirement already satisfied: nvidia-ml-py in /usr/local/lib/python3.10/dist-packages (from deepspeed) (12.560.30)
+Requirement already satisfied: fsspec>=2023.5.0 in /usr/local/lib/python3.10/dist-packages (from huggingface-hub<1.0,>=0.30.0->transformers) (2024.6.1)
+Requirement already satisfied: typing-extensions>=3.7.4.3 in /usr/local/lib/python3.10/dist-packages (from huggingface-hub<1.0,>=0.30.0->transformers) (4.12.2)
+Requirement already satisfied: annotated-types>=0.4.0 in /usr/local/lib/python3.10/dist-packages (from pydantic>=2.0.0->deepspeed) (0.7.0)
+Requirement already satisfied: pydantic-core==2.20.1 in /usr/local/lib/python3.10/dist-packages (from pydantic>=2.0.0->deepspeed) (2.20.1)
+Requirement already satisfied: networkx in /usr/local/lib/python3.10/dist-packages (from torch>=2.0.0->accelerate) (3.3)
+Requirement already satisfied: jinja2 in /usr/local/lib/python3.10/dist-packages (from torch>=2.0.0->accelerate) (3.1.4)
+Requirement already satisfied: sympy==1.13.1 in /usr/local/lib/python3.10/dist-packages (from torch>=2.0.0->accelerate) (1.13.1)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /usr/local/lib/python3.10/dist-packages (from sympy==1.13.1->torch>=2.0.0->accelerate) (1.3.0)
+Requirement already satisfied: charset-normalizer<4,>=2 in /usr/local/lib/python3.10/dist-packages (from requests->transformers) (3.3.2)
+Requirement already satisfied: idna<4,>=2.5 in /usr/local/lib/python3.10/dist-packages (from requests->transformers) (3.7)
+Requirement already satisfied: urllib3<3,>=1.21.1 in /usr/local/lib/python3.10/dist-packages (from requests->transformers) (2.0.7)
+Requirement already satisfied: certifi>=2017.4.17 in /usr/local/lib/python3.10/dist-packages (from requests->transformers) (2024.7.4)
+Requirement already satisfied: MarkupSafe>=2.0 in /usr/local/lib/python3.10/dist-packages (from jinja2->torch>=2.0.0->accelerate) (2.1.5)
+[2025-05-26 14:50:17,639] [INFO] [real_accelerator.py:219:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+Warning: The cache directory for DeepSpeed Triton autotune, /home/users/1787/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Configuration loaded from config.json
+✓ Configuration validation passed
+============================================================
+LOADED CONFIGURATION
+============================================================
+📁 Model Configuration:
+  Model path: /cm/shared/llm_models/Qwen/Qwen2.5-72B-Instruct
+  Model family: qwen
+
+📊 Data Configuration:
+  Training data: dataset/train_set.csv
+  Evaluation data: dataset/test_set.csv
+
+🔧 LoRA Configuration:
+  Use LoRA: True
+  LoRA rank: 32
+  LoRA alpha: 32
+  LoRA dropout: 0.05
+
+🚀 Training Configuration:
+  Batch size: 1
+  Learning rate: 3e-05
+  Number of epochs: 3
+  Max sequence length: 512
+  Gradient accumulation steps: 4
+  Warmup steps: 10
+
+💾 Output Configuration:
+  Output directory: Auto-generated
+============================================================
+
+🖥️  Available GPUs: 4
+📁 Output directory: ./output_models/job_20250526_1450_qwen_Qwen2.5-72B-Instruct_LoRA
+
+🔍 Initial GPU memory state:
+GPU Memory Usage:
+  GPU 0: 0.00GB allocated, 0.00GB reserved
+  GPU 1: 0.00GB allocated, 0.00GB reserved
+  GPU 2: 0.00GB allocated, 0.00GB reserved
+  GPU 3: 0.00GB allocated, 0.00GB reserved
+🔤 Loading tokenizer...
+✓ Tokenizer padding side set to: left
+📚 Creating datasets...
+📊 Loaded 64 examples from dataset/train_set.csv
+📋 Columns: ['Type', 'Case Number', 'Instruction', 'Previous Instruction', 'Input', 'Generated Output', 'Output', 'Previous Output', 'Evaluation Criteria', 'Previous Evaluation Criteria', 'Source Markdown File', 'IR Markdown File', 'IR Raw File', 'Suspect Number', 'Intelligence Number']
+📊 Loaded 16 examples from dataset/test_set.csv
+📋 Columns: ['Type', 'Case Number', 'Instruction', 'Previous Instruction', 'Input', 'Generated Output', 'Output', 'Previous Output', 'Evaluation Criteria', 'Previous Evaluation Criteria', 'Source Markdown File', 'IR Markdown File', 'IR Raw File', 'Suspect Number', 'Intelligence Number']
+
+🔍 After data loading:
+GPU Memory Usage:
+  GPU 0: 0.00GB allocated, 0.00GB reserved
+  GPU 1: 0.00GB allocated, 0.00GB reserved
+  GPU 2: 0.00GB allocated, 0.00GB reserved
+  GPU 3: 0.00GB allocated, 0.00GB reserved
+Creating device map for 4 GPUs...
+Model has 80 layers
+Distributing 80 layers across 4 GPUs
+Base layers per GPU: 20
+GPU 0: layers 0 to 19 (20 layers)
+GPU 1: layers 20 to 39 (20 layers)
+GPU 2: layers 40 to 59 (20 layers)
+GPU 3: layers 60 to 79 (20 layers)
+🤖 Loading model with model parallelism...
+✓ Model loaded with model parallelism
+GPU Memory Usage:
+  GPU 0: 35.02GB allocated, 35.02GB reserved
+  GPU 1: 32.70GB allocated, 32.70GB reserved
+  GPU 2: 32.70GB allocated, 32.70GB reserved
+  GPU 3: 35.02GB allocated, 35.02GB reserved
+🔧 Applying LoRA...
+✓ LoRA target modules for qwen: ['q_proj', 'k_proj', 'v_proj', 'o_proj', 'gate_proj', 'up_proj', 'down_proj']
+
+🔍 After LoRA application:
+GPU Memory Usage:
+  GPU 0: 35.41GB allocated, 35.44GB reserved
+  GPU 1: 33.09GB allocated, 33.12GB reserved
+  GPU 2: 33.09GB allocated, 33.12GB reserved
+  GPU 3: 35.41GB allocated, 35.44GB reserved
+🎯 LoRA parameters found: 1120
+📊 Trainable parameters: 421,068,800 (0.58%)
+🔧 Transformers version: 4.51.3
+🔤 Tokenizer Debug Info:
+  Vocab size: 151643
+  Model max length: 131072
+  Available special tokens:
+    bos_token: None
+    eos_token: '<|im_end|>' (ID: 151645) 🚨 INVALID
+    pad_token: '<|endoftext|>' (ID: 151643) 🚨 INVALID
+    unk_token: None
+  Testing conversation tokens:
+    '<|begin_of_text|>': ❌ NOT FOUND
+    '<|start_header_id|>': ❌ NOT FOUND
+    '<|end_header_id|>': ❌ NOT FOUND
+    '<|eot_id|>': ❌ NOT FOUND
+    '<|im_start|>': ID 151644 ❌ (broken/invalid)
+    '<|im_end|>': ID 151645 ❌ (broken/invalid)
+    '<s>': ID 128245 ✅
+    '</s>': ID 128247 ✅
+    '[INST]': ❌ NOT FOUND
+    '[/INST]': ❌ NOT FOUND
+    '<|user|>': ❌ NOT FOUND
+    '<|assistant|>': ❌ NOT FOUND
+    '<|system|>': ❌ NOT FOUND
+    'Human:': ❌ NOT FOUND
+    'Assistant:': ❌ NOT FOUND
+    'User:': ❌ NOT FOUND
+    'AI:': ❌ NOT FOUND
+  Selected prompt format: plain_text
+📊 Number of trainable parameter tensors: 1120
+📈 Total training steps: 48
+
+============================================================
+🚀 STARTING TRAINING
+============================================================
+  📊 Num examples = 64
+  🔄 Num Epochs = 3
+  📦 Batch size per device = 1
+  📦 Total train batch size = 4
+  🔄 Gradient Accumulation steps = 4
+  📈 Total optimization steps = 48
+============================================================
+
+🔄 === Epoch 1/3 ===
+📊 Epoch 1: Processing 64 batches...
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Police Letter case....'
+  Input: '**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* ...'
+  Output: '```json
+{
+  "source": "Police Letter",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Prompt only: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔍 Batch 1 debug:
+  Batch keys: ['input_ids', 'attention_mask', 'labels']
+  input_ids shape: torch.Size([1, 512])
+  input_ids device: cpu
+  Token ID range: 1 to 94506
+  Loss: 0.000027
+🔄 Batch 1/64: loss=0.000027, scaled=0.000007, accumulated=0.000007
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔍 Batch 2 debug:
+  Batch keys: ['input_ids', 'attention_mask', 'labels']
+  input_ids shape: torch.Size([1, 512])
+  input_ids device: cpu
+  Token ID range: 1 to 94506
+  Loss: 0.002172
+🔄 Batch 2/64: loss=0.002172, scaled=0.000543, accumulated=0.000550
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Search Warrant case...'
+  Input: 'Police Force Ordinance
+(Cap. 232)
+
+Contact Person:...'
+  Output: '```json
+{
+  "source": "Search Warrant",
+  "fraud_t...'
+  Full text: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔍 Batch 3 debug:
+  Batch keys: ['input_ids', 'attention_mask', 'labels']
+  input_ids shape: torch.Size([1, 512])
+  input_ids device: cpu
+  Token ID range: 1 to 94506
+  Loss: 0.000213
+🔄 Batch 3/64: loss=0.000213, scaled=0.000053, accumulated=0.000603
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an ADCC case. Extract...'
+  Input: 'Dear HSB,
+
+Please be informed of a case of **"Inve...'
+  Output: '```json
+{
+  "source": "ADCC",
+  "fraud_type": "Inv...'
+  Full text: 'Instruction: You are given the content of an ADCC case. Extract and summarize the information into J...'
+  Prompt only: 'Instruction: You are given the content of an ADCC case. Extract and summarize the information into J...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 4/64: loss=0.000039, scaled=0.000010, accumulated=0.000613
+📊 ✅ OPTIMIZATION STEP 1:
+    Loss: 0.000613
+    LR: 3.00e-06
+    Grad norm: 0.005747
+    Duration: 6.16s
+    Batches accumulated: 4
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Police Letter case....'
+  Input: '**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* ...'
+  Output: '```json
+{
+  "source": "Police Letter",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Prompt only: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 5/64: loss=0.000027, scaled=0.000007, accumulated=0.000007
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Victim ODFT case. E...'
+  Input: '## 5.Victim with financial loss
+| 5.Victim with fi...'
+  Output: '```json
+{
+  "source": "Victim ODFT",
+  "fraud_type...'
+  Full text: 'Instruction: You are given the content of a Victim ODFT case. Extract and summarize the information ...'
+  Prompt only: 'Instruction: You are given the content of a Victim ODFT case. Extract and summarize the information ...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 6/64: loss=0.023406, scaled=0.005851, accumulated=0.005858
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Victim ODFT case. E...'
+  Input: '## 4.Victim with financial loss
+| 4.Victim with fi...'
+  Output: '```json
+{
+  "source": "Victim ODFT",
+  "fraud_type...'
+  Full text: 'Instruction: You are given the content of a Victim ODFT case. Extract and summarize the information ...'
+  Prompt only: 'Instruction: You are given the content of a Victim ODFT case. Extract and summarize the information ...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 7/64: loss=0.023406, scaled=0.005851, accumulated=0.011710
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Police Letter case....'
+  Input: '**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* ...'
+  Output: '```json
+{
+  "source": "Police Letter",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Prompt only: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 8/64: loss=0.000027, scaled=0.000007, accumulated=0.011716
+📊 ✅ OPTIMIZATION STEP 2:
+    Loss: 0.011716
+    LR: 6.00e-06
+    Grad norm: 0.092660
+    Duration: 0.09s
+    Batches accumulated: 4
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Search Warrant case...'
+  Input: 'Police Force Ordinance
+(Cap. 232)
+
+Contact Person:...'
+  Output: '```json
+{
+  "source": "Search Warrant",
+  "fraud_t...'
+  Full text: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 9/64: loss=0.000237, scaled=0.000059, accumulated=0.000059
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an Internal Referral ...'
+  Input: 'FC-UAR document
+Page x of y
+
+URP-0000000001 - Orig...'
+  Output: '```json
+{
+  "source": "Internal Referral",
+  "frau...'
+  Full text: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Prompt only: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 10/64: loss=0.006012, scaled=0.001503, accumulated=0.001562
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 11/64: loss=0.002237, scaled=0.000559, accumulated=0.002122
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 12/64: loss=0.002202, scaled=0.000550, accumulated=0.002672
+📊 ✅ OPTIMIZATION STEP 3:
+    Loss: 0.002672
+    LR: 9.00e-06
+    Grad norm: 0.035769
+    Duration: 1.22s
+    Batches accumulated: 4
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 13/64: loss=0.002093, scaled=0.000523, accumulated=0.000523
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 14/64: loss=0.002325, scaled=0.000581, accumulated=0.001105
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Police Letter case....'
+  Input: '**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* ...'
+  Output: '```json
+{
+  "source": "Police Letter",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Prompt only: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 15/64: loss=0.000030, scaled=0.000007, accumulated=0.001112
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 16/64: loss=0.002316, scaled=0.000579, accumulated=0.001691
+📊 ✅ OPTIMIZATION STEP 4:
+    Loss: 0.001691
+    LR: 1.20e-05
+    Grad norm: 0.017041
+    Duration: 0.05s
+    Batches accumulated: 4
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Search Warrant case...'
+  Input: 'Police Force Ordinance
+(Cap. 232)
+
+Contact Person:...'
+  Output: '```json
+{
+  "source": "Search Warrant",
+  "fraud_t...'
+  Full text: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 17/64: loss=0.000237, scaled=0.000059, accumulated=0.000059
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Victim ODFT case. E...'
+  Input: '## 4.Victim with financial loss
+| 4.Victim with fi...'
+  Output: '```json
+{
+  "source": "Victim ODFT",
+  "fraud_type...'
+  Full text: 'Instruction: You are given the content of a Victim ODFT case. Extract and summarize the information ...'
+  Prompt only: 'Instruction: You are given the content of a Victim ODFT case. Extract and summarize the information ...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 18/64: loss=0.023708, scaled=0.005927, accumulated=0.005986
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an Internal Referral ...'
+  Input: 'FC-UAR document
+Page x of y
+
+URP-0000000001 - Orig...'
+  Output: '```json
+{
+  "source": "Internal Referral",
+  "frau...'
+  Full text: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Prompt only: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 19/64: loss=0.005933, scaled=0.001483, accumulated=0.007470
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an ADCC case. Extract...'
+  Input: 'Dear HSB,
+
+Please be informed of a case of **"Tele...'
+  Output: '```json
+{
+  "source": "ADCC",
+  "fraud_type": "Tel...'
+  Full text: 'Instruction: You are given the content of an ADCC case. Extract and summarize the information into J...'
+  Prompt only: 'Instruction: You are given the content of an ADCC case. Extract and summarize the information into J...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 20/64: loss=0.000039, scaled=0.000010, accumulated=0.007479
+📊 ✅ OPTIMIZATION STEP 5:
+    Loss: 0.007479
+    LR: 1.50e-05
+    Grad norm: 0.056838
+    Duration: 1.50s
+    Batches accumulated: 4
+💾 Saving checkpoint at step 5
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Search Warrant case...'
+  Input: 'Police Force Ordinance
+(Cap. 232)
+
+Contact Person:...'
+  Output: '```json
+{
+  "source": "Search Warrant",
+  "fraud_t...'
+  Full text: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 21/64: loss=0.000210, scaled=0.000052, accumulated=0.000052
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Police Letter case....'
+  Input: '**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* ...'
+  Output: '```json
+{
+  "source": "Police Letter",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Prompt only: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 22/64: loss=0.000031, scaled=0.000008, accumulated=0.000060
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Police Letter case....'
+  Input: '**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* ...'
+  Output: '```json
+{
+  "source": "Police Letter",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Prompt only: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 23/64: loss=0.000025, scaled=0.000006, accumulated=0.000067
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Police Letter case....'
+  Input: '**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* ...'
+  Output: '```json
+{
+  "source": "Police Letter",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Prompt only: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 24/64: loss=0.000031, scaled=0.000008, accumulated=0.000074
+📊 ✅ OPTIMIZATION STEP 6:
+    Loss: 0.000074
+    LR: 1.80e-05
+    Grad norm: 0.001886
+    Duration: 0.05s
+    Batches accumulated: 4
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 25/64: loss=0.001799, scaled=0.000450, accumulated=0.000450
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Police Letter case....'
+  Input: '**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* ...'
+  Output: '```json
+{
+  "source": "Police Letter",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Prompt only: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 26/64: loss=0.000035, scaled=0.000009, accumulated=0.000459
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Search Warrant case...'
+  Input: 'Police Force Ordinance
+(Cap. 232)
+
+Contact Person:...'
+  Output: '```json
+{
+  "source": "Search Warrant",
+  "fraud_t...'
+  Full text: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 27/64: loss=0.000211, scaled=0.000053, accumulated=0.000511
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Police Letter case....'
+  Input: '**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* ...'
+  Output: '```json
+{
+  "source": "Police Letter",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Prompt only: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 28/64: loss=0.000026, scaled=0.000006, accumulated=0.000518
+📊 ✅ OPTIMIZATION STEP 7:
+    Loss: 0.000518
+    LR: 2.10e-05
+    Grad norm: 0.005274
+    Duration: 1.39s
+    Batches accumulated: 4
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an Internal Referral ...'
+  Input: 'FC-UAR document
+Page x of y
+
+URP-0000000001 - Orig...'
+  Output: '```json
+{
+  "source": "Internal Referral",
+  "frau...'
+  Full text: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Prompt only: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 29/64: loss=0.004879, scaled=0.001220, accumulated=0.001220
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 30/64: loss=0.001576, scaled=0.000394, accumulated=0.001614
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Police Letter case....'
+  Input: '**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* ...'
+  Output: '```json
+{
+  "source": "Police Letter",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Prompt only: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 31/64: loss=0.000023, scaled=0.000006, accumulated=0.001619
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 32/64: loss=0.001592, scaled=0.000398, accumulated=0.002017
+📊 ✅ OPTIMIZATION STEP 8:
+    Loss: 0.002017
+    LR: 2.40e-05
+    Grad norm: 0.017928
+    Duration: 0.05s
+    Batches accumulated: 4
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 33/64: loss=0.001238, scaled=0.000309, accumulated=0.000309
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 34/64: loss=0.001286, scaled=0.000322, accumulated=0.000631
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 35/64: loss=0.001347, scaled=0.000337, accumulated=0.000968
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Search Warrant case...'
+  Input: 'Police Force Ordinance
+(Cap. 232)
+
+Contact Person:...'
+  Output: '```json
+{
+  "source": "Search Warrant",
+  "fraud_t...'
+  Full text: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 36/64: loss=0.000211, scaled=0.000053, accumulated=0.001021
+📊 ✅ OPTIMIZATION STEP 9:
+    Loss: 0.001021
+    LR: 2.70e-05
+    Grad norm: 0.012843
+    Duration: 1.32s
+    Batches accumulated: 4
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an Internal Referral ...'
+  Input: 'FC-UAR document
+Page x of y
+
+URP-0000000001 - Orig...'
+  Output: '```json
+{
+  "source": "Internal Referral",
+  "frau...'
+  Full text: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Prompt only: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 37/64: loss=0.002833, scaled=0.000708, accumulated=0.000708
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Police Letter case....'
+  Input: '**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* ...'
+  Output: '```json
+{
+  "source": "Police Letter",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Prompt only: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 38/64: loss=0.000018, scaled=0.000005, accumulated=0.000713
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Victim ODFT case. E...'
+  Input: '## 3. HASE Suspect
+| 3.HASE Suspect | Unnamed: 1 |...'
+  Output: '```json
+{
+  "source": "Victim ODFT",
+  "fraud_type...'
+  Full text: 'Instruction: You are given the content of a Victim ODFT case. Extract and summarize the information ...'
+  Prompt only: 'Instruction: You are given the content of a Victim ODFT case. Extract and summarize the information ...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 39/64: loss=0.010879, scaled=0.002720, accumulated=0.003433
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Search Warrant case...'
+  Input: 'Police Force Ordinance
+(Cap. 232)
+
+Contact Person:...'
+  Output: '```json
+{
+  "source": "Search Warrant",
+  "fraud_t...'
+  Full text: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 40/64: loss=0.000189, scaled=0.000047, accumulated=0.003480
+📊 ✅ OPTIMIZATION STEP 10:
+    Loss: 0.003480
+    LR: 3.00e-05
+    Grad norm: 0.037909
+    Duration: 0.05s
+    Batches accumulated: 4
+💾 Saving checkpoint at step 10
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 41/64: loss=0.000368, scaled=0.000092, accumulated=0.000092
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Search Warrant case...'
+  Input: 'Police Force Ordinance
+(Cap. 232)
+
+Contact Person:...'
+  Output: '```json
+{
+  "source": "Search Warrant",
+  "fraud_t...'
+  Full text: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 42/64: loss=0.000173, scaled=0.000043, accumulated=0.000135
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an Internal Referral ...'
+  Input: 'FC-UAR document
+Page x of y
+
+URP-0000000001 - Orig...'
+  Output: '```json
+{
+  "source": "Internal Referral",
+  "frau...'
+  Full text: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Prompt only: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 43/64: loss=0.001289, scaled=0.000322, accumulated=0.000457
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 44/64: loss=0.000359, scaled=0.000090, accumulated=0.000547
+📊 ✅ OPTIMIZATION STEP 11:
+    Loss: 0.000547
+    LR: 2.92e-05
+    Grad norm: 0.007384
+    Duration: 1.24s
+    Batches accumulated: 4
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an Internal Referral ...'
+  Input: 'FC-UAR document
+Page x of y
+
+URP-0000000001 - Orig...'
+  Output: '```json
+{
+  "source": "Internal Referral",
+  "frau...'
+  Full text: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Prompt only: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 45/64: loss=0.000369, scaled=0.000092, accumulated=0.000092
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Police Letter case....'
+  Input: '**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* ...'
+  Output: '```json
+{
+  "source": "Police Letter",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Prompt only: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 46/64: loss=0.000013, scaled=0.000003, accumulated=0.000096
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an Internal Referral ...'
+  Input: 'FC-UAR document
+Page x of y
+
+URP-0000000001 - Orig...'
+  Output: '```json
+{
+  "source": "Internal Referral",
+  "frau...'
+  Full text: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Prompt only: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 47/64: loss=0.000379, scaled=0.000095, accumulated=0.000190
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 48/64: loss=0.000110, scaled=0.000027, accumulated=0.000218
+📊 ✅ OPTIMIZATION STEP 12:
+    Loss: 0.000218
+    LR: 2.84e-05
+    Grad norm: 0.003864
+    Duration: 0.06s
+    Batches accumulated: 4
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 49/64: loss=0.000027, scaled=0.000007, accumulated=0.000007
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an Internal Referral ...'
+  Input: 'FC-UAR document
+Page x of y
+
+URP-0000000001 - Orig...'
+  Output: '```json
+{
+  "source": "Internal Referral",
+  "frau...'
+  Full text: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Prompt only: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 50/64: loss=0.000068, scaled=0.000017, accumulated=0.000024
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an Internal Referral ...'
+  Input: 'FC-UAR document
+Page x of y
+
+URP-0000000001 - Orig...'
+  Output: '```json
+{
+  "source": "Internal Referral",
+  "frau...'
+  Full text: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Prompt only: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 51/64: loss=0.000068, scaled=0.000017, accumulated=0.000041
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Victim ODFT case. E...'
+  Input: '## 3. HASE Suspect
+| 3.HASE Suspect | Unnamed: 1 |...'
+  Output: '```json
+{
+  "source": "Victim ODFT",
+  "fraud_type...'
+  Full text: 'Instruction: You are given the content of a Victim ODFT case. Extract and summarize the information ...'
+  Prompt only: 'Instruction: You are given the content of a Victim ODFT case. Extract and summarize the information ...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 52/64: loss=0.000460, scaled=0.000115, accumulated=0.000156
+📊 ✅ OPTIMIZATION STEP 13:
+    Loss: 0.000156
+    LR: 2.76e-05
+    Grad norm: 0.002664
+    Duration: 1.33s
+    Batches accumulated: 4
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an Internal Referral ...'
+  Input: 'FC-UAR document
+Page x of y
+
+URP-0000000001 - Orig...'
+  Output: '```json
+{
+  "source": "Internal Referral",
+  "frau...'
+  Full text: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Prompt only: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 53/64: loss=0.000014, scaled=0.000003, accumulated=0.000003
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an ADCC case. Extract...'
+  Input: 'Dear HSB,
+
+Please be informed of a case of **"Soci...'
+  Output: '```json
+{
+  "source": "ADCC",
+  "fraud_type": "Rom...'
+  Full text: 'Instruction: You are given the content of an ADCC case. Extract and summarize the information into J...'
+  Prompt only: 'Instruction: You are given the content of an ADCC case. Extract and summarize the information into J...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 54/64: loss=0.000008, scaled=0.000002, accumulated=0.000005
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an Internal Referral ...'
+  Input: 'FC-UAR document
+Page x of y
+
+URP-0000000001 - Orig...'
+  Output: '```json
+{
+  "source": "Internal Referral",
+  "frau...'
+  Full text: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Prompt only: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 55/64: loss=0.000014, scaled=0.000004, accumulated=0.000009
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 56/64: loss=0.000006, scaled=0.000002, accumulated=0.000011
+📊 ✅ OPTIMIZATION STEP 14:
+    Loss: 0.000011
+    LR: 2.68e-05
+    Grad norm: 0.000195
+    Duration: 0.05s
+    Batches accumulated: 4
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 57/64: loss=0.000002, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Police Letter case....'
+  Input: '**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* ...'
+  Output: '```json
+{
+  "source": "Police Letter",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Prompt only: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 58/64: loss=0.000004, scaled=0.000001, accumulated=0.000002
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an ADCC case. Extract...'
+  Input: 'Dear HSB,
+
+Please be informed of a case of **"Soci...'
+  Output: '```json
+{
+  "source": "ADCC",
+  "fraud_type": "Soc...'
+  Full text: 'Instruction: You are given the content of an ADCC case. Extract and summarize the information into J...'
+  Prompt only: 'Instruction: You are given the content of an ADCC case. Extract and summarize the information into J...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 59/64: loss=0.000005, scaled=0.000001, accumulated=0.000003
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Police Letter case....'
+  Input: '**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* ...'
+  Output: '```json
+{
+  "source": "Police Letter",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Prompt only: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 60/64: loss=0.000004, scaled=0.000001, accumulated=0.000004
+📊 ✅ OPTIMIZATION STEP 15:
+    Loss: 0.000004
+    LR: 2.61e-05
+    Grad norm: 0.000192
+    Duration: 1.26s
+    Batches accumulated: 4
+💾 Saving checkpoint at step 15
+🗑️ Removing old checkpoint: ./output_models/job_20250526_1450_qwen_Qwen2.5-72B-Instruct_LoRA/checkpoint-5
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an ADCC case. Extract...'
+  Input: 'Dear HSB,
+
+Please be informed of a case of **"Inve...'
+  Output: '```json
+{
+  "source": "ADCC",
+  "fraud_type": "Inv...'
+  Full text: 'Instruction: You are given the content of an ADCC case. Extract and summarize the information into J...'
+  Prompt only: 'Instruction: You are given the content of an ADCC case. Extract and summarize the information into J...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 61/64: loss=0.000003, scaled=0.000001, accumulated=0.000001
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Police Letter case....'
+  Input: '**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* ...'
+  Output: '```json
+{
+  "source": "Police Letter",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Prompt only: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 62/64: loss=0.000004, scaled=0.000001, accumulated=0.000002
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an ADCC case. Extract...'
+  Input: 'Dear HSB,
+
+Please be informed of a case of **"Inve...'
+  Output: '```json
+{
+  "source": "ADCC",
+  "fraud_type": "Inv...'
+  Full text: 'Instruction: You are given the content of an ADCC case. Extract and summarize the information into J...'
+  Prompt only: 'Instruction: You are given the content of an ADCC case. Extract and summarize the information into J...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 63/64: loss=0.000003, scaled=0.000001, accumulated=0.000002
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an Internal Referral ...'
+  Input: 'FC-UAR document
+Page x of y
+
+URP-0000000001 - Orig...'
+  Output: '```json
+{
+  "source": "Internal Referral",
+  "frau...'
+  Full text: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Prompt only: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 64/64: loss=0.000001, scaled=0.000000, accumulated=0.000003
+📊 ✅ OPTIMIZATION STEP 16:
+    Loss: 0.000003
+    LR: 2.53e-05
+    Grad norm: 0.000090
+    Duration: 0.05s
+    Batches accumulated: 4
+
+✅ Epoch 1 completed:
+    Average loss: 0.000503
+    Duration: 172.1s
+    Optimization steps this epoch: 16
+    Total optimization steps so far: 16
+
+🔄 === Epoch 2/3 ===
+📊 Epoch 2: Processing 64 batches...
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an Internal Referral ...'
+  Input: 'FC-UAR document
+Page x of y
+
+URP-0000000001 - Orig...'
+  Output: '```json
+{
+  "source": "Internal Referral",
+  "frau...'
+  Full text: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Prompt only: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔍 Batch 1 debug:
+  Batch keys: ['input_ids', 'attention_mask', 'labels']
+  input_ids shape: torch.Size([1, 512])
+  input_ids device: cpu
+  Token ID range: 1 to 94506
+  Loss: 0.000000
+🔄 Batch 1/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an ADCC case. Extract...'
+  Input: 'Dear HSB,
+
+Please be informed of a case of **"Soci...'
+  Output: '```json
+{
+  "source": "ADCC",
+  "fraud_type": "Soc...'
+  Full text: 'Instruction: You are given the content of an ADCC case. Extract and summarize the information into J...'
+  Prompt only: 'Instruction: You are given the content of an ADCC case. Extract and summarize the information into J...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔍 Batch 2 debug:
+  Batch keys: ['input_ids', 'attention_mask', 'labels']
+  input_ids shape: torch.Size([1, 512])
+  input_ids device: cpu
+  Token ID range: 1 to 94506
+  Loss: 0.000002
+🔄 Batch 2/64: loss=0.000002, scaled=0.000000, accumulated=0.000001
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an Internal Referral ...'
+  Input: 'FC-UAR document
+Page x of y
+
+URP-0000000001 - Orig...'
+  Output: '```json
+{
+  "source": "Internal Referral",
+  "frau...'
+  Full text: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Prompt only: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔍 Batch 3 debug:
+  Batch keys: ['input_ids', 'attention_mask', 'labels']
+  input_ids shape: torch.Size([1, 512])
+  input_ids device: cpu
+  Token ID range: 1 to 94506
+  Loss: 0.000000
+🔄 Batch 3/64: loss=0.000000, scaled=0.000000, accumulated=0.000001
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an Internal Referral ...'
+  Input: 'FC-UAR document
+Page x of y
+
+URP-0000000001 - Orig...'
+  Output: '```json
+{
+  "source": "Internal Referral",
+  "frau...'
+  Full text: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Prompt only: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 4/64: loss=0.000000, scaled=0.000000, accumulated=0.000001
+📊 ✅ OPTIMIZATION STEP 17:
+    Loss: 0.000001
+    LR: 2.45e-05
+    Grad norm: 0.000015
+    Duration: 1.27s
+    Batches accumulated: 4
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 5/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Police Letter case....'
+  Input: '**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* ...'
+  Output: '```json
+{
+  "source": "Police Letter",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Prompt only: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 6/64: loss=0.000002, scaled=0.000001, accumulated=0.000001
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Police Letter case....'
+  Input: '**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* ...'
+  Output: '```json
+{
+  "source": "Police Letter",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Prompt only: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 7/64: loss=0.000002, scaled=0.000001, accumulated=0.000001
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 8/64: loss=0.000000, scaled=0.000000, accumulated=0.000001
+📊 ✅ OPTIMIZATION STEP 18:
+    Loss: 0.000001
+    LR: 2.37e-05
+    Grad norm: 0.000040
+    Duration: 0.05s
+    Batches accumulated: 4
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Police Letter case....'
+  Input: '**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* ...'
+  Output: '```json
+{
+  "source": "Police Letter",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Prompt only: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 9/64: loss=0.000002, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an ADCC case. Extract...'
+  Input: 'Dear HSB,
+
+Please be informed of a case of **"Soci...'
+  Output: '```json
+{
+  "source": "ADCC",
+  "fraud_type": "Rom...'
+  Full text: 'Instruction: You are given the content of an ADCC case. Extract and summarize the information into J...'
+  Prompt only: 'Instruction: You are given the content of an ADCC case. Extract and summarize the information into J...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 10/64: loss=0.000001, scaled=0.000000, accumulated=0.000001
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an Internal Referral ...'
+  Input: 'FC-UAR document
+Page x of y
+
+URP-0000000001 - Orig...'
+  Output: '```json
+{
+  "source": "Internal Referral",
+  "frau...'
+  Full text: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Prompt only: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 11/64: loss=0.000000, scaled=0.000000, accumulated=0.000001
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 12/64: loss=0.000000, scaled=0.000000, accumulated=0.000001
+📊 ✅ OPTIMIZATION STEP 19:
+    Loss: 0.000001
+    LR: 2.29e-05
+    Grad norm: 0.000018
+    Duration: 1.39s
+    Batches accumulated: 4
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an ADCC case. Extract...'
+  Input: 'Dear HSB,
+
+Please be informed of a case of **"Inve...'
+  Output: '```json
+{
+  "source": "ADCC",
+  "fraud_type": "Inv...'
+  Full text: 'Instruction: You are given the content of an ADCC case. Extract and summarize the information into J...'
+  Prompt only: 'Instruction: You are given the content of an ADCC case. Extract and summarize the information into J...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 13/64: loss=0.000001, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Search Warrant case...'
+  Input: 'Police Force Ordinance
+(Cap. 232)
+
+Contact Person:...'
+  Output: '```json
+{
+  "source": "Search Warrant",
+  "fraud_t...'
+  Full text: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 14/64: loss=0.000017, scaled=0.000004, accumulated=0.000004
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an Internal Referral ...'
+  Input: 'FC-UAR document
+Page x of y
+
+URP-0000000001 - Orig...'
+  Output: '```json
+{
+  "source": "Internal Referral",
+  "frau...'
+  Full text: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Prompt only: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 15/64: loss=0.000000, scaled=0.000000, accumulated=0.000004
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Victim ODFT case. E...'
+  Input: '## 3. HASE Suspect
+| 3.HASE Suspect | Unnamed: 1 |...'
+  Output: '```json
+{
+  "source": "Victim ODFT",
+  "fraud_type...'
+  Full text: 'Instruction: You are given the content of a Victim ODFT case. Extract and summarize the information ...'
+  Prompt only: 'Instruction: You are given the content of a Victim ODFT case. Extract and summarize the information ...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 16/64: loss=0.000000, scaled=0.000000, accumulated=0.000004
+📊 ✅ OPTIMIZATION STEP 20:
+    Loss: 0.000004
+    LR: 2.21e-05
+    Grad norm: 0.000079
+    Duration: 0.05s
+    Batches accumulated: 4
+💾 Saving checkpoint at step 20
+🗑️ Removing old checkpoint: ./output_models/job_20250526_1450_qwen_Qwen2.5-72B-Instruct_LoRA/checkpoint-10
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 17/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 18/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 19/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an Internal Referral ...'
+  Input: 'FC-UAR document
+Page x of y
+
+URP-0000000001 - Orig...'
+  Output: '```json
+{
+  "source": "Internal Referral",
+  "frau...'
+  Full text: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Prompt only: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 20/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+📊 ✅ OPTIMIZATION STEP 21:
+    Loss: 0.000000
+    LR: 2.13e-05
+    Grad norm: 0.000000
+    Duration: 1.20s
+    Batches accumulated: 4
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an Internal Referral ...'
+  Input: 'FC-UAR document
+Page x of y
+
+URP-0000000001 - Orig...'
+  Output: '```json
+{
+  "source": "Internal Referral",
+  "frau...'
+  Full text: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Prompt only: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 21/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 22/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an Internal Referral ...'
+  Input: 'FC-UAR document
+Page x of y
+
+URP-0000000001 - Orig...'
+  Output: '```json
+{
+  "source": "Internal Referral",
+  "frau...'
+  Full text: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Prompt only: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 23/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 24/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+📊 ✅ OPTIMIZATION STEP 22:
+    Loss: 0.000000
+    LR: 2.05e-05
+    Grad norm: 0.000000
+    Duration: 0.05s
+    Batches accumulated: 4
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Police Letter case....'
+  Input: '**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* ...'
+  Output: '```json
+{
+  "source": "Police Letter",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Prompt only: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 25/64: loss=0.000001, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Police Letter case....'
+  Input: '**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* ...'
+  Output: '```json
+{
+  "source": "Police Letter",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Prompt only: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 26/64: loss=0.000001, scaled=0.000000, accumulated=0.000001
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an Internal Referral ...'
+  Input: 'FC-UAR document
+Page x of y
+
+URP-0000000001 - Orig...'
+  Output: '```json
+{
+  "source": "Internal Referral",
+  "frau...'
+  Full text: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Prompt only: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 27/64: loss=0.000000, scaled=0.000000, accumulated=0.000001
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an ADCC case. Extract...'
+  Input: 'Dear HSB,
+
+Please be informed of a case of **"Inve...'
+  Output: '```json
+{
+  "source": "ADCC",
+  "fraud_type": "Inv...'
+  Full text: 'Instruction: You are given the content of an ADCC case. Extract and summarize the information into J...'
+  Prompt only: 'Instruction: You are given the content of an ADCC case. Extract and summarize the information into J...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 28/64: loss=0.000000, scaled=0.000000, accumulated=0.000001
+📊 ✅ OPTIMIZATION STEP 23:
+    Loss: 0.000001
+    LR: 1.97e-05
+    Grad norm: 0.000031
+    Duration: 1.50s
+    Batches accumulated: 4
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Police Letter case....'
+  Input: '**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* ...'
+  Output: '```json
+{
+  "source": "Police Letter",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Prompt only: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 29/64: loss=0.000001, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 30/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Victim ODFT case. E...'
+  Input: '## 3. HASE Suspect
+| 3.HASE Suspect | Unnamed: 1 |...'
+  Output: '```json
+{
+  "source": "Victim ODFT",
+  "fraud_type...'
+  Full text: 'Instruction: You are given the content of a Victim ODFT case. Extract and summarize the information ...'
+  Prompt only: 'Instruction: You are given the content of a Victim ODFT case. Extract and summarize the information ...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 31/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 32/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+📊 ✅ OPTIMIZATION STEP 24:
+    Loss: 0.000000
+    LR: 1.89e-05
+    Grad norm: 0.000023
+    Duration: 0.05s
+    Batches accumulated: 4
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Search Warrant case...'
+  Input: 'Police Force Ordinance
+(Cap. 232)
+
+Contact Person:...'
+  Output: '```json
+{
+  "source": "Search Warrant",
+  "fraud_t...'
+  Full text: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 33/64: loss=0.000011, scaled=0.000003, accumulated=0.000003
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Police Letter case....'
+  Input: '**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* ...'
+  Output: '```json
+{
+  "source": "Police Letter",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Prompt only: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 34/64: loss=0.000001, scaled=0.000000, accumulated=0.000003
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 35/64: loss=0.000000, scaled=0.000000, accumulated=0.000003
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Police Letter case....'
+  Input: '**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* ...'
+  Output: '```json
+{
+  "source": "Police Letter",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Prompt only: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 36/64: loss=0.000001, scaled=0.000000, accumulated=0.000003
+📊 ✅ OPTIMIZATION STEP 25:
+    Loss: 0.000003
+    LR: 1.82e-05
+    Grad norm: 0.000050
+    Duration: 1.25s
+    Batches accumulated: 4
+💾 Saving checkpoint at step 25
+🗑️ Removing old checkpoint: ./output_models/job_20250526_1450_qwen_Qwen2.5-72B-Instruct_LoRA/checkpoint-15
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Victim ODFT case. E...'
+  Input: '## 4.Victim with financial loss
+| 4.Victim with fi...'
+  Output: '```json
+{
+  "source": "Victim ODFT",
+  "fraud_type...'
+  Full text: 'Instruction: You are given the content of a Victim ODFT case. Extract and summarize the information ...'
+  Prompt only: 'Instruction: You are given the content of a Victim ODFT case. Extract and summarize the information ...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 37/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Police Letter case....'
+  Input: '**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* ...'
+  Output: '```json
+{
+  "source": "Police Letter",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Prompt only: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 38/64: loss=0.000001, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 39/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Police Letter case....'
+  Input: '**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* ...'
+  Output: '```json
+{
+  "source": "Police Letter",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Prompt only: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 40/64: loss=0.000001, scaled=0.000000, accumulated=0.000001
+📊 ✅ OPTIMIZATION STEP 26:
+    Loss: 0.000001
+    LR: 1.74e-05
+    Grad norm: 0.000022
+    Duration: 0.05s
+    Batches accumulated: 4
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an Internal Referral ...'
+  Input: 'FC-UAR document
+Page x of y
+
+URP-0000000001 - Orig...'
+  Output: '```json
+{
+  "source": "Internal Referral",
+  "frau...'
+  Full text: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Prompt only: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 41/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Victim ODFT case. E...'
+  Input: '## 4.Victim with financial loss
+| 4.Victim with fi...'
+  Output: '```json
+{
+  "source": "Victim ODFT",
+  "fraud_type...'
+  Full text: 'Instruction: You are given the content of a Victim ODFT case. Extract and summarize the information ...'
+  Prompt only: 'Instruction: You are given the content of a Victim ODFT case. Extract and summarize the information ...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 42/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Police Letter case....'
+  Input: '**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* ...'
+  Output: '```json
+{
+  "source": "Police Letter",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Prompt only: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 43/64: loss=0.000001, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 44/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+📊 ✅ OPTIMIZATION STEP 27:
+    Loss: 0.000000
+    LR: 1.66e-05
+    Grad norm: 0.000014
+    Duration: 1.27s
+    Batches accumulated: 4
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Police Letter case....'
+  Input: '**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* ...'
+  Output: '```json
+{
+  "source": "Police Letter",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Prompt only: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 45/64: loss=0.000001, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 46/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Police Letter case....'
+  Input: '**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* ...'
+  Output: '```json
+{
+  "source": "Police Letter",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Prompt only: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 47/64: loss=0.000001, scaled=0.000000, accumulated=0.000001
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Search Warrant case...'
+  Input: 'Police Force Ordinance
+(Cap. 232)
+
+Contact Person:...'
+  Output: '```json
+{
+  "source": "Search Warrant",
+  "fraud_t...'
+  Full text: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 48/64: loss=0.000009, scaled=0.000002, accumulated=0.000003
+📊 ✅ OPTIMIZATION STEP 28:
+    Loss: 0.000003
+    LR: 1.58e-05
+    Grad norm: 0.000037
+    Duration: 0.05s
+    Batches accumulated: 4
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Search Warrant case...'
+  Input: 'Police Force Ordinance
+(Cap. 232)
+
+Contact Person:...'
+  Output: '```json
+{
+  "source": "Search Warrant",
+  "fraud_t...'
+  Full text: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 49/64: loss=0.000009, scaled=0.000002, accumulated=0.000002
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Search Warrant case...'
+  Input: 'Police Force Ordinance
+(Cap. 232)
+
+Contact Person:...'
+  Output: '```json
+{
+  "source": "Search Warrant",
+  "fraud_t...'
+  Full text: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 50/64: loss=0.000009, scaled=0.000002, accumulated=0.000004
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an Internal Referral ...'
+  Input: 'FC-UAR document
+Page x of y
+
+URP-0000000001 - Orig...'
+  Output: '```json
+{
+  "source": "Internal Referral",
+  "frau...'
+  Full text: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Prompt only: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 51/64: loss=0.000000, scaled=0.000000, accumulated=0.000004
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Search Warrant case...'
+  Input: 'Police Force Ordinance
+(Cap. 232)
+
+Contact Person:...'
+  Output: '```json
+{
+  "source": "Search Warrant",
+  "fraud_t...'
+  Full text: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 52/64: loss=0.000008, scaled=0.000002, accumulated=0.000006
+📊 ✅ OPTIMIZATION STEP 29:
+    Loss: 0.000006
+    LR: 1.50e-05
+    Grad norm: 0.000077
+    Duration: 1.51s
+    Batches accumulated: 4
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Search Warrant case...'
+  Input: 'Police Force Ordinance
+(Cap. 232)
+
+Contact Person:...'
+  Output: '```json
+{
+  "source": "Search Warrant",
+  "fraud_t...'
+  Full text: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 53/64: loss=0.000009, scaled=0.000002, accumulated=0.000002
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 54/64: loss=0.000000, scaled=0.000000, accumulated=0.000002
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an ADCC case. Extract...'
+  Input: 'Dear HSB,
+
+Please be informed of a case of **"Tele...'
+  Output: '```json
+{
+  "source": "ADCC",
+  "fraud_type": "Tel...'
+  Full text: 'Instruction: You are given the content of an ADCC case. Extract and summarize the information into J...'
+  Prompt only: 'Instruction: You are given the content of an ADCC case. Extract and summarize the information into J...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 55/64: loss=0.000000, scaled=0.000000, accumulated=0.000002
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 56/64: loss=0.000000, scaled=0.000000, accumulated=0.000002
+📊 ✅ OPTIMIZATION STEP 30:
+    Loss: 0.000002
+    LR: 1.42e-05
+    Grad norm: 0.000026
+    Duration: 0.05s
+    Batches accumulated: 4
+💾 Saving checkpoint at step 30
+🗑️ Removing old checkpoint: ./output_models/job_20250526_1450_qwen_Qwen2.5-72B-Instruct_LoRA/checkpoint-20
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Search Warrant case...'
+  Input: 'Police Force Ordinance
+(Cap. 232)
+
+Contact Person:...'
+  Output: '```json
+{
+  "source": "Search Warrant",
+  "fraud_t...'
+  Full text: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 57/64: loss=0.000010, scaled=0.000002, accumulated=0.000002
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an ADCC case. Extract...'
+  Input: 'Dear HSB,
+
+Please be informed of a case of **"Inve...'
+  Output: '```json
+{
+  "source": "ADCC",
+  "fraud_type": "Inv...'
+  Full text: 'Instruction: You are given the content of an ADCC case. Extract and summarize the information into J...'
+  Prompt only: 'Instruction: You are given the content of an ADCC case. Extract and summarize the information into J...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 58/64: loss=0.000000, scaled=0.000000, accumulated=0.000002
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 59/64: loss=0.000000, scaled=0.000000, accumulated=0.000002
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Police Letter case....'
+  Input: '**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* ...'
+  Output: '```json
+{
+  "source": "Police Letter",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Prompt only: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 60/64: loss=0.000001, scaled=0.000000, accumulated=0.000003
+📊 ✅ OPTIMIZATION STEP 31:
+    Loss: 0.000003
+    LR: 1.34e-05
+    Grad norm: 0.000043
+    Duration: 1.23s
+    Batches accumulated: 4
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Victim ODFT case. E...'
+  Input: '## 5.Victim with financial loss
+| 5.Victim with fi...'
+  Output: '```json
+{
+  "source": "Victim ODFT",
+  "fraud_type...'
+  Full text: 'Instruction: You are given the content of a Victim ODFT case. Extract and summarize the information ...'
+  Prompt only: 'Instruction: You are given the content of a Victim ODFT case. Extract and summarize the information ...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 61/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Police Letter case....'
+  Input: '**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* ...'
+  Output: '```json
+{
+  "source": "Police Letter",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Prompt only: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 62/64: loss=0.000001, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 63/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an Internal Referral ...'
+  Input: 'FC-UAR document
+Page x of y
+
+URP-0000000001 - Orig...'
+  Output: '```json
+{
+  "source": "Internal Referral",
+  "frau...'
+  Full text: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Prompt only: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 64/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+📊 ✅ OPTIMIZATION STEP 32:
+    Loss: 0.000000
+    LR: 1.26e-05
+    Grad norm: 0.000016
+    Duration: 0.05s
+    Batches accumulated: 4
+
+✅ Epoch 2 completed:
+    Average loss: 0.000000
+    Duration: 160.3s
+    Optimization steps this epoch: 16
+    Total optimization steps so far: 32
+
+🔄 === Epoch 3/3 ===
+📊 Epoch 3: Processing 64 batches...
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Police Letter case....'
+  Input: '**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* ...'
+  Output: '```json
+{
+  "source": "Police Letter",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Prompt only: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔍 Batch 1 debug:
+  Batch keys: ['input_ids', 'attention_mask', 'labels']
+  input_ids shape: torch.Size([1, 512])
+  input_ids device: cpu
+  Token ID range: 1 to 94506
+  Loss: 0.000001
+🔄 Batch 1/64: loss=0.000001, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔍 Batch 2 debug:
+  Batch keys: ['input_ids', 'attention_mask', 'labels']
+  input_ids shape: torch.Size([1, 512])
+  input_ids device: cpu
+  Token ID range: 1 to 94506
+  Loss: 0.000000
+🔄 Batch 2/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Police Letter case....'
+  Input: '**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* ...'
+  Output: '```json
+{
+  "source": "Police Letter",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Prompt only: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔍 Batch 3 debug:
+  Batch keys: ['input_ids', 'attention_mask', 'labels']
+  input_ids shape: torch.Size([1, 512])
+  input_ids device: cpu
+  Token ID range: 1 to 94506
+  Loss: 0.000001
+🔄 Batch 3/64: loss=0.000001, scaled=0.000000, accumulated=0.000001
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an Internal Referral ...'
+  Input: 'FC-UAR document
+Page x of y
+
+URP-0000000001 - Orig...'
+  Output: '```json
+{
+  "source": "Internal Referral",
+  "frau...'
+  Full text: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Prompt only: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 4/64: loss=0.000000, scaled=0.000000, accumulated=0.000001
+📊 ✅ OPTIMIZATION STEP 33:
+    Loss: 0.000001
+    LR: 1.18e-05
+    Grad norm: 0.000031
+    Duration: 1.28s
+    Batches accumulated: 4
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 5/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an ADCC case. Extract...'
+  Input: 'Dear HSB,
+
+Please be informed of a case of **"Soci...'
+  Output: '```json
+{
+  "source": "ADCC",
+  "fraud_type": "Soc...'
+  Full text: 'Instruction: You are given the content of an ADCC case. Extract and summarize the information into J...'
+  Prompt only: 'Instruction: You are given the content of an ADCC case. Extract and summarize the information into J...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 6/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Search Warrant case...'
+  Input: 'Police Force Ordinance
+(Cap. 232)
+
+Contact Person:...'
+  Output: '```json
+{
+  "source": "Search Warrant",
+  "fraud_t...'
+  Full text: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 7/64: loss=0.000008, scaled=0.000002, accumulated=0.000002
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 8/64: loss=0.000000, scaled=0.000000, accumulated=0.000002
+📊 ✅ OPTIMIZATION STEP 34:
+    Loss: 0.000002
+    LR: 1.11e-05
+    Grad norm: 0.000024
+    Duration: 0.05s
+    Batches accumulated: 4
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an Internal Referral ...'
+  Input: 'FC-UAR document
+Page x of y
+
+URP-0000000001 - Orig...'
+  Output: '```json
+{
+  "source": "Internal Referral",
+  "frau...'
+  Full text: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Prompt only: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 9/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Search Warrant case...'
+  Input: 'Police Force Ordinance
+(Cap. 232)
+
+Contact Person:...'
+  Output: '```json
+{
+  "source": "Search Warrant",
+  "fraud_t...'
+  Full text: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 10/64: loss=0.000008, scaled=0.000002, accumulated=0.000002
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an ADCC case. Extract...'
+  Input: 'Dear HSB,
+
+Please be informed of a case of **"Tele...'
+  Output: '```json
+{
+  "source": "ADCC",
+  "fraud_type": "Tel...'
+  Full text: 'Instruction: You are given the content of an ADCC case. Extract and summarize the information into J...'
+  Prompt only: 'Instruction: You are given the content of an ADCC case. Extract and summarize the information into J...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 11/64: loss=0.000000, scaled=0.000000, accumulated=0.000002
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Police Letter case....'
+  Input: '**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* ...'
+  Output: '```json
+{
+  "source": "Police Letter",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Prompt only: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 12/64: loss=0.000001, scaled=0.000000, accumulated=0.000002
+📊 ✅ OPTIMIZATION STEP 35:
+    Loss: 0.000002
+    LR: 1.03e-05
+    Grad norm: 0.000032
+    Duration: 1.38s
+    Batches accumulated: 4
+💾 Saving checkpoint at step 35
+🗑️ Removing old checkpoint: ./output_models/job_20250526_1450_qwen_Qwen2.5-72B-Instruct_LoRA/checkpoint-25
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 13/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an ADCC case. Extract...'
+  Input: 'Dear HSB,
+
+Please be informed of a case of **"Inve...'
+  Output: '```json
+{
+  "source": "ADCC",
+  "fraud_type": "Inv...'
+  Full text: 'Instruction: You are given the content of an ADCC case. Extract and summarize the information into J...'
+  Prompt only: 'Instruction: You are given the content of an ADCC case. Extract and summarize the information into J...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 14/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Police Letter case....'
+  Input: '**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* ...'
+  Output: '```json
+{
+  "source": "Police Letter",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Prompt only: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 15/64: loss=0.000001, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an ADCC case. Extract...'
+  Input: 'Dear HSB,
+
+Please be informed of a case of **"Inve...'
+  Output: '```json
+{
+  "source": "ADCC",
+  "fraud_type": "Inv...'
+  Full text: 'Instruction: You are given the content of an ADCC case. Extract and summarize the information into J...'
+  Prompt only: 'Instruction: You are given the content of an ADCC case. Extract and summarize the information into J...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 16/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+📊 ✅ OPTIMIZATION STEP 36:
+    Loss: 0.000000
+    LR: 9.47e-06
+    Grad norm: 0.000024
+    Duration: 0.05s
+    Batches accumulated: 4
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 17/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Police Letter case....'
+  Input: '**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* ...'
+  Output: '```json
+{
+  "source": "Police Letter",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Prompt only: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 18/64: loss=0.000001, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an Internal Referral ...'
+  Input: 'FC-UAR document
+Page x of y
+
+URP-0000000001 - Orig...'
+  Output: '```json
+{
+  "source": "Internal Referral",
+  "frau...'
+  Full text: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Prompt only: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 19/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Victim ODFT case. E...'
+  Input: '## 3. HASE Suspect
+| 3.HASE Suspect | Unnamed: 1 |...'
+  Output: '```json
+{
+  "source": "Victim ODFT",
+  "fraud_type...'
+  Full text: 'Instruction: You are given the content of a Victim ODFT case. Extract and summarize the information ...'
+  Prompt only: 'Instruction: You are given the content of a Victim ODFT case. Extract and summarize the information ...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 20/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+📊 ✅ OPTIMIZATION STEP 37:
+    Loss: 0.000000
+    LR: 8.68e-06
+    Grad norm: 0.000011
+    Duration: 1.42s
+    Batches accumulated: 4
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Search Warrant case...'
+  Input: 'Police Force Ordinance
+(Cap. 232)
+
+Contact Person:...'
+  Output: '```json
+{
+  "source": "Search Warrant",
+  "fraud_t...'
+  Full text: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 21/64: loss=0.000008, scaled=0.000002, accumulated=0.000002
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 22/64: loss=0.000000, scaled=0.000000, accumulated=0.000002
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Police Letter case....'
+  Input: '**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* ...'
+  Output: '```json
+{
+  "source": "Police Letter",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Prompt only: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 23/64: loss=0.000001, scaled=0.000000, accumulated=0.000002
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Police Letter case....'
+  Input: '**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* ...'
+  Output: '```json
+{
+  "source": "Police Letter",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Prompt only: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 24/64: loss=0.000001, scaled=0.000000, accumulated=0.000003
+📊 ✅ OPTIMIZATION STEP 38:
+    Loss: 0.000003
+    LR: 7.89e-06
+    Grad norm: 0.000027
+    Duration: 0.05s
+    Batches accumulated: 4
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an Internal Referral ...'
+  Input: 'FC-UAR document
+Page x of y
+
+URP-0000000001 - Orig...'
+  Output: '```json
+{
+  "source": "Internal Referral",
+  "frau...'
+  Full text: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Prompt only: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 25/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Search Warrant case...'
+  Input: 'Police Force Ordinance
+(Cap. 232)
+
+Contact Person:...'
+  Output: '```json
+{
+  "source": "Search Warrant",
+  "fraud_t...'
+  Full text: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 26/64: loss=0.000008, scaled=0.000002, accumulated=0.000002
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Victim ODFT case. E...'
+  Input: '## 3. HASE Suspect
+| 3.HASE Suspect | Unnamed: 1 |...'
+  Output: '```json
+{
+  "source": "Victim ODFT",
+  "fraud_type...'
+  Full text: 'Instruction: You are given the content of a Victim ODFT case. Extract and summarize the information ...'
+  Prompt only: 'Instruction: You are given the content of a Victim ODFT case. Extract and summarize the information ...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 27/64: loss=0.000000, scaled=0.000000, accumulated=0.000002
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 28/64: loss=0.000000, scaled=0.000000, accumulated=0.000002
+📊 ✅ OPTIMIZATION STEP 39:
+    Loss: 0.000002
+    LR: 7.11e-06
+    Grad norm: 0.000019
+    Duration: 1.66s
+    Batches accumulated: 4
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 29/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an Internal Referral ...'
+  Input: 'FC-UAR document
+Page x of y
+
+URP-0000000001 - Orig...'
+  Output: '```json
+{
+  "source": "Internal Referral",
+  "frau...'
+  Full text: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Prompt only: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 30/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 31/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an Internal Referral ...'
+  Input: 'FC-UAR document
+Page x of y
+
+URP-0000000001 - Orig...'
+  Output: '```json
+{
+  "source": "Internal Referral",
+  "frau...'
+  Full text: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Prompt only: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 32/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+📊 ✅ OPTIMIZATION STEP 40:
+    Loss: 0.000000
+    LR: 6.32e-06
+    Grad norm: 0.000000
+    Duration: 0.05s
+    Batches accumulated: 4
+💾 Saving checkpoint at step 40
+🗑️ Removing old checkpoint: ./output_models/job_20250526_1450_qwen_Qwen2.5-72B-Instruct_LoRA/checkpoint-30
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Police Letter case....'
+  Input: '**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* ...'
+  Output: '```json
+{
+  "source": "Police Letter",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Prompt only: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 33/64: loss=0.000001, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 34/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Search Warrant case...'
+  Input: 'Police Force Ordinance
+(Cap. 232)
+
+Contact Person:...'
+  Output: '```json
+{
+  "source": "Search Warrant",
+  "fraud_t...'
+  Full text: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 35/64: loss=0.000007, scaled=0.000002, accumulated=0.000002
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Police Letter case....'
+  Input: '**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* ...'
+  Output: '```json
+{
+  "source": "Police Letter",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Prompt only: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 36/64: loss=0.000001, scaled=0.000000, accumulated=0.000002
+📊 ✅ OPTIMIZATION STEP 41:
+    Loss: 0.000002
+    LR: 5.53e-06
+    Grad norm: 0.000031
+    Duration: 1.53s
+    Batches accumulated: 4
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Search Warrant case...'
+  Input: 'Police Force Ordinance
+(Cap. 232)
+
+Contact Person:...'
+  Output: '```json
+{
+  "source": "Search Warrant",
+  "fraud_t...'
+  Full text: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 37/64: loss=0.000008, scaled=0.000002, accumulated=0.000002
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Victim ODFT case. E...'
+  Input: '## 5.Victim with financial loss
+| 5.Victim with fi...'
+  Output: '```json
+{
+  "source": "Victim ODFT",
+  "fraud_type...'
+  Full text: 'Instruction: You are given the content of a Victim ODFT case. Extract and summarize the information ...'
+  Prompt only: 'Instruction: You are given the content of a Victim ODFT case. Extract and summarize the information ...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 38/64: loss=0.000000, scaled=0.000000, accumulated=0.000002
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 39/64: loss=0.000000, scaled=0.000000, accumulated=0.000002
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an Internal Referral ...'
+  Input: 'FC-UAR document
+Page x of y
+
+URP-0000000001 - Orig...'
+  Output: '```json
+{
+  "source": "Internal Referral",
+  "frau...'
+  Full text: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Prompt only: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 40/64: loss=0.000000, scaled=0.000000, accumulated=0.000002
+📊 ✅ OPTIMIZATION STEP 42:
+    Loss: 0.000002
+    LR: 4.74e-06
+    Grad norm: 0.000017
+    Duration: 0.05s
+    Batches accumulated: 4
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 41/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Victim ODFT case. E...'
+  Input: '## 4.Victim with financial loss
+| 4.Victim with fi...'
+  Output: '```json
+{
+  "source": "Victim ODFT",
+  "fraud_type...'
+  Full text: 'Instruction: You are given the content of a Victim ODFT case. Extract and summarize the information ...'
+  Prompt only: 'Instruction: You are given the content of a Victim ODFT case. Extract and summarize the information ...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 42/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Police Letter case....'
+  Input: '**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* ...'
+  Output: '```json
+{
+  "source": "Police Letter",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Prompt only: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 43/64: loss=0.000001, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an Internal Referral ...'
+  Input: 'FC-UAR document
+Page x of y
+
+URP-0000000001 - Orig...'
+  Output: '```json
+{
+  "source": "Internal Referral",
+  "frau...'
+  Full text: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Prompt only: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 44/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+📊 ✅ OPTIMIZATION STEP 43:
+    Loss: 0.000000
+    LR: 3.95e-06
+    Grad norm: 0.000017
+    Duration: 1.20s
+    Batches accumulated: 4
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an Internal Referral ...'
+  Input: 'FC-UAR document
+Page x of y
+
+URP-0000000001 - Orig...'
+  Output: '```json
+{
+  "source": "Internal Referral",
+  "frau...'
+  Full text: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Prompt only: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 45/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an Internal Referral ...'
+  Input: 'FC-UAR document
+Page x of y
+
+URP-0000000001 - Orig...'
+  Output: '```json
+{
+  "source": "Internal Referral",
+  "frau...'
+  Full text: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Prompt only: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 46/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 47/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Police Letter case....'
+  Input: '**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* ...'
+  Output: '```json
+{
+  "source": "Police Letter",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Prompt only: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 48/64: loss=0.000001, scaled=0.000000, accumulated=0.000000
+📊 ✅ OPTIMIZATION STEP 44:
+    Loss: 0.000000
+    LR: 3.16e-06
+    Grad norm: 0.000014
+    Duration: 0.05s
+    Batches accumulated: 4
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Search Warrant case...'
+  Input: 'Police Force Ordinance
+(Cap. 232)
+
+Contact Person:...'
+  Output: '```json
+{
+  "source": "Search Warrant",
+  "fraud_t...'
+  Full text: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 49/64: loss=0.000008, scaled=0.000002, accumulated=0.000002
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an Internal Referral ...'
+  Input: 'FC-UAR document
+Page x of y
+
+URP-0000000001 - Orig...'
+  Output: '```json
+{
+  "source": "Internal Referral",
+  "frau...'
+  Full text: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Prompt only: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 50/64: loss=0.000000, scaled=0.000000, accumulated=0.000002
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Police Letter case....'
+  Input: '**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* ...'
+  Output: '```json
+{
+  "source": "Police Letter",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Prompt only: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 51/64: loss=0.000001, scaled=0.000000, accumulated=0.000002
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an Internal Referral ...'
+  Input: 'FC-UAR document
+Page x of y
+
+URP-0000000001 - Orig...'
+  Output: '```json
+{
+  "source": "Internal Referral",
+  "frau...'
+  Full text: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Prompt only: 'Instruction: You are given the content of an Internal Referral case. Extract and summarize the infor...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 52/64: loss=0.000000, scaled=0.000000, accumulated=0.000002
+📊 ✅ OPTIMIZATION STEP 45:
+    Loss: 0.000002
+    LR: 2.37e-06
+    Grad norm: 0.000034
+    Duration: 1.55s
+    Batches accumulated: 4
+💾 Saving checkpoint at step 45
+🗑️ Removing old checkpoint: ./output_models/job_20250526_1450_qwen_Qwen2.5-72B-Instruct_LoRA/checkpoint-35
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 53/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 54/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 55/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an ADCC case. Extract...'
+  Input: 'Dear HSB,
+
+Please be informed of a case of **"Inve...'
+  Output: '```json
+{
+  "source": "ADCC",
+  "fraud_type": "Inv...'
+  Full text: 'Instruction: You are given the content of an ADCC case. Extract and summarize the information into J...'
+  Prompt only: 'Instruction: You are given the content of an ADCC case. Extract and summarize the information into J...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 56/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+📊 ✅ OPTIMIZATION STEP 46:
+    Loss: 0.000000
+    LR: 1.58e-06
+    Grad norm: 0.000001
+    Duration: 0.05s
+    Batches accumulated: 4
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 57/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Search Warrant case...'
+  Input: 'Police Force Ordinance
+(Cap. 232)
+
+Contact Person:...'
+  Output: '```json
+{
+  "source": "Search Warrant",
+  "fraud_t...'
+  Full text: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of a Search Warrant case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 58/64: loss=0.000008, scaled=0.000002, accumulated=0.000002
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an ADCC case. Extract...'
+  Input: 'Dear HSB,
+
+Please be informed of a case of **"Soci...'
+  Output: '```json
+{
+  "source": "ADCC",
+  "fraud_type": "Rom...'
+  Full text: 'Instruction: You are given the content of an ADCC case. Extract and summarize the information into J...'
+  Prompt only: 'Instruction: You are given the content of an ADCC case. Extract and summarize the information into J...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 59/64: loss=0.000000, scaled=0.000000, accumulated=0.000002
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Police Letter case....'
+  Input: '**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* ...'
+  Output: '```json
+{
+  "source": "Police Letter",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Prompt only: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 60/64: loss=0.000001, scaled=0.000000, accumulated=0.000002
+📊 ✅ OPTIMIZATION STEP 47:
+    Loss: 0.000002
+    LR: 7.89e-07
+    Grad norm: 0.000030
+    Duration: 1.50s
+    Batches accumulated: 4
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Police Letter case....'
+  Input: '**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* ...'
+  Output: '```json
+{
+  "source": "Police Letter",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Prompt only: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 61/64: loss=0.000001, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Police Letter case....'
+  Input: '**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* ...'
+  Output: '```json
+{
+  "source": "Police Letter",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Prompt only: 'Instruction: You are given the content of a Police Letter case. Extract and summarize the informatio...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 62/64: loss=0.000001, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of an HSBC Referral case...'
+  Input: 'Dear team,
+
+There is a fraud case reporting involv...'
+  Output: '```json
+{
+  "source": "HSBC Referral",
+  "fraud_ty...'
+  Full text: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Prompt only: 'Instruction: You are given the content of an HSBC Referral case. Extract and summarize the informati...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 63/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+🔍 Processing item 1:
+  Type: <class 'dict'>
+  Keys: ['Instruction', 'Input', 'Output']
+  Instruction: 'You are given the content of a Victim ODFT case. E...'
+  Input: '## 4.Victim with financial loss
+| 4.Victim with fi...'
+  Output: '```json
+{
+  "source": "Victim ODFT",
+  "fraud_type...'
+  Full text: 'Instruction: You are given the content of a Victim ODFT case. Extract and summarize the information ...'
+  Prompt only: 'Instruction: You are given the content of a Victim ODFT case. Extract and summarize the information ...'
+  Kept last 5 tokens as labels
+  Final sequence length: 512
+  Valid labels: 5
+✅ Successfully processed 1 items in batch
+📊 Final batch shape: torch.Size([1, 512])
+📊 Token ID range: 1 to 94506
+🔄 Batch 64/64: loss=0.000000, scaled=0.000000, accumulated=0.000000
+📊 ✅ OPTIMIZATION STEP 48:
+    Loss: 0.000000
+    LR: 0.00e+00
+    Grad norm: 0.000024
+    Duration: 0.05s
+    Batches accumulated: 4
+
+✅ Epoch 3 completed:
+    Average loss: 0.000000
+    Duration: 159.7s
+    Optimization steps this epoch: 16
+    Total optimization steps so far: 48
+
+🎉 Training completed! Total optimization steps: 48
+💾 Saving final model...
+✅ Model saved to ./output_models/job_20250526_1450_qwen_Qwen2.5-72B-Instruct_LoRA
+🎉 Training and saving completed successfully!
+
+🔍 Final GPU memory state:
+GPU Memory Usage:
+  GPU 0: 36.45GB allocated, 36.67GB reserved
+  GPU 1: 33.98GB allocated, 34.17GB reserved
+  GPU 2: 33.98GB allocated, 34.17GB reserved
+  GPU 3: 36.30GB allocated, 36.49GB reserved
+
+================================================================================
+📊 COMPREHENSIVE TRAINING METRICS REPORT
+================================================================================
+
+🎯 TRAINING OVERVIEW
+----------------------------------------
+📅 Total Training Time: 0:14:00
+🔢 Total Training Steps: 48
+⚡ Average Step Duration: 0.807 seconds
+🚀 Steps per Second: 1.24
+📈 Initial Loss: 0.0006
+🏁 Final Loss: 0.0000
+🎯 Best Loss: 0.0000
+📉 Loss Improvement: 0.0006
+📊 Loss Improvement: 99.92%
+
+⏱️  STEP TIMING BREAKDOWN
+----------------------------------------
+🔧 total_training: 14m 0.3s
+🔧 data_loading: 0m 0.6s
+🔧 model_loading: 5m 27.3s
+🔧 lora_setup: 0m 3.9s
+🔧 training_setup: 0m 0.0s
+🔧 training_loop: 8m 13.2s
+🔧 model_saving: 0m 13.0s
+
+💻 RESOURCE UTILIZATION
+----------------------------------------
+🖥️  Peak CPU Usage: 3.4%
+📊 Average CPU Usage: 1.1%
+
+🎮 GPU Memory Usage:
+  GPU 0: 36.45 GB (peak)
+  GPU 1: 33.98 GB (peak)
+  GPU 2: 33.98 GB (peak)
+  GPU 3: 36.30 GB (peak)
+
+💾 Disk I/O:
+  📖 Read: 0.02 GB
+  📝 Write: 0.07 GB
+  📊 Total: 0.09 GB
+================================================================================
+📊 Detailed metrics saved to: ./output_models/job_20250526_1450_qwen_Qwen2.5-72B-Instruct_LoRA/training_metrics
+
+==================================================
+🎉 MODEL PARALLEL TRAINING COMPLETED SUCCESSFULLY!
+==================================================
+
+==================================================
+STARTING CLEANUP PROCESS
+==================================================
+Closing TensorBoard writer...
+Clearing model...
+Cleanup completed!
+==================================================
+🧹 All cleanup completed. Exiting.
+
+Program exiting normally...
+
+==================================================
+STARTING CLEANUP PROCESS
+==================================================
+Cleanup completed!
+==================================================
+Found 0 child processes to terminate

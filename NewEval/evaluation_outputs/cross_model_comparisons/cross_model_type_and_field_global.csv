@@ -1,25 +1,121 @@
 ﻿Type,Field,total,mismatch_count,accuracy_rate,Model
-ADCC,contact_person,4,0,100.00%,cycle3_qwen32b_4380_full60
-ADCC,fraud_type,4,0,100.00%,cycle3_qwen32b_4380_full60
-ADCC,police_team,4,0,100.00%,cycle3_qwen32b_4380_full60
-ADCC,writ_no,4,0,100.00%,cycle3_qwen32b_4380_full60
-HSBC Referral,contact_person,18,0,100.00%,cycle3_qwen32b_4380_full60
-HSBC Referral,fraud_type,18,0,100.00%,cycle3_qwen32b_4380_full60
-HSBC Referral,police_team,18,0,100.00%,cycle3_qwen32b_4380_full60
-HSBC Referral,writ_no,18,0,100.00%,cycle3_qwen32b_4380_full60
-ODFT,contact_person,4,0,100.00%,cycle3_qwen32b_4380_full60
-ODFT,fraud_type,4,0,100.00%,cycle3_qwen32b_4380_full60
-ODFT,police_team,4,0,100.00%,cycle3_qwen32b_4380_full60
-ODFT,writ_no,4,0,100.00%,cycle3_qwen32b_4380_full60
-Police Letter,contact_person,12,0,100.00%,cycle3_qwen32b_4380_full60
-Police Letter,fraud_type,12,1,91.67%,cycle3_qwen32b_4380_full60
-Police Letter,police_team,12,0,100.00%,cycle3_qwen32b_4380_full60
-Police Letter,writ_no,12,0,100.00%,cycle3_qwen32b_4380_full60
-Search Warrant,contact_person,6,0,100.00%,cycle3_qwen32b_4380_full60
-Search Warrant,fraud_type,6,0,100.00%,cycle3_qwen32b_4380_full60
-Search Warrant,police_team,6,0,100.00%,cycle3_qwen32b_4380_full60
-Search Warrant,writ_no,6,0,100.00%,cycle3_qwen32b_4380_full60
-UAR,contact_person,16,0,100.00%,cycle3_qwen32b_4380_full60
-UAR,fraud_type,16,4,75.00%,cycle3_qwen32b_4380_full60
-UAR,police_team,16,0,100.00%,cycle3_qwen32b_4380_full60
-UAR,writ_no,16,0,100.00%,cycle3_qwen32b_4380_full60
+ADCC,contact_person,3,0,100.00%,Qwen32B_rematch_exam18
+ADCC,fraud_type,3,0,100.00%,Qwen32B_rematch_exam18
+ADCC,police_team,3,0,100.00%,Qwen32B_rematch_exam18
+ADCC,writ_no,3,0,100.00%,Qwen32B_rematch_exam18
+HSBC Referral,contact_person,4,0,100.00%,Qwen32B_rematch_exam18
+HSBC Referral,fraud_type,4,0,100.00%,Qwen32B_rematch_exam18
+HSBC Referral,police_team,4,0,100.00%,Qwen32B_rematch_exam18
+HSBC Referral,writ_no,4,0,100.00%,Qwen32B_rematch_exam18
+ODFT,contact_person,2,0,100.00%,Qwen32B_rematch_exam18
+ODFT,fraud_type,2,0,100.00%,Qwen32B_rematch_exam18
+ODFT,police_team,2,0,100.00%,Qwen32B_rematch_exam18
+ODFT,writ_no,2,0,100.00%,Qwen32B_rematch_exam18
+Police Letter,contact_person,4,0,100.00%,Qwen32B_rematch_exam18
+Police Letter,fraud_type,4,0,100.00%,Qwen32B_rematch_exam18
+Police Letter,police_team,4,0,100.00%,Qwen32B_rematch_exam18
+Police Letter,writ_no,4,0,100.00%,Qwen32B_rematch_exam18
+Search Warrant,contact_person,2,0,100.00%,Qwen32B_rematch_exam18
+Search Warrant,fraud_type,2,0,100.00%,Qwen32B_rematch_exam18
+Search Warrant,police_team,2,0,100.00%,Qwen32B_rematch_exam18
+Search Warrant,writ_no,2,0,100.00%,Qwen32B_rematch_exam18
+UAR,contact_person,3,0,100.00%,Qwen32B_rematch_exam18
+UAR,fraud_type,3,0,100.00%,Qwen32B_rematch_exam18
+UAR,police_team,3,0,100.00%,Qwen32B_rematch_exam18
+UAR,writ_no,3,0,100.00%,Qwen32B_rematch_exam18
+ADCC,contact_person,3,0,100.00%,Qwen14B_4355_v2_exam18
+ADCC,fraud_type,3,0,100.00%,Qwen14B_4355_v2_exam18
+ADCC,police_team,3,0,100.00%,Qwen14B_4355_v2_exam18
+ADCC,writ_no,3,0,100.00%,Qwen14B_4355_v2_exam18
+HSBC Referral,contact_person,4,0,100.00%,Qwen14B_4355_v2_exam18
+HSBC Referral,fraud_type,4,0,100.00%,Qwen14B_4355_v2_exam18
+HSBC Referral,police_team,4,0,100.00%,Qwen14B_4355_v2_exam18
+HSBC Referral,writ_no,4,0,100.00%,Qwen14B_4355_v2_exam18
+ODFT,contact_person,2,0,100.00%,Qwen14B_4355_v2_exam18
+ODFT,fraud_type,2,1,50.00%,Qwen14B_4355_v2_exam18
+ODFT,police_team,2,0,100.00%,Qwen14B_4355_v2_exam18
+ODFT,writ_no,2,0,100.00%,Qwen14B_4355_v2_exam18
+Police Letter,contact_person,4,0,100.00%,Qwen14B_4355_v2_exam18
+Police Letter,fraud_type,4,0,100.00%,Qwen14B_4355_v2_exam18
+Police Letter,police_team,4,0,100.00%,Qwen14B_4355_v2_exam18
+Police Letter,writ_no,4,0,100.00%,Qwen14B_4355_v2_exam18
+Search Warrant,contact_person,2,0,100.00%,Qwen14B_4355_v2_exam18
+Search Warrant,fraud_type,2,0,100.00%,Qwen14B_4355_v2_exam18
+Search Warrant,police_team,2,0,100.00%,Qwen14B_4355_v2_exam18
+Search Warrant,writ_no,2,0,100.00%,Qwen14B_4355_v2_exam18
+UAR,contact_person,3,0,100.00%,Qwen14B_4355_v2_exam18
+UAR,fraud_type,3,2,33.33%,Qwen14B_4355_v2_exam18
+UAR,police_team,3,0,100.00%,Qwen14B_4355_v2_exam18
+UAR,writ_no,3,0,100.00%,Qwen14B_4355_v2_exam18
+ADCC,contact_person,3,0,100.00%,Qwen32B_4355_v2_exam18
+ADCC,fraud_type,3,0,100.00%,Qwen32B_4355_v2_exam18
+ADCC,police_team,3,0,100.00%,Qwen32B_4355_v2_exam18
+ADCC,writ_no,3,0,100.00%,Qwen32B_4355_v2_exam18
+HSBC Referral,contact_person,4,0,100.00%,Qwen32B_4355_v2_exam18
+HSBC Referral,fraud_type,4,0,100.00%,Qwen32B_4355_v2_exam18
+HSBC Referral,police_team,4,0,100.00%,Qwen32B_4355_v2_exam18
+HSBC Referral,writ_no,4,0,100.00%,Qwen32B_4355_v2_exam18
+ODFT,contact_person,2,0,100.00%,Qwen32B_4355_v2_exam18
+ODFT,fraud_type,2,1,50.00%,Qwen32B_4355_v2_exam18
+ODFT,police_team,2,0,100.00%,Qwen32B_4355_v2_exam18
+ODFT,writ_no,2,0,100.00%,Qwen32B_4355_v2_exam18
+Police Letter,contact_person,4,0,100.00%,Qwen32B_4355_v2_exam18
+Police Letter,fraud_type,4,0,100.00%,Qwen32B_4355_v2_exam18
+Police Letter,police_team,4,0,100.00%,Qwen32B_4355_v2_exam18
+Police Letter,writ_no,4,0,100.00%,Qwen32B_4355_v2_exam18
+Search Warrant,contact_person,2,0,100.00%,Qwen32B_4355_v2_exam18
+Search Warrant,fraud_type,2,0,100.00%,Qwen32B_4355_v2_exam18
+Search Warrant,police_team,2,0,100.00%,Qwen32B_4355_v2_exam18
+Search Warrant,writ_no,2,0,100.00%,Qwen32B_4355_v2_exam18
+UAR,contact_person,3,0,100.00%,Qwen32B_4355_v2_exam18
+UAR,fraud_type,3,0,100.00%,Qwen32B_4355_v2_exam18
+UAR,police_team,3,0,100.00%,Qwen32B_4355_v2_exam18
+UAR,writ_no,3,0,100.00%,Qwen32B_4355_v2_exam18
+ADCC,contact_person,3,0,100.00%,Qwen14B_4355_v3_exam18
+ADCC,fraud_type,3,0,100.00%,Qwen14B_4355_v3_exam18
+ADCC,police_team,3,0,100.00%,Qwen14B_4355_v3_exam18
+ADCC,writ_no,3,0,100.00%,Qwen14B_4355_v3_exam18
+HSBC Referral,contact_person,4,0,100.00%,Qwen14B_4355_v3_exam18
+HSBC Referral,fraud_type,4,0,100.00%,Qwen14B_4355_v3_exam18
+HSBC Referral,police_team,4,0,100.00%,Qwen14B_4355_v3_exam18
+HSBC Referral,writ_no,4,0,100.00%,Qwen14B_4355_v3_exam18
+ODFT,contact_person,2,0,100.00%,Qwen14B_4355_v3_exam18
+ODFT,fraud_type,2,1,50.00%,Qwen14B_4355_v3_exam18
+ODFT,police_team,2,0,100.00%,Qwen14B_4355_v3_exam18
+ODFT,writ_no,2,0,100.00%,Qwen14B_4355_v3_exam18
+Police Letter,contact_person,4,0,100.00%,Qwen14B_4355_v3_exam18
+Police Letter,fraud_type,4,1,75.00%,Qwen14B_4355_v3_exam18
+Police Letter,police_team,4,0,100.00%,Qwen14B_4355_v3_exam18
+Police Letter,writ_no,4,0,100.00%,Qwen14B_4355_v3_exam18
+Search Warrant,contact_person,2,0,100.00%,Qwen14B_4355_v3_exam18
+Search Warrant,fraud_type,2,0,100.00%,Qwen14B_4355_v3_exam18
+Search Warrant,police_team,2,0,100.00%,Qwen14B_4355_v3_exam18
+Search Warrant,writ_no,2,0,100.00%,Qwen14B_4355_v3_exam18
+UAR,contact_person,3,0,100.00%,Qwen14B_4355_v3_exam18
+UAR,fraud_type,3,1,66.67%,Qwen14B_4355_v3_exam18
+UAR,police_team,3,0,100.00%,Qwen14B_4355_v3_exam18
+UAR,writ_no,3,0,100.00%,Qwen14B_4355_v3_exam18
+ADCC,contact_person,3,0,100.00%,Qwen32B_4355_v3_exam18
+ADCC,fraud_type,3,0,100.00%,Qwen32B_4355_v3_exam18
+ADCC,police_team,3,0,100.00%,Qwen32B_4355_v3_exam18
+ADCC,writ_no,3,0,100.00%,Qwen32B_4355_v3_exam18
+HSBC Referral,contact_person,4,0,100.00%,Qwen32B_4355_v3_exam18
+HSBC Referral,fraud_type,4,0,100.00%,Qwen32B_4355_v3_exam18
+HSBC Referral,police_team,4,0,100.00%,Qwen32B_4355_v3_exam18
+HSBC Referral,writ_no,4,0,100.00%,Qwen32B_4355_v3_exam18
+ODFT,contact_person,2,0,100.00%,Qwen32B_4355_v3_exam18
+ODFT,fraud_type,2,0,100.00%,Qwen32B_4355_v3_exam18
+ODFT,police_team,2,0,100.00%,Qwen32B_4355_v3_exam18
+ODFT,writ_no,2,0,100.00%,Qwen32B_4355_v3_exam18
+Police Letter,contact_person,4,0,100.00%,Qwen32B_4355_v3_exam18
+Police Letter,fraud_type,4,0,100.00%,Qwen32B_4355_v3_exam18
+Police Letter,police_team,4,0,100.00%,Qwen32B_4355_v3_exam18
+Police Letter,writ_no,4,0,100.00%,Qwen32B_4355_v3_exam18
+Search Warrant,contact_person,2,0,100.00%,Qwen32B_4355_v3_exam18
+Search Warrant,fraud_type,2,0,100.00%,Qwen32B_4355_v3_exam18
+Search Warrant,police_team,2,0,100.00%,Qwen32B_4355_v3_exam18
+Search Warrant,writ_no,2,0,100.00%,Qwen32B_4355_v3_exam18
+UAR,contact_person,3,0,100.00%,Qwen32B_4355_v3_exam18
+UAR,fraud_type,3,0,100.00%,Qwen32B_4355_v3_exam18
+UAR,police_team,3,0,100.00%,Qwen32B_4355_v3_exam18
+UAR,writ_no,3,0,100.00%,Qwen32B_4355_v3_exam18

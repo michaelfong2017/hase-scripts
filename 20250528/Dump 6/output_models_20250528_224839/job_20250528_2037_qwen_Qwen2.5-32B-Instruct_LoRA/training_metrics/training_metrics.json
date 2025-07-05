@@ -1,0 +1,160 @@
+{
+  "total_training_time_seconds": 588.4361546039581,
+  "total_training_time_formatted": "0:09:48",
+  "step_timing": {
+    "total_training": {
+      "start": 1748435852.1020389,
+      "end": 1748436440.5328119,
+      "duration": 588.4307730197906
+    },
+    "data_loading": {
+      "start": 1748435853.3262389,
+      "end": 1748435853.8582666,
+      "duration": 0.5320277214050293
+    },
+    "model_loading": {
+      "start": 1748435853.8601441,
+      "end": 1748435870.6741974,
+      "duration": 16.814053297042847
+    },
+    "lora_setup": {
+      "start": 1748435871.0421002,
+      "end": 1748435873.3231595,
+      "duration": 2.2810592651367188
+    },
+    "training_setup": {
+      "start": 1748435873.7504773,
+      "end": 1748435873.7564723,
+      "duration": 0.005995035171508789
+    },
+    "training_loop": {
+      "start": 1748435873.7564738,
+      "end": 1748436431.5439842,
+      "duration": 557.78751039505
+    },
+    "model_saving": {
+      "start": 1748436431.5439894,
+      "end": 1748436440.5328097,
+      "duration": 8.988820314407349
+    }
+  },
+  "training_performance": {
+    "total_steps": 99,
+    "avg_step_duration_seconds": 0.21693938187878542,
+    "steps_per_second": 4.609582600169611,
+    "final_loss": 0.2801761018927209,
+    "min_loss": 0.001579028001287952,
+    "initial_loss": 1.7784151583909988,
+    "loss_improvement": 1.498239056498278
+  },
+  "resource_utilization": {
+    "max_gpu_memory_gb": {
+      "0": 32.29450750350952,
+      "1": 32.151437759399414
+    },
+    "peak_cpu_usage_percent": 0,
+    "avg_cpu_usage_percent": 0.9999999999999998,
+    "disk_io_gb": {
+      "read": 0.021854400634765625,
+      "write": 0.047303199768066406,
+      "total": 0.06915760040283203
+    }
+  },
+  "epoch_progression": [
+    {
+      "epoch": 1,
+      "avg_loss": 0.3536061757710713,
+      "total_steps": 33,
+      "timestamp": 1748436059.4419465
+    },
+    {
+      "epoch": 2,
+      "avg_loss": 0.1598883703342963,
+      "total_steps": 66,
+      "timestamp": 1748436249.7209704
+    },
+    {
+      "epoch": 3,
+      "avg_loss": 0.07711843301052396,
+      "total_steps": 99,
+      "timestamp": 1748436431.005008
+    }
+  ],
+  "memory_snapshots": {
+    "initial": {
+      "timestamp": 1748435853.3244238,
+      "cpu_percent": 0.9,
+      "memory_percent": 1.6,
+      "gpu_memory": {
+        "0": {
+          "allocated_gb": 0.0,
+          "reserved_gb": 0.0
+        },
+        "1": {
+          "allocated_gb": 0.0,
+          "reserved_gb": 0.0
+        }
+      }
+    },
+    "after_data_loading": {
+      "timestamp": 1748435853.8582704,
+      "cpu_percent": 1.0,
+      "memory_percent": 1.6,
+      "gpu_memory": {
+        "0": {
+          "allocated_gb": 0.0,
+          "reserved_gb": 0.0
+        },
+        "1": {
+          "allocated_gb": 0.0,
+          "reserved_gb": 0.0
+        }
+      }
+    },
+    "after_model_loading": {
+      "timestamp": 1748435871.0404053,
+      "cpu_percent": 0.9,
+      "memory_percent": 1.6,
+      "gpu_memory": {
+        "0": {
+          "allocated_gb": 30.51470947265625,
+          "reserved_gb": 30.515625
+        },
+        "1": {
+          "allocated_gb": 30.514719009399414,
+          "reserved_gb": 30.515625
+        }
+      }
+    },
+    "after_lora_setup": {
+      "timestamp": 1748435873.7322283,
+      "cpu_percent": 1.4,
+      "memory_percent": 1.6,
+      "gpu_memory": {
+        "0": {
+          "allocated_gb": 31.01470947265625,
+          "reserved_gb": 31.09375
+        },
+        "1": {
+          "allocated_gb": 31.014719009399414,
+          "reserved_gb": 31.09375
+        }
+      }
+    },
+    "final": {
+      "timestamp": 1748436440.532834,
+      "cpu_percent": 0.8,
+      "memory_percent": 1.7,
+      "gpu_memory": {
+        "0": {
+          "allocated_gb": 32.29450750350952,
+          "reserved_gb": 32.673828125
+        },
+        "1": {
+          "allocated_gb": 32.151437759399414,
+          "reserved_gb": 32.48046875
+        }
+      }
+    }
+  }
+}

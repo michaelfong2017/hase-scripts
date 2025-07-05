@@ -1,0 +1,16 @@
+srun: error: ioctl(TIOCGWINSZ): Inappropriate ioctl for device
+srun: error: Not using a pseudo-terminal, disregarding --pty option
+[ERROR] File already exists: /raid/local/containers/enroot-data/user-1787/pytorch
+Traceback (most recent call last):
+  File "/home/projects/fraudagent/hase-michael/V3/test.py", line 45, in <module>
+    main()
+  File "/home/projects/fraudagent/hase-michael/V3/test.py", line 10, in main
+    model = AutoModelForCausalLM.from_pretrained(
+  File "/usr/local/lib/python3.10/dist-packages/transformers/models/auto/auto_factory.py", line 571, in from_pretrained
+    return model_class.from_pretrained(
+  File "/usr/local/lib/python3.10/dist-packages/transformers/modeling_utils.py", line 279, in _wrapper
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/transformers/modeling_utils.py", line 4016, in from_pretrained
+    raise EnvironmentError("tensor parallel is only supported for `torch>=2.5`.")
+OSError: tensor parallel is only supported for `torch>=2.5`.
+srun: error: klb-dgx-002: task 0: Exited with exit code 1

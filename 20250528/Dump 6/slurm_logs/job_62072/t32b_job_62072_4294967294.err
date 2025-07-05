@@ -1,0 +1,69 @@
+srun: error: ioctl(TIOCGWINSZ): Inappropriate ioctl for device
+srun: error: Not using a pseudo-terminal, disregarding --pty option
+[ERROR] File already exists: /raid/local/containers/enroot-data/user-1787/pytorch
+The `load_in_4bit` and `load_in_8bit` arguments are deprecated and will be removed in the future versions. Please, pass a `BitsAndBytesConfig` object in `quantization_config` argument instead.
+Sliding Window Attention is enabled but not implemented for `sdpa`; unexpected results may be encountered.
+Loading checkpoint shards:   0%|          | 0/37 [00:00<?, ?it/s]Loading checkpoint shards:   3%|▎         | 1/37 [00:02<01:21,  2.27s/it]Loading checkpoint shards:   5%|▌         | 2/37 [00:07<02:14,  3.83s/it]Loading checkpoint shards:   8%|▊         | 3/37 [00:11<02:23,  4.23s/it]Loading checkpoint shards:  11%|█         | 4/37 [00:17<02:31,  4.58s/it]Loading checkpoint shards:  14%|█▎        | 5/37 [00:22<02:37,  4.91s/it]Loading checkpoint shards:  16%|█▌        | 6/37 [00:28<02:41,  5.21s/it]Loading checkpoint shards:  19%|█▉        | 7/37 [00:34<02:43,  5.46s/it]Loading checkpoint shards:  22%|██▏       | 8/37 [00:40<02:45,  5.72s/it]Loading checkpoint shards:  24%|██▍       | 9/37 [00:46<02:44,  5.88s/it]Loading checkpoint shards:  27%|██▋       | 10/37 [00:53<02:42,  6.01s/it]Loading checkpoint shards:  30%|██▉       | 11/37 [00:59<02:36,  6.01s/it]Loading checkpoint shards:  32%|███▏      | 12/37 [01:05<02:32,  6.09s/it]Loading checkpoint shards:  35%|███▌      | 13/37 [01:11<02:27,  6.14s/it]Loading checkpoint shards:  38%|███▊      | 14/37 [01:17<02:22,  6.18s/it]Loading checkpoint shards:  41%|████      | 15/37 [01:23<02:14,  6.12s/it]Loading checkpoint shards:  43%|████▎     | 16/37 [01:30<02:09,  6.17s/it]Loading checkpoint shards:  46%|████▌     | 17/37 [01:36<02:03,  6.19s/it]Loading checkpoint shards:  49%|████▊     | 18/37 [01:42<01:58,  6.22s/it]Loading checkpoint shards:  51%|█████▏    | 19/37 [01:48<01:50,  6.16s/it]Loading checkpoint shards:  54%|█████▍    | 20/37 [01:55<01:45,  6.21s/it]Loading checkpoint shards:  57%|█████▋    | 21/37 [02:01<01:39,  6.23s/it]Loading checkpoint shards:  59%|█████▉    | 22/37 [02:07<01:34,  6.28s/it]Loading checkpoint shards:  62%|██████▏   | 23/37 [02:13<01:27,  6.22s/it]Loading checkpoint shards:  65%|██████▍   | 24/37 [02:20<01:21,  6.30s/it]Loading checkpoint shards:  68%|██████▊   | 25/37 [02:26<01:16,  6.36s/it]Loading checkpoint shards:  70%|███████   | 26/37 [02:33<01:10,  6.37s/it]Loading checkpoint shards:  73%|███████▎  | 27/37 [02:39<01:03,  6.30s/it]Loading checkpoint shards:  76%|███████▌  | 28/37 [02:45<00:56,  6.33s/it]Loading checkpoint shards:  78%|███████▊  | 29/37 [02:52<00:50,  6.35s/it]Loading checkpoint shards:  81%|████████  | 30/37 [02:58<00:44,  6.36s/it]Loading checkpoint shards:  84%|████████▍ | 31/37 [03:04<00:37,  6.28s/it]Loading checkpoint shards:  86%|████████▋ | 32/37 [03:11<00:31,  6.32s/it]Loading checkpoint shards:  89%|████████▉ | 33/37 [03:17<00:25,  6.34s/it]Loading checkpoint shards:  92%|█████████▏| 34/37 [03:23<00:19,  6.36s/it]Loading checkpoint shards:  95%|█████████▍| 35/37 [03:29<00:12,  6.28s/it]Loading checkpoint shards:  97%|█████████▋| 36/37 [03:36<00:06,  6.32s/it]Loading checkpoint shards: 100%|██████████| 37/37 [03:38<00:00,  5.05s/it]Loading checkpoint shards: 100%|██████████| 37/37 [03:38<00:00,  5.90s/it]
+/usr/local/lib/python3.10/dist-packages/bitsandbytes/autograd/_functions.py:315: UserWarning: MatMul8bitLt: inputs will be cast from torch.bfloat16 to float16 during quantization
+  warnings.warn(f"MatMul8bitLt: inputs will be cast from {A.dtype} to float16 during quantization")
+Traceback (most recent call last):
+  File "/home/projects/fraudagent/hase-michael/V3/test-72b.py", line 46, in <module>
+    main()
+  File "/home/projects/fraudagent/hase-michael/V3/test-72b.py", line 29, in main
+    generated_ids = model.generate(**model_inputs, max_new_tokens=2048)
+  File "/usr/local/lib/python3.10/dist-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/transformers/generation/utils.py", line 2465, in generate
+    result = self._sample(
+  File "/usr/local/lib/python3.10/dist-packages/transformers/generation/utils.py", line 3431, in _sample
+    outputs = self(**model_inputs, return_dict=True)
+  File "/usr/local/lib/python3.10/dist-packages/torch/nn/modules/module.py", line 1714, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/nn/modules/module.py", line 1725, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/transformers/utils/generic.py", line 965, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/transformers/utils/deprecation.py", line 172, in wrapped_func
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/transformers/models/qwen2/modeling_qwen2.py", line 823, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+  File "/usr/local/lib/python3.10/dist-packages/torch/nn/modules/module.py", line 1714, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/nn/modules/module.py", line 1725, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/transformers/utils/generic.py", line 965, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/transformers/models/qwen2/modeling_qwen2.py", line 549, in forward
+    layer_outputs = decoder_layer(
+  File "/usr/local/lib/python3.10/dist-packages/torch/nn/modules/module.py", line 1714, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/nn/modules/module.py", line 1725, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/transformers/models/qwen2/modeling_qwen2.py", line 278, in forward
+    hidden_states = self.mlp(hidden_states)
+  File "/usr/local/lib/python3.10/dist-packages/torch/nn/modules/module.py", line 1714, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/nn/modules/module.py", line 1725, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/transformers/models/qwen2/modeling_qwen2.py", line 59, in forward
+    down_proj = self.down_proj(self.act_fn(self.gate_proj(x)) * self.up_proj(x))
+  File "/usr/local/lib/python3.10/dist-packages/torch/nn/modules/module.py", line 1714, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/nn/modules/module.py", line 1725, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/peft/tuners/lora/bnb.py", line 232, in forward
+    result = self.base_layer(x, *args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/nn/modules/module.py", line 1714, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/nn/modules/module.py", line 1725, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/bitsandbytes/nn/modules.py", line 990, in forward
+    out = bnb.matmul(x, self.weight, bias=self.bias, state=self.state)
+  File "/usr/local/lib/python3.10/dist-packages/bitsandbytes/autograd/_functions.py", line 509, in matmul
+    return MatMul8bitLt.apply(A, B, out, bias, state)
+  File "/usr/local/lib/python3.10/dist-packages/torch/autograd/function.py", line 574, in apply
+    return super().apply(*args, **kwargs)  # type: ignore[misc]
+  File "/usr/local/lib/python3.10/dist-packages/bitsandbytes/autograd/_functions.py", line 363, in forward
+    state.subB = (outliers.t() * state.SCB * 7.874015718698502e-3).to(A.dtype)
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 490.00 MiB. GPU 0 has a total capacity of 79.11 GiB of which 38.88 MiB is free. Including non-PyTorch memory, this process has 79.06 GiB memory in use. Of the allocated memory 76.93 GiB is allocated by PyTorch, and 1.40 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+srun: error: klb-dgx-002: task 0: Exited with exit code 1

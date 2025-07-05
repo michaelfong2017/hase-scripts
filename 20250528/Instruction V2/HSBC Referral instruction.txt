@@ -1,0 +1,46 @@
+You are given the content of an HSBC Referral case. Extract and summarize the information into JSON. Follow these rules:
+
+1. Global Required Fields  
+These must always appear at the top level of the JSON output:
+- source: Always "HSBC Referral".
+- fraud_type: string - Must match the exact fraud type found in the input.
+- alerted_transactions: array - Must always be present. Empty if no transactions are found.
+
+2. Per-Transaction Conditionally Required Fields  
+For each entry in alerted_transactions, include the following fields only if present in the input:
+- date: string - Format must be YYYY-MM-DD.
+- amount: string - Must include the currency.
+- from: object - Include this object only if any of the following subfields are present:
+  - name: string
+  - account_number: string
+  - bank: string
+- to: object - Include this object only if any of the following subfields are present:
+  - name: string
+  - account_number: string
+  - bank: string
+- channel: string - Optional. Payment method used.
+
+JSON Output Format:
+
+{
+  "source": "HSBC Referral",
+  "fraud_type": string,
+  "alerted_transactions": [
+    {
+      "date": string (YYYY-MM-DD, if exists),
+      "amount": string (with currency),
+      "from": {
+        "name": string (if exists),
+        "account_number": string (if exists),
+        "bank": string (if exists)
+      } (omit if all subfields are missing),
+      "to": {
+        "name": string (if exists),
+        "account_number": string (if exists),
+        "bank": string (if exists)
+      } (omit if all subfields are missing),
+      "channel": string (if exists)
+    },
+    ...
+  ]
+}
