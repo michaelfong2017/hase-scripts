@@ -1,0 +1,14 @@
+﻿Field,total,mismatch_count,accuracy_rate
+to.name,102,16,84.31%
+currency,102,6,94.12%
+amount,102,7,93.14%
+transaction_references.0,102,4,96.08%
+date,102,4,96.08%
+to.bank,102,8,92.16%
+can_be_located,102,6,94.12%
+to.account_number,102,6,94.12%
+channel,102,8,92.16%
+from.name,102,24,76.47%
+from.account_number,102,3,97.06%
+from.bank,102,20,80.39%
+cancel_amount_requested,102,1,99.02%

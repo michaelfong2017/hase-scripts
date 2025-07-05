@@ -1,7 +1,7 @@
 ﻿Type,Total_Cases,Overall_Pass,Overall_Pass_Rate,Global_Field_Pass,Global_Field_Pass_Rate,Alerted_Transactions_Pass,Alerted_Transactions_Pass_Rate,Models_Included
-ADCC,28,17,60.71%,21,75.00%,20,71.43%,"base32b_full60, base8b_full60, cycle2_llama8b_full60, cycle2_qwen32b_full60, cycle3_4355_32b_full60, cycle3_llama8b_full60, cycle3_qwen32b_full60"
-HSBC Referral,126,83,65.87%,109,86.51%,93,73.81%,"base32b_full60, base8b_full60, cycle2_llama8b_full60, cycle2_qwen32b_full60, cycle3_4355_32b_full60, cycle3_llama8b_full60, cycle3_qwen32b_full60"
-Police Letter,84,51,60.71%,56,66.67%,69,82.14%,"base32b_full60, base8b_full60, cycle2_llama8b_full60, cycle2_qwen32b_full60, cycle3_4355_32b_full60, cycle3_llama8b_full60, cycle3_qwen32b_full60"
-Search Warrant,42,22,52.38%,28,66.67%,35,83.33%,"base32b_full60, base8b_full60, cycle2_llama8b_full60, cycle2_qwen32b_full60, cycle3_4355_32b_full60, cycle3_llama8b_full60, cycle3_qwen32b_full60"
-UAR,112,50,44.64%,75,66.96%,77,68.75%,"base32b_full60, base8b_full60, cycle2_llama8b_full60, cycle2_qwen32b_full60, cycle3_4355_32b_full60, cycle3_llama8b_full60, cycle3_qwen32b_full60"
-ODFT,28,19,67.86%,26,92.86%,21,75.00%,"base32b_full60, base8b_full60, cycle2_llama8b_full60, cycle2_qwen32b_full60, cycle3_4355_32b_full60, cycle3_llama8b_full60, cycle3_qwen32b_full60"
+ADCC,4,4,100.00%,4,100.00%,4,100.00%,cycle3_qwen32b_4380_full60
+HSBC Referral,18,18,100.00%,18,100.00%,18,100.00%,cycle3_qwen32b_4380_full60
+Police Letter,12,11,91.67%,11,91.67%,12,100.00%,cycle3_qwen32b_4380_full60
+Search Warrant,6,6,100.00%,6,100.00%,6,100.00%,cycle3_qwen32b_4380_full60
+UAR,16,12,75.00%,12,75.00%,16,100.00%,cycle3_qwen32b_4380_full60
+ODFT,4,4,100.00%,4,100.00%,4,100.00%,cycle3_qwen32b_4380_full60

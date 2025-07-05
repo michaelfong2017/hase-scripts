@@ -1,0 +1,43 @@
+﻿Type,total,all_fields_correct,mismatch_count,accuracy_rate,Model
+ADCC,20,0,20,0.00%,base32b_full60
+HSBC Referral,39,18,21,46.15%,base32b_full60
+Police Letter,14,13,1,92.86%,base32b_full60
+Search Warrant,22,3,19,13.64%,base32b_full60
+UAR,18,8,10,44.44%,base32b_full60
+ODFT,6,3,3,50.00%,base32b_full60
+ADCC,20,1,19,5.00%,base8b_full60
+HSBC Referral,82,12,70,14.63%,base8b_full60
+Police Letter,17,1,16,5.88%,base8b_full60
+Search Warrant,16,3,13,18.75%,base8b_full60
+UAR,20,0,20,0.00%,base8b_full60
+ODFT,10,1,9,10.00%,base8b_full60
+ADCC,20,4,16,20.00%,cycle3_llama8b_full60
+HSBC Referral,40,13,27,32.50%,cycle3_llama8b_full60
+Police Letter,14,7,7,50.00%,cycle3_llama8b_full60
+Search Warrant,7,2,5,28.57%,cycle3_llama8b_full60
+UAR,18,3,15,16.67%,cycle3_llama8b_full60
+ODFT,6,3,3,50.00%,cycle3_llama8b_full60
+ADCC,20,19,1,95.00%,cycle3_qwen32b_full60
+HSBC Referral,38,37,1,97.37%,cycle3_qwen32b_full60
+Police Letter,14,13,1,92.86%,cycle3_qwen32b_full60
+Search Warrant,6,6,0,100.00%,cycle3_qwen32b_full60
+UAR,18,9,9,50.00%,cycle3_qwen32b_full60
+ODFT,6,6,0,100.00%,cycle3_qwen32b_full60
+ADCC,20,4,16,20.00%,cycle2_llama8b_full60
+HSBC Referral,47,13,34,27.66%,cycle2_llama8b_full60
+Police Letter,14,1,13,7.14%,cycle2_llama8b_full60
+Search Warrant,6,2,4,33.33%,cycle2_llama8b_full60
+UAR,19,4,15,21.05%,cycle2_llama8b_full60
+ODFT,6,2,4,33.33%,cycle2_llama8b_full60
+ADCC,20,8,12,40.00%,cycle2_qwen32b_full60
+HSBC Referral,39,18,21,46.15%,cycle2_qwen32b_full60
+Police Letter,14,13,1,92.86%,cycle2_qwen32b_full60
+Search Warrant,6,6,0,100.00%,cycle2_qwen32b_full60
+UAR,18,8,10,44.44%,cycle2_qwen32b_full60
+ODFT,6,2,4,33.33%,cycle2_qwen32b_full60
+ADCC,20,20,0,100.00%,cycle3_4355_32b_full60
+HSBC Referral,39,37,2,94.87%,cycle3_4355_32b_full60
+Police Letter,14,14,0,100.00%,cycle3_4355_32b_full60
+Search Warrant,6,6,0,100.00%,cycle3_4355_32b_full60
+UAR,18,17,1,94.44%,cycle3_4355_32b_full60
+ODFT,6,5,1,83.33%,cycle3_4355_32b_full60
