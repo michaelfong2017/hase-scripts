@@ -103,7 +103,7 @@ Based on Transaction Code Description in CSV:
 
 Please return the updated JSON with any newly matched transactions. If no additional matches are found, return the original JSON unchanged.
 
-Output the result in JSON format enclosed in `````` tags."""
+Output the result in JSON format."""
     
     return prompt
 
@@ -219,13 +219,9 @@ def process_chunk(chunk, model_name, gpu_index, input_csv, timestamp, job_id):
                 total_input_tokens += rematch_input_tokens
                 total_output_tokens += rematch_output_tokens
                 
-                try:
-                    updated_json = extract_json_content(rematch_response)
-                    final_response = json.dumps(updated_json, indent=2)
-                    print(f"[INFO] Successfully re-matched transactions for row {index + 1}", flush=True)
-                except Exception as e:
-                    print(f"[WARN] Re-matching JSON extraction failed for row {index + 1}: {e}", flush=True)
-                    final_response = response  # Fall back to original response
+                # Use rematch response directly
+                final_response = rematch_response
+                print(f"[INFO] Re-matching completed for row {index + 1}, using rematch response", flush=True)
             else:
                 final_response = response
                 print(f"[INFO] No re-matching needed for row {index + 1}", flush=True)
