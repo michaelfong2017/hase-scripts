@@ -1,0 +1,7 @@
+﻿Type,Total_Cases,Overall_Pass,Overall_Pass_Rate,Global_Field_Pass,Global_Field_Pass_Rate,Alerted_Transactions_Pass,Alerted_Transactions_Pass_Rate,Models_Included
+UAR,9,6,66.67%,9,100.00%,6,66.67%,"Qwen32B_4355_v2_exam18, Qwen32B_4355_v3_exam18, Qwen32B_rematch_exam18"
+ODFT,6,3,50.00%,5,83.33%,3,50.00%,"Qwen32B_4355_v2_exam18, Qwen32B_4355_v3_exam18, Qwen32B_rematch_exam18"
+ADCC,9,6,66.67%,9,100.00%,6,66.67%,"Qwen32B_4355_v2_exam18, Qwen32B_4355_v3_exam18, Qwen32B_rematch_exam18"
+HSBC Referral,12,3,25.00%,12,100.00%,3,25.00%,"Qwen32B_4355_v2_exam18, Qwen32B_4355_v3_exam18, Qwen32B_rematch_exam18"
+Police Letter,12,6,50.00%,12,100.00%,6,50.00%,"Qwen32B_4355_v2_exam18, Qwen32B_4355_v3_exam18, Qwen32B_rematch_exam18"
+Search Warrant,6,6,100.00%,6,100.00%,6,100.00%,"Qwen32B_4355_v2_exam18, Qwen32B_4355_v3_exam18, Qwen32B_rematch_exam18"

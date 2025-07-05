@@ -92,11 +92,19 @@ def are_exact_match_for_eval(value1, value2, key):
 def compare_structures_for_eval(obj1, obj2, path="", comparison_count=[0]):
     """Recursively compare JSON objects with enhanced field matching."""
     mismatches = []
+    
+    # Define fields to ignore in LLM output
+    IGNORE_FIELDS = {'rematch_note', 'original_amount'}
 
     if isinstance(obj1, dict) and isinstance(obj2, dict):
         all_keys = set(obj1.keys()) | set(obj2.keys())
         for key in all_keys:
             current_path = f"{path}.{key}" if path else key
+            
+            # Skip ignored fields when they're extra in LLM output
+            if key not in obj2 and key in IGNORE_FIELDS:
+                continue
+                
             if key not in obj1:
                 mismatches.append(f"{current_path}: Missing in LLM output (Truth has value: {obj2.get(key)})")
             elif key not in obj2:

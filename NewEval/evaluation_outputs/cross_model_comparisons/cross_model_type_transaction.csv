@@ -1,0 +1,19 @@
+﻿Type,total,all_fields_correct,mismatch_count,accuracy_rate,Model
+UAR,3,2,1,66.67%,Qwen32B_rematch_exam18
+ODFT,2,1,1,50.00%,Qwen32B_rematch_exam18
+ADCC,4,2,2,50.00%,Qwen32B_rematch_exam18
+HSBC Referral,5,1,4,20.00%,Qwen32B_rematch_exam18
+Police Letter,6,5,1,83.33%,Qwen32B_rematch_exam18
+Search Warrant,2,2,0,100.00%,Qwen32B_rematch_exam18
+UAR,3,2,1,66.67%,Qwen32B_4355_v2_exam18
+ODFT,2,1,1,50.00%,Qwen32B_4355_v2_exam18
+ADCC,4,2,2,50.00%,Qwen32B_4355_v2_exam18
+HSBC Referral,5,1,4,20.00%,Qwen32B_4355_v2_exam18
+Police Letter,6,3,3,50.00%,Qwen32B_4355_v2_exam18
+Search Warrant,2,2,0,100.00%,Qwen32B_4355_v2_exam18
+UAR,3,2,1,66.67%,Qwen32B_4355_v3_exam18
+ODFT,2,1,1,50.00%,Qwen32B_4355_v3_exam18
+ADCC,4,2,2,50.00%,Qwen32B_4355_v3_exam18
+HSBC Referral,5,1,4,20.00%,Qwen32B_4355_v3_exam18
+Police Letter,6,4,2,66.67%,Qwen32B_4355_v3_exam18
+Search Warrant,2,2,0,100.00%,Qwen32B_4355_v3_exam18

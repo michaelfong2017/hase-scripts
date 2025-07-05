@@ -1,0 +1,10 @@
+﻿Model,Metric,First_Half_Pass,First_Half_Total,First_Half_Percentage,Second_Half_Pass,Second_Half_Total,Second_Half_Percentage,Total_Pass,Total_Total,Total_Percentage
+Qwen32B_rematch_exam18,Overall Pass,3,9,33.33%,8,9,88.89%,11,18,61.11%
+Qwen32B_rematch_exam18,Global Field Pass,9,9,100.00%,9,9,100.00%,18,18,100.00%
+Qwen32B_rematch_exam18,Alerted Transactions Pass,3,9,33.33%,8,9,88.89%,11,18,61.11%
+Qwen32B_4355_v2_exam18,Overall Pass,2,9,22.22%,7,9,77.78%,9,18,50.00%
+Qwen32B_4355_v2_exam18,Global Field Pass,8,9,88.89%,9,9,100.00%,17,18,94.44%
+Qwen32B_4355_v2_exam18,Alerted Transactions Pass,2,9,22.22%,7,9,77.78%,9,18,50.00%
+Qwen32B_4355_v3_exam18,Overall Pass,3,9,33.33%,7,9,77.78%,10,18,55.56%
+Qwen32B_4355_v3_exam18,Global Field Pass,9,9,100.00%,9,9,100.00%,18,18,100.00%
+Qwen32B_4355_v3_exam18,Alerted Transactions Pass,3,9,33.33%,7,9,77.78%,10,18,55.56%
