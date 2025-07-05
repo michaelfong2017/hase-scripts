@@ -80,6 +80,7 @@ INSTRUCTIONS:
    - Add "original_amount" field to store the original amount from the fraud alert source
    - Overwrite existing transaction fields using transaction CSV values when CSV values exist (originator becomes "from", beneficiary becomes "to")
    - Add a "rematch_note" field explaining what amount tolerance was applied
+   - You should read the Transaction Source and Transaction Code Description from the CSV to determine the channel according to the Channel Rules below
 
 **Channel Rules (Payment Method):**
 The channel field can only be: "FPS", "cash", "ATM", "cash deposits via ATM", "cheque", "Remittance", "Branch", or null

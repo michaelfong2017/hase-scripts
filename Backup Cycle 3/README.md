@@ -123,13 +123,13 @@ job 67902 - Cycle 3 job_67902_20250704_1444_Qwen2.5-32B-Instruct_LoRA
 -> full60 inference job 67914
 -> exam18v2 inference job 68037
 -> exam18v3 inference job 68038
--> exam18v3 rematch unlocated inference job 68068 (pre-2 version is job 68051, no channel rules) (pre-1 version is job 68045, no merging rules)
+-> exam18v3 rematch unlocated inference job 68093 (68068 very fail) (pre-2 version is job 68051, no channel rules) (pre-1 version is job 68045, no merging rules)
 
 job 67968 - Cycle 3 job_67968_20250704_2328_Qwen2.5-14B-Instruct_LoRA
 -> full60 inference job 68029
 -> exam18v2 inference job 68035
 -> exam18v3 inference job 68036
--> exam18v3 rematch unlocated inference job 68069 (pre-2 version is job 68053, no channel rules) (pre version is job 68046, no merging rules)
+-> exam18v3 rematch unlocated inference job 68094 (pre-2 version is job 68053, no channel rules) (pre version is job 68046, no merging rules)
 
 
 SECOND TUNE (v5)
@@ -138,14 +138,14 @@ SECOND TUNE (v5)
 -> merge job 68047
 -> exam18v2 inference job 68054
 -> exam18v3 inference job 68055
--> exam18v3 rematch unlocated inference job 68070 (pre-2 version is job 68058, no channel rules)
+-> exam18v3 rematch unlocated inference job 68095 (pre-2 version is job 68058, no channel rules)
 
 /home/projects/fraudagent/all-downloads/job_67736_20250703_1713_Qwen2.5-7B-Instruct_LoRA_job_67981
 -> second675 job 68044 - Cycle 3 job_68044_20250705_1937_job_67736_20250703_1713_Qwen2.5-7B-Instruct_LoRA_job_67981_LoRA
 -> merge job 68048
 -> exam18v2 inference job 68056
 -> exam18v3 inference job 68057
--> exam18v3 rematch unlocated inference job 68071 (pre-2 version is job 68059, no channel rules)
+-> exam18v3 rematch unlocated inference job 68096 (pre-2 version is job 68059, no channel rules)
 
 
 MERGE JOB
@@ -174,7 +174,6 @@ job 67986 - Cycle 2 job_65364_20250616_1930_Llama-3.2-1B-Instruct_LoRA
 
 ## V6 (WORSE)
 ```bash
-V6 (WORSE)
 job 68004 - Cycle 3 full4380 - job_68004_20250705_0854_Qwen2.5-32B-Instruct_LoRA
 -> merge job 68005
 
@@ -182,14 +181,14 @@ job 68004 - Cycle 3 full4380 - job_68004_20250705_0854_Qwen2.5-32B-Instruct_LoRA
 -> inference full60v6 job 68018
 -> inference exam18v2.6 (from v6 instruction) job 68028
 -> inference exam18v3.6 job 68064
--> inference exam18v3.6 rematch unlocated job 68072
+-> inference exam18v3.6 rematch unlocated job 68097
 
 job 68006 - Cycle 3 full4380 - job_68006_20250705_1222_Qwen2.5-14B-Instruct_LoRA
 -> merge job 68042
 -> inference full60v6 job 68062
 -> inference exam18v2.6 (from v6 instruction) job 68063
 -> inference exam18v3.6 job 68065
--> inference exam18v3.6 rematch unlocated job 68073
+-> inference exam18v3.6 rematch unlocated job 68098
 
 /home/projects/fraudagent/all-downloads/job_68006_20250705_1222_Qwen2.5-14B-Instruct_LoRA_job_68042
 ```
