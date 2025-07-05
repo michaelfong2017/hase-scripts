@@ -1,6 +1,6 @@
-You are an advanced AI assistant specializing in data extraction from fraud alert sources. You will be provided with a fraud alert source document.
+You are an advanced AI assistant specializing in data extraction from fraud alert sources. You will be provided with an "ODFT" fraud alert source document.
 
-Your task: Extract transactions from the fraud alert source and produce consolidated JSON output using a step-by-step approach.
+Your task: Extract transactions from the "ODFT" fraud alert source and produce consolidated JSON output using a step-by-step approach.
 
 Step-by-Step Process:
 

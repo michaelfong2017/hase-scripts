@@ -87,8 +87,8 @@ BANK_MAPPING = {
              "ICBKCNB■■■■", "ICBKC■■■■■", "UBHK■■■■", "中国工商银行"],
     "DBS": ["DBS", "DBS BANK", "DBS Bank (Hong Kong) Ltd.", "016", "016 BBAN"],
     "ZA BANK": ["ZA Bank", "ZA Bank Limited", "387", "387 BBAN"],
-    "BOCOM": ["Bank of Com", "Bank of Communications (Hong Kong) Ltd."],
-    "CASH": ["Cash", "Cash Deposit", "CASH", "CASH CASH"]  # All cash-related terms as bank/transaction types
+    "BOCOM": ["Bank of Com", "Bank of Communications (Hong Kong) Ltd."]
+    # Removed CASH mapping completely
 }
 
 # Enhanced pattern definitions
@@ -208,10 +208,8 @@ def extract_unique_values(csv_file_path):
             r'\d{3}\s+BBAN',  # 004 BBAN
             r'BBAN\s+\d+',  # BBAN 4
             r'[A-Z]{3,8}■+',  # ICBKCNB■■■■
-            r'滙豐|渣打银行|恆生銀行|恆生|中國建設銀行.*',  # Chinese bank names
-            r'Cash(?:\s+Deposit)?',  # Cash, Cash Deposit - moved to bank patterns
-            r'CASH\s*CASH',  # CASH CASH - moved to bank patterns
-            r'CASH'  # CASH - moved to bank patterns
+            r'滙豐|渣打银行|恆生銀行|恆生|中國建設銀行.*'  # Chinese bank names
+            # Removed all CASH patterns
         ],
             'police_reference': [
                 r'[A-Z]+RN\d*■*',  # TYRN240■■■■
@@ -287,7 +285,7 @@ def extract_unique_values(csv_file_path):
 
 # Random generation functions (keep existing ones and add enhanced versions)
 def generate_random_date():
-    """Generate random date from sample dates, handling various formats"""
+    """Generate random date from sample dates, avoiding ambiguous formats"""
     # Use the actual dates from your sample data
     valid_dates = [
         "2024-01-03", "2024-05-22", "2024-06-29", "2024-07-10", "2024-07-15",
@@ -307,7 +305,7 @@ def generate_random_date():
     # Pick a random valid date
     base_date = random.choice(valid_dates)
     
-    # Convert to different formats
+    # Convert to different formats but avoid ambiguous day/month formats
     try:
         dt = datetime.strptime(base_date, '%Y-%m-%d')
         
@@ -315,11 +313,10 @@ def generate_random_date():
             dt.strftime('%Y-%m-%d'),           # 2024-08-24
             dt.strftime('%Y-%m-%d %H:%M:%S'),  # 2024-08-24 00:00:00
             dt.strftime('%d %b %Y'),           # 24 Aug 2024
-            dt.strftime('%d/%m/%Y'),           # 24/08/2024
             dt.strftime('%Y%m%d'),             # 20240824
             dt.strftime('%d%b%Y').upper(),     # 24AUG2024
-            dt.strftime('%d%b').upper(),       # 24AUG
-            dt.strftime('%m/%d/%Y'),           # 08/24/2024
+            dt.strftime('%d-%m-%Y'),           # 24-08-2024
+            dt.strftime('%Y/%m/%d'),           # 2024/08/24 (year first, unambiguous)
         ]
         
         return random.choice(formats)

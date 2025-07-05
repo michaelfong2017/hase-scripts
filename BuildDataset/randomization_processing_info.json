@@ -1,0 +1,14 @@
+{
+  "original_rows": 945,
+  "final_rows": 4355,
+  "randomization_sets_created": 125,
+  "timestamp": "2025-07-05T08:04:37.304761",
+  "randomization_counts": {
+    "ADCC": 6,
+    "ODFT": 6,
+    "Search Warrant": 4,
+    "HSBC Referral": 3,
+    "UAR": 3,
+    "Police Letter": 3
+  }
+}
