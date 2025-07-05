@@ -1,0 +1,323 @@
+
+=============
+== PyTorch ==
+=============
+
+NVIDIA Release 24.08 (build 107063150)
+PyTorch Version 2.5.0a0+872d972
+Container image Copyright (c) 2024, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+Copyright (c) 2014-2024 Facebook Inc.
+Copyright (c) 2011-2014 Idiap Research Institute (Ronan Collobert)
+Copyright (c) 2012-2014 Deepmind Technologies    (Koray Kavukcuoglu)
+Copyright (c) 2011-2012 NEC Laboratories America (Koray Kavukcuoglu)
+Copyright (c) 2011-2013 NYU                      (Clement Farabet)
+Copyright (c) 2006-2010 NEC Laboratories America (Ronan Collobert, Leon Bottou, Iain Melvin, Jason Weston)
+Copyright (c) 2006      Idiap Research Institute (Samy Bengio)
+Copyright (c) 2001-2004 Idiap Research Institute (Ronan Collobert, Samy Bengio, Johnny Mariethoz)
+Copyright (c) 2015      Google Inc.
+Copyright (c) 2015      Yangqing Jia
+Copyright (c) 2013-2016 The Caffe contributors
+All rights reserved.
+
+Various files include modifications (c) NVIDIA CORPORATION & AFFILIATES.  All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+ERROR: This container was built for NVIDIA Driver Release 560.35 or later, but
+       version 535.161.08 was detected and compatibility mode is UNAVAILABLE.
+
+       [[]]
+
+[INFO] Inference script started at 2025-07-05 23:40:49
+[INFO] Input CSV path: /home/projects/fraudagent/hase-michael/V4/dataset/exam18_test_set_v3.6.csv
+[INFO] Model: /home/projects/fraudagent/hase-michael/V4/output_models/job_68004_20250705_0854_Qwen2.5-32B-Instruct_LoRA
+[INFO] Num splits: 1, This GPU index: 0
+[INFO] Timestamp: 20250705234009
+[INFO] Created symlink: model_responses/job_68004_20250705_0854_Qwen2.5-32B-Instruct_LoRA/batch_test_job_68108.out -> /home/projects/fraudagent/hase-michael/V4/slurm_logs/job_68108/batch_test_job_68108.out
+[INFO] Created symlink: model_responses/job_68004_20250705_0854_Qwen2.5-32B-Instruct_LoRA/batch_test_job_68108.err -> /home/projects/fraudagent/hase-michael/V4/slurm_logs/job_68108/batch_test_job_68108.err
+[INFO] Loading model: /home/projects/fraudagent/hase-michael/V4/output_models/job_68004_20250705_0854_Qwen2.5-32B-Instruct_LoRA
+[2025-07-05 23:40:50,967] [INFO] [real_accelerator.py:219:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+Warning: The cache directory for DeepSpeed Triton autotune, /home/users/1787/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+[INFO] Model loaded in 17.15 seconds.
+  [GPU 0] 61.53GB allocated, 62.69GB reserved
+  [CPU] 32.89GB used, 2.3% of total
+[INFO] Loading tokenizer from: /home/projects/fraudagent/hase-michael/V4/output_models/job_68004_20250705_0854_Qwen2.5-32B-Instruct_LoRA
+[INFO] Tokenizer loaded successfully.
+[INFO] Starting inference for 18 rows.
+
+[INFO] Processing row 1/18
+[INFO] Instruction (truncated): You are an advanced AI assistant specializing in data extraction and record link...
+[INFO] User Prompt (truncated): Now, process the following documents.
+<FRAUD_ALERT_SOURCE>
+FC-UAR document
+Page x of y
+
+URP-0000000001 - Original Case R...
+[INFO] No re-matching needed for row 1
+[INFO] Row 1 processed in 355.23 seconds.
+[INFO] Input tokens: 3004, Output tokens: 947
+[INFO] Output CSV saved to: model_responses/job_68004_20250705_0854_Qwen2.5-32B-Instruct_LoRA/exam18_test_set_v3_model_responses_chunk_0_job_68108.csv
+  [GPU 0] 61.56GB allocated, 63.74GB reserved
+  [CPU] 32.32GB used, 2.3% of total
+
+[INFO] Processing row 2/18
+[INFO] Instruction (truncated): You are an advanced AI assistant specializing in data extraction and record link...
+[INFO] User Prompt (truncated): Now, process the following documents.
+<FRAUD_ALERT_SOURCE>
+## 4.Victim with financial loss
+| 4.Victim with financial los...
+[INFO] No re-matching needed for row 2
+[INFO] Row 2 processed in 298.37 seconds.
+[INFO] Input tokens: 4281, Output tokens: 774
+[INFO] Output CSV saved to: model_responses/job_68004_20250705_0854_Qwen2.5-32B-Instruct_LoRA/exam18_test_set_v3_model_responses_chunk_0_job_68108.csv
+  [GPU 0] 61.56GB allocated, 64.62GB reserved
+  [CPU] 29.53GB used, 2.1% of total
+
+[INFO] Processing row 3/18
+[INFO] Instruction (truncated): You are an advanced AI assistant specializing in data extraction and record link...
+[INFO] User Prompt (truncated): Now, process the following documents.
+<FRAUD_ALERT_SOURCE>
+## 4.Victim with financial loss
+| 4.Victim with financial los...
+[INFO] No re-matching needed for row 3
+[INFO] Row 3 processed in 132.51 seconds.
+[INFO] Input tokens: 4613, Output tokens: 722
+[INFO] Output CSV saved to: model_responses/job_68004_20250705_0854_Qwen2.5-32B-Instruct_LoRA/exam18_test_set_v3_model_responses_chunk_0_job_68108.csv
+  [GPU 0] 61.56GB allocated, 65.57GB reserved
+  [CPU] 30.37GB used, 2.2% of total
+
+[INFO] Processing row 4/18
+[INFO] Instruction (truncated): You are an advanced AI assistant specializing in data extraction and record link...
+[INFO] User Prompt (truncated): Now, process the following documents.
+<FRAUD_ALERT_SOURCE>
+Dear HSB,
+
+Please be informed of a case of **"Telephone Decep...
+[INFO] No re-matching needed for row 4
+[INFO] Row 4 processed in 48.72 seconds.
+[INFO] Input tokens: 2928, Output tokens: 460
+[INFO] Output CSV saved to: model_responses/job_68004_20250705_0854_Qwen2.5-32B-Instruct_LoRA/exam18_test_set_v3_model_responses_chunk_0_job_68108.csv
+  [GPU 0] 61.56GB allocated, 65.57GB reserved
+  [CPU] 30.66GB used, 2.2% of total
+
+[INFO] Processing row 5/18
+[INFO] Instruction (truncated): You are an advanced AI assistant specializing in data extraction and record link...
+[INFO] User Prompt (truncated): Now, process the following documents.
+<FRAUD_ALERT_SOURCE>
+Dear team,
+
+There is a fraud case reporting involved HASE  su...
+[INFO] No re-matching needed for row 5
+[INFO] Row 5 processed in 130.95 seconds.
+[INFO] Input tokens: 2599, Output tokens: 417
+[INFO] Output CSV saved to: model_responses/job_68004_20250705_0854_Qwen2.5-32B-Instruct_LoRA/exam18_test_set_v3_model_responses_chunk_0_job_68108.csv
+  [GPU 0] 61.56GB allocated, 65.57GB reserved
+  [CPU] 31.43GB used, 2.2% of total
+
+[INFO] Processing row 6/18
+[INFO] Instruction (truncated): You are an advanced AI assistant specializing in data extraction and record link...
+[INFO] User Prompt (truncated): Now, process the following documents.
+<FRAUD_ALERT_SOURCE>
+Dear team,
+
+There is a fraud case reporting involved HASE  su...
+[INFO] No re-matching needed for row 6
+[INFO] Row 6 processed in 41.65 seconds.
+[INFO] Input tokens: 2508, Output tokens: 222
+[INFO] Output CSV saved to: model_responses/job_68004_20250705_0854_Qwen2.5-32B-Instruct_LoRA/exam18_test_set_v3_model_responses_chunk_0_job_68108.csv
+  [GPU 0] 61.56GB allocated, 65.57GB reserved
+  [CPU] 31.66GB used, 2.2% of total
+
+[INFO] Processing row 7/18
+[INFO] Instruction (truncated): You are an advanced AI assistant specializing in data extraction and record link...
+[INFO] User Prompt (truncated): Now, process the following documents.
+<FRAUD_ALERT_SOURCE>
+Dear team,
+
+There is a fraud case reporting involved HASE  su...
+[INFO] No re-matching needed for row 7
+[INFO] Row 7 processed in 18.97 seconds.
+[INFO] Input tokens: 2486, Output tokens: 227
+[INFO] Output CSV saved to: model_responses/job_68004_20250705_0854_Qwen2.5-32B-Instruct_LoRA/exam18_test_set_v3_model_responses_chunk_0_job_68108.csv
+  [GPU 0] 61.56GB allocated, 65.57GB reserved
+  [CPU] 31.76GB used, 2.2% of total
+
+[INFO] Processing row 8/18
+[INFO] Instruction (truncated): You are an advanced AI assistant specializing in data extraction and record link...
+[INFO] User Prompt (truncated): Now, process the following documents.
+<FRAUD_ALERT_SOURCE>
+**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* SS RN 25■■■...
+[INFO] No re-matching needed for row 8
+[INFO] Row 8 processed in 45.87 seconds.
+[INFO] Input tokens: 3782, Output tokens: 264
+[INFO] Output CSV saved to: model_responses/job_68004_20250705_0854_Qwen2.5-32B-Instruct_LoRA/exam18_test_set_v3_model_responses_chunk_0_job_68108.csv
+  [GPU 0] 61.56GB allocated, 65.57GB reserved
+  [CPU] 32.06GB used, 2.2% of total
+
+[INFO] Processing row 9/18
+[INFO] Instruction (truncated): You are an advanced AI assistant specializing in data extraction and record link...
+[INFO] User Prompt (truncated): Now, process the following documents.
+<FRAUD_ALERT_SOURCE>
+FC-UAR document
+Page x of y
+
+URP-0000000001 - Original Case R...
+[INFO] No re-matching needed for row 9
+[INFO] Row 9 processed in 43.67 seconds.
+[INFO] Input tokens: 4189, Output tokens: 238
+[INFO] Output CSV saved to: model_responses/job_68004_20250705_0854_Qwen2.5-32B-Instruct_LoRA/exam18_test_set_v3_model_responses_chunk_0_job_68108.csv
+  [GPU 0] 61.56GB allocated, 65.57GB reserved
+  [CPU] 32.31GB used, 2.3% of total
+
+[INFO] Processing row 10/18
+[INFO] Instruction (truncated): You are an advanced AI assistant specializing in data extraction and record link...
+[INFO] User Prompt (truncated): Now, process the following documents.
+<FRAUD_ALERT_SOURCE>
+Police Force Ordinance
+(Cap. 232)
+
+Contact Person: PC ■■■■■
+C...
+[INFO] No re-matching needed for row 10
+[INFO] Row 10 processed in 4.62 seconds.
+[INFO] Input tokens: 3017, Output tokens: 78
+[INFO] Output CSV saved to: model_responses/job_68004_20250705_0854_Qwen2.5-32B-Instruct_LoRA/exam18_test_set_v3_model_responses_chunk_0_job_68108.csv
+  [GPU 0] 61.56GB allocated, 65.57GB reserved
+  [CPU] 32.33GB used, 2.3% of total
+
+[INFO] Processing row 11/18
+[INFO] Instruction (truncated): You are an advanced AI assistant specializing in data extraction and record link...
+[INFO] User Prompt (truncated): Now, process the following documents.
+<FRAUD_ALERT_SOURCE>
+Dear HSB,
+
+Please be informed of a case of **"Social Media De...
+[INFO] No re-matching needed for row 11
+[INFO] Row 11 processed in 14.25 seconds.
+[INFO] Input tokens: 2934, Output tokens: 275
+[INFO] Output CSV saved to: model_responses/job_68004_20250705_0854_Qwen2.5-32B-Instruct_LoRA/exam18_test_set_v3_model_responses_chunk_0_job_68108.csv
+  [GPU 0] 61.56GB allocated, 65.57GB reserved
+  [CPU] 32.36GB used, 2.3% of total
+
+[INFO] Processing row 12/18
+[INFO] Instruction (truncated): You are an advanced AI assistant specializing in data extraction and record link...
+[INFO] User Prompt (truncated): Now, process the following documents.
+<FRAUD_ALERT_SOURCE>
+**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* POLICEREF2
+...
+[INFO] Re-matching needed for row 12 - found transactions with can_be_located=false
+[INFO] Re-matching completed for row 12, using rematch response
+[INFO] Row 12 processed in 201.88 seconds.
+[INFO] Input tokens: 3426, Output tokens: 869
+[INFO] Output CSV saved to: model_responses/job_68004_20250705_0854_Qwen2.5-32B-Instruct_LoRA/exam18_test_set_v3_model_responses_chunk_0_job_68108.csv
+  [GPU 0] 61.56GB allocated, 65.57GB reserved
+  [CPU] 33.58GB used, 2.3% of total
+
+[INFO] Processing row 13/18
+[INFO] Instruction (truncated): You are an advanced AI assistant specializing in data extraction and record link...
+[INFO] User Prompt (truncated): Now, process the following documents.
+<FRAUD_ALERT_SOURCE>
+FC-UAR document
+Page x of y
+
+URP-0000000001 - Original Case R...
+[INFO] No re-matching needed for row 13
+[INFO] Row 13 processed in 12.37 seconds.
+[INFO] Input tokens: 3707, Output tokens: 227
+[INFO] Output CSV saved to: model_responses/job_68004_20250705_0854_Qwen2.5-32B-Instruct_LoRA/exam18_test_set_v3_model_responses_chunk_0_job_68108.csv
+  [GPU 0] 61.56GB allocated, 65.57GB reserved
+  [CPU] 33.62GB used, 2.3% of total
+
+[INFO] Processing row 14/18
+[INFO] Instruction (truncated): You are an advanced AI assistant specializing in data extraction and record link...
+[INFO] User Prompt (truncated): Now, process the following documents.
+<FRAUD_ALERT_SOURCE>
+Dear team,
+
+There is a fraud case reporting involved HASE  su...
+[INFO] No re-matching needed for row 14
+[INFO] Row 14 processed in 11.67 seconds.
+[INFO] Input tokens: 3271, Output tokens: 220
+[INFO] Output CSV saved to: model_responses/job_68004_20250705_0854_Qwen2.5-32B-Instruct_LoRA/exam18_test_set_v3_model_responses_chunk_0_job_68108.csv
+  [GPU 0] 61.56GB allocated, 65.57GB reserved
+  [CPU] 33.67GB used, 2.3% of total
+
+[INFO] Processing row 15/18
+[INFO] Instruction (truncated): You are an advanced AI assistant specializing in data extraction and record link...
+[INFO] User Prompt (truncated): Now, process the following documents.
+<FRAUD_ALERT_SOURCE>
+Dear HSB,
+
+Please be informed of a case of **"Investment Frau...
+[INFO] No re-matching needed for row 15
+[INFO] Row 15 processed in 14.86 seconds.
+[INFO] Input tokens: 3952, Output tokens: 272
+[INFO] Output CSV saved to: model_responses/job_68004_20250705_0854_Qwen2.5-32B-Instruct_LoRA/exam18_test_set_v3_model_responses_chunk_0_job_68108.csv
+  [GPU 0] 61.56GB allocated, 65.57GB reserved
+  [CPU] 33.76GB used, 2.3% of total
+
+[INFO] Processing row 16/18
+[INFO] Instruction (truncated): You are an advanced AI assistant specializing in data extraction and record link...
+[INFO] User Prompt (truncated): Now, process the following documents.
+<FRAUD_ALERT_SOURCE>
+**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* POLICEREF2
+...
+[INFO] No re-matching needed for row 16
+[INFO] Row 16 processed in 14.12 seconds.
+[INFO] Input tokens: 4468, Output tokens: 250
+[INFO] Output CSV saved to: model_responses/job_68004_20250705_0854_Qwen2.5-32B-Instruct_LoRA/exam18_test_set_v3_model_responses_chunk_0_job_68108.csv
+  [GPU 0] 61.56GB allocated, 65.57GB reserved
+  [CPU] 33.83GB used, 2.3% of total
+
+[INFO] Processing row 17/18
+[INFO] Instruction (truncated): You are an advanced AI assistant specializing in data extraction and record link...
+[INFO] User Prompt (truncated): Now, process the following documents.
+<FRAUD_ALERT_SOURCE>
+**<u>Annex H6</u>**
+**PERSONAL DATA**
+*Our Ref.:* POLICEREF3
+...
+[INFO] No re-matching needed for row 17
+[INFO] Row 17 processed in 164.17 seconds.
+[INFO] Input tokens: 4989, Output tokens: 720
+[INFO] Output CSV saved to: model_responses/job_68004_20250705_0854_Qwen2.5-32B-Instruct_LoRA/exam18_test_set_v3_model_responses_chunk_0_job_68108.csv
+  [GPU 0] 61.56GB allocated, 66.61GB reserved
+  [CPU] 28.18GB used, 2.0% of total
+
+[INFO] Processing row 18/18
+[INFO] Instruction (truncated): You are an advanced AI assistant specializing in data extraction and record link...
+[INFO] User Prompt (truncated): Now, process the following documents.
+<FRAUD_ALERT_SOURCE>
+Police Force Ordinance
+(Cap. 232)
+
+Contact Person: PC ■■■■■
+C...
+[INFO] No re-matching needed for row 18
+[INFO] Row 18 processed in 4.77 seconds.
+[INFO] Input tokens: 4281, Output tokens: 80
+[INFO] Output CSV saved to: model_responses/job_68004_20250705_0854_Qwen2.5-32B-Instruct_LoRA/exam18_test_set_v3_model_responses_chunk_0_job_68108.csv
+  [GPU 0] 61.56GB allocated, 66.61GB reserved
+  [CPU] 28.18GB used, 2.0% of total
+
+[INFO] All rows processed in 1558.66 seconds.
+[INFO] Final output CSV path: model_responses/job_68004_20250705_0854_Qwen2.5-32B-Instruct_LoRA/exam18_test_set_v3_model_responses_chunk_0_job_68108.csv
+
+========== INFERENCE SUMMARY ==========
+Total rows processed: 18
+Rows requiring re-matching: 1
+Total input tokens: 66209
+Total output tokens: 7549
+Average time per row: 86.59 seconds
+Total elapsed time: 1558.66 seconds
+  [GPU 0] 61.56GB allocated, 66.61GB reserved
+  [CPU] 28.18GB used, 2.0% of total
+=======================================

@@ -1,0 +1,1708 @@
+```json
+{
+  "fraud_type": "External Fraud",
+  "alerted_transactions": [
+    {
+      "date": "2025-05-04",
+      "amount": 15500,
+      "currency": "HKD",
+      "from": {
+        "name": "MS YAN MEI MEI",
+        "account_number": "444-4444444-882",
+        "bank": "HASE"
+      },
+      "to": {
+        "name": "CHAN TAI MAN",
+        "account_number": "444-4444444-001",
+        "bank": "HASE"
+      },
+      "channel": null,
+      "can_be_located": false,
+      "transaction_references": [],
+      "original_amount": 15500,
+      "rematch_note": "No matching transaction found within the given date and amount tolerance."
+    }
+  ]
+}
+```
+
+**Explanation:**
+After re-examining the provided transaction records, no transactions match the criteria for the alerted transaction on 2025-05-04 with an amount of 15500 HKD. The date does not match any of the transactions in the provided CSV, and even if we consider a 5% tolerance for the amount, no transactions fall within this range. Therefore, the original JSON remains unchanged.
+2996.0
+632.0
+
+Let's follow the steps to process the given documents and extract the necessary information.
+
+### Step 1: Extract Reported Transactions from Source
+
+From the fraud alert source, we need to extract transactions with both date and amount. The relevant information is:
+
+- **Date**: 2025-04-22
+- **Amount**: HKD 95,500
+- **Currency**: HKD
+- **Originator Name**: YAN MEI MEI
+- **Originator Account Number**: 444-4444444-001
+- **Beneficiary Name**: CHAN TAI MAN
+- **Beneficiary Account Number**: 111-111111-101
+- **Channel**: 支票
+- **Fraud Type**: Not provided
+
+### Step 2: Match Each Reported Transaction to CSV
+
+We need to find a matching transaction in the CSV file based on the extracted information.
+
+- **Date**: 22/4/2025
+- **Amount**: 95500
+- **Originator Account Number**: 444-4444444-001
+- **Beneficiary Account Number**: 111-111111-101
+
+Looking at the CSV file, we find a match:
+
+- **Transaction Date (value)**: 22/4/2025
+- **Originating Currency**: HKD
+- **Originating Amount**: 95500
+- **Debit Credit Indicator**: C
+- **Beneficiary Bank Raw**: Beneficiary
+- **Originator Bank Raw**: HASE
+- **Originator Account Number**: 444-4444444-001
+- **Beneficiary Account Number**: 111-111111-101
+- **Originator Name**: YAN MEI MEI
+- **Beneficiary Name**: CHAN TAI MAN
+- **Subject Type**: CCHQ
+- **Transaction Type Source**: CCHQ
+- **Transaction Code Description**: CDM CHEQUE DEPOSIT
+- **Transaction ID**: f786021b-b725-4182-ba86-eb055f182542
+
+### Step 3: Merge Data for Each Matched Transaction
+
+- **Transaction References**: [f786021b-b725-4182-ba86-eb055f182542]
+- **Global Fields**:
+  - **Fraud Type**: Not provided
+  - **Can Be Located**: true
+
+### Step 4: Apply Global Field Rules
+
+- **Fraud Type**: Not provided
+
+### Step 5: Apply Transaction Rules
+
+- **Bank Rules**:
+  - **from.bank**: HASE
+  - **to.bank**: Beneficiary
+
+### Step 6: Build Final JSON
+
+```json
+{
+  "fraud_type": "Not provided",
+  "alerted_transactions": [
+    {
+      "date": "2025-04-22",
+      "amount": 95500,
+      "currency": "HKD",
+      "from": {
+        "name": "YAN MEI MEI",
+        "account_number": "444-4444444-001",
+        "bank": "HASE"
+      },
+      "to": {
+        "name": "CHAN TAI MAN",
+        "account_number": "111-111111-101",
+        "bank": "Beneficiary"
+      },
+      "channel": "CDM CHEQUE DEPOSIT",
+      "can_be_located": true,
+      "transaction_references": [
+        "f786021b-b725-4182-ba86-eb055f182542"
+      ]
+    }
+  ]
+}
+```
+
+This is the final JSON output based on the provided documents and the specified rules.
+4273.0
+881.0
+
+Let's follow the steps to process the given documents and extract the necessary information.
+
+### Step 1: Extract Reported Transactions from Source
+
+From the fraud alert source, we need to extract transactions with both date and amount:
+
+- **Date**: 2025-04-14
+- **Amount**: HKD 8,300.00
+
+The transaction is explicitly mentioned with both date and amount.
+
+### Step 2: Match Each Reported Transaction to CSV
+
+We need to find a matching transaction in the CSV file:
+
+- **Date**: 2025-04-14
+- **Amount**: 8300
+- **Account Numbers**: 
+  - Originator: 222-222222-110
+  - Beneficiary: 111-111111-109
+
+The transaction matches the criteria in the CSV file:
+
+- **Transaction ID**: `a042a4df-8333-47de-b89e-abd0a352a550`
+
+### Step 3: Merge Data for Each Matched Transaction
+
+Using the CSV data, we merge the transaction details:
+
+- **Transaction ID**: `a042a4df-8333-47de-b89e-abd0a352a550`
+- **Date**: 2025-04-14
+- **Amount**: 8300
+- **Currency**: HKD
+- **From**:
+  - Name: FONG LAI
+  - Account Number: 222-222222-110
+  - Bank: HASE
+- **To**:
+  - Name: SUN YEUNG
+  - Account Number: 111-111111-109
+  - Bank: HASE
+- **Channel**: null
+- **Can Be Located**: true
+- **Transaction References**: ["a042a4df-8333-47de-b89e-abd0a352a550"]
+
+### Step 4: Apply Global Field Rules
+
+- **Fraud Type**: "Social Media Scam" (from the fraud alert source)
+
+### Step 5: Apply Transaction Rules
+
+- **Bank Rules**:
+  - **from.bank**: HASE
+  - **to.bank**: HASE
+
+### Step 6: Build Final JSON
+
+```json
+{
+  "fraud_type": "Social Media Scam",
+  "alerted_transactions": [
+    {
+      "date": "2025-04-14",
+      "amount": 8300,
+      "currency": "HKD",
+      "from": {
+        "name": "FONG LAI",
+        "account_number": "222-222222-110",
+        "bank": "HASE"
+      },
+      "to": {
+        "name": "SUN YEUNG",
+        "account_number": "111-111111-109",
+        "bank": "HASE"
+      },
+      "channel": null,
+      "can_be_located": true,
+      "transaction_references": [
+        "a042a4df-8333-47de-b89e-abd0a352a550"
+      ]
+    }
+  ]
+}
+```
+
+This is the final JSON output based on the provided documents and the specified rules.
+4605.0
+765.0
+
+Let's follow the step-by-step process to extract and consolidate the transactions from the provided fraud alert source and CSV file.
+
+### Step 1: Extract Reported Transactions from Source
+
+From the given fraud alert source, we can extract the following transactions:
+
+1. **Transaction 1:**
+   - Date: 2025-04-15
+   - Amount: 60000
+   - Originator Bank: HSB
+   - Beneficiary Bank: HASE
+   - Beneficiary Account Number: 111-111111-109
+   - Beneficiary Name: SUN Y****
+   - Originator Account Number: 444-4444444-108
+   - Originator Name: CHUN MING
+
+2. **Transaction 2:**
+   - Date: 2025-04-15
+   - Amount: 58000
+   - Originator Bank: HSB
+   - Beneficiary Bank: HASE
+   - Beneficiary Account Number: 111-111111-110
+   - Beneficiary Name: WONG CHUN HEI
+   - Originator Account Number: 444-4444444-101
+   - Originator Name: CHEUNG TAK SHING
+
+3. **Transaction 3:**
+   - Date: 2025-04-15
+   - Amount: 58000
+   - Originator Bank: The Hongkong and Shanghai Banking Corporation Limited
+   - Beneficiary Bank: HASE
+   - Beneficiary Account Number: 111-111111-110
+   - Beneficiary Name: WONG CHUN HEI
+   - Originator Account Number: 444-4444444-101
+   - Originator Name: CHEUNG TAK SHING
+
+### Step 2: Match Each Reported Transaction to CSV
+
+#### Transaction 1:
+- **Exact Match Found:**
+  - Date: 2025-04-15
+  - Amount: 60000
+  - Originator Bank: Bank of China (Hong Kong) Limited
+  - Beneficiary Bank: HASE
+  - Beneficiary Account Number: 111-111111-109
+  - Beneficiary Name: SUN YEUNG
+  - Originator Account Number: 444-4444444-108
+  - Originator Name: CHUN MING
+  - Transaction ID: af603fb0-0de9-47cf-88df-8cf06bbc1778
+
+#### Transaction 2:
+- **Exact Match Found:**
+  - Date: 2025-04-15
+  - Amount: 58000
+  - Originator Bank: Bank of China (Hong Kong) Limited
+  - Beneficiary Bank: HASE
+  - Beneficiary Account Number: 111-111111-110
+  - Beneficiary Name: WONG CHUN HEI
+  - Originator Account Number: 444-4444444-108
+  - Originator Name: CHUN MING
+  - Transaction ID: 9c501229-b7ff-457a-90aa-d2069b47a0a1
+
+#### Transaction 3:
+- **Exact Match Found:**
+  - Date: 2025-04-15
+  - Amount: 58000
+  - Originator Bank: The Hongkong and Shanghai Banking Corporation Limited
+  - Beneficiary Bank: HASE
+  - Beneficiary Account Number: 111-111111-110
+  - Beneficiary Name: WONG CHUN HEI
+  - Originator Account Number: 444-4444444-101
+  - Originator Name: CHEUNG TAK SHING
+  - Transaction ID: ced5d55d-0c4a-4916-8b4f-c72521c39a77
+
+### Step 3: Merge Data for Each Matched Transaction
+
+#### Transaction 1:
+- **Transaction ID:** af603fb0-0de9-47cf-88df-8cf06bbc1778
+- **Date:** 2025-04-15
+- **Amount:** 60000
+- **Currency:** HKD
+- **From:**
+  - Name: CHUN MING
+  - Account Number: 444-4444444-108
+  - Bank: Bank of China (Hong Kong) Limited
+- **To:**
+  - Name: SUN YEUNG
+  - Account Number: 111-111111-109
+  - Bank: HASE
+- **Channel:** null
+- **Can Be Located:** true
+- **Transaction References:** [af603fb0-0de9-47cf-88df-8cf06bbc1778]
+
+#### Transaction 2:
+- **Transaction ID:** 9c501229-b7ff-457a-90aa-d2069b47a0a1
+- **Date:** 2025-04-15
+- **Amount:** 58000
+- **Currency:** HKD
+- **From:**
+  - Name: CHUN MING
+  - Account Number: 444-4444444-108
+  - Bank: Bank of China (Hong Kong) Limited
+- **To:**
+  - Name: WONG CHUN HEI
+  - Account Number: 111-111111-110
+  - Bank: HASE
+- **Channel:** null
+- **Can Be Located:** true
+- **Transaction References:** [9c501229-b7ff-457a-90aa-d2069b47a0a1]
+
+#### Transaction 3:
+- **Transaction ID:** ced5d55d-0c4a-4916-8b4f-c72521c39a77
+- **Date:** 2025-04-15
+- **Amount:** 58000
+- **Currency:** HKD
+- **From:**
+  - Name: CHEUNG TAK SHING
+  - Account Number: 444-4444444-101
+  - Bank: The Hongkong and Shanghai Banking Corporation Limited
+- **To:**
+  - Name: WONG CHUN HEI
+  - Account Number: 111-111111-110
+  - Bank: HASE
+- **Channel:** null
+- **Can Be Located:** true
+- **Transaction References:** [ced5d55d-0c4a-4916-8b4f-c72521c39a77]
+
+### Step 4: Apply Transaction Rules
+
+No specific transaction rules need to be applied here as the transactions already match the required format.
+
+### Step 5: Apply Global Field Rules
+
+- **Fraud Type:** Telephone Deception - Pretend Customer Service
+- **Police Reference:** ESPS ■■■/2025 and TSW RN ■■■■■■■■
+- **Police Team:** DIT 3 ■■■■■■
+
+### Step 6: Build Final JSON
+
+```json
+{
+  "fraud_type": "Telephone Deception - Pretend Customer Service",
+  "police_reference": "ESPS ■■■/2025 and TSW RN ■■■■■■■■",
+  "police_team": "DIT 3 ■■■■■■",
+  "alerted_transactions": [
+    {
+      "date": "2025-04-15",
+      "amount": 60000,
+      "currency": "HKD",
+      "from": {
+        "name": "CHUN MING",
+        "account_number": "444-4444444-108",
+        "bank": "Bank of China (Hong Kong) Limited"
+      },
+      "to": {
+        "name": "SUN YEUNG",
+        "account_number": "111-111111-109",
+        "bank": "HASE"
+      },
+      "channel": null,
+      "can_be_located": true,
+      "transaction_references": [
+        "af603fb0-0de9-47cf-88df-8cf06bbc1778"
+      ]
+    },
+    {
+      "date": "2025-04-15",
+      "amount": 58000,
+      "currency": "HKD",
+      "from": {
+        "name": "CHUN MING",
+        "account_number": "444-4444444-108",
+        "bank": "Bank of China (Hong Kong) Limited"
+      },
+      "to": {
+        "name": "WONG CHUN HEI",
+        "account_number": "111-111111-110",
+        "bank": "HASE"
+      },
+      "channel": null,
+      "can_be_located": true,
+      "transaction_references": [
+        "9c501229-b7ff-457a-90aa-d2069b47a0a1"
+      ]
+    },
+    {
+      "date": "2025-04-15",
+      "amount": 58000,
+      "currency": "HKD",
+      "from": {
+        "name": "CHEUNG TAK SHING",
+        "account_number": "444-4444444-101",
+        "bank": "The Hongkong and Shanghai Banking Corporation Limited"
+      },
+      "to": {
+        "name": "WONG CHUN HEI",
+        "account_number": "111-111111-110",
+        "bank": "HASE"
+      },
+      "channel": null,
+      "can_be_located": true,
+      "transaction_references": [
+        "ced5d55d-0c4a-4916-8b4f-c72521c39a77"
+      ]
+    }
+  ]
+}
+```
+2920.0
+2409.0
+
+Let's follow the step-by-step process to extract and consolidate the transactions from the given fraud alert source and CSV file.
+
+### Step 1: Extract Reported Transactions from Source
+
+From the fraud alert source, we have two transactions:
+
+1. **Transaction 1:**
+   - Date: 13Jun2025
+   - Amount: HKD 10900
+   - Originator:
+     - Account Number: 666-666666-107
+     - Name: CHI FU
+     - Bank: The Hongkong and Shanghai Banking Corporation Limited
+   - Beneficiary:
+     - Account Number: 111-111111-107
+     - Name: MOK YUN
+     - Bank: HASE
+
+2. **Transaction 2:**
+   - Date: 12/06/2025
+   - Amount: HKD 39100
+   - Originator:
+     - Account Number: 666-666666-107
+     - Name: CHI FU
+     - Bank: The Hongkong and Shanghai Banking Corporation Limited
+   - Beneficiary:
+     - Account Number: 111-111111-107
+     - Name: MOK YUN
+     - Bank: HASE
+
+### Step 2: Match Each Reported Transaction to CSV
+
+#### Transaction 1:
+- Date: 13Jun2025
+- Amount: HKD 10900
+- Originator:
+  - Account Number: 666-666666-107
+  - Name: CHI FU
+  - Bank: The Hongkong and Shanghai Banking Corporation Limited
+- Beneficiary:
+  - Account Number: 111-111111-107
+  - Name: MOK YUN
+  - Bank: HASE
+
+**Matched Transaction:**
+- Date: 2025-06-12
+- Amount: 10900
+- Originator:
+  - Account Number: 666-666666-107
+  - Name: CHI FU
+  - Bank: The Hongkong and Shanghai Banking Corporation Limited
+- Beneficiary:
+  - Account Number: 111-111111-107
+  - Name: MOK YUN
+  - Bank: HASE
+- Channel: null
+- Can Be Located: true
+- Transaction References: [1454c14e-3a98-4919-b2d3-dce7ba0eb729]
+
+#### Transaction 2:
+- Date: 12/06/2025
+- Amount: HKD 39100
+- Originator:
+  - Account Number: 666-666666-107
+  - Name: CHI FU
+  - Bank: The Hongkong and Shanghai Banking Corporation Limited
+- Beneficiary:
+  - Account Number: 111-111111-107
+  - Name: MOK YUN
+  - Bank: HASE
+
+**Matched Transaction:**
+- Date: 2025-06-13
+- Amount: 39100
+- Originator:
+  - Account Number: 666-666666-107
+  - Name: CHI FU
+  - Bank: The Hongkong and Shanghai Banking Corporation Limited
+- Beneficiary:
+  - Account Number: 111-111111-107
+  - Name: MOK YUN
+  - Bank: HASE
+- Channel: null
+- Can Be Located: true
+- Transaction References: [8b2dae8c-0835-4958-a2a0-88bbc71e40dc]
+
+### Step 3: Merge Data for Each Matched Transaction
+
+#### Transaction 1:
+- Date: 2025-06-12
+- Amount: 10900
+- Currency: HKD
+- From:
+  - Name: CHI FU
+  - Account Number: 666-666666-107
+  - Bank: The Hongkong and Shanghai Banking Corporation Limited
+- To:
+  - Name: MOK YUN
+  - Account Number: 111-111111-107
+  - Bank: HASE
+- Channel: null
+- Can Be Located: true
+- Transaction References: [1454c14e-3a98-4919-b2d3-dce7ba0eb729]
+
+#### Transaction 2:
+- Date: 2025-06-13
+- Amount: 39100
+- Currency: HKD
+- From:
+  - Name: CHI FU
+  - Account Number: 666-666666-107
+  - Bank: The Hongkong and Shanghai Banking Corporation Limited
+- To:
+  - Name: MOK YUN
+  - Account Number: 111-111111-107
+  - Bank: HASE
+- Channel: null
+- Can Be Located: true
+- Transaction References: [8b2dae8c-0835-4958-a2a0-88bbc71e40dc]
+
+### Step 4: Apply Transaction Rules
+
+Both transactions already meet the bank rules and channel rules, so no further adjustments are needed.
+
+### Step 5: Build Final JSON
+
+```json
+{
+  "fraud_type": "AP-Impersonation (Other)",
+  "alerted_transactions": [
+    {
+      "date": "2025-06-12",
+      "amount": 10900,
+      "currency": "HKD",
+      "from": {
+        "name": "CHI FU",
+        "account_number": "666-666666-107",
+        "bank": "The Hongkong and Shanghai Banking Corporation Limited"
+      },
+      "to": {
+        "name": "MOK YUN",
+        "account_number": "111-111111-107",
+        "bank": "HASE"
+      },
+      "channel": null,
+      "can_be_located": true,
+      "transaction_references": [
+        "1454c14e-3a98-4919-b2d3-dce7ba0eb729"
+      ]
+    },
+    {
+      "date": "2025-06-13",
+      "amount": 39100,
+      "currency": "HKD",
+      "from": {
+        "name": "CHI FU",
+        "account_number": "666-666666-107",
+        "bank": "The Hongkong and Shanghai Banking Corporation Limited"
+      },
+      "to": {
+        "name": "MOK YUN",
+        "account_number": "111-111111-107",
+        "bank": "HASE"
+      },
+      "channel": null,
+      "can_be_located": true,
+      "transaction_references": [
+        "8b2dae8c-0835-4958-a2a0-88bbc71e40dc"
+      ]
+    }
+  ]
+}
+```
+
+This JSON output consolidates the transactions from the fraud alert source and matches them to the corresponding records in the CSV file.
+2587.0
+1713.0
+
+Let's follow the steps to process the given documents and extract the relevant transactions.
+
+### Step 1: Extract Reported Transactions from Source
+
+From the fraud alert source, we have the following transaction details:
+- **Date**: 12/06/2025
+- **Amount**: HKD 5,702
+- **Originator**:
+  - **Account Number**: 333-333333-108
+  - **Name**: POON TO
+  - **Bank**: The Hongkong and Shanghai Banking Corporation Limited
+- **Beneficiary**:
+  - **Account Number**: 111-111111-107
+  - **Name**: MOK YUN
+  - **Bank**: HASE
+
+### Step 2: Match Each Reported Transaction to CSV
+
+We need to find a matching transaction in the CSV file that meets the criteria:
+- **Date**: 2025-06-12
+- **Amount**: 5702
+- **Originator Account Number**: 333-333333-108
+- **Originator Name**: POON TO
+- **Beneficiary Account Number**: 111-111111-107
+- **Beneficiary Name**: MOK YUN
+- **Beneficiary Bank**: HASE
+
+The matching transaction in the CSV file is:
+- **Transaction Date**: 2025-06-12
+- **Amount**: 5702
+- **Originating Bank**: The Hongkong and Shanghai Banking Corporation Limited
+- **Beneficiary Bank**: HASE
+- **Originator Account Number**: 333-333333-108
+- **Beneficiary Account Number**: 111-111111-107
+- **Originator Name**: POON TO
+- **Beneficiary Name**: MOK YUN
+- **Transaction ID**: 4afa975e-4dbb-439a-ab4b-5fb30412f0fb
+
+### Step 3: Merge Data for Each Matched Transaction
+
+- **Transaction References**: [4afa975e-4dbb-439a-ab4b-5fb30412f0fb]
+- **Can Be Located**: true
+- **Channel**: FPS
+- **Currency**: HKD
+- **From**:
+  - **Name**: POON TO
+  - **Account Number**: 333-333333-108
+  - **Bank**: The Hongkong and Shanghai Banking Corporation Limited
+- **To**:
+  - **Name**: MOK YUN
+  - **Account Number**: 111-111111-107
+  - **Bank**: HASE
+
+### Step 4: Apply Transaction Rules
+
+- **Bank Rules**:
+  - **from.bank**: The Hongkong and Shanghai Banking Corporation Limited
+  - **to.bank**: HASE
+- **Channel Rules**:
+  - The channel is "FPS".
+
+### Step 5: Build Final JSON
+
+```json
+{
+  "fraud_type": "AP-Impersonation (Other)",
+  "alerted_transactions": [
+    {
+      "date": "2025-06-12",
+      "amount": 5702,
+      "currency": "HKD",
+      "from": {
+        "name": "POON TO",
+        "account_number": "333-333333-108",
+        "bank": "The Hongkong and Shanghai Banking Corporation Limited"
+      },
+      "to": {
+        "name": "MOK YUN",
+        "account_number": "111-111111-107",
+        "bank": "HASE"
+      },
+      "channel": "FPS",
+      "can_be_located": true,
+      "transaction_references": [
+        "4afa975e-4dbb-439a-ab4b-5fb30412f0fb"
+      ]
+    }
+  ]
+}
+```
+
+This is the final JSON output based on the provided documents and the specified rules.
+2496.0
+929.0
+
+Let's follow the step-by-step process to extract and consolidate the transactions.
+
+### Step 1: Extract Reported Transactions from Source
+From the fraud alert source, we have the following transaction details:
+- **Date**: 10/06/2025
+- **Amount**: HKD 3,500.00
+- **Originator**:
+  - **Account Number**: 666-666666-106
+  - **Name**: CHUANG HUNG
+  - **Bank**: HSBC HK (which is "The Hongkong and Shanghai Banking Corporation Limited")
+- **Beneficiary**:
+  - **Account Number**: 111-111111-107
+  - **Name**: MOK YUN
+  - **Bank**: HASE (which is "Hang Seng Bank Ltd.")
+
+### Step 2: Match Each Reported Transaction to CSV
+We need to find a matching transaction in the CSV file:
+- **Date**: 2025-06-10
+- **Amount**: 3500
+- **Originator**:
+  - **Account Number**: 666-666666-106
+  - **Name**: CHUANG HUNG
+  - **Bank**: The Hongkong and Shanghai Banking Corporation Limited
+- **Beneficiary**:
+  - **Account Number**: 111-111111-107
+  - **Name**: MOK YUN
+  - **Bank**: Hang Seng Bank Ltd.
+
+This matches the transaction with `Transaction ID` 4e73b21d-72f8-475e-b702-6880cc1a394f.
+
+### Step 3: Merge Data for Each Matched Transaction
+- **Transaction ID**: 4e73b21d-72f8-475e-b702-6880cc1a394f
+- **Date**: 2025-06-10
+- **Amount**: 3500
+- **Currency**: HKD
+- **From**:
+  - **Name**: CHUANG HUNG
+  - **Account Number**: 666-666666-106
+  - **Bank**: The Hongkong and Shanghai Banking Corporation Limited
+- **To**:
+  - **Name**: MOK YUN
+  - **Account Number**: 111-111111-107
+  - **Bank**: HASE
+- **Channel**: null
+- **Can Be Located**: true
+- **Transaction References**: [4e73b21d-72f8-475e-b702-6880cc1a394f]
+
+### Step 4: Apply Transaction Rules
+No specific rules apply here since the channel is not specified and the transaction type is not provided.
+
+### Step 5: Build Final JSON
+```json
+{
+  "fraud_type": "Impersonation (Other)",
+  "alerted_transactions": [
+    {
+      "date": "2025-06-10",
+      "amount": 3500,
+      "currency": "HKD",
+      "from": {
+        "name": "CHUANG HUNG",
+        "account_number": "666-666666-106",
+        "bank": "The Hongkong and Shanghai Banking Corporation Limited"
+      },
+      "to": {
+        "name": "MOK YUN",
+        "account_number": "111-111111-107",
+        "bank": "HASE"
+      },
+      "channel": null,
+      "can_be_located": true,
+      "transaction_references": [
+        "4e73b21d-72f8-475e-b702-6880cc1a394f"
+      ]
+    }
+  ]
+}
+```
+
+This is the final consolidated JSON output based on the provided fraud alert source and transaction records.
+2474.0
+907.0
+
+Let's follow the steps outlined to process the given documents and extract the necessary information.
+
+### Step 1: Extract Reported Transactions from Source
+
+From the fraud alert source, we find the following transaction details:
+
+- **Date:** 2025-06-13
+- **Amount:** HKD 139,401.00
+- **Originator Bank:** Bank of China (Hong Kong) Limited
+- **Beneficiary Bank:** HASE
+- **Originator Account Number:** 666-666666-105
+- **Beneficiary Account Number:** 111-111111-107
+- **Beneficiary Name:** MOK YUN
+- **Channel:** FPS
+
+### Step 2: Match Each Reported Transaction to CSV
+
+We need to find a match for the transaction in the CSV file.
+
+- **Exact Match Search:**
+  - Date: 2025-06-13
+  - Amount: 139401
+  - Originator Bank: Bank of China (Hong Kong) Limited
+  - Beneficiary Bank: HASE
+  - Originator Account Number: 666-666666-105
+  - Beneficiary Account Number: 111-111111-107
+  - Beneficiary Name: MOK YUN
+  - Channel: FPS
+
+The transaction matches the following entry in the CSV:
+
+| Transaction Date (value) | Originating Currency | Originating Amount | Debit Credit Indicator | Beneficiary Bank Raw | Originator Bank Raw | Originator Account Number | Beneficiary Account Number | Originator Name | Beneficiary Name | Subject Type | Transaction Type Source | Transaction Code Description | Sending Bank Account Number | Sending Bank Address | Converted Amount | Transaction ID |
+|-------------------------|----------------------|--------------------|------------------------|-----------------------|---------------------|--------------------------|---------------------------|----------------|------------------|-------------|----------------------|-------------------------|----------------------|-----------------|--------------|
+| 2025-06-13              | HKD                  | 139401             | C                      | HASE                  | Bank of China (Hong Kong) Limited | 666-666666-105 | 111-111111-107 | PANG YA SHI | MOK YUN          | Beneficiary | CUTF                 | Default transaction       |                             |                         | 139401         | 635eac01-253a-42af-a99e-8ebf18d5801e |
+
+### Step 3: Merge Data for Each Matched Transaction
+
+- **Transaction References:** `["635eac01-253a-42af-a99e-8ebf18d5801e"]`
+- **Transaction Fields:**
+  - `date`: 2025-06-13
+  - `amount`: 139401
+  - `currency`: HKD
+  - `from`:
+    - `name`: PANG YA SHI
+    - `account_number`: 666-666666-105
+    - `bank`: Bank of China (Hong Kong) Limited
+  - `to`:
+    - `name`: MOK YUN
+    - `account_number`: 111-111111-107
+    - `bank`: HASE
+  - `channel`: FPS
+  - `can_be_located`: true
+
+### Step 4: Apply Transaction Rules
+
+No specific rules need to be applied here as the channel is already correctly identified as FPS.
+
+### Step 5: Apply Global Field Rules
+
+- **Police Reference:** SS RN 25■■■■■
+- **Police Team:** District Investigation Team 6, Tai Po District, Tai Po Police Station
+
+### Step 6: Build Final JSON
+
+```json
+{
+  "fraud_type": "Telephone Deception",
+  "police_reference": "SS RN 25■■■■■",
+  "police_team": "District Investigation Team 6, Tai Po District, Tai Po Police Station",
+  "alerted_transactions": [
+    {
+      "date": "2025-06-13",
+      "amount": 139401,
+      "currency": "HKD",
+      "from": {
+        "name": "PANG YA SHI",
+        "account_number": "666-666666-105",
+        "bank": "Bank of China (Hong Kong) Limited"
+      },
+      "to": {
+        "name": "MOK YUN",
+        "account_number": "111-111111-107",
+        "bank": "HASE"
+      },
+      "channel": "FPS",
+      "can_be_located": true,
+      "transaction_references": [
+        "635eac01-253a-42af-a99e-8ebf18d5801e"
+      ]
+    }
+  ]
+}
+```
+
+This completes the processing of the provided documents and generates the required JSON output.
+3774.0
+1160.0
+
+Let's follow the steps outlined to process the given documents and extract the necessary information.
+
+### Step 1: Extract Reported Transactions from Source
+
+From the fraud alert source, we find the following transaction:
+
+```
+111-111111-107 HKD 20100 16:03:29 HD125■■■■■■■■■■ FRN20250413PAYC01■■■■■■■■■ HKD 41,701.00 C E2E ID NOTPROVIDED TRAN ID 122504■■■■■■■■■ HKD 0.00 DR 003 BBAN 666-666666-101 HKD 41,701.00 CR 024 024N25■■■■■■■■■ SVID 1183■■■■■ LOB RBWM SENDER NAME HUANG JUAN BENE.NAME MOK YUN CUSTOMER TYPE: PERS CORPORATE TYPE : RISK LEVEL : ADDRESSING OPTION 1 : ADDRESSING SUB-OPTION 1 : ADDRESSING SUB-OPTION 2 : ADDRESSING OPTION 2 : ADDRESSING SUB-OPTION 1 : ADDRESSING SUB-OPTION 2 : REMITTANCE INFO 20:12250■■■■■■■■■0 :21:0102■■■■■■■■■06 :79:RE OUR FASTER PAYMENT REF. FRN20250413PAYC01■■■■■■■■■ DATED 20250413 F OR HKD41,701.00 AT THE TRANSFEROR'S REQUEST, PLS CANCEL THE ABOVE PAYMENT AND RETURN FUNDS TO US QUOTING OUR ABOVE REF. AS FRAUD PLS ALWAYS QUOTE OUR FIELD 20 REFERENCE IN FIELD 21 ON YOUR FUTURE CORRESPONDENCE. REGARDS, INQUIRY SERVICES INVESTIGATION SECTION INTERNATIONAL PAYMENT DIVISION -
+```
+
+### Step 2: Match Each Reported Transaction to CSV
+
+We need to find a match for this transaction in the CSV file. The transaction details are:
+
+- Date: `2025-06-13`
+- Amount: `41701`
+- Originator: `666-666666-101`
+- Beneficiary: `111-111111-107`
+- Bank: `STANDARD CHARTERED BANK (HONG KONG) LIMITED`
+
+Looking through the CSV file, we find the following transaction:
+
+```
+2025-06-13,HKD,41701,C,Hang Seng Bank Ltd.,STANDARD CHARTERED BANK (HONG KONG) LIMITED,666-666666-101,111-111111-107,HUANG JUAN,MOK YUN,Beneficiary,CUTF,Default transaction,,STANDARD CHARTERED BANK (HONG KONG) LIMITED,41701,4b42e9c0-9bd4-404e-ae94-bb4cdacf713c
+```
+
+This matches the transaction details exactly.
+
+### Step 3: Merge Data for Each Matched Transaction
+
+- **Transaction References**: `4b42e9c0-9bd4-404e-ae94-bb4cdacf713c`
+- **Transaction Fields**:
+  - `from.name`: `HUANG JUAN`
+  - `from.account_number`: `666-666666-101`
+  - `from.bank`: `STANDARD CHARTERED BANK (HONG KONG) LIMITED`
+  - `to.name`: `MOK YUN`
+  - `to.account_number`: `111-111111-107`
+  - `to.bank`: `HASE`
+  - `channel`: `null`
+  - `can_be_located`: `true`
+  - `cancel_amount_requested`: `41701`
+
+### Step 4: Apply Global Field Rules
+
+- **Fraud Type**: The fraud type is "External Fraud". No other hints are provided, so we keep it as "External Fraud".
+
+### Step 5: Apply Transaction Rules
+
+- **Bank Rules**:
+  - `from.bank`: `STANDARD CHARTERED BANK (HONG KONG) LIMITED`
+  - `to.bank`: `HASE`
+
+- **Channel Rules**: The channel is `CUTF`, which maps to `null`.
+
+### Step 6: Build Final JSON
+
+```json
+{
+  "fraud_type": "External Fraud",
+  "alerted_transactions": [
+    {
+      "date": "2025-06-13",
+      "amount": 41701,
+      "currency": "HKD",
+      "from": {
+        "name": "HUANG JUAN",
+        "account_number": "666-666666-101",
+        "bank": "STANDARD CHARTERED BANK (HONG KONG) LIMITED"
+      },
+      "to": {
+        "name": "MOK YUN",
+        "account_number": "111-111111-107",
+        "bank": "HASE"
+      },
+      "channel": null,
+      "can_be_located": true,
+      "transaction_references": [
+        "4b42e9c0-9bd4-404e-ae94-bb4cdacf713c"
+      ],
+      "cancel_amount_requested": 41701
+    }
+  ]
+}
+```
+
+This completes the processing of the provided documents and generates the required JSON output.
+4181.0
+1318.0
+
+Let's follow the steps to process the given documents and extract the required information.
+
+### Step 1: Extract Reported Transactions from Source
+There are no explicit transactions mentioned with both date and amount in the provided fraud alert source. Therefore, we have no transactions to extract from the source.
+
+### Step 2: Match Each Reported Transaction to CSV
+Since there are no transactions to match, this step is not applicable.
+
+### Step 3: Merge Data for Each Matched Transaction
+Since there are no transactions to merge, this step is not applicable.
+
+### Step 4: Apply Transaction Rules
+Since there are no transactions to apply rules to, this step is not applicable.
+
+### Step 5: Apply Global Field Rules
+From the fraud alert source, we can extract the following global fields:
+
+- **fraud_type**: Obtaining Property By Deception
+- **police_reference**: POLICEREF1
+- **writ_no**: 2■■■■■
+- **contact_person**: PC ■■■■■
+- **police_team**: District investigation Team 2 Western District
+
+### Step 6: Build Final JSON
+Since there are no transactions to include, the final JSON will only contain the global fields:
+
+```json
+{
+  "fraud_type": "Obtaining Property By Deception",
+  "police_reference": "POLICEREF1",
+  "writ_no": "2■■■■■",
+  "contact_person": "PC ■■■■■",
+  "police_team": "District investigation Team 2 Western District",
+  "alerted_transactions": []
+}
+```
+
+### Final Output
+```json
+{
+  "fraud_type": "Obtaining Property By Deception",
+  "police_reference": "POLICEREF1",
+  "writ_no": "2■■■■■",
+  "contact_person": "PC ■■■■■",
+  "police_team": "District investigation Team 2 Western District",
+  "alerted_transactions": []
+}
+```
+3007.0
+422.0
+
+Let's follow the steps to process the given documents and extract the necessary information.
+
+### Step 1: Extract Reported Transactions from Source
+
+From the fraud alert source, we find the following transaction:
+
+- **Date:** 2025-06-23
+- **Amount:** 150000 HKD
+- **Originator Bank:** ZA Bank Limited
+- **Beneficiary Bank:** HSB
+- **Originator Account Number:** 444-4444444-101
+- **Beneficiary Account Number:** 111-111111-101
+- **Beneficiary Name:** CHAN TAI MAN
+
+### Step 2: Match Each Reported Transaction to CSV
+
+We need to find a match for this transaction in the CSV file.
+
+- **Exact Match Search:**
+  - Date: 2025-06-23
+  - Amount: 150000
+  - Originator Bank: ZA Bank Limited
+  - Beneficiary Bank: HSB
+  - Originator Account Number: 444-4444444-101
+  - Beneficiary Account Number: 111-111111-101
+
+We find a match in the CSV file with the following details:
+
+- **Transaction ID:** fadf5307-0459-4fee-bb77-6d942d29c1e9
+
+### Step 3: Merge Data for Each Matched Transaction
+
+- **Transaction References:** [fadf5307-0459-4fee-bb77-6d942d29c1e9]
+- **Transaction Fields:**
+  - **Date:** 2025-06-23
+  - **Amount:** 150000
+  - **Currency:** HKD
+  - **From:**
+    - **Name:** CHEUNG TAK SHING
+    - **Account Number:** 444-4444444-101
+    - **Bank:** ZA Bank Limited
+  - **To:**
+    - **Name:** CHAN TAI MAN
+    - **Account Number:** 111-111111-101
+    - **Bank:** HSB
+
+### Step 4: Apply Transaction Rules
+
+- **Channel:** CWTF
+- **Bank:** HSB
+
+### Step 5: Apply Global Field Rules
+
+- **Police Reference:** ESPS 5■■■■■■ and TPDIV 25■■■■■ (DIT9-■■■■■)
+- **Police Team:** DIT9-■■■■■
+- **Fraud Type:** Social Media Deception - Pig-butchering Scam
+
+### Step 6: Build Final JSON
+
+```json
+{
+  "fraud_type": "Social Media Deception - Pig-butchering Scam",
+  "police_reference": "ESPS 5■■■■■■ and TPDIV 25■■■■■ (DIT9-■■■■■)",
+  "police_team": "DIT9-■■■■■",
+  "alerted_transactions": [
+    {
+      "date": "2025-06-23",
+      "amount": 150000,
+      "currency": "HKD",
+      "from": {
+        "name": "CHEUNG TAK SHING",
+        "account_number": "444-4444444-101",
+        "bank": "ZA Bank Limited"
+      },
+      "to": {
+        "name": "CHAN TAI MAN",
+        "account_number": "111-111111-101",
+        "bank": "HSB"
+      },
+      "channel": "CWTF",
+      "can_be_located": true,
+      "transaction_references": [
+        "fadf5307-0459-4fee-bb77-6d942d29c1e9"
+      ]
+    }
+  ]
+}
+```
+
+This JSON output consolidates the extracted and matched transaction data according to the provided schema.
+2926.0
+936.0
+
+Let's follow the steps outlined to process the given documents and extract the necessary information.
+
+### Step 1: Extract Reported Transactions from Source
+
+From the fraud alert source, we find the following transaction:
+
+- **Date:** 2025-04-24
+- **Amount:** 102000
+- **Originator Account:** CCB 66666666601
+- **Beneficiary Account:** 111-111111-102
+- **Beneficiary Name:** CHUNG SIU
+
+### Step 2: Match Each Reported Transaction to CSV
+
+We need to find a match for this transaction in the CSV file.
+
+- **Exact Match Search:**
+  - Date: 2025-04-24
+  - Amount: 102000
+  - Originator Account: CCB 66666666601
+  - Beneficiary Account: 111-111111-102
+  - Beneficiary Name: CHUNG SIU
+
+Looking through the CSV file, we find the following transaction:
+
+| Transaction Date (value) | Originating Currency | Originating Amount | Debit Credit Indicator | Beneficiary Bank Raw | Originator Bank Raw | Originator Account Number | Beneficiary Account Number | Originator Name | Beneficiary Name | Subject Type | Transaction Type Source | Transaction Code Description | Sending Bank Account Number | Sending Bank Address | Converted Amount | Transaction ID |
+|--------------------------|----------------------|--------------------|------------------------|-----------------------|---------------------|---------------------------|-----------------------------|-----------------|------------------|-------------|-------------------------|-----------------------------|--------------------------|-------------------|---------------|
+| 24/4/2025               | HKD                  | 101890             | C                      | Hang Seng Bank Ltd.    |                     | 66666666601               | 111-111111-102              | YEUNG KAI        | CHUNG SIU        | Beneficiary | CWTF                    | INWARD TELEGRAPHIC       TRANSFER (R22) |                            | PCBCHKHH            | 101890         | e2e3fef9-5cd8-4934-b0e7-1238978c78b8 |
+
+This transaction does not match the exact details provided in the fraud alert source. Therefore, we set `can_be_located` to `false` and `transaction_references` to an empty array.
+
+### Step 3: Merge Data for Each Matched Transaction
+
+Since no exact match was found, we set:
+
+```json
+{
+  "can_be_located": false,
+  "transaction_references": []
+}
+```
+
+### Step 4: Apply Transaction Rules
+
+No specific rules need to be applied here since no transaction was matched.
+
+### Step 5: Apply Global Field Rules
+
+- **Police Reference:**
+  - Extracted: POLICEREF2
+
+- **Police Team:**
+  - Extracted: District Investigation Team 3, Kwai Tsing District, Kwai Chung Police Station
+
+### Step 6: Build Final JSON
+
+Combining all the information, the final JSON output is:
+
+```json
+{
+  "fraud_type": "Investment Scam",
+  "police_reference": "POLICEREF2",
+  "police_team": "District Investigation Team 3, Kwai Tsing District, Kwai Chung Police Station",
+  "alerted_transactions": [
+    {
+      "date": "2025-04-24",
+      "amount": 102000,
+      "currency": "HKD",
+      "from": {
+        "name": "YEUNG KAI",
+        "account_number": "66666666601",
+        "bank": "CCB"
+      },
+      "to": {
+        "name": "CHUNG SIU",
+        "account_number": "111-111111-102",
+        "bank": "HASE"
+      },
+      "channel": null,
+      "can_be_located": false,
+      "transaction_references": []
+    }
+  ]
+}
+```
+
+This JSON output consolidates the extracted and processed information from the fraud alert source and the transaction records.
+3418.0
+941.0
+
+Let's follow the steps to process the given documents and extract the necessary information.
+
+### Step 1: Extract Reported Transactions from Source
+
+From the fraud alert source, we find the following transaction:
+
+```
+2025-04-29,HKD,49873,C,,,222-222222-102,111-111111-103,YAN MEI MEI,CHIU YAN,Beneficiary,CUTF,ATM TRANSFER UNRELATED DEPOSIT,,,49873,ef8945ad-bd19-461f-b8c8-cc01dea6df98
+```
+
+### Step 2: Match Each Reported Transaction to CSV
+
+We need to find a match for this transaction in the CSV file.
+
+#### Exact Match Search:
+- **Date**: 2025-04-29
+- **Amount**: 49873
+- **Originator Account**: Not provided
+- **Beneficiary Account**: 111-111111-103
+- **Beneficiary Name**: CHIU YAN
+
+Looking through the CSV file, we find the following transaction:
+
+```
+2025-04-29,HKD,49873,C,,,222-222222-102,111-111111-103,YAN MEI MEI,CHIU YAN,Beneficiary,CUTF,ATM TRANSFER UNRELATED DEPOSIT,,,49873,ef8945ad-bd19-461f-b8c8-cc01dea6df98
+```
+
+This matches the transaction exactly.
+
+### Step 3: Merge Data for Each Matched Transaction
+
+- **Transaction ID**: ef8945ad-bd19-461f-b8c8-cc01dea6df98
+- **from.name**: YAN MEI MEI
+- **from.account_number**: 222-222222-102
+- **from.bank**: HASE
+- **to.name**: CHIU YAN
+- **to.account_number**: 111-111111-103
+- **to.bank**: HASE
+- **channel**: ATM
+- **can_be_located**: true
+- **transaction_references**: [ef8945ad-bd19-461f-b8c8-cc01dea6df98]
+- **cancel_amount_requested**: null
+
+### Step 4: Apply Global Field Rules
+
+- **Fraud Type**: Payments(Authorised/Scams)
+
+### Step 5: Apply Transaction Rules
+
+- **Bank Rules**:
+  - from.bank: HASE
+  - to.bank: HASE
+
+- **Channel Rules**:
+  - channel: ATM
+
+### Step 6: Build Final JSON
+
+```json
+{
+  "fraud_type": "Payments(Authorised/Scams)",
+  "alerted_transactions": [
+    {
+      "date": "2025-04-29",
+      "amount": 49873,
+      "currency": "HKD",
+      "from": {
+        "name": "YAN MEI MEI",
+        "account_number": "222-222222-102",
+        "bank": "HASE"
+      },
+      "to": {
+        "name": "CHIU YAN",
+        "account_number": "111-111111-103",
+        "bank": "HASE"
+      },
+      "channel": "ATM",
+      "can_be_located": true,
+      "transaction_references": [
+        "ef8945ad-bd19-461f-b8c8-cc01dea6df98"
+      ],
+      "cancel_amount_requested": null
+    }
+  ]
+}
+```
+
+This completes the processing of the provided documents and generates the required JSON output.
+3699.0
+891.0
+
+Let's follow the step-by-step process to extract and consolidate the transactions from the fraud alert source and the CSV file.
+
+### Step 1: Extract Reported Transactions from Source
+From the fraud alert source, we have the following transaction details:
+- **Date**: 2025-04-19
+- **Amount**: 30000
+- **Originator Name**: CHEUNG TAK SHING
+- **Originator Account Number**: 222222222101
+- **Beneficiary Name**: CHAN TAI MAN
+- **Beneficiary Account Number**: 333333333101
+- **Beneficiary Bank**: HASE
+
+### Step 2: Match Each Reported Transaction to CSV
+We need to find a matching transaction in the CSV file that meets the criteria:
+- **Date**: 2025-04-19
+- **Amount**: 30000
+- **Originator Account Number**: 222222222101
+- **Beneficiary Account Number**: 333333333101
+- **Beneficiary Name**: CHAN TAI MAN
+- **Beneficiary Bank**: HASE
+
+Looking through the CSV file, we find the following transaction:
+- **Date**: 2025-04-19
+- **Amount**: 30000
+- **Originating Bank**: Ant Bank (Hong Kong) Limited
+- **Beneficiary Bank**: HASE
+- **Originator Account Number**: 222222222101
+- **Beneficiary Account Number**: 333333333101
+- **Beneficiary Name**: CHAN TAI MAN
+- **Transaction ID**: 125eef90-cb29-4065-941f-df28b88a75a2
+
+This matches the criteria, so we use the transaction ID `125eef90-cb29-4065-941f-df28b88a75a2`.
+
+### Step 3: Merge Data for Each Matched Transaction
+Using the transaction ID `125eef90-cb28b88a75a2` from the CSV, we merge the data:
+- **Transaction ID**: 125eef90-cb29-4065-941f-df28b88a75a2
+- **Date**: 2025-04-19
+- **Amount**: 30000
+- **Currency**: HKD
+- **From**:
+  - **Name**: CHEUNG TAK SHING
+  - **Account Number**: 222222222101
+  - **Bank**: Ant Bank (Hong Kong) Limited
+- **To**:
+  - **Name**: CHAN TAI MAN
+  - **Account Number**: 333333333101
+  - **Bank**: HASE
+- **Channel**: null
+- **Can Be Located**: true
+- **Transaction References**: [125eef90-cb29-4065-941f-df28b88a75a2]
+
+### Step 4: Apply Transaction Rules
+No specific rules apply here since the channel is not provided and the transaction type is `CUTF` which corresponds to `ATM TRANSFER UNRELATED DEPOSIT`.
+
+### Step 5: Build Final JSON
+Now, we build the final JSON output:
+
+```json
+{
+  "fraud_type": "AP- Impersonation (others)",
+  "alerted_transactions": [
+    {
+      "date": "2025-04-19",
+      "amount": 30000,
+      "currency": "HKD",
+      "from": {
+        "name": "CHEUNG TAK SHING",
+        "account_number": "222222222101",
+        "bank": "Ant Bank (Hong Kong) Limited"
+      },
+      "to": {
+        "name": "CHAN TAI MAN",
+        "account_number": "333333333101",
+        "bank": "HASE"
+      },
+      "channel": null,
+      "can_be_located": true,
+      "transaction_references": [
+        "125eef90-cb29-4065-941f-df28b88a75a2"
+      ]
+    }
+  ]
+}
+```
+
+This completes the processing of the provided documents.
+3259.0
+1033.0
+
+Let's follow the steps outlined to process the given documents and extract the necessary information.
+
+### Step 1: Extract Reported Transactions from Source
+
+From the fraud alert source, we have the following transactions:
+
+1. **Date:** 2025-04-01  
+   **Amount:** 200000  
+   **Beneficiary Bank:** Hang Seng Bank Ltd.  
+   **Beneficiary Account Number:** 111-111111-102  
+   **Beneficiary Name:** CHUNG SIU  
+   **Originating Bank:** Bank of China (Hong Kong) Limited  
+   **Originator Account Number:** 66666666602  
+   **Originator Name:** TSANG SIU MING  
+
+### Step 2: Match Each Reported Transaction to CSV
+
+We need to find a match for the transaction in the CSV file.
+
+- **Exact Match Search:**
+  - Date: 2025-04-01
+  - Amount: 200000
+  - Originator Bank: Bank of China (Hong Kong) Limited
+  - Beneficiary Account Number: 111-111111-102
+  - Beneficiary Name: CHUNG SIU
+
+The transaction in the CSV file matches these criteria:
+
+- **Transaction ID:** 01bd7599-6f93-4047-9783-6afe9f0dc772
+
+### Step 3: Merge Data for Each Matched Transaction
+
+- **Transaction References:** [01bd7599-6f93-4047-9783-6afe9f0dc772]
+- **from.name:** TSANG SIU MING
+- **from.account_number:** 66666666602
+- **from.bank:** Bank of China (Hong Kong) Limited
+- **to.name:** CHUNG SIU
+- **to.account_number:** 111-111111-102
+- **to.bank:** HASE
+- **channel:** CWTF
+
+### Step 4: Apply Transaction Rules
+
+No specific rules need to be applied here as the channel is already correctly identified as "CWTF".
+
+### Step 5: Apply Global Field Rules
+
+- **fraud_type:** Investment Fraud - Stock
+- **police_reference:** ESPS 4■■■■■■■ and CDIST 25■■■■■■ (DIT3-■■■■■)
+- **police_team:** DIT3-■■■■■
+
+### Step 6: Build Final JSON
+
+```json
+{
+  "fraud_type": "Investment Fraud - Stock",
+  "police_reference": "ESPS 4■■■■■■■ and CDIST 25■■■■■■ (DIT3-■■■■■)",
+  "police_team": "DIT3-■■■■■",
+  "alerted_transactions": [
+    {
+      "date": "2025-04-01",
+      "amount": 200000,
+      "currency": "HKD",
+      "from": {
+        "name": "TSANG SIU MING",
+        "account_number": "66666666602",
+        "bank": "Bank of China (Hong Kong) Limited"
+      },
+      "to": {
+        "name": "CHUNG SIU",
+        "account_number": "111-111111-102",
+        "bank": "HASE"
+      },
+      "channel": "CWTF",
+      "can_be_located": true,
+      "transaction_references": [
+        "01bd7599-6f93-4047-9783-6afe9f0dc772"
+      ]
+    }
+  ]
+}
+```
+
+This JSON output consolidates the extracted and matched transaction details according to the provided schema.
+3944.0
+883.0
+
+Let's follow the steps to process the given documents and extract the necessary information.
+
+### Step 1: Extract Reported Transactions from Source
+
+From the fraud alert source, we find the following transaction details:
+
+- **Date:** 2025-03-06
+- **Amount:** 1200
+- **Originator Bank:** Hang Seng Bank Ltd.
+- **Beneficiary Account Number:** 111111111103
+- **Beneficiary Name:** CHIU YAN
+
+This transaction matches the following line in the CSV file:
+
+| Transaction Date (value) | Originating Currency | Originating Amount | Debit Credit Indicator | Beneficiary Bank Raw | Originator Bank Raw | Originator Account Number | Beneficiary Account Number | Originator Name | Beneficiary Name | Subject Type | Transaction Type Source | Transaction Code Description | Sending Bank Account Number | Sending Bank Address | Converted Amount | Transaction ID |
+|--------------------------|----------------------|--------------------|------------------------|-----------------------|---------------------|---------------------------|-----------------------------|----------------|------------------|--------------|----------------------|-------------------------|-------------------------|-------------------|---------------|
+| 2025-03-06               | HKD                  | 1200               | C                      | Alipay Financial Services (HK) Limited | Hang Seng Bank Ltd. | 66666666603.0             | 111111111103                 | XIE PANGAN     | CHIU YAN         | Beneficiary | CWTF                 | Default transaction       | Alipay Financial Services (HK) Limited |                         | 1200           | a9b89f6a-c489-4114-b76f-0e0545ec0898 |
+
+### Step 2: Match Each Reported Transaction to CSV
+
+We have already found the exact match in the CSV file. The transaction ID is `a9b89f6a-c489-4114-b76f-0e0545ec0898`.
+
+### Step 3: Merge Data for Each Matched Transaction
+
+- **Transaction ID:** `a9b89f6a-c489-4114-b76f-0e0545ec0898`
+- **Date:** 2025-03-06
+- **Amount:** 1200
+- **Currency:** HKD
+- **From:**
+  - **Name:** XIE PANGAN
+  - **Account Number:** 66666666603.0
+  - **Bank:** Alipay Financial Services (HK) Limited
+- **To:**
+  - **Name:** CHIU YAN
+  - **Account Number:** 111111111103
+  - **Bank:** HASE
+
+### Step 4: Apply Transaction Rules
+
+- **Channel:** "FPS"
+- **Bank Codes:** HASE (Hang Seng Bank Ltd.)
+
+### Step 5: Apply Global Field Rules
+
+- **Police Reference:** POLICEREF2
+- **Police Team:** District Investigation Team 10, Yuen Long District
+
+### Step 6: Build Final JSON
+
+```json
+{
+  "fraud_type": "Employment Fraud",
+  "police_reference": "POLICEREF2",
+  "police_team": "District Investigation Team 10, Yuen Long District",
+  "alerted_transactions": [
+    {
+      "date": "2025-03-06",
+      "amount": 1200,
+      "currency": "HKD",
+      "from": {
+        "name": "XIE PANGAN",
+        "account_number": "66666666603.0",
+        "bank": "Alipay Financial Services (HK) Limited"
+      },
+      "to": {
+        "name": "CHIU YAN",
+        "account_number": "111111111103",
+        "bank": "HASE"
+      },
+      "channel": "FPS",
+      "can_be_located": true,
+      "transaction_references": [
+        "a9b89f6a-c489-4114-b76f-0e0545ec0898"
+      ]
+    }
+  ]
+}
+```
+
+This JSON output consolidates the extracted and matched transaction data according to the provided schema.
+4460.0
+981.0
+
+Let's follow the steps to process the given documents and extract the necessary information.
+
+### Step 1: Extract Reported Transactions from Source
+
+From the fraud alert source, we extract the following transactions:
+
+1. **CHIU YAN Account (111111111103)**
+   - Date: 2025-03-07
+   - Amount: 1000
+   - Originator: Cash Nil
+
+2. **CHONG MAN Account (111111111104)**
+   - Date: 2025-01-20
+   - Amount: 1000
+   - Originator: Cash Nil
+
+### Step 2: Match Each Reported Transaction to CSV
+
+#### CHIU YAN Account (111111111103)
+- **Date:** 2025-03-07
+- **Amount:** 1000
+- **Originator:** Cash Nil
+
+Matched to:
+- **Transaction ID:** 247f1ba8-be03-4953-a87a-f9aa6cdf404f
+
+#### CHONG MAN Account (111111111104)
+- **Date:** 2025-01-20
+- **Amount:** 1000
+- **Originator:** Cash Nil
+
+Matched to:
+- **Transaction ID:** ffa353a0-e1e3-473a-9241-944a2cbe8824
+
+### Step 3: Merge Data for Each Matched Transaction
+
+#### CHIU YAN Account (111111111103)
+- **Transaction ID:** 247f1ba8-be03-4953-a87a-f9aa6cdf404f
+- **Transaction References:** []
+- **From:** {"name": null, "account_number": null, "bank": null}
+- **To:** {"name": "CHIU YAN", "account_number": "111111111103", "bank": "HASE"}
+
+#### CHONG MAN Account (111111111104)
+- **Transaction ID:** ffa353a0-e1e3-473a-9241-944a2cbe8824
+- **Transaction References:** []
+- **From:** {"name": null, "account_number": null, "bank": null}
+- **To:** {"name": "CHONG MAN", "account_number": "111111111104", "bank": "HASE"}
+
+### Step 4: Apply Transaction Rules
+
+No specific rules need to be applied here as the transactions already match the required format.
+
+### Step 5: Apply Global Field Rules
+
+#### Police Reference
+- **POLICEREF3**
+
+#### Police Team
+- **District Investigation Team 1, Eastern District, North Point Police Station**
+
+### Step 6: Build Final JSON
+
+```json
+{
+  "fraud_type": "Telephone Deception",
+  "police_reference": "POLICEREF3",
+  "police_team": "District Investigation Team 1, Eastern District, North Point Police Station",
+  "alerted_transactions": [
+    {
+      "date": "2025-03-07",
+      "amount": 1000,
+      "currency": "HKD",
+      "from": {
+        "name": null,
+        "account_number": null,
+        "bank": null
+      },
+      "to": {
+        "name": "CHIU YAN",
+        "account_number": "111111111103",
+        "bank": "HASE"
+      },
+      "channel": "cash",
+      "can_be_located": true,
+      "transaction_references": [
+        "247f1ba8-be03-4953-a87a-f9aa6cdf404f"
+      ]
+    },
+    {
+      "date": "2025-01-20",
+      "amount": 1000,
+      "currency": "HKD",
+      "from": {
+        "name": null,
+        "account_number": null,
+        "bank": null
+      },
+      "to": {
+        "name": "CHONG MAN",
+        "account_number": "111111111104",
+        "bank": "HASE"
+      },
+      "channel": "cash",
+      "can_be_located": true,
+      "transaction_references": [
+        "ffa353a0-e1e3-473a-9241-944a2cbe8824"
+      ]
+    }
+  ]
+}
+```
+
+This JSON output consolidates the extracted and matched transactions along with the relevant global fields.
+4981.0
+1090.0
+
+Given the provided fraud alert source and transaction records CSV, we will follow the steps outlined to process the data and generate the required JSON output.
+
+### Step 1: Extract Reported Transactions from Source
+There are no explicit transactions mentioned with both date and amount in the provided fraud alert source. Therefore, no transactions are extracted.
+
+### Step 2: Match Each Reported Transaction to CSV
+Since no transactions were extracted in Step 1, this step is not applicable.
+
+### Step 3: Merge Data for Each Matched Transaction
+Since no transactions were extracted, this step is also not applicable.
+
+### Step 4: Apply Transaction Rules
+Since no transactions were extracted, this step is not applicable.
+
+### Step 5: Apply Global Field Rules
+From the fraud alert source:
+- **fraud_type**: "Dealing with property known or believed to represent proceeds of indictable offence"
+- **police_reference**: "POLICEREF4"
+- **writ_no**: "9■■"
+- **contact_person**: "PC ■■■■■"
+- **police_team**: "Regional Crime Support Centre New Territories South, Hong Kong Police Force"
+
+### Step 6: Build Final JSON
+Since no transactions were extracted, the `alerted_transactions` array will be empty.
+
+```json
+{
+  "fraud_type": "Dealing with property known or believed to represent proceeds of indictable offence",
+  "police_reference": "POLICEREF4",
+  "writ_no": "9■■",
+  "contact_person": "PC ■■■■■",
+  "police_team": "Regional Crime Support Centre New Territories South, Hong Kong Police Force",
+  "alerted_transactions": []
+}
+```
+
+This is the final JSON output based on the provided fraud alert source and transaction records CSV.
+4271.0
+371.0
