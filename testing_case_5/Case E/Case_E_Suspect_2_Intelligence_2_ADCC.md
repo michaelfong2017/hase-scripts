@@ -29,7 +29,7 @@ Should you have any enquiry, please feel free to contact the undersigned or our 
 
 Best regards, 
 PC 2■■■■ H■■
-"Anti-Deception Coordination Centre 
+Anti-Deception Coordination Centre 
 Commercial Crime Bureau 
-Hong Kong Police Force"
+Hong Kong Police Force
 Tel: 286■■■■■ / Fax: 220■■■■■

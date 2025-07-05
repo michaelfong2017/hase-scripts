@@ -5,25 +5,25 @@
 *Tel.:* 366■■■■■
 *Fax:* 266■■■■■
 
-"District Investigation Team 6
+District Investigation Team 6
 Tai Po District
 Tai Po Police Station,
 4 On Po Lane, 
-Tai Po"
+Tai Po
 2025-04-18
 
-"HANG SENG BANK, LIMITED
+HANG SENG BANK, LIMITED
 Money Laundering Reporting Officer
 Hang Seng Bank Ltd
 Financial Crime Investigations
 13/F, 83 Des Voeux Road Central,
-Hong Kong"
+Hong Kong
 
 Dear Sir/Madam,
 
 I write to you in connection with the following bank account, which is believed to be held with your institution. Information received by the Hong Kong Polive indicated that the below account:-
 
-"<table>
+<table>
 <thead><tr><th colspan='3'>Account Details</th></tr></thead>
 <tbody>
 <tr><th rowspan='3'>FPS Proxy Type:</th><td colspan='2'> - [X] Proxy ID</td></tr><tr><td colspan='2'> - [ ] Mobile Number</td></tr><tr><td colspan='2'> - [ ] E-mail</td></tr><tr><th>FPS Proxy:</th><td colspan='2'>118■■■■■■■</td></tr><tr><th>FPS Customer ID:</th><td colspan='2'>118■■■■■■■</td></tr><tr><th>FPS Masked Name:</th><td colspan='2'>MOK Y**</td></tr>
@@ -41,7 +41,7 @@ China Mobile. Case was reporte</td></tr>
 
 Under case reference: dated </td></tr>
 </tbody>
-</table>"
+</table>
 
 I suggest that you examine the above/past transactions in the above account to ascertain whether or not you are satisfied that the provenance of the deposits into the said account is legitimate.
 
@@ -53,11 +53,11 @@ May I also remind you of sections 25(1) and 25A(1) of the Organized and Serious 
 
 *"Subject to section 25A, a person commits an offence if, knowing or having reasonable grounds to believe that any property in whole or in part directly or indirectly represents any person's proceeds of an indictable offence, he deals with that property. " (section 25(1))*
 
-"*\""Where a person knows or suspects that any property:-
+*\"Where a person knows or suspects that any property:-
 (a) in whole or in part directly or indirectly represents any person's proceeds of;
 (b) was used in connection with; or
 (c) is intended to be used in connection with,
-an indictable offence, he shall as soon as it is reasonable for him to do so disclose that knowledge or suspicion, together with any matter on which that knowledge or suspicion is based, to an authorized officer.\"" (section 25A(1))*"
+an indictable offence, he shall as soon as it is reasonable for him to do so disclose that knowledge or suspicion, together with any matter on which that knowledge or suspicion is based, to an authorized officer.\" (section 25A(1))*
 
 Please treat this notification in confidence. Disclosure of the contents of this notification, directly or indirectly, to any unauthorized persons including the subjects under investigation, may prejudice the police investigation.
 

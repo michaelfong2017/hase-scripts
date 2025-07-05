@@ -5,19 +5,19 @@
 *Tel.:* 365■■■■■
 *Fax:* 285■■■■■
 
-"District Investigation Team 1
+District Investigation Team 1
 Eastern District
 North Point Police Station
 343 Java Road
-North Point"
+North Point
 2025-03-11
 
-"HANG SENG BANK, LIMITED
+HANG SENG BANK, LIMITED
 Money Laundering Reporting Officer
 Hang Seng Bank Ltd
 Financial Crime Investigations
 13/F, 83 Des Voeux Road Central,
-Hong Kong"
+Hong Kong
 
 Dear Sir/Madam,
 
@@ -76,8 +76,8 @@ Should you have any queries concerning this matter, please contact the Officer-i
 Yours faithfully,
 (Original Signed)
 IP LIU  ■■■-■■
-"District Investigation Team 1
-Eastern District"
+District Investigation Team 1
+Eastern District
 for Commissioner of Police
 cc SP JFIU FIIB
 (email: jfiu-noti-letter@police.gov.hk)

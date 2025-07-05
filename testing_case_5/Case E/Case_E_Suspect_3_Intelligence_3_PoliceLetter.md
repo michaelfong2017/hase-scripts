@@ -5,20 +5,20 @@
 *Tel.:* 366■■■■■
 *Fax:* 244■■■■■
 
-"District Investigation Team 10
+District Investigation Team 10
 Yuen Long District
 
 999 Castle Peak Road
 Yuen
-Long"
+Long
 2025-03-08
 
-"HANG SENG BANK, LIMITED
+HANG SENG BANK, LIMITED
 Money Laundering Reporting Officer
 Hang Seng Bank Ltd
 Financial Crime Investigations
 13/F, 83 Des Voeux Road Central,
-Hong Kong"
+Hong Kong
 
 Dear Sir/Madam,
 
