@@ -16,9 +16,9 @@ from io import StringIO
 RANDOMIZATION_COUNTS = {
     'ADCC': 6,
     'ODFT': 6,
-    'Search Warrant': 4,
-    'HSBC Referral': 3,
-    'UAR': 3,
+    'Search Warrant': 3,
+    'HSBC Referral': 4,
+    'UAR': 6,
     'Police Letter': 3
 }
 
@@ -111,6 +111,10 @@ class FieldMapper:
         
         # FIRST: Generate mappings for all NON-cancel_amount fields
         for field_type, field_values in values.items():
+            # SKIP DATE RANDOMIZATION FOR HSBC REFERRAL, UAR, AND ODFT
+            if field_type == 'date' and self.document_type in ['HSBC Referral', 'UAR', 'ODFT']:
+                continue
+
             if field_type == 'cancel_amount_requested':
                 continue  # Skip cancel_amount for now
                 
@@ -747,7 +751,7 @@ def main():
     
     csv_file_path = input("Enter CSV file path (or press Enter for default): ").strip()
     if not csv_file_path:
-        csv_file_path = 'Dataset_Source_v5_updated_with_groundtruth.csv'
+        csv_file_path = 'Dataset_Source_v6_updated_with_groundtruth.csv'
     
     try:
         df = pd.read_csv(csv_file_path, encoding='utf-8-sig', na_filter=False)

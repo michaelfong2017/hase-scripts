@@ -3,10 +3,10 @@ import os
 
 def split_dataset():
     """
-    Split Dataset_Source_v5_updated_with_groundtruth_RANDOMIZED_ROWS.csv into train and test sets
+    Split Dataset_Source_v6_updated_with_groundtruth_RANDOMIZED_ROWS.csv into train and test sets
     """
     # Define the file path
-    file_path = 'Dataset_Source_v5_updated_with_groundtruth_RANDOMIZED_ROWS.csv'
+    file_path = 'Dataset_Source_v6_updated_with_groundtruth_RANDOMIZED_ROWS.csv'
     
     # Load the CSV file
     try:
@@ -41,8 +41,8 @@ def split_dataset():
     train_set = df[~df['Original Case Number'].isin(test_case_numbers)].copy()
     
     # Save to CSV files
-    train_set.to_csv('full3680_train_set_v5.csv', index=False, encoding='utf-8-sig', na_rep='')
-    test_set.to_csv('full60_test_set_v5.csv', index=False, encoding='utf-8-sig', na_rep='')
+    train_set.to_csv('full4380_train_set_v6.csv', index=False, encoding='utf-8-sig', na_rep='')
+    test_set.to_csv('full60_test_set_v6.csv', index=False, encoding='utf-8-sig', na_rep='')
     
     # Print summary information
     print(f"\n=== Split Results ===")
@@ -63,10 +63,10 @@ def split_dataset():
     print(train_set['Variant Number'].value_counts().sort_index())
     
     # Verify file creation
-    if os.path.exists('full3680_train_set_v5.csv') and os.path.exists('full60_test_set_v5.csv'):
+    if os.path.exists('full4380_train_set_v6.csv') and os.path.exists('full60_test_set_v6.csv'):
         print(f"\n✓ Files saved successfully!")
-        print(f"  - full3680_train_set_v5.csv ({len(train_set)} rows)")
-        print(f"  - full60_test_set_v5.csv ({len(test_set)} rows)")
+        print(f"  - full4380_train_set_v6.csv ({len(train_set)} rows)")
+        print(f"  - full60_test_set_v6.csv ({len(test_set)} rows)")
     else:
         print(f"\n✗ Error: Files were not created properly.")
 
