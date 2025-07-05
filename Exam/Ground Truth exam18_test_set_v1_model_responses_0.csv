@@ -157,7 +157,7 @@ Additional Deatils:
         ""account_number"": ""111-111111-101"",
         ""bank"": ""HASE""
       },
-      ""channel"": null,
+      ""channel"": ""cheque"",
       ""can_be_located"": true,
       ""transaction_references"": [
         ""f786021b-b725-4182-ba86-eb055f182542""
@@ -345,7 +345,7 @@ JSON Schema:
 | \*必填\* 請問你報左警未?\n | 已報警 -> ""請你提供報案編號俾我地做返記錄，並於稍後將口供紙副本以電郵/郵寄方式交俾我地。""\n\n | NaN | NaN |
 | 如客戶提供報案編號 (if any) | ERC 2504■■■■■■■■■ | NaN | NaN |
 | 注：上報時已清楚告知客戶需為有關損失附上全部責任 | NaN | NaN | NaN |","{
-  ""fraud_type"": ""Not provided"",
+  ""fraud_type"": ""Cheque Fraud"",
   ""alerted_transactions"": [
     {
       ""date"": ""2025-04-22"",

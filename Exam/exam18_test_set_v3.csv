@@ -57,7 +57,16 @@ Apply these rules when populating transaction fields:
 - Do NOT confuse HSB with HSBC - they are completely different banks
 
 **Channel Rules (Payment Method):**
-The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""Branch"", or null
+The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""cheque"", ""Remittance"", ""Branch"", or null
+In case the channel is ""cheque"", it might or might not provide hint that the global field fraud_type is ""Cheque Fraud""
+If there is no hint, assume the channel is null
+
+Based on Transaction Source in CSV:
+- ""CUTF"" → need to look at Transaction Code Description and source file
+- ""CMTF"" → ""Branch""
+- ""CWTF"" → ""Remittance"" if Transaction Code Description is INWARD TELEGRAPHIC TRANSFER (R22), otherwise ""FPS""
+- ""DWTF"" → ""FPS""
+- ""FPWICT"" → ""FPS""
 
 Based on Transaction Code Description in CSV:
 - ""ATM TRANSFER UNRELATED DEPOSIT"" → ""ATM""
@@ -65,12 +74,6 @@ Based on Transaction Code Description in CSV:
 - ""CASH DEP VIA CDM/BCDM - AC INPUT (TOUCH SCREEN)"" → ""cash""
 - ""ATM/CDM CASH CREDIT USINGACCOUNT INPUT"" → ""cash deposits via ATM"" if source file mentions ATM, otherwise ""cash""
 - ""CIF CASH DEPOSIT"" → ""cash""
-
-Based on Transaction Source in CSV:
-- ""CMTF"" → ""Branch""
-- ""CWTF"" → ""FPS""
-- ""DWTF"" → ""FPS""
-- ""FPWICT"" → ""FPS""
 
 **Special Handling for cancel_amount_requested (Per Transaction):**
 For each transaction:
@@ -217,7 +220,16 @@ Apply these rules when populating transaction fields:
 - Do NOT confuse HSB with HSBC - they are completely different banks
 
 **Channel Rules (Payment Method):**
-The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""Branch"", or null
+The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""cheque"", ""Remittance"", ""Branch"", or null
+In case the channel is ""cheque"", it might or might not provide hint that the global field fraud_type is ""Cheque Fraud""
+If there is no hint, assume the channel is null
+
+Based on Transaction Source in CSV:
+- ""CUTF"" → need to look at Transaction Code Description and source file
+- ""CMTF"" → ""Branch""
+- ""CWTF"" → ""Remittance"" if Transaction Code Description is INWARD TELEGRAPHIC TRANSFER (R22), otherwise ""FPS""
+- ""DWTF"" → ""FPS""
+- ""FPWICT"" → ""FPS""
 
 Based on Transaction Code Description in CSV:
 - ""ATM TRANSFER UNRELATED DEPOSIT"" → ""ATM""
@@ -225,12 +237,6 @@ Based on Transaction Code Description in CSV:
 - ""CASH DEP VIA CDM/BCDM - AC INPUT (TOUCH SCREEN)"" → ""cash""
 - ""ATM/CDM CASH CREDIT USINGACCOUNT INPUT"" → ""cash deposits via ATM"" if source file mentions ATM, otherwise ""cash""
 - ""CIF CASH DEPOSIT"" → ""cash""
-
-Based on Transaction Source in CSV:
-- ""CMTF"" → ""Branch""
-- ""CWTF"" → ""FPS""
-- ""DWTF"" → ""FPS""
-- ""FPWICT"" → ""FPS""
 
 **Step 6: Build Final JSON**
 - Global field (fraud_type): Use fraud alert source with global field rules applied
@@ -395,7 +401,16 @@ Apply these rules when populating transaction fields:
 - Do NOT confuse HSB with HSBC - they are completely different banks
 
 **Channel Rules (Payment Method):**
-The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""Branch"", or null
+The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""cheque"", ""Remittance"", ""Branch"", or null
+In case the channel is ""cheque"", it might or might not provide hint that the global field fraud_type is ""Cheque Fraud""
+If there is no hint, assume the channel is null
+
+Based on Transaction Source in CSV:
+- ""CUTF"" → need to look at Transaction Code Description and source file
+- ""CMTF"" → ""Branch""
+- ""CWTF"" → ""Remittance"" if Transaction Code Description is INWARD TELEGRAPHIC TRANSFER (R22), otherwise ""FPS""
+- ""DWTF"" → ""FPS""
+- ""FPWICT"" → ""FPS""
 
 Based on Transaction Code Description in CSV:
 - ""ATM TRANSFER UNRELATED DEPOSIT"" → ""ATM""
@@ -403,12 +418,6 @@ Based on Transaction Code Description in CSV:
 - ""CASH DEP VIA CDM/BCDM - AC INPUT (TOUCH SCREEN)"" → ""cash""
 - ""ATM/CDM CASH CREDIT USINGACCOUNT INPUT"" → ""cash deposits via ATM"" if source file mentions ATM, otherwise ""cash""
 - ""CIF CASH DEPOSIT"" → ""cash""
-
-Based on Transaction Source in CSV:
-- ""CMTF"" → ""Branch""
-- ""CWTF"" → ""FPS""
-- ""DWTF"" → ""FPS""
-- ""FPWICT"" → ""FPS""
 
 **Step 6: Build Final JSON**
 - Global field (fraud_type): Use fraud alert source with global field rules applied
@@ -573,7 +582,16 @@ Apply these rules when populating transaction fields:
 - Do NOT confuse HSB with HSBC - they are completely different banks
 
 **Channel Rules (Payment Method):**
-The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""Branch"", or null
+The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""cheque"", ""Remittance"", ""Branch"", or null
+In case the channel is ""cheque"", it might or might not provide hint that the global field fraud_type is ""Cheque Fraud""
+If there is no hint, assume the channel is null
+
+Based on Transaction Source in CSV:
+- ""CUTF"" → need to look at Transaction Code Description and source file
+- ""CMTF"" → ""Branch""
+- ""CWTF"" → ""Remittance"" if Transaction Code Description is INWARD TELEGRAPHIC TRANSFER (R22), otherwise ""FPS""
+- ""DWTF"" → ""FPS""
+- ""FPWICT"" → ""FPS""
 
 Based on Transaction Code Description in CSV:
 - ""ATM TRANSFER UNRELATED DEPOSIT"" → ""ATM""
@@ -581,12 +599,6 @@ Based on Transaction Code Description in CSV:
 - ""CASH DEP VIA CDM/BCDM - AC INPUT (TOUCH SCREEN)"" → ""cash""
 - ""ATM/CDM CASH CREDIT USINGACCOUNT INPUT"" → ""cash deposits via ATM"" if source file mentions ATM, otherwise ""cash""
 - ""CIF CASH DEPOSIT"" → ""cash""
-
-Based on Transaction Source in CSV:
-- ""CMTF"" → ""Branch""
-- ""CWTF"" → ""FPS""
-- ""DWTF"" → ""FPS""
-- ""FPWICT"" → ""FPS""
 
 **Step 5: Apply Global Field Rules**
 Apply these rules when populating global fields:
@@ -763,7 +775,16 @@ Apply these rules when populating transaction fields:
 - Do NOT confuse HSB with HSBC - they are completely different banks
 
 **Channel Rules (Payment Method):**
-The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""Branch"", or null
+The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""cheque"", ""Remittance"", ""Branch"", or null
+In case the channel is ""cheque"", it might or might not provide hint that the global field fraud_type is ""Cheque Fraud""
+If there is no hint, assume the channel is null
+
+Based on Transaction Source in CSV:
+- ""CUTF"" → need to look at Transaction Code Description and source file
+- ""CMTF"" → ""Branch""
+- ""CWTF"" → ""Remittance"" if Transaction Code Description is INWARD TELEGRAPHIC TRANSFER (R22), otherwise ""FPS""
+- ""DWTF"" → ""FPS""
+- ""FPWICT"" → ""FPS""
 
 Based on Transaction Code Description in CSV:
 - ""ATM TRANSFER UNRELATED DEPOSIT"" → ""ATM""
@@ -771,12 +792,6 @@ Based on Transaction Code Description in CSV:
 - ""CASH DEP VIA CDM/BCDM - AC INPUT (TOUCH SCREEN)"" → ""cash""
 - ""ATM/CDM CASH CREDIT USINGACCOUNT INPUT"" → ""cash deposits via ATM"" if source file mentions ATM, otherwise ""cash""
 - ""CIF CASH DEPOSIT"" → ""cash""
-
-Based on Transaction Source in CSV:
-- ""CMTF"" → ""Branch""
-- ""CWTF"" → ""FPS""
-- ""DWTF"" → ""FPS""
-- ""FPWICT"" → ""FPS""
 
 **Step 5: Build Final JSON**
 - Global field (fraud_type): Use fraud alert source
@@ -922,7 +937,16 @@ Apply these rules when populating transaction fields:
 - Do NOT confuse HSB with HSBC - they are completely different banks
 
 **Channel Rules (Payment Method):**
-The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""Branch"", or null
+The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""cheque"", ""Remittance"", ""Branch"", or null
+In case the channel is ""cheque"", it might or might not provide hint that the global field fraud_type is ""Cheque Fraud""
+If there is no hint, assume the channel is null
+
+Based on Transaction Source in CSV:
+- ""CUTF"" → need to look at Transaction Code Description and source file
+- ""CMTF"" → ""Branch""
+- ""CWTF"" → ""Remittance"" if Transaction Code Description is INWARD TELEGRAPHIC TRANSFER (R22), otherwise ""FPS""
+- ""DWTF"" → ""FPS""
+- ""FPWICT"" → ""FPS""
 
 Based on Transaction Code Description in CSV:
 - ""ATM TRANSFER UNRELATED DEPOSIT"" → ""ATM""
@@ -930,12 +954,6 @@ Based on Transaction Code Description in CSV:
 - ""CASH DEP VIA CDM/BCDM - AC INPUT (TOUCH SCREEN)"" → ""cash""
 - ""ATM/CDM CASH CREDIT USINGACCOUNT INPUT"" → ""cash deposits via ATM"" if source file mentions ATM, otherwise ""cash""
 - ""CIF CASH DEPOSIT"" → ""cash""
-
-Based on Transaction Source in CSV:
-- ""CMTF"" → ""Branch""
-- ""CWTF"" → ""FPS""
-- ""DWTF"" → ""FPS""
-- ""FPWICT"" → ""FPS""
 
 **Step 5: Build Final JSON**
 - Global field (fraud_type): Use fraud alert source
@@ -1059,7 +1077,16 @@ Apply these rules when populating transaction fields:
 - Do NOT confuse HSB with HSBC - they are completely different banks
 
 **Channel Rules (Payment Method):**
-The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""Branch"", or null
+The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""cheque"", ""Remittance"", ""Branch"", or null
+In case the channel is ""cheque"", it might or might not provide hint that the global field fraud_type is ""Cheque Fraud""
+If there is no hint, assume the channel is null
+
+Based on Transaction Source in CSV:
+- ""CUTF"" → need to look at Transaction Code Description and source file
+- ""CMTF"" → ""Branch""
+- ""CWTF"" → ""Remittance"" if Transaction Code Description is INWARD TELEGRAPHIC TRANSFER (R22), otherwise ""FPS""
+- ""DWTF"" → ""FPS""
+- ""FPWICT"" → ""FPS""
 
 Based on Transaction Code Description in CSV:
 - ""ATM TRANSFER UNRELATED DEPOSIT"" → ""ATM""
@@ -1067,12 +1094,6 @@ Based on Transaction Code Description in CSV:
 - ""CASH DEP VIA CDM/BCDM - AC INPUT (TOUCH SCREEN)"" → ""cash""
 - ""ATM/CDM CASH CREDIT USINGACCOUNT INPUT"" → ""cash deposits via ATM"" if source file mentions ATM, otherwise ""cash""
 - ""CIF CASH DEPOSIT"" → ""cash""
-
-Based on Transaction Source in CSV:
-- ""CMTF"" → ""Branch""
-- ""CWTF"" → ""FPS""
-- ""DWTF"" → ""FPS""
-- ""FPWICT"" → ""FPS""
 
 **Step 5: Build Final JSON**
 - Global field (fraud_type): Use fraud alert source
@@ -1203,7 +1224,16 @@ Apply these rules when populating transaction fields:
 - Do NOT confuse HSB with HSBC - they are completely different banks
 
 **Channel Rules (Payment Method):**
-The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""Branch"", or null
+The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""cheque"", ""Remittance"", ""Branch"", or null
+In case the channel is ""cheque"", it might or might not provide hint that the global field fraud_type is ""Cheque Fraud""
+If there is no hint, assume the channel is null
+
+Based on Transaction Source in CSV:
+- ""CUTF"" → need to look at Transaction Code Description and source file
+- ""CMTF"" → ""Branch""
+- ""CWTF"" → ""Remittance"" if Transaction Code Description is INWARD TELEGRAPHIC TRANSFER (R22), otherwise ""FPS""
+- ""DWTF"" → ""FPS""
+- ""FPWICT"" → ""FPS""
 
 Based on Transaction Code Description in CSV:
 - ""ATM TRANSFER UNRELATED DEPOSIT"" → ""ATM""
@@ -1211,12 +1241,6 @@ Based on Transaction Code Description in CSV:
 - ""CASH DEP VIA CDM/BCDM - AC INPUT (TOUCH SCREEN)"" → ""cash""
 - ""ATM/CDM CASH CREDIT USINGACCOUNT INPUT"" → ""cash deposits via ATM"" if source file mentions ATM, otherwise ""cash""
 - ""CIF CASH DEPOSIT"" → ""cash""
-
-Based on Transaction Source in CSV:
-- ""CMTF"" → ""Branch""
-- ""CWTF"" → ""FPS""
-- ""DWTF"" → ""FPS""
-- ""FPWICT"" → ""FPS""
 
 **Step 5: Apply Global Field Rules**
 Apply these rules when populating global fields:
@@ -1424,7 +1448,16 @@ Apply these rules when populating transaction fields:
 - Do NOT confuse HSB with HSBC - they are completely different banks
 
 **Channel Rules (Payment Method):**
-The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""Branch"", or null
+The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""cheque"", ""Remittance"", ""Branch"", or null
+In case the channel is ""cheque"", it might or might not provide hint that the global field fraud_type is ""Cheque Fraud""
+If there is no hint, assume the channel is null
+
+Based on Transaction Source in CSV:
+- ""CUTF"" → need to look at Transaction Code Description and source file
+- ""CMTF"" → ""Branch""
+- ""CWTF"" → ""Remittance"" if Transaction Code Description is INWARD TELEGRAPHIC TRANSFER (R22), otherwise ""FPS""
+- ""DWTF"" → ""FPS""
+- ""FPWICT"" → ""FPS""
 
 Based on Transaction Code Description in CSV:
 - ""ATM TRANSFER UNRELATED DEPOSIT"" → ""ATM""
@@ -1432,12 +1465,6 @@ Based on Transaction Code Description in CSV:
 - ""CASH DEP VIA CDM/BCDM - AC INPUT (TOUCH SCREEN)"" → ""cash""
 - ""ATM/CDM CASH CREDIT USINGACCOUNT INPUT"" → ""cash deposits via ATM"" if source file mentions ATM, otherwise ""cash""
 - ""CIF CASH DEPOSIT"" → ""cash""
-
-Based on Transaction Source in CSV:
-- ""CMTF"" → ""Branch""
-- ""CWTF"" → ""FPS""
-- ""DWTF"" → ""FPS""
-- ""FPWICT"" → ""FPS""
 
 **Special Handling for cancel_amount_requested (Per Transaction):**
 For each transaction:
@@ -1581,7 +1608,16 @@ Apply these rules when populating transaction fields:
 - Do NOT confuse HSB with HSBC - they are completely different banks
 
 **Channel Rules (Payment Method):**
-The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""Branch"", or null
+The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""cheque"", ""Remittance"", ""Branch"", or null
+In case the channel is ""cheque"", it might or might not provide hint that the global field fraud_type is ""Cheque Fraud""
+If there is no hint, assume the channel is null
+
+Based on Transaction Source in CSV:
+- ""CUTF"" → need to look at Transaction Code Description and source file
+- ""CMTF"" → ""Branch""
+- ""CWTF"" → ""Remittance"" if Transaction Code Description is INWARD TELEGRAPHIC TRANSFER (R22), otherwise ""FPS""
+- ""DWTF"" → ""FPS""
+- ""FPWICT"" → ""FPS""
 
 Based on Transaction Code Description in CSV:
 - ""ATM TRANSFER UNRELATED DEPOSIT"" → ""ATM""
@@ -1589,12 +1625,6 @@ Based on Transaction Code Description in CSV:
 - ""CASH DEP VIA CDM/BCDM - AC INPUT (TOUCH SCREEN)"" → ""cash""
 - ""ATM/CDM CASH CREDIT USINGACCOUNT INPUT"" → ""cash deposits via ATM"" if source file mentions ATM, otherwise ""cash""
 - ""CIF CASH DEPOSIT"" → ""cash""
-
-Based on Transaction Source in CSV:
-- ""CMTF"" → ""Branch""
-- ""CWTF"" → ""FPS""
-- ""DWTF"" → ""FPS""
-- ""FPWICT"" → ""FPS""
 
 **Step 5: Apply Global Field Rules**
 Apply these rules when populating global fields:
@@ -1735,7 +1765,16 @@ Apply these rules when populating transaction fields:
 - Do NOT confuse HSB with HSBC - they are completely different banks
 
 **Channel Rules (Payment Method):**
-The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""Branch"", or null
+The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""cheque"", ""Remittance"", ""Branch"", or null
+In case the channel is ""cheque"", it might or might not provide hint that the global field fraud_type is ""Cheque Fraud""
+If there is no hint, assume the channel is null
+
+Based on Transaction Source in CSV:
+- ""CUTF"" → need to look at Transaction Code Description and source file
+- ""CMTF"" → ""Branch""
+- ""CWTF"" → ""Remittance"" if Transaction Code Description is INWARD TELEGRAPHIC TRANSFER (R22), otherwise ""FPS""
+- ""DWTF"" → ""FPS""
+- ""FPWICT"" → ""FPS""
 
 Based on Transaction Code Description in CSV:
 - ""ATM TRANSFER UNRELATED DEPOSIT"" → ""ATM""
@@ -1743,12 +1782,6 @@ Based on Transaction Code Description in CSV:
 - ""CASH DEP VIA CDM/BCDM - AC INPUT (TOUCH SCREEN)"" → ""cash""
 - ""ATM/CDM CASH CREDIT USINGACCOUNT INPUT"" → ""cash deposits via ATM"" if source file mentions ATM, otherwise ""cash""
 - ""CIF CASH DEPOSIT"" → ""cash""
-
-Based on Transaction Source in CSV:
-- ""CMTF"" → ""Branch""
-- ""CWTF"" → ""FPS""
-- ""DWTF"" → ""FPS""
-- ""FPWICT"" → ""FPS""
 
 **Step 5: Apply Global Field Rules**
 Apply these rules when populating global fields:
@@ -1902,7 +1935,16 @@ Apply these rules when populating transaction fields:
 - Do NOT confuse HSB with HSBC - they are completely different banks
 
 **Channel Rules (Payment Method):**
-The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""Branch"", or null
+The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""cheque"", ""Remittance"", ""Branch"", or null
+In case the channel is ""cheque"", it might or might not provide hint that the global field fraud_type is ""Cheque Fraud""
+If there is no hint, assume the channel is null
+
+Based on Transaction Source in CSV:
+- ""CUTF"" → need to look at Transaction Code Description and source file
+- ""CMTF"" → ""Branch""
+- ""CWTF"" → ""Remittance"" if Transaction Code Description is INWARD TELEGRAPHIC TRANSFER (R22), otherwise ""FPS""
+- ""DWTF"" → ""FPS""
+- ""FPWICT"" → ""FPS""
 
 Based on Transaction Code Description in CSV:
 - ""ATM TRANSFER UNRELATED DEPOSIT"" → ""ATM""
@@ -1910,12 +1952,6 @@ Based on Transaction Code Description in CSV:
 - ""CASH DEP VIA CDM/BCDM - AC INPUT (TOUCH SCREEN)"" → ""cash""
 - ""ATM/CDM CASH CREDIT USINGACCOUNT INPUT"" → ""cash deposits via ATM"" if source file mentions ATM, otherwise ""cash""
 - ""CIF CASH DEPOSIT"" → ""cash""
-
-Based on Transaction Source in CSV:
-- ""CMTF"" → ""Branch""
-- ""CWTF"" → ""FPS""
-- ""DWTF"" → ""FPS""
-- ""FPWICT"" → ""FPS""
 
 **Step 5: Apply Global Field Rules**
 Apply these rules when populating global fields:
@@ -2116,7 +2152,16 @@ Apply these rules when populating transaction fields:
 - Do NOT confuse HSB with HSBC - they are completely different banks
 
 **Channel Rules (Payment Method):**
-The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""Branch"", or null
+The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""cheque"", ""Remittance"", ""Branch"", or null
+In case the channel is ""cheque"", it might or might not provide hint that the global field fraud_type is ""Cheque Fraud""
+If there is no hint, assume the channel is null
+
+Based on Transaction Source in CSV:
+- ""CUTF"" → need to look at Transaction Code Description and source file
+- ""CMTF"" → ""Branch""
+- ""CWTF"" → ""Remittance"" if Transaction Code Description is INWARD TELEGRAPHIC TRANSFER (R22), otherwise ""FPS""
+- ""DWTF"" → ""FPS""
+- ""FPWICT"" → ""FPS""
 
 Based on Transaction Code Description in CSV:
 - ""ATM TRANSFER UNRELATED DEPOSIT"" → ""ATM""
@@ -2124,12 +2169,6 @@ Based on Transaction Code Description in CSV:
 - ""CASH DEP VIA CDM/BCDM - AC INPUT (TOUCH SCREEN)"" → ""cash""
 - ""ATM/CDM CASH CREDIT USINGACCOUNT INPUT"" → ""cash deposits via ATM"" if source file mentions ATM, otherwise ""cash""
 - ""CIF CASH DEPOSIT"" → ""cash""
-
-Based on Transaction Source in CSV:
-- ""CMTF"" → ""Branch""
-- ""CWTF"" → ""FPS""
-- ""DWTF"" → ""FPS""
-- ""FPWICT"" → ""FPS""
 
 **Special Handling for cancel_amount_requested (Per Transaction):**
 For each transaction:
@@ -2271,7 +2310,16 @@ Apply these rules when populating transaction fields:
 - Do NOT confuse HSB with HSBC - they are completely different banks
 
 **Channel Rules (Payment Method):**
-The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""Branch"", or null
+The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""cheque"", ""Remittance"", ""Branch"", or null
+In case the channel is ""cheque"", it might or might not provide hint that the global field fraud_type is ""Cheque Fraud""
+If there is no hint, assume the channel is null
+
+Based on Transaction Source in CSV:
+- ""CUTF"" → need to look at Transaction Code Description and source file
+- ""CMTF"" → ""Branch""
+- ""CWTF"" → ""Remittance"" if Transaction Code Description is INWARD TELEGRAPHIC TRANSFER (R22), otherwise ""FPS""
+- ""DWTF"" → ""FPS""
+- ""FPWICT"" → ""FPS""
 
 Based on Transaction Code Description in CSV:
 - ""ATM TRANSFER UNRELATED DEPOSIT"" → ""ATM""
@@ -2279,12 +2327,6 @@ Based on Transaction Code Description in CSV:
 - ""CASH DEP VIA CDM/BCDM - AC INPUT (TOUCH SCREEN)"" → ""cash""
 - ""ATM/CDM CASH CREDIT USINGACCOUNT INPUT"" → ""cash deposits via ATM"" if source file mentions ATM, otherwise ""cash""
 - ""CIF CASH DEPOSIT"" → ""cash""
-
-Based on Transaction Source in CSV:
-- ""CMTF"" → ""Branch""
-- ""CWTF"" → ""FPS""
-- ""DWTF"" → ""FPS""
-- ""FPWICT"" → ""FPS""
 
 **Step 5: Build Final JSON**
 - Global field (fraud_type): Use fraud alert source
@@ -2422,7 +2464,16 @@ Apply these rules when populating transaction fields:
 - Do NOT confuse HSB with HSBC - they are completely different banks
 
 **Channel Rules (Payment Method):**
-The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""Branch"", or null
+The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""cheque"", ""Remittance"", ""Branch"", or null
+In case the channel is ""cheque"", it might or might not provide hint that the global field fraud_type is ""Cheque Fraud""
+If there is no hint, assume the channel is null
+
+Based on Transaction Source in CSV:
+- ""CUTF"" → need to look at Transaction Code Description and source file
+- ""CMTF"" → ""Branch""
+- ""CWTF"" → ""Remittance"" if Transaction Code Description is INWARD TELEGRAPHIC TRANSFER (R22), otherwise ""FPS""
+- ""DWTF"" → ""FPS""
+- ""FPWICT"" → ""FPS""
 
 Based on Transaction Code Description in CSV:
 - ""ATM TRANSFER UNRELATED DEPOSIT"" → ""ATM""
@@ -2430,12 +2481,6 @@ Based on Transaction Code Description in CSV:
 - ""CASH DEP VIA CDM/BCDM - AC INPUT (TOUCH SCREEN)"" → ""cash""
 - ""ATM/CDM CASH CREDIT USINGACCOUNT INPUT"" → ""cash deposits via ATM"" if source file mentions ATM, otherwise ""cash""
 - ""CIF CASH DEPOSIT"" → ""cash""
-
-Based on Transaction Source in CSV:
-- ""CMTF"" → ""Branch""
-- ""CWTF"" → ""FPS""
-- ""DWTF"" → ""FPS""
-- ""FPWICT"" → ""FPS""
 
 **Step 5: Apply Global Field Rules**
 Apply these rules when populating global fields:
@@ -2598,7 +2643,16 @@ Apply these rules when populating transaction fields:
 - Do NOT confuse HSB with HSBC - they are completely different banks
 
 **Channel Rules (Payment Method):**
-The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""Branch"", or null
+The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""cheque"", ""Remittance"", ""Branch"", or null
+In case the channel is ""cheque"", it might or might not provide hint that the global field fraud_type is ""Cheque Fraud""
+If there is no hint, assume the channel is null
+
+Based on Transaction Source in CSV:
+- ""CUTF"" → need to look at Transaction Code Description and source file
+- ""CMTF"" → ""Branch""
+- ""CWTF"" → ""Remittance"" if Transaction Code Description is INWARD TELEGRAPHIC TRANSFER (R22), otherwise ""FPS""
+- ""DWTF"" → ""FPS""
+- ""FPWICT"" → ""FPS""
 
 Based on Transaction Code Description in CSV:
 - ""ATM TRANSFER UNRELATED DEPOSIT"" → ""ATM""
@@ -2606,12 +2660,6 @@ Based on Transaction Code Description in CSV:
 - ""CASH DEP VIA CDM/BCDM - AC INPUT (TOUCH SCREEN)"" → ""cash""
 - ""ATM/CDM CASH CREDIT USINGACCOUNT INPUT"" → ""cash deposits via ATM"" if source file mentions ATM, otherwise ""cash""
 - ""CIF CASH DEPOSIT"" → ""cash""
-
-Based on Transaction Source in CSV:
-- ""CMTF"" → ""Branch""
-- ""CWTF"" → ""FPS""
-- ""DWTF"" → ""FPS""
-- ""FPWICT"" → ""FPS""
 
 **Step 5: Apply Global Field Rules**
 Apply these rules when populating global fields:
@@ -2812,7 +2860,16 @@ Apply these rules when populating transaction fields:
 - Do NOT confuse HSB with HSBC - they are completely different banks
 
 **Channel Rules (Payment Method):**
-The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""Branch"", or null
+The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""cheque"", ""Remittance"", ""Branch"", or null
+In case the channel is ""cheque"", it might or might not provide hint that the global field fraud_type is ""Cheque Fraud""
+If there is no hint, assume the channel is null
+
+Based on Transaction Source in CSV:
+- ""CUTF"" → need to look at Transaction Code Description and source file
+- ""CMTF"" → ""Branch""
+- ""CWTF"" → ""Remittance"" if Transaction Code Description is INWARD TELEGRAPHIC TRANSFER (R22), otherwise ""FPS""
+- ""DWTF"" → ""FPS""
+- ""FPWICT"" → ""FPS""
 
 Based on Transaction Code Description in CSV:
 - ""ATM TRANSFER UNRELATED DEPOSIT"" → ""ATM""
@@ -2820,12 +2877,6 @@ Based on Transaction Code Description in CSV:
 - ""CASH DEP VIA CDM/BCDM - AC INPUT (TOUCH SCREEN)"" → ""cash""
 - ""ATM/CDM CASH CREDIT USINGACCOUNT INPUT"" → ""cash deposits via ATM"" if source file mentions ATM, otherwise ""cash""
 - ""CIF CASH DEPOSIT"" → ""cash""
-
-Based on Transaction Source in CSV:
-- ""CMTF"" → ""Branch""
-- ""CWTF"" → ""FPS""
-- ""DWTF"" → ""FPS""
-- ""FPWICT"" → ""FPS""
 
 **Step 5: Apply Global Field Rules**
 Apply these rules when populating global fields:
@@ -3055,7 +3106,16 @@ Apply these rules when populating transaction fields:
 - Do NOT confuse HSB with HSBC - they are completely different banks
 
 **Channel Rules (Payment Method):**
-The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""Branch"", or null
+The channel field can only be: ""FPS"", ""cash"", ""ATM"", ""cash deposits via ATM"", ""cheque"", ""Remittance"", ""Branch"", or null
+In case the channel is ""cheque"", it might or might not provide hint that the global field fraud_type is ""Cheque Fraud""
+If there is no hint, assume the channel is null
+
+Based on Transaction Source in CSV:
+- ""CUTF"" → need to look at Transaction Code Description and source file
+- ""CMTF"" → ""Branch""
+- ""CWTF"" → ""Remittance"" if Transaction Code Description is INWARD TELEGRAPHIC TRANSFER (R22), otherwise ""FPS""
+- ""DWTF"" → ""FPS""
+- ""FPWICT"" → ""FPS""
 
 Based on Transaction Code Description in CSV:
 - ""ATM TRANSFER UNRELATED DEPOSIT"" → ""ATM""
@@ -3063,12 +3123,6 @@ Based on Transaction Code Description in CSV:
 - ""CASH DEP VIA CDM/BCDM - AC INPUT (TOUCH SCREEN)"" → ""cash""
 - ""ATM/CDM CASH CREDIT USINGACCOUNT INPUT"" → ""cash deposits via ATM"" if source file mentions ATM, otherwise ""cash""
 - ""CIF CASH DEPOSIT"" → ""cash""
-
-Based on Transaction Source in CSV:
-- ""CMTF"" → ""Branch""
-- ""CWTF"" → ""FPS""
-- ""DWTF"" → ""FPS""
-- ""FPWICT"" → ""FPS""
 
 **Step 5: Apply Global Field Rules**
 Apply these rules when populating global fields:
